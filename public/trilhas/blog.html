@@ -1,0 +1,2956 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blog Portfólio Técnico — Plano Integrado de Estudos</title>
+<meta name="description" content="Página de referência técnica completa da Plataforma de Blog Técnico Pessoal com arquitetura, requisitos, segurança, DevOps, SEO, newsletter, monetização, fases e transcrição integral do PDF.">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../assets/css/styles.css" rel="stylesheet">
+<style>
+
+:root {
+  --blog-accent: #7C6AE8;
+  --blog-accent-2: #14b8a6;
+  --doc-bg: #090b12;
+  --doc-surface: rgba(255,255,255,.045);
+  --doc-surface-2: rgba(255,255,255,.075);
+  --doc-border: rgba(255,255,255,.12);
+  --doc-text: #e8e6e3;
+  --doc-muted: #a8a6b3;
+  --doc-code: #050814;
+}
+html { scroll-behavior: smooth; }
+body.track-page {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(124,106,232,.2), transparent 32rem),
+    radial-gradient(circle at 95% 10%, rgba(20,184,166,.12), transparent 26rem),
+    var(--doc-bg);
+}
+.track-hero-page {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--doc-border);
+  background: linear-gradient(135deg, rgba(124,106,232,.18), rgba(20,184,166,.06));
+}
+.track-title {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  margin-bottom: .8rem;
+}
+.track-lead {
+  color: var(--doc-muted);
+  max-width: 980px;
+  font-size: 1.05rem;
+}
+.track-badge-set {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin-top:1.2rem;
+}
+.track-badge-set span,
+.badge-cloud span {
+  border:1px solid rgba(124,106,232,.35);
+  background: rgba(124,106,232,.14);
+  color:#d8d2ff;
+  padding:.35rem .65rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:700;
+}
+.track-local-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(9,11,18,.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--doc-border);
+}
+.track-local-nav a {
+  color: var(--doc-muted);
+  text-decoration:none;
+  padding:.45rem .7rem;
+  border-radius:999px;
+  white-space:nowrap;
+  font-size:.84rem;
+  border:1px solid transparent;
+}
+.track-local-nav a:hover {
+  color:#fff;
+  background:rgba(124,106,232,.18);
+  border-color:rgba(124,106,232,.35);
+}
+.track-search {
+  width:min(320px,100%);
+  background:rgba(255,255,255,.05)!important;
+  border-color:var(--doc-border)!important;
+  color:#fff!important;
+}
+.doc-section {
+  background: var(--doc-surface);
+  border: 1px solid var(--doc-border);
+  border-radius: 24px;
+  padding: clamp(1rem, 2vw, 1.7rem);
+  margin-bottom: 1.25rem;
+  box-shadow: 0 18px 70px rgba(0,0,0,.18);
+}
+.doc-section-heading {
+  display:flex;
+  align-items:start;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:1rem;
+  padding-bottom:.9rem;
+  border-bottom:1px solid var(--doc-border);
+}
+.doc-section h2 {
+  margin:0;
+  font-weight:800;
+  letter-spacing:-.03em;
+}
+.doc-section h3 {
+  color:#e9e7ff;
+  font-size:1.15rem;
+  font-weight:800;
+  margin:1.2rem 0 .65rem;
+}
+.doc-section h4 {
+  color:#fff;
+  font-size:.95rem;
+  font-weight:800;
+}
+.section-subtitle {
+  color:var(--doc-muted);
+  margin:.35rem 0 0;
+}
+.section-badge {
+  border:1px solid rgba(20,184,166,.35);
+  background:rgba(20,184,166,.12);
+  color:#b9fff2;
+  font-weight:800;
+  font-size:.75rem;
+  border-radius:999px;
+  padding:.35rem .7rem;
+  white-space:nowrap;
+}
+.doc-hero-card {
+  display:grid;
+  grid-template-columns: minmax(0,1.5fr) minmax(260px,.7fr);
+  gap:1rem;
+  align-items:center;
+}
+.metrics-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.7rem;
+}
+.metric-pill {
+  border:1px solid rgba(124,106,232,.35);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(124,106,232,.12);
+  text-align:center;
+}
+.metric-pill span {
+  font-family:'JetBrains Mono',monospace;
+  font-size:1.7rem;
+  color:#fff;
+  font-weight:800;
+  display:block;
+}
+.metric-pill small {
+  color:var(--doc-muted);
+  text-transform:uppercase;
+  font-size:.7rem;
+  letter-spacing:.04em;
+}
+.doc-grid-2,
+.doc-grid-4,
+.phase-doc-grid {
+  display:grid;
+  gap:1rem;
+}
+.doc-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.doc-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.phase-doc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.mini-card,
+.callout,
+.phase-doc-card {
+  border:1px solid var(--doc-border);
+  background:rgba(255,255,255,.04);
+  border-radius:18px;
+  padding:1rem;
+}
+.mini-card strong {
+  display:block;
+  margin-bottom:.35rem;
+  color:#fff;
+}
+.mini-card span,
+.callout p,
+.phase-doc-card p {
+  color:var(--doc-muted);
+}
+.callout {
+  border-left:4px solid var(--blog-accent-2);
+}
+.callout.accent-purple { border-left-color: var(--blog-accent); }
+.callout.accent-orange { border-left-color:#f59e0b; }
+.callout.success { border-left-color:#22c55e; }
+.doc-list {
+  margin:.5rem 0 1rem;
+  padding-left:1.25rem;
+  color:var(--doc-muted);
+}
+.doc-list li { margin-bottom:.35rem; }
+.table-responsive {
+  border:1px solid var(--doc-border);
+  border-radius:18px;
+  overflow:auto;
+  margin: .75rem 0 1rem;
+}
+.doc-table {
+  min-width: 760px;
+  margin-bottom:0!important;
+}
+.doc-table th {
+  background:rgba(124,106,232,.18)!important;
+  color:#fff!important;
+  font-weight:800;
+  border-color:var(--doc-border)!important;
+  white-space:nowrap;
+}
+.doc-table td {
+  border-color:var(--doc-border)!important;
+  color:#dddbe8!important;
+  font-size:.88rem;
+}
+.dense-table td,
+.dense-table th {
+  font-size:.78rem;
+}
+.code-block {
+  background:var(--doc-code);
+  color:#d9f99d;
+  border:1px solid rgba(124,106,232,.25);
+  border-radius:16px;
+  padding:1rem;
+  overflow:auto;
+  white-space:pre;
+  max-height:680px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  line-height:1.55;
+}
+.badge-cloud {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+.pdf-visual {
+  margin:1rem 0;
+}
+.pdf-visual img {
+  display:block;
+  width:100%;
+  height:auto;
+  border-radius:18px;
+  border:1px solid var(--doc-border);
+  background:#fff;
+}
+.pdf-visual figcaption {
+  color:var(--doc-muted);
+  font-size:.78rem;
+  margin-top:.4rem;
+}
+.phase-doc-head {
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  border-bottom:1px solid var(--doc-border);
+  padding-bottom:.7rem;
+  margin-bottom:.8rem;
+}
+.phase-doc-head h3 {
+  margin:0;
+}
+.phase-doc-head span {
+  font-family:'JetBrains Mono',monospace;
+  color:#b9fff2;
+  font-size:.82rem;
+}
+.priority {
+  display:inline-block;
+  border-radius:999px;
+  padding:.2rem .5rem;
+  font-size:.72rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+.priority.must { color:#fecaca;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3); }
+.priority.should { color:#fde68a;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32); }
+.priority.nice { color:#bbf7d0;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3); }
+.priority.future { color:#bae6fd;background:rgba(14,165,233,.14);border:1px solid rgba(14,165,233,.3); }
+.pdf-page-card {
+  border:1px solid var(--doc-border);
+  background:rgba(255,255,255,.035);
+  border-radius:18px;
+  margin-bottom:.8rem;
+  overflow:hidden;
+}
+.pdf-page-card summary {
+  cursor:pointer;
+  list-style:none;
+  padding:1rem;
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  color:#fff;
+  font-weight:800;
+}
+.pdf-page-card summary::-webkit-details-marker { display:none; }
+.pdf-page-card summary small {
+  color:var(--doc-muted);
+  font-weight:600;
+}
+.pdf-page-content {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(260px,.75fr);
+  gap:1rem;
+  padding:0 1rem 1rem;
+  border-top:1px solid var(--doc-border);
+}
+mark.search-hit,
+.search-hit {
+  outline:2px solid rgba(20,184,166,.65);
+  background:rgba(20,184,166,.10)!important;
+}
+.is-hidden-by-search {
+  display:none!important;
+}
+.back-to-top {
+  position:fixed;
+  right:1rem;
+  bottom:1rem;
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(124,106,232,.45);
+  background:rgba(124,106,232,.2);
+  color:#fff;
+  display:none;
+  z-index:1200;
+}
+.back-to-top.is-visible {
+  display:block;
+}
+.footer-link {
+  color:#d8d2ff;
+  text-decoration:none;
+}
+@media (max-width: 992px) {
+  .doc-hero-card,
+  .doc-grid-2,
+  .doc-grid-4,
+  .phase-doc-grid,
+  .pdf-page-content {
+    grid-template-columns:1fr;
+  }
+  .track-local-nav .container {
+    gap:.75rem;
+  }
+  .track-search {
+    margin-top:.5rem;
+    width:100%;
+  }
+}
+@media (max-width: 576px) {
+  .doc-section { border-radius:18px; }
+  .doc-section-heading { flex-direction:column; }
+  .metrics-grid { grid-template-columns:1fr; }
+  .pdf-page-card summary { flex-direction:column; }
+}
+
+
+/* Imagens reais das páginas originais do PDF.
+   Coloque os prints em: ../assets/img/blog-pdf-pages/blog-tecnico-pagina-XX.png */
+.pdf-visual img.pdf-page-image,
+.pdf-visual img[data-pdf-page] {
+  width: 100%;
+  height: auto;
+  image-rendering: auto;
+  object-fit: contain;
+}
+
+</style>
+</head>
+<body class="track-page" data-track="blog">
+
+<header class="track-hero-page">
+  <div class="container">
+    <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
+    <h1 class="track-title">Blog Portfólio Técnico</h1>
+    <p class="track-lead">Página de referência técnica completa para transformar o blog em uma plataforma própria de portfólio, documentação, comunidade, newsletter, analytics, produtos digitais, área premium e laboratório prático de engenharia.</p>
+    <div class="track-badge-set"><span>Next.js</span><span>Java 21</span><span>Spring Boot</span><span>PostgreSQL</span><span>Redis</span><span>Object Storage</span><span>Vercel</span><span>50 RFs</span><span>28 RNFs</span><span>8 fases</span><span>Monólito modular</span><span>SEO</span><span>Newsletter</span><span>Produtos digitais</span><span>IA/RAG</span></div>
+  </div>
+</header>
+
+<nav class="track-local-nav">
+  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
+    <div class="d-flex flex-nowrap overflow-auto gap-1">
+      <a href="#resumo">Resumo</a>
+      <a href="#visao-produto">Produto</a>
+      <a href="#stack">Stack</a>
+      <a href="#arquitetura">Arquitetura</a>
+      <a href="#monolito">Monólito</a>
+      <a href="#frontend">Frontend</a>
+      <a href="#backend">Backend</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#publicacao">Publicação</a>
+      <a href="#banco">Banco</a>
+      <a href="#api">API</a>
+      <a href="#cache">Cache</a>
+      <a href="#devops">DevOps</a>
+      <a href="#qualidade">Qualidade</a>
+      <a href="#requisitos-funcionais">RFs</a>
+      <a href="#requisitos-nao-funcionais">RNFs</a>
+      <a href="#fases">Fases</a>
+      <a href="#priorizacao">Priorização</a>
+      <a href="#riscos">Riscos</a>
+      <a href="#conhecimento">Engenharia</a>
+      <a href="#transcricao">Transcrição</a>
+      <a href="#referencias">Referências</a>
+    </div>
+    <input id="trackSearch" class="form-control form-control-sm track-search" type="search" placeholder="Buscar nesta página...">
+  </div>
+</nav>
+
+<main class="container py-4" id="blogDocumentMain">
+<section id="resumo" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Resumo executivo</h2>
+      <p class="section-subtitle">Base consolidada a partir das páginas 1 e 2 do PDF.</p>
+    </div>
+    <span class="section-badge">Visão geral</span>
+  </div>
+  
+<div class="doc-hero-card">
+  <div>
+    <p class="lead">Esta página incorpora integralmente o PDF <strong>Documento técnico consolidado — Plataforma de Blog Técnico Pessoal</strong>, mantendo transcrição por página, tabelas, blocos de código, diagramas visuais e estrutura navegável.</p>
+    <p>O documento consolida uma plataforma que deixa de ser apenas um blog estático e passa a ser produto próprio de conteúdo técnico, portfólio público, painel administrativo, comunidade, newsletter, analytics, produtos digitais e área premium.</p>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-pill"><span>50</span><small>Requisitos funcionais</small></div>
+    <div class="metric-pill"><span>28</span><small>Requisitos não funcionais</small></div>
+    <div class="metric-pill"><span>8</span><small>Fases de desenvolvimento</small></div>
+    <div class="metric-pill"><span>25</span><small>Páginas incorporadas</small></div>
+  </div>
+</div>
+<div class="doc-grid-4">
+  <div class="mini-card"><strong>Produto</strong><span>Blog técnico + portfólio + comunidade + newsletter + produtos digitais + área premium.</span></div>
+  <div class="mini-card"><strong>Stack principal</strong><span>Next.js, Java 21, Spring Boot, PostgreSQL, Redis, Object Storage e Vercel.</span></div>
+  <div class="mini-card"><strong>Abordagem</strong><span>Monólito modular evolutivo com fronteiras por domínio e deploy separado de frontend/backend.</span></div>
+  <div class="mini-card"><strong>Planejamento</strong><span>8 fases com MVP, comunidade, monetização, IA, escala e lançamento final.</span></div>
+</div>
+
+</section>
+<section id="visao-produto" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>1. Visão de produto e Lean Canvas</h2>
+      
+    </div>
+    <span class="section-badge">Produto</span>
+  </div>
+  
+<p>A plataforma documenta estudos, aprendizados, decisões de arquitetura e projetos de um desenvolvedor, transformando o processo de aprendizagem em ativo público. Também funciona como laboratório prático para backend, frontend, cloud, DevOps, segurança, dados e IA.</p>
+<div class="doc-grid-2">
+  <div class="callout"><h3>Objetivo principal</h3><p>Criar uma plataforma pública e própria para publicar conteúdo técnico, demonstrar evolução profissional, registrar projetos e construir autoridade técnica com controle de SEO, dados e monetização.</p></div>
+  <div class="callout accent-purple"><h3>Resultado esperado</h3><p>Um produto real em produção, com código versionado, arquitetura documentada, conteúdo publicado, painel admin, analytics, newsletter e base para produtos digitais.</p></div>
+</div>
+<h3>Lean Canvas resumido</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Campo</th><th>Conteúdo</th></tr></thead><tbody><tr><td>Problema</td><td>Conteúdo técnico pessoal disperso em plataformas de terceiros, sem controle de dados, audiência e monetização.</td></tr><tr><td>Segmento</td><td>Desenvolvedores em evolução, recrutadores, clientes e compradores de conteúdo técnico.</td></tr><tr><td>Proposta de valor</td><td>Plataforma própria que une blog técnico, portfólio, newsletter, comunidade e monetização.</td></tr><tr><td>Solução</td><td>Blog + CMS próprio + admin + comentários + analytics + produtos digitais + área premium.</td></tr><tr><td>Canais</td><td>SEO orgânico, redes sociais, newsletter, RSS, GitHub e LinkedIn.</td></tr><tr><td>Métricas-chave</td><td>Posts/mês, assinantes, pageviews, conversões, receita, comentários e backlinks.</td></tr><tr><td>Receita</td><td>Produtos digitais, assinatura premium, consultoria e oportunidades via portfólio.</td></tr><tr><td>Vantagem injusta</td><td>Marca pessoal + histórico técnico público + projeto desenvolvido e documentado em público.</td></tr></tbody></table></div>
+<h3>Premissas e restrições</h3><ul class="doc-list"><li>O autor é o único administrador no MVP; não há multi-tenancy inicialmente.</li><li>Volume inicial estimado: 0 a 50.000 pageviews/mês.</li><li>Conteúdo principal em português brasileiro, com arquitetura preparada para i18n futura.</li><li>A stack do MVP deve ser mantida durante o desenvolvimento para evitar troca prematura.</li><li>A documentação deve ser versionada com CHANGELOG.md e ADRs.</li></ul>
+<h3>OKRs sugeridos para 12 meses</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Objetivo</th><th>Métrica</th><th>Meta</th></tr></thead><tbody><tr><td>Publicar conteúdo técnico</td><td>Posts publicados</td><td>&gt;= 24 posts</td></tr><tr><td>Construir audiência</td><td>Assinantes confirmados</td><td>&gt;= 500</td></tr><tr><td>Gerar tráfego orgânico</td><td>Pageviews mensais</td><td>&gt;= 10.000/mês</td></tr><tr><td>Monetizar</td><td>Receita com produtos digitais</td><td>&gt;= R$ 1.000/mês</td></tr><tr><td>Autoridade técnica</td><td>Backlinks externos</td><td>&gt;= 20 domínios referenciadores</td></tr></tbody></table></div>
+
+</section>
+<section id="stack" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>2. Stack completa recomendada</h2>
+      
+    </div>
+    <span class="section-badge">Stack</span>
+  </div>
+  
+<p>A stack equilibra valor de portfólio, produtividade, robustez e compatibilidade com vagas Java/Spring modernas.</p>
+<div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Camada</th><th>Tecnologias e decisão</th></tr></thead><tbody><tr><td>Frontend</td><td>Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui, React Hook Form, Zod, TanStack Query, Zustand.</td></tr><tr><td>Backend</td><td>Java 21, Spring Boot 3, Spring Security 6, Spring Data JPA, Bean Validation, MapStruct, Resilience4j.</td></tr><tr><td>Banco</td><td>PostgreSQL com UUID, JSONB, FTS, índices parciais, constraints, particionamento e Flyway.</td></tr><tr><td>Cache</td><td>Redis para cache-aside, TTLs, rate limiting, locks, contadores e tokens temporários.</td></tr><tr><td>Storage</td><td>S3/R2/Azure Blob para imagens, anexos e arquivos privados com presigned URLs.</td></tr><tr><td>Observabilidade</td><td>Actuator, Micrometer, logs JSON, traceId, Sentry, Prometheus/Grafana e Uptime Robot.</td></tr><tr><td>DevOps</td><td>Docker, Docker Compose, GitHub Actions, Trivy, SonarQube, staging, zero-downtime deploy.</td></tr><tr><td>Qualidade</td><td>JUnit 5, Mockito, Testcontainers, RestAssured, WireMock, Playwright, k6, Checkstyle, PMD, SpotBugs.</td></tr></tbody></table></div>
+<h3>Ferramentas obrigatórias de qualidade</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Ferramenta</th><th>Categoria</th><th>Propósito</th></tr></thead><tbody><tr><td>Checkstyle + PMD</td><td>Backend</td><td>Linting e análise estática Java.</td></tr><tr><td>SpotBugs</td><td>Backend</td><td>Detecção de bugs em tempo de análise.</td></tr><tr><td>ESLint + Prettier</td><td>Frontend</td><td>Lint e formatação TypeScript.</td></tr><tr><td>Husky + lint-staged</td><td>Ambos</td><td>Pre-commit hooks.</td></tr><tr><td>SonarQube Community</td><td>Ambos</td><td>Cobertura, duplicação, code smells e quality gate.</td></tr><tr><td>Trivy</td><td>Docker</td><td>Scan de vulnerabilidades em imagens.</td></tr><tr><td>Dependabot</td><td>Repositórios</td><td>PRs automáticos de patch/minor.</td></tr></tbody></table></div>
+<h3>Política de atualização de dependências</h3><ul class="doc-list"><li>Patch: atualizar imediatamente quando envolver segurança ou bugfix.</li><li>Minor: avaliar mensalmente.</li><li>Major: avaliar trimestralmente com branch e testes completos.</li></ul>
+<h3>Java 21 Virtual Threads</h3><p>Virtual Threads são uma decisão estratégica para manter o modelo imperativo do Spring MVC com melhor concorrência, sem exigir WebFlux para a maioria dos cenários.</p>
+<pre class="code-block"><code class="yaml">spring:
+  threads:
+    virtual:
+      enabled: true
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true</code></pre>
+
+</section>
+<section id="arquitetura" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>3. Arquitetura geral do sistema</h2>
+      
+    </div>
+    <span class="section-badge">C4 + DFD</span>
+  </div>
+  
+<p>A plataforma usa frontend e backend separados, comunicando via API REST versionada. O frontend é otimizado para SEO, cache e experiência de leitura; o backend concentra regras de negócio, segurança, persistência, eventos internos, integrações e administração.</p>
+<figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-05.png" width="745" height="1053" alt="Visual original da página 5 do PDF" loading="lazy" decoding="async" data-pdf-page="05">
+  <figcaption>Visual original da página 5 do PDF.</figcaption>
+</figure>
+<h3>Degradação graciosa</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Falha</th><th>Comportamento esperado</th></tr></thead><tbody><tr><td>Redis indisponível</td><td>API lê do PostgreSQL diretamente, sem cache e com rate limit degradado.</td></tr><tr><td>Object Storage indisponível</td><td>Posts continuam acessíveis; imagens mostram placeholder e uploads ficam bloqueados.</td></tr><tr><td>Resend/SendGrid indisponível</td><td>Eventos de e-mail são enfileirados para retry e usuário recebe mensagem de processamento.</td></tr><tr><td>Gateway de pagamento indisponível</td><td>Checkout é bloqueado com mensagem amigável; nenhuma cobrança parcial é criada.</td></tr><tr><td>Meilisearch futuro indisponível</td><td>Sistema volta para PostgreSQL Full Text Search.</td></tr></tbody></table></div>
+<h3>Notas preservadas do PDF</h3>
+<pre class="code-block"><code class="">Atores:
+- Leitor / Visitante acessa conteúdo.
+- Autor / Admin administra plataforma.
+- Frontend: Next.js App Router, Vercel / Edge / CDN.
+- Backend: Spring Boot API, Java 21 + Security + JPA, REST /api/v1.
+- Dados privados: PostgreSQL, Redis, S3/R2/Azure Blob.
+- Serviços externos: Resend / SendGrid, Stripe / Mercado Pago, Google / GitHub OAuth.
+
+Fronteiras de confiança:
+- Público / não confiável: navegador, usuários, admin, bots e scrapers.
+- Borda: Vercel Edge / WAF, TLS, headers e cache.
+- Sua infraestrutura: Spring Boot API, PostgreSQL privado, Redis privado, storage privado/assinado.
+- Terceiros: e-mail provider e gateway de pagamento com webhook validado.</code></pre>
+
+</section>
+<section id="monolito" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>4. Monólito modular</h2>
+      
+    </div>
+    <span class="section-badge">Arquitetura</span>
+  </div>
+  
+<p>O projeto deve iniciar como monólito modular. Essa abordagem reduz custo operacional e complexidade, mas preserva separação por domínio e permite extração futura de serviços caso o produto cresça.</p>
+<h3>Quando reavaliar microserviços</h3><ul class="doc-list"><li>Volume acima de 1 milhão de pageviews/mês e escala vertical antieconômica.</li><li>Módulo de pagamentos exigindo time dedicado e deploy próprio.</li><li>Dois módulos com ciclos de deploy independentes e conflitantes.</li><li>Tempo de build acima de 15 minutos.</li></ul>
+<h3>Comunicação entre módulos</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Situação</th><th>Mecanismo</th><th>Exemplo</th></tr></thead><tbody><tr><td>Operação síncrona no mesmo request</td><td>Chamada via interface/port</td><td>PostService consulta UserReadPort.</td></tr><tr><td>Efeito colateral assíncrono</td><td>Spring ApplicationEvent</td><td>PostPublishedEvent dispara indexação e e-mail.</td></tr><tr><td>Comunicação que pode falhar</td><td>Evento + retry</td><td>Envio de e-mail e webhook externo.</td></tr></tbody></table></div>
+<h3>Anti-Corruption Layer entre módulos</h3><p>Módulos não devem expor entidades JPA uns aos outros. O consumo deve ocorrer por portas, DTOs ou eventos.</p>
+<pre class="code-block"><code class="java">public interface PostReadPort {
+    PostSummary findBySlug(String slug);
+    List&lt;PostSummary&gt; findPublished(Pageable pageable);
+}
+// Analytics consome PostReadPort, mas nunca conhece a entidade JPA Post.</code></pre>
+<h3>Módulos previstos</h3>
+<div class="badge-cloud">
+<span>auth: login, JWT, refresh</span><span>users: perfil, roles, status</span><span>posts: conteúdo, SEO, séries</span><span>media: upload, presigned URLs</span><span>community: comments, likes, favorites</span><span>newsletter: subscribers, campaigns</span><span>analytics: views, UTM, leitura</span><span>premium: assinaturas, acesso</span><span>products: digitais, downloads</span><span>payments: checkout, webhooks</span><span>notifications: e-mail, in-app</span><span>settings: feature flags, manutenção</span><span>audit: ações sensíveis</span>
+</div>
+
+</section>
+<section id="frontend" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>5. Arquitetura Frontend</h2>
+      
+    </div>
+    <span class="section-badge">Next.js</span>
+  </div>
+  
+<p>O frontend em Next.js deve priorizar SEO, performance, legibilidade, acessibilidade e experiência de administração. Rotas públicas usam SSG/ISR; áreas privadas usam SSR/CSR conforme necessidade.</p>
+<h3>Estrutura de pastas</h3><pre class="code-block"><code class="text">blog-platform-web/
+├── app/
+│   ├── (public)/blog, projetos, series, produtos
+│   ├── (auth)/login, cadastro, reset-password
+│   ├── (private)/me, dashboard
+│   ├── admin/posts, users, analytics, settings
+│   ├── sitemap.ts, robots.ts, api/og/route.tsx
+│   └── middleware.ts
+├── components/
+│   ├── layout, blog, comments, admin, forms, ui
+├── services/ # clients REST por dominio
+├── lib/ # auth, api, seo, utils
+├── store/ # auth em memoria, tema, UI state
+├── config/ # site, navigation, features
+└── types/ # contratos frontend</code></pre>
+<h3>Estratégia de renderização por rota</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Rota</th><th>Estratégia</th><th>Justificativa</th></tr></thead><tbody><tr><td>/blog</td><td>ISR - revalidate 300s</td><td>Lista muda com novos posts, mas precisa manter performance.</td></tr><tr><td>/blog/[slug]</td><td>SSG + ISR - revalidate 3600s</td><td>SEO crítico e conteúdo pouco alterado.</td></tr><tr><td>/projetos</td><td>SSG</td><td>Portfólio muda com baixa frequência.</td></tr><tr><td>/admin/*</td><td>CSR</td><td>Rotas privadas, não indexáveis e altamente interativas.</td></tr><tr><td>/me/*</td><td>SSR com auth check</td><td>Dados personalizados do usuário autenticado.</td></tr><tr><td>/api/og</td><td>Route Handler</td><td>Gerar Open Graph image dinâmica por post.</td></tr></tbody></table></div>
+<h3>Componentes principais</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Domínio</th><th>Componentes</th></tr></thead><tbody><tr><td>Layout</td><td>Header, Footer, Sidebar, Breadcrumb, Command Search, Theme Toggle.</td></tr><tr><td>Blog</td><td>PostCard, PostHeader, PostContent, TableOfContents, RelatedPosts, ShareButtons.</td></tr><tr><td>Comentários</td><td>CommentList, CommentForm, ModerationBadge, ReplyThread.</td></tr><tr><td>Admin</td><td>PostEditor, MediaUploader, AnalyticsCards, UserTable, SettingsPanel.</td></tr><tr><td>SEO</td><td>JsonLd, OgImage, Canonical, BreadcrumbSchema.</td></tr></tbody></table></div>
+<h3>Error boundaries e middleware</h3><p>O frontend deve usar <code>error.tsx</code>, <code>not-found.tsx</code>, boundaries por grupo de rota e <code>middleware.ts</code> para proteger <code>/admin</code> e <code>/me</code>.</p>
+
+</section>
+<section id="backend" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>6. Arquitetura Backend</h2>
+      
+    </div>
+    <span class="section-badge">Spring Boot</span>
+  </div>
+  
+<p>O backend Spring Boot concentra regras de negócio, segurança, persistência, moderação, integrações externas, analytics, pagamentos e administração.</p>
+<h3>Estrutura de módulos e pacotes</h3><pre class="code-block"><code class="text">blog-platform-api/
+├── auth/ # login, JWT, refresh token, password reset
+├── users/ # perfil, roles, status, LGPD
+├── posts/ # posts, categorias, tags, series, SEO
+├── community/ # comentarios, curtidas, favoritos
+├── newsletter/ # subscribers, campaigns, bounces
+├── analytics/ # page views, UTM, leitura, funis
+├── media/ # upload, presigned URLs, assets
+├── products/ # produtos digitais, arquivos, precos
+├── payments/ # checkout, webhooks, reembolsos
+├── premium/ # assinaturas e controle de acesso
+├── notifications/ # e-mail e notificacoes internas
+├── settings/ # feature flags e manutencao
+└── shared/ # exceptions, security, events, validation, utils</code></pre>
+<h3>Camadas padrão por módulo</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Camada</th><th>Responsabilidade</th></tr></thead><tbody><tr><td>controller</td><td>Receber HTTP, validar DTOs, retornar response e status corretos.</td></tr><tr><td>service</td><td>Orquestrar regras de negócio, transações e eventos.</td></tr><tr><td>repository</td><td>Acesso a dados via Spring Data JPA e queries customizadas.</td></tr><tr><td>entity</td><td>Representação persistente do domínio no banco.</td></tr><tr><td>dto/request/response</td><td>Contratos de entrada e saída da API.</td></tr><tr><td>mapper</td><td>MapStruct para converter entity &lt;-&gt; DTO.</td></tr><tr><td>event</td><td>Eventos de domínio e integração intra-processo.</td></tr><tr><td>validator</td><td>Validações customizadas, como UniqueEmail e UniqueSlug.</td></tr></tbody></table></div>
+<h3>Tratamento global de exceções</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Exceção</th><th>HTTP</th><th>Uso</th></tr></thead><tbody><tr><td>NotFoundException</td><td>404</td><td>Recurso não encontrado.</td></tr><tr><td>ConflictException</td><td>409</td><td>Slug ou e-mail duplicado.</td></tr><tr><td>ForbiddenException</td><td>403</td><td>Role insuficiente.</td></tr><tr><td>UnprocessableEntityException</td><td>422</td><td>Regra de negócio violada.</td></tr><tr><td>ExternalServiceException</td><td>503</td><td>Stripe, Resend ou storage indisponível.</td></tr></tbody></table></div>
+
+</section>
+<section id="seguranca" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>7. Autenticação, autorização e segurança</h2>
+      
+    </div>
+    <span class="section-badge">Security</span>
+  </div>
+  
+<p>A estratégia recomendada usa access token de curta duração, refresh token rotativo em cookie HttpOnly, detecção de reuso, roles e permissões por método.</p>
+<figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-09.png" width="745" height="1053" alt="Visual original da página 9 do PDF" loading="lazy" decoding="async" data-pdf-page="09">
+  <figcaption>Visual original da página 9 do PDF.</figcaption>
+</figure>
+<h3>Política de sessões</h3><ul class="doc-list"><li>Permitir múltiplos dispositivos simultâneos.</li><li>Cada dispositivo possui refresh token próprio.</li><li>Logout revoga apenas a sessão atual.</li><li>Opção “sair de todos os dispositivos” revoga todos os tokens do usuário.</li><li>Reuso de refresh token revogado invalida a família de tokens do usuário.</li></ul>
+<h3>Controles obrigatórios</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Controle</th><th>Descrição</th></tr></thead><tbody><tr><td>BCrypt</td><td>Senha nunca armazenada em texto puro.</td></tr><tr><td>HttpOnly Cookie</td><td>Refresh token inacessível por JavaScript.</td></tr><tr><td>SameSite Strict/Secure</td><td>Reduz superfície de CSRF e exige HTTPS.</td></tr><tr><td>CORS restrito</td><td>Apenas origem oficial do frontend.</td></tr><tr><td>CSP e security headers</td><td>Proteção contra XSS e clickjacking.</td></tr><tr><td>Rate limiting</td><td>Login, comentários, newsletter e endpoints públicos.</td></tr><tr><td>Sanitização</td><td>Conteúdo HTML/Markdown seguro antes de renderizar.</td></tr><tr><td>LGPD</td><td>Exportação, exclusão, consentimento e minimização de dados.</td></tr></tbody></table></div>
+
+</section>
+<section id="publicacao" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>8. Conteúdo, publicação e uploads</h2>
+      
+    </div>
+    <span class="section-badge">Conteúdo</span>
+  </div>
+  
+<p>O fluxo editorial deve permitir escrita técnica com Markdown/MDX, assets otimizados, publicação agendada e propagação de eventos para cache, busca, newsletter e SEO.</p>
+<figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-10.png" width="745" height="1053" alt="Visual original da página 10 do PDF" loading="lazy" decoding="async" data-pdf-page="10">
+  <figcaption>Visual original da página 10 do PDF.</figcaption>
+</figure>
+<h3>Validação de arquivos</h3><ul class="doc-list"><li>Nunca confiar apenas na extensão do arquivo.</li><li>Validar magic bytes para JPEG, PNG, PDF e formatos permitidos.</li><li>Limitar tamanho, content type e dimensões.</li><li>Converter imagens para WebP/AVIF e servir via CDN.</li></ul>
+<h3>Fluxos preservados do PDF</h3>
+<pre class="code-block"><code class="">Fluxo de publicação:
+Admin UI -&gt; Posts API -&gt; PostgreSQL -&gt; PostPublishedEvent -&gt; Redis -&gt; FTS/pgvector -&gt; Newsletter -&gt; Sitemap/RSS/OG.
+
+Fluxo de upload:
+Admin Frontend seleciona arquivo -&gt; Media API gera presigned-url -&gt; Object Storage recebe PUT direto S3/R2/Azure -&gt; PostgreSQL registra media_assets -&gt; CDN/next-image serve WebP/AVIF.</code></pre>
+
+</section>
+<section id="banco" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>9. Banco de Dados e Modelo de Dados</h2>
+      
+    </div>
+    <span class="section-badge">PostgreSQL</span>
+  </div>
+  
+<p>PostgreSQL é o banco principal por oferecer maturidade, consultas relacionais, JSONB, Full Text Search, índices GIN, constraints fortes e extensões como pgvector em fases futuras.</p>
+<figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-11.png" width="745" height="1053" alt="Visual original da página 11 do PDF" loading="lazy" decoding="async" data-pdf-page="11">
+  <figcaption>Visual original da página 11 do PDF.</figcaption>
+</figure>
+<h3>Tabelas principais</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Tabela</th><th>Responsabilidade</th></tr></thead><tbody><tr><td>users</td><td>Usuários, roles, senha hash, status, avatar e soft delete.</td></tr><tr><td>posts</td><td>Conteúdo, author_id, category_id, slug, markdown/html, SEO, status, visibility e published_at.</td></tr><tr><td>categories / tags / post_tags</td><td>Classificação editorial, slugs únicos e relacionamento N:N.</td></tr><tr><td>comments</td><td>Comentários moderados, replies por parent_comment_id e soft delete.</td></tr><tr><td>reactions / bookmarks</td><td>Curtidas e favoritos com unicidade por usuário e post.</td></tr><tr><td>reading_history / page_views</td><td>Progresso de leitura, tempo, origem UTM, views e agregações diárias.</td></tr><tr><td>newsletter_subscribers / subscriber_tags</td><td>Inscritos, double opt-in, segmentação, bounces e unsubscribe.</td></tr><tr><td>products / purchases / subscriptions</td><td>Produtos digitais, compras, assinaturas, status de pagamento e expiração.</td></tr><tr><td>media_assets</td><td>Metadados de arquivos, file_key, content_type, checksum, tamanho e URL pública/assinada.</td></tr><tr><td>audit_logs</td><td>Registro imutável de ações sensíveis com old_data/new_data em JSONB.</td></tr><tr><td>refresh_tokens</td><td>Refresh tokens com hash, expiração, revoked, IP, user agent e detecção de reuso.</td></tr></tbody></table></div>
+<h3>Índices e constraints recomendados</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Nome</th><th>Definição</th><th>Objetivo</th></tr></thead><tbody><tr><td>idx_posts_status_published_at</td><td>posts(status, published_at DESC) WHERE status = PUBLISHED</td><td>Listagem pública por data.</td></tr><tr><td>idx_comments_post_status</td><td>comments(post_id, status) WHERE status = APPROVED</td><td>Carregar comentários visíveis.</td></tr><tr><td>uq_reactions_user_post_type</td><td>UNIQUE(user_id, post_id, type)</td><td>Evitar reação duplicada.</td></tr><tr><td>uq_bookmarks_user_post</td><td>UNIQUE(user_id, post_id)</td><td>Evitar favorito duplicado.</td></tr><tr><td>idx_audit_logs_entity</td><td>audit_logs(entity_type, entity_id)</td><td>Auditoria por entidade.</td></tr><tr><td>idx_refresh_tokens_hash</td><td>refresh_tokens(token_hash) UNIQUE</td><td>Validar refresh token sem armazenar valor bruto.</td></tr><tr><td>GIN search_vector</td><td>posts.search_vector</td><td>Busca textual no PostgreSQL.</td></tr><tr><td>page_views partition</td><td>PARTITION BY RANGE(viewed_at)</td><td>Controlar crescimento de analytics.</td></tr></tbody></table></div>
+<h3>Convenções de banco</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Item</th><th>Padrão</th></tr></thead><tbody><tr><td>Tabelas</td><td>snake_case no plural, como posts, users, audit_logs.</td></tr><tr><td>Colunas</td><td>snake_case.</td></tr><tr><td>PK</td><td>id UUID sempre que possível.</td></tr><tr><td>FK</td><td>{tabela_singular}_id, como post_id.</td></tr><tr><td>Índices</td><td>idx_{tabela}_{colunas}.</td></tr><tr><td>Constraints</td><td>uq_{tabela}_{coluna}, chk_{tabela}_{regra}.</td></tr><tr><td>Migrations</td><td>V{n}__descricao_com_underscores.sql.</td></tr></tbody></table></div>
+
+</section>
+<section id="api" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>10. API REST e Contratos</h2>
+      
+    </div>
+    <span class="section-badge">REST</span>
+  </div>
+  
+<p>A API deve seguir REST com versionamento por URL, padrão uniforme de erros, idempotência em operações críticas e documentação OpenAPI.</p>
+<div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Domínio</th><th>Endpoints principais</th></tr></thead><tbody><tr><td>Auth</td><td>POST /api/v1/auth/register, /login, /refresh, /logout, /forgot-password, /reset-password, GET /me</td></tr><tr><td>Posts públicos</td><td>GET /api/v1/posts, /posts/{slug}, /posts/featured, /posts/recent, /posts/search, /posts/{slug}/related</td></tr><tr><td>Posts admin</td><td>POST /api/v1/admin/posts, PUT /admin/posts/{id}, PATCH /publish, PATCH /archive, DELETE /admin/posts/{id}</td></tr><tr><td>Categorias e tags</td><td>GET /categories, GET /tags, POST/PUT/DELETE /api/v1/admin/categories, /api/v1/admin/tags</td></tr><tr><td>Comunidade</td><td>GET/POST /posts/{postId}/comments, PATCH /admin/comments/{id}/approve, /reject, POST/DELETE /like, /favorite</td></tr><tr><td>Newsletter</td><td>POST /newsletter/subscribe, /confirm, /unsubscribe, POST /admin/newsletter/campaigns/{id}/send</td></tr><tr><td>Produtos e premium</td><td>GET /products, GET /products/{slug}, POST /checkout, GET /me/purchases, GET /me/subscription</td></tr><tr><td>Pagamentos</td><td>POST /api/v1/webhooks/payments, POST /admin/purchases/{id}/refund</td></tr><tr><td>Uploads</td><td>GET /admin/uploads/presigned-url, POST /admin/uploads/confirm, DELETE /admin/uploads/{id}</td></tr><tr><td>Analytics/admin</td><td>POST /analytics/events, GET /admin/analytics/overview, /posts, /revenue, GET /admin/audit-logs, POST /admin/settings</td></tr><tr><td>Sistema</td><td>GET /health, GET /feed.xml, GET /sitemap.xml, GET /robots.txt</td></tr></tbody></table></div>
+<h3>Padrão de erro — RFC 7807</h3>
+<pre class="code-block"><code class="json">{
+  &quot;type&quot;: &quot;https://api.seusite.com.br/errors/post-not-found&quot;,
+  &quot;title&quot;: &quot;Post nao encontrado&quot;,
+  &quot;status&quot;: 404,
+  &quot;detail&quot;: &quot;Nenhum post com slug informado foi encontrado&quot;,
+  &quot;instance&quot;: &quot;/api/v1/posts/spring-boot-xyz&quot;,
+  &quot;timestamp&quot;: &quot;2026-05-22T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc123def456&quot;
+}</code></pre>
+<h3>Regras de API</h3><ul class="doc-list"><li>Versionamento: /api/v1, com depreciação de 12 meses após uma v2.</li><li>Erros uniformes com traceId.</li><li>Idempotência em like, bookmark, subscribe e webhooks.</li><li>Paginação por cursor para grandes volumes.</li><li>Swagger/OpenAPI sempre atualizado no pipeline.</li></ul>
+
+</section>
+<section id="cache" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>11. Cache, busca e performance</h2>
+      
+    </div>
+    <span class="section-badge">Redis</span>
+  </div>
+  
+<p>Redis deve ser usado para reduzir carga do banco, controlar taxa, armazenar locks temporários e acelerar leituras públicas. PostgreSQL Full Text Search atende o MVP; Meilisearch/OpenSearch entram somente se as métricas justificarem.</p>
+<figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-14.png" width="745" height="1053" alt="Visual original da página 14 do PDF" loading="lazy" decoding="async" data-pdf-page="14">
+  <figcaption>Visual original da página 14 do PDF.</figcaption>
+</figure>
+<h3>Chaves e estratégias Redis</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Chave</th><th>Uso</th><th>TTL</th></tr></thead><tbody><tr><td>blog:posts:list:*</td><td>Listagens públicas de posts</td><td>5 a 15 min</td></tr><tr><td>blog:posts:detail:{slug}</td><td>Detalhe do post</td><td>30 a 60 min</td></tr><tr><td>blog:categories:* / blog:tags:*</td><td>Categorias e tags</td><td>1 a 6 h</td></tr><tr><td>rate-limit:{ip}:{endpoint}</td><td>Rate limiting público</td><td>janela móvel</td></tr><tr><td>lock:post:{slug}</td><td>Evitar cache stampede</td><td>5 s</td></tr><tr><td>analytics:views:{postId}</td><td>Contador temporário de views</td><td>flush periódico</td></tr></tbody></table></div>
+<h3>Quando migrar busca para Meilisearch/OpenSearch</h3><ul class="doc-list"><li>Mais de 500 artigos.</li><li>Reclamações de resultados irrelevantes.</li><li>Necessidade de facets por tag, categoria e data simultaneamente.</li><li>Necessidade de typo tolerance e ranking mais sofisticado.</li></ul>
+
+</section>
+<section id="devops" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>12. DevOps, infraestrutura e deploy</h2>
+      
+    </div>
+    <span class="section-badge">CI/CD</span>
+  </div>
+  
+<p>O processo de entrega deve ter ambientes separados, quality gates automatizados, deploy verificável, rollback e migrations seguras.</p>
+<figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-15.png" width="745" height="1053" alt="Visual original da página 15 do PDF" loading="lazy" decoding="async" data-pdf-page="15">
+  <figcaption>Visual original da página 15 do PDF.</figcaption>
+</figure>
+<h3>Ambiente local com Docker Compose</h3><pre class="code-block"><code class="yaml">services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: blogdb
+      POSTGRES_USER: bloguser
+      POSTGRES_PASSWORD: blogpass
+    ports: [&quot;5432:5432&quot;]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/db/seed.sql:/docker-entrypoint-initdb.d/99-seed.sql
+  redis:
+    image: redis:7
+    ports: [&quot;6379:6379&quot;]
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@dev.local
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports: [&quot;5050:80&quot;]</code></pre>
+<h3>Estratégia de deploy</h3><ul class="doc-list"><li>Fluxo: feature branch -&gt; Pull Request -&gt; CI -&gt; staging -&gt; main -&gt; produção.</li><li>Frontend: Vercel com preview deploys e production deploy.</li><li>Backend: Render, Railway, Fly.io, AWS, Azure ou VPS com Docker.</li><li>Banco: PostgreSQL gerenciado separado por ambiente.</li><li>Redis: serviço gerenciado em produção.</li><li>Migrations: expand-contract para zero downtime.</li><li>Rollback: redeploy do último container funcional e migration de compensação quando necessário.</li></ul>
+<h3>Zero downtime</h3><p>O novo container só deve receber tráfego depois de passar readiness/liveness. Migrations destrutivas nunca devem rodar junto com código antigo.</p>
+
+</section>
+<section id="qualidade" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>13. Observabilidade, testes e qualidade</h2>
+      
+    </div>
+    <span class="section-badge">Qualidade</span>
+  </div>
+  
+<h3>Observabilidade</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Item</th><th>Aplicação</th></tr></thead><tbody><tr><td>Logs estruturados</td><td>JSON com traceId, userId quando aplicável e sem tokens/senhas.</td></tr><tr><td>Actuator/Micrometer</td><td>Health, readiness, liveness, JVM, HTTP e métricas customizadas.</td></tr><tr><td>Sentry</td><td>Captura de erros frontend e backend.</td></tr><tr><td>Prometheus/Grafana</td><td>Métricas e dashboards em fase de escala.</td></tr><tr><td>Uptime Robot</td><td>Monitorar /health a cada 5 minutos.</td></tr><tr><td>Audit trail</td><td>Registro imutável de ações administrativas.</td></tr></tbody></table></div>
+<h3>Testes</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Tipo</th><th>Ferramentas</th><th>Escopo</th></tr></thead><tbody><tr><td>Unitários</td><td>JUnit 5, Mockito</td><td>Services, validators, mappers, regras de domínio.</td></tr><tr><td>Integração</td><td>Testcontainers</td><td>PostgreSQL, Redis, Flyway e repositories reais.</td></tr><tr><td>API</td><td>RestAssured, MockMvc</td><td>Contratos REST, segurança, status codes e payloads.</td></tr><tr><td>Externos</td><td>WireMock</td><td>Stripe, Resend, storage e OAuth.</td></tr><tr><td>E2E</td><td>Playwright</td><td>Login, CRUD post, comentários, checkout e admin.</td></tr><tr><td>Carga</td><td>k6</td><td>p95, throughput, saturação e regressão de performance.</td></tr></tbody></table></div>
+<h3>Definition of Done</h3><ul class="doc-list"><li>Código revisado e com checklist de segurança.</li><li>Testes unitários e/ou integração escritos.</li><li>Cobertura de novo código &gt;= 70%.</li><li>Sem warnings no console do browser.</li><li>Responsivo em 375px, 768px e 1280px.</li><li>Documentação OpenAPI atualizada.</li><li>Migration Flyway versionada.</li><li>Staging validado antes da produção.</li></ul>
+
+</section>
+<section id="requisitos-funcionais" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>14. Requisitos Funcionais</h2>
+      
+    </div>
+    <span class="section-badge">50 RFs</span>
+  </div>
+  
+<p>Os requisitos abaixo consolidam a versão completa da plataforma com backend, incluindo as melhorias adicionadas ao documento técnico.</p>
+<div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Código</th><th>Módulo</th><th>Descrição</th><th>Prioridade</th><th>Fase</th></tr></thead><tbody><tr><td>RF01</td><td>Cadastro de usuários</td><td>Permitir criação de conta com nome, e-mail, senha, aceite de termos e status de verificação.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF02</td><td>Login</td><td>Permitir autenticação por e-mail e senha com geração de access token e refresh token.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF03</td><td>Refresh token e logout</td><td>Renovar sessão com refresh token rotativo e revogar tokens no logout.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF04</td><td>Recuperação de senha</td><td>Gerar token temporário e enviar link seguro de redefinição de senha por e-mail.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF05</td><td>Perfil do usuário</td><td>Permitir editar nome, avatar, senha, favoritos, histórico, compras e assinatura.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF06</td><td>Gestão de usuários</td><td>Permitir ao admin listar, bloquear, alterar roles e auditar usuários.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF07</td><td>Criação de posts</td><td>Permitir criar posts com título, slug, descrição, conteúdo, imagem, categoria, tags e SEO.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF08</td><td>Edição e arquivamento de posts</td><td>Permitir editar, publicar, arquivar, deletar logicamente e restaurar posts.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF09</td><td>Publicação agendada</td><td>Permitir agendar posts e publicar automaticamente por job backend.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF10</td><td>Editor Markdown/MDX</td><td>Permitir escrever conteúdo técnico com markdown, blocos de código, tabelas e componentes seguros.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF11</td><td>Listagem pública de posts</td><td>Exibir posts publicados com paginação, ordenação, filtros por categoria e tag.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF12</td><td>Página individual do post</td><td>Exibir título, descrição, autor, datas, sumário, conteúdo, tags, comentários e relacionados.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF13</td><td>Categorias</td><td>Permitir CRUD de categorias com nome, slug, descrição e status.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF14</td><td>Tags</td><td>Permitir CRUD de tags com nome, slug e contagem de posts relacionados.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF15</td><td>Séries de estudo</td><td>Permitir agrupar posts em séries com ordem, descrição e progresso de leitura.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF16</td><td>Projetos de portfólio</td><td>Exibir projetos com stack, problema, arquitetura, link GitHub, deploy e aprendizados.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF17</td><td>Busca textual</td><td>Permitir busca por título, descrição, conteúdo, tags, categorias e autor.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF18</td><td>Comentários</td><td>Permitir comentar posts mediante autenticação, com status de moderação.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF19</td><td>Moderação de comentários</td><td>Permitir aprovar, rejeitar, editar ou remover comentários pelo painel admin.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF20</td><td>Respostas em comentários</td><td>Permitir respostas com limite de profundidade para manter legibilidade.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF21</td><td>Curtidas e reações</td><td>Permitir uma reação por usuário/post/tipo com operação idempotente.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF22</td><td>Favoritos</td><td>Permitir salvar posts para ler depois e listar favoritos na área do usuário.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF23</td><td>Histórico de leitura</td><td>Registrar posts lidos, progresso, tempo gasto e último acesso.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF24</td><td>Leitura completada</td><td>Disparar evento de conclusão quando o leitor atingir critério de progresso configurado.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF25</td><td>Newsletter double opt-in</td><td>Permitir inscrição, confirmação, cancelamento e armazenamento de origem.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF26</td><td>Campanhas de newsletter</td><td>Permitir criar, agendar, enviar e medir campanhas para assinantes.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF27</td><td>Segmentação de newsletter</td><td>Permitir segmentar assinantes por interesse, tags ou comportamento.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF28</td><td>Dashboard administrativo</td><td>Exibir posts, usuários, comentários, assinantes, views, receita e alertas.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF29</td><td>Analytics interno</td><td>Registrar page views, UTM, origem, tempo de leitura, conversões e eventos.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF30</td><td>Produtos digitais</td><td>Permitir cadastrar, publicar, vender e liberar produtos digitais.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF31</td><td>Checkout de pagamentos</td><td>Integrar com gateway para compra única e assinatura.</td><td><span class="priority nice">Nice to Have</span></td><td>Fase 3</td></tr><tr><td>RF32</td><td>Webhooks de pagamento</td><td>Receber webhooks assinados e idempotentes para confirmar pagamentos.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF33</td><td>Área premium</td><td>Restringir acesso a conteúdos e downloads para assinantes ou compradores.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF34</td><td>Downloads privados</td><td>Liberar arquivos por URL assinada e expirada após compra confirmada.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF35</td><td>Upload de imagens e arquivos</td><td>Permitir upload de capas, imagens internas, anexos e arquivos de produto.</td><td><span class="priority should">Should Have</span></td><td>Fase 2-3</td></tr><tr><td>RF36</td><td>Presigned URLs</td><td>Permitir upload direto ao storage por URL assinada com TTL curto.</td><td><span class="priority future">Future</span></td><td>Fase 4+</td></tr><tr><td>RF37</td><td>Notificações</td><td>Enviar notificações por e-mail ou canal interno para eventos relevantes.</td><td><span class="priority future">Future</span></td><td>Fase 4+</td></tr><tr><td>RF38</td><td>Configurações dinâmicas</td><td>Permitir ativar/desativar comentários, cadastro, manutenção e features sem redeploy.</td><td><span class="priority future">Future</span></td><td>Fase 4+</td></tr><tr><td>RF39</td><td>Audit logs</td><td>Registrar ações sensíveis do admin com antes/depois, IP, usuário e timestamp.</td><td><span class="priority future">Future</span></td><td>Fase 4+</td></tr><tr><td>RF40</td><td>SEO dinâmico</td><td>Gerar metadata, canonical, JSON-LD, breadcrumbs e Open Graph por post.</td><td><span class="priority future">Future</span></td><td>Fase 4+</td></tr><tr><td>RF41</td><td>Sitemap e robots</td><td>Gerar sitemap.xml e robots.txt automaticamente a partir do conteúdo publicado.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF42</td><td>Open Graph image dinâmica</td><td>Gerar imagem social por post com título, data e identidade visual.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF43</td><td>Documentação OpenAPI</td><td>Expor Swagger/OpenAPI com schemas, exemplos, erros e segurança.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF44</td><td>Health check</td><td>Expor endpoint de saúde público simplificado e probes de liveness/readiness.</td><td><span class="priority must">Must Have</span></td><td>MVP / Fase 1-2</td></tr><tr><td>RF45</td><td>Modo de manutenção</td><td>O sistema deve suportar modo de manutenção com página de aviso aos visitantes.</td><td><span class="priority should">Should Have</span></td><td>Fase 2+</td></tr><tr><td>RF46</td><td>Redirecionamentos</td><td>O sistema deve permitir criar redirecionamentos de URLs, como /go/github para link externo.</td><td><span class="priority should">Should Have</span></td><td>Fase 2+</td></tr><tr><td>RF47</td><td>RSS Feed</td><td>O sistema deve gerar RSS Feed (/feed.xml) atualizado automaticamente com novos posts.</td><td><span class="priority should">Should Have</span></td><td>Fase 2+</td></tr><tr><td>RF48</td><td>Exclusão de conta</td><td>O sistema deve suportar exclusão de conta pelo próprio usuário conforme LGPD.</td><td><span class="priority should">Should Have</span></td><td>Fase 2+</td></tr><tr><td>RF49</td><td>Paginação por cursor</td><td>O sistema deve implementar paginação baseada em cursor para o endpoint de posts.</td><td><span class="priority should">Should Have</span></td><td>Fase 2+</td></tr><tr><td>RF50</td><td>Exportação de dados</td><td>O sistema deve suportar exportação de dados do usuário em formato JSON para portabilidade LGPD.</td><td><span class="priority should">Should Have</span></td><td>Fase 2+</td></tr></tbody></table></div>
+
+</section>
+<section id="requisitos-nao-funcionais" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>15. Requisitos Não Funcionais</h2>
+      
+    </div>
+    <span class="section-badge">28 RNFs</span>
+  </div>
+  
+<p>Os requisitos não funcionais garantem qualidade operacional, segurança, escalabilidade, observabilidade, manutenção e validação objetiva.</p>
+<div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Código</th><th>Categoria</th><th>Descrição</th><th>Como validar</th></tr></thead><tbody><tr><td>RNF01</td><td>Performance</td><td>LCP das páginas públicas deve ser inferior a 2.5s em conexão padrão.</td><td>Lighthouse CI</td></tr><tr><td>RNF02</td><td>Performance</td><td>Latência p95 da API deve permanecer abaixo de 300ms em endpoints de leitura cacheados.</td><td>k6 + Actuator metrics</td></tr><tr><td>RNF03</td><td>Escalabilidade</td><td>API deve suportar pelo menos 500 req/s em leitura pública com cache habilitado.</td><td>k6 100 VUs por 30s</td></tr><tr><td>RNF04</td><td>Disponibilidade</td><td>Serviços públicos devem manter uptime mínimo de 99.5% no MVP.</td><td>Uptime monitoring</td></tr><tr><td>RNF05</td><td>Escalabilidade</td><td>Backend deve ser stateless e escalar horizontalmente sem sessão local.</td><td>Review de arquitetura</td></tr><tr><td>RNF06</td><td>Segurança</td><td>Senhas devem ser armazenadas apenas com hash BCrypt e salt.</td><td>Teste e code review</td></tr><tr><td>RNF07</td><td>Segurança</td><td>CORS e CSRF devem restringir origens e proteger cookies sensíveis.</td><td>Teste de segurança</td></tr><tr><td>RNF08</td><td>Auditoria</td><td>Ações administrativas devem ser rastreáveis por usuário, ação, entidade e timestamp.</td><td>Consulta audit_logs</td></tr><tr><td>RNF09</td><td>Observabilidade</td><td>Todas as requisições devem ter traceId e logs estruturados.</td><td>Logs JSON + Sentry</td></tr><tr><td>RNF10</td><td>Manutenibilidade</td><td>Código deve seguir camadas e módulos com baixa dependência circular.</td><td>Arquitetura + lint</td></tr><tr><td>RNF11</td><td>Qualidade</td><td>Cobertura mínima de testes do novo código deve ser &gt;= 70%.</td><td>JaCoCo/Istanbul</td></tr><tr><td>RNF12</td><td>Acessibilidade</td><td>Páginas públicas devem atingir score &gt;= 90 em acessibilidade.</td><td>axe-core + Playwright</td></tr><tr><td>RNF13</td><td>SEO</td><td>Páginas públicas devem ser indexáveis com metadados, sitemap e schema.</td><td>Lighthouse SEO + Search Console</td></tr><tr><td>RNF14</td><td>Integridade</td><td>Banco deve usar constraints, FKs, unique indexes e migrations versionadas.</td><td>Flyway + tests</td></tr><tr><td>RNF15</td><td>Resiliência</td><td>Falhas em Redis, storage, e-mail ou pagamento devem degradar sem derrubar o blog.</td><td>Testes de falha</td></tr><tr><td>RNF16</td><td>Idempotência</td><td>Operações críticas como subscribe, like e webhook devem ser idempotentes.</td><td>Testes de repetição</td></tr><tr><td>RNF17</td><td>Privacidade</td><td>Dados pessoais devem ter consentimento, exportação, exclusão e minimização.</td><td>Checklist LGPD</td></tr><tr><td>RNF18</td><td>Migrações</td><td>Mudanças de schema devem seguir expand-contract para evitar downtime.</td><td>Revisão de migration</td></tr><tr><td>RNF19</td><td>Deploy</td><td>Deploy de produção deve usar health checks e rollback possível.</td><td>Pipeline + health probes</td></tr><tr><td>RNF20</td><td>Responsividade</td><td>Interface deve funcionar em 375px, 768px e 1280px sem quebra visual.</td><td>Playwright visual/manual</td></tr><tr><td>RNF21</td><td>Recuperação</td><td>Backup automático do banco com retenção de 7 dias e RPO máximo de 24h.</td><td>Teste de restore</td></tr><tr><td>RNF22</td><td>Recuperação</td><td>RTO máximo após falha crítica deve ser de 2 horas.</td><td>Simulado de desastre</td></tr><tr><td>RNF23</td><td>Segurança</td><td>Implementar Content Security Policy (CSP) headers em todas as respostas.</td><td>Security headers scan</td></tr><tr><td>RNF24</td><td>Segurança</td><td>Headers obrigatórios: Strict-Transport-Security, X-Frame-Options, X-Content-Type-Options.</td><td>Security headers scan</td></tr><tr><td>RNF25</td><td>Performance</td><td>Imagens devem ser servidas em WebP com srcset responsivo e CLS &lt; 0.1.</td><td>Lighthouse CI</td></tr><tr><td>RNF26</td><td>Auditoria</td><td>Ações sensíveis do admin devem ser registradas em log de auditoria imutável.</td><td>Consulta audit_logs</td></tr><tr><td>RNF27</td><td>Resiliência</td><td>A API deve implementar Circuit Breaker para Stripe, Resend e serviços externos.</td><td>Resilience4j tests</td></tr><tr><td>RNF28</td><td>Internacionalização</td><td>Arquitetura deve suportar futura i18n sem refactoring estrutural.</td><td>Review de rotas/content</td></tr></tbody></table></div>
+
+</section>
+<section id="fases" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>16. Processo de desenvolvimento em 8 fases</h2>
+      
+    </div>
+    <span class="section-badge">Roadmap</span>
+  </div>
+  
+<p>As fases abaixo foram extraídas da trilha do HTML anexado e adaptadas para o processo real de construção da plataforma. Cada fase possui foco, entregáveis do blog e critério de saída.</p>
+<div class="phase-doc-grid"><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 1 - Base técnica + fundamentos</h3><span>Sem 1–8 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>Repositório público: README inglês, Conventional Commits, estrutura modular</li><li>Modelagem banco: users, posts, categories, tags, comments (Flyway)</li><li>Auth: JWT + refresh token rotation + Spring Security 6 + BCrypt</li><li>Posts CRUD: criar, editar, publicar, rascunho, markdown, slug, SEO fields</li><li>Categorias + tags: CRUD, relação N:N, slugs únicos</li><li>Testes unitários services, mappers, validators (&gt;80%)</li><li>Swagger/OpenAPI com exemplos e schemas</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> Java 21 Core: tipos, OOP, herança, polimorfismo, interfaces, generics, records, sealed classes; Linux: terminal, comandos essenciais, permissões chmod/chown; AWS: CLF-C02 — Cloud Practitioner.</p>
+      <p><strong>Critério de saída:</strong> MVP operacional com auth, posts, categorias, tags, Swagger, testes e pelo menos 5 posts publicados.</p>
+    </article><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 2 - Desenvolvimento profissional</h3><span>Sem 9–16 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>Comentários: threaded com reply, moderação</li><li>Newsletter: double opt-in, confirmação, preferências</li><li>Busca full-text: PostgreSQL tsvector + tsquery</li><li>Admin panel API: gestão de usuários, posts, moderação</li><li>Redis: cache posts populares, rate limiting por IP</li><li>Testes integração: Testcontainers, MockMvc + security</li><li>Swagger atualizado com todos os endpoints + erros</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> Spring Boot 3 avançado: REST, validação, DTOs, mappers MapStruct; Docker: images, containers, Dockerfile, build, layers, cache; AWS: SAA-C03 — Solutions Architect (início).</p>
+      <p><strong>Critério de saída:</strong> Comunidade inicial: comentários moderados, newsletter funcional, busca FTS, admin e Redis.</p>
+    </article><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 3 - Engenharia de software real</h3><span>Sem 17–24 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>Refatoração hexagonal: domain / ports / adapters</li><li>DDD: Post com comportamento, Slug Value Object, Domain Events</li><li>Kafka: PostPublished → email + notification + analytics</li><li>OAuth2 social login: GitHub + Google</li><li>OWASP hardening: XSS, CSRF, CORS, security headers</li><li>ADRs: hexagonal vs layered, Kafka vs RabbitMQ</li><li>Moderação assíncrona via Kafka</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> Kafka: produtores, consumidores, DLQ, retry, schemas; CI/CD: GitHub Actions (build → test → Sonar → deploy); AWS: SAA-C03 (continuação).</p>
+      <p><strong>Critério de saída:</strong> Arquitetura evoluída: hexagonal/DDD, eventos, Kafka/OAuth e hardening OWASP documentado.</p>
+    </article><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 4 - Arquitetura + candidaturas</h3><span>Sem 25–32 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>Rate limiting granular: IP, usuário, endpoint com Redis</li><li>Email assíncrono: Thymeleaf + Kafka → email-worker</li><li>Paginação cursor-based para feeds de posts</li><li>Versionamento de API: v1/v2 com strategy pattern</li><li>OpenAPI Generator: SDK client em Python</li><li>Métricas: SonarQube integrado, dashboard cobertura</li><li>Moderação inteligente: filtro spam + fila aprovação</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> Spring Boot avançado: profiles, starters customizados, Actuator; Kubernetes: pods, deployments, services, namespaces, kubectl; AWS: SAA-C03 (prova) + DVA-C02 (início).</p>
+      <p><strong>Critério de saída:</strong> Performance e contratos: rate limit, e-mail assíncrono, cursor pagination, API versionada e Sonar.</p>
+    </article><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 5 - Cloud + sistemas distribuídos</h3><span>Sem 33–40 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>Deploy AWS: EKS + RDS Multi-AZ + ElastiCache + S3 + CloudFront</li><li>OpenTelemetry: trace ponta a ponta com correlation ID</li><li>Analytics: page views, tempo leitura, trending, funil</li><li>RSS + Atom + sitemap.xml + meta og/twitter + JSON-LD</li><li>Terraform: VPC, EKS, RDS, S3, CloudFront, Route 53 como código</li><li>SRE: health checks, alertas CloudWatch, SLO 99.9%</li><li>Feature flags: deploy sem risco, A/B testing</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> AWS aplicado: EKS, RDS, ElastiCache, S3, CloudFront, SQS/SNS; K8s avançado: Helm charts, values.yaml, chart repos; AWS: DVA-C02 — Developer Associate (cont.).</p>
+      <p><strong>Critério de saída:</strong> Cloud e escala: deploy AWS, observabilidade, Terraform, SRE, feeds, sitemap e analytics.</p>
+    </article><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 6 - IA aplicada + RAG + agentes</h3><span>Sem 41–48 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>pgvector: embeddings posts para busca semântica</li><li>Posts relacionados via RAG: similaridade semântica</li><li>Auto-tagging: LLM sugere tags com confidence score</li><li>Agente blog: chat RAG com citação de fontes</li><li>Sugestão SEO: LLM gera títulos, meta description</li><li>LLMOps: painel custo IA, latência, avaliação</li><li>Cache inteligente: embeddings pré-computados</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> Embeddings e pgvector: indexação HNSW, cosine similarity; Terraform avançado: import, lifecycle, data sources, for_each; AWS: DVA-C02 (prova) + revisão.</p>
+      <p><strong>Critério de saída:</strong> IA aplicada: busca semântica, RAG, auto-tagging, agente do blog e painel LLMOps.</p>
+    </article><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 7 - Produto + frontend + escala</h3><span>Sem 49–56 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>Frontend Next.js 15: App Router, SSG, ISR, server components</li><li>Design system: shadcn/ui + Tailwind, dark mode, tokens</li><li>Acessibilidade: WCAG 2.1 AA, aria-labels, keyboard nav</li><li>Performance: Lighthouse &gt; 90, WebP, code splitting, lazy load</li><li>PWA: service worker, manifest.json, offline reading</li><li>Analytics frontend: scroll depth, click events, conversão</li><li>i18n: suporte pt-BR e en-US com next-intl</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> Produto completo: arquitetura end-to-end, diagramas C4; GitOps: ArgoCD, sync policies, auto-sync, rollback; AWS: SOA-C02 ou revisão avançada.</p>
+      <p><strong>Critério de saída:</strong> Produto refinado: Next.js completo, design system, acessibilidade, PWA, i18n e analytics frontend.</p>
+    </article><article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 8 - Portfólio final + negociação</h3><span>Sem 57–64 - 896h planejadas</span></div>
+      <h4>Entregáveis de projeto</h4><ul class="doc-list"><li>Launch: pentest OWASP ZAP, performance audit, SEO, a11y</li><li>Domínio próprio + SSL ACM + CloudFront + Route 53</li><li>10+ posts técnicos: ADRs públicos, comparações, tutoriais</li><li>Vídeo apresentação (15-20min): arquitetura, decisões</li><li>Case study: MVP ao produto com IA em produção</li><li>Blog como portfólio vivo: posts = competências</li></ul>
+      <p><strong>Suporte técnico da fase:</strong> System design: sharding, replication, caching, CDN, queues; Infrastructure review: audit completo infra blog; AWS: Revisão + planejamento avançado.</p>
+      <p><strong>Critério de saída:</strong> Lançamento: pentest, domínio, SSL, SEO, 10+ posts, vídeo técnico e case study completo.</p>
+    </article></div>
+
+</section>
+<section id="priorizacao" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>17. Priorização recomendada</h2>
+      
+    </div>
+    <span class="section-badge">Prioridade</span>
+  </div>
+  
+<div class="doc-grid-2">
+  <div class="callout"><h3>MVP obrigatório</h3><ul class="doc-list"><li>Auth com JWT e refresh token.</li><li>CRUD de posts, categorias e tags.</li><li>Admin básico.</li><li>SEO, sitemap, robots e RSS.</li><li>PostgreSQL, Flyway, Redis básico.</li><li>Swagger/OpenAPI e testes essenciais.</li><li>Deploy frontend/backend em staging e produção.</li></ul></div>
+  <div class="callout accent-orange"><h3>Depois do MVP</h3><ul class="doc-list"><li>Comentários, favoritos e histórico.</li><li>Newsletter com campanhas.</li><li>Analytics interno.</li><li>Produtos digitais e checkout.</li><li>Área premium.</li><li>RAG, auto-tagging e agente do blog.</li><li>i18n, PWA e features avançadas.</li></ul></div>
+</div>
+<h3>Critério para parar de adicionar features</h3><ul class="doc-list"><li>Se os últimos 5 posts não foram publicados, foque em conteúdo.</li><li>Se a newsletter não tem 100 assinantes, foque em SEO e distribuição.</li><li>Se existe bug crítico aberto há mais de 7 dias, corrija antes de evoluir escopo.</li><li>Se Lighthouse está abaixo de 90, fortaleça a base antes de adicionar complexidade.</li></ul>
+
+</section>
+<section id="riscos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>18. Melhorias, riscos e decisões pendentes</h2>
+      
+    </div>
+    <span class="section-badge">Riscos</span>
+  </div>
+  
+<h3>Melhorias técnicas recomendadas</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Tema</th><th>Melhoria</th></tr></thead><tbody><tr><td>Documentação</td><td>Criar ADRs, CHANGELOG.md e runbooks operacionais.</td></tr><tr><td>Arquitetura</td><td>Adicionar DFD, C4, trust boundaries e estratégia de fallback.</td></tr><tr><td>Banco</td><td>Adicionar audit_logs, refresh_tokens, soft delete, índices compostos e particionamento de page_views.</td></tr><tr><td>API</td><td>Padronizar erros RFC 7807, cursor pagination, idempotência e versionamento.</td></tr><tr><td>Frontend</td><td>Documentar estratégia de renderização, middleware, error boundaries e config central.</td></tr><tr><td>Segurança</td><td>Armazenamento seguro do token, refresh rotation, rate limit, CSP e validação de arquivos.</td></tr><tr><td>Cache</td><td>Cache warming, mutex lock e eviction por prefixo/tag.</td></tr><tr><td>SEO</td><td>Lighthouse CI, breadcrumb schema, canonical para paginação e OG dinâmico.</td></tr><tr><td>Newsletter</td><td>Segmentação, tratamento de bounce/spam e métricas de saúde da lista.</td></tr><tr><td>Pagamentos</td><td>Webhook idempotente, reembolso, nota fiscal/compliance fiscal e hardening antes de monetizar.</td></tr></tbody></table></div>
+<h3>Riscos principais</h3><div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Risco</th><th>Mitigação</th></tr></thead><tbody><tr><td>Escopo grande demais para MVP</td><td>Começar com auth, posts, categorias, tags, admin, SEO e deploy. Deixar premium, pagamentos e IA para fases futuras.</td></tr><tr><td>Baixa produção de conteúdo</td><td>Regra de produto: se não houver 5 posts recentes, priorizar conteúdo antes de novas features.</td></tr><tr><td>Complexidade de pagamentos</td><td>Adicionar fase de hardening, webhooks idempotentes, reembolso e compliance fiscal antes de monetizar.</td></tr><tr><td>Custos de infraestrutura</td><td>Iniciar com serviços gerenciados de baixo custo e migrar apenas quando métricas justificarem.</td></tr><tr><td>Segurança de usuários</td><td>Usar JWT curto, refresh token rotativo, HttpOnly cookie, rate limit e audit logs.</td></tr><tr><td>Dados pessoais e LGPD</td><td>Incluir exportação, exclusão de conta, consentimento, minimização e políticas desde o início.</td></tr></tbody></table></div>
+
+</section>
+<section id="conhecimento" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>19. Mapa de conhecimento de engenharia coberto</h2>
+      
+    </div>
+    <span class="section-badge">Mapa</span>
+  </div>
+  
+<p>O projeto funciona como portfólio técnico porque cobre várias competências de engenharia moderna. Cada módulo implementado pode virar artigo, estudo de caso ou demonstração em entrevista.</p>
+<div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Área</th><th>Conteúdos cobertos</th><th>Profundidade</th></tr></thead><tbody><tr><td>Arquitetura de Software</td><td>Monólito modular, DDD básico, C4, ACL, events, ADRs, expand-contract, feature flags.</td><td>Alta</td></tr><tr><td>Backend Java/Spring</td><td>Java 21, Spring Boot, Security, JPA, Cache, Events, Actuator, Resilience4j, Flyway.</td><td>Alta</td></tr><tr><td>Banco de Dados</td><td>PostgreSQL, UUID, JSONB, FTS, índices, constraints, particionamento, query tuning.</td><td>Alta</td></tr><tr><td>Cache e Performance</td><td>Redis, cache-aside, TTL, warming, stampede prevention, rate limiting.</td><td>Alta</td></tr><tr><td>Segurança</td><td>JWT, BCrypt, cookies HttpOnly, CSP, CORS, CSRF, OWASP, LGPD, webhooks assinados.</td><td>Alta</td></tr><tr><td>API Design</td><td>REST, versionamento, RFC 7807, idempotência, paginação, OpenAPI, status codes.</td><td>Alta</td></tr><tr><td>Frontend Next.js</td><td>App Router, SSR, SSG, ISR, RSC, forms, error boundaries, middleware, Web Vitals.</td><td>Alta</td></tr><tr><td>DevOps</td><td>Docker, CI/CD, IaC futuro, health checks, staging, rollback, zero downtime.</td><td>Média-Alta</td></tr><tr><td>Observabilidade</td><td>Logs estruturados, traceId, Actuator, Micrometer, Sentry, Prometheus, Grafana.</td><td>Média</td></tr><tr><td>Testes</td><td>JUnit, Mockito, Testcontainers, RestAssured, WireMock, Playwright, k6, JaCoCo.</td><td>Média-Alta</td></tr><tr><td>Produto e Monetização</td><td>Newsletter, funis, produtos digitais, área premium, pagamentos, analytics.</td><td>Média</td></tr></tbody></table></div>
+<div class="callout success"><h3>Conclusão</h3><p>Se construída e documentada com consistência, esta plataforma cobre praticamente toda a trilha de um desenvolvedor backend forte com base full stack, cloud, DevOps, segurança, dados, produto e IA aplicada.</p></div>
+
+</section>
+<section id="transcricao" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Transcrição completa do PDF por página</h2>
+      
+    </div>
+    <span class="section-badge">25 páginas</span>
+  </div>
+  
+<p>Esta seção preserva o conteúdo página por página. Cada bloco contém a transcrição textual extraída do PDF e o visual original renderizado em imagem WebP incorporada no próprio HTML.</p>
+<div class="transcript-stack"><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 1</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 1</h3>
+      <pre class="code-block"><code class="text">Documento tecnico consolidado
+Plataforma de Blog Tecnico Pessoal
+Arquitetura completa, requisitos funcionais e nao funcionais, modelo de dados, seguranca,
+infraestrutura, diagramas e processo de desenvolvimento em fases.
+PRODUTO
+Blog tecnico + portfolio + comunidade + newsletter + produtos
+digitais + area premium
+STACK PRINCIPAL
+Next.js, Java 21, Spring Boot, PostgreSQL, Redis, Object
+Storage e Vercel
+ABORDAGEM
+Monolito modular evolutivo, com fronteiras por dominio e
+deploy separado de frontend/backend
+PLANEJAMENTO
+8 fases de desenvolvimento, com MVP, comunidade,
+monetizacao, IA, escala e lancamento final</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-01.png" width="745" height="1053" alt="Visual original da página 1 do PDF" loading="lazy" decoding="async" data-pdf-page="01">
+  <figcaption>Visual original da página 1 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 2</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 2</h3>
+      <pre class="code-block"><code class="text">Sumario Executivo
+Este PDF consolida a documentacao tecnica do projeto em uma unica especificacao. A plataforma deixa de ser apenas um blog estatico e passa a ser um
+produto proprio de conteudo tecnico, portifolio publico, painel administrativo, comunidade, newsletter, analytics, produtos digitais e area premium.
+50
+REQUISITOS FUNCIONAIS
+28
+REQUISITOS NAO FUNCIONAIS
+8
+FASES DE DESENVOLVIMENTO
+Decisao central: iniciar como monolito modular com backend Java/Spring e frontend Next.js. Microservicos so devem ser considerados se houver
+escala, times independentes, ciclos de deploy conflitantes ou custo de escala vertical alto.
+Sumario Navegavel do Documento
+1. Visao de produto e Lean Canvas
+2. Premissas, restricoes e criterio de sucesso
+3. Stack completa recomendada
+4. Arquitetura geral e diagramas
+5. Monolito modular e modulos
+6. Frontend Next.js
+7. Backend Java/Spring
+8. Banco de dados PostgreSQL
+9. API REST e contratos
+10. Segurança, autenticação e LGPD
+11. Cache, storage e performance
+12. DevOps, CI/CD e deploy
+13. Observabilidade e testes
+14. Requisitos funcionais
+15. Requisitos nao funcionais
+16. Fases de desenvolvimento
+17. Riscos, melhorias e conhecimento coberto</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-02.png" width="745" height="1053" alt="Visual original da página 2 do PDF" loading="lazy" decoding="async" data-pdf-page="02">
+  <figcaption>Visual original da página 2 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 3</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 3</h3>
+      <pre class="code-block"><code class="text">1. Visao de Produto
+A plataforma tem como objetivo documentar estudos, aprendizados, decisoes de arquitetura e projetos de um desenvolvedor, transformando o processo de
+aprendizagem em ativo publico. O projeto tambem serve como laboratorio pratico para tecnologias modernas de backend, frontend, cloud, DevOps,
+seguranca, dados e IA.
+Objetivo principal
+Criar uma plataforma publica e propria para publicar conteudo tecnico,
+demonstrar evolucao profissional, registrar projetos e construir
+autoridade tecnica com controle de SEO, dados e monetizacao.
+Resultado esperado
+Um produto real em producao, com codigo versionado, arquitetura
+documentada, conteudo publicado, painel admin, analytics, newsletter
+e base para produtos digitais.
+Lean Canvas resumido
+Campo
+Conteudo
+Problema
+Conteudo tecnico pessoal disperso em plataformas de terceiros, sem controle de dados, audiencia e monetizacao.
+Segmento
+Desenvolvedores em evolucao, recrutadores, clientes e compradores de conteudo tecnico.
+Proposta de valor
+Plataforma propria que une blog tecnico, portfolio, newsletter, comunidade e monetizacao.
+Solucao
+Blog + CMS proprio + admin + comentarios + analytics + produtos digitais + area premium.
+Canais
+SEO organico, redes sociais, newsletter, RSS, GitHub e LinkedIn.
+Metricas-chave
+Posts/mes, assinantes, pageviews, conversoes, receita, comentarios e backlinks.
+Receita
+Produtos digitais, assinatura premium, consultoria e oportunidades via portfolio.
+Vantagem injusta
+Marca pessoal + historico tecnico publico + projeto desenvolvido e documentado em publico.
+Premissas e restricoes
+O autor e o unico administrador no MVP; nao ha multi-tenancy inicialmente.
+Volume inicial estimado: 0 a 50.000 pageviews/mes.
+Conteudo principal em portugues brasileiro, com arquitetura preparada para i18n futura.
+A stack do MVP deve ser mantida durante o desenvolvimento para evitar troca prematura.
+A documentacao deve ser versionada com CHANGELOG.md e ADRs.
+OKRs sugeridos para 12 meses
+Objetivo
+Metrica
+Meta
+Publicar conteudo tecnico
+Posts publicados
+&gt;= 24 posts
+Construir audiencia
+Assinantes confirmados
+&gt;= 500
+Gerar trafego organico
+Pageviews mensais
+&gt;= 10.000/mes
+Monetizar
+Receita com produtos digitais
+&gt;= R$ 1.000/mes
+Autoridade tecnica
+Backlinks externos
+&gt;= 20 dominios referenciadores
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-03.png" width="745" height="1053" alt="Visual original da página 3 do PDF" loading="lazy" decoding="async" data-pdf-page="03">
+  <figcaption>Visual original da página 3 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 4</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 4</h3>
+      <pre class="code-block"><code class="text">2. Stack Completa Recomendada
+A stack foi escolhida para equilibrar valor de portifolio, produtividade, robustez e compatibilidade com vagas Java/Spring modernas.
+Camada
+Tecnologias e decisao
+Frontend
+Next.js App Router, TypeScript, Tailwind CSS, shadcn/ui, React Hook Form, Zod, TanStack Query, Zustand.
+Backend
+Java 21, Spring Boot 3, Spring Security 6, Spring Data JPA, Bean Validation, MapStruct, Resilience4j.
+Banco
+PostgreSQL com UUID, JSONB, FTS, indices parciais, constraints, particionamento e Flyway.
+Cache
+Redis para cache-aside, TTLs, rate limiting, locks, contadores e tokens temporarios.
+Storage
+S3/R2/Azure Blob para imagens, anexos e arquivos privados com presigned URLs.
+Observabilidade
+Actuator, Micrometer, logs JSON, traceId, Sentry, Prometheus/Grafana e Uptime Robot.
+DevOps
+Docker, Docker Compose, GitHub Actions, Trivy, SonarQube, staging, zero-downtime deploy.
+Qualidade
+JUnit 5, Mockito, Testcontainers, RestAssured, WireMock, Playwright, k6, Checkstyle, PMD, SpotBugs.
+Ferramentas obrigatorias de qualidade
+Ferramenta
+Categoria
+Proposito
+Checkstyle + PMD
+Backend
+Linting e analise estatica Java.
+SpotBugs
+Backend
+Deteccao de bugs em tempo de analise.
+ESLint + Prettier
+Frontend
+Lint e formatacao TypeScript.
+Husky + lint-staged
+Ambos
+Pre-commit hooks.
+SonarQube Community
+Ambos
+Cobertura, duplicacao, code smells e quality gate.
+Trivy
+Docker
+Scan de vulnerabilidades em imagens.
+Dependabot
+Repositorios
+PRs automaticos de patch/minor.
+Politica de atualizacao de dependencias
+Patch: atualizar imediatamente quando envolver seguranca ou bugfix.
+Minor: avaliar mensalmente.
+Major: avaliar trimestralmente com branch e testes completos.
+Java 21 Virtual Threads
+Virtual Threads sao uma decisao estrategica para manter o modelo imperativo do Spring MVC com melhor concorrencia, sem exigir WebFlux para a
+maioria dos cenarios.
+spring:
+  threads:
+    virtual:
+      enabled: true
+management:
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-04.png" width="745" height="1053" alt="Visual original da página 4 do PDF" loading="lazy" decoding="async" data-pdf-page="04">
+  <figcaption>Visual original da página 4 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 5</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 5</h3>
+      <pre class="code-block"><code class="text">3. Arquitetura Geral do Sistema
+A plataforma usa frontend e backend separados, comunicando via API REST versionada. O frontend fica otimizado para SEO, cache e experiencia de
+leitura; o backend concentra regras de negocio, seguranca, persistencia, eventos internos, integracoes e administracao.
+Diagrama C4 de containers: atores, frontend, backend, dados privados e servicos externos.
+Fronteiras de confianca e DFD
+Fronteiras de confianca: trafego publico, borda, infraestrutura propria e terceiros.
+Degradacao graciosa
+Falha
+Comportamento esperado
+Redis indisponivel
+API le do PostgreSQL diretamente, sem cache e com rate limit degradado.
+Object Storage indisponivel
+Posts continuam acessiveis; imagens mostram placeholder e uploads ficam bloqueados.
+Resend/SendGrid indisponivel
+Eventos de e-mail sao enfileirados para retry e usuario recebe mensagem de processamento.
+Gateway de pagamento indisponivel
+Checkout e bloqueado com mensagem amigavel; nenhuma cobranca parcial e criada.
+Meilisearch futuro indisponivel
+Sistema volta para PostgreSQL Full Text Search.
+Atores
+Frontend
+Backend
+Dados privados
+Servicos externos
+Leitor / Visitante
+Next.js App Router
+Vercel / Edge / CDN
+acessa conteudo
+Autor / Admin
+administra plataforma
+Spring Boot API
+Java 21 + Security + JPA
+REST /api/v1
+Google / GitHub OAuth
+Monolito modular
+auth, posts, community, newsletter, premium
+PostgreSQL
+conteudo, usuarios, compras
+Redis
+cache, rate limit, tokens temp.
+S3 / R2 / Azure Blob
+imagens e arquivos
+Resend / SendGrid
+e-mails
+Stripe / Mercado Pago
+checkout e webhooks
+Publico / nao confiavel
+Borda
+Sua infraestrutura
+Terceiros
+Navegador
+usuarios e admin
+Vercel Edge / WAF
+TLS, headers, cache
+HTTPS
+Bots / scrapers
+trafego nao confiavel
+bloquear / limitar
+Spring Boot API
+validacao, auth, regras
+REST + cookies seguros
+PostgreSQL privado
+senhas hash, conteudo
+SQL privado
+Redis privado
+TTL e rate limit
+cache / locks
+Storage privado/assinado
+S3/R2/Azure
+URLs assinadas
+E-mail provider
+outbound only
+API key outbound
+Gateway pagamento
+webhook validado
+criar checkout
+webhook assinado</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-05.png" width="745" height="1053" alt="Visual original da página 5 do PDF" loading="lazy" decoding="async" data-pdf-page="05">
+  <figcaption>Visual original da página 5 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 6</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 6</h3>
+      <pre class="code-block"><code class="text">4. Monolito Modular
+O projeto deve iniciar como monolito modular. Esta abordagem reduz custo operacional e complexidade, mas preserva separacao por dominio, permitindo
+extracao futura de servicos caso o produto cresca.
+Dependencias entre modulos. A regra e manter dependencias unidirecionais e evitar entidade JPA atravessando fronteiras.
+Quando reavaliar microservicos
+Volume acima de 1 milhao de pageviews/mes e escala vertical antieconomica.
+Modulo de pagamentos exigindo time dedicado e deploy proprio.
+Dois modulos com ciclos de deploy independentes e conflitantes.
+Tempo de build acima de 15 minutos.
+Comunicacao entre modulos
+Situacao
+Mecanismo
+Exemplo
+Operacao sincronica no mesmo request
+Chamada via interface/port
+PostService consulta UserReadPort.
+Efeito colateral assincrono
+Spring ApplicationEvent
+PostPublishedEvent dispara indexacao e e-mail.
+Comunicacao que pode falhar
+Evento + retry
+Envio de e-mail e webhook externo.
+Anti-Corruption Layer entre modulos
+Modulos nao devem expor entidades JPA uns aos outros. O consumo deve ocorrer por portas, DTOs ou eventos.
+public interface PostReadPort {
+    PostSummary findBySlug(String slug);
+    List&lt;PostSummary&gt; findPublished(Pageable pageable);
+}
+// Analytics consome PostReadPort, mas nunca conhece a entidade JPA Post.
+auth
+login, JWT, refresh
+users
+perfil, roles, status
+posts
+conteudo, SEO, series
+media
+upload, presigned URLs
+community
+comments, likes, favorites
+newsletter
+subscribers, campaigns
+analytics
+views, UTM, leitura
+premium
+assinaturas, acesso
+products
+digitais, downloads
+payments
+checkout, webhooks
+notifications
+e-mail, in-app
+settings
+feature flags, manutencao
+audit
+acoes sensiveis
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-06.png" width="745" height="1053" alt="Visual original da página 6 do PDF" loading="lazy" decoding="async" data-pdf-page="06">
+  <figcaption>Visual original da página 6 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 7</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 7</h3>
+      <pre class="code-block"><code class="text">5. Arquitetura Frontend
+O frontend em Next.js deve priorizar SEO, performance, legibilidade, acessibilidade e experiencia de administracao. Rotas publicas usam SSG/ISR; areas
+privadas usam SSR/CSR conforme necessidade.
+Estrutura de pastas
+blog-platform-web/
+├── app/
+│   ├── (public)/blog, projetos, series, produtos
+│   ├── (auth)/login, cadastro, reset-password
+│   ├── (private)/me, dashboard
+│   ├── admin/posts, users, analytics, settings
+│   ├── sitemap.ts, robots.ts, api/og/route.tsx
+│   └── middleware.ts
+├── components/
+│   ├── layout, blog, comments, admin, forms, ui
+├── services/          # clients REST por dominio
+├── lib/               # auth, api, seo, utils
+├── store/             # auth em memoria, tema, UI state
+├── config/            # site, navigation, features
+└── types/             # contratos frontend
+Estrategia de renderizacao por rota
+Rota
+Estrategia
+Justificativa
+/blog
+ISR - revalidate 300s
+Lista muda com novos posts, mas precisa manter performance.
+/blog/[slug]
+SSG + ISR - revalidate 3600s
+SEO critico e conteudo pouco alterado.
+/projetos
+SSG
+Portfolio muda com baixa frequencia.
+/admin/*
+CSR
+Rotas privadas, nao indexaveis e altamente interativas.
+/me/*
+SSR com auth check
+Dados personalizados do usuario autenticado.
+/api/og
+Route Handler
+Gerar Open Graph image dinamica por post.
+Componentes principais
+Dominio
+Componentes
+Layout
+Header, Footer, Sidebar, Breadcrumb, Command Search, Theme Toggle.
+Blog
+PostCard, PostHeader, PostContent, TableOfContents, RelatedPosts, ShareButtons.
+Comentarios
+CommentList, CommentForm, ModerationBadge, ReplyThread.
+Admin
+PostEditor, MediaUploader, AnalyticsCards, UserTable, SettingsPanel.
+SEO
+JsonLd, OgImage, Canonical, BreadcrumbSchema.
+Error boundaries e middleware
+O frontend deve usar error.tsx, not-found.tsx, boundaries por grupo de rota e middleware.ts para proteger /admin e /me.</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-07.png" width="745" height="1053" alt="Visual original da página 7 do PDF" loading="lazy" decoding="async" data-pdf-page="07">
+  <figcaption>Visual original da página 7 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 8</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 8</h3>
+      <pre class="code-block"><code class="text">6. Arquitetura Backend
+O backend Spring Boot concentra regras de negocio, seguranca, persistencia, moderacao, integracoes externas, analytics, pagamentos e administracao.
+Estrutura de modulos e pacotes
+blog-platform-api/
+├── auth/              # login, JWT, refresh token, password reset
+├── users/             # perfil, roles, status, LGPD
+├── posts/             # posts, categorias, tags, series, SEO
+├── community/         # comentarios, curtidas, favoritos
+├── newsletter/        # subscribers, campaigns, bounces
+├── analytics/         # page views, UTM, leitura, funis
+├── media/             # upload, presigned URLs, assets
+├── products/          # produtos digitais, arquivos, precos
+├── payments/          # checkout, webhooks, reembolsos
+├── premium/           # assinaturas e controle de acesso
+├── notifications/     # e-mail e notificacoes internas
+├── settings/          # feature flags e manutencao
+└── shared/            # exceptions, security, events, validation, utils
+Camadas padrao por modulo
+Camada
+Responsabilidade
+controller
+Receber HTTP, validar DTOs, retornar response e status corretos.
+service
+Orquestrar regras de negocio, transacoes e eventos.
+repository
+Acesso a dados via Spring Data JPA e queries customizadas.
+entity
+Representacao persistente do dominio no banco.
+dto/request/response
+Contratos de entrada e saida da API.
+mapper
+MapStruct para converter entity &lt;-&gt; DTO.
+event
+Eventos de dominio e integracao intra-processo.
+validator
+Validacoes customizadas, como UniqueEmail e UniqueSlug.
+Tratamento global de excecoes
+Excecao
+HTTP
+Uso
+NotFoundException
+404
+Recurso nao encontrado.
+ConflictException
+409
+Slug ou e-mail duplicado.
+ForbiddenException
+403
+Role insuficiente.
+UnprocessableEntityException
+422
+Regra de negocio violada.
+ExternalServiceException
+503
+Stripe, Resend ou storage indisponivel.</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-08.png" width="745" height="1053" alt="Visual original da página 8 do PDF" loading="lazy" decoding="async" data-pdf-page="08">
+  <figcaption>Visual original da página 8 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 9</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 9</h3>
+      <pre class="code-block"><code class="text">7. Autenticacao, Autorizacao e Seguranca
+A estrategia recomendada usa access token de curta duracao, refresh token rotativo em cookie HttpOnly, deteccao de reuso, roles e permissoes por
+metodo.
+Fluxo de login, armazenamento seguro e rotacao de refresh token.
+Politica de sessoes
+Permitir multiplos dispositivos simultaneos.
+Cada dispositivo possui refresh token proprio.
+Logout revoga apenas a sessao atual.
+Opcao &quot;sair de todos os dispositivos&quot; revoga todos os tokens do usuario.
+Reuso de refresh token revogado invalida a familia de tokens do usuario.
+Controles obrigatorios
+Controle
+Descricao
+BCrypt
+Senha nunca armazenada em texto puro.
+HttpOnly Cookie
+Refresh token inacessivel por JavaScript.
+SameSite Strict/Secure
+Reduz superficie de CSRF e exige HTTPS.
+CORS restrito
+Apenas origem oficial do frontend.
+CSP e security headers
+Protecao contra XSS e clickjacking.
+Rate limiting
+Login, comentarios, newsletter e endpoints publicos.
+Sanitizacao
+Conteudo HTML/Markdown seguro antes de renderizar.
+LGPD
+Exportacao, exclusao, consentimento e minimizacao de dados.
+Usuario
+Frontend
+Login form
+email + senha
+AuthController
+Spring Security
+POST /auth/login
+AuthService
+BCrypt + JWT
+valida request
+PostgreSQL
+users + refresh_tokens
+rotacao + reuse detection
+busca usuario
+HttpOnly Cookie
+refresh_token
+set-cookie seguro
+Access token
+em memoria
+retorna access token
+POST /auth/refresh
+Authorization Bearer
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-09.png" width="745" height="1053" alt="Visual original da página 9 do PDF" loading="lazy" decoding="async" data-pdf-page="09">
+  <figcaption>Visual original da página 9 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 10</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 10</h3>
+      <pre class="code-block"><code class="text">8. Conteudo, Publicacao e Uploads
+O fluxo editorial deve permitir escrita tecnica com Markdown/MDX, assets otimizados, publicacao agendada e propagacao de eventos para cache, busca,
+newsletter e SEO.
+Fluxo de publicacao de post e efeitos colaterais.
+Upload direto ao storage com presigned URL para reduzir carga no backend.
+Validacao de arquivos
+Nunca confiar apenas na extensao do arquivo.
+Validar magic bytes para JPEG, PNG, PDF e formatos permitidos.
+Limitar tamanho, content type e dimensoes.
+Converter imagens para WebP/AVIF e servir via CDN.
+Admin
+Admin UI
+Next.js
+Posts API
+Spring Boot
+PostgreSQL
+posts, tags, SEO
+salva draft/published
+PostPublishedEvent
+Spring Events/Kafka
+publica evento
+Redis
+evict cache
+invalida listas
+FTS / pgvector
+indexacao
+atualiza indice
+Newsletter
+notificacao
+campanha opcional
+Sitemap / RSS / OG
+regenerar
+atualiza feeds
+Admin
+Frontend
+seleciona arquivo
+Media API
+GET presigned-url
+confirma metadata
+Object Storage
+S3/R2/Azure
+PUT direto
+uploadUrl + fileKey
+gera URL PUT TTL 5min
+PostgreSQL
+media_assets
+registra asset
+CDN / next-image
+WebP/AVIF
+servir otimizado
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-10.png" width="745" height="1053" alt="Visual original da página 10 do PDF" loading="lazy" decoding="async" data-pdf-page="10">
+  <figcaption>Visual original da página 10 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 11</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 11</h3>
+      <pre class="code-block"><code class="text">9. Banco de Dados e Modelo de Dados
+PostgreSQL e o banco principal por oferecer maturidade, consultas relacionais, JSONB, Full Text Search, indices GIN, constraints fortes e extensoes como
+pgvector em fases futuras.
+Modelo entidade-relacionamento simplificado para a plataforma.
+Tabelas principais
+Tabela
+Responsabilidade
+users
+Usuarios, roles, senha hash, status, avatar e soft delete.
+posts
+Conteudo, author_id, category_id, slug, markdown/html, SEO, status, visibility e published_at.
+categories / tags / post_tags
+Classificacao editorial, slugs unicos e relacionamento N:N.
+comments
+Comentarios moderados, replies por parent_comment_id e soft delete.
+reactions / bookmarks
+Curtidas e favoritos com unicidade por usuario e post.
+reading_history / page_views
+Progresso de leitura, tempo, origem UTM, views e agregacoes diarias.
+newsletter_subscribers / subscriber_tags
+Inscritos, double opt-in, segmentacao, bounces e unsubscribe.
+products / purchases / subscriptions
+Produtos digitais, compras, assinaturas, status de pagamento e expiracao.
+media_assets
+Metadados de arquivos, file_key, content_type, checksum, tamanho e URL publica/assinada.
+audit_logs
+Registro imutavel de acoes sensiveis com old_data/new_data em JSONB.
+refresh_tokens
+Refresh tokens com hash, expiracao, revoked, IP, user agent e deteccao de reuso.
+Indices e constraints recomendados
+Nome
+Definicao
+Objetivo
+idx_posts_status_published_at
+posts(status, published_at DESC) WHERE status = PUBLISHED
+Listagem publica por data.
+idx_comments_post_status
+comments(post_id, status) WHERE status = APPROVED
+Carregar comentarios visiveis.
+uq_reactions_user_post_type
+UNIQUE(user_id, post_id, type)
+Evitar reacao duplicada.
+uq_bookmarks_user_post
+UNIQUE(user_id, post_id)
+Evitar favorito duplicado.
+idx_audit_logs_entity
+audit_logs(entity_type, entity_id)
+Auditoria por entidade.
+idx_refresh_tokens_hash
+refresh_tokens(token_hash) UNIQUE
+Validar refresh token sem armazenar valor bruto.
+GIN search_vector
+posts.search_vector
+Busca textual no PostgreSQL.
+page_views partition
+PARTITION BY RANGE(viewed_at)
+Controlar crescimento de analytics.
+users
+id PK
+name
+email
+password_hash
+role
+status
+deleted_at
+posts
+id PK
+author_id FK
+category_id FK
+title
+slug
+content
+status
+visibility
+published_at
+deleted_at
+1:N
+comments
+id PK
+post_id FK
+user_id FK
+parent_comment_id
+content
+status
+reactions
+id PK
+post_id FK
+user_id FK
+type unique(user,post,type)
+bookmarks
+id PK
+post_id FK
+user_id FK unique(user,post)
+reading_history
+id PK
+user_id FK
+post_id FK
+progress
+time_spent
+purchases
+id PK
+user_id FK
+product_id FK
+provider
+status
+paid_at
+subscriptions
+id PK
+user_id FK
+plan
+status
+expires_at
+audit_logs
+id PK
+user_id FK
+action
+entity_type
+old_data JSONB
+new_data JSONB
+categories
+id PK
+name
+slug
+active
+N:1
+post_tags
+post_id FK
+tag_id FK
+tags
+id PK
+name
+slug
+newsletter_subscribers
+id PK
+email
+status
+confirmed_at
+products
+id PK
+name
+slug
+price_cents
+file_url
+status</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-11.png" width="745" height="1053" alt="Visual original da página 11 do PDF" loading="lazy" decoding="async" data-pdf-page="11">
+  <figcaption>Visual original da página 11 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 12</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 12</h3>
+      <pre class="code-block"><code class="text">Convencoes de banco
+Item
+Padrao
+Tabelas
+snake_case no plural, como posts, users, audit_logs.
+Colunas
+snake_case.
+PK
+id UUID sempre que possivel.
+FK
+{tabela_singular}_id, como post_id.
+Indices
+idx_{tabela}_{colunas}.
+Constraints
+uq_{tabela}_{coluna}, chk_{tabela}_{regra}.
+Migrations
+V{n}__descricao_com_underscores.sql.</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-12.png" width="745" height="1053" alt="Visual original da página 12 do PDF" loading="lazy" decoding="async" data-pdf-page="12">
+  <figcaption>Visual original da página 12 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 13</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 13</h3>
+      <pre class="code-block"><code class="text">10. API REST e Contratos
+A API deve seguir REST com versionamento por URL, padrao uniforme de erros, idempotencia em operacoes criticas e documentacao OpenAPI.
+Dominio
+Endpoints principais
+Auth
+POST /api/v1/auth/register, /login, /refresh, /logout, /forgot-password, /reset-password, GET /me
+Posts publicos
+GET /api/v1/posts, /posts/{slug}, /posts/featured, /posts/recent, /posts/search, /posts/{slug}/related
+Posts admin
+POST /api/v1/admin/posts, PUT /admin/posts/{id}, PATCH /publish, PATCH /archive, DELETE /admin/posts/{id}
+Categorias e tags
+GET /categories, GET /tags, POST/PUT/DELETE /api/v1/admin/categories, /api/v1/admin/tags
+Comunidade
+GET/POST /posts/{postId}/comments, PATCH /admin/comments/{id}/approve, /reject, POST/DELETE /like, /favorite
+Newsletter
+POST /newsletter/subscribe, /confirm, /unsubscribe, POST /admin/newsletter/campaigns/{id}/send
+Produtos e premium
+GET /products, GET /products/{slug}, POST /checkout, GET /me/purchases, GET /me/subscription
+Pagamentos
+POST /api/v1/webhooks/payments, POST /admin/purchases/{id}/refund
+Uploads
+GET /admin/uploads/presigned-url, POST /admin/uploads/confirm, DELETE /admin/uploads/{id}
+Analytics/admin
+POST /analytics/events, GET /admin/analytics/overview, /posts, /revenue, GET /admin/audit-logs, POST /admin/settings
+Sistema
+GET /health, GET /feed.xml, GET /sitemap.xml, GET /robots.txt
+Padrao de erro - RFC 7807
+{
+  &quot;type&quot;: &quot;https://api.seusite.com.br/errors/post-not-found&quot;,
+  &quot;title&quot;: &quot;Post nao encontrado&quot;,
+  &quot;status&quot;: 404,
+  &quot;detail&quot;: &quot;Nenhum post com slug informado foi encontrado&quot;,
+  &quot;instance&quot;: &quot;/api/v1/posts/spring-boot-xyz&quot;,
+  &quot;timestamp&quot;: &quot;2026-05-22T10:30:00Z&quot;,
+  &quot;traceId&quot;: &quot;abc123def456&quot;
+}
+Regras de API
+Versionamento: /api/v1, com deprecacao de 12 meses apos uma v2.
+Erros uniformes com traceId.
+Idempotencia em like, bookmark, subscribe e webhooks.
+Paginacao por cursor para grandes volumes.
+Swagger/OpenAPI sempre atualizado no pipeline.
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-13.png" width="745" height="1053" alt="Visual original da página 13 do PDF" loading="lazy" decoding="async" data-pdf-page="13">
+  <figcaption>Visual original da página 13 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 14</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 14</h3>
+      <pre class="code-block"><code class="text">11. Cache, Busca e Performance
+Redis deve ser usado para reduzir carga do banco, controlar taxa, armazenar locks temporarios e acelerar leituras publicas. PostgreSQL Full Text Search
+atende o MVP; Meilisearch/OpenSearch entram somente se as metricas justificarem.
+Fluxo de cache-aside com lock para evitar cache stampede.
+Chaves e estrategias Redis
+Chave
+Uso
+TTL
+blog:posts:list:*
+Listagens publicas de posts
+5 a 15 min
+blog:posts:detail:{slug}
+Detalhe do post
+30 a 60 min
+blog:categories:* / blog:tags:*
+Categorias e tags
+1 a 6 h
+rate-limit:{ip}:{endpoint}
+Rate limiting publico
+janela movel
+lock:post:{slug}
+Evitar cache stampede
+5 s
+analytics:views:{postId}
+Contador temporario de views
+flush periodico
+Quando migrar busca para Meilisearch/OpenSearch
+Mais de 500 artigos.
+Reclamacoes de resultados irrelevantes.
+Necessidade de facets por tag, categoria e data simultaneamente.
+Necessidade de typo tolerance e ranking mais sofisticado.
+Cliente
+Posts API
+GET /posts/slug
+Redis Cache
+post:slug, listagens
+cache lookup
+set TTL
+Mutex lock
+lock:post:slug
+se miss, lock 5s
+hit
+PostgreSQL
+apenas 1 request
+fresh data
+PostUpdatedEvent
+eviction
+evict blog:posts:*
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-14.png" width="745" height="1053" alt="Visual original da página 14 do PDF" loading="lazy" decoding="async" data-pdf-page="14">
+  <figcaption>Visual original da página 14 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 15</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 15</h3>
+      <pre class="code-block"><code class="text">12. DevOps, Infraestrutura e Deploy
+O processo de entrega deve ter ambientes separados, quality gates automatizados, deploy verificavel, rollback e migrations seguras.
+Pipeline de desenvolvimento, staging e producao.
+Ambiente local com Docker Compose
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: blogdb
+      POSTGRES_USER: bloguser
+      POSTGRES_PASSWORD: blogpass
+    ports: [&quot;5432:5432&quot;]
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/db/seed.sql:/docker-entrypoint-initdb.d/99-seed.sql
+  redis:
+    image: redis:7
+    ports: [&quot;6379:6379&quot;]
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@dev.local
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports: [&quot;5050:80&quot;]
+Estrategia de deploy
+Fluxo: feature branch -&gt; Pull Request -&gt; CI -&gt; staging -&gt; main -&gt; producao.
+Frontend: Vercel com preview deploys e production deploy.
+Backend: Render, Railway, Fly.io, AWS, Azure ou VPS com Docker.
+Banco: PostgreSQL gerenciado separado por ambiente.
+Redis: servico gerenciado em producao.
+Migrations: expand-contract para zero downtime.
+Rollback: redeploy do ultimo container funcional e migration de compensacao quando necessario.
+Zero downtime
+O novo container so deve receber trafego depois de passar readiness/liveness. Migrations destrutivas nunca devem rodar junto com codigo antigo.
+GitHub
+feature branch
+Pull Request
+review + checks
+GitHub Actions
+build, tests, lint
+Quality Gates
+Sonar, Trivy, Lighthouse
+Staging
+develop -&gt; staging
+Vercel
+frontend production
+Backend runtime
+Render/Railway/AWS/Azure
+Sentry + Uptime + Grafana
+alertas
+Managed PostgreSQL
+Flyway expand-contract
+• 
+• 
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-15.png" width="745" height="1053" alt="Visual original da página 15 do PDF" loading="lazy" decoding="async" data-pdf-page="15">
+  <figcaption>Visual original da página 15 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 16</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 16</h3>
+      <pre class="code-block"><code class="text">13. Observabilidade, Testes e Qualidade
+Observabilidade
+Item
+Aplicacao
+Logs estruturados
+JSON com traceId, userId quando aplicavel e sem tokens/senhas.
+Actuator/Micrometer
+Health, readiness, liveness, JVM, HTTP e metricas customizadas.
+Sentry
+Captura de erros frontend e backend.
+Prometheus/Grafana
+Metricas e dashboards em fase de escala.
+Uptime Robot
+Monitorar /health a cada 5 minutos.
+Audit trail
+Registro imutavel de acoes administrativas.
+Testes
+Tipo
+Ferramentas
+Escopo
+Unitarios
+JUnit 5, Mockito
+Services, validators, mappers, regras de dominio.
+Integracao
+Testcontainers
+PostgreSQL, Redis, Flyway e repositories reais.
+API
+RestAssured, MockMvc
+Contratos REST, seguranca, status codes e payloads.
+Externos
+WireMock
+Stripe, Resend, storage e OAuth.
+E2E
+Playwright
+Login, CRUD post, comentarios, checkout e admin.
+Carga
+k6
+p95, throughput, saturacao e regressao de performance.
+Definition of Done
+Codigo revisado e com checklist de seguranca.
+Testes unitarios e/ou integracao escritos.
+Cobertura de novo codigo &gt;= 70%.
+Sem warnings no console do browser.
+Responsivo em 375px, 768px e 1280px.
+Documentacao OpenAPI atualizada.
+Migration Flyway versionada.
+Staging validado antes da producao.
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-16.png" width="745" height="1053" alt="Visual original da página 16 do PDF" loading="lazy" decoding="async" data-pdf-page="16">
+  <figcaption>Visual original da página 16 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 17</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 17</h3>
+      <pre class="code-block"><code class="text">14. Requisitos Funcionais
+Os requisitos abaixo consolidam a versao completa da plataforma com backend, incluindo as melhorias adicionadas ao documento tecnico.
+Codigo
+Modulo
+Descricao
+Prioridade
+Fase
+RF01
+Cadastro de usuarios
+Permitir criacao de conta com nome, e-mail, senha, aceite de termos e status de verificacao.
+Must Have
+MVP / Fase 1-2
+RF02
+Login
+Permitir autenticacao por e-mail e senha com geracao de access token e refresh token.
+Must Have
+MVP / Fase 1-2
+RF03
+Refresh token e logout
+Renovar sessao com refresh token rotativo e revogar tokens no logout.
+Must Have
+MVP / Fase 1-2
+RF04
+Recuperacao de senha
+Gerar token temporario e enviar link seguro de redefinicao de senha por e-mail.
+Must Have
+MVP / Fase 1-2
+RF05
+Perfil do usuario
+Permitir editar nome, avatar, senha, favoritos, historico, compras e assinatura.
+Must Have
+MVP / Fase 1-2
+RF06
+Gestao de usuarios
+Permitir ao admin listar, bloquear, alterar roles e auditar usuarios.
+Must Have
+MVP / Fase 1-2
+RF07
+Criacao de posts
+Permitir criar posts com titulo, slug, descricao, conteudo, imagem, categoria, tags e SEO.
+Must Have
+MVP / Fase 1-2
+RF08
+Edicao e arquivamento de posts
+Permitir editar, publicar, arquivar, deletar logicamente e restaurar posts.
+Must Have
+MVP / Fase 1-2
+RF09
+Publicacao agendada
+Permitir agendar posts e publicar automaticamente por job backend.
+Must Have
+MVP / Fase 1-2
+RF10
+Editor Markdown/MDX
+Permitir escrever conteudo tecnico com markdown, blocos de codigo, tabelas e componentes seguros.
+Must Have
+MVP / Fase 1-2
+RF11
+Listagem publica de posts
+Exibir posts publicados com paginacao, ordenacao, filtros por categoria e tag.
+Should Have
+Fase 2-3
+RF12
+Pagina individual do post
+Exibir titulo, descricao, autor, datas, sumario, conteudo, tags, comentarios e relacionados.
+Should Have
+Fase 2-3
+RF13
+Categorias
+Permitir CRUD de categorias com nome, slug, descricao e status.
+Should Have
+Fase 2-3
+RF14
+Tags
+Permitir CRUD de tags com nome, slug e contagem de posts relacionados.
+Must Have
+MVP / Fase 1-2
+RF15
+Series de estudo
+Permitir agrupar posts em series com ordem, descricao e progresso de leitura.
+Must Have
+MVP / Fase 1-2
+RF16
+Projetos de portfolio
+Exibir projetos com stack, problema, arquitetura, link GitHub, deploy e aprendizados.
+Must Have
+MVP / Fase 1-2
+RF17
+Busca textual
+Permitir busca por titulo, descricao, conteudo, tags, categorias e autor.
+Must Have
+MVP / Fase 1-2
+RF18
+Comentarios
+Permitir comentar posts mediante autenticacao, com status de moderacao.
+Must Have
+MVP / Fase 1-2
+RF19
+Moderacao de comentarios
+Permitir aprovar, rejeitar, editar ou remover comentarios pelo painel admin.
+Must Have
+MVP / Fase 1-2
+RF20
+Respostas em comentarios
+Permitir respostas com limite de profundidade para manter legibilidade.
+Should Have
+Fase 2-3
+RF21
+Curtidas e reacoes
+Permitir uma reacao por usuario/post/tipo com operacao idempotente.
+Should Have
+Fase 2-3
+RF22
+Favoritos
+Permitir salvar posts para ler depois e listar favoritos na area do usuario.
+Should Have
+Fase 2-3
+RF23
+Historico de leitura
+Registrar posts lidos, progresso, tempo gasto e ultimo acesso.
+Should Have
+Fase 2-3
+RF24
+Leitura completada
+Disparar evento de conclusao quando o leitor atingir criterio de progresso configurado.
+Should Have
+Fase 2-3
+RF25
+Newsletter double opt-in
+Permitir inscricao, confirmacao, cancelamento e armazenamento de origem.
+Should Have
+Fase 2-3
+RF26
+Campanhas de newsletter
+Permitir criar, agendar, enviar e medir campanhas para assinantes.
+Should Have
+Fase 2-3
+RF27
+Segmentacao de newsletter
+Permitir segmentar assinantes por interesse, tags ou comportamento.
+Must Have
+MVP / Fase 1-2
+RF28
+Dashboard administrativo
+Exibir posts, usuarios, comentarios, assinantes, views, receita e alertas.
+Must Have
+MVP / Fase 1-2
+RF29
+Analytics interno
+Registrar page views, UTM, origem, tempo de leitura, conversoes e eventos.
+Must Have
+MVP / Fase 1-2
+RF30
+Produtos digitais
+Permitir cadastrar, publicar, vender e liberar produtos digitais.
+Must Have
+MVP / Fase 1-2
+RF31
+Checkout de pagamentos
+Integrar com gateway para compra unica e assinatura.
+Nice to Have
+Fase 3
+RF32
+Webhooks de pagamento
+Receber webhooks assinados e idempotentes para confirmar pagamentos.
+Should Have
+Fase 2-3
+RF33
+Area premium
+Restringir acesso a conteudos e downloads para assinantes ou compradores.
+Should Have
+Fase 2-3
+RF34
+Downloads privados
+Liberar arquivos por URL assinada e expirada apos compra confirmada.
+Should Have
+Fase 2-3
+RF35
+Upload de imagens e arquivos
+Permitir upload de capas, imagens internas, anexos e arquivos de produto.
+Should Have
+Fase 2-3
+RF36
+Presigned URLs
+Permitir upload direto ao storage por URL assinada com TTL curto.
+Future
+Fase 4+
+RF37
+Notificacoes
+Enviar notificacoes por e-mail ou canal interno para eventos relevantes.
+Future
+Fase 4+
+RF38
+Configuracoes dinamicas
+Permitir ativar/desativar comentarios, cadastro, manutencao e features sem redeploy.
+Future
+Fase 4+
+RF39
+Audit logs
+Registrar acoes sensiveis do admin com antes/depois, IP, usuario e timestamp.
+Future
+Fase 4+</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-17.png" width="745" height="1053" alt="Visual original da página 17 do PDF" loading="lazy" decoding="async" data-pdf-page="17">
+  <figcaption>Visual original da página 17 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 18</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 18</h3>
+      <pre class="code-block"><code class="text">Codigo
+Modulo
+Descricao
+Prioridade
+Fase
+RF40
+SEO dinamico
+Gerar metadata, canonical, JSON-LD, breadcrumbs e Open Graph por post.
+Future
+Fase 4+
+RF41
+Sitemap e robots
+Gerar sitemap.xml e robots.txt automaticamente a partir do conteudo publicado.
+Must Have
+MVP / Fase 1-2
+RF42
+Open Graph image dinamica
+Gerar imagem social por post com titulo, data e identidade visual.
+Must Have
+MVP / Fase 1-2
+RF43
+Documentacao OpenAPI
+Expor Swagger/OpenAPI com schemas, exemplos, erros e seguranca.
+Must Have
+MVP / Fase 1-2
+RF44
+Health check
+Expor endpoint de saude publico simplificado e probes de liveness/readiness.
+Must Have
+MVP / Fase 1-2
+RF45
+Modo de manutencao
+O sistema deve suportar modo de manutencao com pagina de aviso aos visitantes.
+Should Have
+Fase 2+
+RF46
+Redirecionamentos
+O sistema deve permitir criar redirecionamentos de URLs, como /go/github para link externo.
+Should Have
+Fase 2+
+RF47
+RSS Feed
+O sistema deve gerar RSS Feed (/feed.xml) atualizado automaticamente com novos posts.
+Should Have
+Fase 2+
+RF48
+Exclusao de conta
+O sistema deve suportar exclusao de conta pelo proprio usuario conforme LGPD.
+Should Have
+Fase 2+
+RF49
+Paginacao por cursor
+O sistema deve implementar paginacao baseada em cursor para o endpoint de posts.
+Should Have
+Fase 2+
+RF50
+Exportacao de dados
+O sistema deve suportar exportacao de dados do usuario em formato JSON para portabilidade LGPD.
+Should Have
+Fase 2+</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-18.png" width="745" height="1053" alt="Visual original da página 18 do PDF" loading="lazy" decoding="async" data-pdf-page="18">
+  <figcaption>Visual original da página 18 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 19</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 19</h3>
+      <pre class="code-block"><code class="text">15. Requisitos Nao Funcionais
+Os requisitos nao funcionais garantem qualidade operacional, seguranca, escalabilidade, observabilidade, manutencao e validacao objetiva.
+Codigo
+Categoria
+Descricao
+Como validar
+RNF01
+Performance
+LCP das paginas publicas deve ser inferior a 2.5s em conexao padrao.
+Lighthouse CI
+RNF02
+Performance
+Latencia p95 da API deve permanecer abaixo de 300ms em endpoints de leitura cacheados.
+k6 + Actuator metrics
+RNF03
+Escalabilidade
+API deve suportar pelo menos 500 req/s em leitura publica com cache habilitado.
+k6 100 VUs por 30s
+RNF04
+Disponibilidade
+Servicos publicos devem manter uptime minimo de 99.5% no MVP.
+Uptime monitoring
+RNF05
+Escalabilidade
+Backend deve ser stateless e escalar horizontalmente sem sessao local.
+Review de arquitetura
+RNF06
+Seguranca
+Senhas devem ser armazenadas apenas com hash BCrypt e salt.
+Teste e code review
+RNF07
+Seguranca
+CORS e CSRF devem restringir origens e proteger cookies sensiveis.
+Teste de seguranca
+RNF08
+Auditoria
+Acoes administrativas devem ser rastreaveis por usuario, acao, entidade e timestamp.
+Consulta audit_logs
+RNF09
+Observabilidade
+Todas as requisicoes devem ter traceId e logs estruturados.
+Logs JSON + Sentry
+RNF10
+Manutenibilidade
+Codigo deve seguir camadas e modulos com baixa dependencia circular.
+Arquitetura + lint
+RNF11
+Qualidade
+Cobertura minima de testes do novo codigo deve ser &gt;= 70%.
+JaCoCo/Istanbul
+RNF12
+Acessibilidade
+Paginas publicas devem atingir score &gt;= 90 em acessibilidade.
+axe-core + Playwright
+RNF13
+SEO
+Paginas publicas devem ser indexaveis com metadados, sitemap e schema.
+Lighthouse SEO + Search Console
+RNF14
+Integridade
+Banco deve usar constraints, FKs, unique indexes e migrations versionadas.
+Flyway + tests
+RNF15
+Resiliencia
+Falhas em Redis, storage, e-mail ou pagamento devem degradar sem derrubar o blog.
+Testes de falha
+RNF16
+Idempotencia
+Operacoes criticas como subscribe, like e webhook devem ser idempotentes.
+Testes de repeticao
+RNF17
+Privacidade
+Dados pessoais devem ter consentimento, exportacao, exclusao e minimizacao.
+Checklist LGPD
+RNF18
+Migracoes
+Mudancas de schema devem seguir expand-contract para evitar downtime.
+Revisao de migration
+RNF19
+Deploy
+Deploy de producao deve usar health checks e rollback possivel.
+Pipeline + health probes
+RNF20
+Responsividade
+Interface deve funcionar em 375px, 768px e 1280px sem quebra visual.
+Playwright visual/manual
+RNF21
+Recuperacao
+Backup automatico do banco com retencao de 7 dias e RPO maximo de 24h.
+Teste de restore
+RNF22
+Recuperacao
+RTO maximo apos falha critica deve ser de 2 horas.
+Simulado de desastre
+RNF23
+Seguranca
+Implementar Content Security Policy (CSP) headers em todas as respostas.
+Security headers scan
+RNF24
+Seguranca
+Headers obrigatorios: Strict-Transport-Security, X-Frame-Options, X-Content-Type-Options.
+Security headers scan
+RNF25
+Performance
+Imagens devem ser servidas em WebP com srcset responsivo e CLS &lt; 0.1.
+Lighthouse CI
+RNF26
+Auditoria
+Acoes sensiveis do admin devem ser registradas em log de auditoria imutavel.
+Consulta audit_logs
+RNF27
+Resiliencia
+A API deve implementar Circuit Breaker para Stripe, Resend e servicos externos.
+Resilience4j tests
+RNF28
+Internacionalizacao
+Arquitetura deve suportar futura i18n sem refactoring estrutural.
+Review de rotas/content</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-19.png" width="745" height="1053" alt="Visual original da página 19 do PDF" loading="lazy" decoding="async" data-pdf-page="19">
+  <figcaption>Visual original da página 19 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 20</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 20</h3>
+      <pre class="code-block"><code class="text">16. Processo de Desenvolvimento em 8 Fases
+As fases abaixo foram extraidas da trilha do HTML anexado e adaptadas para o processo real de construcao da plataforma. Cada fase possui foco,
+entregaveis do blog e criterio de saida.
+Fase 1 - Base técnica + fundamentos
+Sem 1–8 - 896h planejadas
+Entregaveis de projeto:
+Repositório público: README inglês, Conventional Commits, estrutura modular
+Modelagem banco: users, posts, categories, tags, comments (Flyway)
+Auth: JWT + refresh token rotation + Spring Security 6 + BCrypt
+Posts CRUD: criar, editar, publicar, rascunho, markdown, slug, SEO fields
+Categorias + tags: CRUD, relação N:N, slugs únicos
+Testes unitários services, mappers, validators (&gt;80%)
+Swagger/OpenAPI com exemplos e schemas
+Suporte tecnico da fase: Java 21 Core: tipos, OOP, herança, polimorfismo, interfaces, generics, records, sealed classes; Linux: terminal, comandos
+essenciais, permissões chmod/chown; AWS: CLF-C02 — Cloud Practitioner.
+Criterio de saida: MVP operacional com auth, posts, categorias, tags, Swagger, testes e pelo menos 5 posts publicados.
+Fase 2 - Desenvolvimento profissional
+Sem 9–16 - 896h planejadas
+Entregaveis de projeto:
+Comentários: threaded com reply, moderação
+Newsletter: double opt-in, confirmação, preferências
+Busca full-text: PostgreSQL tsvector + tsquery
+Admin panel API: gestão de usuários, posts, moderação
+Redis: cache posts populares, rate limiting por IP
+Testes integração: Testcontainers, MockMvc + security
+Swagger atualizado com todos os endpoints + erros
+Suporte tecnico da fase: Spring Boot 3 avançado: REST, validação, DTOs, mappers MapStruct; Docker: images, containers, Dockerfile, build, layers,
+cache; AWS: SAA-C03 — Solutions Architect (início).
+Criterio de saida: Comunidade inicial: comentarios moderados, newsletter funcional, busca FTS, admin e Redis.
+Fase 3 - Engenharia de software real
+Sem 17–24 - 896h planejadas
+Entregaveis de projeto:
+Refatoração hexagonal: domain / ports / adapters
+DDD: Post com comportamento, Slug Value Object, Domain Events
+Kafka: PostPublished → email + notification + analytics
+OAuth2 social login: GitHub + Google
+OWASP hardening: XSS, CSRF, CORS, security headers
+ADRs: hexagonal vs layered, Kafka vs RabbitMQ
+Moderação assíncrona via Kafka
+Suporte tecnico da fase: Kafka: produtores, consumidores, DLQ, retry, schemas; CI/CD: GitHub Actions (build → test → Sonar → deploy); AWS:
+SAA-C03 (continuação).
+Criterio de saida: Arquitetura evoluida: hexagonal/DDD, eventos, Kafka/OAuth e hardening OWASP documentado.
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-20.png" width="745" height="1053" alt="Visual original da página 20 do PDF" loading="lazy" decoding="async" data-pdf-page="20">
+  <figcaption>Visual original da página 20 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 21</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 21</h3>
+      <pre class="code-block"><code class="text">Fase 4 - Arquitetura + candidaturas
+Sem 25–32 - 896h planejadas
+Entregaveis de projeto:
+Rate limiting granular: IP, usuário, endpoint com Redis
+Email assíncrono: Thymeleaf + Kafka → email-worker
+Paginação cursor-based para feeds de posts
+Versionamento de API: v1/v2 com strategy pattern
+OpenAPI Generator: SDK client em Python
+Métricas: SonarQube integrado, dashboard cobertura
+Moderação inteligente: filtro spam + fila aprovação
+Suporte tecnico da fase: Spring Boot avançado: profiles, starters customizados, Actuator; Kubernetes: pods, deployments, services, namespaces,
+kubectl; AWS: SAA-C03 (prova) + DVA-C02 (início).
+Criterio de saida: Performance e contratos: rate limit, e-mail assincrono, cursor pagination, API versionada e Sonar.
+Fase 5 - Cloud + sistemas distribuídos
+Sem 33–40 - 896h planejadas
+Entregaveis de projeto:
+Deploy AWS: EKS + RDS Multi-AZ + ElastiCache + S3 + CloudFront
+OpenTelemetry: trace ponta a ponta com correlation ID
+Analytics: page views, tempo leitura, trending, funil
+RSS + Atom + sitemap.xml + meta og/twitter + JSON-LD
+Terraform: VPC, EKS, RDS, S3, CloudFront, Route 53 como código
+SRE: health checks, alertas CloudWatch, SLO 99.9%
+Feature flags: deploy sem risco, A/B testing
+Suporte tecnico da fase: AWS aplicado: EKS, RDS, ElastiCache, S3, CloudFront, SQS/SNS; K8s avançado: Helm charts, values.yaml, chart repos;
+AWS: DVA-C02 — Developer Associate (cont.).
+Criterio de saida: Cloud e escala: deploy AWS, observabilidade, Terraform, SRE, feeds, sitemap e analytics.
+Fase 6 - IA aplicada + RAG + agentes
+Sem 41–48 - 896h planejadas
+Entregaveis de projeto:
+pgvector: embeddings posts para busca semântica
+Posts relacionados via RAG: similaridade semântica
+Auto-tagging: LLM sugere tags com confidence score
+Agente blog: chat RAG com citação de fontes
+Sugestão SEO: LLM gera títulos, meta description
+LLMOps: painel custo IA, latência, avaliação
+Cache inteligente: embeddings pré-computados
+Suporte tecnico da fase: Embeddings e pgvector: indexação HNSW, cosine similarity; Terraform avançado: import, lifecycle, data sources, for_each;
+AWS: DVA-C02 (prova) + revisão.
+Criterio de saida: IA aplicada: busca semantica, RAG, auto-tagging, agente do blog e painel LLMOps.
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-21.png" width="745" height="1053" alt="Visual original da página 21 do PDF" loading="lazy" decoding="async" data-pdf-page="21">
+  <figcaption>Visual original da página 21 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 22</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 22</h3>
+      <pre class="code-block"><code class="text">Fase 7 - Produto + frontend + escala
+Sem 49–56 - 896h planejadas
+Entregaveis de projeto:
+Frontend Next.js 15: App Router, SSG, ISR, server components
+Design system: shadcn/ui + Tailwind, dark mode, tokens
+Acessibilidade: WCAG 2.1 AA, aria-labels, keyboard nav
+Performance: Lighthouse &gt; 90, WebP, code splitting, lazy load
+PWA: service worker, manifest.json, offline reading
+Analytics frontend: scroll depth, click events, conversão
+i18n: suporte pt-BR e en-US com next-intl
+Suporte tecnico da fase: Produto completo: arquitetura end-to-end, diagramas C4; GitOps: ArgoCD, sync policies, auto-sync, rollback; AWS: SOA-
+C02 ou revisão avançada.
+Criterio de saida: Produto refinado: Next.js completo, design system, acessibilidade, PWA, i18n e analytics frontend.
+Fase 8 - Portfólio final + negociação
+Sem 57–64 - 896h planejadas
+Entregaveis de projeto:
+Launch: pentest OWASP ZAP, performance audit, SEO, a11y
+Domínio próprio + SSL ACM + CloudFront + Route 53
+10+ posts técnicos: ADRs públicos, comparações, tutoriais
+Vídeo apresentação (15-20min): arquitetura, decisões
+Case study: MVP ao produto com IA em produção
+Blog como portfólio vivo: posts = competências
+Suporte tecnico da fase: System design: sharding, replication, caching, CDN, queues; Infrastructure review: audit completo infra blog; AWS: Revisão
++ planejamento avançado.
+Criterio de saida: Lancamento: pentest, dominio, SSL, SEO, 10+ posts, video tecnico e case study completo.
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-22.png" width="745" height="1053" alt="Visual original da página 22 do PDF" loading="lazy" decoding="async" data-pdf-page="22">
+  <figcaption>Visual original da página 22 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 23</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 23</h3>
+      <pre class="code-block"><code class="text">17. Priorizacao Recomendada
+MVP obrigatorio
+Auth com JWT e refresh token.
+CRUD de posts, categorias e tags.
+Admin basico.
+SEO, sitemap, robots e RSS.
+PostgreSQL, Flyway, Redis basico.
+Swagger/OpenAPI e testes essenciais.
+Deploy frontend/backend em staging e producao.
+Depois do MVP
+Comentarios, favoritos e historico.
+Newsletter com campanhas.
+Analytics interno.
+Produtos digitais e checkout.
+Area premium.
+RAG, auto-tagging e agente do blog.
+i18n, PWA e features avancadas.
+Criterio para parar de adicionar features
+Se os ultimos 5 posts nao foram publicados, foque em conteudo.
+Se a newsletter nao tem 100 assinantes, foque em SEO e distribuicao.
+Se existe bug critico aberto ha mais de 7 dias, corrija antes de evoluir escopo.
+Se Lighthouse esta abaixo de 90, fortaleça a base antes de adicionar complexidade.
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+• 
+•</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-23.png" width="745" height="1053" alt="Visual original da página 23 do PDF" loading="lazy" decoding="async" data-pdf-page="23">
+  <figcaption>Visual original da página 23 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 24</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 24</h3>
+      <pre class="code-block"><code class="text">18. Melhorias, Riscos e Decisoes Pendentes
+Melhorias tecnicas recomendadas
+Tema
+Melhoria
+Documentacao
+Criar ADRs, CHANGELOG.md e runbooks operacionais.
+Arquitetura
+Adicionar DFD, C4, trust boundaries e estrategia de fallback.
+Banco
+Adicionar audit_logs, refresh_tokens, soft delete, indices compostos e particionamento de page_views.
+API
+Padronizar erros RFC 7807, cursor pagination, idempotencia e versionamento.
+Frontend
+Documentar estrategia de renderizacao, middleware, error boundaries e config central.
+Seguranca
+Armazenamento seguro do token, refresh rotation, rate limit, CSP e validacao de arquivos.
+Cache
+Cache warming, mutex lock e eviction por prefixo/tag.
+SEO
+Lighthouse CI, breadcrumb schema, canonical para paginacao e OG dinamico.
+Newsletter
+Segmentacao, tratamento de bounce/spam e metricas de saude da lista.
+Pagamentos
+Webhook idempotente, reembolso, nota fiscal/compliance fiscal e hardening antes de monetizar.
+Riscos principais
+Risco
+Mitigacao
+Escopo grande demais para
+MVP
+Comecar com auth, posts, categorias, tags, admin, SEO e deploy. Deixar premium, pagamentos e IA para fases
+futuras.
+Baixa producao de conteudo
+Regra de produto: se nao houver 5 posts recentes, priorizar conteudo antes de novas features.
+Complexidade de pagamentos
+Adicionar fase de hardening, webhooks idempotentes, reembolso e compliance fiscal antes de monetizar.
+Custos de infraestrutura
+Iniciar com servicos gerenciados de baixo custo e migrar apenas quando metricas justificarem.
+Seguranca de usuarios
+Usar JWT curto, refresh token rotativo, HttpOnly cookie, rate limit e audit logs.
+Dados pessoais e LGPD
+Incluir exportacao, exclusao de conta, consentimento, minimizacao e politicas desde o inicio.</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-24.png" width="745" height="1053" alt="Visual original da página 24 do PDF" loading="lazy" decoding="async" data-pdf-page="24">
+  <figcaption>Visual original da página 24 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details><details class="pdf-page-card" data-search-section>
+  <summary>
+    <span>Página 25</span>
+    <small>Transcrição integral + visual original</small>
+  </summary>
+  <div class="pdf-page-content">
+    <div class="pdf-text-col">
+      <h3>Transcrição da página 25</h3>
+      <pre class="code-block"><code class="text">19. Mapa de Conhecimento de Engenharia Coberto
+O projeto funciona como portfolio tecnico porque cobre varias competencias de engenharia moderna. Cada modulo implementado pode virar artigo, estudo
+de caso ou demonstracao em entrevista.
+Area
+Conteudos cobertos
+Profundidade
+Arquitetura de Software
+Monolito modular, DDD basico, C4, ACL, events, ADRs, expand-contract, feature flags.
+Alta
+Backend Java/Spring
+Java 21, Spring Boot, Security, JPA, Cache, Events, Actuator, Resilience4j, Flyway.
+Alta
+Banco de Dados
+PostgreSQL, UUID, JSONB, FTS, indices, constraints, particionamento, query tuning.
+Alta
+Cache e Performance
+Redis, cache-aside, TTL, warming, stampede prevention, rate limiting.
+Alta
+Seguranca
+JWT, BCrypt, cookies HttpOnly, CSP, CORS, CSRF, OWASP, LGPD, webhooks assinados.
+Alta
+API Design
+REST, versionamento, RFC 7807, idempotencia, paginacao, OpenAPI, status codes.
+Alta
+Frontend
+Next.js App Router, SSR, SSG, ISR, RSC, forms, error boundaries, middleware, Web Vitals.
+Alta
+DevOps
+Docker, CI/CD, IaC futuro, health checks, staging, rollback, zero downtime.
+Media-Alta
+Observabilidade
+Logs estruturados, traceId, Actuator, Micrometer, Sentry, Prometheus, Grafana.
+Media
+Testes
+JUnit, Mockito, Testcontainers, RestAssured, WireMock, Playwright, k6, JaCoCo.
+Media-Alta
+Produto e Monetizacao
+Newsletter, funis, produtos digitais, area premium, pagamentos, analytics.
+Media
+Conclusao: se construida e documentada com consistencia, esta plataforma cobre praticamente toda a trilha de um desenvolvedor backend forte
+com base full stack, cloud, DevOps, seguranca, dados, produto e IA aplicada.
+Documento gerado para consolidar o processo de desenvolvimento, arquitetura, requisitos e fases da Plataforma de Blog Tecnico Pessoal.</code></pre>
+    </div>
+    <div class="pdf-image-col">
+      <figure class="pdf-visual">
+  <img src="../assets/img/blog-pdf-pages/blog-tecnico-pagina-25.png" width="745" height="1053" alt="Visual original da página 25 do PDF" loading="lazy" decoding="async" data-pdf-page="25">
+  <figcaption>Visual original da página 25 do PDF.</figcaption>
+</figure>
+    </div>
+  </div>
+</details></div>
+
+</section>
+<section id="referencias" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Referências internas da página</h2>
+      
+    </div>
+    <span class="section-badge">Referências</span>
+  </div>
+  
+<ul class="doc-list">
+  <li>PDF incorporado: <strong>blog-tecnico-processo-arquitetura-requisitos.pdf</strong>.</li>
+  <li>HTML base: página de trilha <code>trilhas/blog.html</code> do Plano Integrado de Estudos.</li>
+  <li>Conteúdo preservado: produto, stack, arquitetura, monólito modular, frontend, backend, segurança, publicação, banco, API, cache, DevOps, observabilidade, requisitos, fases, priorização, riscos e mapa de conhecimento.</li>
+</ul>
+
+</section>
+</main>
+
+<footer class="text-center py-4" style="border-top:1px solid var(--doc-border)">
+  <p class="small text-muted mb-2"><span id="trackFooterTitle">Blog Portfólio Técnico</span> · Plano Integrado de Estudos</p>
+  <a class="footer-link small" href="../index.html">← Voltar ao dashboard principal</a>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+(function(){
+  const backToTop = document.getElementById('backToTop');
+  const searchInput = document.getElementById('trackSearch');
+  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 500);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    });
+  });
+
+  function normalize(value) {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  searchInput.addEventListener('input', () => {
+    const query = normalize(searchInput.value.trim());
+    sections.forEach(section => {
+      section.classList.remove('is-hidden-by-search', 'search-hit');
+      if (!query) return;
+      const match = normalize(section.innerText).includes(query);
+      section.classList.toggle('is-hidden-by-search', !match);
+      section.classList.toggle('search-hit', match);
+      if (match && section.tagName.toLowerCase() === 'details') {
+        section.open = true;
+      }
+    });
+  });
+})();
+
+</script>
+</body>
+</html>

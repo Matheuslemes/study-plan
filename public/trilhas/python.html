@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python Backend, Automação e Inteligência Artificial — Plano Integrado de Estudos</title>
+<meta name="description" content="Trilha completa de Python para desenvolvimento backend, automação, dados, machine learning, LLMs, RAG, agentes, MLOps e integração com Java/Spring.">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../assets/css/styles.css" rel="stylesheet">
+<style>
+:root {
+  --py-accent: #4B8BBE;
+  --py-accent-2: #FFD43B;
+  --doc-bg: #080b12;
+  --doc-surface: rgba(255,255,255,.045);
+  --doc-surface-2: rgba(255,255,255,.075);
+  --doc-border: rgba(255,255,255,.12);
+  --doc-text: #e8e6e3;
+  --doc-muted: #a8a6b3;
+  --doc-code: #050814;
+  --success: #22c55e;
+  --warn: #f59e0b;
+  --danger: #ef4444;
+}
+html { scroll-behavior: smooth; }
+body.track-page {
+  font-family: 'DM Sans', sans-serif;
+  background:
+    radial-gradient(circle at 15% 0%, rgba(75,139,190,.24), transparent 30rem),
+    radial-gradient(circle at 90% 12%, rgba(255,212,59,.12), transparent 28rem),
+    var(--doc-bg);
+  color: var(--doc-text);
+}
+.track-hero-page {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--doc-border);
+  background: linear-gradient(135deg, rgba(75,139,190,.18), rgba(255,212,59,.06));
+}
+.track-title {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  margin-bottom: .8rem;
+}
+.track-lead {
+  color: var(--doc-muted);
+  max-width: 1050px;
+  font-size: 1.05rem;
+}
+.track-badge-set, .badge-cloud {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin-top:1.2rem;
+}
+.track-badge-set span,
+.badge-cloud span {
+  border:1px solid rgba(75,139,190,.38);
+  background: rgba(75,139,190,.14);
+  color:#d8ecff;
+  padding:.35rem .65rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:700;
+}
+.track-local-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(8,11,18,.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--doc-border);
+}
+.track-local-nav a {
+  color: var(--doc-muted);
+  text-decoration:none;
+  padding:.45rem .7rem;
+  border-radius:999px;
+  white-space:nowrap;
+  font-size:.84rem;
+  border:1px solid transparent;
+}
+.track-local-nav a:hover {
+  color:#fff;
+  background:rgba(75,139,190,.18);
+  border-color:rgba(75,139,190,.35);
+}
+.track-search {
+  width:min(320px,100%);
+  background:rgba(255,255,255,.05)!important;
+  border-color:var(--doc-border)!important;
+  color:#fff!important;
+}
+.doc-section {
+  background: var(--doc-surface);
+  border: 1px solid var(--doc-border);
+  border-radius: 24px;
+  padding: clamp(1rem, 2vw, 1.7rem);
+  margin-bottom: 1.25rem;
+  box-shadow: 0 18px 70px rgba(0,0,0,.18);
+}
+.doc-section-heading {
+  display:flex;
+  align-items:start;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:1rem;
+  padding-bottom:.9rem;
+  border-bottom:1px solid var(--doc-border);
+}
+.doc-section h2 { margin:0; font-weight:800; letter-spacing:-.03em; }
+.doc-section h3 { color:#e9f4ff; font-size:1.15rem; font-weight:800; margin:1.2rem 0 .65rem; }
+.doc-section h4 { color:#fff; font-size:.98rem; font-weight:800; margin:1rem 0 .5rem; }
+.section-subtitle { color:var(--doc-muted); margin:.35rem 0 0; }
+.section-badge {
+  border:1px solid rgba(255,212,59,.35);
+  background:rgba(255,212,59,.12);
+  color:#fff3b3;
+  font-weight:800;
+  font-size:.75rem;
+  border-radius:999px;
+  padding:.35rem .7rem;
+  white-space:nowrap;
+}
+.doc-hero-card { display:grid; grid-template-columns: minmax(0,1.5fr) minmax(260px,.7fr); gap:1rem; align-items:center; }
+.metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; }
+.metric-pill { border:1px solid rgba(75,139,190,.35); border-radius:18px; padding:1rem; background:rgba(75,139,190,.12); text-align:center; }
+.metric-pill span { font-family:'JetBrains Mono',monospace; font-size:1.55rem; color:#fff; font-weight:800; display:block; }
+.metric-pill small { color:var(--doc-muted); text-transform:uppercase; font-size:.68rem; letter-spacing:.04em; }
+.doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { display:grid; gap:1rem; }
+.doc-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.doc-grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.doc-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.phase-doc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.mini-card, .callout, .phase-doc-card {
+  border:1px solid var(--doc-border);
+  background:rgba(255,255,255,.04);
+  border-radius:18px;
+  padding:1rem;
+}
+.mini-card strong { display:block; margin-bottom:.35rem; color:#fff; }
+.mini-card span, .callout p, .phase-doc-card p { color:var(--doc-muted); }
+.callout { border-left:4px solid var(--py-accent); }
+.callout.accent-yellow { border-left-color: var(--py-accent-2); }
+.callout.accent-green { border-left-color: var(--success); }
+.callout.accent-orange { border-left-color: var(--warn); }
+.callout.accent-red { border-left-color: var(--danger); }
+.doc-list { margin:.5rem 0 1rem; padding-left:1.25rem; color:var(--doc-muted); }
+.doc-list li { margin-bottom:.35rem; }
+.table-responsive { border:1px solid var(--doc-border); border-radius:18px; overflow:auto; margin: .75rem 0 1rem; }
+.doc-table { min-width: 820px; margin-bottom:0!important; }
+.doc-table th { background:rgba(75,139,190,.18)!important; color:#fff!important; font-weight:800; border-color:var(--doc-border)!important; white-space:nowrap; }
+.doc-table td { border-color:var(--doc-border)!important; color:#dddbe8!important; font-size:.88rem; }
+.dense-table td, .dense-table th { font-size:.78rem; }
+.code-block {
+  background:var(--doc-code);
+  color:#d9f99d;
+  border:1px solid rgba(75,139,190,.25);
+  border-radius:16px;
+  padding:1rem;
+  overflow:auto;
+  white-space:pre;
+  max-height:760px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  line-height:1.55;
+}
+.phase-doc-head { display:flex; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--doc-border); padding-bottom:.7rem; margin-bottom:.8rem; }
+.phase-doc-head h3 { margin:0; }
+.phase-doc-head span { font-family:'JetBrains Mono',monospace; color:#fff3b3; font-size:.82rem; }
+.priority { display:inline-block; border-radius:999px; padding:.2rem .5rem; font-size:.72rem; font-weight:800; white-space:nowrap; }
+.priority.must { color:#fecaca;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3); }
+.priority.should { color:#fde68a;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32); }
+.priority.nice { color:#bbf7d0;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3); }
+.priority.future { color:#bae6fd;background:rgba(14,165,233,.14);border:1px solid rgba(14,165,233,.3); }
+.search-hit { outline:2px solid rgba(255,212,59,.65); background:rgba(255,212,59,.08)!important; }
+.is-hidden-by-search { display:none!important; }
+.back-to-top { position:fixed; right:1rem; bottom:1rem; width:44px; height:44px; border-radius:999px; border:1px solid rgba(75,139,190,.45); background:rgba(75,139,190,.2); color:#fff; display:none; z-index:1200; }
+.back-to-top.is-visible { display:block; }
+.footer-link { color:#d8ecff; text-decoration:none; }
+@media (max-width: 992px) {
+  .doc-hero-card, .doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { grid-template-columns:1fr; }
+  .track-local-nav .container { gap:.75rem; }
+  .track-search { margin-top:.5rem; width:100%; }
+}
+@media (max-width: 576px) {
+  .doc-section { border-radius:18px; }
+  .doc-section-heading { flex-direction:column; }
+  .metrics-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body class="track-page" data-track="python">
+
+<header class="track-hero-page">
+  <div class="container">
+    <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
+    <h1 class="track-title">Python Backend, Automação e Inteligência Artificial</h1>
+    <p class="track-lead">Trilha completa para usar Python como segunda linguagem estratégica: desenvolvimento backend com FastAPI/Django, automações, dados, machine learning, LLMs, RAG, agentes, MLOps/LLMOps e integração com Java/Spring em sistemas reais.</p>
+    <div class="track-badge-set"><span>Python 3.12+</span><span>FastAPI</span><span>Django/DRF</span><span>SQLAlchemy</span><span>Alembic</span><span>pytest</span><span>AsyncIO</span><span>Pandas</span><span>NumPy</span><span>Polars</span><span>scikit-learn</span><span>PyTorch</span><span>Hugging Face</span><span>LangChain</span><span>LangGraph</span><span>LlamaIndex</span><span>RAG</span><span>Agentes</span><span>MLflow</span><span>LLMOps</span></div>
+  </div>
+</header>
+
+<nav class="track-local-nav">
+  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
+    <div class="d-flex flex-nowrap overflow-auto gap-1">
+      <a href="#resumo">Resumo</a>
+      <a href="#perfil">Perfil pleno</a>
+      <a href="#conteudos">Conteúdos</a>
+      <a href="#backend">Backend</a>
+      <a href="#ia">IA aplicada</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#consulta">Consulta rápida</a>
+      <a href="#snippets">Snippets</a>
+      <a href="#referencias">Referências</a>
+    </div>
+    <input id="trackSearch" class="form-control form-control-sm track-search" type="search" placeholder="Buscar nesta trilha...">
+  </div>
+</nav>
+
+<main class="container py-4" id="pythonDocumentMain">
+
+<section id="resumo" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Resumo executivo</h2>
+      <p class="section-subtitle">Objetivo da trilha: formar um Python pleno forte para backend, automação e IA aplicada em produção.</p>
+    </div>
+    <span class="section-badge">Visão geral</span>
+  </div>
+  <div class="doc-hero-card">
+    <div>
+      <p class="lead">Python nesta trilha não é tratado como linguagem auxiliar simples. Ele é uma competência de engenharia para construir APIs, workers, pipelines de dados, integrações, produtos com IA, RAG, agentes, automações e microsserviços complementares ao ecossistema Java/Spring.</p>
+      <p>O foco final é posicionar você como <strong>backend Java com capacidade real de entregar soluções de IA em produção usando Python</strong>: FastAPI para serviços de IA, Django/DRF quando houver necessidade de produtividade e admin, pandas/scikit-learn/PyTorch para dados e ML, e LangChain/LangGraph/LlamaIndex para RAG e agentes controláveis.</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-pill"><span>8</span><small>Fases</small></div>
+      <div class="metric-pill"><span>64</span><small>Semanas</small></div>
+      <div class="metric-pill"><span>1h/dia</span><small>Bloco diário</small></div>
+      <div class="metric-pill"><span>5+</span><small>Projetos práticos</small></div>
+    </div>
+  </div>
+  <div class="doc-grid-4">
+    <div class="mini-card"><strong>Desenvolvimento</strong><span>FastAPI, Django/DRF, SQLAlchemy, Alembic, pytest, workers, APIs REST e segurança.</span></div>
+    <div class="mini-card"><strong>Dados</strong><span>NumPy, Pandas, Polars, visualização, limpeza, EDA e feature engineering.</span></div>
+    <div class="mini-card"><strong>IA</strong><span>scikit-learn, PyTorch, Hugging Face, LLMs, embeddings, RAG e agentes.</span></div>
+    <div class="mini-card"><strong>Produção</strong><span>Docker, CI/CD, observabilidade, MLOps, LLMOps, custo, latência, segurança e avaliação.</span></div>
+  </div>
+</section>
+
+<section id="perfil" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>1. Perfil de mercado: Python pleno forte</h2>
+      <p class="section-subtitle">O que precisa ser demonstrável em entrevistas, portfólio e projetos reais.</p>
+    </div>
+    <span class="section-badge">Senioridade</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Dimensão</th><th>Exigência para pleno forte</th><th>Evidência prática esperada</th></tr></thead>
+      <tbody>
+        <tr><td>Linguagem</td><td>Python moderno, idiomático, tipado, organizado em pacotes e com tratamento correto de erros.</td><td>Projeto com typing, Ruff, mypy/pyright, pre-commit, logging e estrutura limpa.</td></tr>
+        <tr><td>Backend</td><td>FastAPI/Django, APIs REST, auth, banco, cache, workers, filas e contratos.</td><td>API com autenticação, testes, migrations, OpenAPI e deploy em container.</td></tr>
+        <tr><td>Testes</td><td>pytest, fixtures, mocks, testes de API, integração, banco real e cobertura orientada por risco.</td><td>Pipeline rodando testes e gerando cobertura com falhas bloqueando merge.</td></tr>
+        <tr><td>Dados</td><td>Pandas, NumPy, Polars, SQL, limpeza, EDA, feature engineering e pipelines simples.</td><td>Notebook/script reprodutível com dataset limpo, análise e exportação.</td></tr>
+        <tr><td>ML</td><td>scikit-learn, métricas, validação, pipelines, overfitting, seleção de modelo e MLflow básico.</td><td>Modelo treinado, avaliado, versionado e exposto via API.</td></tr>
+        <tr><td>LLMs</td><td>Embeddings, RAG, vector DB, agentes, tool calling, avaliação e segurança contra vazamento.</td><td>RAG com fontes, ACL por documento, avaliação e logs auditáveis.</td></tr>
+        <tr><td>Produção</td><td>Docker, CI/CD, observabilidade, health checks, métricas, custo, latência e fallback.</td><td>Serviço monitorado, com logs estruturados, métricas e runbook.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>Perfil 1 — Python Backend Developer</h3><p>Constrói APIs, integrações, workers, pipelines internos, automações, serviços assíncronos e backend de produtos. Deve dominar FastAPI/Django, banco, testes, Docker, CI/CD, segurança e observabilidade.</p></div>
+    <div class="callout accent-yellow"><h3>Perfil 2 — Python AI Application Developer</h3><p>Transforma IA em produto: RAG, agentes, APIs de modelos, automações inteligentes, avaliação, controle de acesso, custos, latência, logs e integração com sistemas existentes.</p></div>
+  </div>
+</section>
+
+<section id="conteudos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>2. Mapa completo de conteúdos</h2>
+      <p class="section-subtitle">Conteúdo necessário para desenvolvimento Python e IA aplicada.</p>
+    </div>
+    <span class="section-badge">Mapa técnico</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table dense-table">
+      <thead><tr><th>Macroárea</th><th>Conteúdos</th><th>Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td>Python Core</td><td>Tipos, collections, funções, OOP, dataclasses, decorators, generators, context managers, exceptions, logging, pathlib, datetime, módulos e pacotes.</td><td><span class="priority must">Obrigatório</span></td></tr>
+        <tr><td>Typing e qualidade</td><td>type hints, Optional, Union, Literal, TypedDict, Protocol, Generic, Annotated, mypy, pyright, Ruff, Black, isort, pre-commit.</td><td><span class="priority must">Obrigatório</span></td></tr>
+        <tr><td>Backend</td><td>FastAPI, Django, DRF, Flask legado, Pydantic, SQLAlchemy, Alembic, Django ORM, PostgreSQL, Redis, MongoDB, OpenAPI e auth.</td><td><span class="priority must">Obrigatório</span></td></tr>
+        <tr><td>Async e workers</td><td>async/await, asyncio, httpx, aiohttp, Celery, RQ, Dramatiq, Arq, Kafka, RabbitMQ, SQS, retries, DLQ e idempotência.</td><td><span class="priority should">Forte diferencial</span></td></tr>
+        <tr><td>Dados</td><td>NumPy, Pandas, Polars, visualização, limpeza, EDA, feature engineering, CSV, JSON, Parquet e pipelines.</td><td><span class="priority must">Obrigatório para IA</span></td></tr>
+        <tr><td>Machine Learning</td><td>scikit-learn, pipelines, preprocessing, métricas, cross-validation, regressão, classificação, clustering, PCA e MLflow.</td><td><span class="priority should">Obrigatório para IA aplicada</span></td></tr>
+        <tr><td>Deep Learning</td><td>PyTorch, tensors, autograd, datasets, dataloaders, nn.Module, training loop, validation, checkpoints, embeddings e transformers.</td><td><span class="priority should">Intermediário forte</span></td></tr>
+        <tr><td>LLMs</td><td>tokens, embeddings, context window, structured output, tool calling, function calling, streaming, hallucination, grounding e prompt injection.</td><td><span class="priority must">Obrigatório para IA aplicada</span></td></tr>
+        <tr><td>RAG e agentes</td><td>chunking, vector DB, retrieval, hybrid search, reranking, citations, ACL, LangChain, LangGraph, LlamaIndex, memória, tools e guardrails.</td><td><span class="priority must">Obrigatório para IA aplicada</span></td></tr>
+        <tr><td>MLOps/LLMOps</td><td>MLflow, experiment tracking, model registry, prompt versioning, eval, drift, monitoring, cost tracking, latency, fallback e A/B tests.</td><td><span class="priority should">Forte diferencial</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="backend" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>3. Python para desenvolvimento/backend</h2>
+      <p class="section-subtitle">Trilha para construir software real, não apenas scripts isolados.</p>
+    </div>
+    <span class="section-badge">Backend</span>
+  </div>
+  <div class="doc-grid-3">
+    <div class="mini-card"><strong>FastAPI</strong><span>Rotas, Pydantic, DI, middleware, exception handlers, OpenAPI, auth, background tasks, async endpoints e testes.</span></div>
+    <div class="mini-card"><strong>Django/DRF</strong><span>Models, migrations, admin, auth, serializers, viewsets, routers, permissions, throttling e pagination.</span></div>
+    <div class="mini-card"><strong>SQLAlchemy/Alembic</strong><span>ORM, sessions, relationships, migrations, transactions, repositories, Unit of Work e async database access.</span></div>
+  </div>
+  <h3>Backend profissional exige</h3>
+  <ul class="doc-list">
+    <li>API REST com versionamento, paginação, filtros, ordenação, status codes e padrão de erro consistente.</li>
+    <li>Autenticação e autorização com JWT/OAuth2, permissões por recurso e validação de escopo.</li>
+    <li>Banco relacional com migrations, transações, índices e testes de integração.</li>
+    <li>Redis para cache, rate limit, locks, sessões temporárias ou fila leve.</li>
+    <li>Workers para tarefas demoradas, retries, DLQ, idempotência e monitoramento.</li>
+    <li>Docker, pipeline CI/CD, logs estruturados, health check, métricas e deploy rastreável.</li>
+  </ul>
+  <h3>Estrutura recomendada para FastAPI</h3>
+  <pre class="code-block"><code class="text">python-service/
+├── app/
+│   ├── main.py
+│   ├── api/
+│   │   └── v1/
+│   │       ├── routes.py
+│   │       └── endpoints/
+│   ├── core/
+│   │   ├── config.py
+│   │   ├── security.py
+│   │   └── logging.py
+│   ├── domain/
+│   │   ├── entities.py
+│   │   └── services.py
+│   ├── application/
+│   │   ├── use_cases.py
+│   │   └── ports.py
+│   ├── infrastructure/
+│   │   ├── database.py
+│   │   ├── repositories.py
+│   │   ├── cache.py
+│   │   └── messaging.py
+│   ├── schemas/
+│   │   ├── requests.py
+│   │   └── responses.py
+│   └── tests/
+├── alembic/
+├── pyproject.toml
+├── Dockerfile
+└── README.md</code></pre>
+</section>
+
+<section id="ia" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>4. Python para inteligência artificial aplicada</h2>
+      <p class="section-subtitle">Do notebook ao produto: dados, ML, LLMs, RAG, agentes e operação.</p>
+    </div>
+    <span class="section-badge">IA aplicada</span>
+  </div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>AI Application Developer</h3><p>Constrói aplicações que usam modelos existentes: RAG, agentes, tool calling, automações, APIs de IA, classificação, sumarização, busca semântica e integração com sistemas.</p></div>
+    <div class="callout accent-green"><h3>Machine Learning Engineer base</h3><p>Treina, avalia, versiona e serve modelos quando necessário: scikit-learn, PyTorch, MLflow, métricas, datasets, pipelines e monitoramento de qualidade.</p></div>
+  </div>
+  <h3>RAG em produção precisa conter</h3>
+  <ul class="doc-list">
+    <li>ingestão de documentos, parsing, limpeza e chunking controlado;</li>
+    <li>embeddings, vector store, metadata filters e ACL por documento;</li>
+    <li>retrieval com similaridade, busca híbrida e reranking quando necessário;</li>
+    <li>resposta com fontes/citações, grounding e controle de alucinação;</li>
+    <li>avaliação com métricas de faithfulness, context relevance e answer relevance;</li>
+    <li>logs auditáveis, custo por requisição, latência p95, fallback e rate limit;</li>
+    <li>proteção contra prompt injection, vazamento de dados e uso indevido de ferramentas.</li>
+  </ul>
+  <h3>Matriz IA por nível</h3>
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Nível</th><th>Conteúdo</th><th>Resultado esperado</th></tr></thead>
+      <tbody>
+        <tr><td>Base</td><td>NumPy, Pandas, visualização, EDA, limpeza, feature engineering.</td><td>Preparar dados confiáveis e explicar padrões.</td></tr>
+        <tr><td>ML clássico</td><td>scikit-learn, pipelines, métricas, validação, overfitting e tuning.</td><td>Treinar e avaliar modelo tabular simples.</td></tr>
+        <tr><td>Deep Learning</td><td>PyTorch, tensors, autograd, training loop, embeddings e transformers.</td><td>Entender fine-tuning e inferência sem tratar modelo como caixa mágica.</td></tr>
+        <tr><td>LLM/RAG</td><td>LangChain/LangGraph/LlamaIndex, vector DB, retrieval, agents e eval.</td><td>Construir aplicação de IA útil, segura e testável.</td></tr>
+        <tr><td>Operação</td><td>MLflow, LLMOps, monitoramento, custo, latência, drift, rollback e A/B testing.</td><td>Colocar IA em produção com controle técnico.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="roadmap" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>5. Roadmap em 8 fases</h2>
+      <p class="section-subtitle">Progressão alinhada ao index do plano integrado: Python como backend + IA aplicada.</p>
+    </div>
+    <span class="section-badge">64 semanas</span>
+  </div>
+  <div class="phase-doc-grid">
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 1 — Python Core profissional</h3><span>Sem 1–8</span></div>
+      <ul class="doc-list"><li>Sintaxe, tipos, controle de fluxo, funções, comprehensions, OOP e módulos.</li><li>Dataclasses, enums, exceptions, context managers, generators, decorators e logging.</li><li>Typing inicial: list[str], dict[str, Any], Optional, Union, Literal e TypedDict.</li><li>Ambiente: venv, pip, uv, pyproject.toml, Ruff, Black, isort e pre-commit.</li><li>Scripts úteis para arquivos, JSON, CSV, logs e automações do projeto Java/blog.</li></ul>
+      <p><strong>Entregável:</strong> pacote Python utilitário com CLI simples, testes, lint, type check e README.</p>
+    </article>
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 2 — Backend Python base</h3><span>Sem 9–16</span></div>
+      <ul class="doc-list"><li>Requests/httpx, consumo de APIs, auth, headers, pagination e tratamento de erro.</li><li>FastAPI, Pydantic v2, rotas, validação, middleware, exception handlers e OpenAPI.</li><li>SQLAlchemy + Alembic, PostgreSQL, models, migrations, repositories e sessions.</li><li>pytest, fixtures, parametrize, mocking, coverage, TestClient/httpx e testes de API.</li><li>AsyncIO, async/await, aiohttp/httpx async, timeouts e concorrência de IO.</li></ul>
+      <p><strong>Entregável:</strong> API FastAPI com CRUD, PostgreSQL, Alembic, testes e Docker Compose.</p>
+    </article>
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 3 — APIs profissionais e automação</h3><span>Sem 17–24</span></div>
+      <ul class="doc-list"><li>FastAPI avançado: DI, lifespan, settings, background tasks, auth e estrutura por camadas.</li><li>Pydantic v2: validators, serializers, Field, Annotated, response models e strict validation.</li><li>Workers: Celery, RQ, Dramatiq ou Arq, retries, DLQ, idempotência e scheduled jobs.</li><li>Integração com Kafka/RabbitMQ/SQS, mensagens, poison messages e observabilidade de jobs.</li><li>CLIs com Typer/Click, automação de deploy, análise de logs e geração de relatórios.</li></ul>
+      <p><strong>Entregável:</strong> worker assíncrono com fila, retry, DLQ, logs estruturados e dashboard simples.</p>
+    </article>
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 4 — Dados, EDA e ML clássico</h3><span>Sem 25–32</span></div>
+      <ul class="doc-list"><li>NumPy: arrays, broadcasting, slicing, vetorização e operações matemáticas.</li><li>Pandas: DataFrames, groupby, merge, pivot, datas, missing values, limpeza e export.</li><li>Polars: lazy evaluation, arquivos grandes, expressões e performance.</li><li>Visualização: Matplotlib, Seaborn, Plotly, distribuições, correlação e séries temporais.</li><li>scikit-learn: preprocessing, train/test, cross-validation, pipelines, regressão, árvores e métricas.</li></ul>
+      <p><strong>Entregável:</strong> pipeline ML clássico com dataset limpo, métricas, relatório e endpoint de inferência inicial.</p>
+    </article>
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 5 — PyTorch, NLP e embeddings</h3><span>Sem 33–40</span></div>
+      <ul class="doc-list"><li>PyTorch: tensors, autograd, nn.Module, optimizers, losses e training loop.</li><li>Datasets/DataLoaders, batching, transforms, checkpointing e inferência.</li><li>Embeddings: Word2Vec, sentence embeddings, modelos pré-treinados e similaridade.</li><li>Hugging Face: tokenizers, pipeline, transformers, inference e fine-tuning leve com LoRA/PEFT.</li><li>Integração com APIs Python e Java para servir inferência.</li></ul>
+      <p><strong>Entregável:</strong> classificador ou buscador semântico com embeddings, avaliação e API de inferência.</p>
+    </article>
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 6 — LLMs, RAG e agentes</h3><span>Sem 41–48</span></div>
+      <ul class="doc-list"><li>LangChain, LangGraph e LlamaIndex: chains, retrievers, agents, tools e memória.</li><li>RAG: ingest, chunk, embed, retrieve, rerank, generate, cite e evaluate.</li><li>Vector stores: pgvector, Chroma, Qdrant, Pinecone, Weaviate e FAISS.</li><li>Agentes: ReAct, graph workflows, planner/executor, human-in-the-loop e validação de saída.</li><li>APIs de modelos: OpenAI SDK, Anthropic SDK, streaming, function calling e structured output.</li></ul>
+      <p><strong>Entregável:</strong> RAG com documentos privados, ACL, fontes, avaliação, logs e proteção contra vazamento.</p>
+    </article>
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 7 — MLOps/LLMOps e produção</h3><span>Sem 49–56</span></div>
+      <ul class="doc-list"><li>MLflow: experiment tracking, model registry, artifacts, serving e comparação de execuções.</li><li>LLMOps: prompt versioning, eval, custo, latência, logs de contexto, fallback e A/B testing.</li><li>Data pipelines: Airflow basics, DAGs, operators, scheduling e retries.</li><li>Observabilidade: OpenTelemetry, Sentry, Prometheus, métricas de inferência e dashboards.</li><li>Segurança em IA: prompt injection, PII masking, LGPD, ACL por documento, rate limit e sandbox de tools.</li></ul>
+      <p><strong>Entregável:</strong> serviço de IA em produção com monitoramento de custo, latência, qualidade e fallback.</p>
+    </article>
+    <article class="phase-doc-card">
+      <div class="phase-doc-head"><h3>Fase 8 — Portfólio Python pleno forte</h3><span>Sem 57–64</span></div>
+      <ul class="doc-list"><li>Python system design: FastAPI vs Django, Python vs Java, arquitetura híbrida e trade-offs.</li><li>Projeto final: FastAPI + RAG + agente + PostgreSQL/pgvector + Redis + observabilidade.</li><li>Integração Java-Python: contratos REST/gRPC, auth, timeouts, retries, tracing e documentação.</li><li>Contribuição open source ou PR técnico em projeto Python.</li><li>Mock interviews: backend Python, ML/RAG, system design e debugging.</li></ul>
+      <p><strong>Entregável:</strong> case study público de produto Python + IA em produção integrado ao portfólio Java.</p>
+    </article>
+  </div>
+</section>
+
+<section id="checklist" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>6. Checklists de execução</h2><p class="section-subtitle">Critérios práticos para não estudar de forma superficial.</p></div>
+    <span class="section-badge">Checklist</span>
+  </div>
+  <div class="doc-grid-3">
+    <div class="callout"><h3>Checklist semanal</h3><ul class="doc-list"><li>1 commit Python útil.</li><li>1 teste novo ou melhoria de teste.</li><li>1 conceito documentado em README/Obsidian.</li><li>1 integração real com Java, banco, API, worker ou IA.</li><li>1 revisão de typing/lint.</li></ul></div>
+    <div class="callout accent-yellow"><h3>Checklist de PR Python</h3><ul class="doc-list"><li>Ruff/Black/isort OK.</li><li>mypy/pyright sem erro relevante.</li><li>pytest passando.</li><li>Logs sem dados sensíveis.</li><li>Tratamento de exceção e status HTTP coerente.</li><li>OpenAPI atualizado se houver API.</li></ul></div>
+    <div class="callout accent-green"><h3>Checklist IA em produção</h3><ul class="doc-list"><li>Fonte/citação quando usar RAG.</li><li>ACL por documento.</li><li>Métrica de qualidade.</li><li>Custo e latência medidos.</li><li>Fallback definido.</li><li>Prompt/model versionado.</li><li>Proteção contra prompt injection.</li></ul></div>
+  </div>
+  <h3>Checklist de prontidão para pleno forte</h3>
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table dense-table">
+      <thead><tr><th>Item</th><th>Critério de aprovação</th></tr></thead>
+      <tbody>
+        <tr><td>API backend</td><td>Cria API FastAPI com auth, banco, migrations, cache, testes, Docker e OpenAPI.</td></tr>
+        <tr><td>Projeto Django</td><td>Entende quando usar Django/DRF para produtividade, admin, ORM e painéis.</td></tr>
+        <tr><td>Qualidade</td><td>Usa typing, Pydantic, pytest, Ruff, mypy/pyright, pre-commit e CI.</td></tr>
+        <tr><td>Dados</td><td>Manipula dados com Pandas/NumPy/Polars e gera análises reprodutíveis.</td></tr>
+        <tr><td>ML</td><td>Treina e avalia modelo com scikit-learn e sabe explicar métricas.</td></tr>
+        <tr><td>Deep Learning</td><td>Entende PyTorch o suficiente para inferência, embeddings e fine-tuning leve.</td></tr>
+        <tr><td>RAG</td><td>Constrói RAG com chunking, vector DB, fontes, eval, ACL e logs.</td></tr>
+        <tr><td>Agentes</td><td>Cria agente com tools limitadas, validação de saída, memória e auditoria.</td></tr>
+        <tr><td>Produção</td><td>Monitora custo, latência, erro, drift/qualidade e tem fallback.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="projetos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>7. Projetos práticos obrigatórios</h2><p class="section-subtitle">Projetos que demonstram domínio real para mercado e entrevistas.</p></div>
+    <span class="section-badge">Portfólio</span>
+  </div>
+  <div class="doc-grid-2">
+    <div class="mini-card"><strong>1. API Python profissional</strong><span>FastAPI, PostgreSQL, SQLAlchemy, Alembic, Redis, JWT/OAuth2, pytest, Docker, GitHub Actions, OpenAPI e logs estruturados.</span></div>
+    <div class="mini-card"><strong>2. Worker assíncrono</strong><span>Celery/RQ/Arq, Redis/RabbitMQ/SQS, retry, DLQ, idempotência, monitoramento, scheduled jobs e documentação de falhas.</span></div>
+    <div class="mini-card"><strong>3. Pipeline ML clássico</strong><span>Pandas, scikit-learn, MLflow, métricas, model registry simples, endpoint de inferência e relatório técnico.</span></div>
+    <div class="mini-card"><strong>4. RAG com documentos privados</strong><span>FastAPI, LangChain/LlamaIndex, pgvector/Qdrant/Chroma, embeddings, reranking, citations, auth, ACL e avaliação.</span></div>
+    <div class="mini-card"><strong>5. Agente com ferramentas</strong><span>LangGraph, ferramentas internas, validação Pydantic, human-in-the-loop, logs auditáveis, escopo limitado e fallback.</span></div>
+    <div class="mini-card"><strong>6. Integração Java + Python</strong><span>Spring Boot chamando serviço FastAPI via REST/gRPC, contratos, retries, timeouts, tracing e documentação de arquitetura.</span></div>
+  </div>
+</section>
+
+<section id="consulta" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>8. Consulta rápida</h2><p class="section-subtitle">Resumo objetivo para revisão e entrevistas.</p></div>
+    <span class="section-badge">Revisão</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Pergunta</th><th>Resposta curta esperada</th></tr></thead>
+      <tbody>
+        <tr><td>FastAPI ou Django?</td><td>FastAPI para APIs modernas, microsserviços e IA; Django para produto web, admin, ORM integrado e produtividade full-stack.</td></tr>
+        <tr><td>Async sempre melhora performance?</td><td>Não. Ajuda em I/O concorrente; para CPU-bound use multiprocessing, workers, otimização ou serviço separado.</td></tr>
+        <tr><td>Por que typing importa?</td><td>Melhora contrato, documentação, refatoração, validação com Pydantic e reduz erro em projetos grandes.</td></tr>
+        <tr><td>Quando usar worker?</td><td>Para tarefas demoradas, instáveis ou reprocessáveis: e-mail, parsing, IA, relatórios, ingestão e integrações externas.</td></tr>
+        <tr><td>O que torna um RAG bom?</td><td>Boa ingestão, chunking correto, retrieval relevante, citações, avaliação, ACL, logs e controle de alucinação.</td></tr>
+        <tr><td>O que medir em LLMOps?</td><td>Custo, latência, erro, qualidade, faithfulness, contexto usado, taxa de fallback e versão do prompt/modelo.</td></tr>
+        <tr><td>O que é prompt injection?</td><td>Tentativa de manipular o modelo para ignorar regras, revelar dados ou usar ferramentas de forma indevida.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="snippets" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>9. Snippets úteis</h2><p class="section-subtitle">Exemplos mínimos para consulta rápida.</p></div>
+    <span class="section-badge">Código</span>
+  </div>
+  <h3>FastAPI com health check e exception handler</h3>
+  <pre class="code-block"><code class="python">from fastapi import FastAPI, Request
+from fastapi.responses import JSONResponse
+from pydantic import BaseModel
+
+app = FastAPI(title="Python AI Service", version="1.0.0")
+
+class ApiError(Exception):
+    def __init__(self, message: str, status_code: int = 400):
+        self.message = message
+        self.status_code = status_code
+
+@app.exception_handler(ApiError)
+async def api_error_handler(request: Request, exc: ApiError):
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "type": "about:blank",
+            "title": "Application error",
+            "status": exc.status_code,
+            "detail": exc.message,
+            "instance": str(request.url.path),
+        },
+    )
+
+@app.get("/health")
+async def health():
+    return {"status": "UP"}</code></pre>
+  <h3>pyproject.toml base</h3>
+  <pre class="code-block"><code class="toml">[project]
+name = "python-ai-service"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi",
+  "uvicorn[standard]",
+  "pydantic-settings",
+  "sqlalchemy",
+  "alembic",
+  "httpx",
+]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]</code></pre>
+  <h3>Comandos essenciais</h3>
+  <pre class="code-block"><code class="bash"># ambiente e dependências
+python -m venv .venv
+source .venv/bin/activate
+pip install -U pip
+
+# qualidade
+ruff check .
+ruff format .
+pytest -q
+mypy app
+
+# FastAPI local
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+
+# Alembic
+alembic revision --autogenerate -m "create_initial_tables"
+alembic upgrade head</code></pre>
+</section>
+
+<section id="referencias" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>10. Referências técnicas</h2><p class="section-subtitle">Fontes oficiais e guias para aprofundamento.</p></div>
+    <span class="section-badge">Referências</span>
+  </div>
+  <div class="doc-grid-2">
+    <div>
+      <h3>Python e backend</h3>
+      <ul class="doc-list">
+        <li>Python Documentation — linguagem, biblioteca padrão, typing, asyncio, logging e packaging.</li>
+        <li>FastAPI Documentation — APIs modernas, Pydantic, dependency injection, async e OpenAPI.</li>
+        <li>Django Documentation — framework web, ORM, auth, security e admin.</li>
+        <li>Django REST Framework — serializers, viewsets, routers, permissions, throttling e pagination.</li>
+        <li>SQLAlchemy Documentation — ORM, Core, sessions, async e transações.</li>
+        <li>Alembic Documentation — migrations versionadas para SQLAlchemy.</li>
+        <li>pytest Documentation — testes unitários, fixtures, parametrização e integração.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Dados, IA e produção</h3>
+      <ul class="doc-list">
+        <li>NumPy, Pandas e Polars — manipulação e processamento eficiente de dados.</li>
+        <li>scikit-learn User Guide — ML clássico, pipelines, métricas e validação.</li>
+        <li>PyTorch Tutorials — tensors, autograd, training loop e deep learning.</li>
+        <li>Hugging Face Documentation — transformers, tokenizers, datasets e inferência.</li>
+        <li>LangChain, LangGraph e LlamaIndex — RAG, agentes, tools e workflows.</li>
+        <li>MLflow Documentation — experiment tracking, model registry, serving e avaliação.</li>
+        <li>OpenTelemetry e Prometheus — observabilidade, métricas, traces e monitoramento.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="text-center py-4" style="border-top:1px solid var(--doc-border)">
+  <p class="small text-muted mb-2"><span id="trackFooterTitle">Python Backend, Automação e Inteligência Artificial</span> · Plano Integrado de Estudos</p>
+  <a class="footer-link small" href="../index.html">← Voltar ao dashboard principal</a>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  const backToTop = document.getElementById('backToTop');
+  const searchInput = document.getElementById('trackSearch');
+  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 500);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    });
+  });
+
+  function normalize(value) {
+    return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  searchInput.addEventListener('input', () => {
+    const query = normalize(searchInput.value.trim());
+    sections.forEach(section => {
+      section.classList.remove('is-hidden-by-search', 'search-hit');
+      if (!query) return;
+      const match = normalize(section.innerText).includes(query);
+      section.classList.toggle('is-hidden-by-search', !match);
+      section.classList.toggle('search-hit', match);
+    });
+  });
+})();
+</script>
+</body>
+</html>

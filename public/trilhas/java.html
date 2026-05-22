@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Java, Spring Boot e Engenharia de Software — Plano Integrado de Estudos</title>
+<meta name="description" content="Página técnica completa da trilha Java, Spring Boot e Engenharia de Software para evoluir para dev backend pleno forte com arquitetura, testes, observabilidade, cloud, mensageria e system design.">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../assets/css/styles.css" rel="stylesheet">
+<style>
+:root {
+  --java-accent: #0F6E56;
+  --java-accent-2: #34d399;
+  --java-blue: #38bdf8;
+  --java-green: #22c55e;
+  --java-purple: #a78bfa;
+  --java-red: #fb7185;
+  --java-yellow: #facc15;
+  --doc-bg: #070d0a;
+  --doc-surface: rgba(255,255,255,.045);
+  --doc-surface-2: rgba(255,255,255,.075);
+  --doc-border: rgba(255,255,255,.12);
+  --doc-text: #e8e6e3;
+  --doc-muted: #a8b3ad;
+  --doc-code: #040908;
+}
+html { scroll-behavior: smooth; }
+body.track-page {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--doc-text);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(15,110,86,.28), transparent 32rem),
+    radial-gradient(circle at 92% 8%, rgba(52,211,153,.12), transparent 28rem),
+    radial-gradient(circle at 55% 95%, rgba(56,189,248,.10), transparent 30rem),
+    var(--doc-bg);
+}
+.mono { font-family:'JetBrains Mono', monospace; }
+.track-hero-page {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--doc-border);
+  background: linear-gradient(135deg, rgba(15,110,86,.26), rgba(56,189,248,.07));
+}
+.track-title {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  margin-bottom: .8rem;
+}
+.track-lead { color: var(--doc-muted); max-width: 1080px; font-size: 1.05rem; }
+.track-badge-set, .badge-cloud { display:flex; flex-wrap:wrap; gap:.5rem; }
+.track-badge-set { margin-top:1.2rem; }
+.track-badge-set span, .badge-cloud span {
+  border:1px solid rgba(52,211,153,.38);
+  background: rgba(15,110,86,.18);
+  color:#c7ffeb;
+  padding:.35rem .65rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:800;
+}
+.track-local-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(7,13,10,.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--doc-border);
+}
+.track-local-nav a {
+  color: var(--doc-muted);
+  text-decoration:none;
+  padding:.45rem .7rem;
+  border-radius:999px;
+  white-space:nowrap;
+  font-size:.84rem;
+  border:1px solid transparent;
+}
+.track-local-nav a:hover { color:#fff; background:rgba(15,110,86,.20); border-color:rgba(52,211,153,.35); }
+.track-search {
+  width:min(320px,100%);
+  background:rgba(255,255,255,.05)!important;
+  border-color:var(--doc-border)!important;
+  color:#fff!important;
+}
+.doc-section {
+  background: var(--doc-surface);
+  border: 1px solid var(--doc-border);
+  border-radius: 24px;
+  padding: clamp(1rem, 2vw, 1.7rem);
+  margin-bottom: 1.25rem;
+  box-shadow: 0 18px 70px rgba(0,0,0,.18);
+}
+.doc-section-heading {
+  display:flex;
+  align-items:start;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:1rem;
+  padding-bottom:.9rem;
+  border-bottom:1px solid var(--doc-border);
+}
+.doc-section h2 { margin:0; font-weight:800; letter-spacing:-.03em; }
+.doc-section h3 { color:#d8ffef; font-size:1.15rem; font-weight:800; margin:1.2rem 0 .65rem; }
+.doc-section h4 { color:#fff; font-size:.95rem; font-weight:800; }
+.section-subtitle { color:var(--doc-muted); margin:.35rem 0 0; }
+.section-badge {
+  border:1px solid rgba(52,211,153,.38);
+  background:rgba(15,110,86,.18);
+  color:#c7ffeb;
+  font-weight:800;
+  font-size:.75rem;
+  border-radius:999px;
+  padding:.35rem .7rem;
+  white-space:nowrap;
+}
+.doc-hero-card { display:grid; grid-template-columns: minmax(0,1.45fr) minmax(260px,.75fr); gap:1rem; align-items:center; }
+.metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; }
+.metric-pill {
+  border:1px solid rgba(52,211,153,.35);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(15,110,86,.14);
+  text-align:center;
+}
+.metric-pill span { font-family:'JetBrains Mono',monospace; font-size:1.65rem; color:#fff; font-weight:800; display:block; }
+.metric-pill small { color:var(--doc-muted); text-transform:uppercase; font-size:.7rem; letter-spacing:.04em; }
+.doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { display:grid; gap:1rem; }
+.doc-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.doc-grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.doc-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.phase-doc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.mini-card, .callout, .phase-doc-card, .exam-card {
+  border:1px solid var(--doc-border);
+  background:rgba(255,255,255,.04);
+  border-radius:18px;
+  padding:1rem;
+}
+.exam-card { position:relative; overflow:hidden; }
+.exam-card::before { content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg,var(--java-accent),var(--java-blue)); }
+.mini-card strong { display:block; margin-bottom:.35rem; color:#fff; }
+.mini-card span, .callout p, .phase-doc-card p, .exam-card p { color:var(--doc-muted); }
+.callout { border-left:4px solid var(--java-accent); }
+.callout.accent-blue { border-left-color:var(--java-blue); }
+.callout.accent-green { border-left-color:var(--java-green); }
+.callout.accent-purple { border-left-color:var(--java-purple); }
+.callout.accent-red { border-left-color:var(--java-red); }
+.callout.accent-yellow { border-left-color:var(--java-yellow); }
+.doc-list { margin:.5rem 0 1rem; padding-left:1.25rem; color:var(--doc-muted); }
+.doc-list li { margin-bottom:.35rem; }
+.table-responsive { border:1px solid var(--doc-border); border-radius:18px; overflow:auto; margin: .75rem 0 1rem; }
+.doc-table { min-width: 760px; margin-bottom:0!important; }
+.doc-table th { background:rgba(15,110,86,.24)!important; color:#fff!important; font-weight:800; border-color:var(--doc-border)!important; white-space:nowrap; }
+.doc-table td { border-color:var(--doc-border)!important; color:#dddbe8!important; font-size:.88rem; vertical-align:top; }
+.dense-table td, .dense-table th { font-size:.78rem; }
+.code-block {
+  background:var(--doc-code);
+  color:#d9f99d;
+  border:1px solid rgba(52,211,153,.25);
+  border-radius:16px;
+  padding:1rem;
+  overflow:auto;
+  white-space:pre;
+  max-height:680px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  line-height:1.55;
+}
+.phase-doc-head { display:flex; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--doc-border); padding-bottom:.7rem; margin-bottom:.8rem; }
+.phase-doc-head h3 { margin:0; }
+.phase-doc-head span { font-family:'JetBrains Mono',monospace; color:#c7ffeb; font-size:.82rem; }
+.priority { display:inline-block; border-radius:999px; padding:.2rem .5rem; font-size:.72rem; font-weight:800; white-space:nowrap; }
+.priority.must { color:#fecaca;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3); }
+.priority.should { color:#fde68a;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32); }
+.priority.nice { color:#bbf7d0;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3); }
+.priority.future { color:#bae6fd;background:rgba(14,165,233,.14);border:1px solid rgba(14,165,233,.3); }
+.timeline { position:relative; margin-left:.65rem; padding-left:1.5rem; }
+.timeline::before { content:""; position:absolute; left:0; top:.25rem; bottom:.25rem; width:1px; background:var(--doc-border); }
+.timeline-item { position:relative; margin-bottom:1rem; }
+.timeline-item::before { content:""; position:absolute; left:-1.77rem; top:.3rem; width:.65rem; height:.65rem; border-radius:999px; background:var(--java-accent-2); box-shadow:0 0 0 5px rgba(52,211,153,.14); }
+.timeline-item strong { color:#fff; display:block; }
+.timeline-item span { color:var(--doc-muted); }
+.ref-list a, .footer-link { color:#c7ffeb; text-decoration:none; }
+.ref-list a:hover, .footer-link:hover { color:#fff; text-decoration:underline; }
+mark.search-hit, .search-hit { outline:2px solid rgba(52,211,153,.65); background:rgba(52,211,153,.10)!important; }
+.is-hidden-by-search { display:none!important; }
+.back-to-top {
+  position:fixed; right:1rem; bottom:1rem; width:44px; height:44px; border-radius:999px;
+  border:1px solid rgba(52,211,153,.45); background:rgba(15,110,86,.35); color:#fff; display:none; z-index:1200;
+}
+.back-to-top.is-visible { display:block; }
+@media (max-width: 992px) {
+  .doc-hero-card, .doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { grid-template-columns:1fr; }
+  .track-local-nav .container { gap:.75rem; }
+  .track-search { margin-top:.5rem; width:100%; }
+}
+@media (max-width: 576px) {
+  .doc-section { border-radius:18px; }
+  .doc-section-heading, .phase-doc-head { flex-direction:column; }
+  .metrics-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body class="track-page" data-track="java">
+
+<header class="track-hero-page">
+  <div class="container">
+    <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
+    <h1 class="track-title">Java, Spring Boot e Engenharia de Software</h1>
+    <p class="track-lead">Página técnica completa para evoluir de desenvolvedor backend Java para um perfil pleno forte: Java moderno, Spring Boot, APIs REST, JPA/Hibernate, segurança, testes, arquitetura, mensageria, observabilidade, performance, cloud, DevOps, sistemas distribuídos e system design. A trilha está alinhada ao cronograma integrado de 64 semanas e transforma estudo em evidências concretas de portfólio.</p>
+    <div class="track-badge-set">
+      <span>Java 21</span><span>Spring Boot</span><span>Spring Security</span><span>JPA/Hibernate</span><span>PostgreSQL</span><span>Redis</span><span>Kafka</span><span>JUnit 5</span><span>Mockito</span><span>Testcontainers</span><span>Hexagonal</span><span>DDD</span><span>Outbox</span><span>CQRS</span><span>Observabilidade</span><span>System Design</span><span>64 semanas</span>
+    </div>
+  </div>
+</header>
+
+<nav class="track-local-nav">
+  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
+    <div class="d-flex flex-nowrap overflow-auto gap-1">
+      <a href="#resumo">Resumo</a>
+      <a href="#perfil-pleno">Perfil pleno</a>
+      <a href="#conteudos">Conteúdos</a>
+      <a href="#java21">Java 21</a>
+      <a href="#spring">Spring</a>
+      <a href="#persistencia">Persistência</a>
+      <a href="#seguranca">Segurança</a>
+      <a href="#api">API</a>
+      <a href="#testes">Testes</a>
+      <a href="#arquitetura">Arquitetura</a>
+      <a href="#mensageria">Mensageria</a>
+      <a href="#observabilidade">Observabilidade</a>
+      <a href="#performance">Performance</a>
+      <a href="#legado">Legado</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#consulta">Consulta rápida</a>
+      <a href="#referencias">Referências</a>
+    </div>
+    <input id="trackSearch" class="form-control form-control-sm track-search" type="search" placeholder="Buscar nesta trilha...">
+  </div>
+</nav>
+
+<main class="container py-4" id="trackMain">
+
+<section id="resumo" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Resumo executivo</h2>
+      <p class="section-subtitle">A trilha principal para formar um backend Java pleno forte com visão de engenharia.</p>
+    </div>
+    <span class="section-badge">Backend Core</span>
+  </div>
+  <div class="doc-hero-card">
+    <div>
+      <p class="lead">A trilha Java + Engenharia de Software deve ser tratada como o eixo central do plano. Ela começa em <strong>Java 21, OOP, estruturas de dados, SQL, Spring Boot e testes</strong>, evolui para <strong>Spring Security, integrações, Redis, Kafka, arquitetura hexagonal, DDD, microsserviços e padrões distribuídos</strong>, e termina com <strong>observabilidade, performance, troubleshooting, system design, legado e portfólio técnico defensável em entrevista</strong>.</p>
+      <p>O objetivo não é apenas aprender sintaxe ou frameworks. O objetivo é conseguir construir, manter, evoluir, testar, observar e defender tecnicamente sistemas backend em produção.</p>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-pill"><span>64</span><small>Semanas</small></div>
+      <div class="metric-pill"><span>3,5h</span><small>Java + projeto/dia</small></div>
+      <div class="metric-pill"><span>8</span><small>Fases técnicas</small></div>
+      <div class="metric-pill"><span>Pleno+</span><small>Objetivo de mercado</small></div>
+    </div>
+  </div>
+  <div class="doc-grid-4 mt-3">
+    <div class="mini-card"><strong>Base sólida</strong><span>Java 21, OOP, generics, records, collections, Big O, SQL, Git, testes e Spring Boot.</span></div>
+    <div class="mini-card"><strong>Backend real</strong><span>REST, Security, JPA, Redis, Kafka, integração externa, cache, resiliência e banco relacional.</span></div>
+    <div class="mini-card"><strong>Engenharia</strong><span>DDD, Hexagonal, Clean Architecture, ADRs, contratos, microsserviços e padrões distribuídos.</span></div>
+    <div class="mini-card"><strong>Produção</strong><span>Actuator, Micrometer, OpenTelemetry, logs, profiling, JVM, incidentes, tuning e system design.</span></div>
+  </div>
+</section>
+
+<section id="perfil-pleno" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>O que caracteriza um Java pleno forte</h2><p class="section-subtitle">O padrão de competência que esta trilha deve produzir.</p></div>
+    <span class="section-badge">Mercado</span>
+  </div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table">
+    <thead><tr><th>Área</th><th>Pleno comum</th><th>Pleno forte</th><th>Evidência no portfólio</th></tr></thead>
+    <tbody>
+      <tr><td>Java</td><td>Usa classes, streams e collections.</td><td>Domina generics, records, sealed classes, concorrência, JVM básica e trade-offs.</td><td>Módulo Java com domain model expressivo, testes e documentação.</td></tr>
+      <tr><td>Spring Boot</td><td>Cria controllers e services.</td><td>Projeta APIs versionadas, seguras, observáveis, resilientes e testáveis.</td><td>API Spring Boot completa com Swagger, segurança, testes e métricas.</td></tr>
+      <tr><td>JPA/Hibernate</td><td>Mapeia entidades e repositories.</td><td>Resolve N+1, locking, transações, projections, batch, queries e tuning.</td><td>Relatório de performance com EXPLAIN, índices e correções.</td></tr>
+      <tr><td>Segurança</td><td>Implementa JWT básico.</td><td>Domina Resource Server, OAuth2/OIDC, scopes, claims, CORS, CSRF e method security.</td><td>Security module com testes de autorização e threat model.</td></tr>
+      <tr><td>Mensageria</td><td>Consome/publica eventos.</td><td>Projeta idempotência, DLQ, retry, outbox, schema evolution, ordering e lag monitoring.</td><td>Fluxo assíncrono documentado com Kafka/SQS e runbook de falha.</td></tr>
+      <tr><td>Testes</td><td>Faz unitários básicos.</td><td>Cobre unidade, integração, contrato, segurança, performance e regressão.</td><td>Pipeline bloqueando merge por testes, cobertura e quality gate.</td></tr>
+      <tr><td>Produção</td><td>Sabe olhar logs.</td><td>Usa logs estruturados, traceId, métricas, tracing, dashboards e profiling.</td><td>Dashboard, trace ponta a ponta e postmortem técnico.</td></tr>
+      <tr><td>Arquitetura</td><td>Conhece SOLID.</td><td>Defende trade-offs entre monólito modular, microsserviços, DDD, CQRS e eventos.</td><td>ADRs, C4 diagrams e case study de arquitetura.</td></tr>
+    </tbody>
+  </table></div>
+  <div class="callout accent-green"><h3>Definição prática</h3><p>Um Java pleno forte é alguém que não apenas implementa tasks, mas entende impacto em arquitetura, dados, segurança, testes, deploy, operação, custo, performance e evolução do produto.</p></div>
+</section>
+
+<section id="conteudos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Mapa completo de conteúdos</h2><p class="section-subtitle">Macroáreas, microáreas e nível esperado ao final da trilha.</p></div><span class="section-badge">Conteúdos</span></div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table">
+    <thead><tr><th>Macroárea</th><th>Microáreas</th><th>Profundidade esperada</th><th>Quando priorizar</th></tr></thead>
+    <tbody>
+      <tr><td>Java 21 Core</td><td>OOP, generics, collections, streams, records, sealed classes, pattern matching, virtual threads, exceptions, immutability.</td><td>Alta</td><td>Fases 1, 2 e revisão contínua.</td></tr>
+      <tr><td>Spring Boot</td><td>REST, validation, configuration, profiles, Actuator, starters, error handling, async, scheduling, cache.</td><td>Alta</td><td>Fases 1, 2, 4 e 7.</td></tr>
+      <tr><td>Spring Security</td><td>JWT, OAuth2, OIDC, Resource Server, scopes, claims, method security, CORS, CSRF, filters.</td><td>Alta</td><td>Fase 2 e reforço em todo projeto.</td></tr>
+      <tr><td>Persistência</td><td>JPA/Hibernate, PostgreSQL, Flyway, MongoDB, Redis, transações, locking, indexes, query tuning, migrations.</td><td>Alta</td><td>Fases 1, 2, 5 e 8.</td></tr>
+      <tr><td>API Design</td><td>REST, OpenAPI, RFC 7807, idempotência, cursor pagination, versionamento, rate limit, contracts.</td><td>Alta</td><td>Fases 2, 4 e 7.</td></tr>
+      <tr><td>Testes</td><td>JUnit, Mockito, MockMvc, RestAssured, Testcontainers, contract tests, WireMock, Gatling/k6.</td><td>Alta</td><td>Todas as fases.</td></tr>
+      <tr><td>Arquitetura</td><td>SOLID, Clean Architecture, Hexagonal, DDD, modular monolith, microsserviços, ADRs, C4.</td><td>Alta</td><td>Fases 3, 4, 7 e 8.</td></tr>
+      <tr><td>Mensageria</td><td>Kafka, Rabbit/SQS conceitual, producers, consumers, partitions, offset, DLQ, retry, schema evolution, outbox.</td><td>Alta</td><td>Fases 3, 4 e 5.</td></tr>
+      <tr><td>Resiliência</td><td>Timeout, retry, circuit breaker, bulkhead, rate limiter, fallback, idempotência, consistency.</td><td>Alta</td><td>Fases 2, 4 e 5.</td></tr>
+      <tr><td>Observabilidade</td><td>Logs estruturados, Actuator, Micrometer, OpenTelemetry, traceId, metrics, dashboards, alerts.</td><td>Alta</td><td>Fases 4, 5 e 6.</td></tr>
+      <tr><td>Performance/JVM</td><td>Profiling, heap/thread dumps, GC, HikariCP, N+1, indexes, p95/p99, load tests.</td><td>Média-Alta</td><td>Fases 3, 7 e 8.</td></tr>
+      <tr><td>Legado e migração</td><td>Java 8/11 → 17/21, Spring Boot 2 → 3, javax → jakarta, refatoração incremental, dívida técnica.</td><td>Média-Alta</td><td>Fases 7 e 8.</td></tr>
+      <tr><td>System Design</td><td>sharding, replication, queues, CDN, cache, consistency, CAP, DR, scale, trade-offs.</td><td>Média-Alta</td><td>Fase 8 e entrevistas.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="java21" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Java 21 e fundamentos modernos</h2><p class="section-subtitle">Base da linguagem para escrever código expressivo, seguro e performático.</p></div><span class="section-badge">Java Core</span></div>
+  <div class="doc-grid-2">
+    <div>
+      <h3>Conceitos obrigatórios</h3>
+      <ul class="doc-list"><li>Tipos primitivos, wrappers, autoboxing, comparação por valor/referência e imutabilidade.</li><li>OOP: encapsulamento, coesão, acoplamento, herança, composição, polimorfismo e interfaces.</li><li>Generics: type parameters, bounded types, wildcards, variance e type erasure.</li><li>Collections: List, Set, Map, Queue, equals/hashCode, ordenação, hashing e complexidade.</li><li>Streams: map/filter/reduce, collectors, parallel stream com cautela e legibilidade.</li><li>Records para DTOs/value carriers; sealed classes para hierarquias controladas.</li><li>Virtual Threads para concorrência de alta escala em workloads bloqueantes, sem confundir com ganho mágico de CPU.</li><li>Exceptions: checked/unchecked, tradução de exceções, contratos de erro e logging correto.</li></ul>
+    </div>
+    <div>
+      <h3>Armadilhas comuns</h3>
+      <ul class="doc-list"><li>Usar herança onde composição resolveria melhor.</li><li>Criar DTO mutável sem necessidade.</li><li>Ignorar equals/hashCode em entidades e value objects.</li><li>Usar Stream em excesso quando um loop é mais claro.</li><li>Tratar Optional como campo de entidade ou parâmetro generalizado.</li><li>Engolir exceção ou logar sem contexto.</li><li>Confundir Virtual Threads com solução para banco lento, locks ou gargalos externos.</li></ul>
+    </div>
+  </div>
+  <h3>Exemplo: sealed class para resultado de caso de uso</h3>
+  <pre class="code-block"><code class="language-java">public sealed interface CreatePostResult permits CreatePostResult.Success, CreatePostResult.DuplicatedSlug, CreatePostResult.InvalidAuthor {
+
+    record Success(UUID postId, String slug) implements CreatePostResult {}
+    record DuplicatedSlug(String slug) implements CreatePostResult {}
+    record InvalidAuthor(UUID authorId) implements CreatePostResult {}
+}
+
+public ResponseEntity&lt;?&gt; handle(CreatePostResult result) {
+    return switch (result) {
+        case CreatePostResult.Success s -&gt; ResponseEntity.status(201).body(s);
+        case CreatePostResult.DuplicatedSlug e -&gt; ResponseEntity.status(409).body(e);
+        case CreatePostResult.InvalidAuthor e -&gt; ResponseEntity.status(422).body(e);
+    };
+}</code></pre>
+  <div class="callout"><h3>Critério de domínio</h3><p>Você domina Java Core quando consegue explicar por que escolheu uma estrutura de dados, como equals/hashCode afetam collections, quando usar record/sealed class e como concorrência impacta latência, throughput e consumo de recursos.</p></div>
+</section>
+
+<section id="spring" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Spring Boot profissional</h2><p class="section-subtitle">Construção de APIs backend robustas, configuráveis, testáveis e operáveis.</p></div><span class="section-badge">Spring</span></div>
+  <div class="doc-grid-3">
+    <div class="exam-card"><h3>Camada HTTP</h3><p>Controllers finos, validação com Bean Validation, DTOs, Problem Details, status codes corretos, paginação, filtros, versionamento e OpenAPI.</p></div>
+    <div class="exam-card"><h3>Camada de aplicação</h3><p>Services orquestram casos de uso, transações, idempotência, integrações, eventos e regras de negócio sem vazar detalhes da infraestrutura.</p></div>
+    <div class="exam-card"><h3>Configuração</h3><p>Profiles, configuration properties, variáveis de ambiente, secrets, health probes, Actuator, logs e readiness/liveness.</p></div>
+  </div>
+  <h3>Estrutura recomendada de projeto</h3>
+  <pre class="code-block"><code class="language-text">src/main/java/br/com/seuprojeto/blog/
+├── shared/
+│   ├── config/              # Jackson, OpenAPI, Security, Observability, CORS
+│   ├── exception/           # Problem Details, handler global, error codes
+│   ├── validation/          # validadores customizados
+│   └── observability/       # traceId, log helpers, metrics
+├── posts/
+│   ├── application/         # use cases, services, commands, queries
+│   ├── domain/              # entities, value objects, domain events
+│   ├── infra/               # JPA, Kafka, external clients
+│   └── web/                 # controllers, request/response DTOs
+├── users/
+├── auth/
+├── media/
+└── notifications/</code></pre>
+  <h3>Checklist de API Spring Boot</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Item</th><th>Padrão esperado</th><th>Erro comum</th></tr></thead><tbody>
+    <tr><td>Controller</td><td>Recebe request, valida, delega e retorna contrato HTTP.</td><td>Colocar regra de negócio no controller.</td></tr>
+    <tr><td>Service</td><td>Representa caso de uso, transação e orquestração.</td><td>Virar classe gigante com tudo.</td></tr>
+    <tr><td>DTO</td><td>Contrato externo versionável.</td><td>Expor entidade JPA na API.</td></tr>
+    <tr><td>Exception</td><td>Problem Details, traceId e códigos de domínio.</td><td>Retornar stack trace ou mensagens inconsistentes.</td></tr>
+    <tr><td>Config</td><td>ConfigurationProperties tipado e validado.</td><td>Espalhar @Value sem padrão.</td></tr>
+    <tr><td>Actuator</td><td>Health, metrics, info, readiness e liveness.</td><td>Expor endpoints sensíveis publicamente.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="persistencia" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Persistência, JPA/Hibernate e bancos</h2><p class="section-subtitle">O diferencial real de backend Java pleno está em dados, transações e performance.</p></div><span class="section-badge">Dados</span></div>
+  <div class="doc-grid-2">
+    <div><h3>JPA/Hibernate avançado</h3><ul class="doc-list"><li>Ciclo de vida da entidade: transient, managed, detached e removed.</li><li>Dirty checking, flush, persistence context e impacto em performance.</li><li>Lazy vs eager loading, N+1, fetch join e EntityGraph.</li><li>Projections, DTO queries, paginação e batch fetching.</li><li>Optimistic locking com @Version e pessimistic locking quando necessário.</li><li>Transações: propagation, isolation, rollback rules e boundaries.</li><li>HikariCP: pool size, timeout, leak detection e saturação.</li></ul></div>
+    <div><h3>Banco de dados em produção</h3><ul class="doc-list"><li>PostgreSQL: índices B-tree, compostos, parciais, GIN e análise de plano.</li><li>EXPLAIN ANALYZE para provar gargalo e validar correção.</li><li>Flyway com migrations versionadas, reversibilidade e expand-contract.</li><li>MongoDB para documentos com modelagem orientada ao acesso.</li><li>Redis para cache, locks, rate limiting, idempotência e TTL.</li><li>Consistência entre serviços e riscos de dual-write.</li><li>Backup, restore, retenção e validação de recuperação.</li></ul></div>
+  </div>
+  <h3>Exemplo: entidade com auditoria e optimistic locking</h3>
+  <pre class="code-block"><code class="language-java">@Entity
+@Table(name = "posts", indexes = {
+    @Index(name = "idx_posts_slug", columnList = "slug", unique = true),
+    @Index(name = "idx_posts_status_published", columnList = "status,published_at")
+})
+public class PostEntity {
+
+    @Id
+    private UUID id;
+
+    @Column(nullable = false, length = 180)
+    private String title;
+
+    @Column(nullable = false, unique = true, length = 200)
+    private String slug;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 30)
+    private PostStatus status;
+
+    @Version
+    private long version;
+
+    @Column(name = "created_at", nullable = false)
+    private Instant createdAt;
+
+    @Column(name = "updated_at", nullable = false)
+    private Instant updatedAt;
+}</code></pre>
+  <h3>Checklist de tuning JPA</h3>
+  <ul class="doc-list"><li>Medir antes de otimizar.</li><li>Ativar logs SQL apenas em ambiente controlado.</li><li>Identificar N+1 com teste de integração e query counter.</li><li>Validar plano com EXPLAIN ANALYZE.</li><li>Revisar índice de acordo com filtros, ordenação e cardinalidade.</li><li>Ajustar pool HikariCP com base em banco, CPU e latência.</li><li>Evitar transação longa envolvendo chamada externa.</li></ul>
+</section>
+
+<section id="seguranca" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Spring Security, OAuth2 e proteção de APIs</h2><p class="section-subtitle">Segurança é requisito de pleno forte, não detalhe opcional.</p></div><span class="section-badge">Security</span></div>
+  <div class="doc-grid-3">
+    <div class="mini-card"><strong>Autenticação</strong><span>Login, JWT, refresh token rotation, OAuth2/OIDC, Resource Server e integração com provedores externos.</span></div>
+    <div class="mini-card"><strong>Autorização</strong><span>Roles, scopes, authorities, claims, method security, @PreAuthorize e regras por recurso.</span></div>
+    <div class="mini-card"><strong>Hardening</strong><span>CORS, CSRF, headers, rate limit, hashing, secrets, logging sem dados sensíveis e OWASP Top 10.</span></div>
+  </div>
+  <h3>Checklist de segurança para API Java</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Controle</th><th>Como aplicar</th><th>Como testar</th></tr></thead><tbody>
+    <tr><td>JWT Resource Server</td><td>Validar assinatura, issuer, audience, expiração e claims.</td><td>Testes com token expirado, inválido e sem scope.</td></tr>
+    <tr><td>Method Security</td><td>@PreAuthorize em operações críticas.</td><td>MockMvc com usuário sem permissão.</td></tr>
+    <tr><td>Refresh token</td><td>Rotativo, HttpOnly, Secure, SameSite e detecção de reuso.</td><td>Teste de replay e logout global.</td></tr>
+    <tr><td>CORS/CSRF</td><td>Origem restrita e CSRF quando houver cookie.</td><td>Request de origem inválida e tentativa cross-site.</td></tr>
+    <tr><td>Secrets</td><td>Variáveis/Secret Manager; nunca no Git.</td><td>Secret scanning no pipeline.</td></tr>
+    <tr><td>Auditoria</td><td>Registrar ação, usuário, entidade, IP e timestamp.</td><td>Teste validando audit log.</td></tr>
+  </tbody></table></div>
+  <pre class="code-block"><code class="language-java">@Bean
+SecurityFilterChain apiSecurity(HttpSecurity http) throws Exception {
+    return http
+        .csrf(csrf -&gt; csrf.disable())
+        .cors(Customizer.withDefaults())
+        .authorizeHttpRequests(auth -&gt; auth
+            .requestMatchers("/actuator/health", "/v3/api-docs/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/v1/admin/**").hasAuthority("SCOPE_admin:write")
+            .anyRequest().authenticated())
+        .oauth2ResourceServer(oauth2 -&gt; oauth2.jwt(Customizer.withDefaults()))
+        .build();
+}</code></pre>
+</section>
+
+<section id="api" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>API Design profissional</h2><p class="section-subtitle">Contratos HTTP claros, evolutivos, seguros e previsíveis.</p></div><span class="section-badge">REST</span></div>
+  <div class="doc-grid-2">
+    <div><h3>Princípios</h3><ul class="doc-list"><li>URLs orientadas a recursos e não a ações internas.</li><li>Status codes coerentes: 200, 201, 202, 204, 400, 401, 403, 404, 409, 422, 429, 500.</li><li>Erros com RFC 7807 / Problem Details.</li><li>Idempotência em operações sensíveis como pagamento, webhook, like e criação externa.</li><li>Paginação por cursor para feeds grandes.</li><li>Versionamento explícito e política de depreciação.</li><li>Rate limit, timeout, retry e circuit breaker definidos.</li></ul></div>
+    <div><h3>Contratos</h3><ul class="doc-list"><li>OpenAPI atualizado no pipeline.</li><li>DTOs separados por request/response.</li><li>Backward compatibility como regra.</li><li>Consumer-driven contract tests quando houver múltiplos consumidores.</li><li>Headers de correlação: X-Request-Id / traceparent.</li><li>Campos de data em ISO-8601 e timezone claro.</li><li>Validação com mensagens consistentes.</li></ul></div>
+  </div>
+  <h3>Exemplo: Problem Details</h3>
+  <pre class="code-block"><code class="language-json">{
+  "type": "https://api.seusite.com/errors/duplicated-slug",
+  "title": "Slug duplicado",
+  "status": 409,
+  "detail": "Já existe um post publicado com o slug informado.",
+  "instance": "/api/v1/posts",
+  "traceId": "00-b7a7c4d2f8...",
+  "timestamp": "2026-05-22T19:30:00Z"
+}</code></pre>
+  <h3>Checklist para cada endpoint</h3>
+  <ul class="doc-list"><li>Contrato OpenAPI existe?</li><li>DTO não vaza entidade?</li><li>Validação cobre campos obrigatórios e limites?</li><li>Erros esperados foram testados?</li><li>Autorização por recurso foi testada?</li><li>Endpoint tem logs e métricas?</li><li>Paginação/filtro/ordenação foram pensados para escala?</li><li>Existe impacto transacional ou chamada externa?</li></ul>
+</section>
+
+<section id="testes" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Testes, qualidade e pipeline</h2><p class="section-subtitle">Testes precisam comprovar comportamento, segurança e integração real.</p></div><span class="section-badge">Quality</span></div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Tipo</th><th>Ferramentas</th><th>Escopo</th><th>Quando usar</th></tr></thead><tbody>
+    <tr><td>Unitário</td><td>JUnit 5, Mockito, AssertJ</td><td>Services, validators, mappers, value objects e regras puras.</td><td>Sempre que regra puder ser isolada.</td></tr>
+    <tr><td>Web/API</td><td>MockMvc, WebTestClient, RestAssured</td><td>Controllers, filtros, segurança, payloads, status codes.</td><td>Endpoints e contratos HTTP.</td></tr>
+    <tr><td>Integração</td><td>Testcontainers</td><td>PostgreSQL, Redis, Kafka, Flyway, repositories e transações.</td><td>Quando o comportamento depende de infraestrutura real.</td></tr>
+    <tr><td>Contrato</td><td>Spring Cloud Contract, Pact</td><td>Compatibilidade entre produtor e consumidor.</td><td>Times/serviços independentes.</td></tr>
+    <tr><td>Externo</td><td>WireMock</td><td>Feign/WebClient, timeouts, retries e erros de terceiros.</td><td>Integrações HTTP externas.</td></tr>
+    <tr><td>Carga</td><td>k6, Gatling</td><td>p95/p99, throughput, saturação e regressão.</td><td>Antes de release crítico.</td></tr>
+  </tbody></table></div>
+  <h3>Exemplo: teste de integração com PostgreSQL</h3>
+  <pre class="code-block"><code class="language-java">@Testcontainers
+@SpringBootTest
+class PostRepositoryIT {
+
+    @Container
+    static PostgreSQLContainer&lt;?&gt; postgres = new PostgreSQLContainer&lt;&gt;("postgres:16");
+
+    @DynamicPropertySource
+    static void properties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url", postgres::getJdbcUrl);
+        registry.add("spring.datasource.username", postgres::getUsername);
+        registry.add("spring.datasource.password", postgres::getPassword);
+    }
+
+    @Autowired PostRepository repository;
+
+    @Test
+    void shouldFindPublishedPostBySlug() {
+        // arrange / act / assert
+    }
+}</code></pre>
+  <h3>Quality gate mínimo</h3>
+  <ul class="doc-list"><li>Build sem warning crítico.</li><li>Testes unitários e integração passando.</li><li>Cobertura nova mínima de 70% e módulos críticos acima de 85%.</li><li>Sonar sem bug/blocker/critical.</li><li>Sem segredo em repositório.</li><li>OpenAPI atualizado.</li><li>Docker image escaneada quando aplicável.</li></ul>
+</section>
+
+<section id="arquitetura" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Arquitetura de software aplicada</h2><p class="section-subtitle">O ponto que diferencia pleno executor de pleno com visão técnica.</p></div><span class="section-badge">Architecture</span></div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>Monólito modular primeiro</h3><p>Para o blog/portfólio, comece com monólito modular: menor custo operacional, deploy simples, fronteiras por domínio e extração futura se houver necessidade real.</p></div>
+    <div class="callout accent-blue"><h3>Microsserviços com critério</h3><p>Extraia serviço apenas se houver escala, times independentes, deploy conflitante, isolamento de falha, custo de escala vertical alto ou requisitos claros de autonomia.</p></div>
+  </div>
+  <h3>Arquitetura hexagonal por módulo</h3>
+  <pre class="code-block"><code class="language-text">posts/
+├── domain/
+│   ├── Post.java
+│   ├── Slug.java
+│   ├── PostStatus.java
+│   └── PostPublishedEvent.java
+├── application/
+│   ├── CreatePostUseCase.java
+│   ├── PublishPostUseCase.java
+│   └── ports/
+│       ├── PostRepositoryPort.java
+│       ├── EventPublisherPort.java
+│       └── SlugUniquenessPort.java
+├── adapters/
+│   ├── in/web/PostController.java
+│   └── out/jpa/JpaPostRepositoryAdapter.java
+└── config/PostModuleConfig.java</code></pre>
+  <h3>Quando usar cada padrão</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Padrão</th><th>Uso adequado</th><th>Risco se mal usado</th></tr></thead><tbody>
+    <tr><td>DDD</td><td>Domínio com regra rica, invariantes e linguagem de negócio.</td><td>Overengineering para CRUD simples.</td></tr>
+    <tr><td>Hexagonal</td><td>Domínio precisa ficar isolado de banco, HTTP, fila e ferramentas.</td><td>Excesso de interfaces sem ganho real.</td></tr>
+    <tr><td>CQRS</td><td>Leitura e escrita têm modelos, escala ou requisitos diferentes.</td><td>Duplicação e complexidade desnecessária.</td></tr>
+    <tr><td>Outbox</td><td>Precisa salvar no banco e publicar evento de forma confiável.</td><td>Scheduler/consumer mal monitorado vira fila invisível.</td></tr>
+    <tr><td>Saga</td><td>Processo distribuído com compensações entre serviços.</td><td>Dificuldade de depuração e consistência.</td></tr>
+    <tr><td>Event Sourcing</td><td>Auditoria completa e reconstrução de estado são requisitos fortes.</td><td>Complexidade alta para domínio simples.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="mensageria" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Mensageria, Kafka e eventos</h2><p class="section-subtitle">Essencial para microsserviços, integração assíncrona e sistemas distribuídos.</p></div><span class="section-badge">Events</span></div>
+  <div class="doc-grid-2">
+    <div><h3>Kafka profissional</h3><ul class="doc-list"><li>Topics, partitions, replication factor e retenção.</li><li>Consumer groups, offsets, commits e rebalances.</li><li>Ordering por chave e impacto no particionamento.</li><li>At-least-once vs exactly-once e idempotent consumer.</li><li>Schema evolution, versionamento de eventos e compatibilidade.</li><li>DLQ, retry topics, poison messages e backoff.</li><li>Lag monitoring, throughput e tuning de consumers.</li></ul></div>
+    <div><h3>Padrões de evento</h3><ul class="doc-list"><li>Transactional Outbox para evitar dual-write.</li><li>Inbox/idempotency table para processar evento uma vez logicamente.</li><li>Event notification vs event-carried state transfer.</li><li>Saga coreografada vs orquestrada.</li><li>Contrato de evento com versionamento sem quebrar consumidor.</li><li>Tracing assíncrono preservando correlation ID.</li><li>Runbook para fila acumulada e consumer parado.</li></ul></div>
+  </div>
+  <h3>Exemplo de evento versionado</h3>
+  <pre class="code-block"><code class="language-json">{
+  "eventId": "8ca7d0ad-6e74-4ef9-97ec-09b93a8f42f4",
+  "eventType": "post.published.v1",
+  "occurredAt": "2026-05-22T19:30:00Z",
+  "correlationId": "req-123",
+  "producer": "blog-api",
+  "payload": {
+    "postId": "8b1...",
+    "slug": "spring-boot-observabilidade",
+    "authorId": "2f9...",
+    "publishedAt": "2026-05-22T19:29:55Z"
+  }
+}</code></pre>
+  <h3>Checklist de evento confiável</h3>
+  <ul class="doc-list"><li>Evento tem id único?</li><li>Existe correlationId?</li><li>Producer e versão estão claros?</li><li>Consumer é idempotente?</li><li>DLQ/retry estão definidos?</li><li>Lag é monitorado?</li><li>Schema é compatível com consumidores antigos?</li><li>Há teste de contrato do evento?</li></ul>
+</section>
+
+<section id="observabilidade" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Observabilidade Java em produção</h2><p class="section-subtitle">Logs, métricas e traces para diagnosticar comportamento real.</p></div><span class="section-badge">Ops</span></div>
+  <div class="doc-grid-3">
+    <div class="exam-card"><h3>Logs</h3><p>JSON, traceId, userId quando permitido, endpoint, status, latência, erro, sem senha/token/PII sensível.</p></div>
+    <div class="exam-card"><h3>Métricas</h3><p>Actuator + Micrometer: requests, latency, JVM, DB pool, cache, Kafka lag, erros por endpoint e métricas customizadas.</p></div>
+    <div class="exam-card"><h3>Tracing</h3><p>OpenTelemetry para rastrear frontend → API → banco/cache/fila → worker com spans e propagação de contexto.</p></div>
+  </div>
+  <h3>Métricas recomendadas para API Spring</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Categoria</th><th>Métrica</th><th>Objetivo</th></tr></thead><tbody>
+    <tr><td>HTTP</td><td>request count, p50/p95/p99, 4xx, 5xx</td><td>Entender uso, erro e latência.</td></tr>
+    <tr><td>JVM</td><td>heap, non-heap, GC pause, threads</td><td>Detectar pressão de memória e concorrência.</td></tr>
+    <tr><td>Banco</td><td>Hikari active/idle/pending, query duration</td><td>Detectar saturação do pool e queries lentas.</td></tr>
+    <tr><td>Cache</td><td>hit/miss/eviction/latency</td><td>Validar eficiência do Redis/cache local.</td></tr>
+    <tr><td>Mensageria</td><td>consumer lag, retry count, DLQ count</td><td>Detectar backlog e falhas assíncronas.</td></tr>
+    <tr><td>Negócio</td><td>posts published, signup conversion, checkout success</td><td>Medir produto, não só infraestrutura.</td></tr>
+  </tbody></table></div>
+  <pre class="code-block"><code class="language-yaml">management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: http://otel-collector:4318/v1/traces</code></pre>
+</section>
+
+<section id="performance" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Performance, JVM e troubleshooting</h2><p class="section-subtitle">Como investigar problemas reais além de “funciona na minha máquina”.</p></div><span class="section-badge">Performance</span></div>
+  <div class="doc-grid-2">
+    <div><h3>Ferramentas e técnicas</h3><ul class="doc-list"><li>Thread dump para deadlock, contenção e saturação.</li><li>Heap dump para memory leak e retenção indevida.</li><li>GC logs para pausas, throughput e pressão de memória.</li><li>Java Flight Recorder e profiler para hotspots.</li><li>k6/Gatling para carga e regressão de performance.</li><li>APM para flame graph, spans lentos e dependências externas.</li><li>EXPLAIN ANALYZE para queries e índices.</li></ul></div>
+    <div><h3>Problemas comuns</h3><ul class="doc-list"><li>N+1 em listagem paginada.</li><li>Pool de conexão saturado.</li><li>Timeout inexistente em chamada externa.</li><li>Retry sem backoff causando tempestade.</li><li>Cache stampede em endpoint quente.</li><li>Transação longa segurando lock.</li><li>Serialização JSON pesada ou payload excessivo.</li></ul></div>
+  </div>
+  <h3>Fluxo de diagnóstico</h3>
+  <div class="timeline">
+    <div class="timeline-item"><strong>1. Reproduzir</strong><span>Defina entrada, ambiente, volume e métrica afetada.</span></div>
+    <div class="timeline-item"><strong>2. Medir</strong><span>Logs, traces, métricas, query plan, thread/heap dump quando necessário.</span></div>
+    <div class="timeline-item"><strong>3. Hipótese</strong><span>Formule causa provável e valide com evidência.</span></div>
+    <div class="timeline-item"><strong>4. Corrigir</strong><span>Faça mudança pequena e mensurável.</span></div>
+    <div class="timeline-item"><strong>5. Provar</strong><span>Compare antes/depois com métricas e teste de regressão.</span></div>
+    <div class="timeline-item"><strong>6. Documentar</strong><span>Registre causa, correção, impacto e prevenção.</span></div>
+  </div>
+</section>
+
+<section id="legado" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Legado, migração e manutenção evolutiva</h2><p class="section-subtitle">Mercado real envolve sistemas existentes, não só projetos novos.</p></div><span class="section-badge">Legacy</span></div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>Migrações críticas</h3><ul class="doc-list"><li>Java 8/11 → 17/21: dependências, build, bytecode, APIs removidas e testes.</li><li>Spring Boot 2 → 3: Java 17 mínimo, Spring 6 e namespace jakarta.*.</li><li>javax.* → jakarta.*: imports, libs compatíveis, validação e JPA.</li><li>JUnit 4 → JUnit 5: extension model e modernização de testes.</li><li>RestTemplate → WebClient/HTTP interfaces quando fizer sentido.</li></ul></div>
+    <div class="callout accent-purple"><h3>Refatoração segura</h3><ul class="doc-list"><li>Adicionar testes antes de mudar comportamento.</li><li>Quebrar classe gigante por caso de uso.</li><li>Extrair portas/adapters gradualmente.</li><li>Preservar contrato público.</li><li>Usar feature flags em mudanças arriscadas.</li><li>Registrar ADR para decisões importantes.</li></ul></div>
+  </div>
+  <h3>Checklist de sistema legado</h3>
+  <ul class="doc-list"><li>Existe teste cobrindo comportamento atual?</li><li>Qual contrato externo não pode quebrar?</li><li>Há dependência abandonada ou vulnerável?</li><li>O build é reproduzível?</li><li>Existem logs suficientes para diagnosticar?</li><li>O banco tem migrations confiáveis?</li><li>A mudança pode ser feita em etapas?</li></ul>
+</section>
+
+<section id="roadmap" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Roadmap Java integrado às 8 fases</h2><p class="section-subtitle">Evolução coerente com o index e com o cronograma de 64 semanas.</p></div><span class="section-badge">Roadmap</span></div>
+  <div class="phase-doc-grid">
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 1 — Base técnica + fundamentos</h3><span>Sem 1–8</span></div><p><strong>Foco:</strong> Java 21, OOP, estruturas de dados, SQL, Spring Boot inicial e testes.</p><ul class="doc-list"><li>Java 21 Core: tipos, OOP, interfaces, generics, records e sealed classes.</li><li>Collections, Big O, arrays, listas, hashing, árvores, heaps e trade-offs.</li><li>SQL/PostgreSQL: JOINs, CTEs, transações, índices e modelagem relacional.</li><li>Spring Boot: primeiros endpoints REST, DTOs, validação, JPA/Hibernate e Flyway.</li><li>JUnit 5, Mockito, AssertJ e cobertura de regra de negócio.</li><li>Entregável: API CRUD de posts com testes e migrations.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 2 — Desenvolvimento profissional</h3><span>Sem 9–16</span></div><p><strong>Foco:</strong> Spring Boot avançado, segurança, integrações, cache e testes de integração.</p><ul class="doc-list"><li>Spring Security com JWT, OAuth2, OIDC, roles, scopes e Resource Server.</li><li>Feign/WebClient com timeout, retry, circuit breaker e fallback.</li><li>Redis para cache, TTL, rate limiting, idempotência e invalidation.</li><li>Testcontainers com PostgreSQL, Redis e MockMvc/RestAssured.</li><li>SonarQube, JaCoCo e quality gates.</li><li>Entregável: API segura com cache, integração externa mockada e testes de integração.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 3 — Engenharia de software real</h3><span>Sem 17–24</span></div><p><strong>Foco:</strong> Kafka, arquitetura hexagonal, DDD, microsserviços e performance inicial.</p><ul class="doc-list"><li>Kafka producers/consumers, DLQ, retry, schemas e consumer groups.</li><li>Hexagonal: domain, ports, adapters e isolamento de infraestrutura.</li><li>DDD: entities, value objects, aggregates e domain events.</li><li>Microsserviços: decomposição, contratos e trade-offs.</li><li>Performance: N+1, EntityGraph, batch insert, profiling básico.</li><li>Entregável: evento PostPublished com consumer idempotente.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 4 — Arquitetura + candidaturas</h3><span>Sem 25–32</span></div><p><strong>Foco:</strong> padrões distribuídos, resiliência, versionamento e observabilidade inicial.</p><ul class="doc-list"><li>Saga, Outbox, CQRS, idempotência e consistency patterns.</li><li>Resilience4j: circuit breaker, retry, bulkhead, rate limiter e timeout.</li><li>Cache aside, write-through e invalidation por evento.</li><li>OpenAPI Generator e contratos client/server.</li><li>Virtual Threads e CompletableFuture com uso consciente.</li><li>Entregável: outbox + worker + métricas de processamento.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 5 — Cloud + sistemas distribuídos</h3><span>Sem 33–40</span></div><p><strong>Foco:</strong> AWS aplicada, sistemas distribuídos, Redis/Kafka avançados e SRE.</p><ul class="doc-list"><li>EKS, RDS, ElastiCache, S3, CloudFront, SQS/SNS integrados ao backend.</li><li>CAP, consistência eventual, relógios lógicos e trade-offs.</li><li>Kafka Streams, particionamento, exactly-once e monitoramento de lag.</li><li>Redis Lua, pub/sub, Streams, geospatial e locks.</li><li>gRPC e Protocol Buffers.</li><li>Entregável: sistema distribuído com observabilidade ponta a ponta.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 6 — IA aplicada + RAG + agentes</h3><span>Sem 41–48</span></div><p><strong>Foco:</strong> Java integrado a IA, RAG, pgvector, LLMOps e API Gateway patterns.</p><ul class="doc-list"><li>Embeddings e pgvector com indexação HNSW e cosine similarity.</li><li>RAG: chunking, retrieval, reranking, citação e controle de acesso.</li><li>Integração Java ↔ Python via REST/gRPC.</li><li>LLMOps: custo, latência p95, versionamento de prompts e avaliação.</li><li>API Gateway patterns: BFF, composition, rate limiting.</li><li>Entregável: agente RAG do blog com logging, métricas e testes de avaliação.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 7 — Produto + frontend + escala</h3><span>Sem 49–56</span></div><p><strong>Foco:</strong> produto completo, multi-tenancy, webhooks, batch, versionamento e carga.</p><ul class="doc-list"><li>Arquitetura end-to-end com diagramas C4.</li><li>Multi-tenancy: schema per tenant, row-level security e isolamento.</li><li>Webhooks com retry, idempotência e signature verification.</li><li>Quartz, Spring Batch e jobs de processamento.</li><li>API versioning, deprecation e migration.</li><li>Entregável: carga com k6/Gatling, profiling e tuning documentado.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 8 — Portfólio final + negociação</h3><span>Sem 57–64</span></div><p><strong>Foco:</strong> system design, entrevistas, legado, revisão e case study final.</p><ul class="doc-list"><li>System design: sharding, replication, caching, CDN e queues.</li><li>Coding interviews: HashMap, BFS/DFS, DP e sliding window.</li><li>Revisão: Kafka, Redis, Spring Security, K8s, AWS e testes.</li><li>Legado: migração Java/Spring, javax→jakarta, refatoração segura.</li><li>Behavioral: STAR, trade-offs, conflitos e comunicação técnica.</li><li>Entregável: case study de backend Java pleno forte com arquitetura e incidentes simulados.</li></ul></article>
+  </div>
+</section>
+
+<section id="checklist" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Checklist de execução</h2><p class="section-subtitle">Como transformar estudo em competência verificável.</p></div><span class="section-badge">Execução</span></div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>Checklist semanal</h3><ul class="doc-list"><li>Estudar Java/SW Engineering no bloco 06:30–09:00.</li><li>Executar 1h de projeto da fase das 18:00–19:00.</li><li>Fazer pelo menos um commit técnico em inglês.</li><li>Adicionar ou melhorar testes.</li><li>Registrar decisão técnica ou aprendizado no README/ADR.</li><li>Revisar 5 flashcards de erros e conceitos.</li><li>Explicar um conceito em voz alta em até 7 minutos.</li></ul></div>
+    <div class="callout accent-blue"><h3>Checklist de PR</h3><ul class="doc-list"><li>Feature tem teste unitário e/ou integração?</li><li>Contrato OpenAPI foi atualizado?</li><li>Endpoint tem segurança e validação?</li><li>Logs e métricas foram considerados?</li><li>Query foi analisada se houver impacto em dados?</li><li>Erro segue Problem Details?</li><li>Há impacto em migração ou compatibilidade?</li></ul></div>
+  </div>
+  <h3>Checklist de prontidão para pleno forte</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Competência</th><th>Critério de pronto</th><th>Evidência</th></tr></thead><tbody>
+    <tr><td>Java Core</td><td>Explica e aplica records, generics, collections, exceptions e concorrência.</td><td>Domínio modelado com testes.</td></tr>
+    <tr><td>Spring Boot</td><td>API com security, validation, error handler, OpenAPI, Actuator e configs.</td><td>Projeto rodando com documentação.</td></tr>
+    <tr><td>Persistência</td><td>Resolve N+1, cria índice correto, usa transação conscientemente.</td><td>Relatório antes/depois.</td></tr>
+    <tr><td>Mensageria</td><td>Implementa consumer idempotente, retry e DLQ.</td><td>Fluxo assíncrono testado.</td></tr>
+    <tr><td>Observabilidade</td><td>Tem logs, métricas e tracing de endpoint crítico.</td><td>Dashboard ou print técnico.</td></tr>
+    <tr><td>Arquitetura</td><td>Defende trade-offs e registra ADRs.</td><td>C4 + ADRs no repositório.</td></tr>
+    <tr><td>Produção</td><td>Simula incidente, diagnostica e documenta postmortem.</td><td>Runbook + postmortem.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="projetos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Projetos práticos e entregáveis</h2><p class="section-subtitle">Cada fase precisa gerar prova técnica para entrevistas e portfólio.</p></div><span class="section-badge">Projetos</span></div>
+  <h3>Projeto central: Plataforma de Blog Técnico</h3>
+  <p>A plataforma de blog deve ser o laboratório principal: API Spring Boot, frontend, auth, posts, comentários, newsletter, busca, analytics, produtos digitais, deploy, observabilidade, segurança e documentação. Cada módulo deve demonstrar uma competência da trilha.</p>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Fase</th><th>Mini projeto Java</th><th>Competências demonstradas</th></tr></thead><tbody>
+    <tr><td>1</td><td>CRUD de posts com Spring Boot, PostgreSQL, Flyway e testes.</td><td>Java, REST, JPA, SQL, DTOs, validação, migrations e JUnit.</td></tr>
+    <tr><td>2</td><td>Auth + comentários + cache Redis + integração externa mockada.</td><td>Security, Redis, Feign/WebClient, Resilience4j e Testcontainers.</td></tr>
+    <tr><td>3</td><td>Refatoração hexagonal + Kafka PostPublishedEvent.</td><td>DDD, ports/adapters, eventos, DLQ, retry e idempotência.</td></tr>
+    <tr><td>4</td><td>Outbox + worker assíncrono + API versionada.</td><td>Padrões distribuídos, contratos, OpenAPI e observabilidade inicial.</td></tr>
+    <tr><td>5</td><td>Deploy cloud com RDS, Redis, fila e tracing.</td><td>Sistemas distribuídos, cloud, SRE e integração backend/infra.</td></tr>
+    <tr><td>6</td><td>Agente RAG integrado com Spring Boot e pgvector.</td><td>IA aplicada, vector search, API Gateway, avaliação e LLMOps.</td></tr>
+    <tr><td>7</td><td>Webhooks, batch, multi-tenancy e teste de carga.</td><td>Produto real, escala, segurança, jobs e performance.</td></tr>
+    <tr><td>8</td><td>Case study final com system design, legado, incidentes e tuning.</td><td>Pleno forte/avançado: arquitetura, produção e comunicação técnica.</td></tr>
+  </tbody></table></div>
+  <h3>Estrutura de repositório esperada</h3>
+  <pre class="code-block"><code class="language-text">blog-platform/
+├── README.md
+├── CHANGELOG.md
+├── docs/
+│   ├── adr/
+│   ├── c4/
+│   ├── runbooks/
+│   └── postmortems/
+├── backend/
+│   ├── src/main/java/...
+│   ├── src/test/java/...
+│   ├── Dockerfile
+│   └── pom.xml
+├── infra/
+│   ├── docker-compose.yml
+│   ├── terraform/
+│   └── k8s/
+└── load-tests/
+    └── k6/</code></pre>
+</section>
+
+<section id="consulta" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Consulta rápida</h2><p class="section-subtitle">Resumo objetivo para revisão antes de codar, revisar PR ou entrevista.</p></div><span class="section-badge">Quick Reference</span></div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Tópico</th><th>O que lembrar</th><th>Pergunta de entrevista</th></tr></thead><tbody>
+    <tr><td>Java</td><td>Collections dependem de equals/hashCode; generics sofrem type erasure; records são imutáveis por contrato superficial.</td><td>Quando usar record, class ou sealed class?</td></tr>
+    <tr><td>Spring</td><td>Controller não deve carregar regra; service orquestra; domain protege invariantes.</td><td>Como você estrutura uma API Spring Boot grande?</td></tr>
+    <tr><td>JPA</td><td>N+1, lazy loading, transação longa e índice errado são gargalos frequentes.</td><td>Como diagnosticar query lenta?</td></tr>
+    <tr><td>Security</td><td>Autenticação prova identidade; autorização define acesso; claims precisam ser confiáveis.</td><td>Como proteger endpoint admin?</td></tr>
+    <tr><td>API</td><td>Contrato deve ser estável, versionado, validado e documentado.</td><td>Como evoluir API sem quebrar cliente?</td></tr>
+    <tr><td>Kafka</td><td>Partição define paralelismo e ordering; consumer precisa ser idempotente.</td><td>Como evitar processar evento duplicado?</td></tr>
+    <tr><td>Cache</td><td>Cache melhora leitura, mas introduz invalidação e consistência.</td><td>Quando usar cache-aside?</td></tr>
+    <tr><td>Resiliência</td><td>Timeout sempre; retry com backoff; circuit breaker para falha persistente.</td><td>Quando retry piora o sistema?</td></tr>
+    <tr><td>Observabilidade</td><td>Log diz o que aconteceu; métrica mostra tendência; trace mostra caminho.</td><td>Como investigar p95 alto?</td></tr>
+    <tr><td>Arquitetura</td><td>Todo padrão tem custo. Justifique por problema real, não por moda.</td><td>Quando não usar microsserviços?</td></tr>
+  </tbody></table></div>
+  <h3>Comandos e snippets úteis</h3>
+  <pre class="code-block"><code class="language-bash"># Rodar testes e gerar cobertura
+./mvnw clean verify
+
+# Subir dependências locais
+docker compose up -d postgres redis kafka
+
+# Rodar aplicação com profile local
+SPRING_PROFILES_ACTIVE=local ./mvnw spring-boot:run
+
+# Ver métricas Prometheus local
+curl http://localhost:8080/actuator/prometheus
+
+# Ver health/readiness
+curl http://localhost:8080/actuator/health/readiness
+
+# Gerar thread dump
+jcmd &lt;PID&gt; Thread.print
+
+# Gerar heap dump
+jcmd &lt;PID&gt; GC.heap_dump /tmp/app.hprof</code></pre>
+</section>
+
+<section id="referencias" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Referências oficiais e materiais de apoio</h2><p class="section-subtitle">Fontes para validar versões, recursos e práticas técnicas.</p></div><span class="section-badge">Fontes</span></div>
+  <ul class="doc-list ref-list">
+    <li><a href="https://docs.oracle.com/en/java/javase/21/" target="_blank" rel="noopener">Oracle — JDK 21 Documentation</a></li>
+    <li><a href="https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html" target="_blank" rel="noopener">Oracle — Virtual Threads</a></li>
+    <li><a href="https://spring.io/projects/spring-boot" target="_blank" rel="noopener">Spring Boot — Project Page</a></li>
+    <li><a href="https://docs.spring.io/spring-boot/system-requirements.html" target="_blank" rel="noopener">Spring Boot — System Requirements</a></li>
+    <li><a href="https://docs.spring.io/spring-boot/reference/actuator/" target="_blank" rel="noopener">Spring Boot Actuator — Reference</a></li>
+    <li><a href="https://docs.spring.io/spring-boot/reference/actuator/observability.html" target="_blank" rel="noopener">Spring Boot Observability</a></li>
+    <li><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html" target="_blank" rel="noopener">Spring Security — OAuth2 Resource Server JWT</a></li>
+    <li><a href="https://docs.spring.io/spring-data/jpa/reference/" target="_blank" rel="noopener">Spring Data JPA — Reference</a></li>
+    <li><a href="https://hibernate.org/orm/documentation/" target="_blank" rel="noopener">Hibernate ORM — Documentation</a></li>
+    <li><a href="https://junit.org/junit5/docs/current/user-guide/" target="_blank" rel="noopener">JUnit 5 — User Guide</a></li>
+    <li><a href="https://java.testcontainers.org/" target="_blank" rel="noopener">Testcontainers for Java</a></li>
+    <li><a href="https://kafka.apache.org/documentation/" target="_blank" rel="noopener">Apache Kafka — Documentation</a></li>
+    <li><a href="https://micrometer.io/" target="_blank" rel="noopener">Micrometer — Observability Facade</a></li>
+    <li><a href="https://opentelemetry.io/docs/languages/java/" target="_blank" rel="noopener">OpenTelemetry Java</a></li>
+    <li>Referência interna: index do Plano Integrado de Estudos com a trilha Java + SW Engineering em 8 fases.</li>
+  </ul>
+</section>
+
+</main>
+
+<footer class="text-center py-4" style="border-top:1px solid var(--doc-border)">
+  <p class="small text-muted mb-2"><span id="trackFooterTitle">Java, Spring Boot e Engenharia de Software</span> · Plano Integrado de Estudos</p>
+  <a class="footer-link small" href="../index.html">← Voltar ao dashboard principal</a>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  const backToTop = document.getElementById('backToTop');
+  const searchInput = document.getElementById('trackSearch');
+  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 500);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+      const selector = anchor.getAttribute('href');
+      const target = document.querySelector(selector);
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    });
+  });
+
+  function normalize(value) {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  searchInput.addEventListener('input', () => {
+    const query = normalize(searchInput.value.trim());
+    sections.forEach(section => {
+      section.classList.remove('is-hidden-by-search', 'search-hit');
+      if (!query) return;
+      const match = normalize(section.innerText).includes(query);
+      section.classList.toggle('is-hidden-by-search', !match);
+      section.classList.toggle('search-hit', match);
+    });
+  });
+})();
+</script>
+</body>
+</html>

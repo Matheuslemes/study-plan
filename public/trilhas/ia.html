@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trilha IA por Livros — Plano Integrado de Estudos</title>
+<meta name="description" content="Trilha de estudo em Inteligência Artificial baseada nos livros anexados, organizada para programação, produtos, automação, LLMs, RAG, agentes e monetização.">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ia-accent: #7F77DD;
+  --ia-accent-2: #38BDF8;
+  --ia-accent-3: #52B788;
+  --ia-warn: #F59E0B;
+  --ia-danger: #F87171;
+  --doc-bg: #080A12;
+  --doc-surface: rgba(255,255,255,.045);
+  --doc-surface-2: rgba(255,255,255,.075);
+  --doc-surface-3: rgba(127,119,221,.13);
+  --doc-border: rgba(255,255,255,.12);
+  --doc-text: #E8E6E3;
+  --doc-muted: #A8A6B3;
+  --doc-code: #050814;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body.track-page {
+  font-family: 'DM Sans', sans-serif;
+  color: var(--doc-text);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(127,119,221,.23), transparent 30rem),
+    radial-gradient(circle at 90% 8%, rgba(56,189,248,.14), transparent 28rem),
+    radial-gradient(circle at 65% 52%, rgba(82,183,136,.08), transparent 32rem),
+    var(--doc-bg);
+  line-height: 1.65;
+  margin: 0;
+}
+code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+a { color:#d9d4ff; }
+.track-hero-page {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--doc-border);
+  background: linear-gradient(135deg, rgba(127,119,221,.20), rgba(56,189,248,.08));
+}
+.track-title {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -.05em;
+  margin-bottom: .8rem;
+}
+.track-lead {
+  color: var(--doc-muted);
+  max-width: 1050px;
+  font-size: 1.05rem;
+}
+.track-badge-set, .badge-cloud {
+  display:flex;
+  flex-wrap:wrap;
+  gap:.5rem;
+  margin-top:1.2rem;
+}
+.track-badge-set span, .badge-cloud span {
+  border:1px solid rgba(127,119,221,.38);
+  background:rgba(127,119,221,.15);
+  color:#dfdcff;
+  padding:.35rem .65rem;
+  border-radius:999px;
+  font-size:.78rem;
+  font-weight:800;
+}
+.track-local-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(8,10,18,.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--doc-border);
+}
+.track-local-nav a {
+  color: var(--doc-muted);
+  text-decoration:none;
+  padding:.45rem .7rem;
+  border-radius:999px;
+  white-space:nowrap;
+  font-size:.84rem;
+  border:1px solid transparent;
+}
+.track-local-nav a:hover {
+  color:#fff;
+  background:rgba(127,119,221,.18);
+  border-color:rgba(127,119,221,.35);
+}
+.track-search {
+  width:min(320px,100%);
+  background:rgba(255,255,255,.05)!important;
+  border-color:var(--doc-border)!important;
+  color:#fff!important;
+}
+.doc-section {
+  background: var(--doc-surface);
+  border: 1px solid var(--doc-border);
+  border-radius: 24px;
+  padding: clamp(1rem, 2vw, 1.7rem);
+  margin-bottom: 1.25rem;
+  box-shadow: 0 18px 70px rgba(0,0,0,.18);
+}
+.doc-section-heading {
+  display:flex;
+  align-items:start;
+  justify-content:space-between;
+  gap:1rem;
+  margin-bottom:1rem;
+  padding-bottom:.9rem;
+  border-bottom:1px solid var(--doc-border);
+}
+.doc-section h2 {
+  margin:0;
+  font-weight:800;
+  letter-spacing:-.03em;
+}
+.doc-section h3 {
+  color:#E9E7FF;
+  font-size:1.15rem;
+  font-weight:800;
+  margin:1.2rem 0 .65rem;
+}
+.doc-section h4 {
+  color:#fff;
+  font-size:.98rem;
+  font-weight:800;
+  margin:.9rem 0 .45rem;
+}
+.section-subtitle {
+  color:var(--doc-muted);
+  margin:.35rem 0 0;
+}
+.section-badge {
+  border:1px solid rgba(56,189,248,.35);
+  background:rgba(56,189,248,.12);
+  color:#c5f1ff;
+  font-weight:800;
+  font-size:.75rem;
+  border-radius:999px;
+  padding:.35rem .7rem;
+  white-space:nowrap;
+}
+.doc-hero-card {
+  display:grid;
+  grid-template-columns: minmax(0,1.45fr) minmax(280px,.7fr);
+  gap:1rem;
+  align-items:center;
+}
+.metrics-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:.7rem;
+}
+.metric-pill {
+  border:1px solid rgba(127,119,221,.35);
+  border-radius:18px;
+  padding:1rem;
+  background:rgba(127,119,221,.12);
+  text-align:center;
+}
+.metric-pill span {
+  font-family:'JetBrains Mono',monospace;
+  font-size:1.55rem;
+  color:#fff;
+  font-weight:800;
+  display:block;
+}
+.metric-pill small {
+  color:var(--doc-muted);
+  text-transform:uppercase;
+  font-size:.68rem;
+  letter-spacing:.04em;
+}
+.doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid {
+  display:grid;
+  gap:1rem;
+}
+.doc-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.doc-grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.doc-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+.phase-doc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.mini-card, .callout, .phase-doc-card, .book-card, .project-card {
+  border:1px solid var(--doc-border);
+  background:rgba(255,255,255,.04);
+  border-radius:18px;
+  padding:1rem;
+}
+.mini-card strong, .project-card strong {
+  display:block;
+  margin-bottom:.35rem;
+  color:#fff;
+}
+.mini-card span, .callout p, .phase-doc-card p, .book-card p, .project-card p {
+  color:var(--doc-muted);
+}
+.callout { border-left:4px solid var(--ia-accent-2); }
+.callout.accent-purple { border-left-color: var(--ia-accent); }
+.callout.accent-green { border-left-color: var(--ia-accent-3); }
+.callout.accent-orange { border-left-color: var(--ia-warn); }
+.callout.accent-red { border-left-color: var(--ia-danger); }
+.doc-list {
+  margin:.5rem 0 1rem;
+  padding-left:1.25rem;
+  color:var(--doc-muted);
+}
+.doc-list li { margin-bottom:.35rem; }
+.table-responsive {
+  border:1px solid var(--doc-border);
+  border-radius:18px;
+  overflow:auto;
+  margin:.75rem 0 1rem;
+}
+.doc-table {
+  min-width: 860px;
+  margin-bottom:0!important;
+}
+.doc-table th {
+  background:rgba(127,119,221,.18)!important;
+  color:#fff!important;
+  font-weight:800;
+  border-color:var(--doc-border)!important;
+  white-space:nowrap;
+}
+.doc-table td {
+  border-color:var(--doc-border)!important;
+  color:#dddbe8!important;
+  font-size:.87rem;
+  vertical-align:top;
+}
+.dense-table td, .dense-table th { font-size:.78rem; }
+.code-block {
+  background:var(--doc-code);
+  color:#d9f99d;
+  border:1px solid rgba(127,119,221,.25);
+  border-radius:16px;
+  padding:1rem;
+  overflow:auto;
+  white-space:pre;
+  max-height:760px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;
+  line-height:1.55;
+}
+.phase-doc-head, .book-head {
+  display:flex;
+  justify-content:space-between;
+  align-items:start;
+  gap:1rem;
+  border-bottom:1px solid var(--doc-border);
+  padding-bottom:.7rem;
+  margin-bottom:.8rem;
+}
+.phase-doc-head h3, .book-head h3 { margin:0; }
+.phase-doc-head span, .book-head span {
+  font-family:'JetBrains Mono',monospace;
+  color:#c5f1ff;
+  font-size:.82rem;
+}
+.phase-doc-card {
+  position:relative;
+  overflow:hidden;
+}
+.phase-doc-card::before, .book-card::before {
+  content:'';
+  position:absolute;
+  inset:0 auto 0 0;
+  width:4px;
+  background:var(--card-accent, var(--ia-accent));
+}
+.phase-doc-card, .book-card { position:relative; padding-left:1.25rem; }
+.priority {
+  display:inline-block;
+  border-radius:999px;
+  padding:.2rem .5rem;
+  font-size:.72rem;
+  font-weight:800;
+  white-space:nowrap;
+}
+.priority.must { color:#fecaca;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3); }
+.priority.should { color:#fde68a;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32); }
+.priority.nice { color:#bbf7d0;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3); }
+.priority.future { color:#bae6fd;background:rgba(14,165,233,.14);border:1px solid rgba(14,165,233,.3); }
+.timeline {
+  position:relative;
+  padding-left:1.25rem;
+}
+.timeline::before {
+  content:'';
+  position:absolute;
+  left:.33rem;
+  top:.4rem;
+  bottom:.4rem;
+  width:1px;
+  background:var(--doc-border);
+}
+.timeline-item {
+  position:relative;
+  margin:0 0 1rem;
+  padding-left:.9rem;
+}
+.timeline-item::before {
+  content:'';
+  position:absolute;
+  left:-.08rem;
+  top:.45rem;
+  width:.65rem;
+  height:.65rem;
+  border-radius:999px;
+  background:var(--ia-accent-2);
+  box-shadow:0 0 0 4px rgba(56,189,248,.12);
+}
+.search-hit {
+  outline:2px solid rgba(56,189,248,.65);
+  background:rgba(56,189,248,.10)!important;
+}
+.is-hidden-by-search { display:none!important; }
+.back-to-top {
+  position:fixed;
+  right:1rem;
+  bottom:1rem;
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid rgba(127,119,221,.45);
+  background:rgba(127,119,221,.2);
+  color:#fff;
+  display:none;
+  z-index:1200;
+}
+.back-to-top.is-visible { display:block; }
+.footer-link {
+  color:#d9d4ff;
+  text-decoration:none;
+}
+@media (max-width: 992px) {
+  .doc-hero-card, .doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { grid-template-columns:1fr; }
+  .track-local-nav .container { gap:.75rem; }
+  .track-search { margin-top:.5rem; width:100%; }
+}
+@media (max-width: 576px) {
+  .doc-section { border-radius:18px; }
+  .doc-section-heading, .phase-doc-head, .book-head { flex-direction:column; }
+  .metrics-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body class="track-page" data-track="ia-livros">
+
+<header class="track-hero-page">
+  <div class="container">
+    <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
+    <h1 class="track-title">Trilha IA por Livros</h1>
+    <p class="track-lead">Página de referência completa para estudar Inteligência Artificial aplicada a programação, produtos digitais, automação, LLMs, RAG, agentes e monetização. A trilha segue os livros anexados e o cronograma do index: leitura estratégica primeiro, fundamentos técnicos depois, aplicação prática sempre.</p>
+    <div class="track-badge-set">
+      <span>9 livros</span><span>64 semanas</span><span>20:30–22:00</span><span>23:00–23:30 revisão IA</span><span>LLMs</span><span>RAG</span><span>Agentes</span><span>AI Factory</span><span>LLMOps</span><span>Produtos digitais</span><span>Backend + IA</span>
+    </div>
+  </div>
+</header>
+
+<nav class="track-local-nav">
+  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
+    <div class="d-flex flex-nowrap overflow-auto gap-1">
+      <a href="#resumo">Resumo</a>
+      <a href="#cronograma">Cronograma</a>
+      <a href="#sequencia">Sequência</a>
+      <a href="#livros">Livros</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#tecnica">Técnica</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#checklists">Checklists</a>
+      <a href="#monetizacao">Monetização</a>
+      <a href="#consulta">Consulta rápida</a>
+      <a href="#referencias">Referências</a>
+    </div>
+    <input id="trackSearch" class="form-control form-control-sm track-search" type="search" placeholder="Buscar nesta trilha...">
+  </div>
+</nav>
+
+<main class="container py-4" id="iaDocumentMain">
+
+<section id="resumo" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Resumo executivo</h2>
+      <p class="section-subtitle">Trilha baseada nos livros anexados e integrada ao plano de 64 semanas.</p>
+    </div>
+    <span class="section-badge">Visão geral</span>
+  </div>
+
+  <div class="doc-hero-card">
+    <div>
+      <p class="lead">O objetivo desta trilha é transformar leitura em competência prática de IA aplicada: entender impacto, decisão, processos, estratégia, AI Factory, LLMs, RAG, agentes, automações e produtos reais.</p>
+      <p>O eixo central não é apenas “ler livros de IA”. A sequência foi estruturada para formar um desenvolvedor capaz de usar IA no próprio workflow, identificar oportunidades de valor, desenhar sistemas com IA, implementar LLMs/RAG/agentes com código e operar soluções com avaliação, segurança e monitoramento.</p>
+      <div class="callout accent-purple">
+        <h3>Posicionamento final esperado</h3>
+        <p>Desenvolvedor com base em backend, dados, LLMs, RAG, agentes, avaliação, cloud e capacidade de transformar IA em sistema produtivo.</p>
+      </div>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-pill"><span>9</span><small>Livros-base</small></div>
+      <div class="metric-pill"><span>64</span><small>Semanas no index</small></div>
+      <div class="metric-pill"><span>220–340h</span><small>Leitura + prática</small></div>
+      <div class="metric-pill"><span>10+</span><small>Entregáveis</small></div>
+    </div>
+  </div>
+
+  <div class="doc-grid-4">
+    <div class="mini-card"><strong>Primeiro eixo</strong><span>Fluência com IA, decisão, produtividade e validação crítica de respostas.</span></div>
+    <div class="mini-card"><strong>Segundo eixo</strong><span>IA empresarial, processos, cargos, estratégia, dados, cultura e governança.</span></div>
+    <div class="mini-card"><strong>Terceiro eixo</strong><span>LLMs técnicos: tokenização, attention, GPT, pré-treinamento, fine-tuning e LoRA.</span></div>
+    <div class="mini-card"><strong>Quarto eixo</strong><span>Agentes: ferramentas, memória, raciocínio, segurança, escala, logs e fallback humano.</span></div>
+  </div>
+</section>
+
+<section id="cronograma" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Cronograma da trilha no index</h2>
+      <p class="section-subtitle">Como encaixar a leitura e a prática dentro da rotina diária.</p>
+    </div>
+    <span class="section-badge">Rotina</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Bloco diário</th><th>Duração</th><th>Uso na trilha de IA</th><th>Resultado esperado</th></tr></thead>
+      <tbody>
+        <tr><td>20:30–22:00</td><td>1h30</td><td>Leitura estruturada dos livros, fichamento, extração de conceitos e execução prática ligada ao livro atual.</td><td>Progresso contínuo nos 9 livros e geração de artefatos por fase.</td></tr>
+        <tr><td>23:00–23:30</td><td>30min</td><td>IA no workflow: revisar PR, explicar erro, gerar hipótese de debug, validar resposta, registrar aprendizados.</td><td>Consolidação diária e uso real da IA como par técnico.</td></tr>
+        <tr><td>Blocos Python/Banco/DevOps</td><td>Variável</td><td>Suporte técnico paralelo para APIs, dados, embeddings, RAG, vector DB, Docker, CI/CD, observabilidade e deploy.</td><td>Evitar que a leitura técnica trave por falta de base prática.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout accent-orange">
+    <h3>Regra de execução da trilha</h3>
+    <p>Todo livro precisa gerar ao menos um artefato técnico ou estratégico: workflow, mapa de decisão, diagnóstico, processo redesenhado, arquitetura, roadmap, notebook, API, classificador, fine-tuning, agente ou relatório de avaliação.</p>
+  </div>
+</section>
+
+<section id="sequencia" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Sequência macro de estudo</h2>
+      <p class="section-subtitle">A ordem correta evita estudar agentes ou LLMs sem visão de valor, decisão e processo.</p>
+    </div>
+    <span class="section-badge">Ordem macro</span>
+  </div>
+
+  <p>A progressão recomendada é: <strong>uso prático da IA → economia da decisão → IA empresarial → redesenho de processos → organizações AI-fueled → AI Factory → roadmap de execução → fundamentos técnicos de LLMs → agentes de IA</strong>.</p>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Macroetapa</th><th>Livros</th><th>Objetivo</th><th>Entrega recomendada</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Co-Intelligence + Prediction Machines</td><td>Ganhar fluência com IA e entender IA como previsão/decisão.</td><td>Workflow pessoal de IA + mapa de decisões com IA.</td></tr>
+        <tr><td>2</td><td>The AI Advantage + Human + Machine</td><td>Entender IA em empresas, processos, cargos e redesenho de trabalho.</td><td>Mapa de processo humano + IA para um negócio real.</td></tr>
+        <tr><td>3</td><td>All-In on AI + Competing in the Age of AI</td><td>Entender empresas AI-fueled, dados, tecnologia, AI Factory e estratégia digital.</td><td>Arquitetura conceitual de produto/SaaS com IA.</td></tr>
+        <tr><td>4</td><td>Untangling AI</td><td>Transformar conhecimento em roadmap, execução e automação planejada.</td><td>Roadmap de 30/60/90 dias de IA para um nicho.</td></tr>
+        <tr><td>5</td><td>Build a Large Language Model</td><td>Aprofundar LLMs tecnicamente com Python/PyTorch.</td><td>Mini GPT, classificador e fine-tuning de instruções.</td></tr>
+        <tr><td>6</td><td>Agentic Artificial Intelligence</td><td>Criar agentes com ferramentas, memória, raciocínio, segurança e escala.</td><td>Agente RAG com ferramentas, logs, avaliação e fallback humano.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="livros" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Os 9 livros da trilha</h2>
+      <p class="section-subtitle">O que estudar em cada livro, o que extrair e qual entrega criar.</p>
+    </div>
+    <span class="section-badge">Biblioteca IA</span>
+  </div>
+
+  <div class="phase-doc-grid">
+    <article class="book-card" style="--card-accent:#7F77DD" data-search-section>
+      <div class="book-head"><h3>1. Co-Intelligence — Ethan Mollick</h3><span>Fluência prática</span></div>
+      <p><strong>Foco:</strong> IA generativa como parceira de trabalho: coworker, tutor, coach, criatividade, validação e futuro do trabalho.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>Creating Alien Minds e Aligning the Alien.</li>
+        <li>Four Rules for Co-Intelligence.</li>
+        <li>AI as Coworker, AI as Tutor e AI as Coach.</li>
+        <li>Como estudar, programar, documentar e pesquisar com IA sem terceirizar julgamento.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Workflow pessoal de IA: biblioteca de prompts, processo de validação, checklist anti-alucinação e rotina de uso em código, estudo, documentação e produto.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#38BDF8" data-search-section>
+      <div class="book-head"><h3>2. Prediction Machines</h3><span>Decisão e ROI</span></div>
+      <p><strong>Foco:</strong> IA como tecnologia que reduz o custo da previsão e muda decisões, julgamento, ações, fluxos de trabalho e risco.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>Cheap Changes Everything.</li>
+        <li>Prediction, Decision Making, Judgment e Action.</li>
+        <li>Deconstructing Workflows e Decomposing Decisions.</li>
+        <li>Managing AI Risk: privacidade, controle, acurácia e autonomia.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Mapa de 10 decisões em um sistema/produto/empresa, separando previsão, julgamento humano, ação, métrica de resultado, risco e ROI esperado.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#52B788" data-search-section>
+      <div class="book-head"><h3>3. The AI Advantage — Thomas H. Davenport</h3><span>IA empresarial</span></div>
+      <p><strong>Foco:</strong> Uso realista de IA em empresas, estratégia cognitiva, processos, tarefas, habilidades, abordagens técnicas e ética.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>AI Comes of Age — Slowly.</li>
+        <li>AI in the Enterprise e What Are Companies Doing Today?</li>
+        <li>Cognitive Strategy e AI Tasks and Business Processes.</li>
+        <li>Jobs and Skills, Technical Approaches e Ethical Implications.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Diagnóstico de IA para pequeno negócio: dores, tarefas, dados disponíveis, automações possíveis, riscos e backlog de casos de uso priorizados.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#F59E0B" data-search-section>
+      <div class="book-head"><h3>4. Human + Machine</h3><span>Processos</span></div>
+      <p><strong>Foco:</strong> Colaboração humano-máquina, missing middle, responsible AI, produtividade, redesenho de processos e fusion skills.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>AI em produção, supply chain, funções corporativas, R&D, atendimento, vendas e marketing.</li>
+        <li>The Missing Middle e Reimagining Processes with AI.</li>
+        <li>Responsible AI e papéis humanos no desenvolvimento/deploy.</li>
+        <li>Eight New Fusion Skills for an AI Workplace.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Mapa de processo humano + IA: tarefas humanas, tarefas automatizáveis, tarefas híbridas, pontos de controle humano e métricas de produtividade.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#7F77DD" data-search-section>
+      <div class="book-head"><h3>5. All-In on AI</h3><span>AI-fueled</span></div>
+      <p><strong>Foco:</strong> Como empresas maduras escalam IA de verdade: lado humano, estratégia, dados, tecnologia, capacidades e casos de uso por indústria.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>What Does It Mean to Be AI Fueled?</li>
+        <li>The Human Side, Strategy, Technology and Data.</li>
+        <li>Capabilities, Industry Use Cases e Becoming AI Fueled.</li>
+        <li>Por que pilotos isolados não bastam para capturar valor.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Blueprint de empresa/produto AI-fueled: dados, tecnologia, MLOps, cultura, governança, capabilities e casos de uso priorizados.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#38BDF8" data-search-section>
+      <div class="book-head"><h3>6. Competing in the Age of AI</h3><span>AI Factory</span></div>
+      <p><strong>Foco:</strong> Firma digital, operating model, AI Factory, escala, escopo, aprendizado, estratégia, ética e liderança.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>The Age of AI, Rethinking the Firm e The AI Factory.</li>
+        <li>Rearchitecting the Firm e Becoming an AI Company.</li>
+        <li>Strategy for a New Age, Ethics e Leadership Mandate.</li>
+        <li>Digital scale, digital scope e learning loops.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Arquitetura de AI Factory: dados → modelos → decisões → ações → feedback → governança → melhoria contínua.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#52B788" data-search-section>
+      <div class="book-head"><h3>7. Untangling AI — Matt Kesby</h3><span>Roadmap</span></div>
+      <p><strong>Foco:</strong> Transformação com estratégia, pessoas, tecnologia, execução, agentes de IA, automação planejada e impacto em valuation.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>Strategy: AI Strategic Roadmap.</li>
+        <li>People: AI-Powered People.</li>
+        <li>Technology: Navigating AI Integration.</li>
+        <li>Execution: AI-Enabled Execution.</li>
+        <li>AI Agents + Automation Planning.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Roadmap 30/60/90 dias para aplicar IA em um nicho: prioridades, riscos, dados, pessoas, tecnologia, automações, métricas e plano de execução.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#F59E0B" data-search-section>
+      <div class="book-head"><h3>8. Build a Large Language Model</h3><span>LLMs técnicos</span></div>
+      <p><strong>Foco:</strong> Construir um LLM do zero com Python/PyTorch para entender tokenização, attention, transformer, pretraining e fine-tuning.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>Working with text data: tokenização, BPE, sliding window e embeddings.</li>
+        <li>Self-attention, causal attention e multi-head attention.</li>
+        <li>GPT model, layer norm, GELU, shortcut connections e transformer blocks.</li>
+        <li>Pretraining, evaluation, temperature, top-k, classification fine-tuning, instruction fine-tuning e LoRA.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Mini GPT educacional + classificador + instruction fine-tuning, com notebooks, métricas, README e explicação técnica dos trade-offs.</p>
+    </article>
+
+    <article class="book-card" style="--card-accent:#F87171" data-search-section>
+      <div class="book-head"><h3>9. Agentic Artificial Intelligence</h3><span>Agentes</span></div>
+      <p><strong>Foco:</strong> Criar e escalar agentes com ações, ferramentas, raciocínio, memória, colaboração humano-agente, safeguards e governança.</p>
+      <h4>Temas prioritários</h4>
+      <ul class="doc-list">
+        <li>The Five Levels of AI Agents.</li>
+        <li>Action: tools e tool usage.</li>
+        <li>Reasoning, multi-agent systems e reliability.</li>
+        <li>Memory: short-term, long-term, feedback loops e best practices.</li>
+        <li>Building successful agents, business models, scaling e safeguards.</li>
+      </ul>
+      <h4>Entregável</h4>
+      <p>Agente RAG com ferramentas, memória, logs, avaliação, limites de ação, human-in-the-loop, fallback humano e documentação de segurança.</p>
+    </article>
+  </div>
+</section>
+
+<section id="roadmap" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Roadmap em 8 fases conforme o index</h2>
+      <p class="section-subtitle">Distribuição dos livros e entregáveis dentro das 64 semanas do plano integrado.</p>
+    </div>
+    <span class="section-badge">64 semanas</span>
+  </div>
+
+  <div class="phase-doc-grid">
+    <article class="phase-doc-card" style="--card-accent:#7F77DD">
+      <div class="phase-doc-head"><h3>Fase 1 — Base técnica + fundamentos</h3><span>Sem 1–8</span></div>
+      <h4>Livros</h4>
+      <ul class="doc-list"><li>Sem 1–2: Co-Intelligence.</li><li>Sem 3–4: Prediction Machines.</li><li>Sem 5–6: The AI Advantage.</li><li>Sem 7–8: Human + Machine.</li></ul>
+      <h4>Foco</h4>
+      <p>Construir fluência de uso, entender IA como previsão/decisão, identificar casos de uso empresariais e redesenhar processos com colaboração humano-máquina.</p>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Workflow pessoal de IA.</li><li>Mapa de 10 decisões.</li><li>Diagnóstico de IA para pequeno negócio.</li><li>Mapa de processo humano + IA.</li></ul>
+    </article>
+
+    <article class="phase-doc-card" style="--card-accent:#38BDF8">
+      <div class="phase-doc-head"><h3>Fase 2 — Desenvolvimento profissional</h3><span>Sem 9–16</span></div>
+      <h4>Livros</h4>
+      <ul class="doc-list"><li>Sem 9–10: All-In on AI.</li><li>Sem 11–12: Competing in the Age of AI.</li><li>Sem 13–14: Untangling AI.</li><li>Sem 15–16: início técnico guiado por Build LLM.</li></ul>
+      <h4>Foco</h4>
+      <p>Entender organizações AI-fueled, AI Factory, strategy-to-execution e iniciar a ponte para LLMs técnicos.</p>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Blueprint de organização AI-fueled.</li><li>Arquitetura de AI Factory para microSaaS.</li><li>Roadmap 30/60/90 dias.</li><li>Setup Python/PyTorch e preparação técnica.</li></ul>
+    </article>
+
+    <article class="phase-doc-card" style="--card-accent:#52B788">
+      <div class="phase-doc-head"><h3>Fase 3 — Engenharia de software real</h3><span>Sem 17–24</span></div>
+      <h4>Livro</h4>
+      <p>Build a Large Language Model — estudo com código.</p>
+      <h4>Foco técnico</h4>
+      <ul class="doc-list"><li>Tokenização, BPE e preparação de texto.</li><li>Embeddings e positional encodings.</li><li>Self-attention, causal attention e multi-head attention.</li><li>Arquitetura GPT pequena.</li></ul>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Tokenizer educacional.</li><li>Notebook de attention explicado.</li><li>Mini GPT gerando texto.</li><li>Post técnico: “Como attention funciona com código”.</li></ul>
+    </article>
+
+    <article class="phase-doc-card" style="--card-accent:#F59E0B">
+      <div class="phase-doc-head"><h3>Fase 4 — Arquitetura + candidaturas</h3><span>Sem 25–32</span></div>
+      <h4>Livro</h4>
+      <p>Build a Large Language Model — continuação e fechamento técnico.</p>
+      <h4>Foco técnico</h4>
+      <ul class="doc-list"><li>Training loop, loss e avaliação.</li><li>Pretraining em dados não rotulados.</li><li>Decoding: temperature e top-k.</li><li>Fine-tuning para classificação.</li><li>Instruction fine-tuning e LoRA.</li></ul>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Classificador com LLM fine-tuned.</li><li>Modelo instruction-tuned educacional.</li><li>Relatório de avaliação e limitações.</li><li>README técnico para portfólio.</li></ul>
+    </article>
+
+    <article class="phase-doc-card" style="--card-accent:#7F77DD">
+      <div class="phase-doc-head"><h3>Fase 5 — Cloud + sistemas distribuídos</h3><span>Sem 33–40</span></div>
+      <h4>Livro</h4>
+      <p>Agentic Artificial Intelligence — início.</p>
+      <h4>Foco</h4>
+      <ul class="doc-list"><li>5 níveis de agentes: de automação à autonomia.</li><li>Action: ferramentas como blocos de construção.</li><li>Reasoning: pausa, reflexão e multi-agent systems.</li><li>Memory: memória curta, longa e feedback loops.</li></ul>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Especificação de agente por nível de autonomia.</li><li>Catálogo de tools seguras.</li><li>Protótipo de agente com tool use controlado.</li><li>Mapa de riscos e limites de ação.</li></ul>
+    </article>
+
+    <article class="phase-doc-card" style="--card-accent:#38BDF8">
+      <div class="phase-doc-head"><h3>Fase 6 — IA aplicada + RAG + agentes</h3><span>Sem 41–48</span></div>
+      <h4>Livro</h4>
+      <p>Agentic Artificial Intelligence — continuação.</p>
+      <h4>Foco</h4>
+      <ul class="doc-list"><li>Guia prático para construir agentes.</li><li>Oportunidades agentic, papéis, capacidades e implementação.</li><li>Modelos de negócio para economia de agentes.</li><li>Human-agent collaboration, trust, governance e scaling.</li></ul>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Agente RAG com ferramentas.</li><li>Memória, logs, avaliação e fallback humano.</li><li>Runbook de erro e limites de autonomia.</li><li>Dashboard inicial de custo, latência e qualidade.</li></ul>
+    </article>
+
+    <article class="phase-doc-card" style="--card-accent:#52B788">
+      <div class="phase-doc-head"><h3>Fase 7 — Produto + frontend + escala</h3><span>Sem 49–56</span></div>
+      <h4>Foco</h4>
+      <p>Consolidar os 9 livros e transformar conhecimento em produto, portfólio e arquitetura demonstrável.</p>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Projeto integrado: microSaaS com IA ou plataforma de agentes.</li><li>Documentação de AI Factory + RAG + agentes.</li><li>Artigos técnicos no blog.</li><li>Demo com métricas de qualidade, custo e latência.</li></ul>
+    </article>
+
+    <article class="phase-doc-card" style="--card-accent:#F87171">
+      <div class="phase-doc-head"><h3>Fase 8 — Portfólio final + negociação</h3><span>Sem 57–64</span></div>
+      <h4>Foco</h4>
+      <p>Transformar a trilha em posicionamento profissional e monetização: consultoria, produtos digitais, automações e sistemas de IA aplicados.</p>
+      <h4>Entregáveis</h4>
+      <ul class="doc-list"><li>Case study completo: problema → arquitetura → implementação → métricas.</li><li>Vídeo técnico de 15–20 min.</li><li>Pacote de diagnóstico de IA.</li><li>Oferta de microSaaS/agente vertical.</li><li>Plano de evolução para LLMOps, fine-tuning e agentes em produção.</li></ul>
+    </article>
+  </div>
+</section>
+
+<section id="tecnica" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Sequência técnica recomendada após os livros</h2>
+      <p class="section-subtitle">Caminho mais empregável para programação em IA aplicada.</p>
+    </div>
+    <span class="section-badge">Stack IA</span>
+  </div>
+
+  <p>A sequência técnica mais forte é: <strong>Python → ML básico → APIs de LLM → embeddings → RAG → avaliação → agentes → LLMOps → fine-tuning → produto/SaaS</strong>. Ela é mais útil para mercado e portfólio do que tentar treinar grandes modelos do zero no início.</p>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Ordem</th><th>Tópico técnico</th><th>O que dominar</th><th>Entrega prática</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Python para IA</td><td>Scripts, notebooks, pandas, tratamento de texto, consumo de APIs, typing e pytest.</td><td>Pacote de utilitários para ingestão e limpeza de documentos.</td></tr>
+        <tr><td>2</td><td>ML básico</td><td>Classificação, regressão, métricas, validação, overfitting, pipelines e baseline.</td><td>Classificador simples com métricas e validação.</td></tr>
+        <tr><td>3</td><td>LLMs via API</td><td>Prompting, structured output, function calling, streaming, retries e rate limit.</td><td>API backend que chama modelo e retorna resposta estruturada.</td></tr>
+        <tr><td>4</td><td>Embeddings e busca vetorial</td><td>Chunking, embeddings, cosine similarity, pgvector/Qdrant/Chroma, metadata filters.</td><td>Busca semântica com documentos próprios.</td></tr>
+        <tr><td>5</td><td>RAG</td><td>Ingestão, chunk, embed, retrieve, rerank, generate, citações, grounding e ACL.</td><td>Chat com documentos, fontes e controle de acesso.</td></tr>
+        <tr><td>6</td><td>Avaliação de LLM/RAG</td><td>Golden dataset, faithfulness, answer relevance, context precision/recall, hallucination checks.</td><td>Suite de testes para respostas corretas, seguras e rastreáveis.</td></tr>
+        <tr><td>7</td><td>Agentes</td><td>Tools, memória, planning, ReAct, LangGraph, human-in-the-loop, limites e fallback.</td><td>Agente com ferramentas, logs, permissões e fallback humano.</td></tr>
+        <tr><td>8</td><td>LLMOps</td><td>Custo, latência, qualidade, versionamento de prompt/modelo, rollback e monitoramento.</td><td>Dashboard de custo, latência, erro e qualidade.</td></tr>
+        <tr><td>9</td><td>Fine-tuning/LoRA</td><td>Datasets, treinamento supervisionado, avaliação, PEFT/LoRA e limites de uso.</td><td>Modelo ajustado para classificação ou resposta em domínio específico.</td></tr>
+        <tr><td>10</td><td>Produto/SaaS</td><td>Deploy, autenticação, billing, multi-tenant, logs, analytics, segurança e suporte.</td><td>MicroSaaS vertical ou agente especializado vendável.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Arquitetura mínima de produto com IA</h3>
+  <pre class="code-block"><code class="text">frontend-nextjs/
+  app/
+  components/
+  lib/api-client.ts
+
+backend-java-or-python/
+  api/
+  auth/
+  documents/
+  ingestion/
+  retrieval/
+  generation/
+  evaluation/
+  agents/
+  billing/
+  observability/
+
+data-layer/
+  postgres        # usuários, permissões, auditoria, billing
+  pgvector/qdrant # embeddings e retrieval
+  redis           # cache, rate limit, jobs rápidos
+  object-storage  # PDFs, arquivos, uploads
+
+llmops/
+  prompt-registry
+  golden-datasets
+  eval-runs
+  cost-dashboard
+  latency-dashboard
+  safety-checks</code></pre>
+</section>
+
+<section id="projetos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Projetos práticos obrigatórios</h2>
+      <p class="section-subtitle">Cada projeto transforma leitura em evidência de portfólio.</p>
+    </div>
+    <span class="section-badge">Portfólio</span>
+  </div>
+
+  <div class="doc-grid-3">
+    <div class="project-card"><strong>1. Workflow pessoal de IA</strong><p>Prompt library, checklist de validação, rotina de revisão de código, estudo, documentação e brainstorming de produtos.</p></div>
+    <div class="project-card"><strong>2. Mapa de decisões com IA</strong><p>Planilha ou página HTML com previsão, julgamento, ação, resultado, dados necessários, risco e ROI.</p></div>
+    <div class="project-card"><strong>3. Diagnóstico de IA para negócio</strong><p>Análise de processo, tarefas humanas, automações possíveis, dados, riscos e roadmap de implementação.</p></div>
+    <div class="project-card"><strong>4. AI Factory de microSaaS</strong><p>Arquitetura conceitual dados → modelos → decisões → ações → feedback → governança.</p></div>
+    <div class="project-card"><strong>5. Roadmap 30/60/90 dias</strong><p>Plano realista de execução com pessoas, tecnologia, dados, métricas, riscos e custos.</p></div>
+    <div class="project-card"><strong>6. Mini GPT educacional</strong><p>Implementação com tokenização, attention, transformer block, training loop, evaluation e geração de texto.</p></div>
+    <div class="project-card"><strong>7. Classificador com LLM</strong><p>Fine-tuning para classificação, métricas, comparação com baseline e relatório técnico.</p></div>
+    <div class="project-card"><strong>8. RAG com documentos</strong><p>Upload, chunking, embeddings, retrieval, geração com citações, ACL e avaliação.</p></div>
+    <div class="project-card"><strong>9. Agente RAG com ferramentas</strong><p>Tool use, memória, logs, fallback humano, limites de ação e dashboard LLMOps.</p></div>
+  </div>
+</section>
+
+<section id="checklists" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Checklists de execução</h2>
+      <p class="section-subtitle">Controles para evitar leitura passiva e garantir aplicação técnica.</p>
+    </div>
+    <span class="section-badge">Qualidade</span>
+  </div>
+
+  <div class="doc-grid-2">
+    <div class="callout accent-purple">
+      <h3>Checklist semanal</h3>
+      <ul class="doc-list">
+        <li>Li pelo menos 5 sessões ou 1 capítulo relevante?</li>
+        <li>Transformei o conteúdo em notas próprias?</li>
+        <li>Criei pelo menos 1 artefato prático?</li>
+        <li>Conectei o conteúdo ao blog/projeto/portfólio?</li>
+        <li>Registrei perguntas, riscos e decisões no Obsidian?</li>
+        <li>Usei IA para revisar, mas validei fontes e respostas?</li>
+      </ul>
+    </div>
+    <div class="callout">
+      <h3>Checklist técnico de IA aplicada</h3>
+      <ul class="doc-list">
+        <li>Existe problema de negócio claramente descrito?</li>
+        <li>Existe dado suficiente e autorizado para uso?</li>
+        <li>Existe métrica de sucesso antes de usar IA?</li>
+        <li>Existe baseline sem IA para comparação?</li>
+        <li>Existe avaliação automatizada da resposta?</li>
+        <li>Existe fallback humano e limite de ação?</li>
+        <li>Existe logging, custo, latência e segurança?</li>
+      </ul>
+    </div>
+    <div class="callout accent-green">
+      <h3>Checklist de RAG</h3>
+      <ul class="doc-list">
+        <li>Documentos têm origem e permissões claras?</li>
+        <li>Chunking foi testado com tamanhos diferentes?</li>
+        <li>Retrieval tem metadata filters e ACL?</li>
+        <li>Respostas citam fontes?</li>
+        <li>Existe golden dataset para avaliação?</li>
+        <li>Há teste de hallucination e groundedness?</li>
+        <li>Há medição de latência e custo por consulta?</li>
+      </ul>
+    </div>
+    <div class="callout accent-orange">
+      <h3>Checklist de agentes</h3>
+      <ul class="doc-list">
+        <li>O agente tem objetivo e limites explícitos?</li>
+        <li>Tools têm permissões mínimas?</li>
+        <li>Ações irreversíveis exigem confirmação humana?</li>
+        <li>Memória tem escopo, expiração e auditoria?</li>
+        <li>Falhas têm retry, fallback e escalonamento?</li>
+        <li>Logs permitem reconstruir decisões?</li>
+        <li>Existe kill switch e modo seguro?</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="monetizacao" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Monetização possível a partir da trilha</h2>
+      <p class="section-subtitle">Caminhos realistas para transformar estudo em renda.</p>
+    </div>
+    <span class="section-badge">Produtos</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Prazo</th><th>O que criar</th><th>Base dos livros</th><th>Oferta prática</th></tr></thead>
+      <tbody>
+        <tr><td>Curto prazo</td><td>Diagnóstico de IA, pacotes de prompts, automações simples, assistente de atendimento e relatórios automatizados.</td><td>Co-Intelligence, Prediction Machines, The AI Advantage, Human + Machine.</td><td>Pacote de diagnóstico + automação inicial para pequenos negócios.</td></tr>
+        <tr><td>Médio prazo</td><td>RAG para documentos, dashboard com insights, microSaaS vertical e agentes para atendimento/vendas/suporte.</td><td>All-In on AI, Competing in the Age of AI, Untangling AI, Build LLM.</td><td>Produto com assinatura mensal para nicho específico.</td></tr>
+        <tr><td>Longo prazo</td><td>Plataforma de agentes, AI Factory para empresas, LLMOps, avaliação de LLM, fine-tuning e produtos verticais com dados próprios.</td><td>Build LLM, Agentic AI, Competing in the Age of AI, Untangling AI.</td><td>Consultoria + SaaS + implantação técnica com governança.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout accent-red">
+    <h3>Alerta estratégico</h3>
+    <p>A monetização mais realista para um desenvolvedor não é treinar um grande modelo do zero no início. O caminho mais vendável é integrar IA a processos, documentos, sistemas, atendimento, análise de dados, geração de relatórios, RAG, agentes controlados e automações com medição de valor.</p>
+  </div>
+</section>
+
+<section id="consulta" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Consulta rápida por objetivo</h2>
+      <p class="section-subtitle">Use esta seção para revisar rápido qual livro/conceito consultar.</p>
+    </div>
+    <span class="section-badge">Revisão</span>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table dense-table">
+      <thead><tr><th>Objetivo</th><th>Livro principal</th><th>Conceitos-chave</th><th>Artefato</th></tr></thead>
+      <tbody>
+        <tr><td>Usar IA melhor no dia a dia</td><td>Co-Intelligence</td><td>Coworker, tutor, coach, validação, prompts.</td><td>Workflow pessoal de IA.</td></tr>
+        <tr><td>Escolher casos de uso com ROI</td><td>Prediction Machines</td><td>Previsão, julgamento, decisão, ação, trade-offs.</td><td>Mapa de decisões.</td></tr>
+        <tr><td>Aplicar IA em empresa tradicional</td><td>The AI Advantage</td><td>Estratégia cognitiva, processos, tarefas, skills, ética.</td><td>Diagnóstico de IA.</td></tr>
+        <tr><td>Redesenhar processos com IA</td><td>Human + Machine</td><td>Missing middle, fusion skills, responsible AI.</td><td>Mapa humano + máquina.</td></tr>
+        <tr><td>Escalar IA além de pilotos</td><td>All-In on AI</td><td>AI-fueled, dados, tecnologia, capabilities, cultura.</td><td>Blueprint AI-fueled.</td></tr>
+        <tr><td>Desenhar AI Factory</td><td>Competing in the Age of AI</td><td>Digital operating model, scale, scope, learning.</td><td>Arquitetura AI Factory.</td></tr>
+        <tr><td>Montar roadmap prático</td><td>Untangling AI</td><td>Strategy, people, technology, execution, automation.</td><td>Roadmap 30/60/90.</td></tr>
+        <tr><td>Entender LLMs tecnicamente</td><td>Build a Large Language Model</td><td>Tokenização, attention, GPT, pretraining, fine-tuning.</td><td>Mini GPT + fine-tuning.</td></tr>
+        <tr><td>Criar agentes reais</td><td>Agentic Artificial Intelligence</td><td>Action, tools, reasoning, memory, scaling, safeguards.</td><td>Agente RAG com tools.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Modelo de prompt seguro para usar no estudo</h3>
+  <pre class="code-block"><code class="text">Atue como revisor técnico crítico.
+Contexto: estou estudando [livro/capítulo] para aplicar em [projeto].
+Tarefa:
+1. Resuma o conceito em linguagem técnica.
+2. Aponte aplicações em programação/backend/produto.
+3. Liste riscos, limitações e pressupostos.
+4. Gere um entregável prático pequeno.
+5. Faça 5 perguntas de revisão.
+Importante: não invente dados; quando não souber, diga que precisa validar em fonte externa.</code></pre>
+</section>
+
+<section id="referencias" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Referências da trilha</h2>
+      <p class="section-subtitle">Livros e documentos utilizados como base para esta página.</p>
+    </div>
+    <span class="section-badge">Fontes</span>
+  </div>
+
+  <ul class="doc-list">
+    <li><strong>sequencia_estudo_ia_livros.pdf</strong> — documento de sequência, macroetapas, roteiro prático, horas, monetização e lista dos livros.</li>
+    <li><strong>Co-Intelligence</strong> — Ethan Mollick.</li>
+    <li><strong>Prediction Machines</strong> — Ajay Agrawal, Joshua Gans e Avi Goldfarb.</li>
+    <li><strong>The AI Advantage</strong> — Thomas H. Davenport.</li>
+    <li><strong>Human + Machine</strong> — Paul R. Daugherty e H. James Wilson.</li>
+    <li><strong>All-In on AI</strong> — Thomas H. Davenport e Nitin Mittal.</li>
+    <li><strong>Competing in the Age of AI</strong> — Marco Iansiti e Karim R. Lakhani.</li>
+    <li><strong>Untangling AI</strong> — Matt Kesby.</li>
+    <li><strong>Build a Large Language Model (From Scratch)</strong> — Sebastian Raschka.</li>
+    <li><strong>Agentic Artificial Intelligence</strong> — Pascal Bornet et al.</li>
+  </ul>
+
+  <div class="callout">
+    <h3>Nota de atualização</h3>
+    <p>Como IA muda rapidamente, mantenha esta trilha viva: revise ferramentas, APIs, modelos, custos, benchmarks, frameworks e práticas de segurança a cada mês. O conteúdo conceitual dos livros permanece útil, mas a implementação deve acompanhar documentação oficial, changelogs e benchmarks atuais.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="text-center py-4" style="border-top:1px solid var(--doc-border)">
+  <p class="small text-muted mb-2"><span id="trackFooterTitle">Trilha IA por Livros</span> · Plano Integrado de Estudos</p>
+  <a class="footer-link small" href="../index.html">← Voltar ao dashboard principal</a>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  const backToTop = document.getElementById('backToTop');
+  const searchInput = document.getElementById('trackSearch');
+  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 500);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    });
+  });
+
+  function normalize(value) {
+    return value
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
+
+  searchInput.addEventListener('input', () => {
+    const query = normalize(searchInput.value.trim());
+    sections.forEach(section => {
+      section.classList.remove('is-hidden-by-search', 'search-hit');
+      if (!query) return;
+      const match = normalize(section.innerText).includes(query);
+      section.classList.toggle('is-hidden-by-search', !match);
+      section.classList.toggle('search-hit', match);
+    });
+  });
+})();
+</script>
+</body>
+</html>

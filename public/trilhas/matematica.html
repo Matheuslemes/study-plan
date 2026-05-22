@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Matemática para Programação e IA — Plano Integrado de Estudos</title>
+<meta name="description" content="Trilha completa de matemática aplicada à programação, algoritmos, machine learning, deep learning, LLMs, RAG e avaliação de IA, alinhada ao cronograma do Plano Integrado de Estudos.">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../assets/css/styles.css" rel="stylesheet">
+<style>
+:root {
+  --math-accent: #52B788;
+  --math-accent-2: #38bdf8;
+  --math-accent-3: #7F77DD;
+  --doc-bg: #08110d;
+  --doc-surface: rgba(255,255,255,.045);
+  --doc-surface-2: rgba(255,255,255,.075);
+  --doc-border: rgba(255,255,255,.12);
+  --doc-text: #e8e6e3;
+  --doc-muted: #a8a6b3;
+  --doc-code: #050814;
+}
+html { scroll-behavior: smooth; }
+body.track-page {
+  font-family:'DM Sans',sans-serif;
+  color: var(--doc-text);
+  background:
+    radial-gradient(circle at 18% 0%, rgba(82,183,136,.20), transparent 32rem),
+    radial-gradient(circle at 92% 8%, rgba(56,189,248,.13), transparent 26rem),
+    radial-gradient(circle at 55% 65%, rgba(127,119,221,.08), transparent 30rem),
+    var(--doc-bg);
+}
+.track-hero-page {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--doc-border);
+  background: linear-gradient(135deg, rgba(82,183,136,.18), rgba(56,189,248,.06));
+}
+.track-title { font-size: clamp(2rem, 4vw, 4rem); font-weight: 800; letter-spacing: -.05em; margin-bottom:.8rem; }
+.track-lead { color: var(--doc-muted); max-width: 1040px; font-size: 1.05rem; }
+.track-badge-set,.badge-cloud { display:flex; flex-wrap:wrap; gap:.5rem; }
+.track-badge-set span,.badge-cloud span { border:1px solid rgba(82,183,136,.35); background: rgba(82,183,136,.14); color:#d8ffe8; padding:.35rem .65rem; border-radius:999px; font-size:.78rem; font-weight:700; }
+.track-local-nav { position: sticky; top:0; z-index:1000; background: rgba(8,17,13,.92); backdrop-filter: blur(14px); border-bottom:1px solid var(--doc-border); }
+.track-local-nav a { color: var(--doc-muted); text-decoration:none; padding:.45rem .7rem; border-radius:999px; white-space:nowrap; font-size:.84rem; border:1px solid transparent; }
+.track-local-nav a:hover { color:#fff; background:rgba(82,183,136,.18); border-color:rgba(82,183,136,.35); }
+.track-search { width:min(320px,100%); background:rgba(255,255,255,.05)!important; border-color:var(--doc-border)!important; color:#fff!important; }
+.doc-section { background: var(--doc-surface); border:1px solid var(--doc-border); border-radius:24px; padding:clamp(1rem,2vw,1.7rem); margin-bottom:1.25rem; box-shadow: 0 18px 70px rgba(0,0,0,.18); }
+.doc-section-heading { display:flex; align-items:start; justify-content:space-between; gap:1rem; margin-bottom:1rem; padding-bottom:.9rem; border-bottom:1px solid var(--doc-border); }
+.doc-section h2 { margin:0; font-weight:800; letter-spacing:-.03em; }
+.doc-section h3 { color:#e9fff1; font-size:1.15rem; font-weight:800; margin:1.2rem 0 .65rem; }
+.doc-section h4 { color:#fff; font-size:.95rem; font-weight:800; }
+.section-subtitle { color:var(--doc-muted); margin:.35rem 0 0; }
+.section-badge { border:1px solid rgba(56,189,248,.35); background:rgba(56,189,248,.12); color:#c7f3ff; font-weight:800; font-size:.75rem; border-radius:999px; padding:.35rem .7rem; white-space:nowrap; }
+.doc-hero-card { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr); gap:1rem; align-items:center; }
+.metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; }
+.metric-pill { border:1px solid rgba(82,183,136,.35); border-radius:18px; padding:1rem; background:rgba(82,183,136,.12); text-align:center; }
+.metric-pill span { font-family:'JetBrains Mono',monospace; font-size:1.55rem; color:#fff; font-weight:800; display:block; }
+.metric-pill small { color:var(--doc-muted); text-transform:uppercase; font-size:.68rem; letter-spacing:.04em; }
+.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid { display:grid; gap:1rem; }
+.doc-grid-2 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.doc-grid-3 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.doc-grid-4 { grid-template-columns: repeat(4,minmax(0,1fr)); }
+.phase-doc-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+.mini-card,.callout,.phase-doc-card { border:1px solid var(--doc-border); background:rgba(255,255,255,.04); border-radius:18px; padding:1rem; }
+.mini-card strong { display:block; margin-bottom:.35rem; color:#fff; }
+.mini-card span,.callout p,.phase-doc-card p { color:var(--doc-muted); }
+.callout { border-left:4px solid var(--math-accent); }
+.callout.accent-blue { border-left-color: var(--math-accent-2); }
+.callout.accent-purple { border-left-color: var(--math-accent-3); }
+.callout.success { border-left-color:#22c55e; }
+.doc-list { margin:.5rem 0 1rem; padding-left:1.25rem; color:var(--doc-muted); }
+.doc-list li { margin-bottom:.35rem; }
+.table-responsive { border:1px solid var(--doc-border); border-radius:18px; overflow:auto; margin:.75rem 0 1rem; }
+.doc-table { min-width:760px; margin-bottom:0!important; }
+.doc-table th { background:rgba(82,183,136,.18)!important; color:#fff!important; font-weight:800; border-color:var(--doc-border)!important; white-space:nowrap; }
+.doc-table td { border-color:var(--doc-border)!important; color:#dddbe8!important; font-size:.88rem; vertical-align:top; }
+.dense-table td,.dense-table th { font-size:.78rem; }
+.code-block { background:var(--doc-code); color:#d9f99d; border:1px solid rgba(82,183,136,.25); border-radius:16px; padding:1rem; overflow:auto; white-space:pre; max-height:620px; font-family:'JetBrains Mono',monospace; font-size:.78rem; line-height:1.55; }
+.phase-doc-head { display:flex; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--doc-border); padding-bottom:.7rem; margin-bottom:.8rem; }
+.phase-doc-head h3 { margin:0; }
+.phase-doc-head span { font-family:'JetBrains Mono',monospace; color:#c7f3ff; font-size:.82rem; }
+.priority { display:inline-block; border-radius:999px; padding:.2rem .5rem; font-size:.72rem; font-weight:800; white-space:nowrap; }
+.priority.must { color:#fecaca;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3); }
+.priority.should { color:#fde68a;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32); }
+.priority.nice { color:#bbf7d0;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3); }
+.search-hit { outline:2px solid rgba(82,183,136,.65); background:rgba(82,183,136,.10)!important; }
+.is-hidden-by-search { display:none!important; }
+.back-to-top { position:fixed; right:1rem; bottom:1rem; width:44px; height:44px; border-radius:999px; border:1px solid rgba(82,183,136,.45); background:rgba(82,183,136,.2); color:#fff; display:none; z-index:1200; }
+.back-to-top.is-visible { display:block; }
+.footer-link { color:#d8ffe8; text-decoration:none; }
+@media (max-width: 992px) { .doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid { grid-template-columns:1fr; } .track-local-nav .container { gap:.75rem; } .track-search { margin-top:.5rem; width:100%; } }
+@media (max-width: 576px) { .doc-section { border-radius:18px; } .doc-section-heading { flex-direction:column; } .metrics-grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body class="track-page" data-track="math">
+
+<header class="track-hero-page">
+  <div class="container">
+    <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
+    <h1 class="track-title">Matemática para Programação e IA</h1>
+    <p class="track-lead">Trilha de 64 semanas para transformar matemática em ferramenta prática de desenvolvimento: lógica, Big O, grafos, álgebra linear, probabilidade, estatística, cálculo, otimização, deep learning, LLMs, embeddings, RAG, retrieval e avaliação de modelos.</p>
+    <div class="track-badge-set mt-3"><span>1h/dia</span><span>64 semanas</span><span>8 fases</span><span>Programação</span><span>Algoritmos</span><span>Machine Learning</span><span>Deep Learning</span><span>LLMs</span><span>RAG</span><span>Retrieval</span><span>Métricas</span><span>Portfólio</span></div>
+  </div>
+</header>
+
+<nav class="track-local-nav">
+  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
+    <div class="d-flex flex-nowrap overflow-auto gap-1">
+      <a href="#resumo">Resumo</a>
+      <a href="#perfil">Perfil</a>
+      <a href="#conteudos">Conteúdos</a>
+      <a href="#aplicacoes">Aplicações</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#checklist">Checklist</a>
+      <a href="#projetos">Projetos</a>
+      <a href="#snippets">Snippets</a>
+      <a href="#consulta">Consulta rápida</a>
+      <a href="#referencias">Referências</a>
+    </div>
+    <input id="trackSearch" class="form-control form-control-sm track-search" type="search" placeholder="Buscar nesta trilha...">
+  </div>
+</nav>
+
+<main class="container py-4" id="mathDocumentMain">
+
+<section id="resumo" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Resumo executivo</h2>
+      <p class="section-subtitle">Base da trilha de Matemática do index: 13:30–14:30, 1h por dia, 8 fases e 64 semanas.</p>
+    </div>
+    <span class="section-badge">Visão geral</span>
+  </div>
+  <div class="doc-hero-card">
+    <div>
+      <p class="lead">Esta trilha existe para garantir que matemática seja usada como ferramenta de engenharia, não como estudo abstrato. Todo conceito precisa terminar em código, notebook, benchmark, gráfico, métrica, artigo ou decisão técnica.</p>
+      <p>O foco principal é programação e desenvolvimento de IA: algoritmos, complexidade, estruturas de dados, embeddings, machine learning, deep learning, transformers, RAG, retrieval, ranking e avaliação de sistemas inteligentes.</p>
+      <div class="callout success"><h3>Regra central</h3><p>Todo conceito matemático deve terminar em uma aplicação prática: implementação em Python/Java/notebook, gráfico, benchmark, métrica, algoritmo, explicação no blog ou conexão direta com embeddings, loss, gradiente, attention, retrieval ou avaliação de IA.</p></div>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-pill"><span>1h</span><small>Por dia</small></div>
+      <div class="metric-pill"><span>64</span><small>Semanas</small></div>
+      <div class="metric-pill"><span>8</span><small>Fases</small></div>
+      <div class="metric-pill"><span>8+</span><small>Projetos matemáticos</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="perfil" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Perfil esperado ao final da trilha</h2><p class="section-subtitle">O objetivo é formar matemática suficiente para desenvolvimento forte e IA aplicada.</p></div>
+    <span class="section-badge">Resultado</span>
+  </div>
+  <div class="doc-grid-3">
+    <div class="mini-card"><strong>Programação</strong><span>Entender complexidade, corretude, grafos, hashing, recorrências, estruturas discretas, algoritmos e trade-offs de performance.</span></div>
+    <div class="mini-card"><strong>Machine Learning</strong><span>Compreender vetores, matrizes, probabilidade, estatística, regressão, métricas, regularização, otimização e validação de modelos.</span></div>
+    <div class="mini-card"><strong>IA moderna</strong><span>Explicar embeddings, softmax, attention, loss, gradient descent, transformers, RAG, ranking e métricas de avaliação com código.</span></div>
+  </div>
+  <h3>Competências práticas esperadas</h3>
+  <ul class="doc-list">
+    <li>Implementar algoritmos de grafos e explicar sua complexidade.</li>
+    <li>Usar NumPy/PyTorch para manipular vetores, matrizes, tensores e atenção.</li>
+    <li>Calcular e interpretar métricas de classificação, regressão, ranking, retrieval e RAG.</li>
+    <li>Explicar cosine similarity, dot product, normalização, high-dimensional spaces e embeddings.</li>
+    <li>Implementar gradient descent e explicar learning rate, convergência, overfitting e regularização.</li>
+    <li>Validar experimentos com estatística, intervalos de confiança, p-value, poder estatístico e A/B testing.</li>
+    <li>Documentar cada aplicação matemática em README, notebook ou artigo técnico.</li>
+  </ul>
+</section>
+
+<section id="conteudos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Mapa completo de conteúdos</h2><p class="section-subtitle">A trilha está organizada por finalidade prática, não por matemática acadêmica isolada.</p></div>
+    <span class="section-badge">Conteúdos</span>
+  </div>
+  <div class="doc-grid-4">
+
+    <div class="mini-card"><strong>Lógica, conjuntos e Big O</strong><span>Base para raciocínio de código, validação de regras, análise de algoritmos e entrevistas técnicas.</span><div class="badge-cloud mt-2"><span>Lógica booleana</span><span>Tabelas-verdade</span><span>Conjuntos</span><span>Big O</span><span>Indução</span><span>Invariantes</span></div></div>
+
+    <div class="mini-card"><strong>Grafos e matemática discreta</strong><span>Base para workflows, dependências, rotas, filas, agentes, busca e estruturas de dados.</span><div class="badge-cloud mt-2"><span>BFS/DFS</span><span>Dijkstra</span><span>Topological sort</span><span>Union-Find</span><span>DAGs</span><span>Recorrências</span></div></div>
+
+    <div class="mini-card"><strong>Álgebra linear aplicada</strong><span>Base de embeddings, busca vetorial, matrizes em transformers, PCA, SVD e similaridade.</span><div class="badge-cloud mt-2"><span>Vetores</span><span>Normas</span><span>Produto interno</span><span>Matrizes</span><span>PCA</span><span>SVD</span></div></div>
+
+    <div class="mini-card"><strong>Probabilidade e estatística</strong><span>Base para incerteza, validação de modelos, métricas, A/B testing e tomada de decisão.</span><div class="badge-cloud mt-2"><span>Bayes</span><span>Variáveis aleatórias</span><span>Distribuições</span><span>Intervalos</span><span>p-value</span><span>A/B testing</span></div></div>
+
+    <div class="mini-card"><strong>Cálculo e otimização</strong><span>Base de treinamento de modelos, backpropagation, gradient descent e ajuste de parâmetros.</span><div class="badge-cloud mt-2"><span>Derivadas</span><span>Gradiente</span><span>Regra da cadeia</span><span>SGD</span><span>Adam</span><span>Regularização</span></div></div>
+
+    <div class="mini-card"><strong>Deep Learning e LLMs</strong><span>Matemática de attention, softmax, losses, normalização, embeddings, transformers e avaliação.</span><div class="badge-cloud mt-2"><span>Attention</span><span>Softmax</span><span>Cross-entropy</span><span>RMSNorm</span><span>Temperature</span><span>Perplexidade</span></div></div>
+
+    <div class="mini-card"><strong>Retrieval, ranking e RAG</strong><span>Métricas e matemática para avaliar busca semântica, BM25, embeddings, reranking e respostas com contexto.</span><div class="badge-cloud mt-2"><span>TF-IDF</span><span>BM25</span><span>MRR</span><span>MAP</span><span>NDCG</span><span>Faithfulness</span></div></div>
+
+    <div class="mini-card"><strong>Produto e experimentação</strong><span>Uso de matemática para decidir se uma feature realmente melhorou métricas de produto ou qualidade de IA.</span><div class="badge-cloud mt-2"><span>Uplift</span><span>Coortes</span><span>Significância</span><span>Poder estatístico</span><span>Conversão</span><span>Correlação vs causalidade</span></div></div>
+
+  </div>
+</section>
+
+<section id="aplicacoes" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Aplicações diretas em programação e IA</h2><p class="section-subtitle">Cada assunto precisa ser conectado a uma aplicação técnica verificável.</p></div>
+    <span class="section-badge">Aplicação</span>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-dark table-hover align-middle doc-table">
+      <thead><tr><th>Conceito matemático</th><th>Aplicação em programação</th><th>Aplicação em IA</th><th>Entregável recomendado</th></tr></thead>
+      <tbody>
+        <tr><td>Lógica booleana</td><td>Validação de regras, filtros, condicionais, feature flags.</td><td>Regras de guardrails, validação de output, filtros de segurança.</td><td>Tabela-verdade implementada em Python.</td></tr>
+        <tr><td>Big O</td><td>Análise de performance, estruturas de dados, entrevistas.</td><td>Custo de busca, retrieval, inferência e pré-processamento.</td><td>Benchmark com gráficos e README.</td></tr>
+        <tr><td>Grafos</td><td>Dependências, workflows, rotas, filas, build graph.</td><td>Knowledge graphs, agentes, PageRank, recomendação.</td><td>Implementar BFS/DFS/Dijkstra/topological sort.</td></tr>
+        <tr><td>Vetores e matrizes</td><td>Computação vetorial, transformação de dados, otimização.</td><td>Embeddings, transformers, similarity search, PCA/SVD.</td><td>Notebook NumPy de similaridade.</td></tr>
+        <tr><td>Probabilidade</td><td>Risco, incerteza, filas, sistemas distribuídos.</td><td>Classificação probabilística, Bayes, calibration, uncertainty.</td><td>Classificador Bayesiano simples.</td></tr>
+        <tr><td>Estatística</td><td>Experimentos, métricas, decisão de produto.</td><td>Avaliação de modelos, intervalos, p-value, A/B testing.</td><td>Relatório estatístico de experimento.</td></tr>
+        <tr><td>Cálculo e gradiente</td><td>Otimização de funções e parâmetros.</td><td>Backpropagation, gradient descent, training loops.</td><td>Gradient descent do zero.</td></tr>
+        <tr><td>Information retrieval</td><td>Busca textual, ranking, filtros, recomendação.</td><td>RAG, BM25, embeddings, reranking, NDCG, MRR.</td><td>BM25 vs embeddings com métricas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section id="roadmap" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Roadmap em 8 fases</h2><p class="section-subtitle">Cronograma alinhado ao index do Plano Integrado: 1h/dia, 64 semanas.</p></div>
+    <span class="section-badge">64 semanas</span>
+  </div>
+  <div class="phase-doc-grid">
+    
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 1 — Base lógica, discreta e complexidade inicial</h3><span>Semanas 1–8</span></div>
+  <p><strong>Foco:</strong> Programação, lógica de código, Big O, recursão e corretude básica.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Lógica booleana aplicada a código: AND, OR, NOT, XOR, curto-circuito, expressões condicionais e validação de regras</li>
+<li>Lógica proposicional: conectivos, tabelas-verdade, equivalências, De Morgan e implementação de tabelas-verdade em Python</li>
+<li>Teoria de conjuntos aplicada: união, interseção, diferença, cardinalidade, Venn, conjuntos em Java/Python e uso em filtros/consultas</li>
+<li>Álgebra básica para programação: equações, funções lineares/quadráticas, gráficos, crescimento linear/quadrático e leitura de funções</li>
+<li>Sistemas numéricos: binário, octal, hexadecimal, conversões, bits, bytes, máscaras, flags e representação de inteiros</li>
+<li>Combinatória: princípio da contagem, permutações, combinações, busca exaustiva, explosão combinatória e custo de brute force</li>
+<li>Notação Big O: tempo, espaço, comparação de complexidades, benchmark real, loops aninhados, recursão e análise assintótica</li>
+<li>Indução matemática e corretude: provas simples para algoritmos recursivos, invariantes de loop e raciocínio formal básico</li>
+<li>Entregável: notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e explicação no README</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>Notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e README.</p></div>
+</article>
+
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 2 — Funções, grafos, relações e algoritmos</h3><span>Semanas 9–16</span></div>
+  <p><strong>Foco:</strong> Grafos, dependências, workflows, rotas, hashing, recorrências e entrevistas técnicas.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Funções aplicadas: domínio, imagem, composição, inversa, monotonicidade e interpretação de funções como transformação de dados</li>
+<li>Grafos I: representação por lista/matriz de adjacência, grau, conectividade, componentes, BFS, DFS e complexidade</li>
+<li>Grafos II: Dijkstra, topological sort, Union-Find, árvores, DAGs, heaps e aplicações em dependências, rotas e workflows</li>
+<li>Relações: equivalência, ordem parcial, fecho transitivo, ordenação topológica e modelagem de dependências entre módulos</li>
+<li>Lógica de predicados: quantificadores, predicados, provas, pré/pós-condições e validação formal de regras de negócio</li>
+<li>Aritmética modular: congruência, hashing, checksums, criptografia básica, colisões e distribuição de chaves</li>
+<li>Teoria dos números: MDC, MMC, algoritmo de Euclides, primalidade básica e aplicações em criptografia e hashing</li>
+<li>Complexidade avançada: análise amortizada, recorrências, Teorema Mestre, recursão em divide-and-conquer e custo de algoritmos</li>
+<li>Entregável: implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O no README</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>Implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O.</p></div>
+</article>
+
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 3 — Álgebra linear, geometria vetorial e probabilidade</h3><span>Semanas 17–24</span></div>
+  <p><strong>Foco:</strong> Embeddings, similaridade, vetores, matrizes, incerteza e fundamentos de ML.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Álgebra linear I: vetores, escalares, operações, norma L1/L2, produto interno, ângulo entre vetores e ortogonalidade</li>
+<li>Geometria vetorial aplicada: distância euclidiana, Manhattan e Mahalanobis, projeção vetorial, mudança de base e subespaços</li>
+<li>Matrizes: tipos, transposta, determinante, inversa, sistemas lineares, multiplicação matricial e interpretação computacional</li>
+<li>Transformações lineares: rotação, escala, cisalhamento, projeção, composição de transformações e matrizes como funções</li>
+<li>Embeddings: vetores em alta dimensão, normalização, curse of dimensionality, dot product, cosine similarity e busca vetorial</li>
+<li>Probabilidade I: axiomas, eventos, probabilidade condicional, independência, Bayes e interpretação de incerteza</li>
+<li>Variáveis aleatórias: esperança, variância, desvio padrão, covariância e distribuições binomial, Poisson e normal</li>
+<li>Aplicação em IA: matrizes em transformers, embeddings, similaridade semântica, recomendação e clustering</li>
+<li>Entregável: notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade entre textos</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>Notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade entre textos.</p></div>
+</article>
+
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 4 — PCA, SVD, cálculo, gradiente e otimização</h3><span>Semanas 25–32</span></div>
+  <p><strong>Foco:</strong> Redução de dimensionalidade, gradient descent, MLE/MAP e otimização aplicada.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Álgebra linear II: autovalores, autovetores, decomposição espectral, diagonalização e interpretação geométrica</li>
+<li>PCA: centralização, matriz de covariância, componentes principais, variância explicada e redução de dimensionalidade</li>
+<li>SVD: decomposição, compressão, recomendação, latent factors e comparação com PCA em dados reais</li>
+<li>Cálculo I: limites, derivadas, derivadas parciais, taxa de variação e interpretação geométrica do gradiente</li>
+<li>Gradiente: vetor gradiente, gradiente descendente, função de custo, learning rate e convergência</li>
+<li>Cálculo II: regra da cadeia, integrais básicas, Jacobiano, Hessiana e noção de curvatura</li>
+<li>Probabilidade aplicada: likelihood, log-likelihood, MLE, MAP, prior, posterior, evidence e calibration</li>
+<li>Otimização: pontos críticos, convexidade, Lagrange, saddle points, mínimos locais/globais e gradient checking</li>
+<li>Entregável: PCA/SVD manual com NumPy + comparação com scikit-learn + implementação manual de gradient descent</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>PCA/SVD manual com NumPy + comparação com scikit-learn + gradient descent manual.</p></div>
+</article>
+
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 5 — Estatística, experimentação e métricas de ML</h3><span>Semanas 33–40</span></div>
+  <p><strong>Foco:</strong> A/B testing, inferência, regressão, métricas, regularização e validação de modelos.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Estatística I: estimadores, viés, variância, intervalo de confiança, erro padrão e interpretação prática</li>
+<li>Estatística II: teste de hipótese, p-value, erro tipo I/II, poder estatístico, tamanho de amostra e significância</li>
+<li>Produto e experimentação: A/B testing, uplift, análise de coorte, métricas de conversão, correlação vs causalidade e multiple testing</li>
+<li>Regressão e correlação: regressão linear, regressão logística, ANOVA, correlação Pearson/Spearman e interpretação de coeficientes</li>
+<li>Bayes aplicado: prior, posterior, atualização bayesiana, incerteza, calibration e tomada de decisão probabilística</li>
+<li>Entropia e informação: entropia, entropia cruzada, divergência KL, perplexidade e relação com classificação/LLMs</li>
+<li>Otimização em ML: SGD, Adam, momentum, learning rate schedules, batch size effect e gradient clipping</li>
+<li>Regularização: L1, L2, dropout, early stopping, weight decay, overfitting, underfitting e bias-variance tradeoff</li>
+<li>Métricas ML: accuracy, precision, recall, F1, ROC-AUC, PR-AUC, confusion matrix, MAE, RMSE, R² e threshold tuning</li>
+<li>Entregável: experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório interpretativo</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>Experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório interpretativo.</p></div>
+</article>
+
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 6 — Deep Learning, attention, losses e métricas RAG/LLM</h3><span>Semanas 41–48</span></div>
+  <p><strong>Foco:</strong> Transformers, self-attention, backpropagation, losses, normalização e avaliação de IA.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Álgebra linear para deep learning: batch matrix multiplication, broadcasting, tensores, shapes e custo computacional</li>
+<li>Attention: Q·K^T/√d, softmax, multiplicação por V, masked attention, cross-attention e interpretação de pesos</li>
+<li>Backpropagation: regra da cadeia, computational graph, autograd, fluxo de gradiente e cálculo de loss</li>
+<li>Loss functions: MSE, cross-entropy, focal loss, contrastive loss e relação com objetivos de treinamento</li>
+<li>Ativações: ReLU, GELU, SiLU, sigmoid, tanh, saturação, propriedades de gradiente e escolha prática</li>
+<li>Normalização: batch norm, layer norm, RMSNorm, estabilização, treinamento profundo e transformers</li>
+<li>Similaridade e retrieval: cosine, dot product, euclidiana, Jaccard, threshold de similaridade e normalização de embeddings</li>
+<li>Problemas de otimização: vanishing gradient, exploding gradient, gradient clipping, saddle points e estabilidade numérica</li>
+<li>Métricas RAG/LLM: faithfulness, answer relevance, context precision, context recall, hallucination rate e groundedness</li>
+<li>Entregável: implementação de self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>Self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes.</p></div>
+</article>
+
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 7 — Informação, ranking, retrieval, séries e métodos numéricos</h3><span>Semanas 49–56</span></div>
+  <p><strong>Foco:</strong> BM25, TF-IDF, dense/hybrid retrieval, MRR, MAP, NDCG, PageRank e ranking.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Teoria da informação: entropia de Shannon, informação mútua, compressão, incerteza e relação com modelos probabilísticos</li>
+<li>Probabilistic ML: Naive Bayes, Gaussian Mixture, EM em nível prático e interpretação probabilística</li>
+<li>Kernels: RBF, polynomial, SVM, kernel trick e noção de espaço de características</li>
+<li>Séries temporais: autocorrelação, tendência, sazonalidade, ARIMA básico, previsão e validação temporal</li>
+<li>Grafos e redes: PageRank, community detection, centralidade, ranking e aplicações em busca/recomendação</li>
+<li>Retrieval e ranking: TF-IDF, BM25, dense retrieval, sparse retrieval, hybrid search, reranking e score de similaridade</li>
+<li>Métricas de busca/RAG: precision@k, recall@k, hit rate, MRR, MAP, NDCG, retrieval hit rate e threshold tuning</li>
+<li>Otimização convexa: dualidade, KKT, programação linear e trade-offs em problemas de otimização</li>
+<li>Métodos numéricos: floating point, overflow/underflow, estabilidade numérica, condicionamento e erros de arredondamento</li>
+<li>Entregável: comparação BM25 vs embeddings em um dataset próprio, avaliando MRR/NDCG e documentando decisão técnica</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>Comparação BM25 vs embeddings em dataset próprio, avaliando MRR/NDCG e documentando decisão técnica.</p></div>
+</article>
+
+<article class="phase-doc-card searchable-section" data-search-section>
+  <div class="phase-doc-head"><h3>Fase 8 — Consolidação, entrevistas e portfólio Math for AI Engineering</h3><span>Semanas 57–64</span></div>
+  <p><strong>Foco:</strong> Revisão integral, aplicação em IA, entrevistas, artigos técnicos e caderno público.</p>
+  <h4>Conteúdos obrigatórios</h4>
+  <ul class="doc-list"><li>Revisão integral: lógica, Big O, grafos, álgebra linear, cálculo, probabilidade, estatística, otimização e métricas</li>
+<li>Problemas de entrevista: puzzles, estimativas Fermi, análise de complexidade, grafos, árvores, recursão e programação dinâmica</li>
+<li>Matemática de LLMs: attention, softmax, temperature, cross-entropy, perplexidade, embeddings e normalização</li>
+<li>Matemática de embeddings: projeções, subespaços, normalização, cosine similarity, subspace clustering e alta dimensionalidade</li>
+<li>Matemática de avaliação: intervalos de confiança, significância estatística, A/B testing, métricas de ML e métricas de RAG</li>
+<li>Aplicação em produto: decidir métrica correta, interpretar experimento, explicar trade-off e medir melhoria real</li>
+<li>Portfólio: caderno público &#x27;Matemática para AI Engineering&#x27; com notebooks, gráficos, código e explicações</li>
+<li>Artigos técnicos: cosine similarity com código, attention matematicamente, avaliação de RAG com NDCG/MRR e gradient descent do zero</li>
+<li>Entregável final: página/blog post consolidando cada conceito matemático com uma aplicação real em programação ou IA</li></ul>
+  <div class="callout success"><h4>Entregável da fase</h4><p>Página/blog post consolidando cada conceito matemático com aplicação real em programação ou IA.</p></div>
+</article>
+  </div>
+</section>
+
+<section id="checklist" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Checklist de execução</h2><p class="section-subtitle">Use estes critérios para impedir que a trilha vire apenas teoria.</p></div>
+    <span class="section-badge">Checklist</span>
+  </div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>Checklist semanal</h3><ul class="doc-list">
+      <li>Estude pelo menos 5 blocos de 1h na semana.</li>
+      <li>Implemente pelo menos 1 conceito em Python, Java ou notebook.</li>
+      <li>Registre fórmulas, intuições e erros no Obsidian.</li>
+      <li>Gere pelo menos 1 gráfico, benchmark, teste ou visualização.</li>
+      <li>Conecte o conceito ao blog, IA, banco, DevOps ou entrevistas.</li>
+      <li>Crie flashcards para fórmulas, métricas e interpretações.</li>
+    </ul></div>
+    <div class="callout accent-blue"><h3>Checklist de domínio</h3><ul class="doc-list">
+      <li>Consigo explicar o conceito sem decorar.</li>
+      <li>Consigo implementar uma versão mínima do conceito.</li>
+      <li>Consigo apontar um uso real em programação ou IA.</li>
+      <li>Consigo dizer quando o conceito não deve ser usado.</li>
+      <li>Consigo interpretar uma métrica ou resultado gerado.</li>
+      <li>Consigo documentar a decisão em README, ADR ou artigo.</li>
+    </ul></div>
+  </div>
+  <h3>Checklist de prontidão para IA Engineering</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Área</th><th>Critério de prontidão</th><th>Evidência esperada</th></tr></thead><tbody>
+    <tr><td>Algoritmos</td><td>Explica Big O, grafos, recursão, recorrências e análise amortizada.</td><td>Implementações com testes e README.</td></tr>
+    <tr><td>Álgebra linear</td><td>Explica vetores, matrizes, normas, produto interno, PCA, SVD e embeddings.</td><td>Notebook NumPy com busca vetorial.</td></tr>
+    <tr><td>Probabilidade</td><td>Explica Bayes, variáveis aleatórias, distribuições, likelihood e uncertainty.</td><td>Modelo probabilístico simples.</td></tr>
+    <tr><td>Estatística</td><td>Interpreta p-value, intervalo, poder, A/B test e métricas de modelo.</td><td>Relatório de experimento.</td></tr>
+    <tr><td>Deep Learning</td><td>Explica gradiente, backpropagation, losses, softmax, attention e normalização.</td><td>Self-attention em PyTorch.</td></tr>
+    <tr><td>RAG/Search</td><td>Calcula precision@k, recall@k, MRR, MAP, NDCG e compara BM25 vs embeddings.</td><td>Avaliação de retrieval documentada.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="projetos" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Projetos práticos obrigatórios</h2><p class="section-subtitle">Um projeto por fase para transformar matemática em portfólio técnico.</p></div>
+    <span class="section-badge">Projetos</span>
+  </div>
+  <div class="doc-grid-2">
+
+    <div class="mini-card"><strong>Projeto 1 — Big O Visual</strong><span>Comparar algoritmos O(1), O(log n), O(n), O(n log n), O(n²) com Python, gráficos e README explicando custo de tempo/espaço.</span></div>
+
+    <div class="mini-card"><strong>Projeto 2 — Graph Algorithms Lab</strong><span>Implementar BFS, DFS, Dijkstra, topological sort e Union-Find com testes, visualização simples e análise de complexidade.</span></div>
+
+    <div class="mini-card"><strong>Projeto 3 — Embeddings Similarity Lab</strong><span>Criar notebook NumPy com normalização, dot product, cosine similarity, projeção vetorial e busca por textos similares.</span></div>
+
+    <div class="mini-card"><strong>Projeto 4 — PCA/SVD do Zero</strong><span>Implementar PCA e SVD manualmente, comparar com scikit-learn e explicar variância explicada, compressão e recomendação.</span></div>
+
+    <div class="mini-card"><strong>Projeto 5 — Statistical Experiment Lab</strong><span>Executar experimento com regressão/classificação, testes de hipótese, intervalos de confiança e métricas de ML.</span></div>
+
+    <div class="mini-card"><strong>Projeto 6 — Attention from Scratch</strong><span>Implementar self-attention em PyTorch, documentar Q/K/V, escala por raiz de d, masked attention, softmax e shapes.</span></div>
+
+    <div class="mini-card"><strong>Projeto 7 — Retrieval Metrics Lab</strong><span>Comparar TF-IDF/BM25 contra embeddings, medir precision@k, recall@k, MRR, MAP e NDCG em dataset próprio.</span></div>
+
+    <div class="mini-card"><strong>Projeto 8 — Math for AI Engineering</strong><span>Publicar caderno final com notebooks, gráficos, snippets e artigos conectando cada conceito a programação, IA ou RAG.</span></div>
+
+  </div>
+</section>
+
+<section id="snippets" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Snippets e fórmulas úteis</h2><p class="section-subtitle">Blocos mínimos para iniciar os entregáveis de cada fase.</p></div>
+    <span class="section-badge">Código</span>
+  </div>
+  <h3>Cosine similarity com NumPy</h3>
+  <pre class="code-block"><code class="language-python">import numpy as np
+
+def cosine_similarity(a: np.ndarray, b: np.ndarray) -> float:
+    denom = np.linalg.norm(a) * np.linalg.norm(b)
+    if denom == 0:
+        return 0.0
+    return float(np.dot(a, b) / denom)
+
+v1 = np.array([0.2, 0.5, 0.1])
+v2 = np.array([0.1, 0.4, 0.3])
+print(cosine_similarity(v1, v2))</code></pre>
+
+  <h3>Softmax com estabilização numérica</h3>
+  <pre class="code-block"><code class="language-python">import numpy as np
+
+def softmax(x: np.ndarray, temperature: float = 1.0) -> np.ndarray:
+    z = x / temperature
+    z = z - np.max(z)  # evita overflow
+    exp = np.exp(z)
+    return exp / exp.sum()
+
+logits = np.array([2.0, 1.0, 0.1])
+print(softmax(logits, temperature=0.7))</code></pre>
+
+  <h3>Self-attention simplificado em PyTorch</h3>
+  <pre class="code-block"><code class="language-python">import torch
+import torch.nn.functional as F
+
+def scaled_dot_product_attention(Q, K, V, mask=None):
+    d_k = Q.size(-1)
+    scores = Q @ K.transpose(-2, -1) / (d_k ** 0.5)
+    if mask is not None:
+        scores = scores.masked_fill(mask == 0, float('-inf'))
+    weights = F.softmax(scores, dim=-1)
+    return weights @ V, weights
+
+batch, tokens, dim = 1, 4, 8
+Q = torch.randn(batch, tokens, dim)
+K = torch.randn(batch, tokens, dim)
+V = torch.randn(batch, tokens, dim)
+out, weights = scaled_dot_product_attention(Q, K, V)
+print(out.shape, weights.shape)</code></pre>
+
+  <h3>Métricas de retrieval: MRR simples</h3>
+  <pre class="code-block"><code class="language-python">def reciprocal_rank(results: list[str], expected_id: str) -> float:
+    for index, item_id in enumerate(results, start=1):
+        if item_id == expected_id:
+            return 1.0 / index
+    return 0.0
+
+queries = [
+    (["doc7", "doc3", "doc1"], "doc3"),
+    (["doc2", "doc8", "doc9"], "doc9"),
+]
+mrr = sum(reciprocal_rank(r, expected) for r, expected in queries) / len(queries)
+print(mrr)</code></pre>
+</section>
+
+<section id="consulta" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Consulta rápida por objetivo</h2><p class="section-subtitle">Use esta seção como guia de revisão antes de implementar, estudar ou explicar em entrevista.</p></div>
+    <span class="section-badge">Consulta</span>
+  </div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Objetivo</th><th>Estudar</th><th>Aplicar em</th></tr></thead><tbody>
+    <tr><td>Melhorar lógica de programação</td><td>Lógica booleana, predicados, conjuntos, indução.</td><td>Validações, regras de negócio, filtros, testes.</td></tr>
+    <tr><td>Passar melhor em entrevistas</td><td>Big O, grafos, recorrências, árvores, programação dinâmica.</td><td>Coding interviews, análise de algoritmos.</td></tr>
+    <tr><td>Entender embeddings</td><td>Vetores, normas, produto interno, cosine similarity, alta dimensionalidade.</td><td>RAG, busca semântica, recomendação.</td></tr>
+    <tr><td>Entender transformers</td><td>Matrizes, tensores, softmax, attention, normalização, backpropagation.</td><td>LLMs, fine-tuning, inferência e avaliação.</td></tr>
+    <tr><td>Avaliar modelos</td><td>Estatística, métricas ML, intervalos, testes, calibration.</td><td>Classificação, regressão, experimentos e relatórios.</td></tr>
+    <tr><td>Avaliar RAG</td><td>TF-IDF, BM25, MRR, NDCG, context precision, faithfulness.</td><td>Retrieval, reranking, busca híbrida e resposta com fonte.</td></tr>
+    <tr><td>Decidir produto com dados</td><td>A/B testing, poder estatístico, p-value, uplift, coortes.</td><td>Features de blog, SaaS, IA aplicada e monetização.</td></tr>
+  </tbody></table></div>
+</section>
+
+<section id="referencias" class="doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading">
+    <div><h2>Referências recomendadas</h2><p class="section-subtitle">Fontes de estudo para sustentar a trilha com profundidade e prática.</p></div>
+    <span class="section-badge">Referências</span>
+  </div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>Livros e cursos</h3><ul class="doc-list">
+      <li>Mathematics for Machine Learning — Deisenroth, Faisal e Ong.</li>
+      <li>Deep Learning — Goodfellow, Bengio e Courville.</li>
+      <li>Introduction to Algorithms — Cormen, Leiserson, Rivest e Stein.</li>
+      <li>Think Stats / Think Bayes — Allen B. Downey.</li>
+      <li>3Blue1Brown — Essence of Linear Algebra e Neural Networks.</li>
+      <li>MIT OpenCourseWare — Linear Algebra, Probability e Calculus.</li>
+    </ul></div>
+    <div class="callout accent-purple"><h3>Documentações e prática</h3><ul class="doc-list">
+      <li>NumPy, SciPy, Matplotlib e SymPy para implementação matemática.</li>
+      <li>scikit-learn para PCA, SVM, métricas, validação e pipelines.</li>
+      <li>PyTorch para tensores, autograd, attention e deep learning.</li>
+      <li>Hugging Face para embeddings, transformers e avaliação prática.</li>
+      <li>Notebooks próprios versionados no GitHub com README e gráficos.</li>
+      <li>Blog pessoal como portfólio de explicações matemáticas aplicadas.</li>
+    </ul></div>
+  </div>
+  <div class="callout success mt-3"><h3>Como usar esta trilha</h3><p>Não estude matemática apenas por leitura. Para cada tópico: escreva a intuição, derive o mínimo necessário, implemente, visualize, teste, conecte com código real e documente o aprendizado.</p></div>
+</section>
+
+</main>
+
+<footer class="text-center py-4" style="border-top:1px solid var(--doc-border)">
+  <p class="small text-muted mb-2"><span id="trackFooterTitle">Matemática para Programação e IA</span> · Plano Integrado de Estudos</p>
+  <a class="footer-link small" href="../index.html">← Voltar ao dashboard principal</a>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+(function(){
+  const backToTop = document.getElementById('backToTop');
+  const searchInput = document.getElementById('trackSearch');
+  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('is-visible', window.scrollY > 500);
+  });
+
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+      }
+    });
+  });
+
+  function normalize(value) {
+    return value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
+  searchInput.addEventListener('input', () => {
+    const query = normalize(searchInput.value.trim());
+    sections.forEach(section => {
+      section.classList.remove('is-hidden-by-search', 'search-hit');
+      if (!query) return;
+      const match = normalize(section.innerText).includes(query);
+      section.classList.toggle('is-hidden-by-search', !match);
+      section.classList.toggle('search-hit', match);
+    });
+  });
+})();
+</script>
+</body>
+</html>
