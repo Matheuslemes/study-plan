@@ -1,717 +1,1058 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-bs-theme="dark">
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Trilha IA por Livros — Plano Integrado de Estudos</title>
-<meta name="description" content="Trilha de estudo em Inteligência Artificial baseada nos livros anexados, organizada para programação, produtos, automação, LLMs, RAG, agentes e monetização.">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-:root {
-  --ia-accent: #7F77DD;
-  --ia-accent-2: #38BDF8;
-  --ia-accent-3: #52B788;
-  --ia-warn: #F59E0B;
-  --ia-danger: #F87171;
-  --doc-bg: #080A12;
-  --doc-surface: rgba(255,255,255,.045);
-  --doc-surface-2: rgba(255,255,255,.075);
-  --doc-surface-3: rgba(127,119,221,.13);
-  --doc-border: rgba(255,255,255,.12);
-  --doc-text: #E8E6E3;
-  --doc-muted: #A8A6B3;
-  --doc-code: #050814;
-}
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
-body.track-page {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--doc-text);
-  background:
-    radial-gradient(circle at 18% 0%, rgba(127,119,221,.23), transparent 30rem),
-    radial-gradient(circle at 90% 8%, rgba(56,189,248,.14), transparent 28rem),
-    radial-gradient(circle at 65% 52%, rgba(82,183,136,.08), transparent 32rem),
-    var(--doc-bg);
-  line-height: 1.65;
-  margin: 0;
-}
-code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
-a { color:#d9d4ff; }
-.track-hero-page {
-  padding: 3rem 0 2rem;
-  border-bottom: 1px solid var(--doc-border);
-  background: linear-gradient(135deg, rgba(127,119,221,.20), rgba(56,189,248,.08));
-}
-.track-title {
-  font-size: clamp(2rem, 4vw, 4rem);
-  font-weight: 800;
-  letter-spacing: -.05em;
-  margin-bottom: .8rem;
-}
-.track-lead {
-  color: var(--doc-muted);
-  max-width: 1050px;
-  font-size: 1.05rem;
-}
-.track-badge-set, .badge-cloud {
-  display:flex;
-  flex-wrap:wrap;
-  gap:.5rem;
-  margin-top:1.2rem;
-}
-.track-badge-set span, .badge-cloud span {
-  border:1px solid rgba(127,119,221,.38);
-  background:rgba(127,119,221,.15);
-  color:#dfdcff;
-  padding:.35rem .65rem;
-  border-radius:999px;
-  font-size:.78rem;
-  font-weight:800;
-}
-.track-local-nav {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(8,10,18,.92);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--doc-border);
-}
-.track-local-nav a {
-  color: var(--doc-muted);
-  text-decoration:none;
-  padding:.45rem .7rem;
-  border-radius:999px;
-  white-space:nowrap;
-  font-size:.84rem;
-  border:1px solid transparent;
-}
-.track-local-nav a:hover {
-  color:#fff;
-  background:rgba(127,119,221,.18);
-  border-color:rgba(127,119,221,.35);
-}
-.track-search {
-  width:min(320px,100%);
-  background:rgba(255,255,255,.05)!important;
-  border-color:var(--doc-border)!important;
-  color:#fff!important;
-}
-.doc-section {
-  background: var(--doc-surface);
-  border: 1px solid var(--doc-border);
-  border-radius: 24px;
-  padding: clamp(1rem, 2vw, 1.7rem);
-  margin-bottom: 1.25rem;
-  box-shadow: 0 18px 70px rgba(0,0,0,.18);
-}
-.doc-section-heading {
-  display:flex;
-  align-items:start;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:1rem;
-  padding-bottom:.9rem;
-  border-bottom:1px solid var(--doc-border);
-}
-.doc-section h2 {
-  margin:0;
-  font-weight:800;
-  letter-spacing:-.03em;
-}
-.doc-section h3 {
-  color:#E9E7FF;
-  font-size:1.15rem;
-  font-weight:800;
-  margin:1.2rem 0 .65rem;
-}
-.doc-section h4 {
-  color:#fff;
-  font-size:.98rem;
-  font-weight:800;
-  margin:.9rem 0 .45rem;
-}
-.section-subtitle {
-  color:var(--doc-muted);
-  margin:.35rem 0 0;
-}
-.section-badge {
-  border:1px solid rgba(56,189,248,.35);
-  background:rgba(56,189,248,.12);
-  color:#c5f1ff;
-  font-weight:800;
-  font-size:.75rem;
-  border-radius:999px;
-  padding:.35rem .7rem;
-  white-space:nowrap;
-}
-.doc-hero-card {
-  display:grid;
-  grid-template-columns: minmax(0,1.45fr) minmax(280px,.7fr);
-  gap:1rem;
-  align-items:center;
-}
-.metrics-grid {
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:.7rem;
-}
-.metric-pill {
-  border:1px solid rgba(127,119,221,.35);
-  border-radius:18px;
-  padding:1rem;
-  background:rgba(127,119,221,.12);
-  text-align:center;
-}
-.metric-pill span {
-  font-family:'JetBrains Mono',monospace;
-  font-size:1.55rem;
-  color:#fff;
-  font-weight:800;
-  display:block;
-}
-.metric-pill small {
-  color:var(--doc-muted);
-  text-transform:uppercase;
-  font-size:.68rem;
-  letter-spacing:.04em;
-}
-.doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid {
-  display:grid;
-  gap:1rem;
-}
-.doc-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-.doc-grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-.doc-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
-.phase-doc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-.mini-card, .callout, .phase-doc-card, .book-card, .project-card {
-  border:1px solid var(--doc-border);
-  background:rgba(255,255,255,.04);
-  border-radius:18px;
-  padding:1rem;
-}
-.mini-card strong, .project-card strong {
-  display:block;
-  margin-bottom:.35rem;
-  color:#fff;
-}
-.mini-card span, .callout p, .phase-doc-card p, .book-card p, .project-card p {
-  color:var(--doc-muted);
-}
-.callout { border-left:4px solid var(--ia-accent-2); }
-.callout.accent-purple { border-left-color: var(--ia-accent); }
-.callout.accent-green { border-left-color: var(--ia-accent-3); }
-.callout.accent-orange { border-left-color: var(--ia-warn); }
-.callout.accent-red { border-left-color: var(--ia-danger); }
-.doc-list {
-  margin:.5rem 0 1rem;
-  padding-left:1.25rem;
-  color:var(--doc-muted);
-}
-.doc-list li { margin-bottom:.35rem; }
-.table-responsive {
-  border:1px solid var(--doc-border);
-  border-radius:18px;
-  overflow:auto;
-  margin:.75rem 0 1rem;
-}
-.doc-table {
-  min-width: 860px;
-  margin-bottom:0!important;
-}
-.doc-table th {
-  background:rgba(127,119,221,.18)!important;
-  color:#fff!important;
-  font-weight:800;
-  border-color:var(--doc-border)!important;
-  white-space:nowrap;
-}
-.doc-table td {
-  border-color:var(--doc-border)!important;
-  color:#dddbe8!important;
-  font-size:.87rem;
-  vertical-align:top;
-}
-.dense-table td, .dense-table th { font-size:.78rem; }
-.code-block {
-  background:var(--doc-code);
-  color:#d9f99d;
-  border:1px solid rgba(127,119,221,.25);
-  border-radius:16px;
-  padding:1rem;
-  overflow:auto;
-  white-space:pre;
-  max-height:760px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.78rem;
-  line-height:1.55;
-}
-.phase-doc-head, .book-head {
-  display:flex;
-  justify-content:space-between;
-  align-items:start;
-  gap:1rem;
-  border-bottom:1px solid var(--doc-border);
-  padding-bottom:.7rem;
-  margin-bottom:.8rem;
-}
-.phase-doc-head h3, .book-head h3 { margin:0; }
-.phase-doc-head span, .book-head span {
-  font-family:'JetBrains Mono',monospace;
-  color:#c5f1ff;
-  font-size:.82rem;
-}
-.phase-doc-card {
-  position:relative;
-  overflow:hidden;
-}
-.phase-doc-card::before, .book-card::before {
-  content:'';
-  position:absolute;
-  inset:0 auto 0 0;
-  width:4px;
-  background:var(--card-accent, var(--ia-accent));
-}
-.phase-doc-card, .book-card { position:relative; padding-left:1.25rem; }
-.priority {
-  display:inline-block;
-  border-radius:999px;
-  padding:.2rem .5rem;
-  font-size:.72rem;
-  font-weight:800;
-  white-space:nowrap;
-}
-.priority.must { color:#fecaca;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3); }
-.priority.should { color:#fde68a;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32); }
-.priority.nice { color:#bbf7d0;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3); }
-.priority.future { color:#bae6fd;background:rgba(14,165,233,.14);border:1px solid rgba(14,165,233,.3); }
-.timeline {
-  position:relative;
-  padding-left:1.25rem;
-}
-.timeline::before {
-  content:'';
-  position:absolute;
-  left:.33rem;
-  top:.4rem;
-  bottom:.4rem;
-  width:1px;
-  background:var(--doc-border);
-}
-.timeline-item {
-  position:relative;
-  margin:0 0 1rem;
-  padding-left:.9rem;
-}
-.timeline-item::before {
-  content:'';
-  position:absolute;
-  left:-.08rem;
-  top:.45rem;
-  width:.65rem;
-  height:.65rem;
-  border-radius:999px;
-  background:var(--ia-accent-2);
-  box-shadow:0 0 0 4px rgba(56,189,248,.12);
-}
-.search-hit {
-  outline:2px solid rgba(56,189,248,.65);
-  background:rgba(56,189,248,.10)!important;
-}
-.is-hidden-by-search { display:none!important; }
-.back-to-top {
-  position:fixed;
-  right:1rem;
-  bottom:1rem;
-  width:44px;
-  height:44px;
-  border-radius:999px;
-  border:1px solid rgba(127,119,221,.45);
-  background:rgba(127,119,221,.2);
-  color:#fff;
-  display:none;
-  z-index:1200;
-}
-.back-to-top.is-visible { display:block; }
-.footer-link {
-  color:#d9d4ff;
-  text-decoration:none;
-}
-@media (max-width: 992px) {
-  .doc-hero-card, .doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { grid-template-columns:1fr; }
-  .track-local-nav .container { gap:.75rem; }
-  .track-search { margin-top:.5rem; width:100%; }
-}
-@media (max-width: 576px) {
-  .doc-section { border-radius:18px; }
-  .doc-section-heading, .phase-doc-head, .book-head { flex-direction:column; }
-  .metrics-grid { grid-template-columns:1fr; }
-}
-</style>
-</head>
-<body class="track-page" data-track="ia-livros">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trilha IA por Livros — Plano Integrado de Estudos</title>
+  <meta name="description" content="Trilha de estudo em Inteligência Artificial baseada nos livros anexados, organizada para programação, produtos, automação, LLMs, RAG, agentes e monetização.">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
 
-<header class="track-hero-page">
+    :root {
+      --bg: #07090f;
+      --surface: #0d1117;
+      --surface2: #141a24;
+      --surface3: rgba(255,255,255,.045);
+      --border: rgba(255,255,255,.09);
+      --border2: rgba(255,255,255,.15);
+      --accent: #4f9ef8;
+      --accent2: #22d3b0;
+      --accent3: #a78bfa;
+      --accent4: #fb923c;
+      --ia: #a78bfa;
+      --ia2: #38bdf8;
+      --ia3: #22d3b0;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --muted2: #94a3b8;
+      --code-bg: #060a12;
+      --must: #fca5a5;
+      --should: #fcd34d;
+      --nice: #86efac;
+      --future: #93c5fd;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:15px}
+    body{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+      background-image:
+        radial-gradient(ellipse 80% 40% at 10% -5%, rgba(167,139,250,.14) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 30% at 90% 5%, rgba(56,189,248,.09) 0%, transparent 40%),
+        radial-gradient(ellipse 55% 30% at 78% 35%, rgba(34,211,176,.045) 0%, transparent 42%);
+    }
+    .container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+
+    /* ─── HERO ─── */
+    .hero{padding:4rem 0 3rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(167,139,250,.12) 0%,rgba(56,189,248,.055) 56%,rgba(34,211,176,.04) 100%)}
+    .hero-label{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:.8rem}
+    .hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 35%,var(--ia) 74%,var(--accent) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:.8rem}
+    .hero-sub{color:var(--muted2);max-width:980px;font-size:1rem}
+    .hero-back-link{display:inline-flex;align-items:center;gap:.4rem;font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;color:var(--muted2);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.04);padding:.32rem .75rem;border-radius:6px;margin-bottom:1.2rem;transition:all .15s}
+    .hero-back-link:hover{color:#fff;border-color:rgba(167,139,250,.35);background:rgba(167,139,250,.08)}
+    .hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+    .tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:6px;border:1px solid rgba(79,158,248,.3);background:rgba(79,158,248,.08);color:var(--accent)}
+    .tag.g{border-color:rgba(34,211,176,.3);background:rgba(34,211,176,.08);color:var(--accent2)}
+    .tag.ia{border-color:rgba(167,139,250,.32);background:rgba(167,139,250,.08);color:var(--ia)}
+    .tag.p{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:var(--accent3)}
+    .tag.o{border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.08);color:var(--accent4)}
+
+    /* ─── NAV ─── */
+    .sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
+    .sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent2);border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
+    .nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+    .nav-back:hover{color:#fff;border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08)}
+    .nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
+    .sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+    .search-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.3rem .7rem;color:#fff;font-size:.8rem;outline:none;width:250px}
+    .search-box::placeholder{color:var(--muted)}
+    .search-box:focus{border-color:rgba(167,139,250,.4)}
+    .sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
+    .sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(167,139,250,.4) rgba(255,255,255,.04);padding:0 32px}
+    .sitenav-bar-inner::-webkit-scrollbar{height:4px}.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(167,139,250,.4);border-radius:99px}.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(167,139,250,.7)}
+    .sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}.sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}.sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
+    .nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}.nav-scroll-btn:hover{color:#fff;background:rgba(167,139,250,.08)}.nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
+    .nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}.nav-group:last-child{border-right:none;padding-right:.8rem}
+    .nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
+    .nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}.nav-link:hover{color:#fff;background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.25)}.nav-link.active{color:var(--ia);background:rgba(167,139,250,.1);border-color:rgba(167,139,250,.3)}
+
+    /* ─── LAYOUT ─── */
+    .main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}.sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}.sidebar-group{margin-bottom:1.4rem}.sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}.sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}.sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}.sidebar a.active{color:var(--ia);background:rgba(167,139,250,.08)}
+    .content{padding:2rem 0 4rem 2rem}.section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem)}.section:target{border-color:rgba(167,139,250,.4);box-shadow:0 0 0 1px rgba(167,139,250,.15)}.section-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.section-header h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff}.section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);color:var(--accent2)}
+    h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}li{margin-bottom:.3rem;font-size:.88rem}strong{color:#e2e8f0;font-weight:600}code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(167,139,250,.1);color:var(--ia);padding:.1em .35em;border-radius:4px}.lead{font-size:1rem;color:var(--text)}
+
+    /* ─── TABLES ─── */
+    .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0}table{border-collapse:collapse;width:100%;min-width:560px}thead tr{background:rgba(167,139,250,.1)}th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem;text-align:left;color:#fff;border-bottom:1px solid var(--border2)}td{padding:.6rem 1rem;font-size:.82rem;color:#cbd5e1;border-bottom:1px solid var(--border);vertical-align:top}tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}
+    pre,.code-block{background:var(--code-bg);border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#7dd3fc;max-height:600px;white-space:pre}.code-block code,pre code{background:none;color:inherit;padding:0;font-size:inherit}
+
+    /* ─── CALLOUTS / GRID / CARDS ─── */
+    .callout{border-left:3px solid var(--accent2);background:rgba(34,211,176,.06);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:.8rem 0}.callout.blue{border-color:var(--accent);background:rgba(79,158,248,.06)}.callout.purple{border-color:var(--ia);background:rgba(167,139,250,.06)}.callout.orange{border-color:var(--accent4);background:rgba(251,146,60,.06)}.callout.green{border-color:#4ade80;background:rgba(74,222,128,.06)}.callout h3,.callout h4{margin-top:0;color:#fff}.callout p:last-child{margin-bottom:0}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.mini-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem}.mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}.mini-card span,.mini-card p{color:var(--muted2);font-size:.78rem;margin-bottom:0}.hero-content-grid{align-items:center;margin-bottom:1rem}.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}.metric{background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);border-radius:12px;padding:1rem;text-align:center}.metric span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}.metric small{font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+
+    /* ─── PRIORITY BADGES ─── */
+    .pri{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}.pri-must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}.pri-should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}.pri-nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}.pri-low{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
+
+    /* ─── PHASE / BOOK CARDS ─── */
+    .phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}.phase-card{position:relative;overflow:hidden;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.1rem 1.1rem 1.25rem}.phase-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:var(--card-accent,var(--ia))}.phase-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:.6rem;margin-bottom:.8rem;gap:.5rem;flex-wrap:wrap}.phase-head h3,.phase-head h4{margin:0;font-size:.88rem;color:#fff}.phase-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}.phase-card ul{margin-bottom:.6rem}.phase-card p:last-child{margin-bottom:0}
+    .timeline{position:relative;margin-left:.65rem;padding-left:1.5rem}.timeline::before{content:"";position:absolute;left:0;top:.25rem;bottom:.25rem;width:1px;background:var(--border)}.timeline-item{position:relative;margin-bottom:1rem}.timeline-item::before{content:"";position:absolute;left:-1.77rem;top:.3rem;width:.65rem;height:.65rem;border-radius:999px;background:var(--ia);box-shadow:0 0 0 5px rgba(167,139,250,.14)}.timeline-item strong{color:#fff;display:block}.timeline-item span{color:var(--muted2);font-size:.84rem}
+    .search-hit{outline:1px solid rgba(167,139,250,.55);background:rgba(167,139,250,.055)!important}.is-hidden-by-search{display:none!important}.footer-link{color:#d8ecff;text-decoration:none}.footer-link:hover{color:#fff;text-decoration:underline}
+    #btt{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(167,139,250,.15);border:1px solid rgba(167,139,250,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}#btt.show{display:flex}#btt:hover{background:rgba(167,139,250,.3)}footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}
+    @media(max-width:900px){.main{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem 0 3rem}.grid2,.grid3,.grid4,.metrics,.phase-grid{grid-template-columns:1fr}.sitenav-top{flex-wrap:wrap;gap:.5rem}.sitenav-top-right{width:100%}.search-box{width:100%}.nav-ver{display:none}}
+    @media(max-width:580px){.section{border-radius:10px;padding:1rem}.section-header{flex-direction:column}.sitenav-brand span{display:none}.nav-back{font-size:.65rem;padding:.25rem .5rem}.hero{padding:3rem 0 2rem}}
+
+  </style>
+
+
+  <!-- Responsividade refeita: estrutura baseada diretamente na Trilha Java. O CSS original acima permanece intacto. -->
+  <style id="ia-responsive-refactor">
+    /* ─────────────────────────────────────────────────────────────
+       RESPONSIVIDADE REFEITA — IA Track
+       Estrutura baseada no HTML da Trilha Java anexada.
+       Bloco complementar: o CSS original permanece intacto.
+       Objetivo: corrigir layout em notebook, tablet e celular sem alterar conteúdo.
+       ───────────────────────────────────────────────────────────── */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .container,
+    .main,
+    .content,
+    .section,
+    .table-wrap,
+    .phase-card,
+    .mini-card,
+    .callout {
+      min-width: 0;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    img,
+    video,
+    canvas,
+    iframe,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .section {
+      scroll-margin-top: 126px;
+    }
+
+    .table-wrap,
+    pre,
+    .code-block {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-inline: contain;
+    }
+
+    .table-wrap table {
+      width: 100%;
+      min-width: max(720px, 100%);
+      table-layout: auto;
+    }
+
+    th,
+    td {
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    pre,
+    .code-block {
+      white-space: pre;
+      overflow-y: auto;
+    }
+
+    pre code,
+    .code-block code {
+      white-space: inherit;
+    }
+
+    .hero h1,
+    .section-header h2,
+    .sitenav-brand,
+    .hero-sub,
+    p,
+    li,
+    .mini-card span,
+    .mini-card p,
+    .callout p,
+    .timeline-item span {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    .grid2 > *,
+    .grid3 > *,
+    .grid4 > *,
+    .metrics > *,
+    .phase-grid > * {
+      min-width: 0;
+    }
+
+    .sitenav,
+    .sitenav * {
+      min-width: 0;
+    }
+
+    .sitenav-top {
+      min-width: 0;
+    }
+
+    .sitenav-brand,
+    .nav-back,
+    .nav-ver {
+      flex-shrink: 0;
+    }
+
+    .sitenav-top-right {
+      min-width: 180px;
+    }
+
+    .search-box {
+      max-width: 100%;
+    }
+
+    /* Notebook e desktop estreito */
+    @media (max-width: 1180px) {
+      .container,
+      .main {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .main {
+        grid-template-columns: 200px minmax(0, 1fr);
+      }
+
+      .content {
+        padding-left: 1.35rem;
+      }
+
+      .grid4,
+      .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Tablet: remove sidebar e preserva navegação superior */
+    @media (max-width: 980px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .content {
+        padding: 1.5rem 0 3rem;
+      }
+
+      .section {
+        scroll-margin-top: 148px;
+      }
+
+      .grid2,
+      .phase-grid,
+      .hero-content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sitenav-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .55rem .75rem;
+      }
+
+      .sitenav-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-ver {
+        display: none;
+      }
+
+      .nav-back {
+        justify-self: end;
+      }
+
+      .sitenav-top-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+      }
+
+      .search-box {
+        width: 100%;
+        min-height: 38px;
+      }
+    }
+
+    /* Tablet estreito e celulares grandes */
+    @media (max-width: 760px) {
+      html {
+        font-size: 14.5px;
+      }
+
+      .container,
+      .main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .hero {
+        padding: 2.8rem 0 2rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 9vw, 3.1rem);
+        letter-spacing: -.035em;
+      }
+
+      .hero-sub {
+        max-width: 100%;
+      }
+
+      .hero-meta {
+        gap: .42rem;
+      }
+
+      .tag {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
+
+      .sitenav-bar-inner {
+        padding-left: 34px;
+        padding-right: 34px;
+      }
+
+      .nav-group {
+        padding: .25rem .3rem;
+      }
+
+      .nav-group-label {
+        font-size: .56rem;
+        padding-right: .4rem;
+        margin-right: .2rem;
+      }
+
+      .nav-link {
+        font-size: .66rem;
+        padding: .3rem .5rem;
+      }
+
+      .section {
+        padding: 1rem;
+        border-radius: 12px;
+        scroll-margin-top: 154px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-badge {
+        white-space: normal;
+      }
+
+      .grid3,
+      .grid4,
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .metric span {
+        font-size: 1.75rem;
+      }
+
+      .table-wrap table {
+        min-width: 680px;
+      }
+
+      th,
+      td {
+        padding: .58rem .72rem;
+      }
+
+      pre,
+      .code-block {
+        padding: .9rem;
+        font-size: .72rem;
+        max-height: 520px;
+      }
+
+      .phase-head {
+        align-items: flex-start;
+      }
+    }
+
+    /* Celulares */
+    @media (max-width: 520px) {
+      html {
+        font-size: 14px;
+      }
+
+      .container,
+      .main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+      }
+
+      .hero {
+        padding: 2.35rem 0 1.7rem;
+      }
+
+      .hero-label {
+        font-size: .66rem;
+      }
+
+      .hero-back-link {
+        max-width: 100%;
+      }
+
+      .sitenav-top {
+        grid-template-columns: 1fr;
+        gap: .45rem;
+      }
+
+      .sitenav-brand {
+        width: 100%;
+        white-space: normal;
+        justify-content: space-between;
+      }
+
+      .sitenav-brand span {
+        flex-shrink: 0;
+      }
+
+      .nav-back {
+        width: 100%;
+        justify-content: center;
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .nav-group-label {
+        display: none;
+      }
+
+      .nav-group {
+        border-right: none;
+        padding: .25rem .18rem;
+      }
+
+      .nav-link {
+        font-size: .64rem;
+        padding: .3rem .46rem;
+      }
+
+      .content {
+        padding-top: 1rem;
+      }
+
+      .section {
+        margin-bottom: 1rem;
+        padding: .9rem;
+        scroll-margin-top: 184px;
+      }
+
+      .section-header h2 {
+        font-size: 1.15rem;
+      }
+
+      h3 {
+        font-size: .96rem;
+      }
+
+      p,
+      li,
+      td {
+        font-size: .84rem;
+      }
+
+      th {
+        font-size: .66rem;
+      }
+
+      .tag,
+      .pri,
+      .section-badge {
+        font-size: .64rem;
+      }
+
+      .metric {
+        padding: .85rem;
+      }
+
+      .metric span {
+        font-size: 1.62rem;
+      }
+
+      .mini-card,
+      .phase-card {
+        border-radius: 10px;
+      }
+
+      .table-wrap table {
+        min-width: 640px;
+      }
+
+      footer > div > div,
+      .footer-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      footer a[style],
+      .footer-link {
+        justify-content: center !important;
+      }
+
+      footer div[style*="display:flex"] {
+        justify-content: center !important;
+      }
+
+      #btt {
+        right: .85rem;
+        bottom: .85rem;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Celulares muito estreitos */
+    @media (max-width: 380px) {
+      .container,
+      .main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+
+      .hero h1 {
+        font-size: 1.85rem;
+      }
+
+      .sitenav-brand span {
+        display: none;
+      }
+
+      .section {
+        padding: .78rem;
+      }
+
+      pre,
+      .code-block {
+        font-size: .68rem;
+      }
+
+      .table-wrap table {
+        min-width: 600px;
+      }
+    }
+
+    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+    @media (pointer: coarse) {
+      .nav-scroll-btn,
+      #btt,
+      .nav-link,
+      .hero-back-link,
+      .nav-back,
+      .sidebar a {
+        touch-action: manipulation;
+      }
+
+      .nav-link,
+      .hero-back-link,
+      .nav-back {
+        min-height: 34px;
+      }
+    }
+  </style>
+
+  <!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta o encaixe texto + métricas. -->
+  <style id="ia-summary-executive-visual-fix">
+    /*
+      Correção equivalente à aplicada na Trilha Java:
+      o Resumo Executivo passa a usar texto em largura confortável
+      e métricas abaixo, ocupando a largura disponível.
+    */
+    #resumo .hero-content-grid {
+      grid-template-columns: 1fr !important;
+      align-items: start !important;
+      gap: 1rem !important;
+    }
+
+    #resumo .hero-content-grid > div:first-child {
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    #resumo .lead {
+      max-width: 980px;
+    }
+
+    #resumo .metrics {
+      width: 100%;
+      max-width: 100%;
+      grid-template-columns: repeat(4, minmax(130px, 1fr)) !important;
+      align-items: stretch;
+      margin-top: .35rem;
+    }
+
+    #resumo .metric {
+      min-width: 0;
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #resumo .metric span,
+    #resumo .metric small {
+      overflow-wrap: normal;
+      word-break: normal;
+    }
+
+    @media (max-width: 1180px) {
+      #resumo .metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+    }
+
+    @media (max-width: 760px) {
+      #resumo .metrics {
+        grid-template-columns: 1fr !important;
+      }
+
+      #resumo .metric {
+        min-height: auto;
+      }
+    }
+  </style>
+
+</head>
+<body>
+
+<header class="hero">
   <div class="container">
-    <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
-    <h1 class="track-title">Trilha IA por Livros</h1>
-    <p class="track-lead">Página de referência completa para estudar Inteligência Artificial aplicada a programação, produtos digitais, automação, LLMs, RAG, agentes e monetização. A trilha segue os livros anexados e o cronograma do index: leitura estratégica primeiro, fundamentos técnicos depois, aplicação prática sempre.</p>
-    <div class="track-badge-set">
-      <span>9 livros</span><span>64 semanas</span><span>20:30–22:00</span><span>23:00–23:30 revisão IA</span><span>LLMs</span><span>RAG</span><span>Agentes</span><span>AI Factory</span><span>LLMOps</span><span>Produtos digitais</span><span>Backend + IA</span>
+    <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
+    <div class="hero-label">Trilha técnica · Inteligência Artificial · Livros e aplicação prática</div>
+    <h1>Trilha IA por Livros</h1>
+    <p class="hero-sub">Página de referência completa para estudar Inteligência Artificial aplicada a programação, produtos digitais, automação, LLMs, RAG, agentes e monetização. A trilha segue os livros anexados e o cronograma do index: leitura estratégica primeiro, fundamentos técnicos depois, aplicação prática sempre.</p>
+    <div class="hero-meta">
+      <span class="tag ia">9 livros</span>
+      <span class="tag g">64 semanas</span>
+      <span class="tag">LLMs</span>
+      <span class="tag">RAG</span>
+      <span class="tag p">Agentes</span>
+      <span class="tag p">AI Factory</span>
+      <span class="tag o">LLMOps</span>
+      <span class="tag o">Produtos digitais</span>
+      <span class="tag g">Backend + IA</span>
     </div>
   </div>
 </header>
 
-<nav class="track-local-nav">
-  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
-    <div class="d-flex flex-nowrap overflow-auto gap-1">
-      <a href="#resumo">Resumo</a>
-      <a href="#cronograma">Cronograma</a>
-      <a href="#sequencia">Sequência</a>
-      <a href="#livros">Livros</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#tecnica">Técnica</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#checklists">Checklists</a>
-      <a href="#monetizacao">Monetização</a>
-      <a href="#consulta">Consulta rápida</a>
-      <a href="#referencias">Referências</a>
+<nav class="sitenav">
+  <div class="container">
+    <div class="sitenav-top">
+      <a class="sitenav-brand" href="#">IA Track <span>64 semanas</span></a>
+      <span class="nav-ver">Plano Integrado de Estudos</span>
+      <a class="nav-back" href="../index.html">← Dashboard principal</a>
+      <div class="sitenav-top-right">
+        <input class="search-box" type="search" placeholder="🔍  Buscar na trilha IA..." id="searchInput">
+      </div>
     </div>
-    <input id="trackSearch" class="form-control form-control-sm track-search" type="search" placeholder="Buscar nesta trilha...">
+  </div>
+  <div class="sitenav-bar-outer">
+    <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">&#8249;</button>
+    <div class="sitenav-bar-inner" id="navSectionsBar">
+      <div class="nav-group">
+        <span class="nav-group-label">Base</span>
+        <a class="nav-link" href="#resumo">01 · Resumo</a>
+        <a class="nav-link" href="#cronograma">02 · Cronograma</a>
+        <a class="nav-link" href="#sequencia">03 · Sequência</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Biblioteca</span>
+        <a class="nav-link" href="#livros">04 · Livros</a>
+        <a class="nav-link" href="#roadmap">05 · Roadmap</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Aplicação</span>
+        <a class="nav-link" href="#tecnica">06 · Técnica</a>
+        <a class="nav-link" href="#projetos">07 · Projetos</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Execução</span>
+        <a class="nav-link" href="#checklists">08 · Checklists</a>
+        <a class="nav-link" href="#monetizacao">09 · Monetização</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Revisão</span>
+        <a class="nav-link" href="#consulta">10 · Consulta</a>
+        <a class="nav-link" href="#referencias">11 · Referências</a>
+      </div>
+    </div>
+    <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
   </div>
 </nav>
 
-<main class="container py-4" id="iaDocumentMain">
-
-<section id="resumo" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Resumo executivo</h2>
-      <p class="section-subtitle">Trilha baseada nos livros anexados e integrada ao plano de 64 semanas.</p>
+<div class="main">
+  <aside class="sidebar">
+    <div class="sidebar-group">
+      <div class="sidebar-label">Base IA</div>
+      <a href="#resumo">Resumo executivo</a>
+      <a href="#cronograma">Cronograma</a>
+      <a href="#sequencia">Sequência macro</a>
     </div>
-    <span class="section-badge">Visão geral</span>
-  </div>
-
-  <div class="doc-hero-card">
-    <div>
-      <p class="lead">O objetivo desta trilha é transformar leitura em competência prática de IA aplicada: entender impacto, decisão, processos, estratégia, AI Factory, LLMs, RAG, agentes, automações e produtos reais.</p>
-      <p>O eixo central não é apenas “ler livros de IA”. A sequência foi estruturada para formar um desenvolvedor capaz de usar IA no próprio workflow, identificar oportunidades de valor, desenhar sistemas com IA, implementar LLMs/RAG/agentes com código e operar soluções com avaliação, segurança e monitoramento.</p>
-      <div class="callout accent-purple">
-        <h3>Posicionamento final esperado</h3>
-        <p>Desenvolvedor com base em backend, dados, LLMs, RAG, agentes, avaliação, cloud e capacidade de transformar IA em sistema produtivo.</p>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Livros e fases</div>
+      <a href="#livros">9 livros da trilha</a>
+      <a href="#roadmap">Roadmap 8 fases</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Técnica</div>
+      <a href="#tecnica">Stack IA aplicada</a>
+      <a href="#projetos">Projetos obrigatórios</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Execução</div>
+      <a href="#checklists">Checklists</a>
+      <a href="#monetizacao">Monetização</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Consulta</div>
+      <a href="#consulta">Consulta rápida</a>
+      <a href="#referencias">Referências</a>
+    </div>
+  </aside>
+  <div class="content" id="mainContent">
+    <section class="section" data-search-section="" id="resumo">
+      <div class="section-header">
+        <div>
+          <h2>Resumo executivo</h2>
+          <p class="section-subtitle">Trilha baseada nos livros anexados e integrada ao plano de 64 semanas.</p>
+        </div>
+        <span class="section-badge">Visão geral</span>
       </div>
+      <div class="grid2 hero-content-grid">
+        <div>
+          <p class="lead">O objetivo desta trilha é transformar leitura em competência prática de IA aplicada: entender impacto, decisão, processos, estratégia, AI Factory, LLMs, RAG, agentes, automações e produtos reais.</p>
+          <p>O eixo central não é apenas “ler livros de IA”. A sequência foi estruturada para formar um desenvolvedor capaz de usar IA no próprio workflow, identificar oportunidades de valor, desenhar sistemas com IA, implementar LLMs/RAG/agentes com código e operar soluções com avaliação, segurança e monitoramento.</p>
+          <div class="callout purple">
+            <h3>Posicionamento final esperado</h3>
+            <p>Desenvolvedor com base em backend, dados, LLMs, RAG, agentes, avaliação, cloud e capacidade de transformar IA em sistema produtivo.</p>
+          </div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><span>9</span><small>Livros-base</small></div>
+          <div class="metric"><span>64</span><small>Semanas no index</small></div>
+          <div class="metric"><span>220–340h</span><small>Leitura + prática</small></div>
+          <div class="metric"><span>10+</span><small>Entregáveis</small></div>
+        </div>
+      </div>
+      <div class="grid4">
+        <div class="mini-card"><strong>Primeiro eixo</strong><span>Fluência com IA, decisão, produtividade e validação crítica de respostas.</span></div>
+        <div class="mini-card"><strong>Segundo eixo</strong><span>IA empresarial, processos, cargos, estratégia, dados, cultura e governança.</span></div>
+        <div class="mini-card"><strong>Terceiro eixo</strong><span>LLMs técnicos: tokenização, attention, GPT, pré-treinamento, fine-tuning e LoRA.</span></div>
+        <div class="mini-card"><strong>Quarto eixo</strong><span>Agentes: ferramentas, memória, raciocínio, segurança, escala, logs e fallback humano.</span></div>
+      </div>
+    </section><section class="section" data-search-section="" id="cronograma">
+    <div class="section-header">
+      <div>
+        <h2>Cronograma da trilha no index</h2>
+        <p class="section-subtitle">Como encaixar a leitura e a prática dentro da rotina diária.</p>
+      </div>
+      <span class="section-badge">Rotina</span>
     </div>
-    <div class="metrics-grid">
-      <div class="metric-pill"><span>9</span><small>Livros-base</small></div>
-      <div class="metric-pill"><span>64</span><small>Semanas no index</small></div>
-      <div class="metric-pill"><span>220–340h</span><small>Leitura + prática</small></div>
-      <div class="metric-pill"><span>10+</span><small>Entregáveis</small></div>
-    </div>
-  </div>
-
-  <div class="doc-grid-4">
-    <div class="mini-card"><strong>Primeiro eixo</strong><span>Fluência com IA, decisão, produtividade e validação crítica de respostas.</span></div>
-    <div class="mini-card"><strong>Segundo eixo</strong><span>IA empresarial, processos, cargos, estratégia, dados, cultura e governança.</span></div>
-    <div class="mini-card"><strong>Terceiro eixo</strong><span>LLMs técnicos: tokenização, attention, GPT, pré-treinamento, fine-tuning e LoRA.</span></div>
-    <div class="mini-card"><strong>Quarto eixo</strong><span>Agentes: ferramentas, memória, raciocínio, segurança, escala, logs e fallback humano.</span></div>
-  </div>
-</section>
-
-<section id="cronograma" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Cronograma da trilha no index</h2>
-      <p class="section-subtitle">Como encaixar a leitura e a prática dentro da rotina diária.</p>
-    </div>
-    <span class="section-badge">Rotina</span>
-  </div>
-
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table">
-      <thead><tr><th>Bloco diário</th><th>Duração</th><th>Uso na trilha de IA</th><th>Resultado esperado</th></tr></thead>
-      <tbody>
+    <div class="table-wrap">
+      <table class="">
+        <thead><tr><th>Bloco diário</th><th>Duração</th><th>Uso na trilha de IA</th><th>Resultado esperado</th></tr></thead>
+        <tbody>
         <tr><td>20:30–22:00</td><td>1h30</td><td>Leitura estruturada dos livros, fichamento, extração de conceitos e execução prática ligada ao livro atual.</td><td>Progresso contínuo nos 9 livros e geração de artefatos por fase.</td></tr>
         <tr><td>23:00–23:30</td><td>30min</td><td>IA no workflow: revisar PR, explicar erro, gerar hipótese de debug, validar resposta, registrar aprendizados.</td><td>Consolidação diária e uso real da IA como par técnico.</td></tr>
         <tr><td>Blocos Python/Banco/DevOps</td><td>Variável</td><td>Suporte técnico paralelo para APIs, dados, embeddings, RAG, vector DB, Docker, CI/CD, observabilidade e deploy.</td><td>Evitar que a leitura técnica trave por falta de base prática.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="callout accent-orange">
-    <h3>Regra de execução da trilha</h3>
-    <p>Todo livro precisa gerar ao menos um artefato técnico ou estratégico: workflow, mapa de decisão, diagnóstico, processo redesenhado, arquitetura, roadmap, notebook, API, classificador, fine-tuning, agente ou relatório de avaliação.</p>
-  </div>
-</section>
-
-<section id="sequencia" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Sequência macro de estudo</h2>
-      <p class="section-subtitle">A ordem correta evita estudar agentes ou LLMs sem visão de valor, decisão e processo.</p>
+        </tbody>
+      </table>
     </div>
-    <span class="section-badge">Ordem macro</span>
-  </div>
-
-  <p>A progressão recomendada é: <strong>uso prático da IA → economia da decisão → IA empresarial → redesenho de processos → organizações AI-fueled → AI Factory → roadmap de execução → fundamentos técnicos de LLMs → agentes de IA</strong>.</p>
-
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table">
-      <thead><tr><th>Macroetapa</th><th>Livros</th><th>Objetivo</th><th>Entrega recomendada</th></tr></thead>
-      <tbody>
+    <div class="callout orange">
+      <h3>Regra de execução da trilha</h3>
+      <p>Todo livro precisa gerar ao menos um artefato técnico ou estratégico: workflow, mapa de decisão, diagnóstico, processo redesenhado, arquitetura, roadmap, notebook, API, classificador, fine-tuning, agente ou relatório de avaliação.</p>
+    </div>
+  </section><section class="section" data-search-section="" id="sequencia">
+    <div class="section-header">
+      <div>
+        <h2>Sequência macro de estudo</h2>
+        <p class="section-subtitle">A ordem correta evita estudar agentes ou LLMs sem visão de valor, decisão e processo.</p>
+      </div>
+      <span class="section-badge">Ordem macro</span>
+    </div>
+    <p>A progressão recomendada é: <strong>uso prático da IA → economia da decisão → IA empresarial → redesenho de processos → organizações AI-fueled → AI Factory → roadmap de execução → fundamentos técnicos de LLMs → agentes de IA</strong>.</p>
+    <div class="table-wrap">
+      <table class="">
+        <thead><tr><th>Macroetapa</th><th>Livros</th><th>Objetivo</th><th>Entrega recomendada</th></tr></thead>
+        <tbody>
         <tr><td>1</td><td>Co-Intelligence + Prediction Machines</td><td>Ganhar fluência com IA e entender IA como previsão/decisão.</td><td>Workflow pessoal de IA + mapa de decisões com IA.</td></tr>
         <tr><td>2</td><td>The AI Advantage + Human + Machine</td><td>Entender IA em empresas, processos, cargos e redesenho de trabalho.</td><td>Mapa de processo humano + IA para um negócio real.</td></tr>
         <tr><td>3</td><td>All-In on AI + Competing in the Age of AI</td><td>Entender empresas AI-fueled, dados, tecnologia, AI Factory e estratégia digital.</td><td>Arquitetura conceitual de produto/SaaS com IA.</td></tr>
         <tr><td>4</td><td>Untangling AI</td><td>Transformar conhecimento em roadmap, execução e automação planejada.</td><td>Roadmap de 30/60/90 dias de IA para um nicho.</td></tr>
         <tr><td>5</td><td>Build a Large Language Model</td><td>Aprofundar LLMs tecnicamente com Python/PyTorch.</td><td>Mini GPT, classificador e fine-tuning de instruções.</td></tr>
         <tr><td>6</td><td>Agentic Artificial Intelligence</td><td>Criar agentes com ferramentas, memória, raciocínio, segurança e escala.</td><td>Agente RAG com ferramentas, logs, avaliação e fallback humano.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section id="livros" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Os 9 livros da trilha</h2>
-      <p class="section-subtitle">O que estudar em cada livro, o que extrair e qual entrega criar.</p>
+        </tbody>
+      </table>
     </div>
-    <span class="section-badge">Biblioteca IA</span>
-  </div>
-
-  <div class="phase-doc-grid">
-    <article class="book-card" style="--card-accent:#7F77DD" data-search-section>
-      <div class="book-head"><h3>1. Co-Intelligence — Ethan Mollick</h3><span>Fluência prática</span></div>
-      <p><strong>Foco:</strong> IA generativa como parceira de trabalho: coworker, tutor, coach, criatividade, validação e futuro do trabalho.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>Creating Alien Minds e Aligning the Alien.</li>
-        <li>Four Rules for Co-Intelligence.</li>
-        <li>AI as Coworker, AI as Tutor e AI as Coach.</li>
-        <li>Como estudar, programar, documentar e pesquisar com IA sem terceirizar julgamento.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Workflow pessoal de IA: biblioteca de prompts, processo de validação, checklist anti-alucinação e rotina de uso em código, estudo, documentação e produto.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#38BDF8" data-search-section>
-      <div class="book-head"><h3>2. Prediction Machines</h3><span>Decisão e ROI</span></div>
-      <p><strong>Foco:</strong> IA como tecnologia que reduz o custo da previsão e muda decisões, julgamento, ações, fluxos de trabalho e risco.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>Cheap Changes Everything.</li>
-        <li>Prediction, Decision Making, Judgment e Action.</li>
-        <li>Deconstructing Workflows e Decomposing Decisions.</li>
-        <li>Managing AI Risk: privacidade, controle, acurácia e autonomia.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Mapa de 10 decisões em um sistema/produto/empresa, separando previsão, julgamento humano, ação, métrica de resultado, risco e ROI esperado.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#52B788" data-search-section>
-      <div class="book-head"><h3>3. The AI Advantage — Thomas H. Davenport</h3><span>IA empresarial</span></div>
-      <p><strong>Foco:</strong> Uso realista de IA em empresas, estratégia cognitiva, processos, tarefas, habilidades, abordagens técnicas e ética.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>AI Comes of Age — Slowly.</li>
-        <li>AI in the Enterprise e What Are Companies Doing Today?</li>
-        <li>Cognitive Strategy e AI Tasks and Business Processes.</li>
-        <li>Jobs and Skills, Technical Approaches e Ethical Implications.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Diagnóstico de IA para pequeno negócio: dores, tarefas, dados disponíveis, automações possíveis, riscos e backlog de casos de uso priorizados.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#F59E0B" data-search-section>
-      <div class="book-head"><h3>4. Human + Machine</h3><span>Processos</span></div>
-      <p><strong>Foco:</strong> Colaboração humano-máquina, missing middle, responsible AI, produtividade, redesenho de processos e fusion skills.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>AI em produção, supply chain, funções corporativas, R&D, atendimento, vendas e marketing.</li>
-        <li>The Missing Middle e Reimagining Processes with AI.</li>
-        <li>Responsible AI e papéis humanos no desenvolvimento/deploy.</li>
-        <li>Eight New Fusion Skills for an AI Workplace.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Mapa de processo humano + IA: tarefas humanas, tarefas automatizáveis, tarefas híbridas, pontos de controle humano e métricas de produtividade.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#7F77DD" data-search-section>
-      <div class="book-head"><h3>5. All-In on AI</h3><span>AI-fueled</span></div>
-      <p><strong>Foco:</strong> Como empresas maduras escalam IA de verdade: lado humano, estratégia, dados, tecnologia, capacidades e casos de uso por indústria.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>What Does It Mean to Be AI Fueled?</li>
-        <li>The Human Side, Strategy, Technology and Data.</li>
-        <li>Capabilities, Industry Use Cases e Becoming AI Fueled.</li>
-        <li>Por que pilotos isolados não bastam para capturar valor.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Blueprint de empresa/produto AI-fueled: dados, tecnologia, MLOps, cultura, governança, capabilities e casos de uso priorizados.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#38BDF8" data-search-section>
-      <div class="book-head"><h3>6. Competing in the Age of AI</h3><span>AI Factory</span></div>
-      <p><strong>Foco:</strong> Firma digital, operating model, AI Factory, escala, escopo, aprendizado, estratégia, ética e liderança.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>The Age of AI, Rethinking the Firm e The AI Factory.</li>
-        <li>Rearchitecting the Firm e Becoming an AI Company.</li>
-        <li>Strategy for a New Age, Ethics e Leadership Mandate.</li>
-        <li>Digital scale, digital scope e learning loops.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Arquitetura de AI Factory: dados → modelos → decisões → ações → feedback → governança → melhoria contínua.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#52B788" data-search-section>
-      <div class="book-head"><h3>7. Untangling AI — Matt Kesby</h3><span>Roadmap</span></div>
-      <p><strong>Foco:</strong> Transformação com estratégia, pessoas, tecnologia, execução, agentes de IA, automação planejada e impacto em valuation.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>Strategy: AI Strategic Roadmap.</li>
-        <li>People: AI-Powered People.</li>
-        <li>Technology: Navigating AI Integration.</li>
-        <li>Execution: AI-Enabled Execution.</li>
-        <li>AI Agents + Automation Planning.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Roadmap 30/60/90 dias para aplicar IA em um nicho: prioridades, riscos, dados, pessoas, tecnologia, automações, métricas e plano de execução.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#F59E0B" data-search-section>
-      <div class="book-head"><h3>8. Build a Large Language Model</h3><span>LLMs técnicos</span></div>
-      <p><strong>Foco:</strong> Construir um LLM do zero com Python/PyTorch para entender tokenização, attention, transformer, pretraining e fine-tuning.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>Working with text data: tokenização, BPE, sliding window e embeddings.</li>
-        <li>Self-attention, causal attention e multi-head attention.</li>
-        <li>GPT model, layer norm, GELU, shortcut connections e transformer blocks.</li>
-        <li>Pretraining, evaluation, temperature, top-k, classification fine-tuning, instruction fine-tuning e LoRA.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Mini GPT educacional + classificador + instruction fine-tuning, com notebooks, métricas, README e explicação técnica dos trade-offs.</p>
-    </article>
-
-    <article class="book-card" style="--card-accent:#F87171" data-search-section>
-      <div class="book-head"><h3>9. Agentic Artificial Intelligence</h3><span>Agentes</span></div>
-      <p><strong>Foco:</strong> Criar e escalar agentes com ações, ferramentas, raciocínio, memória, colaboração humano-agente, safeguards e governança.</p>
-      <h4>Temas prioritários</h4>
-      <ul class="doc-list">
-        <li>The Five Levels of AI Agents.</li>
-        <li>Action: tools e tool usage.</li>
-        <li>Reasoning, multi-agent systems e reliability.</li>
-        <li>Memory: short-term, long-term, feedback loops e best practices.</li>
-        <li>Building successful agents, business models, scaling e safeguards.</li>
-      </ul>
-      <h4>Entregável</h4>
-      <p>Agente RAG com ferramentas, memória, logs, avaliação, limites de ação, human-in-the-loop, fallback humano e documentação de segurança.</p>
-    </article>
-  </div>
-</section>
-
-<section id="roadmap" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Roadmap em 8 fases conforme o index</h2>
-      <p class="section-subtitle">Distribuição dos livros e entregáveis dentro das 64 semanas do plano integrado.</p>
+  </section><section class="section" data-search-section="" id="livros">
+    <div class="section-header">
+      <div>
+        <h2>Os 9 livros da trilha</h2>
+        <p class="section-subtitle">O que estudar em cada livro, o que extrair e qual entrega criar.</p>
+      </div>
+      <span class="section-badge">Biblioteca IA</span>
     </div>
-    <span class="section-badge">64 semanas</span>
-  </div>
-
-  <div class="phase-doc-grid">
-    <article class="phase-doc-card" style="--card-accent:#7F77DD">
-      <div class="phase-doc-head"><h3>Fase 1 — Base técnica + fundamentos</h3><span>Sem 1–8</span></div>
-      <h4>Livros</h4>
-      <ul class="doc-list"><li>Sem 1–2: Co-Intelligence.</li><li>Sem 3–4: Prediction Machines.</li><li>Sem 5–6: The AI Advantage.</li><li>Sem 7–8: Human + Machine.</li></ul>
-      <h4>Foco</h4>
-      <p>Construir fluência de uso, entender IA como previsão/decisão, identificar casos de uso empresariais e redesenhar processos com colaboração humano-máquina.</p>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Workflow pessoal de IA.</li><li>Mapa de 10 decisões.</li><li>Diagnóstico de IA para pequeno negócio.</li><li>Mapa de processo humano + IA.</li></ul>
-    </article>
-
-    <article class="phase-doc-card" style="--card-accent:#38BDF8">
-      <div class="phase-doc-head"><h3>Fase 2 — Desenvolvimento profissional</h3><span>Sem 9–16</span></div>
-      <h4>Livros</h4>
-      <ul class="doc-list"><li>Sem 9–10: All-In on AI.</li><li>Sem 11–12: Competing in the Age of AI.</li><li>Sem 13–14: Untangling AI.</li><li>Sem 15–16: início técnico guiado por Build LLM.</li></ul>
-      <h4>Foco</h4>
-      <p>Entender organizações AI-fueled, AI Factory, strategy-to-execution e iniciar a ponte para LLMs técnicos.</p>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Blueprint de organização AI-fueled.</li><li>Arquitetura de AI Factory para microSaaS.</li><li>Roadmap 30/60/90 dias.</li><li>Setup Python/PyTorch e preparação técnica.</li></ul>
-    </article>
-
-    <article class="phase-doc-card" style="--card-accent:#52B788">
-      <div class="phase-doc-head"><h3>Fase 3 — Engenharia de software real</h3><span>Sem 17–24</span></div>
-      <h4>Livro</h4>
-      <p>Build a Large Language Model — estudo com código.</p>
-      <h4>Foco técnico</h4>
-      <ul class="doc-list"><li>Tokenização, BPE e preparação de texto.</li><li>Embeddings e positional encodings.</li><li>Self-attention, causal attention e multi-head attention.</li><li>Arquitetura GPT pequena.</li></ul>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Tokenizer educacional.</li><li>Notebook de attention explicado.</li><li>Mini GPT gerando texto.</li><li>Post técnico: “Como attention funciona com código”.</li></ul>
-    </article>
-
-    <article class="phase-doc-card" style="--card-accent:#F59E0B">
-      <div class="phase-doc-head"><h3>Fase 4 — Arquitetura + candidaturas</h3><span>Sem 25–32</span></div>
-      <h4>Livro</h4>
-      <p>Build a Large Language Model — continuação e fechamento técnico.</p>
-      <h4>Foco técnico</h4>
-      <ul class="doc-list"><li>Training loop, loss e avaliação.</li><li>Pretraining em dados não rotulados.</li><li>Decoding: temperature e top-k.</li><li>Fine-tuning para classificação.</li><li>Instruction fine-tuning e LoRA.</li></ul>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Classificador com LLM fine-tuned.</li><li>Modelo instruction-tuned educacional.</li><li>Relatório de avaliação e limitações.</li><li>README técnico para portfólio.</li></ul>
-    </article>
-
-    <article class="phase-doc-card" style="--card-accent:#7F77DD">
-      <div class="phase-doc-head"><h3>Fase 5 — Cloud + sistemas distribuídos</h3><span>Sem 33–40</span></div>
-      <h4>Livro</h4>
-      <p>Agentic Artificial Intelligence — início.</p>
-      <h4>Foco</h4>
-      <ul class="doc-list"><li>5 níveis de agentes: de automação à autonomia.</li><li>Action: ferramentas como blocos de construção.</li><li>Reasoning: pausa, reflexão e multi-agent systems.</li><li>Memory: memória curta, longa e feedback loops.</li></ul>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Especificação de agente por nível de autonomia.</li><li>Catálogo de tools seguras.</li><li>Protótipo de agente com tool use controlado.</li><li>Mapa de riscos e limites de ação.</li></ul>
-    </article>
-
-    <article class="phase-doc-card" style="--card-accent:#38BDF8">
-      <div class="phase-doc-head"><h3>Fase 6 — IA aplicada + RAG + agentes</h3><span>Sem 41–48</span></div>
-      <h4>Livro</h4>
-      <p>Agentic Artificial Intelligence — continuação.</p>
-      <h4>Foco</h4>
-      <ul class="doc-list"><li>Guia prático para construir agentes.</li><li>Oportunidades agentic, papéis, capacidades e implementação.</li><li>Modelos de negócio para economia de agentes.</li><li>Human-agent collaboration, trust, governance e scaling.</li></ul>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Agente RAG com ferramentas.</li><li>Memória, logs, avaliação e fallback humano.</li><li>Runbook de erro e limites de autonomia.</li><li>Dashboard inicial de custo, latência e qualidade.</li></ul>
-    </article>
-
-    <article class="phase-doc-card" style="--card-accent:#52B788">
-      <div class="phase-doc-head"><h3>Fase 7 — Produto + frontend + escala</h3><span>Sem 49–56</span></div>
-      <h4>Foco</h4>
-      <p>Consolidar os 9 livros e transformar conhecimento em produto, portfólio e arquitetura demonstrável.</p>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Projeto integrado: microSaaS com IA ou plataforma de agentes.</li><li>Documentação de AI Factory + RAG + agentes.</li><li>Artigos técnicos no blog.</li><li>Demo com métricas de qualidade, custo e latência.</li></ul>
-    </article>
-
-    <article class="phase-doc-card" style="--card-accent:#F87171">
-      <div class="phase-doc-head"><h3>Fase 8 — Portfólio final + negociação</h3><span>Sem 57–64</span></div>
-      <h4>Foco</h4>
-      <p>Transformar a trilha em posicionamento profissional e monetização: consultoria, produtos digitais, automações e sistemas de IA aplicados.</p>
-      <h4>Entregáveis</h4>
-      <ul class="doc-list"><li>Case study completo: problema → arquitetura → implementação → métricas.</li><li>Vídeo técnico de 15–20 min.</li><li>Pacote de diagnóstico de IA.</li><li>Oferta de microSaaS/agente vertical.</li><li>Plano de evolução para LLMOps, fine-tuning e agentes em produção.</li></ul>
-    </article>
-  </div>
-</section>
-
-<section id="tecnica" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Sequência técnica recomendada após os livros</h2>
-      <p class="section-subtitle">Caminho mais empregável para programação em IA aplicada.</p>
+    <div class="phase-grid">
+      <article class="phase-card" data-search-section="" style="--card-accent:#7F77DD">
+        <div class="phase-head"><h3>1. Co-Intelligence — Ethan Mollick</h3><span>Fluência prática</span></div>
+        <p><strong>Foco:</strong> IA generativa como parceira de trabalho: coworker, tutor, coach, criatividade, validação e futuro do trabalho.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>Creating Alien Minds e Aligning the Alien.</li>
+          <li>Four Rules for Co-Intelligence.</li>
+          <li>AI as Coworker, AI as Tutor e AI as Coach.</li>
+          <li>Como estudar, programar, documentar e pesquisar com IA sem terceirizar julgamento.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Workflow pessoal de IA: biblioteca de prompts, processo de validação, checklist anti-alucinação e rotina de uso em código, estudo, documentação e produto.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#38BDF8">
+        <div class="phase-head"><h3>2. Prediction Machines</h3><span>Decisão e ROI</span></div>
+        <p><strong>Foco:</strong> IA como tecnologia que reduz o custo da previsão e muda decisões, julgamento, ações, fluxos de trabalho e risco.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>Cheap Changes Everything.</li>
+          <li>Prediction, Decision Making, Judgment e Action.</li>
+          <li>Deconstructing Workflows e Decomposing Decisions.</li>
+          <li>Managing AI Risk: privacidade, controle, acurácia e autonomia.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Mapa de 10 decisões em um sistema/produto/empresa, separando previsão, julgamento humano, ação, métrica de resultado, risco e ROI esperado.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#52B788">
+        <div class="phase-head"><h3>3. The AI Advantage — Thomas H. Davenport</h3><span>IA empresarial</span></div>
+        <p><strong>Foco:</strong> Uso realista de IA em empresas, estratégia cognitiva, processos, tarefas, habilidades, abordagens técnicas e ética.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>AI Comes of Age — Slowly.</li>
+          <li>AI in the Enterprise e What Are Companies Doing Today?</li>
+          <li>Cognitive Strategy e AI Tasks and Business Processes.</li>
+          <li>Jobs and Skills, Technical Approaches e Ethical Implications.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Diagnóstico de IA para pequeno negócio: dores, tarefas, dados disponíveis, automações possíveis, riscos e backlog de casos de uso priorizados.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#F59E0B">
+        <div class="phase-head"><h3>4. Human + Machine</h3><span>Processos</span></div>
+        <p><strong>Foco:</strong> Colaboração humano-máquina, missing middle, responsible AI, produtividade, redesenho de processos e fusion skills.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>AI em produção, supply chain, funções corporativas, R&amp;D, atendimento, vendas e marketing.</li>
+          <li>The Missing Middle e Reimagining Processes with AI.</li>
+          <li>Responsible AI e papéis humanos no desenvolvimento/deploy.</li>
+          <li>Eight New Fusion Skills for an AI Workplace.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Mapa de processo humano + IA: tarefas humanas, tarefas automatizáveis, tarefas híbridas, pontos de controle humano e métricas de produtividade.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#7F77DD">
+        <div class="phase-head"><h3>5. All-In on AI</h3><span>AI-fueled</span></div>
+        <p><strong>Foco:</strong> Como empresas maduras escalam IA de verdade: lado humano, estratégia, dados, tecnologia, capacidades e casos de uso por indústria.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>What Does It Mean to Be AI Fueled?</li>
+          <li>The Human Side, Strategy, Technology and Data.</li>
+          <li>Capabilities, Industry Use Cases e Becoming AI Fueled.</li>
+          <li>Por que pilotos isolados não bastam para capturar valor.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Blueprint de empresa/produto AI-fueled: dados, tecnologia, MLOps, cultura, governança, capabilities e casos de uso priorizados.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#38BDF8">
+        <div class="phase-head"><h3>6. Competing in the Age of AI</h3><span>AI Factory</span></div>
+        <p><strong>Foco:</strong> Firma digital, operating model, AI Factory, escala, escopo, aprendizado, estratégia, ética e liderança.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>The Age of AI, Rethinking the Firm e The AI Factory.</li>
+          <li>Rearchitecting the Firm e Becoming an AI Company.</li>
+          <li>Strategy for a New Age, Ethics e Leadership Mandate.</li>
+          <li>Digital scale, digital scope e learning loops.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Arquitetura de AI Factory: dados → modelos → decisões → ações → feedback → governança → melhoria contínua.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#52B788">
+        <div class="phase-head"><h3>7. Untangling AI — Matt Kesby</h3><span>Roadmap</span></div>
+        <p><strong>Foco:</strong> Transformação com estratégia, pessoas, tecnologia, execução, agentes de IA, automação planejada e impacto em valuation.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>Strategy: AI Strategic Roadmap.</li>
+          <li>People: AI-Powered People.</li>
+          <li>Technology: Navigating AI Integration.</li>
+          <li>Execution: AI-Enabled Execution.</li>
+          <li>AI Agents + Automation Planning.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Roadmap 30/60/90 dias para aplicar IA em um nicho: prioridades, riscos, dados, pessoas, tecnologia, automações, métricas e plano de execução.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#F59E0B">
+        <div class="phase-head"><h3>8. Build a Large Language Model</h3><span>LLMs técnicos</span></div>
+        <p><strong>Foco:</strong> Construir um LLM do zero com Python/PyTorch para entender tokenização, attention, transformer, pretraining e fine-tuning.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>Working with text data: tokenização, BPE, sliding window e embeddings.</li>
+          <li>Self-attention, causal attention e multi-head attention.</li>
+          <li>GPT model, layer norm, GELU, shortcut connections e transformer blocks.</li>
+          <li>Pretraining, evaluation, temperature, top-k, classification fine-tuning, instruction fine-tuning e LoRA.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Mini GPT educacional + classificador + instruction fine-tuning, com notebooks, métricas, README e explicação técnica dos trade-offs.</p>
+      </article>
+      <article class="phase-card" data-search-section="" style="--card-accent:#F87171">
+        <div class="phase-head"><h3>9. Agentic Artificial Intelligence</h3><span>Agentes</span></div>
+        <p><strong>Foco:</strong> Criar e escalar agentes com ações, ferramentas, raciocínio, memória, colaboração humano-agente, safeguards e governança.</p>
+        <h4>Temas prioritários</h4>
+        <ul class="doc-list">
+          <li>The Five Levels of AI Agents.</li>
+          <li>Action: tools e tool usage.</li>
+          <li>Reasoning, multi-agent systems e reliability.</li>
+          <li>Memory: short-term, long-term, feedback loops e best practices.</li>
+          <li>Building successful agents, business models, scaling e safeguards.</li>
+        </ul>
+        <h4>Entregável</h4>
+        <p>Agente RAG com ferramentas, memória, logs, avaliação, limites de ação, human-in-the-loop, fallback humano e documentação de segurança.</p>
+      </article>
     </div>
-    <span class="section-badge">Stack IA</span>
-  </div>
-
-  <p>A sequência técnica mais forte é: <strong>Python → ML básico → APIs de LLM → embeddings → RAG → avaliação → agentes → LLMOps → fine-tuning → produto/SaaS</strong>. Ela é mais útil para mercado e portfólio do que tentar treinar grandes modelos do zero no início.</p>
-
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table">
-      <thead><tr><th>Ordem</th><th>Tópico técnico</th><th>O que dominar</th><th>Entrega prática</th></tr></thead>
-      <tbody>
+  </section><section class="section" data-search-section="" id="roadmap">
+    <div class="section-header">
+      <div>
+        <h2>Roadmap em 8 fases conforme o index</h2>
+        <p class="section-subtitle">Distribuição dos livros e entregáveis dentro das 64 semanas do plano integrado.</p>
+      </div>
+      <span class="section-badge">64 semanas</span>
+    </div>
+    <div class="phase-grid">
+      <article class="phase-card" style="--card-accent:#7F77DD">
+        <div class="phase-head"><h3>Fase 1 — Base técnica + fundamentos</h3><span>Sem 1–8</span></div>
+        <h4>Livros</h4>
+        <ul class="doc-list"><li>Sem 1–2: Co-Intelligence.</li><li>Sem 3–4: Prediction Machines.</li><li>Sem 5–6: The AI Advantage.</li><li>Sem 7–8: Human + Machine.</li></ul>
+        <h4>Foco</h4>
+        <p>Construir fluência de uso, entender IA como previsão/decisão, identificar casos de uso empresariais e redesenhar processos com colaboração humano-máquina.</p>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Workflow pessoal de IA.</li><li>Mapa de 10 decisões.</li><li>Diagnóstico de IA para pequeno negócio.</li><li>Mapa de processo humano + IA.</li></ul>
+      </article>
+      <article class="phase-card" style="--card-accent:#38BDF8">
+        <div class="phase-head"><h3>Fase 2 — Desenvolvimento profissional</h3><span>Sem 9–16</span></div>
+        <h4>Livros</h4>
+        <ul class="doc-list"><li>Sem 9–10: All-In on AI.</li><li>Sem 11–12: Competing in the Age of AI.</li><li>Sem 13–14: Untangling AI.</li><li>Sem 15–16: início técnico guiado por Build LLM.</li></ul>
+        <h4>Foco</h4>
+        <p>Entender organizações AI-fueled, AI Factory, strategy-to-execution e iniciar a ponte para LLMs técnicos.</p>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Blueprint de organização AI-fueled.</li><li>Arquitetura de AI Factory para microSaaS.</li><li>Roadmap 30/60/90 dias.</li><li>Setup Python/PyTorch e preparação técnica.</li></ul>
+      </article>
+      <article class="phase-card" style="--card-accent:#52B788">
+        <div class="phase-head"><h3>Fase 3 — Engenharia de software real</h3><span>Sem 17–24</span></div>
+        <h4>Livro</h4>
+        <p>Build a Large Language Model — estudo com código.</p>
+        <h4>Foco técnico</h4>
+        <ul class="doc-list"><li>Tokenização, BPE e preparação de texto.</li><li>Embeddings e positional encodings.</li><li>Self-attention, causal attention e multi-head attention.</li><li>Arquitetura GPT pequena.</li></ul>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Tokenizer educacional.</li><li>Notebook de attention explicado.</li><li>Mini GPT gerando texto.</li><li>Post técnico: “Como attention funciona com código”.</li></ul>
+      </article>
+      <article class="phase-card" style="--card-accent:#F59E0B">
+        <div class="phase-head"><h3>Fase 4 — Arquitetura + candidaturas</h3><span>Sem 25–32</span></div>
+        <h4>Livro</h4>
+        <p>Build a Large Language Model — continuação e fechamento técnico.</p>
+        <h4>Foco técnico</h4>
+        <ul class="doc-list"><li>Training loop, loss e avaliação.</li><li>Pretraining em dados não rotulados.</li><li>Decoding: temperature e top-k.</li><li>Fine-tuning para classificação.</li><li>Instruction fine-tuning e LoRA.</li></ul>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Classificador com LLM fine-tuned.</li><li>Modelo instruction-tuned educacional.</li><li>Relatório de avaliação e limitações.</li><li>README técnico para portfólio.</li></ul>
+      </article>
+      <article class="phase-card" style="--card-accent:#7F77DD">
+        <div class="phase-head"><h3>Fase 5 — Cloud + sistemas distribuídos</h3><span>Sem 33–40</span></div>
+        <h4>Livro</h4>
+        <p>Agentic Artificial Intelligence — início.</p>
+        <h4>Foco</h4>
+        <ul class="doc-list"><li>5 níveis de agentes: de automação à autonomia.</li><li>Action: ferramentas como blocos de construção.</li><li>Reasoning: pausa, reflexão e multi-agent systems.</li><li>Memory: memória curta, longa e feedback loops.</li></ul>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Especificação de agente por nível de autonomia.</li><li>Catálogo de tools seguras.</li><li>Protótipo de agente com tool use controlado.</li><li>Mapa de riscos e limites de ação.</li></ul>
+      </article>
+      <article class="phase-card" style="--card-accent:#38BDF8">
+        <div class="phase-head"><h3>Fase 6 — IA aplicada + RAG + agentes</h3><span>Sem 41–48</span></div>
+        <h4>Livro</h4>
+        <p>Agentic Artificial Intelligence — continuação.</p>
+        <h4>Foco</h4>
+        <ul class="doc-list"><li>Guia prático para construir agentes.</li><li>Oportunidades agentic, papéis, capacidades e implementação.</li><li>Modelos de negócio para economia de agentes.</li><li>Human-agent collaboration, trust, governance e scaling.</li></ul>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Agente RAG com ferramentas.</li><li>Memória, logs, avaliação e fallback humano.</li><li>Runbook de erro e limites de autonomia.</li><li>Dashboard inicial de custo, latência e qualidade.</li></ul>
+      </article>
+      <article class="phase-card" style="--card-accent:#52B788">
+        <div class="phase-head"><h3>Fase 7 — Produto + frontend + escala</h3><span>Sem 49–56</span></div>
+        <h4>Foco</h4>
+        <p>Consolidar os 9 livros e transformar conhecimento em produto, portfólio e arquitetura demonstrável.</p>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Projeto integrado: microSaaS com IA ou plataforma de agentes.</li><li>Documentação de AI Factory + RAG + agentes.</li><li>Artigos técnicos no blog.</li><li>Demo com métricas de qualidade, custo e latência.</li></ul>
+      </article>
+      <article class="phase-card" style="--card-accent:#F87171">
+        <div class="phase-head"><h3>Fase 8 — Portfólio final + negociação</h3><span>Sem 57–64</span></div>
+        <h4>Foco</h4>
+        <p>Transformar a trilha em posicionamento profissional e monetização: consultoria, produtos digitais, automações e sistemas de IA aplicados.</p>
+        <h4>Entregáveis</h4>
+        <ul class="doc-list"><li>Case study completo: problema → arquitetura → implementação → métricas.</li><li>Vídeo técnico de 15–20 min.</li><li>Pacote de diagnóstico de IA.</li><li>Oferta de microSaaS/agente vertical.</li><li>Plano de evolução para LLMOps, fine-tuning e agentes em produção.</li></ul>
+      </article>
+    </div>
+  </section><section class="section" data-search-section="" id="tecnica">
+    <div class="section-header">
+      <div>
+        <h2>Sequência técnica recomendada após os livros</h2>
+        <p class="section-subtitle">Caminho mais empregável para programação em IA aplicada.</p>
+      </div>
+      <span class="section-badge">Stack IA</span>
+    </div>
+    <p>A sequência técnica mais forte é: <strong>Python → ML básico → APIs de LLM → embeddings → RAG → avaliação → agentes → LLMOps → fine-tuning → produto/SaaS</strong>. Ela é mais útil para mercado e portfólio do que tentar treinar grandes modelos do zero no início.</p>
+    <div class="table-wrap">
+      <table class="">
+        <thead><tr><th>Ordem</th><th>Tópico técnico</th><th>O que dominar</th><th>Entrega prática</th></tr></thead>
+        <tbody>
         <tr><td>1</td><td>Python para IA</td><td>Scripts, notebooks, pandas, tratamento de texto, consumo de APIs, typing e pytest.</td><td>Pacote de utilitários para ingestão e limpeza de documentos.</td></tr>
         <tr><td>2</td><td>ML básico</td><td>Classificação, regressão, métricas, validação, overfitting, pipelines e baseline.</td><td>Classificador simples com métricas e validação.</td></tr>
         <tr><td>3</td><td>LLMs via API</td><td>Prompting, structured output, function calling, streaming, retries e rate limit.</td><td>API backend que chama modelo e retorna resposta estruturada.</td></tr>
@@ -722,12 +1063,11 @@ a { color:#d9d4ff; }
         <tr><td>8</td><td>LLMOps</td><td>Custo, latência, qualidade, versionamento de prompt/modelo, rollback e monitoramento.</td><td>Dashboard de custo, latência, erro e qualidade.</td></tr>
         <tr><td>9</td><td>Fine-tuning/LoRA</td><td>Datasets, treinamento supervisionado, avaliação, PEFT/LoRA e limites de uso.</td><td>Modelo ajustado para classificação ou resposta em domínio específico.</td></tr>
         <tr><td>10</td><td>Produto/SaaS</td><td>Deploy, autenticação, billing, multi-tenant, logs, analytics, segurança e suporte.</td><td>MicroSaaS vertical ou agente especializado vendável.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>Arquitetura mínima de produto com IA</h3>
-  <pre class="code-block"><code class="text">frontend-nextjs/
+        </tbody>
+      </table>
+    </div>
+    <h3>Arquitetura mínima de produto com IA</h3>
+    <pre class="code-block"><code class="text">frontend-nextjs/
   app/
   components/
   lib/api-client.ts
@@ -757,129 +1097,116 @@ llmops/
   cost-dashboard
   latency-dashboard
   safety-checks</code></pre>
-</section>
-
-<section id="projetos" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Projetos práticos obrigatórios</h2>
-      <p class="section-subtitle">Cada projeto transforma leitura em evidência de portfólio.</p>
+  </section><section class="section" data-search-section="" id="projetos">
+    <div class="section-header">
+      <div>
+        <h2>Projetos práticos obrigatórios</h2>
+        <p class="section-subtitle">Cada projeto transforma leitura em evidência de portfólio.</p>
+      </div>
+      <span class="section-badge">Portfólio</span>
     </div>
-    <span class="section-badge">Portfólio</span>
-  </div>
-
-  <div class="doc-grid-3">
-    <div class="project-card"><strong>1. Workflow pessoal de IA</strong><p>Prompt library, checklist de validação, rotina de revisão de código, estudo, documentação e brainstorming de produtos.</p></div>
-    <div class="project-card"><strong>2. Mapa de decisões com IA</strong><p>Planilha ou página HTML com previsão, julgamento, ação, resultado, dados necessários, risco e ROI.</p></div>
-    <div class="project-card"><strong>3. Diagnóstico de IA para negócio</strong><p>Análise de processo, tarefas humanas, automações possíveis, dados, riscos e roadmap de implementação.</p></div>
-    <div class="project-card"><strong>4. AI Factory de microSaaS</strong><p>Arquitetura conceitual dados → modelos → decisões → ações → feedback → governança.</p></div>
-    <div class="project-card"><strong>5. Roadmap 30/60/90 dias</strong><p>Plano realista de execução com pessoas, tecnologia, dados, métricas, riscos e custos.</p></div>
-    <div class="project-card"><strong>6. Mini GPT educacional</strong><p>Implementação com tokenização, attention, transformer block, training loop, evaluation e geração de texto.</p></div>
-    <div class="project-card"><strong>7. Classificador com LLM</strong><p>Fine-tuning para classificação, métricas, comparação com baseline e relatório técnico.</p></div>
-    <div class="project-card"><strong>8. RAG com documentos</strong><p>Upload, chunking, embeddings, retrieval, geração com citações, ACL e avaliação.</p></div>
-    <div class="project-card"><strong>9. Agente RAG com ferramentas</strong><p>Tool use, memória, logs, fallback humano, limites de ação e dashboard LLMOps.</p></div>
-  </div>
-</section>
-
-<section id="checklists" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Checklists de execução</h2>
-      <p class="section-subtitle">Controles para evitar leitura passiva e garantir aplicação técnica.</p>
+    <div class="grid3">
+      <div class="mini-card"><strong>1. Workflow pessoal de IA</strong><p>Prompt library, checklist de validação, rotina de revisão de código, estudo, documentação e brainstorming de produtos.</p></div>
+      <div class="mini-card"><strong>2. Mapa de decisões com IA</strong><p>Planilha ou página HTML com previsão, julgamento, ação, resultado, dados necessários, risco e ROI.</p></div>
+      <div class="mini-card"><strong>3. Diagnóstico de IA para negócio</strong><p>Análise de processo, tarefas humanas, automações possíveis, dados, riscos e roadmap de implementação.</p></div>
+      <div class="mini-card"><strong>4. AI Factory de microSaaS</strong><p>Arquitetura conceitual dados → modelos → decisões → ações → feedback → governança.</p></div>
+      <div class="mini-card"><strong>5. Roadmap 30/60/90 dias</strong><p>Plano realista de execução com pessoas, tecnologia, dados, métricas, riscos e custos.</p></div>
+      <div class="mini-card"><strong>6. Mini GPT educacional</strong><p>Implementação com tokenização, attention, transformer block, training loop, evaluation e geração de texto.</p></div>
+      <div class="mini-card"><strong>7. Classificador com LLM</strong><p>Fine-tuning para classificação, métricas, comparação com baseline e relatório técnico.</p></div>
+      <div class="mini-card"><strong>8. RAG com documentos</strong><p>Upload, chunking, embeddings, retrieval, geração com citações, ACL e avaliação.</p></div>
+      <div class="mini-card"><strong>9. Agente RAG com ferramentas</strong><p>Tool use, memória, logs, fallback humano, limites de ação e dashboard LLMOps.</p></div>
     </div>
-    <span class="section-badge">Qualidade</span>
-  </div>
-
-  <div class="doc-grid-2">
-    <div class="callout accent-purple">
-      <h3>Checklist semanal</h3>
-      <ul class="doc-list">
-        <li>Li pelo menos 5 sessões ou 1 capítulo relevante?</li>
-        <li>Transformei o conteúdo em notas próprias?</li>
-        <li>Criei pelo menos 1 artefato prático?</li>
-        <li>Conectei o conteúdo ao blog/projeto/portfólio?</li>
-        <li>Registrei perguntas, riscos e decisões no Obsidian?</li>
-        <li>Usei IA para revisar, mas validei fontes e respostas?</li>
-      </ul>
+  </section><section class="section" data-search-section="" id="checklists">
+    <div class="section-header">
+      <div>
+        <h2>Checklists de execução</h2>
+        <p class="section-subtitle">Controles para evitar leitura passiva e garantir aplicação técnica.</p>
+      </div>
+      <span class="section-badge">Qualidade</span>
     </div>
-    <div class="callout">
-      <h3>Checklist técnico de IA aplicada</h3>
-      <ul class="doc-list">
-        <li>Existe problema de negócio claramente descrito?</li>
-        <li>Existe dado suficiente e autorizado para uso?</li>
-        <li>Existe métrica de sucesso antes de usar IA?</li>
-        <li>Existe baseline sem IA para comparação?</li>
-        <li>Existe avaliação automatizada da resposta?</li>
-        <li>Existe fallback humano e limite de ação?</li>
-        <li>Existe logging, custo, latência e segurança?</li>
-      </ul>
+    <div class="grid2">
+      <div class="callout purple">
+        <h3>Checklist semanal</h3>
+        <ul class="doc-list">
+          <li>Li pelo menos 5 sessões ou 1 capítulo relevante?</li>
+          <li>Transformei o conteúdo em notas próprias?</li>
+          <li>Criei pelo menos 1 artefato prático?</li>
+          <li>Conectei o conteúdo ao blog/projeto/portfólio?</li>
+          <li>Registrei perguntas, riscos e decisões no Obsidian?</li>
+          <li>Usei IA para revisar, mas validei fontes e respostas?</li>
+        </ul>
+      </div>
+      <div class="callout blue">
+        <h3>Checklist técnico de IA aplicada</h3>
+        <ul class="doc-list">
+          <li>Existe problema de negócio claramente descrito?</li>
+          <li>Existe dado suficiente e autorizado para uso?</li>
+          <li>Existe métrica de sucesso antes de usar IA?</li>
+          <li>Existe baseline sem IA para comparação?</li>
+          <li>Existe avaliação automatizada da resposta?</li>
+          <li>Existe fallback humano e limite de ação?</li>
+          <li>Existe logging, custo, latência e segurança?</li>
+        </ul>
+      </div>
+      <div class="callout green">
+        <h3>Checklist de RAG</h3>
+        <ul class="doc-list">
+          <li>Documentos têm origem e permissões claras?</li>
+          <li>Chunking foi testado com tamanhos diferentes?</li>
+          <li>Retrieval tem metadata filters e ACL?</li>
+          <li>Respostas citam fontes?</li>
+          <li>Existe golden dataset para avaliação?</li>
+          <li>Há teste de hallucination e groundedness?</li>
+          <li>Há medição de latência e custo por consulta?</li>
+        </ul>
+      </div>
+      <div class="callout orange">
+        <h3>Checklist de agentes</h3>
+        <ul class="doc-list">
+          <li>O agente tem objetivo e limites explícitos?</li>
+          <li>Tools têm permissões mínimas?</li>
+          <li>Ações irreversíveis exigem confirmação humana?</li>
+          <li>Memória tem escopo, expiração e auditoria?</li>
+          <li>Falhas têm retry, fallback e escalonamento?</li>
+          <li>Logs permitem reconstruir decisões?</li>
+          <li>Existe kill switch e modo seguro?</li>
+        </ul>
+      </div>
     </div>
-    <div class="callout accent-green">
-      <h3>Checklist de RAG</h3>
-      <ul class="doc-list">
-        <li>Documentos têm origem e permissões claras?</li>
-        <li>Chunking foi testado com tamanhos diferentes?</li>
-        <li>Retrieval tem metadata filters e ACL?</li>
-        <li>Respostas citam fontes?</li>
-        <li>Existe golden dataset para avaliação?</li>
-        <li>Há teste de hallucination e groundedness?</li>
-        <li>Há medição de latência e custo por consulta?</li>
-      </ul>
+  </section><section class="section" data-search-section="" id="monetizacao">
+    <div class="section-header">
+      <div>
+        <h2>Monetização possível a partir da trilha</h2>
+        <p class="section-subtitle">Caminhos realistas para transformar estudo em renda.</p>
+      </div>
+      <span class="section-badge">Produtos</span>
     </div>
-    <div class="callout accent-orange">
-      <h3>Checklist de agentes</h3>
-      <ul class="doc-list">
-        <li>O agente tem objetivo e limites explícitos?</li>
-        <li>Tools têm permissões mínimas?</li>
-        <li>Ações irreversíveis exigem confirmação humana?</li>
-        <li>Memória tem escopo, expiração e auditoria?</li>
-        <li>Falhas têm retry, fallback e escalonamento?</li>
-        <li>Logs permitem reconstruir decisões?</li>
-        <li>Existe kill switch e modo seguro?</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<section id="monetizacao" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Monetização possível a partir da trilha</h2>
-      <p class="section-subtitle">Caminhos realistas para transformar estudo em renda.</p>
-    </div>
-    <span class="section-badge">Produtos</span>
-  </div>
-
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table">
-      <thead><tr><th>Prazo</th><th>O que criar</th><th>Base dos livros</th><th>Oferta prática</th></tr></thead>
-      <tbody>
+    <div class="table-wrap">
+      <table class="">
+        <thead><tr><th>Prazo</th><th>O que criar</th><th>Base dos livros</th><th>Oferta prática</th></tr></thead>
+        <tbody>
         <tr><td>Curto prazo</td><td>Diagnóstico de IA, pacotes de prompts, automações simples, assistente de atendimento e relatórios automatizados.</td><td>Co-Intelligence, Prediction Machines, The AI Advantage, Human + Machine.</td><td>Pacote de diagnóstico + automação inicial para pequenos negócios.</td></tr>
         <tr><td>Médio prazo</td><td>RAG para documentos, dashboard com insights, microSaaS vertical e agentes para atendimento/vendas/suporte.</td><td>All-In on AI, Competing in the Age of AI, Untangling AI, Build LLM.</td><td>Produto com assinatura mensal para nicho específico.</td></tr>
         <tr><td>Longo prazo</td><td>Plataforma de agentes, AI Factory para empresas, LLMOps, avaliação de LLM, fine-tuning e produtos verticais com dados próprios.</td><td>Build LLM, Agentic AI, Competing in the Age of AI, Untangling AI.</td><td>Consultoria + SaaS + implantação técnica com governança.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="callout accent-red">
-    <h3>Alerta estratégico</h3>
-    <p>A monetização mais realista para um desenvolvedor não é treinar um grande modelo do zero no início. O caminho mais vendável é integrar IA a processos, documentos, sistemas, atendimento, análise de dados, geração de relatórios, RAG, agentes controlados e automações com medição de valor.</p>
-  </div>
-</section>
-
-<section id="consulta" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Consulta rápida por objetivo</h2>
-      <p class="section-subtitle">Use esta seção para revisar rápido qual livro/conceito consultar.</p>
+        </tbody>
+      </table>
     </div>
-    <span class="section-badge">Revisão</span>
-  </div>
-
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table dense-table">
-      <thead><tr><th>Objetivo</th><th>Livro principal</th><th>Conceitos-chave</th><th>Artefato</th></tr></thead>
-      <tbody>
+    <div class="callout orange">
+      <h3>Alerta estratégico</h3>
+      <p>A monetização mais realista para um desenvolvedor não é treinar um grande modelo do zero no início. O caminho mais vendável é integrar IA a processos, documentos, sistemas, atendimento, análise de dados, geração de relatórios, RAG, agentes controlados e automações com medição de valor.</p>
+    </div>
+  </section><section class="section" data-search-section="" id="consulta">
+    <div class="section-header">
+      <div>
+        <h2>Consulta rápida por objetivo</h2>
+        <p class="section-subtitle">Use esta seção para revisar rápido qual livro/conceito consultar.</p>
+      </div>
+      <span class="section-badge">Revisão</span>
+    </div>
+    <div class="table-wrap">
+      <table class="">
+        <thead><tr><th>Objetivo</th><th>Livro principal</th><th>Conceitos-chave</th><th>Artefato</th></tr></thead>
+        <tbody>
         <tr><td>Usar IA melhor no dia a dia</td><td>Co-Intelligence</td><td>Coworker, tutor, coach, validação, prompts.</td><td>Workflow pessoal de IA.</td></tr>
         <tr><td>Escolher casos de uso com ROI</td><td>Prediction Machines</td><td>Previsão, julgamento, decisão, ação, trade-offs.</td><td>Mapa de decisões.</td></tr>
         <tr><td>Aplicar IA em empresa tradicional</td><td>The AI Advantage</td><td>Estratégia cognitiva, processos, tarefas, skills, ética.</td><td>Diagnóstico de IA.</td></tr>
@@ -889,12 +1216,11 @@ llmops/
         <tr><td>Montar roadmap prático</td><td>Untangling AI</td><td>Strategy, people, technology, execution, automation.</td><td>Roadmap 30/60/90.</td></tr>
         <tr><td>Entender LLMs tecnicamente</td><td>Build a Large Language Model</td><td>Tokenização, attention, GPT, pretraining, fine-tuning.</td><td>Mini GPT + fine-tuning.</td></tr>
         <tr><td>Criar agentes reais</td><td>Agentic Artificial Intelligence</td><td>Action, tools, reasoning, memory, scaling, safeguards.</td><td>Agente RAG com tools.</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h3>Modelo de prompt seguro para usar no estudo</h3>
-  <pre class="code-block"><code class="text">Atue como revisor técnico crítico.
+        </tbody>
+      </table>
+    </div>
+    <h3>Modelo de prompt seguro para usar no estudo</h3>
+    <pre class="code-block"><code class="text">Atue como revisor técnico crítico.
 Contexto: estou estudando [livro/capítulo] para aplicar em [projeto].
 Tarefa:
 1. Resuma o conceito em linguagem técnica.
@@ -903,88 +1229,121 @@ Tarefa:
 4. Gere um entregável prático pequeno.
 5. Faça 5 perguntas de revisão.
 Importante: não invente dados; quando não souber, diga que precisa validar em fonte externa.</code></pre>
-</section>
-
-<section id="referencias" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Referências da trilha</h2>
-      <p class="section-subtitle">Livros e documentos utilizados como base para esta página.</p>
+  </section><section class="section" data-search-section="" id="referencias">
+    <div class="section-header">
+      <div>
+        <h2>Referências da trilha</h2>
+        <p class="section-subtitle">Livros e documentos utilizados como base para esta página.</p>
+      </div>
+      <span class="section-badge">Fontes</span>
     </div>
-    <span class="section-badge">Fontes</span>
+    <ul class="doc-list">
+      <li><strong>sequencia_estudo_ia_livros.pdf</strong> — documento de sequência, macroetapas, roteiro prático, horas, monetização e lista dos livros.</li>
+      <li><strong>Co-Intelligence</strong> — Ethan Mollick.</li>
+      <li><strong>Prediction Machines</strong> — Ajay Agrawal, Joshua Gans e Avi Goldfarb.</li>
+      <li><strong>The AI Advantage</strong> — Thomas H. Davenport.</li>
+      <li><strong>Human + Machine</strong> — Paul R. Daugherty e H. James Wilson.</li>
+      <li><strong>All-In on AI</strong> — Thomas H. Davenport e Nitin Mittal.</li>
+      <li><strong>Competing in the Age of AI</strong> — Marco Iansiti e Karim R. Lakhani.</li>
+      <li><strong>Untangling AI</strong> — Matt Kesby.</li>
+      <li><strong>Build a Large Language Model (From Scratch)</strong> — Sebastian Raschka.</li>
+      <li><strong>Agentic Artificial Intelligence</strong> — Pascal Bornet et al.</li>
+    </ul>
+    <div class="callout blue">
+      <h3>Nota de atualização</h3>
+      <p>Como IA muda rapidamente, mantenha esta trilha viva: revise ferramentas, APIs, modelos, custos, benchmarks, frameworks e práticas de segurança a cada mês. O conteúdo conceitual dos livros permanece útil, mas a implementação deve acompanhar documentação oficial, changelogs e benchmarks atuais.</p>
+    </div>
+  </section>
   </div>
+</div>
 
-  <ul class="doc-list">
-    <li><strong>sequencia_estudo_ia_livros.pdf</strong> — documento de sequência, macroetapas, roteiro prático, horas, monetização e lista dos livros.</li>
-    <li><strong>Co-Intelligence</strong> — Ethan Mollick.</li>
-    <li><strong>Prediction Machines</strong> — Ajay Agrawal, Joshua Gans e Avi Goldfarb.</li>
-    <li><strong>The AI Advantage</strong> — Thomas H. Davenport.</li>
-    <li><strong>Human + Machine</strong> — Paul R. Daugherty e H. James Wilson.</li>
-    <li><strong>All-In on AI</strong> — Thomas H. Davenport e Nitin Mittal.</li>
-    <li><strong>Competing in the Age of AI</strong> — Marco Iansiti e Karim R. Lakhani.</li>
-    <li><strong>Untangling AI</strong> — Matt Kesby.</li>
-    <li><strong>Build a Large Language Model (From Scratch)</strong> — Sebastian Raschka.</li>
-    <li><strong>Agentic Artificial Intelligence</strong> — Pascal Bornet et al.</li>
-  </ul>
-
-  <div class="callout">
-    <h3>Nota de atualização</h3>
-    <p>Como IA muda rapidamente, mantenha esta trilha viva: revise ferramentas, APIs, modelos, custos, benchmarks, frameworks e práticas de segurança a cada mês. O conteúdo conceitual dos livros permanece útil, mas a implementação deve acompanhar documentação oficial, changelogs e benchmarks atuais.</p>
+<footer>
+  <div class="footer-row">
+    <a class="hero-back-link" href="../index.html" style="margin-bottom:0">← Voltar ao dashboard principal</a>
+    <div class="hero-meta" style="margin-top:0;justify-content:center">
+      <span class="tag ia">IA</span>
+      <span class="tag">LLMs</span>
+      <span class="tag p">RAG</span>
+      <span class="tag g">Agentes</span>
+      <span class="tag o">Monetização</span>
+    </div>
   </div>
-</section>
-
-</main>
-
-<footer class="text-center py-4" style="border-top:1px solid var(--doc-border)">
-  <p class="small text-muted mb-2"><span id="trackFooterTitle">Trilha IA por Livros</span> · Plano Integrado de Estudos</p>
-  <a class="footer-link small" href="../index.html">← Voltar ao dashboard principal</a>
+  <p><strong>Trilha IA por Livros</strong> · Plano Integrado de Estudos</p>
 </footer>
 
-<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
-(function(){
-  const backToTop = document.getElementById('backToTop');
-  const searchInput = document.getElementById('trackSearch');
-  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+
+  (function(){
+    const bar = document.getElementById('navSectionsBar');
+    const btnL = document.getElementById('navScrollLeft');
+    const btnR = document.getElementById('navScrollRight');
+    const STEP = 320;
+    if(!bar || !btnL || !btnR) return;
+    function update(){
+      const atStart = bar.scrollLeft <= 4;
+      const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+      btnL.classList.toggle('hidden', atStart);
+      btnR.classList.toggle('hidden', atEnd);
+    }
+    btnL.addEventListener('click', () => bar.scrollBy({left:-STEP, behavior:'smooth'}));
+    btnR.addEventListener('click', () => bar.scrollBy({left: STEP, behavior:'smooth'}));
+    bar.addEventListener('scroll', update, {passive:true});
+    function scrollActiveIntoView(){
+      const active = bar.querySelector('.nav-link.active');
+      if(active){active.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});}
+    }
+    update();
+    setTimeout(update, 600);
+    window._navScrollActiveIntoView = scrollActiveIntoView;
+  })();
 
   window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('is-visible', window.scrollY > 500);
+    document.getElementById('btt').classList.toggle('show', window.scrollY > 400);
   });
 
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  });
+  const searchInput = document.getElementById('searchInput');
+  if(searchInput){
+    function normalize(value){return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
+    searchInput.addEventListener('input', function(){
+      const q = normalize(this.value.trim());
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(sec => {
+        sec.classList.remove('is-hidden-by-search','search-hit');
+        if(!q) return;
+        const match = normalize(sec.innerText).includes(q);
+        sec.classList.toggle('is-hidden-by-search', !match);
+        sec.classList.toggle('search-hit', match);
+      });
+    });
+  }
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  Array.from(document.querySelectorAll('a[href^="#"]')).forEach(anchor => {
     anchor.addEventListener('click', event => {
       const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) {
+      if(target){
         event.preventDefault();
-        target.scrollIntoView({behavior: 'smooth', block: 'start'});
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+        history.replaceState(null, '', anchor.getAttribute('href'));
       }
     });
   });
 
-  function normalize(value) {
-    return value
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-  }
-
-  searchInput.addEventListener('input', () => {
-    const query = normalize(searchInput.value.trim());
-    sections.forEach(section => {
-      section.classList.remove('is-hidden-by-search', 'search-hit');
-      if (!query) return;
-      const match = normalize(section.innerText).includes(query);
-      section.classList.toggle('is-hidden-by-search', !match);
-      section.classList.toggle('search-hit', match);
+  const observedSections = document.querySelectorAll('.section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sidebarLinks = document.querySelectorAll('.sidebar a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+        sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+        if(window._navScrollActiveIntoView) window._navScrollActiveIntoView();
+      }
     });
-  });
-})();
+  }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
+  observedSections.forEach(s => observer.observe(s));
+
 </script>
 </body>
 </html>

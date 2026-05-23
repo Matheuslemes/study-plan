@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Plano de Treino Híbrido Otimizado — HTML Técnico</title>
+    <meta name="description" content="Plano de treino híbrido otimizado com musculação 3x/semana, cardio 6x/semana, 3 fases progressivas, zona 2, progressão semanal e adaptação para semanas difíceis.">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{
+          --bg:#07090f;--surface:#0d1117;--surface2:#141a24;--surface3:rgba(255,255,255,.045);
+          --border:rgba(255,255,255,.09);--border2:rgba(255,255,255,.15);
+          --accent:#f43f5e;--accent2:#22d3ee;--accent3:#84cc16;--accent4:#f97316;--accent5:#a78bfa;
+          --training:#ef4444;--cardio:#22d3ee;--strength:#84cc16;--recovery:#f59e0b;
+          --text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8;--code-bg:#060a12;
+          --must:#fca5a5;--should:#fcd34d;--nice:#86efac;--future:#93c5fd;
+        }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        html{scroll-behavior:smooth;font-size:15px} body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;min-height:100vh;overflow-x:hidden;background-image:radial-gradient(ellipse 80% 40% at 10% -5%,rgba(244,63,94,.15) 0%,transparent 50%),radial-gradient(ellipse 60% 30% at 90% 5%,rgba(34,211,238,.09) 0%,transparent 42%),radial-gradient(ellipse 52% 25% at 82% 28%,rgba(132,204,22,.07) 0%,transparent 42%)}
+        ::selection{background:rgba(244,63,94,.28);color:#fff}.container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+        .hero{position:relative;overflow:hidden;padding:4rem 0 3rem;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(244,63,94,.12),rgba(34,211,238,.055) 56%,rgba(132,204,22,.045))}.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(180deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.45),transparent 75%)}.hero .container{position:relative;z-index:1}.hero-label{font-family:'IBM Plex Mono',monospace;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:.8rem}.hero h1{font-family:'Syne',sans-serif;font-size:clamp(2rem,5vw,4rem);font-weight:800;letter-spacing:-.04em;background:linear-gradient(135deg,#fff 34%,var(--accent) 72%,var(--cardio) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:.8rem}.hero-sub{color:var(--muted2);max-width:960px;font-size:1rem}.hero-back-link{display:inline-flex;align-items:center;gap:.4rem;font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;color:var(--muted2);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.04);padding:.32rem .75rem;border-radius:6px;margin-bottom:1.2rem;transition:all .15s}.hero-back-link:hover{color:#fff;border-color:rgba(244,63,94,.35);background:rgba(244,63,94,.08);transform:translateY(-1px)}.hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}.tag{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:6px;border:1px solid rgba(244,63,94,.32);background:rgba(244,63,94,.08);color:#fda4af}.tag.g{border-color:rgba(34,211,238,.32);background:rgba(34,211,238,.08);color:var(--cardio)}.tag.s{border-color:rgba(132,204,22,.32);background:rgba(132,204,22,.08);color:var(--strength)}.tag.o{border-color:rgba(249,115,22,.32);background:rgba(249,115,22,.08);color:var(--accent4)}
+        .sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}.sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}.sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}.sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent2);border:1px solid rgba(34,211,238,.3);background:rgba(34,211,238,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}.nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}.nav-back:hover{color:#fff;border-color:rgba(244,63,94,.3);background:rgba(244,63,94,.08)}.nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}.sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}.search-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.3rem .7rem;color:#fff;font-size:.8rem;outline:none;width:250px}.search-box::placeholder{color:var(--muted)}.search-box:focus{border-color:rgba(244,63,94,.4)}.sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}.sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(244,63,94,.4) rgba(255,255,255,.04);padding:0 32px}.sitenav-bar-inner::-webkit-scrollbar{height:4px}.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(244,63,94,.4);border-radius:99px}.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(244,63,94,.7)}.sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2}.sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}.sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}.nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s}.nav-scroll-btn:hover{color:#fff;background:rgba(244,63,94,.08)}.nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}.nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}.nav-group:last-child{border-right:none;padding-right:.8rem}.nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}.nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}.nav-link:hover{color:#fff;background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.25)}.nav-link.active{color:#fda4af;background:rgba(244,63,94,.1);border-color:rgba(244,63,94,.3)}
+        .main{display:grid;grid-template-columns:220px minmax(0,1fr);gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}.sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}.sidebar-group{margin-bottom:1.4rem}.sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}.sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}.sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}.sidebar a.active{color:#fda4af;background:rgba(244,63,94,.08)}.content{padding:2rem 0 4rem 2rem;min-width:0}.section{margin-bottom:2rem;background:linear-gradient(180deg,rgba(255,255,255,.018),transparent 8rem),var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem);scroll-margin-top:126px}.section:hover{border-color:rgba(255,255,255,.13)}.section:target{border-color:rgba(244,63,94,.42);box-shadow:0 0 0 1px rgba(244,63,94,.15)}.section-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}.section-header h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff}.section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}.section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(34,211,238,.3);background:rgba(34,211,238,.08);color:var(--cardio)}h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}.lead{font-size:1rem;color:#cbd5e1}ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}li{margin-bottom:.3rem;font-size:.88rem}strong{color:#e2e8f0;font-weight:600}code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(244,63,94,.1);color:#fda4af;padding:.1em .35em;border-radius:4px}.callout{border-left:3px solid var(--accent2);background:rgba(34,211,238,.06);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:.8rem 0}.callout.rose{border-color:var(--accent);background:rgba(244,63,94,.06)}.callout.green{border-color:var(--strength);background:rgba(132,204,22,.06)}.callout.orange{border-color:var(--accent4);background:rgba(249,115,22,.06)}.callout h3,.callout h4{margin-top:0;color:#fff}.callout p:last-child,.callout ul:last-child{margin-bottom:0}.grid2,.grid3,.grid4,.phase-grid,.metrics-grid{display:grid;gap:1rem}.grid2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}.phase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero-content-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.8fr);gap:1rem;align-items:center}.mini-card,.phase-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color .18s,transform .18s,background .18s}.mini-card:hover,.phase-card:hover{border-color:rgba(244,63,94,.3);background:#151d29;transform:translateY(-2px)}.mini-card strong,.phase-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}.mini-card span,.phase-card p{color:var(--muted2);font-size:.82rem}.metrics-grid{grid-template-columns:repeat(4,minmax(130px,1fr));margin:.8rem 0}.metric{background:rgba(244,63,94,.08);border:1px solid rgba(244,63,94,.2);border-radius:12px;padding:1rem;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:112px}.metric span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}.metric small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}.metric em{font-style:normal;color:var(--muted);font-size:.72rem;margin-top:.25rem}.phase-card{position:relative;overflow:hidden;padding:1.1rem 1.1rem 1.1rem 1.25rem}.phase-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--cardio))}.phase-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid var(--border);padding-bottom:.6rem;margin-bottom:.8rem;gap:.5rem;flex-wrap:wrap}.phase-head h3,.phase-head h4{margin:0;font-size:.9rem;color:#fff}.phase-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}.doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0;background:rgba(255,255,255,.012);max-width:100%;-webkit-overflow-scrolling:touch}table{border-collapse:collapse;width:100%;min-width:max(720px,100%)}thead tr{background:rgba(244,63,94,.1)}th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem;text-align:left;color:#fff;border-bottom:1px solid var(--border2);white-space:nowrap}td{padding:.6rem 1rem;font-size:.82rem;color:#cbd5e1;border-bottom:1px solid var(--border);vertical-align:top;white-space:normal;overflow-wrap:break-word}tr:last-child td{border-bottom:none}tr:hover td{background:rgba(255,255,255,.02)}.week-table{min-width:840px}.page-transcript{border:1px solid var(--border);background:var(--surface2);border-radius:12px;margin:.65rem 0;overflow:hidden}.page-transcript summary{cursor:pointer;font-family:'IBM Plex Mono',monospace;color:#fff;padding:.75rem 1rem;background:rgba(244,63,94,.075)}pre{background:var(--code-bg);border-top:1px solid rgba(244,63,94,.18);padding:1rem;overflow:auto;font-family:'IBM Plex Mono',monospace;font-size:.72rem;line-height:1.55;color:#cbd5e1;max-height:520px;white-space:pre}.is-hidden-by-search{display:none!important}.search-hit{outline:1px solid rgba(244,63,94,.65);background:rgba(244,63,94,.06)!important}footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto 1.2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}.footer-link{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted2);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.04);padding:.4rem .85rem;border-radius:7px;display:inline-flex;align-items:center;gap:.4rem}.footer-link:hover{color:#fff;border-color:rgba(244,63,94,.35);background:rgba(244,63,94,.08)}.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px;border:1px solid rgba(244,63,94,.25);background:rgba(244,63,94,.06);color:#fda4af}.footer-pill.cyan{border-color:rgba(34,211,238,.25);background:rgba(34,211,238,.06);color:var(--cardio)}.footer-pill.green{border-color:rgba(132,204,22,.25);background:rgba(132,204,22,.06);color:var(--strength)}footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}#btt{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(244,63,94,.15);border:1px solid rgba(244,63,94,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}#btt.show{display:flex}#btt:hover{background:rgba(244,63,94,.3)}
+        @media(max-width:1180px){.container,.main{padding-left:1.25rem;padding-right:1.25rem}.main{grid-template-columns:200px minmax(0,1fr)}.content{padding-left:1.35rem}.grid4,.metrics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+        @media(max-width:980px){.main{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem 0 3rem}.section{scroll-margin-top:148px}.grid2,.phase-grid,.hero-content-grid{grid-template-columns:1fr}.sitenav-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.55rem .75rem}.sitenav-brand{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nav-ver{display:none}.nav-back{justify-self:end}.sitenav-top-right{grid-column:1/-1;width:100%;min-width:0;margin-left:0}.search-box{width:100%;min-height:38px}}
+        @media(max-width:760px){html{font-size:14.5px}.container,.main{padding-left:1rem;padding-right:1rem}.hero{padding:2.8rem 0 2rem}.hero h1{font-size:clamp(2rem,9vw,3.1rem);letter-spacing:-.035em}.hero-sub{max-width:100%}.hero-meta{gap:.42rem}.tag{max-width:100%;white-space:normal;line-height:1.35}.sitenav-bar-inner{padding-left:34px;padding-right:34px}.nav-group{padding:.25rem .3rem}.nav-group-label{font-size:.56rem;padding-right:.4rem;margin-right:.2rem}.nav-link{font-size:.66rem;padding:.3rem .5rem}.section{padding:1rem;border-radius:12px;scroll-margin-top:154px}.section-header{flex-direction:column;align-items:flex-start}.section-badge{white-space:normal}.grid3,.grid4,.metrics-grid{grid-template-columns:1fr}.metric span{font-size:1.75rem}.table-wrap table{min-width:680px}th,td{padding:.58rem .72rem}pre{padding:.9rem;font-size:.68rem;max-height:520px}.phase-head{align-items:flex-start}}
+        @media(max-width:520px){html{font-size:14px}.container,.main{padding-left:.85rem;padding-right:.85rem}.hero{padding:2.35rem 0 1.7rem}.hero-label{font-size:.66rem}.hero-back-link{max-width:100%}.sitenav-top{grid-template-columns:1fr;gap:.45rem}.sitenav-brand{width:100%;white-space:normal;justify-content:space-between}.sitenav-brand span{flex-shrink:0}.nav-back{width:100%;justify-content:center;justify-self:stretch;text-align:center}.nav-group-label{display:none}.nav-group{border-right:none;padding:.25rem .18rem}.nav-link{font-size:.64rem;padding:.3rem .46rem}.content{padding-top:1rem}.section{margin-bottom:1rem;padding:.9rem;scroll-margin-top:184px}.section-header h2{font-size:1.15rem}h3{font-size:.96rem}p,li,td{font-size:.84rem}th{font-size:.66rem}.tag,.section-badge{font-size:.64rem}.metric{padding:.85rem;min-height:auto}.metric span{font-size:1.62rem}.mini-card,.phase-card{border-radius:10px}.table-wrap table{min-width:640px}.footer-row{flex-direction:column!important;align-items:stretch!important}.footer-link{justify-content:center!important}#btt{right:.85rem;bottom:.85rem;width:40px;height:40px}}
+        @media(max-width:380px){.container,.main{padding-left:.7rem;padding-right:.7rem}.hero h1{font-size:1.85rem}.sitenav-brand span{display:none}.section{padding:.78rem}pre{font-size:.64rem}.table-wrap table{min-width:600px}}
+        @media(pointer:coarse){.nav-scroll-btn,#btt,.nav-link,.hero-back-link,.nav-back,.sidebar a{touch-action:manipulation}.nav-link,.hero-back-link,.nav-back{min-height:34px}}
+    </style>
+
+
+    <!-- Correção desktop da página de treino: mantém a responsividade mobile existente e corrige o encaixe visual em telas largas. -->
+    <style id="treino-desktop-layout-fix">
+        /*
+          Correção focada em desktop/notebook.
+          Problemas corrigidos:
+          1. Métricas com rótulos grandes demais no desktop.
+          2. Grid de métricas com 4 colunas dentro de cards estreitos, causando estouro horizontal.
+          3. Resumo executivo com texto + métricas lado a lado comprimindo o conteúdo.
+          4. Fase 1/2/3 com cards internos muito estreitos em desktop.
+        */
+
+        /* Base de segurança contra estouro horizontal em desktop */
+        .main,
+        .content,
+        .section,
+        .hero-content-grid,
+        .phase-grid,
+        .metrics-grid,
+        .grid2,
+        .grid3,
+        .grid4,
+        .mini-card,
+        .phase-card,
+        .callout,
+        .table-wrap {
+          min-width: 0;
+        }
+
+        /* Área principal mais estável em telas largas */
+        @media (min-width: 981px) {
+          .main {
+            grid-template-columns: 220px minmax(0, 1fr) !important;
+          }
+
+          .content {
+            min-width: 0 !important;
+            max-width: 100% !important;
+          }
+
+          .section {
+            overflow: hidden;
+          }
+        }
+
+        /* Resumo executivo: texto em largura confortável e métricas em linha própria */
+        #resumo .hero-content-grid {
+          grid-template-columns: 1fr !important;
+          align-items: start !important;
+          gap: 1rem !important;
+        }
+
+        #resumo .hero-content-grid > div:first-child {
+          max-width: 980px;
+          min-width: 0;
+        }
+
+        #resumo .lead {
+          max-width: 980px;
+        }
+
+        /* Métricas: o HTML usa <span> como rótulo e <small> como valor.
+           Esta regra corrige o peso visual sem mudar o conteúdo. */
+        .metric {
+          min-width: 0 !important;
+          gap: .22rem;
+        }
+
+        .metric span {
+          font-family: 'IBM Plex Mono', monospace !important;
+          font-size: .72rem !important;
+          font-weight: 700 !important;
+          line-height: 1.25 !important;
+          color: var(--muted2) !important;
+          text-transform: uppercase;
+          letter-spacing: .055em;
+          overflow-wrap: normal;
+          word-break: normal;
+        }
+
+        .metric small {
+          display: block !important;
+          font-family: 'Syne', sans-serif !important;
+          font-size: clamp(1.25rem, 1.7vw, 1.85rem) !important;
+          font-weight: 800 !important;
+          line-height: 1.05 !important;
+          color: #fff !important;
+          text-transform: none !important;
+          letter-spacing: -.025em !important;
+          overflow-wrap: break-word;
+        }
+
+        .metric em {
+          display: block;
+          line-height: 1.35;
+        }
+
+        /* Resumo: 4 métricas cabem bem quando ocupam a largura completa */
+        #resumo .metrics-grid {
+          width: 100%;
+          max-width: 100%;
+          grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+          align-items: stretch;
+        }
+
+        /* Cards das fases: dentro de cards de duas colunas, métricas precisam ser 2x2 */
+        .phase-card .metrics-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          align-items: stretch;
+        }
+
+        .phase-card .metric {
+          min-height: 104px;
+          padding: .85rem;
+        }
+
+        .phase-card .metric small {
+          font-size: clamp(1.05rem, 1.35vw, 1.35rem) !important;
+        }
+
+        /* Evita que tabelas invadam o layout desktop; mantém scroll interno. */
+        .table-wrap {
+          width: 100%;
+          max-width: 100%;
+          overflow-x: auto !important;
+          overflow-y: hidden;
+        }
+
+        .table-wrap table {
+          min-width: max(720px, 100%);
+        }
+
+        .week-table {
+          min-width: 760px !important;
+        }
+
+        /* Desktop largo: duas colunas de fase continuam, mas sem estouro interno. */
+        @media (min-width: 1181px) {
+          #fases .phase-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+
+          #fases .phase-card:last-child:nth-child(odd) {
+            grid-column: auto;
+          }
+        }
+
+        /* Notebook: o conteúdo real fica mais legível com fases em coluna única.
+           O mobile já estava correto; esta faixa corrige principalmente desktop estreito. */
+        @media (max-width: 1180px) and (min-width: 981px) {
+          #resumo .metrics-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+
+          #fases .phase-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .phase-card .metrics-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+          }
+        }
+
+        /* Tablet e mobile: preserva o comportamento responsivo que já estava correto. */
+        @media (max-width: 980px) {
+          #resumo .metrics-grid,
+          .phase-card .metrics-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+          }
+        }
+
+        @media (max-width: 760px) {
+          #resumo .metrics-grid,
+          .phase-card .metrics-grid {
+            grid-template-columns: 1fr !important;
+          }
+
+          .metric small {
+            font-size: 1.45rem !important;
+          }
+        }
+    </style>
+
+</head>
+<body>
+<header class="hero">
+    <div class="container">
+        <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
+        <div class="hero-label">Trilha técnica · Treino híbrido · Saúde cardiovascular</div>
+        <h1>Plano de Treino Híbrido Otimizado</h1>
+        <p class="hero-sub">Perda de peso, saúde cardiovascular e manutenção de massa muscular. Plano estruturado em 3 fases progressivas para uma rotina de trabalho sentado, alta carga de estudos e limite de 1h30 por treino.</p>
+        <div class="hero-meta">
+            <span class="tag">103 kg</span><span class="tag g">1,80 m</span><span class="tag s">Massa muscular</span><span class="tag o">1h30/treino</span><span class="tag">3 fases</span><span class="tag g">Cardio 6x</span><span class="tag s">Musculação 3x</span><span class="tag o">Zona 2</span><span class="tag">Semana 8+</span>
+        </div>
+    </div>
+</header>
+<nav class="sitenav">
+    <div class="container">
+        <div class="sitenav-top">
+            <a class="sitenav-brand" href="#">Hybrid Training <span>vHTML</span></a>
+            <span class="nav-ver">Extraído de TREINO-H.pdf · 16 páginas</span>
+            <a class="nav-back" href="../index.html">← Dashboard principal</a>
+            <div class="sitenav-top-right"><input class="search-box" type="search" placeholder="🔍  Buscar neste plano..." id="searchInput" aria-label="Buscar no plano de treino"></div>
+        </div>
+    </div>
+    <div class="sitenav-bar-outer">
+        <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">&#8249;</button>
+        <div class="sitenav-bar-inner" id="navSectionsBar">
+            <div class="nav-group"><span class="nav-group-label">Base</span><a class="nav-link" href="#resumo">01 · Resumo</a><a class="nav-link" href="#contexto">02 · Contexto</a><a class="nav-link" href="#principios">03 · Princípios</a><a class="nav-link" href="#analise">04 · Análise</a></div>
+            <div class="nav-group"><span class="nav-group-label">Plano</span><a class="nav-link" href="#fases">05 · Fases</a><a class="nav-link" href="#semana">06 · Semana</a><a class="nav-link" href="#musculacao">07 · Musculação</a><a class="nav-link" href="#cardio">08 · Cardio</a></div>
+            <div class="nav-group"><span class="nav-group-label">Execução</span><a class="nav-link" href="#aquecimento">09 · Aquecimento</a><a class="nav-link" href="#progressao">10 · Progressão</a><a class="nav-link" href="#adaptacao">11 · Adaptação</a><a class="nav-link" href="#sobrecarga">12 · Sobrecarga</a></div>
+            <div class="nav-group"><span class="nav-group-label">Fechamento</span><a class="nav-link" href="#recomendacoes">13 · Recomendações</a><a class="nav-link" href="#final">14 · Resumo</a><a class="nav-link" href="#transcricao">15 · Transcrição</a></div>
+        </div>
+        <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
+    </div>
+</nav>
+<div class="main">
+    <aside class="sidebar">
+        <div class="sidebar-group"><div class="sidebar-label">Base</div><a href="#resumo">1. Resumo executivo</a><a href="#contexto">2. Contexto e objetivos</a><a href="#principios">3. Princípios híbridos</a><a href="#analise">4. Análise do treino original</a></div>
+        <div class="sidebar-group"><div class="sidebar-label">Plano</div><a href="#fases">5. Fases progressivas</a><a href="#semana">6. Divisão semanal</a><a href="#musculacao">7. Treinos de musculação</a><a href="#cardio">8. Cardio e zonas</a></div>
+        <div class="sidebar-group"><div class="sidebar-label">Execução</div><a href="#aquecimento">9. Aquecimento</a><a href="#progressao">10. Progressão</a><a href="#adaptacao">11. Semanas difíceis</a><a href="#sobrecarga">12. Sobrecarga</a></div>
+        <div class="sidebar-group"><div class="sidebar-label">Fechamento</div><a href="#recomendacoes">13. Recomendações</a><a href="#final">14. Resumo final</a><a href="#transcricao">15. Transcrição integral</a></div>
+    </aside>
+    <div class="content" id="mainContent">
+        <section class="section" id="resumo" data-search-section>
+            <div class="section-header"><div><h2>1. Resumo executivo</h2><p class="section-subtitle">Plano de treino híbrido personalizado: musculação + cardio em 3 fases progressivas.</p></div><span class="section-badge">Visão geral</span></div>
+            <div class="hero-content-grid">
+                <div>
+                    <p class="lead">O plano foi construído para melhorar saúde cardiovascular, reduzir peso, preservar massa muscular e combater os efeitos do trabalho sentado, respeitando o limite máximo de 90 minutos por sessão.</p>
+                    <div class="callout rose"><h3>Objetivo central</h3><p>Melhorar saúde cardiovascular • Reduzir peso • Evitar sedentarismo, com rotina sustentável a longo prazo.</p></div>
+                </div>
+                <div class="metrics-grid"><div class="metric"><span>Peso atual</span><small>103 kg</small><em>IMC ~31,8</em></div><div class="metric"><span>Altura</span><small>1,80 m</small><em>Proporção adequada</em></div><div class="metric"><span>Massa muscular</span><small>Boa quantidade</small><em>Histórico de treino</em></div><div class="metric"><span>Rotina diária</span><small>Sentado 8h+</small><em>Trabalho + estudos</em></div></div>
+            </div>
+            <div class="grid3">
+                <div class="mini-card"><strong>Fase 1</strong><span>Adaptação inicial: semanas 1-3, foco em hábito e base aeróbica.</span></div>
+                <div class="mini-card"><strong>Fase 2</strong><span>Consolidação: semanas 4-7, integração de cardio pós-musculação e Zona 3 gradual.</span></div>
+                <div class="mini-card"><strong>Fase 3</strong><span>Rotina ideal: semana 8+, musculação 3x/semana e cardio 6x/semana.</span></div>
+            </div>
+        </section>
+
+        <section class="section" id="contexto" data-search-section>
+            <div class="section-header"><div><h2>2. Contexto inicial e objetivos</h2><p class="section-subtitle">Perfil, rotina e metas de curto, médio e longo prazo.</p></div><span class="section-badge">Contexto</span></div>
+            <p>O praticante possui 103 kg e 1,80 m de altura, apresentando um IMC de aproximadamente 31,8 kg/m², porém com uma composição corporal diferenciada: existe uma quantidade expressiva de massa muscular previamente desenvolvida, fruto de um histórico de treinamento de força bem estruturado.</p>
+            <p>A rotina diária envolve trabalho extenso em posição sentada diante do computador, combinada com uma carga elevada de estudos. Esse cenário gera sedentarismo involuntário ao longo do dia, que impacta negativamente o metabolismo, a saúde cardiovascular e o bem-estar geral - mesmo em pessoas com boa composição corporal.</p>
+            <div class="callout"><h3>Premissa central</h3><p>O treino deve melhorar saúde, disposição e desempenho cognitivo - nunca ser um fator de esgotamento que prejudique o foco nos estudos ou no trabalho.</p></div>
+            <div class="grid2">
+                <div class="mini-card"><strong>Objetivo principal</strong><span>Melhorar a saúde cardiovascular e reduzir o peso corporal de forma sustentável, sem comprometer a massa muscular existente nem o desempenho nos estudos e no trabalho.</span></div>
+                <div class="mini-card"><strong>Necessidade de otimização de tempo</strong><span>O plano respeita o limite de 1h30 por sessão, priorizando eficiência sobre volume.</span></div>
+            </div>
+            <h3>Objetivos secundários</h3>
+            <ul class="doc-list"><li>Estabelecer uma rotina de exercícios sustentável a longo prazo</li><li>Inserir cardio regular sem ultrapassar o limite de tempo disponível</li><li>Preservar a massa muscular já desenvolvida</li><li>Combater os efeitos do sedentarismo causado pelo trabalho sentado</li><li>Melhorar disposição, foco e qualidade do sono</li></ul>
+            <div class="grid3">
+                <div class="mini-card"><strong>Curto prazo (Semanas 1-3)</strong><span>Criar o hábito de treinar regularmente. Estabelecer base aeróbica em Zona 2. Adaptar o corpo ao novo volume combinado de força + cardio.</span></div>
+                <div class="mini-card"><strong>Médio prazo (Semanas 4-8)</strong><span>Consolidar 5 a 6 sessões semanais. Reduzir peso e percentual de gordura visivelmente. Atingir boa capacidade aeróbica (Zona 2 por 40+ min sem desconforto).</span></div>
+                <div class="mini-card"><strong>Longo prazo (Pós semana 8)</strong><span>Manter musculação 3x/semana + cardio 6x/semana de forma natural na rotina. Composição corporal melhorada. Sistema cardiovascular saudável. Energia elevada para estudos e trabalho.</span></div>
+            </div>
+        </section>
+
+        <section class="section" id="principios" data-search-section>
+            <div class="section-header"><div><h2>3. Princípios do treino híbrido</h2><p class="section-subtitle">Base técnica que orienta a combinação entre força, cardio e recuperação.</p></div><span class="section-badge">Princípios</span></div>
+            <div class="grid2">
+                <div class="callout rose"><h3>O que é treino híbrido?</h3><p>Combinação estruturada de musculação com exercício cardiovascular em um mesmo programa semanal. O modelo integra ambos de forma sinérgica, maximizando queima de gordura, preservando massa muscular e melhorando a saúde cardiovascular simultaneamente.</p></div>
+                <div class="callout"><h3>Combinação entre musculação e cardio</h3><p>A musculação preserva e estimula o tecido muscular. O cardio amplia o gasto calórico total e treina o sistema cardiovascular. Juntos, criam déficit energético sem sacrificar massa magra.</p></div>
+                <div class="callout green"><h3>Importância da Zona 2</h3><p>Zona 2 corresponde a 60-70% da FCmax. Nessa intensidade, o corpo utiliza predominantemente gordura como combustível, preservando glicogênio muscular e melhorando eficiência mitocondrial.</p></div>
+                <div class="callout orange"><h3>Teste da fala</h3><p>Você consegue dizer frases completas durante o exercício, mas não consegue cantar. Esse ritmo conversacional confortável é a Zona 2 ideal.</p></div>
+            </div>
+            <h3>Preservação muscular, fadiga e rotina de estudos</h3>
+            <p>Com déficit calórico, o corpo pode catabolizar tecido muscular se não houver estímulo adequado de força. A musculação 3x/semana, mesmo com volume reduzido (9-10 séries/grupo), é suficiente para sinalizar ao organismo que o músculo deve ser preservado.</p>
+            <p>O volume total foi calculado para ser sustentável. Fadiga acumulada excessiva compromete estudos, sono e aumenta o risco de lesões. O treino foi estruturado para causar o mínimo impacto cognitivo possível, com protocolo de modo mínimo viável para semanas de prova ou entrega.</p>
+        </section>
+
+        <section class="section" id="analise" data-search-section>
+            <div class="section-header"><div><h2>4. Análise do treino original</h2><p class="section-subtitle">Pontos preservados, excessos e ajustes técnicos necessários.</p></div><span class="section-badge">Diagnóstico</span></div>
+            <p>O treino original era um programa de hipertrofia 6x/semana com periodização Alta Carga (HC) e Volume Intermediário (VI) em semanas alternadas.</p>
+            <div class="grid2">
+                <div class="callout green"><h3>Pontos positivos</h3><ul class="doc-list"><li>Periodização HC/VI bem estruturada</li><li>Exercícios compostos priorizados</li><li>Progressão de carga mensurável</li><li>Controle de RIR e técnica</li><li>Volume por grupo adequado para hipertrofia</li><li>Registro de treino recomendado</li><li>Descanso controlado entre séries</li></ul></div>
+                <div class="callout rose"><h3>Excessos e problemas</h3><ul class="doc-list"><li>6 dias/semana: insustentável com alta carga de estudos</li><li>Zero cardio em toda a programação</li><li>Sábado inteiro dedicado apenas a braços/antebraço</li><li>Tríceps com 7-8 exercícios no total semanal</li><li>Sexta exclusiva de ombros (sessão curta e isolada)</li><li>22+ exercícios semanais = excesso de tempo gasto</li><li>Nenhuma estratégia para saúde cardiovascular</li></ul></div>
+                <div class="callout orange"><h3>Ajustes necessários</h3><ul class="doc-list"><li>Reduzir para 3 dias de musculação/semana</li><li>Inserir cardio como prioridade semanal</li><li>Mesclar grupos musculares (Upper/Lower)</li><li>Cortar isoladores de baixo impacto</li><li>Reduzir de 4 para 3 séries nos compostos</li><li>Encurtar descanso para liberar tempo total</li><li>Integrar cardio pós-musculação nas fases 2 e 3</li></ul></div>
+                <div class="callout"><h3>O que se mantém</h3><ul class="doc-list"><li>Supino inclinado, remada curvada, puxada</li><li>Agachamento, leg press, stiff, mesa flexora</li><li>Desenvolvimento de ombros</li><li>Progressão reps -&gt; carga -&gt; densidade</li><li>Técnica como critério de qualidade de série</li><li>Registro de carga e descanso a cada treino</li><li>Princípio de não treinar além do limite técnico</li></ul></div>
+            </div>
+            <div class="callout green"><h3>Nota sobre volume</h3><p>O volume foi reduzido de 14-18 séries/grupo/semana para 9-10 séries/grupo/semana intencionalmente. Com déficit calórico moderado e foco em recomposição corporal, esse volume é suficiente para preservar a massa muscular construída.</p></div>
+        </section>
+
+        <section class="section" id="fases" data-search-section>
+            <div class="section-header"><div><h2>5. Plano de treino otimizado</h2><p class="section-subtitle">Visão geral das fases e progressão semanal.</p></div><span class="section-badge">3 fases</span></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Fase</th><th>Período</th><th>Musculação</th><th>Cardio</th><th>Total/Semana</th><th>Objetivo principal</th></tr></thead><tbody><tr><td>Fase 1</td><td>Semanas 1-3</td><td>3x/sem</td><td>2x/sem</td><td>5 treinos</td><td>Criar hábito e base aeróbica</td></tr>
+            <tr><td>Fase 2</td><td>Semanas 4-7</td><td>3x/sem</td><td>5x/sem</td><td>6 treinos</td><td>Consolidar rotina híbrida</td></tr>
+            <tr><td>Fase 3</td><td>Semana 8+</td><td>3x/sem</td><td>6x/sem</td><td>6 treinos + 1 cardio leve</td><td>Rotina ideal sustentável</td></tr>
+            </tbody></table></div>
+            <div class="phase-grid">
+                <div class="phase-card"><div class="phase-head"><h3>5.1. Fase 1 - Adaptação Inicial</h3><span>Semanas 1-3</span></div><div class="metrics-grid"><div class="metric"><span>Frequência semanal</span><small>5 x/sem</small><em>3 musculação + 2 cardio</em></div><div class="metric"><span>Duração/sessão</span><small>45-60 min</small><em>Cardio separado: 30 min</em></div><div class="metric"><span>Tipo de cardio</span><small>Zona 2</small><em>60-70% FCmax puro</em></div><div class="metric"><span>Intensidade força</span><small>Moderada</small><em>3x10-12 • 75s descanso</em></div></div><div class="table-wrap"><table class="week-table"><thead><tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr></thead><tbody><tr><td>Upper A<br>~55 min</td><td>Cardio Z2<br>30 min</td><td>Lower<br>~55 min</td><td>Descanso<br>ou caminhada</td><td>Upper B<br>~50 min</td><td>Cardio Z2<br>35 min</td><td>Descanso</td></tr>
+                </tbody></table></div><p><strong>Objetivo:</strong> Criar o hábito. A musculação mantém a massa construída enquanto o cardio desenvolve a base aeróbica. Consistência é o único objetivo desta fase.</p></div>
+                <div class="phase-card"><div class="phase-head"><h3>5.2. Fase 2 - Consolidação</h3><span>Semanas 4-7</span></div><div class="metrics-grid"><div class="metric"><span>Frequência semanal</span><small>6 x/sem</small><em>3 musculação + 5 cardio</em></div><div class="metric"><span>Cardio pós-treino</span><small>20 min</small><em>Zona 2 ao final de cada musculação</em></div><div class="metric"><span>Cardio dedicado</span><small>35-45 min</small><em>Terça, Quinta e Sábado</em></div><div class="metric"><span>Novidade</span><small>Zona 3</small><em>Quinta: 10 min levemente mais intenso</em></div></div><div class="table-wrap"><table class="week-table"><thead><tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr></thead><tbody><tr><td>Upper A<br>+ Cardio 20 min</td><td>Cardio Z2<br>40 min</td><td>Lower<br>+ Cardio 15 min</td><td>Cardio Z2-3<br>35 min</td><td>Upper B<br>+ Cardio 20 min</td><td>Cardio Z2<br>45 min</td><td>Descanso</td></tr>
+                </tbody></table></div><p><strong>O que muda:</strong> O cardio é incorporado ao final dos dias de musculação. A musculação permanece idêntica; a quinta começa a introduzir suavemente a Zona 3.</p></div>
+                <div class="phase-card"><div class="phase-head"><h3>5.3. Fase 3 - Rotina Ideal</h3><span>Semana 8+</span></div><div class="metrics-grid"><div class="metric"><span>Musculação</span><small>3 x/sem</small><em>Seg • Qua • Sex</em></div><div class="metric"><span>Cardio</span><small>6 x/sem</small><em>Todo dia exceto domingo</em></div><div class="metric"><span>Sessão mais longa</span><small>90 min</small><em>Sexta • Full Body + Cardio</em></div><div class="metric"><span>Cardio semanal</span><small>~180 min</small><em>Dentro do recomendado OMS</em></div></div><div class="table-wrap"><table class="week-table"><thead><tr><th>Seg</th><th>Ter</th><th>Qua</th><th>Qui</th><th>Sex</th><th>Sáb</th><th>Dom</th></tr></thead><tbody><tr><td>Upper A<br>+ Cardio 25 min</td><td>Cardio Z2<br>40 min</td><td>Lower<br>+ Cardio 20 min</td><td>Cardio Z2-3<br>40 min</td><td>Full Body<br>+ Cardio 20 min</td><td>Cardio Z2<br>50 min</td><td>Descanso total</td></tr>
+                </tbody></table></div><p><strong>Rotina sustentável:</strong> Volume de musculação calibrado para preservação de massa, com cardio Zona 2 como base de recomposição corporal.</p></div>
+                <div class="phase-card"><div class="phase-head"><h3>Critérios para avançar</h3><span>Por estabilidade</span></div><p>Avance para a Fase 3 quando a Fase 2 estiver confortável por 2 semanas consecutivas. Não avance por calendário - avance por sensação de estabilidade: cardio pós-musculação sem dificuldade, sono bom e sem queda de desempenho.</p></div>
+            </div>
+        </section>
+
+        <section class="section" id="semana" data-search-section>
+            <div class="section-header"><div><h2>6. Divisão semanal completa - Fase 3</h2><p class="section-subtitle">Rotina ideal com três estímulos de força, seis estímulos cardiovasculares e descanso total no domingo.</p></div><span class="section-badge">Semana 8+</span></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Dia</th><th>Tipo</th><th>Exercícios principais</th><th>Cardio</th><th>Duração</th><th>Intensidade</th></tr></thead><tbody><tr><td>Segunda</td><td>Musculação + Cardio</td><td>Upper A: Supino / Remada / Puxada / Desenvolvimento / Prancha</td><td>25 min Zona 2 pós</td><td>~85 min</td><td>Moderada</td></tr>
+            <tr><td>Terça</td><td>Cardio puro</td><td>-</td><td>40 min Zona 2</td><td>40 min</td><td>Baixa-mod.</td></tr>
+            <tr><td>Quarta</td><td>Musculação + Cardio</td><td>Lower: Agachamento / Leg Press / Stiff / Mesa / Panturrilha</td><td>20 min Zona 2 pós</td><td>~80 min</td><td>Moderada</td></tr>
+            <tr><td>Quinta</td><td>Cardio puro</td><td>-</td><td>40 min Z2-Z3</td><td>40 min</td><td>Mod.-alta</td></tr>
+            <tr><td>Sexta</td><td>Musculação + Cardio</td><td>Full Body: Supino / Remada / Goblet / Elevação / Superset</td><td>20 min Zona 2 pós</td><td>~90 min</td><td>Moderada</td></tr>
+            <tr><td>Sábado</td><td>Cardio puro</td><td>-</td><td>50 min Zona 2</td><td>50 min</td><td>Baixa-mod.</td></tr>
+            <tr><td>Domingo</td><td>Descanso</td><td>-</td><td>-</td><td>-</td><td>-</td></tr>
+            </tbody></table></div>
+            <div class="callout"><h3>Observação complementar da Fase 3</h3><p>A semana é organizada para manter três estímulos de força, seis estímulos cardiovasculares e um descanso total no domingo. O limite máximo de 90 minutos por dia é preservado, com o maior volume concentrado na sexta-feira e no sábado.</p></div>
+        </section>
+
+        <section class="section" id="musculacao" data-search-section>
+            <div class="section-header"><div><h2>7. Treinos de musculação detalhados</h2><p class="section-subtitle">Exercícios, séries, repetições, descanso, técnica, aquecimento, desaquecimento e cardio pós-treino quando aplicável.</p></div><span class="section-badge">Força</span></div>
+            <h3>7.1. Treino A - Upper A (Peito + Costas + Ombro + Core)</h3>
+            <div class="callout orange"><h4>Segunda - Upper A (Fase 1) | 5 exercícios • ~55 min</h4><p><strong>Aquecimento:</strong> 3 min esteira leve (Zona 1) + 10 rotações de ombro + 10 crucifixo com elástico leve.</p></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Exercício</th><th>Séries × Reps</th><th>Descanso</th><th>Observações técnicas</th></tr></thead><tbody><tr><td>Supino inclinado halteres</td><td>3 x 10-12</td><td>75 s</td><td>3s descida • RIR 1 nas 2 primeiras séries</td></tr>
+            <tr><td>Remada curvada barra</td><td>3 x 10-12</td><td>75 s</td><td>Tronco ~45 graus • não balance o corpo</td></tr>
+            <tr><td>Puxada aberta (lat pulldown)</td><td>3 x 10-12</td><td>60 s</td><td>Puxe até o queixo • postura ereta</td></tr>
+            <tr><td>Desenvolvimento máquina</td><td>3 x 10-12</td><td>60 s</td><td>Cotovelos na linha dos ombros</td></tr>
+            <tr><td>Prancha isométrica</td><td>3 x 45 s</td><td>45 s</td><td>Core ativado • não prenda a respiração</td></tr>
+            </tbody></table></div>
+            <p><strong>Desaquecimento:</strong> Alongamento de peitoral na parede 30s cada lado + latíssimo com barra 2x20s.</p>
+            <div class="callout"><h4>Segunda - Upper A + Cardio (Fase 3) | ~85 min total</h4><p>Peito • costas • ombro • core + 25 min Zona 2 pós-treino. Aquecimento: 3 min esteira leve + 10 rotações de ombro.</p></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Exercício</th><th>Séries × Reps</th><th>Descanso</th><th>Observações técnicas</th></tr></thead><tbody><tr><td>Supino inclinado halteres</td><td>3 x 10-12</td><td>75 s</td><td>Progrida carga ao fechar 12 reps em todas as séries</td></tr>
+            <tr><td>Remada curvada barra</td><td>3 x 10-12</td><td>75 s</td><td>Composto principal de costas da semana</td></tr>
+            <tr><td>Puxada aberta (lat pulldown)</td><td>3 x 10-12</td><td>60 s</td><td>Largura dorsal • puxe com os cotovelos</td></tr>
+            <tr><td>Desenvolvimento máquina</td><td>3 x 10-12</td><td>60 s</td><td>Volume principal de ombro da semana</td></tr>
+            <tr><td>Prancha isométrica</td><td>3 x 60 s</td><td>45 s</td><td>Respiração contínua • não prenda o ar</td></tr>
+            </tbody></table></div>
+            <p><strong>Cardio pós-treino (25 min):</strong> 3 min Zona 1 -> 20 min Zona 2 -> 2 min Zona 1. Esteira inclinada (5-8%) ou bicicleta ergométrica.</p><p><strong>Desaquecimento:</strong> Peitoral na parede 30s cada + latíssimo com barra 20s.</p>
+            <h3>7.2. Treino B - Lower (Quadríceps + Posterior + Panturrilha)</h3>
+            <div class="callout orange"><h4>Quarta - Lower (Fase 1) | 5 exercícios • ~55 min</h4><p><strong>Aquecimento:</strong> 3 min bicicleta leve + 10 agachamentos com peso corporal + 10 hip circles.</p></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Exercício</th><th>Séries × Reps</th><th>Descanso</th><th>Observações técnicas</th></tr></thead><tbody><tr><td>Agachamento livre ou hack squat</td><td>3 x 10-12</td><td>90 s</td><td>3s descida • paralelo ao chão ou abaixo</td></tr>
+            <tr><td>Leg press</td><td>3 x 12-15</td><td>75 s</td><td>Não trave os joelhos no topo do movimento</td></tr>
+            <tr><td>Stiff (barra ou halteres)</td><td>3 x 10-12</td><td>75 s</td><td>3s descida • sinta o alongamento do posterior</td></tr>
+            <tr><td>Mesa flexora</td><td>3 x 12-15</td><td>60 s</td><td>Pausa de 1 segundo no topo da contração</td></tr>
+            <tr><td>Panturrilha em pé</td><td>3 x 20</td><td>45 s</td><td>Amplitude total • pausa no topo e na descida</td></tr>
+            </tbody></table></div>
+            <p><strong>Desaquecimento:</strong> Quadríceps em pé 30s cada + posterior sentado 2x30s.</p>
+            <div class="callout"><h4>Quarta - Lower + Cardio (Fase 3) | ~80 min total</h4><p>Quadríceps • posterior • panturrilha + 20 min Zona 2. Aquecimento: 3 min bicicleta leve + 10 agachamentos livres.</p></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Exercício</th><th>Séries × Reps</th><th>Descanso</th><th>Observações técnicas</th></tr></thead><tbody><tr><td>Agachamento livre ou hack squat</td><td>3 x 10-12</td><td>90 s</td><td>Exercício mais importante da semana • preservar técnica</td></tr>
+            <tr><td>Leg press</td><td>3 x 12-15</td><td>75 s</td><td>Amplitude máxima segura • não trave os joelhos</td></tr>
+            <tr><td>Stiff</td><td>3 x 10-12</td><td>75 s</td><td>3s descida • sinta o posterior ao máximo</td></tr>
+            <tr><td>Mesa flexora</td><td>3 x 12-15</td><td>60 s</td><td>Pausa de 1 segundo no topo da contração</td></tr>
+            <tr><td>Panturrilha em pé</td><td>3 x 20</td><td>45 s</td><td>Pausa no topo e na descida • amplitude total</td></tr>
+            </tbody></table></div>
+            <p><strong>Cardio pós-treino (20 min):</strong> Prefira bicicleta ou elíptico após o treino de perna. Menos impacto articular com os músculos fatigados.</p><p><strong>Desaquecimento:</strong> Quadríceps em pé 30s cada + posterior sentado 30s.</p>
+            <h3>7.3. Treino C - Full Body / Upper B</h3>
+            <div class="callout orange"><h4>Sexta - Upper B (Ombros + Braços + Costas) | 5 exercícios • ~50 min</h4></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Exercício</th><th>Séries × Reps</th><th>Descanso</th><th>Observações técnicas</th></tr></thead><tbody><tr><td>Desenvolvimento máquina ou smith</td><td>3 x 10-12</td><td>75 s</td><td>Composto principal de ombro neste dia</td></tr>
+            <tr><td>Remada baixa no cabo</td><td>3 x 10-12</td><td>60 s</td><td>Contração máxima no topo • cotovelos fechados</td></tr>
+            <tr><td>Elevação lateral no cabo</td><td>3 x 12-15</td><td>45 s</td><td>Cotovelo levemente flexionado • não balance</td></tr>
+            <tr><td>Tríceps corda</td><td>2 x 12-15</td><td>45 s</td><td>Cotovelos fixos ao lado do corpo</td></tr>
+            <tr><td>Rosca direta barra EZ</td><td>2 x 10-12</td><td>45 s</td><td>Controle total na fase excêntrica (descida)</td></tr>
+            </tbody></table></div>
+            <div class="callout"><h4>Sexta - Full Body + Cardio (Fase 3) | ~90 min total</h4><p>Treino completo eficiente • braços incluídos + 20 min Zona 2. Aquecimento: 3 min esteira leve + mobilidade de quadril (10 circles).</p></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Exercício</th><th>Séries × Reps</th><th>Descanso</th><th>Observações técnicas</th></tr></thead><tbody><tr><td>Supino reto máquina</td><td>3 x 10-12</td><td>75 s</td><td>Variação do supino inclinado da segunda-feira</td></tr>
+            <tr><td>Remada baixa no cabo</td><td>3 x 10-12</td><td>60 s</td><td>Contração máxima dorsal • cotovelos para trás</td></tr>
+            <tr><td>Agachamento goblet (haltere no peito)</td><td>3 x 12</td><td>75 s</td><td>Haltere no peito • quadril abaixo do joelho</td></tr>
+            <tr><td>Elevação lateral</td><td>3 x 12-15</td><td>45 s</td><td>Volume direto de ombro lateral • sem balanço</td></tr>
+            <tr><td>Tríceps corda + Rosca EZ (superset)</td><td>2 x 12 cada</td><td>60 s</td><td>Feitos em sequência sem pausa entre eles</td></tr>
+            </tbody></table></div>
+            <p><strong>Cardio pós-treino (20 min):</strong> 3 min Zona 1 -> 15 min Zona 2 -> 2 min Zona 1. Pode reduzir para 15 min se o treino foi mais pesado que o habitual.</p><p><strong>Desaquecimento:</strong> Alongamento global 5 min.</p>
+        </section>
+
+        <section class="section" id="cardio" data-search-section>
+            <div class="section-header"><div><h2>8. Cardio: zonas, intensidade e progressão</h2><p class="section-subtitle">Cardio específico por fase e zonas de frequência cardíaca.</p></div><span class="section-badge">Zona 2</span></div>
+            <h3>Cardios específicos das fases</h3>
+            <h4>Terça e Sábado - Cardio Zona 2 | 30-35 min • intensidade baixa-moderada</h4><div class="table-wrap"><table class="doc-table"><thead><tr><th>Parte</th><th>Duração</th><th>Zona</th><th>Detalhe</th></tr></thead><tbody><tr><td>Aquecimento</td><td>3 min</td><td>Zona 1</td><td>Caminhada plana • ritmo bem leve</td></tr>
+        <tr><td>Zona 2 principal</td><td>25-30 min</td><td>60-70% FCmax</td><td>Inclinação 5-8% na esteira ou bicicleta/elíptico</td></tr>
+        <tr><td>Desaquecimento</td><td>3 min</td><td>Zona 1</td><td>Reduz velocidade e inclinação gradualmente</td></tr>
+        </tbody></table></div><div class="callout green"><h4>Intensidade correta na Zona 2</h4><p>Você consegue conversar em frases completas. Cansado, mas confortável. Se a respiração ficar ofegante, reduza a intensidade imediatamente.</p></div>
+            <h4>Cardio pós-musculação - Seg / Qua / Sex | 20 min • Zona 2 direto ao terminar</h4><div class="table-wrap"><table class="doc-table"><thead><tr><th>Parte</th><th>Duração</th><th>Zona</th><th>Detalhe</th></tr></thead><tbody><tr><td>Início leve</td><td>3 min</td><td>Zona 1</td><td>Corpo ainda aquecido do treino de força</td></tr>
+        <tr><td>Zona 2 contínua</td><td>15 min</td><td>60-70% FCmax</td><td>Esteira, bicicleta ou elíptico</td></tr>
+        <tr><td>Desaquecimento</td><td>2 min</td><td>Zona 1</td><td>Reduz intensidade progressivamente</td></tr>
+        </tbody></table></div>
+            <h4>Quinta - Cardio Zona 2-3 (introdução gradual) | 35 min</h4><div class="table-wrap"><table class="doc-table"><thead><tr><th>Parte</th><th>Duração</th><th>Zona</th><th>Detalhe</th></tr></thead><tbody><tr><td>Aquecimento</td><td>5 min</td><td>Zona 1</td><td>Aumenta velocidade/resistência gradualmente</td></tr>
+        <tr><td>Zona 2</td><td>15 min</td><td>60-70% FCmax</td><td>Ritmo conversacional confortável</td></tr>
+        <tr><td>Zona 3 (nova)</td><td>10 min</td><td>70-80% FCmax</td><td>Frases curtas • esforço claramente perceptível</td></tr>
+        <tr><td>Desaquecimento</td><td>5 min</td><td>Zona 1-2</td><td>Volta gradual ao ritmo leve</td></tr>
+        </tbody></table></div><div class="callout orange"><h4>Se sentir que é demais</h4><p>Elimine os 10 min de Zona 3 e permaneça em Zona 2 durante toda a sessão. Só introduza Zona 3 quando a Zona 2 longa (40+ min) estiver completamente confortável.</p></div>
+            <h4>Sábado - Cardio Zona 2 Longo (50 min) | Sessão mais importante para a base aeróbica</h4><div class="table-wrap"><table class="doc-table"><thead><tr><th>Parte</th><th>Duração</th><th>Zona</th><th>Detalhe</th></tr></thead><tbody><tr><td>Aquecimento</td><td>5 min</td><td>Zona 1</td><td>Aumente a intensidade devagar</td></tr>
+        <tr><td>Zona 2 contínua</td><td>40 min</td><td>60-70% FCmax</td><td>Ritmo constante • foco total na base aeróbica</td></tr>
+        <tr><td>Desaquecimento</td><td>5 min</td><td>Zona 1</td><td>Termine caminhando • frequência caindo naturalmente</td></tr>
+        </tbody></table></div><div class="callout"><h4>Por que esta é a sessão mais importante da semana</h4><p>O cardio longo em Zona 2 no sábado é o principal estímulo para adaptações cardiovasculares profundas: melhora mitocondrial, redução da pressão arterial, eficiência cardíaca. Pode ser realizado ao ar livre.</p></div>
+            <h3>Zonas, intensidade e progressão</h3><p>O cardio é estruturado em zonas de frequência cardíaca. A fórmula de referência é: FCmax = 220 - idade. Para um praticante de 30 anos, FCmax = 190 bpm.</p><div class="table-wrap"><table class="doc-table"><thead><tr><th>Zona</th><th>% FCmax</th><th>BPM (30 anos)</th><th>Percepção de esforço</th><th>Uso no plano</th></tr></thead><tbody><tr><td>Zona 1</td><td>50-60%</td><td>95-114 bpm</td><td>Muito leve • pode cantar</td><td>Aquecimento e desaquecimento</td></tr>
+        <tr><td>Zona 2</td><td>60-70%</td><td>114-133 bpm</td><td>Confortável • frases completas</td><td>FOCO PRINCIPAL em todas as fases</td></tr>
+        <tr><td>Zona 3</td><td>70-80%</td><td>133-152 bpm</td><td>Moderado • frases curtas</td><td>Fase 2 (quinta) e Fase 3</td></tr>
+        <tr><td>Zona 4</td><td>80-90%</td><td>152-171 bpm</td><td>Difícil • poucas palavras</td><td>Uso pontual apenas pós Fase 3</td></tr>
+        </tbody></table></div>
+            <h3>Modalidades recomendadas para 103 kg</h3><ul class="doc-list"><li>Esteira com inclinação 5-8% - caminhada rápida. Ativa glúteos e posterior sem impacto de corrida.</li><li>Bicicleta ergométrica - excelente para Zona 2. Zero impacto. Recomendada pós-treino de perna.</li><li>Elíptico - combina membros superiores e inferiores. Baixo impacto. Ótimo para variar.</li><li>Caminhada ao ar livre - em terreno levemente inclinado. Útil para o sábado.</li></ul>
+            <h3>Como evoluir o cardio sem sobrecarregar</h3><ul class="doc-list"><li>Semanas 1-3: adicione 3-5 min por semana nas sessões de Zona 2</li><li>Não aumente intensidade antes de aumentar duração</li><li>Indicador de progresso: mesma FC para velocidade maior (adaptação real)</li><li>Se a FC estiver muito elevada para a mesma carga: reduza intensidade e mantenha</li><li>Progressão de Zona: só introduza Zona 3 quando Zona 2 longa (40+ min) for confortável</li></ul>
+        </section>
+
+        <section class="section" id="aquecimento" data-search-section>
+            <div class="section-header"><div><h2>9. Aquecimento e desaquecimento</h2><p class="section-subtitle">Preparação e retorno à calma por contexto de treino.</p></div><span class="section-badge">Preparação</span></div>
+            <h3>Aquecimento</h3><div class="table-wrap"><table class="doc-table"><thead><tr><th>Situação</th><th>Aquecimento</th><th>Duração</th></tr></thead><tbody><tr><td>Antes da musculação</td><td>2-3 min esteira/bicicleta leve (Zona 1) + mobilidade específica do grupo muscular + 1 série leve do primeiro exercício</td><td>5-8 min</td></tr>
+        <tr><td>Antes do cardio puro</td><td>2-3 min na mesma modalidade, mas em ritmo muito leve (Zona 1). Aumento gradual de velocidade</td><td>3-4 min</td></tr>
+        <tr><td>Cardio pós-musculação</td><td>Não necessário - corpo já aquecido do treino de força. Comece diretamente em Zona 1 suave</td><td>1-2 min</td></tr>
+        </tbody></table></div><h3>Desaquecimento</h3><div class="table-wrap"><table class="doc-table"><thead><tr><th>Situação</th><th>Desaquecimento</th><th>Duração</th></tr></thead><tbody><tr><td>Após musculação</td><td>Alongamento dos músculos trabalhados (30s cada grupo) + respiração lenta e profunda</td><td>4-5 min</td></tr>
+        <tr><td>Após cardio puro</td><td>Reduzir velocidade/intensidade progressivamente. Terminar em passo leve por 2-3 min</td><td>3-4 min</td></tr>
+        <tr><td>Após cardio pós-musculação</td><td>Reduzir intensidade nos últimos 2 min. Não parar abruptamente</td><td>2 min</td></tr>
+        </tbody></table></div>
+            <h3>Mobilidade simples pós-treino</h3><ul class="doc-list"><li>Peitoral: braço esticado na parede, rotação de tronco. 30s cada lado.</li><li>Costas/latíssimo: segure uma barra fixa com os braços esticados, solte o peso do corpo. 2x20s.</li><li>Quadríceps: em pé, puxe o pé em direção ao glúteo. 30s cada perna.</li><li>Posterior/isquiotibiais: sentado, perna estendida, incline o tronco à frente. 2x30s.</li><li>Ombros: braço cruzado na frente do peito, pressione levemente com o outro. 20s cada lado.</li><li>Panturrilha: pé no degrau ou parede, calcanhar no chão, incline à frente. 30s cada.</li></ul>
+        </section>
+
+        <section class="section" id="progressao" data-search-section>
+            <div class="section-header"><div><h2>10. Progressão semanal</h2><p class="section-subtitle">Regras objetivas para carga, reps, descanso, cardio e manutenção.</p></div><span class="section-badge">Progressão</span></div>
+            <div class="grid2">
+                <div class="mini-card"><strong>Fechou o topo das reps em todas as séries?</strong><span>Aumente 2-5% de carga na próxima sessão e volte para a parte baixa da faixa. Exemplo: 12/12/12 com 30 kg -&gt; 10 reps com 31-32 kg.</span></div>
+                <div class="mini-card"><strong>Perdeu reps antes do esperado?</strong><span>Mantenha a carga, aumente o descanso em 10-15s e priorize a técnica. Dois treinos seguidos com queda de reps = sinal para reduzir volume.</span></div>
+                <div class="mini-card"><strong>Estagnou por 2 semanas?</strong><span>Troque a ordem dos exercícios ou a variação do último exercício. Não aumente volume - ajuste o estímulo.</span></div>
+                <div class="mini-card"><strong>Como aumentar o cardio com segurança</strong><span>Adicione 3-5 minutos por semana nas sessões de Zona 2. Priorize duração antes de intensidade. Zona 3 só entra quando Zona 2 longa estiver confortável.</span></div>
+                <div class="mini-card"><strong>Quando manter o treino igual</strong><span>Semanas de maior carga de estudos, sono ruim ou queda de motivação. Manter é sempre melhor do que reduzir abruptamente.</span></div>
+                <div class="mini-card"><strong>Quando reduzir o volume</strong><span>Queda de reps por 2+ treinos, FC em repouso elevada, dor articular, sono interrompido por 3+ dias. Reduza 1 sessão de cardio e mantenha a musculação.</span></div>
+            </div>
+            <div class="callout rose"><h3>Regra de ouro da progressão</h3><p>Sem registro = sem progressão controlada. Anote sempre: exercício, carga, reps por série e tempo de descanso real.</p></div>
+        </section>
+
+        <section class="section" id="adaptacao" data-search-section>
+            <div class="section-header"><div><h2>11. Adaptação para semanas difíceis</h2><p class="section-subtitle">Modo mínimo viável para semanas de provas, entregas ou picos de trabalho.</p></div><span class="section-badge">Continuidade</span></div>
+            <p>Em semanas de provas, entregas ou picos de trabalho, o treino deve ser adaptado - nunca abandonado. Manter uma versão reduzida é infinitamente melhor do que interromper completamente e perder o ritmo.</p>
+            <h3>Modo Mínimo Viável - o que manter obrigatoriamente</h3><div class="table-wrap"><table class="doc-table"><thead><tr><th>Elemento</th><th>Normal (Fase 3)</th><th>Semana difícil</th><th>Justificativa</th></tr></thead><tbody><tr><td>Musculação</td><td>3x/sem • 60+ min</td><td>3x/sem • 20-30 min</td><td>Sem cardio pós. Só os compostos principais.</td></tr>
+        <tr><td>Cardio formal</td><td>6x/sem • 20-50 min</td><td>2-3x/sem • 20 min</td><td>Bicicleta ou elíptico. Zona 2 leve.</td></tr>
+        <tr><td>Caminhada</td><td>Complementar</td><td>20 min após o jantar</td><td>Substitui o cardio formal ausente.</td></tr>
+        <tr><td>Descanso</td><td>Domingo</td><td>Priorize sono 7-8h</td><td>Sono vale mais que 1 treino nessas semanas.</td></tr>
+        <tr><td>Carga musculação</td><td>Progressão normal</td><td>Mantenha a carga atual</td><td>Não reduza carga. Apenas menos volume.</td></tr>
+        </tbody></table></div>
+            <div class="grid2">
+                <div class="callout"><h3>Modo mínimo viável</h3><p>Mantenha os 3 dias de musculação (20-30 min, sem cardio pós). Substitua cardio formal por caminhada de 20 min após o jantar.</p></div>
+                <div class="callout green"><h3>Caminhada como cardio de emergência</h3><p>20-30 min de caminhada moderada equivale a Zona 1-2 passiva. Não é o ideal, mas é infinitamente melhor do que zero.</p></div>
+                <div class="callout orange"><h3>Sono acima do treino</h3><p>Em semanas de prova, priorize 7-8h de sono. Sono ruim sabota emagrecimento e recuperação muscular mais do que um treino perdido.</p></div>
+                <div class="callout rose"><h3>Como voltar à rotina normal</h3><p>Na semana seguinte, retome a fase atual sem tentar compensar. Não dobre o volume tentando recuperar o tempo perdido.</p></div>
+            </div>
+        </section>
+
+        <section class="section" id="sobrecarga" data-search-section>
+            <div class="section-header"><div><h2>12. Sinais de excesso e sobrecarga</h2><p class="section-subtitle">Indicadores de que o volume total ultrapassou a capacidade de recuperação.</p></div><span class="section-badge">Controle</span></div>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Sinal</th><th>Descrição</th></tr></thead><tbody><tr><td>Cansaço persistente</td><td>Fadiga que não melhora mesmo após noite de sono. Indica que o volume total está acima da capacidade de recuperação.</td></tr>
+            <tr><td>Queda de desempenho</td><td>Reps ou carga caindo por 2+ treinos seguidos sem motivo aparente. Sinal clássico de overreaching.</td></tr>
+            <tr><td>Sono ruim</td><td>Dificuldade para dormir ou sono fragmentado por 3+ dias consecutivos. O cortisol elevado por excesso de treino perturba o sono.</td></tr>
+            <tr><td>Dor articular</td><td>Dor em articulações (joelhos, quadris, ombros). Diferente de dor muscular - esta é aceitável; aquela é sinal de parada imediata.</td></tr>
+            <tr><td>Falta de motivação</td><td>Vontade zero de treinar, mesmo com horário disponível. Pode indicar fadiga do SNC (sistema nervoso central).</td></tr>
+            <tr><td>FC em repouso elevada</td><td>FC matinal 5-8 bpm acima do normal por 2+ dias consecutivos. Indicador fidedigno de estresse fisiológico excessivo.</td></tr>
+            <tr><td>Dificuldade pós-treino</td><td>Treino prejudica claramente a concentração nos estudos. O treino deve energizar, não drenar.</td></tr>
+            </tbody></table></div>
+            <div class="callout rose"><h3>O que fazer ao detectar sinais de excesso</h3><p>Reduza 1 sessão de cardio naquela semana e mantenha somente os 3 dias de musculação. Não pare tudo - reduza. Se os sinais persistirem após uma semana reduzida, considere descanso ativo por 3-4 dias com apenas caminhadas leves antes de retomar.</p></div>
+        </section>
+
+        <section class="section" id="recomendacoes" data-search-section>
+            <div class="section-header"><div><h2>13. Recomendações gerais</h2><p class="section-subtitle">Sono, hidratação, alimentação, pausas e acompanhamento profissional.</p></div><span class="section-badge">Hábitos</span></div>
+            <div class="grid2">
+                <div class="mini-card"><strong>Sono</strong><span>Priorize 7-8 horas por noite. O sono é quando o corpo produz GH, repara músculos e consolida a memória. Sono insuficiente sabota emagrecimento, recuperação muscular e desempenho cognitivo.</span></div>
+                <div class="mini-card"><strong>Hidratação</strong><span>Mantenha pelo menos 35 ml/kg de peso corporal em água por dia. Para 103 kg: cerca de 3,5 litros. Aumente em dias de treino.</span></div>
+                <div class="mini-card"><strong>Alimentação equilibrada</strong><span>Foco em proteína adequada (1,6-2,2 g/kg/dia), carboidratos pré-treino, vegetais e frutas. Evite déficit calórico agressivo - 300 a 500 kcal/dia é ideal.</span></div>
+                <div class="mini-card"><strong>Pausas no trabalho sentado</strong><span>A cada 60-90 min sentado, levante-se por 3-5 minutos. Caminhe, suba escadas ou faça agachamentos leves.</span></div>
+                <div class="mini-card"><strong>Caminhadas curtas</strong><span>Caminhadas de 10-15 min após refeições principais reduzem picos de glicemia, melhoram digestão e contribuem para o gasto calórico diário.</span></div>
+                <div class="mini-card"><strong>Constância acima de perfeição</strong><span>Um treino medíocre que acontece é mais valioso do que o treino perfeito que não acontece. Em dias ruins, faça o mínimo - mas faça.</span></div>
+            </div>
+            <div class="callout"><h3>Acompanhamento profissional</h3><p>Quando possível, consulte um educador físico para ajustes de carga e técnica, um nutricionista para orientação alimentar personalizada e um médico para check-up cardiovascular periódico.</p></div>
+        </section>
+
+        <section class="section" id="final" data-search-section>
+            <div class="section-header"><div><h2>14. Resumo final</h2><p class="section-subtitle">Rotina ideal, pontos de atenção e mensagem final.</p></div><span class="section-badge">Fechamento</span></div>
+            <p>Este plano foi construído para ser sustentável, eficiente e adaptável. O sucesso não depende de perfeição - depende de constância e ajustes inteligentes.</p>
+            <div class="table-wrap"><table class="doc-table"><thead><tr><th>Elemento</th><th>Rotina Ideal (Fase 3)</th></tr></thead><tbody><tr><td>Musculação</td><td>3x/semana - Seg, Qua, Sex</td></tr>
+            <tr><td>Cardio</td><td>6x/semana - Seg a Sáb (20-50 min/sessão)</td></tr>
+            <tr><td>Tempo máximo/dia</td><td>90 minutos (musculação + cardio pós)</td></tr>
+            <tr><td>Cardio puro</td><td>Ter, Qui, Sáb - 40-50 min em Zona 2</td></tr>
+            <tr><td>Zona principal</td><td>Zona 2 - 60-70% da FCmax</td></tr>
+            <tr><td>Volume musculação</td><td>9-10 séries por grupo muscular por semana</td></tr>
+            <tr><td>Progressão força</td><td>Reps -&gt; Carga (+2-5%) -&gt; Densidade</td></tr>
+            <tr><td>Progressão cardio</td><td>+3-5 min por semana até as durações alvo</td></tr>
+            <tr><td>Domingo</td><td>Descanso total - nenhuma atividade obrigatória</td></tr>
+            </tbody></table></div>
+            <h3>O que evitar</h3><ul class="doc-list"><li>Aumentar volume e intensidade ao mesmo tempo</li><li>Saltar direto para a Fase 3 sem cumprir as fases anteriores</li><li>Compensar treinos perdidos dobrando o volume</li><li>Ignorar sinais de fadiga persistente</li><li>Usar cardio de alta intensidade como método principal de emagrecimento</li><li>Comparar seu progresso com o de outras pessoas</li><li>Abandonar o treino em semanas difíceis - reduza, nunca pare</li></ul>
+            <div class="callout green"><h3>Mensagem final</h3><p>O objetivo é transformar o treino em parte natural da sua rotina de saúde - não em mais uma fonte de pressão. Com consistência e progressão gradual, os resultados virão: menos gordura, mais disposição, sistema cardiovascular saudável e massa muscular preservada. O treino deve dar energia para os estudos e o trabalho, não tirar.</p></div>
+        </section>
+
+        <section class="section" id="transcricao" data-search-section>
+            <div class="section-header"><div><h2>15. Transcrição integral do PDF</h2><p class="section-subtitle">Conteúdo extraído página a página, preservado como apêndice para evitar perda de dados da fonte.</p></div><span class="section-badge">16 páginas</span></div>
+            <div class="callout orange"><h3>Controle de integridade</h3><p>Além da versão estruturada acima, este apêndice mantém a transcrição integral extraída do PDF. Isso permite conferência completa do conteúdo original.</p></div>
+            <details class="page-transcript"><summary>Página 1</summary><pre>H
+
+                    Plano de Treino
+                   Híbrido Otimizado
+  Perda de peso • Saúde cardiovascular • Manutenção de massa muscular
+
+
+
+
+      PESO                      ALTURA                       PERFIL                       LIMITE
+    103 kg                   1,80 m                  Massa muscular                  1h30/treino
+
+
+
+     OBJETIVO | Melhorar saúde cardiovascular • Reduzir peso • Evitar
+                             sedentarismo
+
+                Trabalho sentado • Alta carga de estudos • Planejamento em 3 fases
+
+
+
+
+        FASE 1                               FASE 2                                  FASE 3
+       Adaptação                           Consolidação                            Rotina Ideal
+       Semanas 1-3                          Semanas 4-7                            Semana 8+
+
+
+
+
+Musculação 3x/semana • Cardio 6x/semana • Máx. 90 min/dia • Sustentável a
+                              longo prazo
+
+              Treino híbrido personalizado | Musculação + Cardio | 3 fases progressivas</pre></details>
+            <details class="page-transcript"><summary>Página 2</summary><pre>Plano de Treino Híbrido Otimizado                                        103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ SUMÁRIO
+
+ 1. Contexto Inicial                                                                                                     4
+
+    Necessidade de otimização de tempo . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 4
+
+
+ 2. Objetivos do Treino                                                                                                  4
+
+ 3. Princípios do Treino Híbrido                                                                                         5
+
+    O que é treino híbrido?    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+    Combinação entre musculação e cardio . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+    Importância da Zona 2      . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+    Teste da fala - como identificar a Zona 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+    Preservação muscular durante o emagrecimento . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+    Controle de fadiga e recuperação . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 5
+
+    Adaptação para rotinas com estudos intensos          . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .5
+
+
+ 4. Análise do Treino Original                                                                                           5
+
+ 5. Plano de Treino Otimizado                                                                                            6
+
+    Visão Geral das Fases . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+    5.1. Fase 1 - Adaptação Inicial (Semanas 1-3) . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6
+
+    5.2. Fase 2 - Consolidação da Rotina (Semanas 4-7)         . . . . . . . . . . . . . . . . . . . . . . . . . . . .6
+       O que muda da Fase 1 para a Fase 2 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+       Critérios para avançar para a Fase 3 . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7
+
+    5.3. Fase 3 - Rotina Ideal (Semana 8 em diante)        . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .7
+
+
+ 6. Divisão Semanal Completa - Fase 3                                                                                    8
+
+ 7. Treinos de Musculação Detalhados                                                                                     8
+
+    7.1. Treino A - Upper A (Peito + Costas + Ombro + Core)          . . . . . . . . . . . . . . . . . . . . . . . . .8
+       Segunda - Upper A (Fase 1) | 5 exercícios • ~55 min     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .8
+
+       Segunda - Upper A + Cardio (Fase 3) | ~85 min total     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .9
+
+    7.2. Treino B - Lower (Quadríceps + Posterior + Panturrilha) . . . . . . . . . . . . . . . . . . . . . . . . 9
+       Quarta - Lower (Fase 1) | 5 exercícios • ~55 min . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 9
+
+       Quarta - Lower + Cardio (Fase 3) | ~80 min total    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .9
+
+    7.3. Treino C - Full Body / Upper B . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+       Sexta - Upper B (Ombros + Braços + Costas) | 5 exercícios • ~50 min . . . . . . . . . . . . . . . . . . . . . 10
+
+
+
+
+                                                          Página 2</pre></details>
+            <details class="page-transcript"><summary>Página 3</summary><pre>Plano de Treino Híbrido Otimizado                                        103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+       Sexta - Full Body + Cardio (Fase 3) | ~90 min total . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 10
+
+
+ 8. Cardio: Zonas, Intensidade e Progressão                                                                            11
+
+    Cardios específicos das fases     . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+       Terça e Sábado - Cardio Zona 2 | 30-35 min • intensidade baixa-moderada . . . . . . . . . . . . . . . . . . 11
+
+       Cardio pós-musculação - Seg / Qua / Sex | 20 min • Zona 2 direto ao terminar      . . . . . . . . . . . . . . . . 11
+
+       Quinta - Cardio Zona 2-3 (introdução gradual) | 35 min . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 11
+
+       Sábado - Cardio Zona 2 Longo (50 min) | Sessão mais importante para a base aeróbica . . . . . . . . . . . . 11
+
+    Zonas, intensidade e progressão . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+       Modalidades recomendadas para 103 kg . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+       Como evoluir o cardio sem sobrecarregar . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 12
+
+
+ 9. Aquecimento e Desaquecimento                                                                                       12
+
+    Mobilidade simples pós-treino . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+
+ 10. Progressão Semanal                                                                                                13
+
+ 11. Adaptação para Semanas Difíceis                                                                                   13
+
+    Modo mínimo viável . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 13
+
+    Caminhada como cardio de emergência . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+    Sono acima do treino . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+    Como voltar à rotina normal . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 14
+
+
+ 12. Sinais de Excesso e Sobrecarga                                                                                    14
+
+ 13. Recomendações Gerais                                                                                              15
+
+ 14. Resumo Final                                                                                                      15
+
+    O que evitar    . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 16
+
+
+
+
+                                                         Página 3</pre></details>
+            <details class="page-transcript"><summary>Página 4</summary><pre>Plano de Treino Híbrido Otimizado                                      103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ 1. Contexto Inicial
+ O praticante possui 103 kg e 1,80 m de altura, apresentando um IMC de aproximadamente 31,8
+ kg/m², porém com uma composição corporal diferenciada: existe uma quantidade expressiva de
+ massa muscular previamente desenvolvida, fruto de um histórico de treinamento de força bem
+ estruturado.
+ A rotina diária envolve trabalho extenso em posição sentada diante do computador, combinada com
+ uma carga elevada de estudos. Esse cenário gera sedentarismo involuntário ao longo do dia, que
+ impacta negativamente o metabolismo, a saúde cardiovascular e o bem-estar geral - mesmo em
+ pessoas com boa composição corporal.
+
+   Peso atual                       Altura                      Massa muscular            Rotina diária
+   103 kg                           1,80 m                      Boa quantidade            Sentado 8h+
+   IMC ~31,8                        Proporção adequada          Histórico de treino       Trabalho + estudos
+
+
+
+ Necessidade de otimização de tempo
+ Com uma agenda de trabalho e estudos intensa, o tempo disponível para treino é limitado. O plano
+ respeita o limite de 1 hora e 30 minutos por sessão, priorizando eficiência sobre volume. O objetivo
+ é que o treino funcione como suporte para uma vida produtiva - e não o contrário.
+
+ Premissa central
+
+ O treino deve melhorar saúde, disposição e desempenho cognitivo - nunca ser um fator de esgotamento que
+ prejudique o foco nos estudos ou no trabalho.
+
+
+
+ 2. Objetivos do Treino
+   Objetivo principal
+   Melhorar a saúde cardiovascular e reduzir o peso corporal de forma sustentável, sem comprometer a massa
+   muscular existente nem o desempenho nos estudos e no trabalho.
+
+   Objetivos secundários
+   • Estabelecer uma rotina de exercícios sustentável a longo prazo
+   • Inserir cardio regular sem ultrapassar o limite de tempo disponível
+   • Preservar a massa muscular já desenvolvida
+   • Combater os efeitos do sedentarismo causado pelo trabalho sentado
+   • Melhorar disposição, foco e qualidade do sono
+
+   Curto prazo (Semanas 1-3)
+   Criar o hábito de treinar regularmente. Estabelecer base aeróbica em Zona 2. Adaptar o corpo ao novo volume
+   combinado de força + cardio.
+
+   Médio prazo (Semanas 4-8)
+   Consolidar 5 a 6 sessões semanais. Reduzir peso e percentual de gordura visivelmente. Atingir boa capacidade
+   aeróbica (Zona 2 por 40+ min sem desconforto).
+
+   Longo prazo (Pós semana 8)
+   Manter musculação 3x/semana + cardio 6x/semana de forma natural na rotina. Composição corporal melhorada.
+   Sistema cardiovascular saudável. Energia elevada para estudos e trabalho.
+
+
+
+
+                                                         Página 4</pre></details>
+            <details class="page-transcript"><summary>Página 5</summary><pre>Plano de Treino Híbrido Otimizado                               103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ 3. Princípios do Treino Híbrido
+ O que é treino híbrido?
+ Treino híbrido é a combinação estruturada de musculação (força) com exercício cardiovascular em
+ um mesmo programa semanal. Diferente da abordagem tradicional que separava esses objetivos, o
+ modelo híbrido integra ambos de forma sinérgica, maximizando a queima de gordura, preservando
+ massa muscular e melhorando a saúde cardiovascular simultaneamente.
+
+ Combinação entre musculação e cardio
+ A musculação preserva e estimula o tecido muscular, mantendo o metabolismo elevado. O cardio
+ amplia o gasto calórico total e treina o sistema cardiovascular. Juntos, criam um déficit energético
+ sem sacrificar a massa magra - o cenário ideal para recomposição corporal.
+
+ Importância da Zona 2
+ A Zona 2 corresponde a 60-70% da frequência cardíaca máxima (FCmax). Nessa intensidade, o
+ corpo utiliza predominantemente gordura como combustível, preservando glicogênio muscular.
+ Além da queima de gordura, o cardio em Zona 2 melhora a eficiência mitocondrial, reduz pressão
+ arterial e contribui para a longevidade cardiovascular.
+
+ Teste da fala - como identificar a Zona 2
+ Você consegue dizer frases completas durante o exercício, mas não consegue cantar. Se consegue
+ cantar sem dificuldade = está na Zona 1 (muito leve). Se só consegue dizer palavras soltas = está
+ na Zona 3 ou acima (muito intenso). O ritmo conversacional confortável é a Zona 2 ideal.
+
+ Preservação muscular durante o emagrecimento
+ Com déficit calórico, o corpo pode catabolizar tecido muscular se não houver estímulo adequado de
+ força. A musculação 3x/semana, mesmo com volume reduzido (9-10 séries/grupo), é suficiente para
+ sinalizar ao organismo que o músculo deve ser preservado. Proteína adequada na dieta potencializa
+ ainda mais esse efeito.
+
+ Controle de fadiga e recuperação
+ O volume total de treino foi calculado para ser sustentável. A fadiga acumulada excessiva
+ compromete os estudos, prejudica o sono e aumenta o risco de lesões. O controle de intensidade, o
+ descanso entre séries e os dias de recuperação são tão importantes quanto os próprios treinos.
+
+ Adaptação para rotinas com estudos intensos
+ O treino foi estruturado para causar o mínimo de impacto cognitivo possível. Sessões de cardio em
+ Zona 2 podem inclusive melhorar o foco e a oxigenação cerebral. Em semanas de prova ou entrega,
+ existe um protocolo de &#x27;modo mínimo viável&#x27; que garante continuidade sem sacrificar desempenho
+ acadêmico.
+
+
+ 4. Análise do Treino Original
+ O treino original era um programa de hipertrofia 6x/semana com periodização Alta Carga (HC) e
+ Volume Intermediário (VI) em semanas alternadas. Abaixo está a análise técnica completa.
+
+   Pontos positivos                                      Excessos e problemas
+   • Periodização HC/VI bem estruturada                  • 6 dias/semana: insustentável com alta carga de
+   • Exercícios compostos priorizados                    estudos
+   • Progressão de carga mensurável                      • Zero cardio em toda a programação
+   • Controle de RIR e técnica                           • Sábado inteiro dedicado apenas a braços/antebraço
+   • Volume por grupo adequado para hipertrofia          • Tríceps com 7-8 exercícios no total semanal
+   • Registro de treino recomendado                      • Sexta exclusiva de ombros (sessão curta e isolada)
+   • Descanso controlado entre séries                    • 22+ exercícios semanais = excesso de tempo gasto
+                                                         • Nenhuma estratégia para saúde cardiovascular
+
+
+
+
+                                                  Página 5</pre></details>
+            <details class="page-transcript"><summary>Página 6</summary><pre>Plano de Treino Híbrido Otimizado                                        103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+   Ajustes necessários                                            O que se mantém
+   • Reduzir para 3 dias de musculação/semana                     • Supino inclinado, remada curvada, puxada
+   • Inserir cardio como prioridade semanal                       • Agachamento, leg press, stiff, mesa flexora
+   • Mesclar grupos musculares (Upper/Lower)                      • Desenvolvimento de ombros
+   • Cortar isoladores de baixo impacto                           • Progressão reps -&gt; carga -&gt; densidade
+   • Reduzir de 4 para 3 séries nos compostos                     • Técnica como critério de qualidade de série
+   • Encurtar descanso para liberar tempo total                   • Registro de carga e descanso a cada treino
+   • Integrar cardio pós-musculação nas fases 2 e 3               • Princípio de não treinar além do limite técnico
+
+
+ Nota sobre volume
+
+ O volume foi reduzido de 14-18 séries/grupo/semana para 9-10 séries/grupo/semana intencionalmente. Com
+ déficit calórico moderado e foco em recomposição corporal, esse volume é suficiente para preservar a massa
+ muscular construída. O excesso de volume em déficit calórico gera fadiga sem benefício adicional.
+
+
+
+ 5. Plano de Treino Otimizado
+ Visão Geral das Fases
+      Fase            Período            Musculação           Cardio       Total/Semana              Objetivo principal
+
+     Fase 1      Semanas 1-3                3x/sem        2x/sem              5 treinos         Criar hábito e base aeróbica
+
+     Fase 2      Semanas 4-7                3x/sem        5x/sem              6 treinos         Consolidar rotina híbrida
+
+     Fase 3      Semana 8+                  3x/sem        6x/sem         6 treinos + 1 cardio   Rotina ideal sustentável
+                                                                                 leve
+
+
+ 5.1. Fase 1 - Adaptação Inicial (Semanas 1-3)
+
+                                                          F1
+                                         Fase 1 - Adaptação Inicial
+                                        Semanas 1 a 3 • 3 musculação + 2 cardio
+
+
+   Frequência semanal               Duração/sessão                Tipo de cardio                 Intensidade força
+   5 x/sem                          45-60 min                     Zona 2                         Moderada
+   3 musculação + 2 cardio          Cardio separado: 30 min       60-70% FCmax puro              3x10-12 • 75s descanso
+
+
+ Divisão semanal - Fase 1
+        Seg               Ter               Qua                Qui              Sex               Sáb               Dom
+
+      Upper A          Cardio Z2           Lower          Descanso           Upper B            Cardio Z2         Descanso
+      ~55 min           30 min            ~55 min       ou caminhada         ~50 min             35 min
+
+
+ Objetivo da Fase 1
+
+ Foco em criar o hábito. A musculação mantém a massa construída enquanto o cardio começa a desenvolver a
+ base aeróbica. Não se preocupe com intensidade - consistência é o único objetivo desta fase.
+
+
+ 5.2. Fase 2 - Consolidação da Rotina (Semanas 4-7)
+
+                                                          F2
+                                    Fase 2 - Consolidação da Rotina
+                                        Semanas 4 a 7 • 3 musculação + 5 cardio
+
+
+
+
+                                                         Página 6</pre></details>
+            <details class="page-transcript"><summary>Página 7</summary><pre>Plano de Treino Híbrido Otimizado                                          103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+   Frequência semanal               Cardio pós-treino               Cardio dedicado                 Novidade
+   6 x/sem                          20 min                          35-45 min                       Zona 3
+   3 musculação + 5 cardio          Zona 2 ao final de cada         Terça, Quinta e Sábado          Quinta: 10 min levemente
+                                    musculação                                                      mais intenso
+
+
+ Divisão semanal - Fase 2
+        Seg               Ter                Qua              Qui                 Sex               Sáb               Dom
+
+     Upper A           Cardio Z2           Lower          Cardio Z2-3           Upper B           Cardio Z2         Descanso
+    + Cardio 20         40 min           + Cardio 15        35 min             + Cardio 20         45 min
+       min                                  min                                   min
+
+
+ O que muda da Fase 1 para a Fase 2
+ O cardio é incorporado ao final dos dias de musculação (20 min Zona 2). A musculação permanece
+ idêntica - não aumente carga em excesso antes de se adaptar ao volume de cardio adicionado. A
+ quinta começa a introduzir suavemente a Zona 3.
+
+ Progressão em relação à Fase 1
+        Elemento                       Fase 1                         Fase 2                            Observação
+
+  Musculação               3x/sem (sem cardio pós)      3x/sem + 20 min cardio pós           Mesmos exercícios e cargas
+
+  Cardio semanal           2 sessões puras              5 sessões no total                   Progressão gradual
+
+  Duração sessão           45-55 min                    65-80 min (com cardio)               Dentro do limite de 90 min
+  musculação
+
+  Zona introduzida         Zona 2 apenas                Zona 2 + início de Zona 3            Só quinta-feira
+
+  Total semanal            5 treinos                    6 treinos                            +1 cardio dedicado
+
+
+ Critérios para avançar para a Fase 3
+
+ Quando avançar de fase
+
+ Avance para a Fase 3 quando a Fase 2 estiver confortável por 2 semanas consecutivas. Não avance por calendário
+ - avance por sensação de estabilidade. Indicadores: cardio pós-musculação sem dificuldade, sono bom, sem
+ queda de desempenho.
+
+
+ 5.3. Fase 3 - Rotina Ideal (Semana 8 em diante)
+
+                                                              F3
+                         Fase 3 - Rotina Ideal (Semana 8 em diante)
+                                Musculação 3x/sem • Cardio 6x/sem • Máximo 90 min/dia
+
+
+   Musculação                       Cardio                          Sessão mais longa               Cardio semanal
+   3 x/sem                          6 x/sem                         90 min                          ~180 min
+   Seg • Qua • Sex                  Todo dia exceto domingo         Sexta • Full Body +             Dentro do recomendado
+                                                                    Cardio                          OMS
+
+
+ Divisão semanal - Fase 3 (Rotina Ideal)
+        Seg               Ter                Qua              Qui                 Sex               Sáb               Dom
+
+     Upper A           Cardio Z2           Lower          Cardio Z2-3           Full Body         Cardio Z2       Descanso total
+    + Cardio 25         40 min           + Cardio 20        40 min             + Cardio 20         50 min
+       min                                  min                                    min
+
+
+
+
+                                                          Página 7</pre></details>
+            <details class="page-transcript"><summary>Página 8</summary><pre>Plano de Treino Híbrido Otimizado                                         103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ Sobre o volume da Fase 3
+
+ Rotina sustentável de longo prazo. O volume de musculação (9-10 séries/grupo/semana) é calibrado para
+ preservação de massa, não hipertrofia máxima. Com déficit calórico moderado, esse volume é suficiente para
+ manter o músculo enquanto o cardio em Zona 2 faz o trabalho de recomposição corporal.
+
+
+
+ 6. Divisão Semanal Completa - Fase 3
+          Dia                 Tipo             Exercícios principais                       Cardio          Duração     Intensida
+                                                                                                                           de
+
+  Segunda         Musculação + Cardio   Upper A: Supino / Remada / Puxada /        25 min Zona 2 pós      ~85 min      Moderada
+                                        Desenvolvimento / Prancha
+
+  Terça           Cardio puro           -                                          40 min Zona 2          40 min       Baixa-mod.
+
+  Quarta          Musculação + Cardio   Lower: Agachamento / Leg Press / Stiff /   20 min Zona 2 pós      ~80 min      Moderada
+                                        Mesa / Panturrilha
+
+  Quinta          Cardio puro           -                                          40 min Z2-Z3           40 min       Mod.-alta
+
+  Sexta           Musculação + Cardio   Full Body: Supino / Remada / Goblet /      20 min Zona 2 pós      ~90 min      Moderada
+                                        Elevação / Superset
+
+  Sábado          Cardio puro           -                                          50 min Zona 2          50 min       Baixa-mod.
+
+  Domingo         Descanso              -                                          -                      -            -
+
+
+ Observação complementar da Fase 3
+
+ A semana é organizada para manter três estímulos de força, seis estímulos cardiovasculares e um descanso total
+ no domingo. O limite máximo de 90 minutos por dia é preservado, com o maior volume concentrado na
+ sexta-feira e no sábado.
+
+
+
+ 7. Treinos de Musculação Detalhados
+ Esta seção formaliza o detalhamento dos treinos de musculação citados nas fases. Os blocos abaixo
+ preservam exercícios, séries, repetições, descansos, observações técnicas, aquecimentos,
+ desaquecimentos e cardios pós-treino quando aplicável.
+
+ 7.1. Treino A - Upper A (Peito + Costas + Ombro + Core)
+ Segunda - Upper A (Fase 1) | 5 exercícios • ~55 min
+
+ Aquecimento
+
+ 3 min esteira leve (Zona 1) + 10 rotações de ombro + 10 crucifixo com elástico leve.
+
+                 Exercício                  Séries × Reps             Descanso                  Observações técnicas
+
+  Supino inclinado halteres                    3 x 10-12                75 s           3s descida • RIR 1 nas 2 primeiras séries
+
+  Remada curvada barra                         3 x 10-12                75 s           Tronco ~45 graus • não balance o corpo
+
+  Puxada aberta (lat pulldown)                 3 x 10-12                60 s           Puxe até o queixo • postura ereta
+
+  Desenvolvimento máquina                      3 x 10-12                60 s           Cotovelos na linha dos ombros
+
+  Prancha isométrica                            3 x 45 s                45 s           Core ativado • não prenda a respiração
+
+ Desaquecimento
+
+ Alongamento de peitoral na parede 30s cada lado + latíssimo com barra 2x20s.
+
+
+
+
+                                                           Página 8</pre></details>
+            <details class="page-transcript"><summary>Página 9</summary><pre>Plano de Treino Híbrido Otimizado                                       103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ Segunda - Upper A + Cardio (Fase 3) | ~85 min total
+ Peito • costas • ombro • core + 25 min Zona 2 pós-treino
+
+ Aquecimento
+
+ 3 min esteira leve + 10 rotações de ombro.
+
+                  Exercício               Séries × Reps             Descanso            Observações técnicas
+
+  Supino inclinado halteres                   3 x 10-12               75 s     Progrida carga ao fechar 12 reps em todas
+                                                                               as séries
+
+  Remada curvada barra                        3 x 10-12               75 s     Composto principal de costas da semana
+
+  Puxada aberta (lat pulldown)                3 x 10-12               60 s     Largura dorsal • puxe com os cotovelos
+
+  Desenvolvimento máquina                     3 x 10-12               60 s     Volume principal de ombro da semana
+
+  Prancha isométrica                          3 x 60 s                45 s     Respiração contínua • não prenda o ar
+
+ Cardio pós-treino (25 min)
+
+ 3 min Zona 1 -&gt; 20 min Zona 2 -&gt; 2 min Zona 1. Esteira inclinada (5-8%) ou bicicleta ergométrica.
+
+ Desaquecimento
+
+ Peitoral na parede 30s cada + latíssimo com barra 20s.
+
+
+ 7.2. Treino B - Lower (Quadríceps + Posterior + Panturrilha)
+ Quarta - Lower (Fase 1) | 5 exercícios • ~55 min
+
+ Aquecimento
+
+ 3 min bicicleta leve + 10 agachamentos com peso corporal + 10 hip circles.
+
+                  Exercício               Séries × Reps             Descanso            Observações técnicas
+
+  Agachamento livre ou hack squat             3 x 10-12               90 s     3s descida • paralelo ao chão ou abaixo
+
+  Leg press                                   3 x 12-15               75 s     Não trave os joelhos no topo do movimento
+
+  Stiff (barra ou halteres)                   3 x 10-12               75 s     3s descida • sinta o alongamento do
+                                                                               posterior
+
+  Mesa flexora                                3 x 12-15               60 s     Pausa de 1 segundo no topo da contração
+
+  Panturrilha em pé                            3 x 20                 45 s     Amplitude total • pausa no topo e na
+                                                                               descida
+
+ Desaquecimento
+
+ Quadríceps em pé 30s cada + posterior sentado 2x30s.
+
+
+ Quarta - Lower + Cardio (Fase 3) | ~80 min total
+ Quadríceps • posterior • panturrilha + 20 min Zona 2
+
+ Aquecimento
+
+ 3 min bicicleta leve + 10 agachamentos livres.
+
+                  Exercício               Séries × Reps             Descanso            Observações técnicas
+
+  Agachamento livre ou hack squat             3 x 10-12               90 s     Exercício mais importante da semana •
+                                                                               preservar técnica
+
+
+
+
+                                                         Página 9</pre></details>
+            <details class="page-transcript"><summary>Página 10</summary><pre>Plano de Treino Híbrido Otimizado                                        103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+                  Exercício                Séries × Reps             Descanso             Observações técnicas
+
+  Leg press                                   3 x 12-15                75 s     Amplitude máxima segura • não trave os
+                                                                                joelhos
+
+  Stiff                                       3 x 10-12                75 s     3s descida • sinta o posterior ao máximo
+
+  Mesa flexora                                3 x 12-15                60 s     Pausa de 1 segundo no topo da contração
+
+  Panturrilha em pé                             3 x 20                 45 s     Pausa no topo e na descida • amplitude
+                                                                                total
+
+ Cardio pós-treino (20 min)
+
+ Prefira bicicleta ou elíptico após o treino de perna. Menos impacto articular com os músculos fatigados.
+
+ Desaquecimento
+
+ Quadríceps em pé 30s cada + posterior sentado 30s.
+
+
+ 7.3. Treino C - Full Body / Upper B
+ Sexta - Upper B (Ombros + Braços + Costas) | 5 exercícios • ~50 min
+                  Exercício                Séries × Reps             Descanso             Observações técnicas
+
+  Desenvolvimento máquina ou smith            3 x 10-12                75 s     Composto principal de ombro neste dia
+
+  Remada baixa no cabo                        3 x 10-12                60 s     Contração máxima no topo • cotovelos
+                                                                                fechados
+
+  Elevação lateral no cabo                    3 x 12-15                45 s     Cotovelo levemente flexionado • não
+                                                                                balance
+
+  Tríceps corda                               2 x 12-15                45 s     Cotovelos fixos ao lado do corpo
+
+  Rosca direta barra EZ                       2 x 10-12                45 s     Controle total na fase excêntrica (descida)
+
+
+ Sexta - Full Body + Cardio (Fase 3) | ~90 min total
+ Treino completo eficiente • braços incluídos + 20 min Zona 2
+
+ Aquecimento
+
+ 3 min esteira leve + mobilidade de quadril (10 circles).
+
+                  Exercício                Séries × Reps             Descanso             Observações técnicas
+
+  Supino reto máquina                         3 x 10-12                75 s     Variação do supino inclinado da
+                                                                                segunda-feira
+
+  Remada baixa no cabo                        3 x 10-12                60 s     Contração máxima dorsal • cotovelos para
+                                                                                trás
+
+  Agachamento goblet (haltere no peito)         3 x 12                 75 s     Haltere no peito • quadril abaixo do joelho
+
+  Elevação lateral                            3 x 12-15                45 s     Volume direto de ombro lateral • sem
+                                                                                balanço
+
+  Tríceps corda + Rosca EZ (superset)        2 x 12 cada               60 s     Feitos em sequência sem pausa entre eles
+
+ Cardio pós-treino (20 min)
+
+ 3 min Zona 1 -&gt; 15 min Zona 2 -&gt; 2 min Zona 1. Pode reduzir para 15 min se o treino foi mais pesado que o
+ habitual.
+
+ Desaquecimento
+
+ Alongamento global 5 min.
+
+
+
+
+                                                         Página 10</pre></details>
+            <details class="page-transcript"><summary>Página 11</summary><pre>Plano de Treino Híbrido Otimizado                                   103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ 8. Cardio: Zonas, Intensidade e Progressão
+ Cardios específicos das fases
+ Terça e Sábado - Cardio Zona 2 | 30-35 min • intensidade baixa-moderada
+            Parte                   Duração             Zona                                 Detalhe
+
+  Aquecimento                        3 min             Zona 1          Caminhada plana • ritmo bem leve
+
+  Zona 2 principal                  25-30 min      60-70% FCmax        Inclinação 5-8% na esteira ou bicicleta/elíptico
+
+  Desaquecimento                     3 min             Zona 1          Reduz velocidade e inclinação gradualmente
+
+ Intensidade correta na Zona 2
+
+ Você consegue conversar em frases completas. Cansado, mas confortável. Se a respiração ficar ofegante, reduza
+ a intensidade imediatamente.
+
+
+ Cardio pós-musculação - Seg / Qua / Sex | 20 min • Zona 2 direto ao
+ terminar
+            Parte                   Duração             Zona                                 Detalhe
+
+  Início leve                        3 min             Zona 1          Corpo ainda aquecido do treino de força
+
+  Zona 2 contínua                    15 min        60-70% FCmax        Esteira, bicicleta ou elíptico
+
+  Desaquecimento                     2 min             Zona 1          Reduz intensidade progressivamente
+
+
+ Quinta - Cardio Zona 2-3 (introdução gradual) | 35 min
+            Parte                   Duração             Zona                                 Detalhe
+
+  Aquecimento                        5 min             Zona 1          Aumenta velocidade/resistência gradualmente
+
+  Zona 2                             15 min        60-70% FCmax        Ritmo conversacional confortável
+
+  Zona 3 (nova)                      10 min        70-80% FCmax        Frases curtas • esforço claramente perceptível
+
+  Desaquecimento                     5 min            Zona 1-2         Volta gradual ao ritmo leve
+
+ Se sentir que é demais
+
+ Elimine os 10 min de Zona 3 e permaneça em Zona 2 durante toda a sessão. Só introduza Zona 3 quando a Zona
+ 2 longa (40+ min) estiver completamente confortável.
+
+
+ Sábado - Cardio Zona 2 Longo (50 min) | Sessão mais importante para a
+ base aeróbica
+            Parte                   Duração             Zona                                 Detalhe
+
+  Aquecimento                        5 min             Zona 1          Aumente a intensidade devagar
+
+  Zona 2 contínua                    40 min        60-70% FCmax        Ritmo constante • foco total na base aeróbica
+
+  Desaquecimento                     5 min             Zona 1          Termine caminhando • frequência caindo
+                                                                       naturalmente
+
+ Por que esta é a sessão mais importante da semana
+
+ O cardio longo em Zona 2 no sábado é o principal estímulo para adaptações cardiovasculares profundas: melhora
+ mitocondrial, redução da pressão arterial, eficiência cardíaca. Pode ser realizado ao ar livre (caminhada rápida em
+ terreno levemente inclinado).
+
+
+
+
+                                                      Página 11</pre></details>
+            <details class="page-transcript"><summary>Página 12</summary><pre>Plano de Treino Híbrido Otimizado                                          103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ Zonas, intensidade e progressão
+ O cardio é estruturado em zonas de frequência cardíaca. A fórmula de referência é: FCmax = 220 -
+ idade. Para um praticante de 30 anos, FCmax = 190 bpm.
+
+      Zona            % FCmax           BPM (30 anos)             Percepção de esforço                   Uso no plano
+
+      Zona 1              50-60%          95-114 bpm         Muito leve • pode cantar           Aquecimento e desaquecimento
+
+      Zona 2              60-70%         114-133 bpm         Confortável • frases completas     FOCO PRINCIPAL em todas as
+                                                                                                fases
+
+      Zona 3              70-80%         133-152 bpm         Moderado • frases curtas           Fase 2 (quinta) e Fase 3
+
+      Zona 4              80-90%         152-171 bpm         Difícil • poucas palavras          Uso pontual apenas pós Fase 3
+
+
+ Modalidades recomendadas para 103 kg
+ Para um praticante com 103 kg, é fundamental priorizar modalidades de baixo impacto articular,
+ especialmente nas primeiras semanas. Corrida impactante pode sobrecarregar joelhos, quadris e
+ tornozelos antes da adaptação adequada.
+ • Esteira com inclinação 5-8% - caminhada rápida. Ativa glúteos e posterior sem impacto de corrida.
+ • Bicicleta ergométrica - excelente para Zona 2. Zero impacto. Recomendada pós-treino de perna.
+ • Elíptico - combina membros superiores e inferiores. Baixo impacto. Ótimo para variar.
+ • Caminhada ao ar livre - em terreno levemente inclinado. Útil para o sábado.
+
+ Como evoluir o cardio sem sobrecarregar
+ • Semanas 1-3: adicione 3-5 min por semana nas sessões de Zona 2
+ • Não aumente intensidade antes de aumentar duração
+ • Indicador de progresso: mesma FC para velocidade maior (adaptação real)
+ • Se a FC estiver muito elevada para a mesma carga: reduza intensidade e mantenha
+ • Progressão de Zona: só introduza Zona 3 quando Zona 2 longa (40+ min) for confortável
+
+
+ 9. Aquecimento e Desaquecimento
+ Aquecimento
+               Situação                                        Aquecimento                                      Duração
+
+  Antes da musculação               2-3 min esteira/bicicleta leve (Zona 1) + mobilidade específica do           5-8 min
+                                    grupo muscular + 1 série leve do primeiro exercício
+
+  Antes do cardio puro              2-3 min na mesma modalidade, mas em ritmo muito leve (Zona 1).               3-4 min
+                                    Aumento gradual de velocidade
+
+  Cardio pós-musculação             Não necessário - corpo já aquecido do treino de força. Comece                1-2 min
+                                    diretamente em Zona 1 suave
+
+
+ Desaquecimento
+               Situação                                      Desaquecimento                                     Duração
+
+  Após musculação                   Alongamento dos músculos trabalhados (30s cada grupo) +                      4-5 min
+                                    respiração lenta e profunda
+
+  Após cardio puro                  Reduzir velocidade/intensidade progressivamente. Terminar em                 3-4 min
+                                    passo leve por 2-3 min
+
+  Após cardio pós-musculação        Reduzir intensidade nos últimos 2 min. Não parar abruptamente                 2 min
+
+
+
+
+                                                           Página 12</pre></details>
+            <details class="page-transcript"><summary>Página 13</summary><pre>Plano de Treino Híbrido Otimizado                                      103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ Mobilidade simples pós-treino
+ • Peitoral: braço esticado na parede, rotação de tronco. 30s cada lado.
+ • Costas/latíssimo: segure uma barra fixa com os braços esticados, solte o peso do corpo. 2x20s.
+ • Quadríceps: em pé, puxe o pé em direção ao glúteo. 30s cada perna.
+ • Posterior/isquiotibiais: sentado, perna estendida, incline o tronco à frente. 2x30s.
+ • Ombros: braço cruzado na frente do peito, pressione levemente com o outro. 20s cada lado.
+ • Panturrilha: pé no degrau ou parede, calcanhar no chão, incline à frente. 30s cada.
+
+
+ 10. Progressão Semanal
+   Fechou o topo das reps em todas as séries?                 Perdeu reps antes do esperado?
+   Aumente 2-5% de carga na próxima sessão e volte            Mantenha a carga, aumente o descanso em 10-15s e
+   para a parte baixa da faixa. Exemplo: estava fazendo       priorize a técnica. Dois treinos seguidos com queda de
+   12/12/12 com 30 kg, na próxima sessão inicie com 10        reps = sinal para reduzir volume.
+   reps usando 31-32 kg.
+
+   Estagnou por 2 semanas?                                    Como aumentar o cardio com segurança
+   Troque a ordem dos exercícios ou a variação do último      Adicione 3-5 minutos por semana nas sessões de Zona
+   exercício. Não aumente volume - ajuste o estímulo.         2. Priorize duração antes de intensidade. Zona 3 só
+                                                              entra quando Zona 2 longa estiver confortável.
+
+   Quando manter o treino igual                               Quando reduzir o volume
+   Semanas de maior carga de estudos, sono ruim ou            Queda de reps por 2+ treinos, FC em repouso elevada,
+   queda de motivação. Manter é sempre melhor do que          dor articular, sono interrompido por 3+ dias. Reduza 1
+   reduzir abruptamente.                                      sessão de cardio e mantenha a musculação.
+
+
+ Regra de ouro da progressão
+
+ Sem registro = sem progressão controlada. Anote sempre: exercício, carga, reps por série e tempo de descanso
+ real. Isso permite identificar estágios antes que virem problemas.
+
+
+
+ 11. Adaptação para Semanas Difíceis
+ Em semanas de provas, entregas ou picos de trabalho, o treino deve ser adaptado - nunca
+ abandonado. Manter uma versão reduzida é infinitamente melhor do que interromper
+ completamente e perder o ritmo.
+
+ Modo Mínimo Viável - o que manter obrigatoriamente
+        Elemento               Normal (Fase 3)             Semana difícil                      Justificativa
+
+  Musculação               3x/sem • 60+ min       3x/sem • 20-30 min             Sem cardio pós. Só os compostos
+                                                                                 principais.
+
+  Cardio formal            6x/sem • 20-50 min     2-3x/sem • 20 min              Bicicleta ou elíptico. Zona 2 leve.
+
+  Caminhada                Complementar           20 min após o jantar           Substitui o cardio formal ausente.
+
+  Descanso                 Domingo                Priorize sono 7-8h             Sono vale mais que 1 treino nessas
+                                                                                 semanas.
+
+  Carga musculação         Progressão normal      Mantenha a carga atual         Não reduza carga. Apenas menos
+                                                                                 volume.
+
+
+ Modo mínimo viável
+ Mantenha os 3 dias de musculação (20-30 min, sem cardio pós). Substitua cardio formal por
+ caminhada de 20 min após o jantar. Isso mantém o metabolismo ativo sem custar energia cognitiva.
+
+
+
+
+                                                    Página 13</pre></details>
+            <details class="page-transcript"><summary>Página 14</summary><pre>Plano de Treino Híbrido Otimizado                                       103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ Caminhada como cardio de emergência
+ 20-30 min de caminhada moderada equivale a Zona 1-2 passiva. Não é o ideal, mas é infinitamente
+ melhor do que zero.
+
+ Sono acima do treino
+ Em semanas de prova, priorize 7-8h de sono. Sono ruim sabota tanto o emagrecimento quanto a
+ recuperação muscular muito mais do que um treino perdido.
+
+ Como voltar à rotina normal
+ Na semana seguinte, retome a fase atual sem tentar compensar. Não dobre o volume tentando
+ recuperar o tempo perdido - isso aumenta o risco de lesão e overtraining.
+
+
+ 12. Sinais de Excesso e Sobrecarga
+                  Sinal                                                    Descrição
+
+  Cansaço persistente               Fadiga que não melhora mesmo após noite de sono. Indica que o volume total está acima
+                                    da capacidade de recuperação.
+
+  Queda de desempenho               Reps ou carga caindo por 2+ treinos seguidos sem motivo aparente. Sinal clássico de
+                                    overreaching.
+
+  Sono ruim                         Dificuldade para dormir ou sono fragmentado por 3+ dias consecutivos. O cortisol elevado
+                                    por excesso de treino perturba o sono.
+
+  Dor articular                     Dor em articulações (joelhos, quadris, ombros). Diferente de dor muscular - esta é
+                                    aceitável; aquela é sinal de parada imediata.
+
+  Falta de motivação                Vontade zero de treinar, mesmo com horário disponível. Pode indicar fadiga do SNC
+                                    (sistema nervoso central).
+
+  FC em repouso elevada             FC matinal 5-8 bpm acima do normal por 2+ dias consecutivos. Indicador fidedigno de
+                                    estresse fisiológico excessivo.
+
+  Dificuldade pós-treino            Treino prejudica claramente a concentração nos estudos. O treino deve energizar, não
+                                    drenar.
+
+ O que fazer ao detectar sinais de excesso
+
+ Reduza 1 sessão de cardio naquela semana e mantenha somente os 3 dias de musculação. Não pare tudo -
+ reduza. Se os sinais persistirem após uma semana reduzida, considere descanso ativo por 3-4 dias (apenas
+ caminhadas leves) antes de retomar o programa.
+
+
+
+
+                                                        Página 14</pre></details>
+            <details class="page-transcript"><summary>Página 15</summary><pre>Plano de Treino Híbrido Otimizado                                      103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ 13. Recomendações Gerais
+   Sono
+   Priorize 7-8 horas por noite. O sono é quando o corpo produz GH, repara músculos e consolida a memória. Sono
+   insuficiente sabota emagrecimento, recuperação muscular e desempenho cognitivo simultaneamente. Nenhum
+   protocolo de treino compensa sono ruim.
+
+   Hidratação
+   Mantenha pelo menos 35 ml/kg de peso corporal em água por dia. Para 103 kg: cerca de 3,5 litros. Aumente em
+   dias de treino. Desidratação reduz desempenho físico e cognitivo significativamente.
+
+   Alimentação equilibrada
+   Não é necessário uma dieta extrema. Foco em: proteína adequada (1,6-2,2 g/kg/dia) para preservar músculo;
+   carboidratos pré-treino para energia; vegetais e frutas para micronutrientes. Evite déficit calórico agressivo - 300 a
+   500 kcal/dia de déficit é ideal.
+
+   Pausas no trabalho sentado
+   A cada 60-90 min sentado, levante-se por 3-5 minutos. Caminhe até a cozinha, suba escadas, faça agachamentos
+   leves. Esses microintervalos reduzem a glicemia, melhoram a circulação e aumentam o foco.
+
+   Caminhadas curtas
+   Caminhadas de 10-15 min após as refeições principais reduzem picos de glicemia, melhoram a digestão e
+   contribuem para o gasto calórico diário. Facilmente encaixadas mesmo em rotinas de estudos intensos.
+
+   Constância acima de perfeição
+   Um treino medíocre que acontece é infinitamente mais valioso do que o treino perfeito que não acontece. Em dias
+   ruins, faça o mínimo - mas faça. A constância ao longo dos meses produz resultados que sessões perfeitas
+   esporádicas nunca atingem.
+
+   Acompanhamento profissional
+   Quando possível, consulte um educador físico para ajustes de carga e técnica, um nutricionista para orientação
+   alimentar personalizada e um médico para check-up cardiovascular periódico - especialmente considerando os
+   objetivos deste plano.
+
+
+
+ 14. Resumo Final
+ Este plano foi construído para ser sustentável, eficiente e adaptável. O sucesso não depende de
+ perfeição - depende de constância e ajustes inteligentes.
+
+                Elemento                                              Rotina Ideal (Fase 3)
+
+  Musculação                             3x/semana - Seg, Qua, Sex
+
+  Cardio                                 6x/semana - Seg a Sáb (20-50 min/sessão)
+
+  Tempo máximo/dia                       90 minutos (musculação + cardio pós)
+
+  Cardio puro                            Ter, Qui, Sáb - 40-50 min em Zona 2
+
+  Zona principal                         Zona 2 - 60-70% da FCmax
+
+  Volume musculação                      9-10 séries por grupo muscular por semana
+
+  Progressão força                       Reps -&gt; Carga (+2-5%) -&gt; Densidade
+
+  Progressão cardio                      +3-5 min por semana até as durações alvo
+
+  Domingo                                Descanso total - nenhuma atividade obrigatória
+
+
+
+
+                                                        Página 15</pre></details>
+            <details class="page-transcript"><summary>Página 16</summary><pre>Plano de Treino Híbrido Otimizado                                 103 kg | 1,80 m | Musculação 3x + Cardio 6x
+
+
+
+
+ O que evitar
+ • Aumentar volume e intensidade ao mesmo tempo
+ • Saltar direto para a Fase 3 sem cumprir as fases anteriores
+ • Compensar treinos perdidos dobrando o volume
+ • Ignorar sinais de fadiga persistente
+ • Usar cardio de alta intensidade como método principal de emagrecimento
+ • Comparar seu progresso com o de outras pessoas
+ • Abandonar o treino em semanas difíceis - reduza, nunca pare
+
+ Mensagem final
+
+ O objetivo é transformar o treino em parte natural da sua rotina de saúde - não em mais uma fonte de pressão.
+ Com consistência e progressão gradual, os resultados virão: menos gordura, mais disposição, sistema
+ cardiovascular saudável e massa muscular preservada. O treino deve dar energia para os estudos e o trabalho,
+ não tirar.
+
+
+
+
+                                                    Página 16</pre></details>
+
+        </section>
+    </div>
+</div>
+<footer>
+    <div class="footer-row">
+        <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
+        <div class="footer-pills"><span class="footer-pill">16 páginas extraídas</span><span class="footer-pill cyan">3 fases</span><span class="footer-pill green">3x força + 6x cardio</span><span class="footer-pill">90 min/dia</span></div>
+    </div>
+    <p><strong style="color:var(--muted2)">Plano de Treino Híbrido Otimizado</strong> · HTML técnico gerado a partir de TREINO-H.pdf</p>
+</footer>
+<button id="btt" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<script>
+    (function(){
+      const btt=document.getElementById('btt');
+      const search=document.getElementById('searchInput');
+      const sections=Array.from(document.querySelectorAll('[data-search-section]'));
+      const navLinks=Array.from(document.querySelectorAll('.nav-link'));
+      const sideLinks=Array.from(document.querySelectorAll('.sidebar a'));
+      const bar=document.getElementById('navSectionsBar');
+      const btnL=document.getElementById('navScrollLeft');
+      const btnR=document.getElementById('navScrollRight');
+      function norm(v){return v.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');}
+      function upd(){if(!bar)return;btnL.classList.toggle('hidden',bar.scrollLeft<=4);btnR.classList.toggle('hidden',bar.scrollLeft+bar.clientWidth>=bar.scrollWidth-4);}
+      if(bar){btnL.addEventListener('click',()=>bar.scrollBy({left:-320,behavior:'smooth'}));btnR.addEventListener('click',()=>bar.scrollBy({left:320,behavior:'smooth'}));bar.addEventListener('scroll',upd,{passive:true});upd();}
+      window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>420));
+      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}}));
+      search.addEventListener('input',()=>{const q=norm(search.value.trim()); sections.forEach(s=>{s.classList.remove('is-hidden-by-search','search-hit'); if(!q)return; const m=norm(s.innerText).includes(q); s.classList.toggle('is-hidden-by-search',!m); s.classList.toggle('search-hit',m);});});
+      const obs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){const id=en.target.id;navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));sideLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));const active=bar?bar.querySelector('.nav-link.active'):null;if(active)active.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'});}});},{threshold:.15,rootMargin:'-100px 0px -55% 0px'});sections.forEach(s=>obs.observe(s));
+    })();
+</script>
+</body>
+</html>

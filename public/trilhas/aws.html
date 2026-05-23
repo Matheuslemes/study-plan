@@ -1,209 +1,744 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Certificações AWS — Plano Integrado de Estudos</title>
-<meta name="description" content="Página técnica completa para CLF-C02, SAA-C03, DVA-C02, SOA-C03 e DOP-C02 integrada ao cronograma de 64 semanas.">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="../assets/css/styles.css" rel="stylesheet">
-<style>
-:root {
-  --aws-accent: #ef9f27;
-  --aws-accent-2: #ffcf7a;
-  --aws-blue: #38bdf8;
-  --aws-green: #22c55e;
-  --aws-purple: #a78bfa;
-  --aws-red: #fb7185;
-  --doc-bg: #07090f;
-  --doc-surface: rgba(255,255,255,.045);
-  --doc-surface-2: rgba(255,255,255,.075);
-  --doc-border: rgba(255,255,255,.12);
-  --doc-text: #e8e6e3;
-  --doc-muted: #aaa6a0;
-  --doc-code: #050814;
-}
-html { scroll-behavior: smooth; }
-body.track-page {
-  font-family: 'DM Sans', sans-serif;
-  color: var(--doc-text);
-  background:
-    radial-gradient(circle at 15% 0%, rgba(239,159,39,.22), transparent 32rem),
-    radial-gradient(circle at 90% 8%, rgba(56,189,248,.13), transparent 28rem),
-    radial-gradient(circle at 60% 95%, rgba(167,139,250,.11), transparent 30rem),
-    var(--doc-bg);
-}
-.mono { font-family:'JetBrains Mono', monospace; }
-.track-hero-page {
-  padding: 3rem 0 2rem;
-  border-bottom: 1px solid var(--doc-border);
-  background: linear-gradient(135deg, rgba(239,159,39,.20), rgba(56,189,248,.07));
-}
-.track-title {
-  font-size: clamp(2rem, 4vw, 4rem);
-  font-weight: 800;
-  letter-spacing: -.05em;
-  margin-bottom: .8rem;
-}
-.track-lead { color: var(--doc-muted); max-width: 1040px; font-size: 1.05rem; }
-.track-badge-set, .badge-cloud { display:flex; flex-wrap:wrap; gap:.5rem; }
-.track-badge-set { margin-top:1.2rem; }
-.track-badge-set span, .badge-cloud span {
-  border:1px solid rgba(239,159,39,.38);
-  background: rgba(239,159,39,.14);
-  color:#ffe2b4;
-  padding:.35rem .65rem;
-  border-radius:999px;
-  font-size:.78rem;
-  font-weight:800;
-}
-.track-local-nav {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  background: rgba(7,9,15,.94);
-  backdrop-filter: blur(14px);
-  border-bottom: 1px solid var(--doc-border);
-}
-.track-local-nav a {
-  color: var(--doc-muted);
-  text-decoration:none;
-  padding:.45rem .7rem;
-  border-radius:999px;
-  white-space:nowrap;
-  font-size:.84rem;
-  border:1px solid transparent;
-}
-.track-local-nav a:hover { color:#fff; background:rgba(239,159,39,.16); border-color:rgba(239,159,39,.35); }
-.track-search {
-  width:min(320px,100%);
-  background:rgba(255,255,255,.05)!important;
-  border-color:var(--doc-border)!important;
-  color:#fff!important;
-}
-.doc-section {
-  background: var(--doc-surface);
-  border: 1px solid var(--doc-border);
-  border-radius: 24px;
-  padding: clamp(1rem, 2vw, 1.7rem);
-  margin-bottom: 1.25rem;
-  box-shadow: 0 18px 70px rgba(0,0,0,.18);
-}
-.doc-section-heading {
-  display:flex;
-  align-items:start;
-  justify-content:space-between;
-  gap:1rem;
-  margin-bottom:1rem;
-  padding-bottom:.9rem;
-  border-bottom:1px solid var(--doc-border);
-}
-.doc-section h2 { margin:0; font-weight:800; letter-spacing:-.03em; }
-.doc-section h3 { color:#fff0d4; font-size:1.15rem; font-weight:800; margin:1.2rem 0 .65rem; }
-.doc-section h4 { color:#fff; font-size:.95rem; font-weight:800; }
-.section-subtitle { color:var(--doc-muted); margin:.35rem 0 0; }
-.section-badge {
-  border:1px solid rgba(239,159,39,.38);
-  background:rgba(239,159,39,.14);
-  color:#ffe2b4;
-  font-weight:800;
-  font-size:.75rem;
-  border-radius:999px;
-  padding:.35rem .7rem;
-  white-space:nowrap;
-}
-.doc-hero-card { display:grid; grid-template-columns: minmax(0,1.45fr) minmax(260px,.75fr); gap:1rem; align-items:center; }
-.metrics-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:.7rem; }
-.metric-pill {
-  border:1px solid rgba(239,159,39,.35);
-  border-radius:18px;
-  padding:1rem;
-  background:rgba(239,159,39,.12);
-  text-align:center;
-}
-.metric-pill span { font-family:'JetBrains Mono',monospace; font-size:1.65rem; color:#fff; font-weight:800; display:block; }
-.metric-pill small { color:var(--doc-muted); text-transform:uppercase; font-size:.7rem; letter-spacing:.04em; }
-.doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { display:grid; gap:1rem; }
-.doc-grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
-.doc-grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
-.doc-grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
-.phase-doc-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
-.mini-card, .callout, .phase-doc-card, .exam-card {
-  border:1px solid var(--doc-border);
-  background:rgba(255,255,255,.04);
-  border-radius:18px;
-  padding:1rem;
-}
-.exam-card { position:relative; overflow:hidden; }
-.exam-card::before { content:""; position:absolute; inset:0 0 auto 0; height:3px; background:linear-gradient(90deg,var(--aws-accent),var(--aws-blue)); }
-.mini-card strong { display:block; margin-bottom:.35rem; color:#fff; }
-.mini-card span, .callout p, .phase-doc-card p, .exam-card p { color:var(--doc-muted); }
-.callout { border-left:4px solid var(--aws-accent); }
-.callout.accent-blue { border-left-color:var(--aws-blue); }
-.callout.accent-green { border-left-color:var(--aws-green); }
-.callout.accent-purple { border-left-color:var(--aws-purple); }
-.callout.accent-red { border-left-color:var(--aws-red); }
-.doc-list { margin:.5rem 0 1rem; padding-left:1.25rem; color:var(--doc-muted); }
-.doc-list li { margin-bottom:.35rem; }
-.table-responsive { border:1px solid var(--doc-border); border-radius:18px; overflow:auto; margin: .75rem 0 1rem; }
-.doc-table { min-width: 760px; margin-bottom:0!important; }
-.doc-table th { background:rgba(239,159,39,.18)!important; color:#fff!important; font-weight:800; border-color:var(--doc-border)!important; white-space:nowrap; }
-.doc-table td { border-color:var(--doc-border)!important; color:#dddbe8!important; font-size:.88rem; vertical-align:top; }
-.dense-table td, .dense-table th { font-size:.78rem; }
-.code-block {
-  background:var(--doc-code);
-  color:#d9f99d;
-  border:1px solid rgba(239,159,39,.25);
-  border-radius:16px;
-  padding:1rem;
-  overflow:auto;
-  white-space:pre;
-  max-height:680px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:.78rem;
-  line-height:1.55;
-}
-.phase-doc-head { display:flex; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--doc-border); padding-bottom:.7rem; margin-bottom:.8rem; }
-.phase-doc-head h3 { margin:0; }
-.phase-doc-head span { font-family:'JetBrains Mono',monospace; color:#ffe2b4; font-size:.82rem; }
-.priority { display:inline-block; border-radius:999px; padding:.2rem .5rem; font-size:.72rem; font-weight:800; white-space:nowrap; }
-.priority.must { color:#fecaca;background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.3); }
-.priority.should { color:#fde68a;background:rgba(245,158,11,.16);border:1px solid rgba(245,158,11,.32); }
-.priority.nice { color:#bbf7d0;background:rgba(34,197,94,.14);border:1px solid rgba(34,197,94,.3); }
-.priority.future { color:#bae6fd;background:rgba(14,165,233,.14);border:1px solid rgba(14,165,233,.3); }
-.timeline { position:relative; margin-left:.65rem; padding-left:1.5rem; }
-.timeline::before { content:""; position:absolute; left:0; top:.25rem; bottom:.25rem; width:1px; background:var(--doc-border); }
-.timeline-item { position:relative; margin-bottom:1rem; }
-.timeline-item::before { content:""; position:absolute; left:-1.77rem; top:.3rem; width:.65rem; height:.65rem; border-radius:999px; background:var(--aws-accent); box-shadow:0 0 0 5px rgba(239,159,39,.14); }
-.timeline-item strong { color:#fff; display:block; }
-.timeline-item span { color:var(--doc-muted); }
-.ref-list a, .footer-link { color:#ffe2b4; text-decoration:none; }
-.ref-list a:hover, .footer-link:hover { color:#fff; text-decoration:underline; }
-mark.search-hit, .search-hit { outline:2px solid rgba(239,159,39,.65); background:rgba(239,159,39,.10)!important; }
-.is-hidden-by-search { display:none!important; }
-.back-to-top {
-  position:fixed; right:1rem; bottom:1rem; width:44px; height:44px; border-radius:999px;
-  border:1px solid rgba(239,159,39,.45); background:rgba(239,159,39,.2); color:#fff; display:none; z-index:1200;
-}
-.back-to-top.is-visible { display:block; }
-@media (max-width: 992px) {
-  .doc-hero-card, .doc-grid-2, .doc-grid-3, .doc-grid-4, .phase-doc-grid { grid-template-columns:1fr; }
-  .track-local-nav .container { gap:.75rem; }
-  .track-search { margin-top:.5rem; width:100%; }
-}
-@media (max-width: 576px) {
-  .doc-section { border-radius:18px; }
-  .doc-section-heading, .phase-doc-head { flex-direction:column; }
-  .metrics-grid { grid-template-columns:1fr; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificações AWS — Plano Integrado de Estudos</title>
+  <meta name="description" content="Página técnica completa para CLF-C02, SAA-C03, DVA-C02, SOA-C03 e DOP-C02 integrada ao cronograma de 64 semanas.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <style>
+
+    :root{
+      --bg:#07090f;
+      --surface:#0d1117;
+      --surface2:#141a24;
+      --surface3:rgba(255,255,255,.045);
+      --border:rgba(255,255,255,.09);
+      --border2:rgba(255,255,255,.15);
+
+      --accent:#ef9f27;
+      --accent2:#ffcf7a;
+      --accent3:#38bdf8;
+      --accent4:#22d3b0;
+      --accent5:#a78bfa;
+      --aws-orange:#ef9f27;
+      --aws-yellow:#ffcf7a;
+      --aws-blue:#38bdf8;
+      --aws-green:#22d3b0;
+      --aws-purple:#a78bfa;
+      --aws-red:#fb7185;
+
+      --text:#e2e8f0;
+      --muted:#64748b;
+      --muted2:#94a3b8;
+      --code-bg:#060a12;
+
+      --must:#fca5a5;
+      --should:#fcd34d;
+      --nice:#86efac;
+      --future:#93c5fd;
+
+      --doc-bg:var(--bg);
+      --doc-surface:var(--surface);
+      --doc-surface-2:var(--surface2);
+      --doc-border:var(--border);
+      --doc-text:var(--text);
+      --doc-muted:var(--muted2);
+      --doc-code:var(--code-bg);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;font-size:15px}
+    body.track-page{
+      font-family:'Inter',sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.7;
+      min-height:100vh;
+      background-image:
+        radial-gradient(ellipse 80% 40% at 10% -5%, rgba(239,159,39,.14) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 30% at 90% 5%, rgba(56,189,248,.08) 0%, transparent 42%),
+        radial-gradient(ellipse 50% 25% at 85% 25%, rgba(167,139,250,.055) 0%, transparent 42%);
+    }
+    ::selection{background:rgba(239,159,39,.28);color:#fff}
+    .container{max-width:1240px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
+    .mono{font-family:'IBM Plex Mono',monospace}
+
+    /* HERO */
+    .track-hero-page{
+      padding:4rem 0 3rem;
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(135deg,rgba(239,159,39,.12) 0%,rgba(56,189,248,.055) 54%,rgba(167,139,250,.045) 100%);
+    }
+    .hero-label{
+      font-family:'IBM Plex Mono',monospace;
+      font-size:.72rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--accent2);
+      margin-bottom:.8rem;
+    }
+    .track-title{
+      font-family:'Syne',sans-serif;
+      font-size:clamp(2rem,5vw,4rem);
+      font-weight:800;
+      letter-spacing:-.04em;
+      background:linear-gradient(135deg,#fff 38%,var(--accent) 76%,var(--aws-yellow) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      line-height:1.1;
+      margin-bottom:.8rem;
+    }
+    .track-lead{color:var(--muted2);max-width:980px;font-size:1rem;margin-bottom:0}
+    .track-badge-set,.badge-cloud{display:flex;flex-wrap:wrap;gap:.5rem}
+    .track-badge-set{margin-top:1.4rem}
+    .track-badge-set span,.badge-cloud span{
+      font-family:'IBM Plex Mono',monospace;
+      font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:6px;
+      border:1px solid rgba(239,159,39,.32);background:rgba(239,159,39,.08);color:var(--accent)
+    }
+    .track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.085);color:var(--aws-blue)}
+    .track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(167,139,250,.30);background:rgba(167,139,250,.075);color:var(--aws-purple)}
+    .footer-link,.hero-back-link{
+      display:inline-flex;align-items:center;gap:.4rem;
+      font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;
+      color:var(--muted2);text-decoration:none;border:1px solid var(--border);
+      background:rgba(255,255,255,.04);padding:.32rem .75rem;border-radius:6px;transition:all .15s
+    }
+    .footer-link:hover,.hero-back-link:hover{color:#fff;border-color:rgba(239,159,39,.35);background:rgba(239,159,39,.08);text-decoration:none}
+
+    /* SITENAV */
+    .sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+    .sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+    .sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
+    .sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent2);border:1px solid rgba(255,207,122,.3);background:rgba(255,207,122,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
+    .nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
+    .nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+    .nav-back:hover{color:#fff;border-color:rgba(239,159,39,.35);background:rgba(239,159,39,.08)}
+    .sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+    .search-box,.track-search{background:var(--surface2)!important;border:1px solid var(--border)!important;border-radius:8px;padding:.3rem .7rem;color:#fff!important;font-size:.8rem;outline:none;width:270px;box-shadow:none!important}
+    .search-box::placeholder,.track-search::placeholder{color:var(--muted)!important}
+    .search-box:focus,.track-search:focus{border-color:rgba(239,159,39,.45)!important}
+    .sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
+    .sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(239,159,39,.4) rgba(255,255,255,.04);padding:0 32px}
+    .sitenav-bar-inner::-webkit-scrollbar{height:4px}.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(239,159,39,.4);border-radius:99px}.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(239,159,39,.7)}
+    .sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
+    .sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
+    .sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
+    .nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
+    .nav-scroll-btn:hover{color:#fff;background:rgba(239,159,39,.08)}
+    .nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
+    .nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
+    .nav-group:last-child{border-right:none;padding-right:.8rem}
+    .nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
+    .nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
+    .nav-link:hover{color:#fff;background:rgba(239,159,39,.1);border-color:rgba(239,159,39,.25)}
+    .nav-link.active{color:var(--accent);background:rgba(239,159,39,.1);border-color:rgba(239,159,39,.3)}
+
+    /* LAYOUT */
+    .main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
+    .sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+    .sidebar-group{margin-bottom:1.4rem}
+    .sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
+    .sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
+    .sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
+    .sidebar a.active{color:var(--accent);background:rgba(239,159,39,.08)}
+    .content{padding:2rem 0 4rem 2rem}
+    #trackMain{padding-top:0!important;padding-bottom:0!important}
+
+    /* CONTENT */
+    .doc-section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem);box-shadow:none}
+    .doc-section:target{border-color:rgba(239,159,39,.42);box-shadow:0 0 0 1px rgba(239,159,39,.15)}
+    .doc-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+    .doc-section-heading h2,.doc-section h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff;margin:0}
+    .section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
+    .section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(255,207,122,.32);background:rgba(255,207,122,.085);color:var(--accent2)}
+    .doc-section h3,.exam-card h3,.phase-doc-card h3,.callout h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
+    .doc-section h4,.phase-doc-card h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
+    p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}.lead{font-size:1rem;color:#cbd5e1}ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}li{margin-bottom:.3rem;font-size:.88rem}strong{color:#e2e8f0;font-weight:600}em{color:#fed7aa;font-style:normal;font-weight:700}
+    code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(239,159,39,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
+    .doc-hero-card{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr);gap:1rem;align-items:center}
+    .doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid{display:grid;gap:1rem}.doc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.doc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.doc-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.phase-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}.metric-pill{background:rgba(239,159,39,.08);border:1px solid rgba(239,159,39,.22);border-radius:12px;padding:1rem;text-align:center}.metric-pill span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}.metric-pill small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+    .mini-card,.exam-card,.phase-doc-card,.callout{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color .15s,background .15s,transform .15s}.mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}.mini-card span,.exam-card p,.phase-doc-card p,.callout p{color:var(--muted2);font-size:.82rem}.mini-card:hover,.exam-card:hover,.phase-doc-card:hover{border-color:rgba(239,159,39,.28);background:#151c27;transform:translateY(-1px)}
+    .exam-card{position:relative;overflow:hidden}.exam-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--aws-blue))}
+    .callout{border-left:3px solid var(--accent);background:rgba(239,159,39,.06);border-radius:0 10px 10px 0}.callout.accent-blue{border-left-color:var(--aws-blue);background:rgba(56,189,248,.06)}.callout.accent-green{border-left-color:var(--aws-green);background:rgba(34,211,176,.06)}.callout.accent-purple{border-left-color:var(--aws-purple);background:rgba(167,139,250,.06)}.callout.accent-red{border-left-color:var(--aws-red);background:rgba(251,113,133,.06)}.callout h3,.callout h4{margin-top:0;color:#fff}.callout p,.callout ul{margin-bottom:0}
+    .doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}.doc-list li{margin-bottom:.35rem}
+    .phase-doc-card{position:relative;overflow:hidden;padding:1.1rem}.phase-doc-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--aws-blue))}.phase-doc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;padding-bottom:.6rem;margin-bottom:.7rem;border-bottom:1px solid var(--border)}.phase-doc-head h3{margin:0;font-size:.92rem;color:#fff}.phase-doc-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}
+    .table-responsive{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0 1rem}.doc-table{border-collapse:collapse;width:100%;min-width:760px;margin-bottom:0!important}.doc-table thead tr,.doc-table th{background:rgba(239,159,39,.10)!important}.doc-table th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem!important;text-align:left;color:#fff!important;border-bottom:1px solid var(--border2)!important;border-color:var(--border)!important;white-space:nowrap}.doc-table td{padding:.65rem 1rem!important;font-size:.82rem;color:#cbd5e1!important;border-bottom:1px solid var(--border)!important;border-color:var(--border)!important;vertical-align:top}.doc-table tr:last-child td{border-bottom:none!important}.doc-table tr:hover td{background:rgba(255,255,255,.025)!important}.dense-table td,.dense-table th{font-size:.78rem!important}.table-dark,.table-dark>:not(caption)>*>*{background:transparent!important;color:var(--text)!important}.table-hover>tbody>tr:hover>*{background:rgba(255,255,255,.025)!important}.table-dark>:not(caption)>*{border-color:var(--border)!important}
+    pre,.code-block{background:var(--code-bg);border:1px solid rgba(239,159,39,.22);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#fdba74;max-height:680px;white-space:pre}pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
+    .timeline{position:relative;margin-left:.65rem;padding-left:1.5rem}.timeline::before{content:"";position:absolute;left:0;top:.25rem;bottom:.25rem;width:1px;background:var(--border)}.timeline-item{position:relative;margin-bottom:1rem}.timeline-item::before{content:"";position:absolute;left:-1.77rem;top:.3rem;width:.65rem;height:.65rem;border-radius:999px;background:var(--accent);box-shadow:0 0 0 5px rgba(239,159,39,.14)}.timeline-item strong{color:#fff;display:block}.timeline-item span{color:var(--muted2);font-size:.84rem}
+    .priority{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}.priority.must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}.priority.should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}.priority.nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}.priority.future{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
+    .ref-list a{color:#ffe2b4;text-decoration:none}.ref-list a:hover{color:#fff;text-decoration:underline}.mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.is-hidden-by-search{display:none!important}.search-hit{outline:1px solid rgba(239,159,39,.65);background:rgba(239,159,39,.08)!important}
+    .back-to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(239,159,39,.15);border:1px solid rgba(239,159,39,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}.back-to-top.is-visible{display:flex}.back-to-top:hover{background:rgba(239,159,39,.3)}
+    .page-footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}.page-footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px}.footer-pill.orange{border:1px solid rgba(239,159,39,.25);background:rgba(239,159,39,.06);color:var(--accent)}.footer-pill.yellow{border:1px solid rgba(255,207,122,.25);background:rgba(255,207,122,.06);color:var(--accent2)}.footer-pill.blue{border:1px solid rgba(56,189,248,.25);background:rgba(56,189,248,.06);color:var(--aws-blue)}.footer-pill.purple{border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--aws-purple)}
+    a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid rgba(239,159,39,.65);outline-offset:2px}
+    @media(max-width:992px){.main{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem 0 3rem}.doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid,.metrics-grid{grid-template-columns:1fr}.sitenav-top{flex-wrap:wrap;gap:.5rem}.sitenav-top-right{width:100%}.search-box,.track-search{width:100%}.nav-ver{display:none}}
+    @media(max-width:576px){.track-hero-page{padding:3rem 0 2rem}.track-title{font-size:clamp(1.8rem,10vw,2.8rem)}.doc-section{border-radius:10px;padding:1rem}.doc-section-heading,.phase-doc-head{flex-direction:column}.sitenav-brand span{display:none}.nav-back{font-size:.65rem;padding:.25rem .5rem}.nav-group-label{display:none}.nav-group{border-right:none;padding:.25rem .25rem}.nav-link{font-size:.66rem;padding:.25rem .48rem}}
+
+  </style>
+
+
+  <!-- Responsividade refeita: estrutura baseada na Trilha do Blog e aplicada também na Trilha Java corrigida. O CSS original acima permanece intacto. -->
+  <style id="aws-responsive-refactor">
+    /* ─────────────────────────────────────────────────────────────
+       RESPONSIVIDADE REFEITA — AWS Track
+       Bloco complementar: não altera o CSS principal nem o conteúdo.
+       Objetivo: padronizar notebook, tablet e mobile com a estrutura
+       usada na Trilha do Blog e reaplicada na Trilha Java.
+       ───────────────────────────────────────────────────────────── */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body.track-page {
+      overflow-x: hidden;
+    }
+
+    .container,
+    .main,
+    .content,
+    .doc-section,
+    .table-responsive,
+    .doc-table,
+    .phase-doc-card,
+    .exam-card,
+    .mini-card,
+    .callout,
+    .metrics-grid,
+    .doc-hero-card {
+      min-width: 0;
+    }
+
+    img,
+    video,
+    canvas,
+    iframe,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .doc-section {
+      scroll-margin-top: 126px;
+    }
+
+    .table-responsive,
+    pre,
+    .code-block {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-inline: contain;
+    }
+
+    .table-responsive .doc-table,
+    .table-responsive table {
+      width: 100%;
+      min-width: max(760px, 100%);
+      table-layout: auto;
+    }
+
+    .doc-table th,
+    .doc-table td,
+    th,
+    td {
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    pre,
+    .code-block {
+      white-space: pre;
+      overflow-y: auto;
+    }
+
+    pre code,
+    .code-block code {
+      white-space: inherit;
+    }
+
+    .track-title,
+    .track-lead,
+    .doc-section-heading h2,
+    .sitenav-brand,
+    p,
+    li,
+    .mini-card span,
+    .exam-card p,
+    .phase-doc-card p,
+    .callout p,
+    .timeline-item span {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    .doc-grid-2 > *,
+    .doc-grid-3 > *,
+    .doc-grid-4 > *,
+    .phase-doc-grid > *,
+    .metrics-grid > * {
+      min-width: 0;
+    }
+
+    .sitenav,
+    .sitenav * {
+      min-width: 0;
+    }
+
+    .sitenav-brand,
+    .nav-back,
+    .nav-ver {
+      flex-shrink: 0;
+    }
+
+    .sitenav-top-right {
+      min-width: 180px;
+    }
+
+    .search-box,
+    .track-search {
+      max-width: 100%;
+    }
+
+    .sitenav-bar-inner {
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+    }
+
+    .nav-link {
+      scroll-snap-align: start;
+    }
+
+    /* Correção do Resumo Executivo: evita texto espremido contra os cards. */
+    #resumo .doc-hero-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    #resumo .metrics-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    #resumo .metric-pill {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Notebook e desktop estreito */
+    @media (max-width: 1180px) {
+      .container,
+      .main {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .main {
+        grid-template-columns: 200px minmax(0, 1fr);
+      }
+
+      .content {
+        padding-left: 1.35rem;
+      }
+
+      .doc-grid-4,
+      #resumo .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .doc-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Tablet: remove sidebar e preserva navegação superior */
+    @media (max-width: 980px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .content {
+        padding: 1.5rem 0 3rem;
+      }
+
+      .doc-section {
+        scroll-margin-top: 148px;
+      }
+
+      .doc-hero-card,
+      .doc-grid-2,
+      .phase-doc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sitenav-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .55rem .75rem;
+      }
+
+      .sitenav-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-ver {
+        display: none;
+      }
+
+      .nav-back {
+        justify-self: end;
+      }
+
+      .sitenav-top-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+      }
+
+      .search-box,
+      .track-search {
+        width: 100% !important;
+        min-height: 38px;
+      }
+    }
+
+    /* Tablet estreito e celulares grandes */
+    @media (max-width: 760px) {
+      html {
+        font-size: 14.5px;
+      }
+
+      .container,
+      .main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .track-hero-page {
+        padding: 2.8rem 0 2rem;
+      }
+
+      .track-title {
+        font-size: clamp(2rem, 9vw, 3.1rem);
+        letter-spacing: -.035em;
+      }
+
+      .track-lead {
+        max-width: 100%;
+      }
+
+      .track-badge-set,
+      .badge-cloud {
+        gap: .42rem;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
+
+      .sitenav-bar-inner {
+        padding-left: 34px;
+        padding-right: 34px;
+      }
+
+      .nav-group {
+        padding: .25rem .3rem;
+      }
+
+      .nav-group-label {
+        font-size: .56rem;
+        padding-right: .4rem;
+        margin-right: .2rem;
+      }
+
+      .nav-link {
+        font-size: .66rem;
+        padding: .3rem .5rem;
+      }
+
+      .doc-section {
+        padding: 1rem;
+        border-radius: 12px;
+        scroll-margin-top: 154px;
+      }
+
+      .doc-section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-badge {
+        white-space: normal;
+      }
+
+      .doc-grid-3,
+      .doc-grid-4,
+      .metrics-grid,
+      #resumo .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-pill span {
+        font-size: 1.75rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 680px;
+      }
+
+      .doc-table th,
+      .doc-table td,
+      th,
+      td {
+        padding: .58rem .72rem !important;
+      }
+
+      pre,
+      .code-block {
+        padding: .9rem;
+        font-size: .72rem;
+        max-height: 520px;
+      }
+
+      .phase-doc-head {
+        align-items: flex-start;
+      }
+    }
+
+    /* Celulares */
+    @media (max-width: 520px) {
+      html {
+        font-size: 14px;
+      }
+
+      .container,
+      .main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+      }
+
+      .track-hero-page {
+        padding: 2.35rem 0 1.7rem;
+      }
+
+      .hero-label {
+        font-size: .66rem;
+      }
+
+      .hero-back-link,
+      .footer-link {
+        max-width: 100%;
+      }
+
+      .sitenav-top {
+        grid-template-columns: 1fr;
+        gap: .45rem;
+      }
+
+      .sitenav-brand {
+        width: 100%;
+        white-space: normal;
+        justify-content: space-between;
+      }
+
+      .sitenav-brand span {
+        flex-shrink: 0;
+      }
+
+      .nav-back {
+        width: 100%;
+        justify-content: center;
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .nav-group-label {
+        display: none;
+      }
+
+      .nav-group {
+        border-right: none;
+        padding: .25rem .18rem;
+      }
+
+      .nav-link {
+        font-size: .64rem;
+        padding: .3rem .46rem;
+      }
+
+      .content {
+        padding-top: 1rem;
+      }
+
+      .doc-section {
+        margin-bottom: 1rem;
+        padding: .9rem;
+        scroll-margin-top: 184px;
+      }
+
+      .doc-section-heading h2,
+      .doc-section h2 {
+        font-size: 1.15rem;
+      }
+
+      .doc-section h3,
+      .exam-card h3,
+      .phase-doc-card h3,
+      .callout h3 {
+        font-size: .96rem;
+      }
+
+      p,
+      li,
+      .doc-table td,
+      td {
+        font-size: .84rem !important;
+      }
+
+      .doc-table th,
+      th {
+        font-size: .66rem !important;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span,
+      .priority,
+      .section-badge {
+        font-size: .64rem;
+      }
+
+      .metric-pill {
+        padding: .85rem;
+        min-height: 96px;
+      }
+
+      .metric-pill span {
+        font-size: 1.62rem;
+      }
+
+      .mini-card,
+      .exam-card,
+      .phase-doc-card {
+        border-radius: 10px;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 640px;
+      }
+
+      .page-footer .footer-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      .page-footer .footer-link {
+        justify-content: center !important;
+      }
+
+      .footer-pills {
+        justify-content: center !important;
+      }
+
+      .back-to-top {
+        right: .85rem;
+        bottom: .85rem;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Celulares muito estreitos */
+    @media (max-width: 380px) {
+      .container,
+      .main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+
+      .track-title {
+        font-size: 1.85rem;
+      }
+
+      .sitenav-brand span {
+        display: none;
+      }
+
+      .doc-section {
+        padding: .78rem;
+      }
+
+      pre,
+      .code-block {
+        font-size: .68rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 600px;
+      }
+    }
+
+    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+    @media (pointer: coarse) {
+      .nav-scroll-btn,
+      .back-to-top,
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back,
+      .sidebar a {
+        touch-action: manipulation;
+      }
+
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back {
+        min-height: 34px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+
 </head>
 <body class="track-page" data-track="aws">
 
 <header class="track-hero-page">
   <div class="container">
     <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
+    <div class="hero-label">Trilha cloud · AWS · Certificações</div>
     <h1 class="track-title">Certificações AWS</h1>
     <p class="track-lead">Página técnica completa para consulta rápida e estudo dirigido das certificações AWS citadas no plano integrado: CLF-C02, SAA-C03, DVA-C02, SOA-C03 e DOP-C02. O conteúdo está alinhado ao cronograma de 64 semanas, aos objetivos de Java/Spring, arquitetura, DevOps, cloud e portfólio técnico.</p>
     <div class="track-badge-set">
@@ -212,492 +747,582 @@ mark.search-hit, .search-hit { outline:2px solid rgba(239,159,39,.65); backgroun
   </div>
 </header>
 
-<nav class="track-local-nav">
-  <div class="container py-2 d-flex align-items-center justify-content-between flex-wrap">
-    <div class="d-flex flex-nowrap overflow-auto gap-1">
-      <a href="#resumo">Resumo</a>
-      <a href="#atualizacao-soa">Atualização SOA</a>
-      <a href="#visao-geral">Visão geral</a>
-      <a href="#clfc02">CLF-C02</a>
-      <a href="#saac03">SAA-C03</a>
-      <a href="#dvac02">DVA-C02</a>
-      <a href="#soac03">SOA-C03</a>
-      <a href="#dopc02">DOP-C02</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#checklist">Checklist</a>
-      <a href="#projetos">Projetos</a>
-      <a href="#consulta">Consulta rápida</a>
-      <a href="#referencias">Referências</a>
+<nav class="sitenav">
+  <div class="container">
+    <div class="sitenav-top">
+      <a class="sitenav-brand" href="#">AWS Track <span>64 semanas</span></a>
+      <span class="nav-ver">CLF · SAA · DVA · SOA/DOP</span>
+      <a class="nav-back" href="../index.html">← Dashboard principal</a>
+      <div class="sitenav-top-right">
+        <input class="search-box" type="search" placeholder="🔍  Buscar nesta trilha..." id="searchInput" aria-label="Buscar na trilha AWS">
+      </div>
     </div>
-    <input id="trackSearch" class="form-control form-control-sm track-search" type="search" placeholder="Buscar nesta trilha...">
+  </div>
+  <div class="sitenav-bar-outer">
+    <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">&#8249;</button>
+    <div class="sitenav-bar-inner" id="navSectionsBar">
+      <div class="nav-group">
+        <span class="nav-group-label">Base</span>
+        <a class="nav-link" href="#resumo">01 · Resumo</a>
+        <a class="nav-link" href="#atualizacao-soa">02 · Atualização</a>
+        <a class="nav-link" href="#visao-geral">03 · Visão geral</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Certs</span>
+        <a class="nav-link" href="#clfc02">04 · CLF-C02</a>
+        <a class="nav-link" href="#saac03">05 · SAA-C03</a>
+        <a class="nav-link" href="#dvac02">06 · DVA-C02</a>
+        <a class="nav-link" href="#soac03">07 · SOA-C03</a>
+        <a class="nav-link" href="#dopc02">08 · DOP-C02</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Execução</span>
+        <a class="nav-link" href="#roadmap">09 · Roadmap</a>
+        <a class="nav-link" href="#checklist">10 · Checklist</a>
+        <a class="nav-link" href="#projetos">11 · Projetos</a>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">Apoio</span>
+        <a class="nav-link" href="#consulta">12 · Consulta</a>
+        <a class="nav-link" href="#referencias">13 · Referências</a>
+      </div>
+    </div>
+    <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
   </div>
 </nav>
-
-<main class="container py-4" id="trackMain">
-
-<section id="resumo" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Resumo executivo</h2>
-      <p class="section-subtitle">Trilha AWS integrada ao plano de estudos e ao portfólio de engenharia.</p>
+<div class="main">
+  <aside class="sidebar">
+    <div class="sidebar-group">
+      <div class="sidebar-label">Base</div>
+      <a href="#resumo">1. Resumo executivo</a>
+      <a href="#atualizacao-soa">2. Atualização SOA</a>
+      <a href="#visao-geral">3. Visão geral</a>
     </div>
-    <span class="section-badge">AWS Certs</span>
-  </div>
-  <div class="doc-hero-card">
-    <div>
-      <p class="lead">A trilha AWS do plano deve ser executada como uma sequência progressiva: <strong>CLF-C02 → SAA-C03 → DVA-C02 → SOA-C03 ou DOP-C02</strong>. Para um desenvolvedor Java/Spring com foco em backend, microsserviços, arquitetura e DevOps, a combinação mais forte é <strong>SAA-C03 + DVA-C02</strong>, usando a CLF-C02 como base e a DOP-C02 como evolução profissional.</p>
-      <p>O estudo não deve ser apenas teórico. Cada certificação precisa gerar entregáveis práticos no projeto principal: infraestrutura AWS, logs, custos, CI/CD, segurança, observabilidade, filas, serverless, storage, banco gerenciado, CDN e documentação de arquitetura.</p>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Certificações</div>
+      <a href="#clfc02">4. CLF-C02</a>
+      <a href="#saac03">5. SAA-C03</a>
+      <a href="#dvac02">6. DVA-C02</a>
+      <a href="#soac03">7. SOA-C03</a>
+      <a href="#dopc02">8. DOP-C02</a>
     </div>
-    <div class="metrics-grid">
-      <div class="metric-pill"><span>5</span><small>Certificações tratadas</small></div>
-      <div class="metric-pill"><span>64</span><small>Semanas integradas</small></div>
-      <div class="metric-pill"><span>1,5h</span><small>AWS por dia</small></div>
-      <div class="metric-pill"><span>3+</span><small>Certs alvo no plano</small></div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Execução</div>
+      <a href="#roadmap">9. Roadmap AWS</a>
+      <a href="#checklist">10. Checklist</a>
+      <a href="#projetos">11. Projetos práticos</a>
+    </div>
+    <div class="sidebar-group">
+      <div class="sidebar-label">Apoio</div>
+      <a href="#consulta">12. Consulta rápida</a>
+      <a href="#referencias">13. Referências oficiais</a>
+    </div>
+  </aside>
+  <div class="content" id="trackMain">
+
+    <section id="resumo" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>Resumo executivo</h2>
+          <p class="section-subtitle">Trilha AWS integrada ao plano de estudos e ao portfólio de engenharia.</p>
+        </div>
+        <span class="section-badge">AWS Certs</span>
+      </div>
+      <div class="doc-hero-card">
+        <div>
+          <p class="lead">A trilha AWS do plano deve ser executada como uma sequência progressiva: <strong>CLF-C02 → SAA-C03 → DVA-C02 → SOA-C03 ou DOP-C02</strong>. Para um desenvolvedor Java/Spring com foco em backend, microsserviços, arquitetura e DevOps, a combinação mais forte é <strong>SAA-C03 + DVA-C02</strong>, usando a CLF-C02 como base e a DOP-C02 como evolução profissional.</p>
+          <p>O estudo não deve ser apenas teórico. Cada certificação precisa gerar entregáveis práticos no projeto principal: infraestrutura AWS, logs, custos, CI/CD, segurança, observabilidade, filas, serverless, storage, banco gerenciado, CDN e documentação de arquitetura.</p>
+        </div>
+        <div class="metrics-grid">
+          <div class="metric-pill"><span>5</span><small>Certificações tratadas</small></div>
+          <div class="metric-pill"><span>64</span><small>Semanas integradas</small></div>
+          <div class="metric-pill"><span>1,5h</span><small>AWS por dia</small></div>
+          <div class="metric-pill"><span>3+</span><small>Certs alvo no plano</small></div>
+        </div>
+      </div>
+      <div class="doc-grid-4 mt-3">
+        <div class="mini-card"><strong>Base</strong><span>CLF-C02 valida fundamentos: cloud, segurança, serviços centrais, billing e suporte.</span></div>
+        <div class="mini-card"><strong>Arquitetura</strong><span>SAA-C03 valida desenho de soluções seguras, resilientes, performáticas e otimizadas por custo.</span></div>
+        <div class="mini-card"><strong>Desenvolvimento</strong><span>DVA-C02 valida desenvolvimento, deploy, segurança e troubleshooting de aplicações AWS.</span></div>
+        <div class="mini-card"><strong>Operação/DevOps</strong><span>SOA-C03 aprofunda CloudOps; DOP-C02 valida automação, CI/CD, IaC e operação avançada.</span></div>
+      </div>
+    </section>
+
+    <section id="atualizacao-soa" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>Atualização importante: SOA-C02 → SOA-C03</h2>
+          <p class="section-subtitle">Correção técnica em relação ao cronograma original.</p>
+        </div>
+        <span class="section-badge">Atualização</span>
+      </div>
+      <div class="callout accent-red">
+        <h3>Correção necessária no HTML anterior</h3>
+        <p>Onde o cronograma anterior cita <strong>SOA-C02</strong>, use como referência atual <strong>SOA-C03 — AWS Certified CloudOps Engineer - Associate</strong>. A AWS passou a tratar a versão mais recente da antiga linha SysOps como CloudOps Engineer - Associate. Portanto, na Fase 7 e Fase 8, o texto recomendado é: <strong>SOA-C03 ou DOP-C02 conforme carreira</strong>.</p>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle doc-table">
+          <thead><tr><th>Antes no plano</th><th>Atualização técnica</th><th>Impacto no cronograma</th></tr></thead>
+          <tbody>
+          <tr><td>SOA-C02 ou revisão avançada</td><td>SOA-C03 — AWS Certified CloudOps Engineer - Associate</td><td>Manter como etapa de operação/CloudOps nas semanas 49–56.</td></tr>
+          <tr><td>SOA-C02 ou DOP-C02 se aplicável</td><td>SOA-C03 ou DOP-C02 se aplicável</td><td>Na semana 57+, decidir entre operação Associate ou DevOps Professional.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="visao-geral" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>Visão geral das certificações</h2>
+          <p class="section-subtitle">Comparativo técnico, papel na carreira e encaixe no plano.</p>
+        </div>
+        <span class="section-badge">Mapa</span>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle doc-table dense-table">
+          <thead><tr><th>Ordem</th><th>Certificação</th><th>Código</th><th>Nível</th><th>Foco técnico</th><th>Resultado esperado</th><th>No cronograma</th></tr></thead>
+          <tbody>
+          <tr><td>1</td><td>AWS Certified Cloud Practitioner</td><td class="mono">CLF-C02</td><td>Foundational</td><td>Fundamentos cloud, serviços, segurança, billing.</td><td>Vocabulário AWS e base para provas técnicas.</td><td>Semanas 1–8; prova 8–9.</td></tr>
+          <tr><td>2</td><td>AWS Certified Solutions Architect - Associate</td><td class="mono">SAA-C03</td><td>Associate</td><td>Arquitetura segura, resiliente, performática e econômica.</td><td>Capacidade de desenhar soluções e defender trade-offs.</td><td>Semanas 9–32; prova 30–31.</td></tr>
+          <tr><td>3</td><td>AWS Certified Developer - Associate</td><td class="mono">DVA-C02</td><td>Associate</td><td>Desenvolvimento, CI/CD, segurança, deploy e debugging.</td><td>Aplicações cloud-native integradas a serviços AWS.</td><td>Semanas 25–48; prova 46–47.</td></tr>
+          <tr><td>4A</td><td>AWS Certified CloudOps Engineer - Associate</td><td class="mono">SOA-C03</td><td>Associate</td><td>Operação, monitoramento, troubleshooting e continuidade.</td><td>Maturidade operacional e CloudOps.</td><td>Semanas 49–56 ou planejamento.</td></tr>
+          <tr><td>4B</td><td>AWS Certified DevOps Engineer - Professional</td><td class="mono">DOP-C02</td><td>Professional</td><td>CI/CD, IaC, automação, resiliência, segurança e operação avançada.</td><td>DevOps cloud avançado e credencial forte de produção.</td><td>Semana 57+ se houver base prática.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="doc-grid-2">
+        <div class="callout"><h3>Sequência recomendada para Java Backend</h3><p><strong>CLF-C02 → SAA-C03 → DVA-C02 → DOP-C02</strong>. Essa sequência maximiza impacto em backend, arquitetura, integração, deploy e operação de sistemas distribuídos.</p></div>
+        <div class="callout accent-blue"><h3>Sequência mais completa</h3><p><strong>CLF-C02 → SAA-C03 → DVA-C02 → SOA-C03 → DOP-C02</strong>. Use esta se quiser reforçar CloudOps antes de tentar a Professional.</p></div>
+      </div>
+      <h3>Política geral de prova e pontuação</h3>
+      <ul class="doc-list">
+        <li>Foundational: nota mínima de referência <strong>700</strong>.</li>
+        <li>Associate: nota mínima de referência <strong>720</strong>.</li>
+        <li>Professional e Specialty: nota mínima de referência <strong>750</strong>.</li>
+        <li>As provas usam pontuação escalada e podem conter questões não pontuadas usadas pela AWS para avaliação futura.</li>
+        <li>Em caso de reprovação, há espera de 14 dias para nova tentativa.</li>
+      </ul>
+    </section>
+
+    <section id="clfc02" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>CLF-C02 — AWS Certified Cloud Practitioner</h2>
+          <p class="section-subtitle">Fundamentos de cloud, serviços AWS e linguagem comum para arquitetura.</p>
+        </div>
+        <span class="section-badge">Sem 1–8</span>
+      </div>
+      <div class="doc-grid-3">
+        <div class="exam-card"><h3>Objetivo</h3><p>Validar compreensão geral da AWS Cloud, independentemente de uma função específica. Deve ser usada como base, não como destino final.</p></div>
+        <div class="exam-card"><h3>Perfil técnico</h3><p>Até 6 meses de exposição a design, implementação ou operação em AWS. Não exige codificação, arquitetura profunda ou troubleshooting avançado.</p></div>
+        <div class="exam-card"><h3>No seu plano</h3><p>Estudar nas semanas 1–8 e realizar a prova nas semanas 8–9. O foco é fechar lacunas conceituais antes da SAA-C03.</p></div>
+      </div>
+      <h3>Domínios oficiais</h3>
+      <div class="table-responsive">
+        <table class="table table-dark table-hover align-middle doc-table">
+          <thead><tr><th>Domínio</th><th>Peso</th><th>O que dominar</th><th>Serviços/conceitos principais</th></tr></thead>
+          <tbody>
+          <tr><td>Cloud Concepts</td><td>24%</td><td>Valor da nuvem, elasticidade, escalabilidade, alta disponibilidade, migração e Well-Architected.</td><td>Regiões, AZs, Edge, modelos IaaS/PaaS/SaaS.</td></tr>
+          <tr><td>Security and Compliance</td><td>30%</td><td>Responsabilidade compartilhada, IAM, MFA, criptografia, compliance e boas práticas.</td><td>IAM, KMS, CloudTrail, AWS Artifact, Shield, WAF.</td></tr>
+          <tr><td>Cloud Technology and Services</td><td>34%</td><td>Serviços centrais de compute, storage, database, networking, integração e monitoramento.</td><td>EC2, Lambda, S3, EBS, RDS, DynamoDB, VPC, CloudWatch.</td></tr>
+          <tr><td>Billing, Pricing and Support</td><td>12%</td><td>Modelos de preço, ferramentas de custo, suporte e governança financeira.</td><td>Cost Explorer, Budgets, Pricing Calculator, Organizations, Support Plans.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Conteúdo técnico da fase</h3>
+      <ul class="doc-list">
+        <li>Entender regiões, zonas de disponibilidade e edge locations.</li>
+        <li>Diferenciar EC2, Lambda, ECS/EKS em nível conceitual.</li>
+        <li>Dominar S3, EBS, EFS, RDS e DynamoDB em visão de uso.</li>
+        <li>Entender VPC, subnet, security group, NACL, route table e internet gateway em alto nível.</li>
+        <li>Entender shared responsibility model e princípio de menor privilégio.</li>
+        <li>Usar Cost Explorer, Budgets e AWS Pricing Calculator para estimar custo do projeto.</li>
+        <li>Relacionar Well-Architected Framework aos pilares: operational excellence, security, reliability, performance efficiency, cost optimization e sustainability.</li>
+      </ul>
+      <h3>Entregáveis práticos no projeto</h3>
+      <ul class="doc-list">
+        <li>Documento <code>aws-foundations.md</code> explicando os serviços que serão usados no blog.</li>
+        <li>Planilha simples de custo estimado: domínio, Route 53, CloudFront, S3, RDS, ElastiCache, logs e transferência.</li>
+        <li>Diagrama inicial: usuário → CloudFront → Frontend → API → banco/cache/storage.</li>
+        <li>Checklist de responsabilidade compartilhada para o projeto.</li>
+        <li>Flashcards no Obsidian para cada questão errada em simulado.</li>
+      </ul>
+    </section>
+
+    <section id="saac03" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>SAA-C03 — AWS Certified Solutions Architect - Associate</h2>
+          <p class="section-subtitle">A certificação central para arquitetura cloud no seu plano.</p>
+        </div>
+        <span class="section-badge">Sem 9–32</span>
+      </div>
+      <div class="doc-grid-3">
+        <div class="exam-card"><h3>Objetivo</h3><p>Validar capacidade de desenhar soluções baseadas no AWS Well-Architected Framework para requisitos atuais e futuros.</p></div>
+        <div class="exam-card"><h3>Perfil técnico</h3><p>Idealmente 1 ano de experiência prática desenhando soluções com AWS. Cobra decisões arquiteturais, não apenas memorização de serviços.</p></div>
+        <div class="exam-card"><h3>No seu plano</h3><p>Início na Fase 2, continuação na Fase 3, prova na Fase 4 entre as semanas 30–31.</p></div>
+      </div>
+      <h3>Domínios oficiais</h3>
+      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
+        <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
+        <tbody>
+        <tr><td>Design Secure Architectures</td><td>30%</td><td>Acesso, proteção de dados, workloads seguros.</td><td>IAM, KMS, Secrets Manager, SG/NACL, WAF, CloudFront OAC, políticas S3.</td></tr>
+        <tr><td>Design Resilient Architectures</td><td>26%</td><td>Alta disponibilidade, desacoplamento, recuperação e continuidade.</td><td>Multi-AZ, Auto Scaling, ELB, SQS/SNS, Route 53 failover, backup/restore.</td></tr>
+        <tr><td>Design High-Performing Architectures</td><td>24%</td><td>Performance de compute, banco, storage e rede.</td><td>EC2, Lambda, RDS/Aurora, DynamoDB, ElastiCache, CloudFront, S3 Transfer Acceleration.</td></tr>
+        <tr><td>Design Cost-Optimized Architectures</td><td>20%</td><td>Redução de custo sem perder requisitos técnicos.</td><td>Savings Plans, Reserved, Spot, lifecycle S3, rightsizing, Compute Optimizer.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Conteúdo técnico prioritário</h3>
+      <div class="doc-grid-2">
+        <div>
+          <h4>Networking e segurança</h4>
+          <ul class="doc-list"><li>VPC, CIDR, subnets públicas/privadas, route tables, IGW e NAT Gateway.</li><li>Security Groups vs NACLs.</li><li>VPC Peering, Transit Gateway, PrivateLink e VPC endpoints.</li><li>IAM policies, roles, resource-based policies e least privilege.</li><li>KMS, Secrets Manager, ACM, WAF, Shield, CloudFront OAC.</li></ul>
+        </div>
+        <div>
+          <h4>Compute, storage e dados</h4>
+          <ul class="doc-list"><li>EC2, Auto Scaling, ALB vs NLB e placement groups.</li><li>S3 versioning, lifecycle, replication, encryption e presigned URLs.</li><li>RDS Multi-AZ, Read Replicas, RDS Proxy e Aurora Serverless v2.</li><li>DynamoDB, GSI/LSI, TTL, Streams, DAX e single-table design.</li><li>ElastiCache Redis, CloudFront, Route 53 e disaster recovery.</li></ul>
+        </div>
+      </div>
+      <h3>Entregáveis práticos no projeto</h3>
+      <ul class="doc-list">
+        <li>Diagrama C4 de arquitetura AWS do blog técnico.</li>
+        <li>ADR: <code>ADR-aws-networking-vpc.md</code> explicando VPC, subnets, NAT e endpoints.</li>
+        <li>ADR: <code>ADR-aws-database-rds-vs-dynamodb.md</code>.</li>
+        <li>Implementar bucket S3 para imagens e arquivos estáticos com política segura.</li>
+        <li>Desenhar arquitetura com CloudFront + S3 + API + RDS + ElastiCache + SQS/SNS.</li>
+        <li>Simular DR: backup/restore, pilot light, warm standby e active-active em documento comparativo.</li>
+      </ul>
+    </section>
+
+    <section id="dvac02" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>DVA-C02 — AWS Certified Developer - Associate</h2>
+          <p class="section-subtitle">A certificação mais conectada ao desenvolvimento backend cloud-native.</p>
+        </div>
+        <span class="section-badge">Sem 25–48</span>
+      </div>
+      <div class="doc-grid-3">
+        <div class="exam-card"><h3>Objetivo</h3><p>Validar proficiência em desenvolver, testar, empacotar, implantar e depurar aplicações baseadas na AWS.</p></div>
+        <div class="exam-card"><h3>Perfil técnico</h3><p>Recomenda 1+ ano de experiência prática desenvolvendo e mantendo aplicações com serviços AWS.</p></div>
+        <div class="exam-card"><h3>No seu plano</h3><p>Início na Fase 4, continuação na Fase 5, prova na Fase 6 entre as semanas 46–47.</p></div>
+      </div>
+      <h3>Domínios oficiais</h3>
+      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
+        <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
+        <tbody>
+        <tr><td>Development with AWS Services</td><td>32%</td><td>Construção e otimização de aplicações com serviços AWS.</td><td>Lambda, DynamoDB, API Gateway, SDKs, S3, SQS, EventBridge.</td></tr>
+        <tr><td>Security</td><td>26%</td><td>Proteção de código, dados, acesso e secrets.</td><td>IAM roles, KMS, Cognito, Secrets Manager, Parameter Store, encryption.</td></tr>
+        <tr><td>Deployment</td><td>24%</td><td>Empacotamento e entrega por CI/CD.</td><td>CodePipeline, CodeBuild, CodeDeploy, SAM, CloudFormation, Elastic Beanstalk.</td></tr>
+        <tr><td>Troubleshooting and Optimization</td><td>18%</td><td>Diagnóstico, logs, tracing, erro de permissão, throttling e performance.</td><td>CloudWatch Logs/Metrics, X-Ray, retries, DLQ, timeout, alarms.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Conteúdo técnico prioritário</h3>
+      <ul class="doc-list">
+        <li><strong>Lambda:</strong> handlers, environment variables, layers, concurrency, DLQ, retries, cold start, SnapStart Java e permissões IAM.</li>
+        <li><strong>DynamoDB:</strong> partition key, sort key, GSI/LSI, TTL, conditional writes, transactions, Streams e DAX.</li>
+        <li><strong>API Gateway:</strong> REST vs HTTP API, Lambda proxy integration, authorizers, throttling, caching, stages e deployment.</li>
+        <li><strong>Segurança:</strong> IAM least privilege, KMS, Secrets Manager, Parameter Store, Cognito, criptografia e assinatura de requests.</li>
+        <li><strong>CI/CD:</strong> CodeBuild, CodeDeploy, CodePipeline, CloudFormation, SAM e deployment blue/green/canary.</li>
+        <li><strong>Observabilidade:</strong> CloudWatch Logs, X-Ray, structured logging, trace, timeout, throttling e alarmes.</li>
+      </ul>
+      <h3>Entregáveis práticos no projeto</h3>
+      <ul class="doc-list">
+        <li>API Spring Boot consumindo Secrets Manager/Parameter Store para configuração sensível.</li>
+        <li>Fluxo assíncrono: publicação de post → EventBridge ou SQS → Lambda worker.</li>
+        <li>Função Lambda para gerar thumbnails, processar eventos ou enviar notificações.</li>
+        <li>Pipeline com build, testes, scan, deploy e rollback.</li>
+        <li>Tracing de request: frontend → API → fila → worker.</li>
+        <li>Dashboard CloudWatch com latência, erro, throughput e custos.</li>
+      </ul>
+    </section>
+
+    <section id="soac03" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>SOA-C03 — AWS Certified CloudOps Engineer - Associate</h2>
+          <p class="section-subtitle">Operação, monitoramento, networking e continuidade de workloads AWS.</p>
+        </div>
+        <span class="section-badge">Sem 49–56</span>
+      </div>
+      <div class="doc-grid-3">
+        <div class="exam-card"><h3>Objetivo</h3><p>Validar capacidade de implantar, gerenciar e operar workloads na AWS com foco em CloudOps.</p></div>
+        <div class="exam-card"><h3>Perfil técnico</h3><p>Recomenda experiência com deployment, management, troubleshooting, networking e segurança em AWS.</p></div>
+        <div class="exam-card"><h3>No seu plano</h3><p>Entrar como revisão avançada/planejamento na Fase 7, ou como ponte antes da DOP-C02.</p></div>
+      </div>
+      <h3>Domínios oficiais</h3>
+      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
+        <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
+        <tbody>
+        <tr><td>Monitoring, Logging, Analysis, Remediation and Performance Optimization</td><td>22%</td><td>Observabilidade, análise e correção de problemas.</td><td>CloudWatch, Logs Insights, alarms, dashboards, X-Ray, remediation.</td></tr>
+        <tr><td>Reliability and Business Continuity</td><td>22%</td><td>Disponibilidade, backup, restore e DR.</td><td>Multi-AZ, snapshots, Route 53 failover, AWS Backup, RTO/RPO.</td></tr>
+        <tr><td>Deployment, Provisioning and Automation</td><td>22%</td><td>Provisionamento, automação e mudanças controladas.</td><td>CloudFormation, Systems Manager, CLI, automation documents.</td></tr>
+        <tr><td>Security and Compliance</td><td>16%</td><td>Controles, compliance e auditoria operacional.</td><td>IAM, CloudTrail, Config, GuardDuty, Security Hub, KMS.</td></tr>
+        <tr><td>Networking and Content Delivery</td><td>18%</td><td>Conectividade, DNS, firewalls e distribuição.</td><td>VPC, DNS, TCP/IP, SG/NACL, ELB, CloudFront, Route 53.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Conteúdo técnico prioritário</h3>
+      <ul class="doc-list">
+        <li>CloudWatch Metrics, Logs, Logs Insights, alarms, dashboards e métricas customizadas.</li>
+        <li>Systems Manager: Session Manager, Run Command, Patch Manager, Parameter Store e automation.</li>
+        <li>Backup, restore, retenção, RTO, RPO, DR drills e validação de recuperação.</li>
+        <li>CloudTrail, AWS Config, GuardDuty, Security Hub e postura de segurança.</li>
+        <li>VPC troubleshooting: DNS, rotas, SG, NACL, NAT, endpoints, load balancers e CloudFront.</li>
+        <li>Remediação operacional: runbooks, alarmes acionáveis e incident response básico.</li>
+      </ul>
+      <h3>Entregáveis práticos no projeto</h3>
+      <ul class="doc-list">
+        <li>Runbook de incidente: API fora do ar, Redis indisponível, banco lento, fila acumulada.</li>
+        <li>Dashboard operacional CloudWatch: API p95, erro 5xx, uso de CPU/memória, fila e custo.</li>
+        <li>Alarme e ação de remediação para erro 5xx elevado.</li>
+        <li>Plano de backup e restore do PostgreSQL/RDS com teste documentado.</li>
+        <li>Relatório de Security Hub/GuardDuty/Config com plano de correção.</li>
+      </ul>
+    </section>
+
+    <section id="dopc02" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>DOP-C02 — AWS Certified DevOps Engineer - Professional</h2>
+          <p class="section-subtitle">Evolução profissional para CI/CD, IaC, automação e operação avançada.</p>
+        </div>
+        <span class="section-badge">Semana 57+</span>
+      </div>
+      <div class="doc-grid-3">
+        <div class="exam-card"><h3>Objetivo</h3><p>Validar experiência avançada em provisionar, operar e gerenciar sistemas distribuídos na AWS.</p></div>
+        <div class="exam-card"><h3>Perfil técnico</h3><p>Recomenda 2+ anos de experiência em provisionamento, operação e gerenciamento de ambientes AWS, além de SDLC e scripting.</p></div>
+        <div class="exam-card"><h3>No seu plano</h3><p>Planejar após SAA-C03 e DVA-C02, preferencialmente com um projeto AWS real, IaC, pipeline, observabilidade e rollback.</p></div>
+      </div>
+      <h3>Domínios oficiais</h3>
+      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
+        <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
+        <tbody>
+        <tr><td>SDLC Automation</td><td>22%</td><td>Automação de entrega e validação.</td><td>CodePipeline, CodeBuild, CodeDeploy, testing, rollback, approvals.</td></tr>
+        <tr><td>Configuration Management and IaC</td><td>17%</td><td>Infraestrutura reprodutível e versionada.</td><td>CloudFormation, CDK, Terraform, StackSets, drift detection, change sets.</td></tr>
+        <tr><td>Resilient Cloud Solutions</td><td>15%</td><td>Alta disponibilidade, escalabilidade e recuperação.</td><td>Auto Scaling, ELB, Route 53, multi-AZ, multi-region, failover.</td></tr>
+        <tr><td>Monitoring and Logging</td><td>15%</td><td>Observabilidade de sistemas distribuídos.</td><td>CloudWatch, X-Ray, logs centralizados, metrics, alarms.</td></tr>
+        <tr><td>Incident and Event Response</td><td>14%</td><td>Resposta automatizada a eventos e incidentes.</td><td>EventBridge, Lambda, Systems Manager Automation, runbooks.</td></tr>
+        <tr><td>Security and Compliance</td><td>17%</td><td>Governança, auditoria e controles automatizados.</td><td>IAM avançado, SCP, Config, GuardDuty, Security Hub, KMS, Secrets Manager.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Conteúdo técnico prioritário</h3>
+      <ul class="doc-list">
+        <li>CI/CD completo: build, test, scan, deploy, approval, rollback e promoção entre ambientes.</li>
+        <li>CloudFormation/CDK/Terraform: módulos, parâmetros, outputs, estado, change sets e drift detection.</li>
+        <li>Containers: ECS, EKS, Fargate, service discovery, autoscaling e deployment strategies.</li>
+        <li>Serverless: Lambda, API Gateway, SAM, Step Functions, EventBridge, SQS e SNS.</li>
+        <li>Observabilidade: CloudWatch, X-Ray, dashboards, logs centralizados, alarmes compostos e incident response.</li>
+        <li>Segurança: IAM avançado, permission boundaries, SCPs, Organizations, Config, GuardDuty, Security Hub e KMS.</li>
+      </ul>
+      <h3>Critério para tentar a DOP-C02</h3>
+      <ul class="doc-list">
+        <li>SAA-C03 e DVA-C02 concluídas ou domínio prático equivalente.</li>
+        <li>Projeto em produção ou simulação realista com IaC.</li>
+        <li>Pipeline completo com testes, scans, deploy e rollback.</li>
+        <li>CloudWatch/X-Ray configurados com logs, métricas, dashboards e alarmes.</li>
+        <li>Ao menos um cenário de incidente documentado e remediado.</li>
+      </ul>
+    </section>
+
+    <section id="roadmap" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading">
+        <div>
+          <h2>Roadmap AWS integrado às 8 fases</h2>
+          <p class="section-subtitle">Cronograma coeso com o plano anterior de 64 semanas.</p>
+        </div>
+        <span class="section-badge">64 semanas</span>
+      </div>
+      <div class="phase-doc-grid">
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 1 — Base técnica + fundamentos</h3><span>Sem 1–8</span></div><p><strong>AWS:</strong> CLF-C02 — Cloud Practitioner. Prova nas semanas 8–9.</p><ul class="doc-list"><li>Cloud Concepts, Security, Technology, Billing.</li><li>Mapear serviços que serão usados no blog.</li><li>Criar budget e estimativa de custo.</li><li>Primeiros labs no Free Tier: S3, EC2, IAM, CloudWatch, RDS básico.</li></ul></article>
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 2 — Desenvolvimento profissional</h3><span>Sem 9–16</span></div><p><strong>AWS:</strong> SAA-C03 — início.</p><ul class="doc-list"><li>VPC, EC2, ELB, Auto Scaling, S3, RDS e Aurora.</li><li>Desenhar arquitetura inicial do blog.</li><li>Documentar decisões de rede e banco.</li><li>Lab: VPC com subnets públicas/privadas, ALB e RDS.</li></ul></article>
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 3 — Engenharia de software real</h3><span>Sem 17–24</span></div><p><strong>AWS:</strong> SAA-C03 — continuação.</p><ul class="doc-list"><li>ElastiCache, DynamoDB, Lambda, API Gateway, SQS/SNS, CloudFront e Route 53.</li><li>Conectar arquitetura event-driven do blog aos serviços AWS.</li><li>Lab: SQS + DLQ + Lambda worker.</li><li>Lab: CloudFront + S3 + OAC.</li></ul></article>
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 4 — Arquitetura + candidaturas</h3><span>Sem 25–32</span></div><p><strong>AWS:</strong> SAA-C03 prova + DVA-C02 início. Prova SAA-C03 nas semanas 30–31.</p><ul class="doc-list"><li>Disaster Recovery, Well-Architected, Cognito, CodePipeline, CodeBuild, CodeDeploy e X-Ray.</li><li>Iniciar DVA-C02 com Lambda, DynamoDB, API Gateway e SDK.</li><li>Candidaturas começam com portfólio + 2 certs planejadas/concluídas.</li></ul></article>
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 5 — Cloud + sistemas distribuídos</h3><span>Sem 33–40</span></div><p><strong>AWS:</strong> DVA-C02 — continuação.</p><ul class="doc-list"><li>DynamoDB transactions, Lambda SnapStart Java, CloudFormation, Secrets Manager, EventBridge, Step Functions, ECS/EKS.</li><li>Deploy AWS do blog com EKS/RDS/ElastiCache/S3/CloudFront.</li><li>Terraform para VPC, EKS, RDS, S3, CloudFront e Route 53.</li></ul></article>
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 6 — IA aplicada + RAG + agentes</h3><span>Sem 41–48</span></div><p><strong>AWS:</strong> DVA-C02 prova + revisão. Prova DVA-C02 nas semanas 46–47.</p><ul class="doc-list"><li>Elastic Beanstalk, Kinesis, CloudWatch, IAM avançado, Tutorials Dojo, Well-Architected Tool e cost optimization.</li><li>Integrar observabilidade e custo de IA/RAG no projeto.</li><li>Fechar lacunas antes de escolher SOA-C03 ou DOP-C02.</li></ul></article>
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 7 — Produto + frontend + escala</h3><span>Sem 49–56</span></div><p><strong>AWS:</strong> SOA-C03 ou revisão avançada.</p><ul class="doc-list"><li>Systems Manager, CloudWatch Logs Insights, Organizations, Config, GuardDuty, Security Hub, Backup, DMS e Cost Management.</li><li>Foco em operação real, incidentes, segurança e governança.</li><li>Preparar decisão: CloudOps Associate ou DevOps Professional.</li></ul></article>
+        <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 8 — Portfólio final + negociação</h3><span>Sem 57–64</span></div><p><strong>AWS:</strong> revisão + planejamento avançado.</p><ul class="doc-list"><li>Revisão CLF + SAA + DVA.</li><li>Well-Architected review completo do blog.</li><li>Cost optimization final, Security Hub, GuardDuty e IAM review.</li><li>Planejar SOA-C03 ou DOP-C02 conforme carreira.</li></ul></article>
+      </div>
+      <h3>Marcos AWS do cronograma</h3>
+      <div class="timeline">
+        <div class="timeline-item"><strong>Semanas 8–9 — CLF-C02</strong><span>Fechar fundamentos e validar base de AWS Cloud.</span></div>
+        <div class="timeline-item"><strong>Semanas 30–31 — SAA-C03</strong><span>Validar arquitetura cloud e decisões de desenho.</span></div>
+        <div class="timeline-item"><strong>Semanas 46–47 — DVA-C02</strong><span>Validar desenvolvimento, deploy e troubleshooting cloud-native.</span></div>
+        <div class="timeline-item"><strong>Semana 57+ — SOA-C03 ou DOP-C02</strong><span>Decidir entre reforço operacional Associate ou avanço Professional em DevOps.</span></div>
+      </div>
+    </section>
+
+    <section id="checklist" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading"><div><h2>Checklist de execução</h2><p class="section-subtitle">Regras práticas para não transformar a trilha em estudo passivo.</p></div><span class="section-badge">Execução</span></div>
+      <div class="doc-grid-2">
+        <div class="callout"><h3>Checklist semanal</h3><ul class="doc-list"><li>Estudar AWS 1,5h/dia no bloco 15:30–17:00.</li><li>Fazer pelo menos 2 labs práticos por semana.</li><li>Registrar erros de simulados no Obsidian.</li><li>Relacionar cada serviço AWS a uma decisão real do blog.</li><li>Gerar 1 commit, ADR ou documentação técnica relacionada à nuvem.</li><li>Revisar custos no final da semana.</li></ul></div>
+        <div class="callout accent-blue"><h3>Checklist antes de marcar prova</h3><ul class="doc-list"><li>Acertar consistentemente 80%+ em simulados.</li><li>Conseguir explicar cada domínio sem consultar resumo.</li><li>Ter feito labs práticos dos principais serviços.</li><li>Ter transformado erros recorrentes em flashcards.</li><li>Ter revisado os serviços fora e dentro do escopo.</li><li>Conseguir justificar escolhas por segurança, resiliência, performance e custo.</li></ul></div>
+      </div>
+      <h3>Critérios por certificação</h3>
+      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table">
+        <thead><tr><th>Certificação</th><th>Pronto para simulado?</th><th>Pronto para prova?</th><th>Entregável mínimo</th></tr></thead>
+        <tbody>
+        <tr><td>CLF-C02</td><td>Conhece serviços principais e billing.</td><td>Explica shared responsibility, Well-Architected, custo e serviços centrais.</td><td>Mapa AWS do projeto + estimativa de custo.</td></tr>
+        <tr><td>SAA-C03</td><td>Resolve cenários de VPC, HA, S3, RDS, DynamoDB e filas.</td><td>Justifica trade-offs arquiteturais por segurança, resiliência, performance e custo.</td><td>Diagrama C4 AWS + ADRs de arquitetura.</td></tr>
+        <tr><td>DVA-C02</td><td>Implementa Lambda/API Gateway/DynamoDB/SQS e entende CI/CD.</td><td>Depura IAM, timeout, throttling, logs, X-Ray e deploy.</td><td>Pipeline + worker assíncrono + observabilidade.</td></tr>
+        <tr><td>SOA-C03</td><td>Opera CloudWatch, Systems Manager, backup e networking.</td><td>Resolve incidentes simulados com runbook e métricas.</td><td>Runbooks + alarmes + DR drill.</td></tr>
+        <tr><td>DOP-C02</td><td>Tem projeto com IaC, CI/CD e observabilidade real.</td><td>Domina automação, rollback, compliance, eventos e operação avançada.</td><td>Infra como código + pipeline + postmortem.</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="projetos" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading"><div><h2>Projetos práticos para fixação</h2><p class="section-subtitle">Cada certificação deve gerar evidência de portfólio.</p></div><span class="section-badge">Labs</span></div>
+      <h3>Projeto central: Blog Técnico Cloud-Native</h3>
+      <p>A recomendação é usar o próprio blog/portfólio como laboratório AWS evolutivo. Isso evita projetos soltos e transforma estudo de certificação em material demonstrável para entrevistas.</p>
+      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
+        <thead><tr><th>Fase AWS</th><th>Implementação prática no blog</th><th>Competências demonstradas</th></tr></thead>
+        <tbody>
+        <tr><td>CLF-C02</td><td>Mapa de serviços, estimativa de custo, IAM básico, S3 lab e billing alerts.</td><td>Fundamentos, custo, segurança básica e governança.</td></tr>
+        <tr><td>SAA-C03</td><td>CloudFront + S3, API com ALB, RDS Multi-AZ, ElastiCache, Route 53, ACM, SQS/SNS.</td><td>Arquitetura, resiliência, performance e custo.</td></tr>
+        <tr><td>DVA-C02</td><td>Lambda worker, EventBridge/SQS, DynamoDB, API Gateway, Secrets Manager, pipeline e X-Ray.</td><td>Desenvolvimento cloud-native, CI/CD, segurança e debug.</td></tr>
+        <tr><td>SOA-C03</td><td>CloudWatch dashboards, Logs Insights, alarms, Systems Manager, backup, restore e runbooks.</td><td>Operação, troubleshooting, continuidade e resposta a incidentes.</td></tr>
+        <tr><td>DOP-C02</td><td>IaC completa, blue/green ou canary deploy, rollback automático, compliance e automação de incidentes.</td><td>DevOps avançado, automação, governança e produção.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Mini projetos por certificação</h3>
+      <div class="doc-grid-2">
+        <div class="mini-card"><strong>CLF-C02 — Calculadora de custo do blog</strong><span>Documento/planilha com custo estimado para S3, CloudFront, RDS, logs, domínio, NAT e transferência.</span></div>
+        <div class="mini-card"><strong>SAA-C03 — Arquitetura HA</strong><span>Desenho do blog em duas AZs com ALB, Auto Scaling, RDS Multi-AZ, ElastiCache, S3 e CloudFront.</span></div>
+        <div class="mini-card"><strong>DVA-C02 — Worker serverless</strong><span>PostPublishedEvent → SQS/EventBridge → Lambda → CloudWatch/X-Ray → atualização de analytics/notificação.</span></div>
+        <div class="mini-card"><strong>SOA-C03 — Runbook operacional</strong><span>Incident response para falha de API, banco lento, Redis fora, fila crescendo e custo anormal.</span></div>
+        <div class="mini-card"><strong>DOP-C02 — Pipeline com rollback</strong><span>CI/CD com testes, Trivy, Sonar, deploy canary/blue-green, alarmes e rollback automatizado.</span></div>
+        <div class="mini-card"><strong>Projeto final — Well-Architected Review</strong><span>Revisão completa do blog usando os pilares AWS e backlog de melhorias com prioridade.</span></div>
+      </div>
+    </section>
+
+    <section id="consulta" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading"><div><h2>Consulta rápida</h2><p class="section-subtitle">Resumo objetivo para revisar antes de estudar ou fazer simulado.</p></div><span class="section-badge">Quick Reference</span></div>
+      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table">
+        <thead><tr><th>Tópico</th><th>CLF-C02</th><th>SAA-C03</th><th>DVA-C02</th><th>SOA-C03</th><th>DOP-C02</th></tr></thead>
+        <tbody>
+        <tr><td>Foco</td><td>Conceitos</td><td>Arquitetura</td><td>Desenvolvimento</td><td>Operação</td><td>DevOps avançado</td></tr>
+        <tr><td>Nível</td><td>Foundational</td><td>Associate</td><td>Associate</td><td>Associate</td><td>Professional</td></tr>
+        <tr><td>Nota mínima típica</td><td>700</td><td>720</td><td>720</td><td>720</td><td>750</td></tr>
+        <tr><td>Mais importante para backend</td><td>IAM, S3, EC2, Lambda, billing</td><td>VPC, RDS, S3, SQS, CloudFront</td><td>Lambda, DynamoDB, API Gateway, CI/CD</td><td>CloudWatch, SSM, backup, networking</td><td>CI/CD, IaC, incident response, compliance</td></tr>
+        <tr><td>Erro comum</td><td>Memorizar serviço sem entender uso.</td><td>Ignorar trade-offs de custo/resiliência.</td><td>Não praticar IAM, logs e debugging.</td><td>Estudar teoria sem operar ambiente.</td><td>Tentar cedo sem projeto real.</td></tr>
+        <tr><td>Artefato de portfólio</td><td>Mapa AWS + custo.</td><td>Diagrama de arquitetura.</td><td>Pipeline + worker.</td><td>Runbooks + dashboards.</td><td>IaC + rollback + postmortem.</td></tr>
+        </tbody>
+      </table></div>
+      <h3>Decisão SOA-C03 vs DOP-C02</h3>
+      <div class="doc-grid-2">
+        <div class="callout accent-green"><h3>Escolha SOA-C03 se...</h3><ul class="doc-list"><li>Você quer reforçar operação antes da Professional.</li><li>Precisa melhorar troubleshooting, CloudWatch, networking e backup.</li><li>Quer atuar com CloudOps, suporte cloud, SRE inicial ou administração AWS.</li><li>Ainda não tem projeto maduro com CI/CD e IaC.</li></ul></div>
+        <div class="callout accent-purple"><h3>Escolha DOP-C02 se...</h3><ul class="doc-list"><li>Você já domina SAA-C03 e DVA-C02 na prática.</li><li>Seu projeto tem pipeline, IaC, observabilidade e rollback.</li><li>Você quer se posicionar como backend/cloud/DevOps mais sênior.</li><li>Você consegue explicar incidentes, automação e compliance.</li></ul></div>
+      </div>
+    </section>
+
+    <section id="referencias" class="doc-section searchable-section" data-search-section>
+      <div class="doc-section-heading"><div><h2>Referências e fontes oficiais</h2><p class="section-subtitle">Use estas páginas para validar mudanças de versão, domínios e materiais oficiais.</p></div><span class="section-badge">Fontes</span></div>
+      <ul class="doc-list ref-list">
+        <li><a href="https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html" target="_blank" rel="noopener">AWS Exam Guide — CLF-C02</a></li>
+        <li><a href="https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html" target="_blank" rel="noopener">AWS Exam Guide — SAA-C03</a></li>
+        <li><a href="https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html" target="_blank" rel="noopener">AWS Exam Guide — DVA-C02</a></li>
+        <li><a href="https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.html" target="_blank" rel="noopener">AWS Exam Guide — SOA-C03 / CloudOps Engineer - Associate</a></li>
+        <li><a href="https://docs.aws.amazon.com/aws-certification/latest/devops-engineer-professional-02/devops-engineer-professional-02.html" target="_blank" rel="noopener">AWS Exam Guide — DOP-C02</a></li>
+        <li><a href="https://aws.amazon.com/certification/certification-prep/" target="_blank" rel="noopener">AWS Certification Exam Preparation</a></li>
+        <li><a href="https://aws.amazon.com/certification/policies/after-testing/" target="_blank" rel="noopener">AWS Certification — After Testing / Scoring and Retake Policy</a></li>
+        <li>Referência interna: cronograma integrado de 8 fases / 64 semanas do Plano Integrado de Estudos.</li>
+      </ul>
+    </section>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+<footer class="page-footer">
+  <div class="footer-row">
+    <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
+    <div class="footer-pills">
+      <span class="footer-pill orange">CLF-C02</span>
+      <span class="footer-pill yellow">SAA-C03</span>
+      <span class="footer-pill blue">DVA-C02</span>
+      <span class="footer-pill purple">SOA/DOP</span>
     </div>
   </div>
-  <div class="doc-grid-4 mt-3">
-    <div class="mini-card"><strong>Base</strong><span>CLF-C02 valida fundamentos: cloud, segurança, serviços centrais, billing e suporte.</span></div>
-    <div class="mini-card"><strong>Arquitetura</strong><span>SAA-C03 valida desenho de soluções seguras, resilientes, performáticas e otimizadas por custo.</span></div>
-    <div class="mini-card"><strong>Desenvolvimento</strong><span>DVA-C02 valida desenvolvimento, deploy, segurança e troubleshooting de aplicações AWS.</span></div>
-    <div class="mini-card"><strong>Operação/DevOps</strong><span>SOA-C03 aprofunda CloudOps; DOP-C02 valida automação, CI/CD, IaC e operação avançada.</span></div>
-  </div>
-</section>
-
-<section id="atualizacao-soa" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Atualização importante: SOA-C02 → SOA-C03</h2>
-      <p class="section-subtitle">Correção técnica em relação ao cronograma original.</p>
-    </div>
-    <span class="section-badge">Atualização</span>
-  </div>
-  <div class="callout accent-red">
-    <h3>Correção necessária no HTML anterior</h3>
-    <p>Onde o cronograma anterior cita <strong>SOA-C02</strong>, use como referência atual <strong>SOA-C03 — AWS Certified CloudOps Engineer - Associate</strong>. A AWS passou a tratar a versão mais recente da antiga linha SysOps como CloudOps Engineer - Associate. Portanto, na Fase 7 e Fase 8, o texto recomendado é: <strong>SOA-C03 ou DOP-C02 conforme carreira</strong>.</p>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table">
-      <thead><tr><th>Antes no plano</th><th>Atualização técnica</th><th>Impacto no cronograma</th></tr></thead>
-      <tbody>
-        <tr><td>SOA-C02 ou revisão avançada</td><td>SOA-C03 — AWS Certified CloudOps Engineer - Associate</td><td>Manter como etapa de operação/CloudOps nas semanas 49–56.</td></tr>
-        <tr><td>SOA-C02 ou DOP-C02 se aplicável</td><td>SOA-C03 ou DOP-C02 se aplicável</td><td>Na semana 57+, decidir entre operação Associate ou DevOps Professional.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section id="visao-geral" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Visão geral das certificações</h2>
-      <p class="section-subtitle">Comparativo técnico, papel na carreira e encaixe no plano.</p>
-    </div>
-    <span class="section-badge">Mapa</span>
-  </div>
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table dense-table">
-      <thead><tr><th>Ordem</th><th>Certificação</th><th>Código</th><th>Nível</th><th>Foco técnico</th><th>Resultado esperado</th><th>No cronograma</th></tr></thead>
-      <tbody>
-        <tr><td>1</td><td>AWS Certified Cloud Practitioner</td><td class="mono">CLF-C02</td><td>Foundational</td><td>Fundamentos cloud, serviços, segurança, billing.</td><td>Vocabulário AWS e base para provas técnicas.</td><td>Semanas 1–8; prova 8–9.</td></tr>
-        <tr><td>2</td><td>AWS Certified Solutions Architect - Associate</td><td class="mono">SAA-C03</td><td>Associate</td><td>Arquitetura segura, resiliente, performática e econômica.</td><td>Capacidade de desenhar soluções e defender trade-offs.</td><td>Semanas 9–32; prova 30–31.</td></tr>
-        <tr><td>3</td><td>AWS Certified Developer - Associate</td><td class="mono">DVA-C02</td><td>Associate</td><td>Desenvolvimento, CI/CD, segurança, deploy e debugging.</td><td>Aplicações cloud-native integradas a serviços AWS.</td><td>Semanas 25–48; prova 46–47.</td></tr>
-        <tr><td>4A</td><td>AWS Certified CloudOps Engineer - Associate</td><td class="mono">SOA-C03</td><td>Associate</td><td>Operação, monitoramento, troubleshooting e continuidade.</td><td>Maturidade operacional e CloudOps.</td><td>Semanas 49–56 ou planejamento.</td></tr>
-        <tr><td>4B</td><td>AWS Certified DevOps Engineer - Professional</td><td class="mono">DOP-C02</td><td>Professional</td><td>CI/CD, IaC, automação, resiliência, segurança e operação avançada.</td><td>DevOps cloud avançado e credencial forte de produção.</td><td>Semana 57+ se houver base prática.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="doc-grid-2">
-    <div class="callout"><h3>Sequência recomendada para Java Backend</h3><p><strong>CLF-C02 → SAA-C03 → DVA-C02 → DOP-C02</strong>. Essa sequência maximiza impacto em backend, arquitetura, integração, deploy e operação de sistemas distribuídos.</p></div>
-    <div class="callout accent-blue"><h3>Sequência mais completa</h3><p><strong>CLF-C02 → SAA-C03 → DVA-C02 → SOA-C03 → DOP-C02</strong>. Use esta se quiser reforçar CloudOps antes de tentar a Professional.</p></div>
-  </div>
-  <h3>Política geral de prova e pontuação</h3>
-  <ul class="doc-list">
-    <li>Foundational: nota mínima de referência <strong>700</strong>.</li>
-    <li>Associate: nota mínima de referência <strong>720</strong>.</li>
-    <li>Professional e Specialty: nota mínima de referência <strong>750</strong>.</li>
-    <li>As provas usam pontuação escalada e podem conter questões não pontuadas usadas pela AWS para avaliação futura.</li>
-    <li>Em caso de reprovação, há espera de 14 dias para nova tentativa.</li>
-  </ul>
-</section>
-
-<section id="clfc02" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>CLF-C02 — AWS Certified Cloud Practitioner</h2>
-      <p class="section-subtitle">Fundamentos de cloud, serviços AWS e linguagem comum para arquitetura.</p>
-    </div>
-    <span class="section-badge">Sem 1–8</span>
-  </div>
-  <div class="doc-grid-3">
-    <div class="exam-card"><h3>Objetivo</h3><p>Validar compreensão geral da AWS Cloud, independentemente de uma função específica. Deve ser usada como base, não como destino final.</p></div>
-    <div class="exam-card"><h3>Perfil técnico</h3><p>Até 6 meses de exposição a design, implementação ou operação em AWS. Não exige codificação, arquitetura profunda ou troubleshooting avançado.</p></div>
-    <div class="exam-card"><h3>No seu plano</h3><p>Estudar nas semanas 1–8 e realizar a prova nas semanas 8–9. O foco é fechar lacunas conceituais antes da SAA-C03.</p></div>
-  </div>
-  <h3>Domínios oficiais</h3>
-  <div class="table-responsive">
-    <table class="table table-dark table-hover align-middle doc-table">
-      <thead><tr><th>Domínio</th><th>Peso</th><th>O que dominar</th><th>Serviços/conceitos principais</th></tr></thead>
-      <tbody>
-        <tr><td>Cloud Concepts</td><td>24%</td><td>Valor da nuvem, elasticidade, escalabilidade, alta disponibilidade, migração e Well-Architected.</td><td>Regiões, AZs, Edge, modelos IaaS/PaaS/SaaS.</td></tr>
-        <tr><td>Security and Compliance</td><td>30%</td><td>Responsabilidade compartilhada, IAM, MFA, criptografia, compliance e boas práticas.</td><td>IAM, KMS, CloudTrail, AWS Artifact, Shield, WAF.</td></tr>
-        <tr><td>Cloud Technology and Services</td><td>34%</td><td>Serviços centrais de compute, storage, database, networking, integração e monitoramento.</td><td>EC2, Lambda, S3, EBS, RDS, DynamoDB, VPC, CloudWatch.</td></tr>
-        <tr><td>Billing, Pricing and Support</td><td>12%</td><td>Modelos de preço, ferramentas de custo, suporte e governança financeira.</td><td>Cost Explorer, Budgets, Pricing Calculator, Organizations, Support Plans.</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <h3>Conteúdo técnico da fase</h3>
-  <ul class="doc-list">
-    <li>Entender regiões, zonas de disponibilidade e edge locations.</li>
-    <li>Diferenciar EC2, Lambda, ECS/EKS em nível conceitual.</li>
-    <li>Dominar S3, EBS, EFS, RDS e DynamoDB em visão de uso.</li>
-    <li>Entender VPC, subnet, security group, NACL, route table e internet gateway em alto nível.</li>
-    <li>Entender shared responsibility model e princípio de menor privilégio.</li>
-    <li>Usar Cost Explorer, Budgets e AWS Pricing Calculator para estimar custo do projeto.</li>
-    <li>Relacionar Well-Architected Framework aos pilares: operational excellence, security, reliability, performance efficiency, cost optimization e sustainability.</li>
-  </ul>
-  <h3>Entregáveis práticos no projeto</h3>
-  <ul class="doc-list">
-    <li>Documento <code>aws-foundations.md</code> explicando os serviços que serão usados no blog.</li>
-    <li>Planilha simples de custo estimado: domínio, Route 53, CloudFront, S3, RDS, ElastiCache, logs e transferência.</li>
-    <li>Diagrama inicial: usuário → CloudFront → Frontend → API → banco/cache/storage.</li>
-    <li>Checklist de responsabilidade compartilhada para o projeto.</li>
-    <li>Flashcards no Obsidian para cada questão errada em simulado.</li>
-  </ul>
-</section>
-
-<section id="saac03" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>SAA-C03 — AWS Certified Solutions Architect - Associate</h2>
-      <p class="section-subtitle">A certificação central para arquitetura cloud no seu plano.</p>
-    </div>
-    <span class="section-badge">Sem 9–32</span>
-  </div>
-  <div class="doc-grid-3">
-    <div class="exam-card"><h3>Objetivo</h3><p>Validar capacidade de desenhar soluções baseadas no AWS Well-Architected Framework para requisitos atuais e futuros.</p></div>
-    <div class="exam-card"><h3>Perfil técnico</h3><p>Idealmente 1 ano de experiência prática desenhando soluções com AWS. Cobra decisões arquiteturais, não apenas memorização de serviços.</p></div>
-    <div class="exam-card"><h3>No seu plano</h3><p>Início na Fase 2, continuação na Fase 3, prova na Fase 4 entre as semanas 30–31.</p></div>
-  </div>
-  <h3>Domínios oficiais</h3>
-  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
-    <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
-    <tbody>
-      <tr><td>Design Secure Architectures</td><td>30%</td><td>Acesso, proteção de dados, workloads seguros.</td><td>IAM, KMS, Secrets Manager, SG/NACL, WAF, CloudFront OAC, políticas S3.</td></tr>
-      <tr><td>Design Resilient Architectures</td><td>26%</td><td>Alta disponibilidade, desacoplamento, recuperação e continuidade.</td><td>Multi-AZ, Auto Scaling, ELB, SQS/SNS, Route 53 failover, backup/restore.</td></tr>
-      <tr><td>Design High-Performing Architectures</td><td>24%</td><td>Performance de compute, banco, storage e rede.</td><td>EC2, Lambda, RDS/Aurora, DynamoDB, ElastiCache, CloudFront, S3 Transfer Acceleration.</td></tr>
-      <tr><td>Design Cost-Optimized Architectures</td><td>20%</td><td>Redução de custo sem perder requisitos técnicos.</td><td>Savings Plans, Reserved, Spot, lifecycle S3, rightsizing, Compute Optimizer.</td></tr>
-    </tbody>
-  </table></div>
-  <h3>Conteúdo técnico prioritário</h3>
-  <div class="doc-grid-2">
-    <div>
-      <h4>Networking e segurança</h4>
-      <ul class="doc-list"><li>VPC, CIDR, subnets públicas/privadas, route tables, IGW e NAT Gateway.</li><li>Security Groups vs NACLs.</li><li>VPC Peering, Transit Gateway, PrivateLink e VPC endpoints.</li><li>IAM policies, roles, resource-based policies e least privilege.</li><li>KMS, Secrets Manager, ACM, WAF, Shield, CloudFront OAC.</li></ul>
-    </div>
-    <div>
-      <h4>Compute, storage e dados</h4>
-      <ul class="doc-list"><li>EC2, Auto Scaling, ALB vs NLB e placement groups.</li><li>S3 versioning, lifecycle, replication, encryption e presigned URLs.</li><li>RDS Multi-AZ, Read Replicas, RDS Proxy e Aurora Serverless v2.</li><li>DynamoDB, GSI/LSI, TTL, Streams, DAX e single-table design.</li><li>ElastiCache Redis, CloudFront, Route 53 e disaster recovery.</li></ul>
-    </div>
-  </div>
-  <h3>Entregáveis práticos no projeto</h3>
-  <ul class="doc-list">
-    <li>Diagrama C4 de arquitetura AWS do blog técnico.</li>
-    <li>ADR: <code>ADR-aws-networking-vpc.md</code> explicando VPC, subnets, NAT e endpoints.</li>
-    <li>ADR: <code>ADR-aws-database-rds-vs-dynamodb.md</code>.</li>
-    <li>Implementar bucket S3 para imagens e arquivos estáticos com política segura.</li>
-    <li>Desenhar arquitetura com CloudFront + S3 + API + RDS + ElastiCache + SQS/SNS.</li>
-    <li>Simular DR: backup/restore, pilot light, warm standby e active-active em documento comparativo.</li>
-  </ul>
-</section>
-
-<section id="dvac02" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>DVA-C02 — AWS Certified Developer - Associate</h2>
-      <p class="section-subtitle">A certificação mais conectada ao desenvolvimento backend cloud-native.</p>
-    </div>
-    <span class="section-badge">Sem 25–48</span>
-  </div>
-  <div class="doc-grid-3">
-    <div class="exam-card"><h3>Objetivo</h3><p>Validar proficiência em desenvolver, testar, empacotar, implantar e depurar aplicações baseadas na AWS.</p></div>
-    <div class="exam-card"><h3>Perfil técnico</h3><p>Recomenda 1+ ano de experiência prática desenvolvendo e mantendo aplicações com serviços AWS.</p></div>
-    <div class="exam-card"><h3>No seu plano</h3><p>Início na Fase 4, continuação na Fase 5, prova na Fase 6 entre as semanas 46–47.</p></div>
-  </div>
-  <h3>Domínios oficiais</h3>
-  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
-    <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
-    <tbody>
-      <tr><td>Development with AWS Services</td><td>32%</td><td>Construção e otimização de aplicações com serviços AWS.</td><td>Lambda, DynamoDB, API Gateway, SDKs, S3, SQS, EventBridge.</td></tr>
-      <tr><td>Security</td><td>26%</td><td>Proteção de código, dados, acesso e secrets.</td><td>IAM roles, KMS, Cognito, Secrets Manager, Parameter Store, encryption.</td></tr>
-      <tr><td>Deployment</td><td>24%</td><td>Empacotamento e entrega por CI/CD.</td><td>CodePipeline, CodeBuild, CodeDeploy, SAM, CloudFormation, Elastic Beanstalk.</td></tr>
-      <tr><td>Troubleshooting and Optimization</td><td>18%</td><td>Diagnóstico, logs, tracing, erro de permissão, throttling e performance.</td><td>CloudWatch Logs/Metrics, X-Ray, retries, DLQ, timeout, alarms.</td></tr>
-    </tbody>
-  </table></div>
-  <h3>Conteúdo técnico prioritário</h3>
-  <ul class="doc-list">
-    <li><strong>Lambda:</strong> handlers, environment variables, layers, concurrency, DLQ, retries, cold start, SnapStart Java e permissões IAM.</li>
-    <li><strong>DynamoDB:</strong> partition key, sort key, GSI/LSI, TTL, conditional writes, transactions, Streams e DAX.</li>
-    <li><strong>API Gateway:</strong> REST vs HTTP API, Lambda proxy integration, authorizers, throttling, caching, stages e deployment.</li>
-    <li><strong>Segurança:</strong> IAM least privilege, KMS, Secrets Manager, Parameter Store, Cognito, criptografia e assinatura de requests.</li>
-    <li><strong>CI/CD:</strong> CodeBuild, CodeDeploy, CodePipeline, CloudFormation, SAM e deployment blue/green/canary.</li>
-    <li><strong>Observabilidade:</strong> CloudWatch Logs, X-Ray, structured logging, trace, timeout, throttling e alarmes.</li>
-  </ul>
-  <h3>Entregáveis práticos no projeto</h3>
-  <ul class="doc-list">
-    <li>API Spring Boot consumindo Secrets Manager/Parameter Store para configuração sensível.</li>
-    <li>Fluxo assíncrono: publicação de post → EventBridge ou SQS → Lambda worker.</li>
-    <li>Função Lambda para gerar thumbnails, processar eventos ou enviar notificações.</li>
-    <li>Pipeline com build, testes, scan, deploy e rollback.</li>
-    <li>Tracing de request: frontend → API → fila → worker.</li>
-    <li>Dashboard CloudWatch com latência, erro, throughput e custos.</li>
-  </ul>
-</section>
-
-<section id="soac03" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>SOA-C03 — AWS Certified CloudOps Engineer - Associate</h2>
-      <p class="section-subtitle">Operação, monitoramento, networking e continuidade de workloads AWS.</p>
-    </div>
-    <span class="section-badge">Sem 49–56</span>
-  </div>
-  <div class="doc-grid-3">
-    <div class="exam-card"><h3>Objetivo</h3><p>Validar capacidade de implantar, gerenciar e operar workloads na AWS com foco em CloudOps.</p></div>
-    <div class="exam-card"><h3>Perfil técnico</h3><p>Recomenda experiência com deployment, management, troubleshooting, networking e segurança em AWS.</p></div>
-    <div class="exam-card"><h3>No seu plano</h3><p>Entrar como revisão avançada/planejamento na Fase 7, ou como ponte antes da DOP-C02.</p></div>
-  </div>
-  <h3>Domínios oficiais</h3>
-  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
-    <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
-    <tbody>
-      <tr><td>Monitoring, Logging, Analysis, Remediation and Performance Optimization</td><td>22%</td><td>Observabilidade, análise e correção de problemas.</td><td>CloudWatch, Logs Insights, alarms, dashboards, X-Ray, remediation.</td></tr>
-      <tr><td>Reliability and Business Continuity</td><td>22%</td><td>Disponibilidade, backup, restore e DR.</td><td>Multi-AZ, snapshots, Route 53 failover, AWS Backup, RTO/RPO.</td></tr>
-      <tr><td>Deployment, Provisioning and Automation</td><td>22%</td><td>Provisionamento, automação e mudanças controladas.</td><td>CloudFormation, Systems Manager, CLI, automation documents.</td></tr>
-      <tr><td>Security and Compliance</td><td>16%</td><td>Controles, compliance e auditoria operacional.</td><td>IAM, CloudTrail, Config, GuardDuty, Security Hub, KMS.</td></tr>
-      <tr><td>Networking and Content Delivery</td><td>18%</td><td>Conectividade, DNS, firewalls e distribuição.</td><td>VPC, DNS, TCP/IP, SG/NACL, ELB, CloudFront, Route 53.</td></tr>
-    </tbody>
-  </table></div>
-  <h3>Conteúdo técnico prioritário</h3>
-  <ul class="doc-list">
-    <li>CloudWatch Metrics, Logs, Logs Insights, alarms, dashboards e métricas customizadas.</li>
-    <li>Systems Manager: Session Manager, Run Command, Patch Manager, Parameter Store e automation.</li>
-    <li>Backup, restore, retenção, RTO, RPO, DR drills e validação de recuperação.</li>
-    <li>CloudTrail, AWS Config, GuardDuty, Security Hub e postura de segurança.</li>
-    <li>VPC troubleshooting: DNS, rotas, SG, NACL, NAT, endpoints, load balancers e CloudFront.</li>
-    <li>Remediação operacional: runbooks, alarmes acionáveis e incident response básico.</li>
-  </ul>
-  <h3>Entregáveis práticos no projeto</h3>
-  <ul class="doc-list">
-    <li>Runbook de incidente: API fora do ar, Redis indisponível, banco lento, fila acumulada.</li>
-    <li>Dashboard operacional CloudWatch: API p95, erro 5xx, uso de CPU/memória, fila e custo.</li>
-    <li>Alarme e ação de remediação para erro 5xx elevado.</li>
-    <li>Plano de backup e restore do PostgreSQL/RDS com teste documentado.</li>
-    <li>Relatório de Security Hub/GuardDuty/Config com plano de correção.</li>
-  </ul>
-</section>
-
-<section id="dopc02" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>DOP-C02 — AWS Certified DevOps Engineer - Professional</h2>
-      <p class="section-subtitle">Evolução profissional para CI/CD, IaC, automação e operação avançada.</p>
-    </div>
-    <span class="section-badge">Semana 57+</span>
-  </div>
-  <div class="doc-grid-3">
-    <div class="exam-card"><h3>Objetivo</h3><p>Validar experiência avançada em provisionar, operar e gerenciar sistemas distribuídos na AWS.</p></div>
-    <div class="exam-card"><h3>Perfil técnico</h3><p>Recomenda 2+ anos de experiência em provisionamento, operação e gerenciamento de ambientes AWS, além de SDLC e scripting.</p></div>
-    <div class="exam-card"><h3>No seu plano</h3><p>Planejar após SAA-C03 e DVA-C02, preferencialmente com um projeto AWS real, IaC, pipeline, observabilidade e rollback.</p></div>
-  </div>
-  <h3>Domínios oficiais</h3>
-  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
-    <thead><tr><th>Domínio</th><th>Peso</th><th>Foco</th><th>Competência prática</th></tr></thead>
-    <tbody>
-      <tr><td>SDLC Automation</td><td>22%</td><td>Automação de entrega e validação.</td><td>CodePipeline, CodeBuild, CodeDeploy, testing, rollback, approvals.</td></tr>
-      <tr><td>Configuration Management and IaC</td><td>17%</td><td>Infraestrutura reprodutível e versionada.</td><td>CloudFormation, CDK, Terraform, StackSets, drift detection, change sets.</td></tr>
-      <tr><td>Resilient Cloud Solutions</td><td>15%</td><td>Alta disponibilidade, escalabilidade e recuperação.</td><td>Auto Scaling, ELB, Route 53, multi-AZ, multi-region, failover.</td></tr>
-      <tr><td>Monitoring and Logging</td><td>15%</td><td>Observabilidade de sistemas distribuídos.</td><td>CloudWatch, X-Ray, logs centralizados, metrics, alarms.</td></tr>
-      <tr><td>Incident and Event Response</td><td>14%</td><td>Resposta automatizada a eventos e incidentes.</td><td>EventBridge, Lambda, Systems Manager Automation, runbooks.</td></tr>
-      <tr><td>Security and Compliance</td><td>17%</td><td>Governança, auditoria e controles automatizados.</td><td>IAM avançado, SCP, Config, GuardDuty, Security Hub, KMS, Secrets Manager.</td></tr>
-    </tbody>
-  </table></div>
-  <h3>Conteúdo técnico prioritário</h3>
-  <ul class="doc-list">
-    <li>CI/CD completo: build, test, scan, deploy, approval, rollback e promoção entre ambientes.</li>
-    <li>CloudFormation/CDK/Terraform: módulos, parâmetros, outputs, estado, change sets e drift detection.</li>
-    <li>Containers: ECS, EKS, Fargate, service discovery, autoscaling e deployment strategies.</li>
-    <li>Serverless: Lambda, API Gateway, SAM, Step Functions, EventBridge, SQS e SNS.</li>
-    <li>Observabilidade: CloudWatch, X-Ray, dashboards, logs centralizados, alarmes compostos e incident response.</li>
-    <li>Segurança: IAM avançado, permission boundaries, SCPs, Organizations, Config, GuardDuty, Security Hub e KMS.</li>
-  </ul>
-  <h3>Critério para tentar a DOP-C02</h3>
-  <ul class="doc-list">
-    <li>SAA-C03 e DVA-C02 concluídas ou domínio prático equivalente.</li>
-    <li>Projeto em produção ou simulação realista com IaC.</li>
-    <li>Pipeline completo com testes, scans, deploy e rollback.</li>
-    <li>CloudWatch/X-Ray configurados com logs, métricas, dashboards e alarmes.</li>
-    <li>Ao menos um cenário de incidente documentado e remediado.</li>
-  </ul>
-</section>
-
-<section id="roadmap" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Roadmap AWS integrado às 8 fases</h2>
-      <p class="section-subtitle">Cronograma coeso com o plano anterior de 64 semanas.</p>
-    </div>
-    <span class="section-badge">64 semanas</span>
-  </div>
-  <div class="phase-doc-grid">
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 1 — Base técnica + fundamentos</h3><span>Sem 1–8</span></div><p><strong>AWS:</strong> CLF-C02 — Cloud Practitioner. Prova nas semanas 8–9.</p><ul class="doc-list"><li>Cloud Concepts, Security, Technology, Billing.</li><li>Mapear serviços que serão usados no blog.</li><li>Criar budget e estimativa de custo.</li><li>Primeiros labs no Free Tier: S3, EC2, IAM, CloudWatch, RDS básico.</li></ul></article>
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 2 — Desenvolvimento profissional</h3><span>Sem 9–16</span></div><p><strong>AWS:</strong> SAA-C03 — início.</p><ul class="doc-list"><li>VPC, EC2, ELB, Auto Scaling, S3, RDS e Aurora.</li><li>Desenhar arquitetura inicial do blog.</li><li>Documentar decisões de rede e banco.</li><li>Lab: VPC com subnets públicas/privadas, ALB e RDS.</li></ul></article>
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 3 — Engenharia de software real</h3><span>Sem 17–24</span></div><p><strong>AWS:</strong> SAA-C03 — continuação.</p><ul class="doc-list"><li>ElastiCache, DynamoDB, Lambda, API Gateway, SQS/SNS, CloudFront e Route 53.</li><li>Conectar arquitetura event-driven do blog aos serviços AWS.</li><li>Lab: SQS + DLQ + Lambda worker.</li><li>Lab: CloudFront + S3 + OAC.</li></ul></article>
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 4 — Arquitetura + candidaturas</h3><span>Sem 25–32</span></div><p><strong>AWS:</strong> SAA-C03 prova + DVA-C02 início. Prova SAA-C03 nas semanas 30–31.</p><ul class="doc-list"><li>Disaster Recovery, Well-Architected, Cognito, CodePipeline, CodeBuild, CodeDeploy e X-Ray.</li><li>Iniciar DVA-C02 com Lambda, DynamoDB, API Gateway e SDK.</li><li>Candidaturas começam com portfólio + 2 certs planejadas/concluídas.</li></ul></article>
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 5 — Cloud + sistemas distribuídos</h3><span>Sem 33–40</span></div><p><strong>AWS:</strong> DVA-C02 — continuação.</p><ul class="doc-list"><li>DynamoDB transactions, Lambda SnapStart Java, CloudFormation, Secrets Manager, EventBridge, Step Functions, ECS/EKS.</li><li>Deploy AWS do blog com EKS/RDS/ElastiCache/S3/CloudFront.</li><li>Terraform para VPC, EKS, RDS, S3, CloudFront e Route 53.</li></ul></article>
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 6 — IA aplicada + RAG + agentes</h3><span>Sem 41–48</span></div><p><strong>AWS:</strong> DVA-C02 prova + revisão. Prova DVA-C02 nas semanas 46–47.</p><ul class="doc-list"><li>Elastic Beanstalk, Kinesis, CloudWatch, IAM avançado, Tutorials Dojo, Well-Architected Tool e cost optimization.</li><li>Integrar observabilidade e custo de IA/RAG no projeto.</li><li>Fechar lacunas antes de escolher SOA-C03 ou DOP-C02.</li></ul></article>
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 7 — Produto + frontend + escala</h3><span>Sem 49–56</span></div><p><strong>AWS:</strong> SOA-C03 ou revisão avançada.</p><ul class="doc-list"><li>Systems Manager, CloudWatch Logs Insights, Organizations, Config, GuardDuty, Security Hub, Backup, DMS e Cost Management.</li><li>Foco em operação real, incidentes, segurança e governança.</li><li>Preparar decisão: CloudOps Associate ou DevOps Professional.</li></ul></article>
-    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 8 — Portfólio final + negociação</h3><span>Sem 57–64</span></div><p><strong>AWS:</strong> revisão + planejamento avançado.</p><ul class="doc-list"><li>Revisão CLF + SAA + DVA.</li><li>Well-Architected review completo do blog.</li><li>Cost optimization final, Security Hub, GuardDuty e IAM review.</li><li>Planejar SOA-C03 ou DOP-C02 conforme carreira.</li></ul></article>
-  </div>
-  <h3>Marcos AWS do cronograma</h3>
-  <div class="timeline">
-    <div class="timeline-item"><strong>Semanas 8–9 — CLF-C02</strong><span>Fechar fundamentos e validar base de AWS Cloud.</span></div>
-    <div class="timeline-item"><strong>Semanas 30–31 — SAA-C03</strong><span>Validar arquitetura cloud e decisões de desenho.</span></div>
-    <div class="timeline-item"><strong>Semanas 46–47 — DVA-C02</strong><span>Validar desenvolvimento, deploy e troubleshooting cloud-native.</span></div>
-    <div class="timeline-item"><strong>Semana 57+ — SOA-C03 ou DOP-C02</strong><span>Decidir entre reforço operacional Associate ou avanço Professional em DevOps.</span></div>
-  </div>
-</section>
-
-<section id="checklist" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading"><div><h2>Checklist de execução</h2><p class="section-subtitle">Regras práticas para não transformar a trilha em estudo passivo.</p></div><span class="section-badge">Execução</span></div>
-  <div class="doc-grid-2">
-    <div class="callout"><h3>Checklist semanal</h3><ul class="doc-list"><li>Estudar AWS 1,5h/dia no bloco 15:30–17:00.</li><li>Fazer pelo menos 2 labs práticos por semana.</li><li>Registrar erros de simulados no Obsidian.</li><li>Relacionar cada serviço AWS a uma decisão real do blog.</li><li>Gerar 1 commit, ADR ou documentação técnica relacionada à nuvem.</li><li>Revisar custos no final da semana.</li></ul></div>
-    <div class="callout accent-blue"><h3>Checklist antes de marcar prova</h3><ul class="doc-list"><li>Acertar consistentemente 80%+ em simulados.</li><li>Conseguir explicar cada domínio sem consultar resumo.</li><li>Ter feito labs práticos dos principais serviços.</li><li>Ter transformado erros recorrentes em flashcards.</li><li>Ter revisado os serviços fora e dentro do escopo.</li><li>Conseguir justificar escolhas por segurança, resiliência, performance e custo.</li></ul></div>
-  </div>
-  <h3>Critérios por certificação</h3>
-  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table">
-    <thead><tr><th>Certificação</th><th>Pronto para simulado?</th><th>Pronto para prova?</th><th>Entregável mínimo</th></tr></thead>
-    <tbody>
-      <tr><td>CLF-C02</td><td>Conhece serviços principais e billing.</td><td>Explica shared responsibility, Well-Architected, custo e serviços centrais.</td><td>Mapa AWS do projeto + estimativa de custo.</td></tr>
-      <tr><td>SAA-C03</td><td>Resolve cenários de VPC, HA, S3, RDS, DynamoDB e filas.</td><td>Justifica trade-offs arquiteturais por segurança, resiliência, performance e custo.</td><td>Diagrama C4 AWS + ADRs de arquitetura.</td></tr>
-      <tr><td>DVA-C02</td><td>Implementa Lambda/API Gateway/DynamoDB/SQS e entende CI/CD.</td><td>Depura IAM, timeout, throttling, logs, X-Ray e deploy.</td><td>Pipeline + worker assíncrono + observabilidade.</td></tr>
-      <tr><td>SOA-C03</td><td>Opera CloudWatch, Systems Manager, backup e networking.</td><td>Resolve incidentes simulados com runbook e métricas.</td><td>Runbooks + alarmes + DR drill.</td></tr>
-      <tr><td>DOP-C02</td><td>Tem projeto com IaC, CI/CD e observabilidade real.</td><td>Domina automação, rollback, compliance, eventos e operação avançada.</td><td>Infra como código + pipeline + postmortem.</td></tr>
-    </tbody>
-  </table></div>
-</section>
-
-<section id="projetos" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading"><div><h2>Projetos práticos para fixação</h2><p class="section-subtitle">Cada certificação deve gerar evidência de portfólio.</p></div><span class="section-badge">Labs</span></div>
-  <h3>Projeto central: Blog Técnico Cloud-Native</h3>
-  <p>A recomendação é usar o próprio blog/portfólio como laboratório AWS evolutivo. Isso evita projetos soltos e transforma estudo de certificação em material demonstrável para entrevistas.</p>
-  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table">
-    <thead><tr><th>Fase AWS</th><th>Implementação prática no blog</th><th>Competências demonstradas</th></tr></thead>
-    <tbody>
-      <tr><td>CLF-C02</td><td>Mapa de serviços, estimativa de custo, IAM básico, S3 lab e billing alerts.</td><td>Fundamentos, custo, segurança básica e governança.</td></tr>
-      <tr><td>SAA-C03</td><td>CloudFront + S3, API com ALB, RDS Multi-AZ, ElastiCache, Route 53, ACM, SQS/SNS.</td><td>Arquitetura, resiliência, performance e custo.</td></tr>
-      <tr><td>DVA-C02</td><td>Lambda worker, EventBridge/SQS, DynamoDB, API Gateway, Secrets Manager, pipeline e X-Ray.</td><td>Desenvolvimento cloud-native, CI/CD, segurança e debug.</td></tr>
-      <tr><td>SOA-C03</td><td>CloudWatch dashboards, Logs Insights, alarms, Systems Manager, backup, restore e runbooks.</td><td>Operação, troubleshooting, continuidade e resposta a incidentes.</td></tr>
-      <tr><td>DOP-C02</td><td>IaC completa, blue/green ou canary deploy, rollback automático, compliance e automação de incidentes.</td><td>DevOps avançado, automação, governança e produção.</td></tr>
-    </tbody>
-  </table></div>
-  <h3>Mini projetos por certificação</h3>
-  <div class="doc-grid-2">
-    <div class="mini-card"><strong>CLF-C02 — Calculadora de custo do blog</strong><span>Documento/planilha com custo estimado para S3, CloudFront, RDS, logs, domínio, NAT e transferência.</span></div>
-    <div class="mini-card"><strong>SAA-C03 — Arquitetura HA</strong><span>Desenho do blog em duas AZs com ALB, Auto Scaling, RDS Multi-AZ, ElastiCache, S3 e CloudFront.</span></div>
-    <div class="mini-card"><strong>DVA-C02 — Worker serverless</strong><span>PostPublishedEvent → SQS/EventBridge → Lambda → CloudWatch/X-Ray → atualização de analytics/notificação.</span></div>
-    <div class="mini-card"><strong>SOA-C03 — Runbook operacional</strong><span>Incident response para falha de API, banco lento, Redis fora, fila crescendo e custo anormal.</span></div>
-    <div class="mini-card"><strong>DOP-C02 — Pipeline com rollback</strong><span>CI/CD com testes, Trivy, Sonar, deploy canary/blue-green, alarmes e rollback automatizado.</span></div>
-    <div class="mini-card"><strong>Projeto final — Well-Architected Review</strong><span>Revisão completa do blog usando os pilares AWS e backlog de melhorias com prioridade.</span></div>
-  </div>
-</section>
-
-<section id="consulta" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading"><div><h2>Consulta rápida</h2><p class="section-subtitle">Resumo objetivo para revisar antes de estudar ou fazer simulado.</p></div><span class="section-badge">Quick Reference</span></div>
-  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table">
-    <thead><tr><th>Tópico</th><th>CLF-C02</th><th>SAA-C03</th><th>DVA-C02</th><th>SOA-C03</th><th>DOP-C02</th></tr></thead>
-    <tbody>
-      <tr><td>Foco</td><td>Conceitos</td><td>Arquitetura</td><td>Desenvolvimento</td><td>Operação</td><td>DevOps avançado</td></tr>
-      <tr><td>Nível</td><td>Foundational</td><td>Associate</td><td>Associate</td><td>Associate</td><td>Professional</td></tr>
-      <tr><td>Nota mínima típica</td><td>700</td><td>720</td><td>720</td><td>720</td><td>750</td></tr>
-      <tr><td>Mais importante para backend</td><td>IAM, S3, EC2, Lambda, billing</td><td>VPC, RDS, S3, SQS, CloudFront</td><td>Lambda, DynamoDB, API Gateway, CI/CD</td><td>CloudWatch, SSM, backup, networking</td><td>CI/CD, IaC, incident response, compliance</td></tr>
-      <tr><td>Erro comum</td><td>Memorizar serviço sem entender uso.</td><td>Ignorar trade-offs de custo/resiliência.</td><td>Não praticar IAM, logs e debugging.</td><td>Estudar teoria sem operar ambiente.</td><td>Tentar cedo sem projeto real.</td></tr>
-      <tr><td>Artefato de portfólio</td><td>Mapa AWS + custo.</td><td>Diagrama de arquitetura.</td><td>Pipeline + worker.</td><td>Runbooks + dashboards.</td><td>IaC + rollback + postmortem.</td></tr>
-    </tbody>
-  </table></div>
-  <h3>Decisão SOA-C03 vs DOP-C02</h3>
-  <div class="doc-grid-2">
-    <div class="callout accent-green"><h3>Escolha SOA-C03 se...</h3><ul class="doc-list"><li>Você quer reforçar operação antes da Professional.</li><li>Precisa melhorar troubleshooting, CloudWatch, networking e backup.</li><li>Quer atuar com CloudOps, suporte cloud, SRE inicial ou administração AWS.</li><li>Ainda não tem projeto maduro com CI/CD e IaC.</li></ul></div>
-    <div class="callout accent-purple"><h3>Escolha DOP-C02 se...</h3><ul class="doc-list"><li>Você já domina SAA-C03 e DVA-C02 na prática.</li><li>Seu projeto tem pipeline, IaC, observabilidade e rollback.</li><li>Você quer se posicionar como backend/cloud/DevOps mais sênior.</li><li>Você consegue explicar incidentes, automação e compliance.</li></ul></div>
-  </div>
-</section>
-
-<section id="referencias" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading"><div><h2>Referências e fontes oficiais</h2><p class="section-subtitle">Use estas páginas para validar mudanças de versão, domínios e materiais oficiais.</p></div><span class="section-badge">Fontes</span></div>
-  <ul class="doc-list ref-list">
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html" target="_blank" rel="noopener">AWS Exam Guide — CLF-C02</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html" target="_blank" rel="noopener">AWS Exam Guide — SAA-C03</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html" target="_blank" rel="noopener">AWS Exam Guide — DVA-C02</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.html" target="_blank" rel="noopener">AWS Exam Guide — SOA-C03 / CloudOps Engineer - Associate</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/devops-engineer-professional-02/devops-engineer-professional-02.html" target="_blank" rel="noopener">AWS Exam Guide — DOP-C02</a></li>
-    <li><a href="https://aws.amazon.com/certification/certification-prep/" target="_blank" rel="noopener">AWS Certification Exam Preparation</a></li>
-    <li><a href="https://aws.amazon.com/certification/policies/after-testing/" target="_blank" rel="noopener">AWS Certification — After Testing / Scoring and Retake Policy</a></li>
-    <li>Referência interna: cronograma integrado de 8 fases / 64 semanas do Plano Integrado de Estudos.</li>
-  </ul>
-</section>
-
-</main>
-
-<footer class="text-center py-4" style="border-top:1px solid var(--doc-border)">
-  <p class="small text-muted mb-2"><span id="trackFooterTitle">Certificações AWS</span> · Plano Integrado de Estudos</p>
-  <a class="footer-link small" href="../index.html">← Voltar ao dashboard principal</a>
+  <p><strong style="color:var(--muted2)">Certificações AWS</strong> · Plano Integrado de Estudos · 64 semanas</p>
 </footer>
 
 <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-(function(){
-  const backToTop = document.getElementById('backToTop');
-  const searchInput = document.getElementById('trackSearch');
-  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
 
-  window.addEventListener('scroll', () => {
-    backToTop.classList.toggle('is-visible', window.scrollY > 500);
-  });
+  (function(){
+    const backToTop = document.getElementById('backToTop');
+    const searchInput = document.getElementById('searchInput');
+    const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
+    const bar = document.getElementById('navSectionsBar');
+    const btnL = document.getElementById('navScrollLeft');
+    const btnR = document.getElementById('navScrollRight');
+    const STEP = 320;
 
-  backToTop.addEventListener('click', () => {
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  });
+    function normalize(value){
+      return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+    }
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', event => {
-      const selector = anchor.getAttribute('href');
-      const target = document.querySelector(selector);
-      if (target) {
-        event.preventDefault();
-        target.scrollIntoView({behavior: 'smooth', block: 'start'});
-      }
+    function updateScrollButtons(){
+      if(!bar || !btnL || !btnR) return;
+      const atStart = bar.scrollLeft <= 4;
+      const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+      btnL.classList.toggle('hidden', atStart);
+      btnR.classList.toggle('hidden', atEnd);
+    }
+
+    if(btnL && btnR && bar){
+      btnL.addEventListener('click',()=>bar.scrollBy({left:-STEP,behavior:'smooth'}));
+      btnR.addEventListener('click',()=>bar.scrollBy({left:STEP,behavior:'smooth'}));
+      bar.addEventListener('scroll',updateScrollButtons,{passive:true});
+      updateScrollButtons();
+      setTimeout(updateScrollButtons,400);
+    }
+
+    window.addEventListener('scroll',()=>{
+      backToTop.classList.toggle('is-visible',window.scrollY>500);
     });
-  });
 
-  function normalize(value) {
-    return value
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
-  }
+    backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
 
-  searchInput.addEventListener('input', () => {
-    const query = normalize(searchInput.value.trim());
-    sections.forEach(section => {
-      section.classList.remove('is-hidden-by-search', 'search-hit');
-      if (!query) return;
-      const match = normalize(section.innerText).includes(query);
-      section.classList.toggle('is-hidden-by-search', !match);
-      section.classList.toggle('search-hit', match);
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      anchor.addEventListener('click',event=>{
+        const target=document.querySelector(anchor.getAttribute('href'));
+        if(target){
+          event.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+        }
+      });
     });
-  });
-})();
+
+    searchInput.addEventListener('input',()=>{
+      const query=normalize(searchInput.value.trim());
+      sections.forEach(section=>{
+        section.classList.remove('is-hidden-by-search','search-hit');
+        if(!query) return;
+        const match=normalize(section.innerText).includes(query);
+        section.classList.toggle('is-hidden-by-search',!match);
+        section.classList.toggle('search-hit',match);
+      });
+    });
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id=entry.target.id;
+          navLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+id));
+          sidebarLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+id));
+          const active=bar ? bar.querySelector('.nav-link.active') : null;
+          if(active) active.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'});
+        }
+      });
+    },{threshold:.15,rootMargin:'-100px 0px -55% 0px'});
+
+    sections.forEach(section=>observer.observe(section));
+  })();
+
 </script>
 </body>
 </html>
