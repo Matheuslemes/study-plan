@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Dashboard do Plano Integrado de Estudos — 15,5h/dia, 9 trilhas + treino, 8 fases, 64 semanas.">
+<meta name="description" content="Dashboard do Plano Integrado de Estudos — 15,5h/dia, 10 trilhas + treino, 8 fases, 64 semanas.">
 <title>Plano Integrado de Estudos — 15,5h/dia · 64 semanas</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -40,6 +40,7 @@
   --fin:#fb923c;    --fin-bg:#2e1a10;
   --treino:#ef4444; --treino-bg:#2f1115;
   --db:#38bdf8;     --db-bg:#0e2538;
+  --ingles:#14b8a6; --ingles-bg:#0c2f2b;
 }
 
 /* ── reset ───────────────────────────── */
@@ -151,6 +152,7 @@ body{
 .tb-fin   {background:var(--fin-bg);  color:var(--fin);  border:1px solid var(--fin)}
 .tb-treino{background:var(--treino-bg);color:var(--treino);border:1px solid var(--treino)}
 .tb-db    {background:var(--db-bg);   color:var(--db);   border:1px solid var(--db)}
+.tb-ingles{background:var(--ingles-bg);color:var(--ingles);border:1px solid var(--ingles)}
 
 /* ── phase cards ────────────────────── */
 .phase-card{
@@ -420,9 +422,9 @@ footer p{
 <!-- HERO -->
 <div class="hero">
   <div class="container">
-    <span class="hero-eyebrow fade-up">Plano integrado de estudos · 9 trilhas + treino · 64 semanas</span>
+    <span class="hero-eyebrow fade-up">Plano integrado de estudos · 10 trilhas + treino · 64 semanas</span>
     <h1 class="fade-up fade-up-d1">Plano Integrado de Estudos</h1>
-    <p class="hero-sub fade-up fade-up-d2">15,5h/dia · 7 dias/semana · 8 fases · ~6.944 horas · Java + Spring Boot · DevCore Platform · AWS Certifications · Python · DevOps · Banco de Dados SQL/NoSQL · Matemática · IA · Financeiro · Treino Híbrido</p>
+    <p class="hero-sub fade-up fade-up-d2">15,5h/dia · 7 dias/semana · 8 fases · ~6.944 horas · Java + Spring Boot · Inglês Técnico · DevCore Platform · AWS Certifications · Python · DevOps · Banco de Dados SQL/NoSQL · Matemática · IA · Financeiro · Treino Híbrido</p>
     <div class="hero-tags fade-up fade-up-d3" id="heroTags"></div>
     <div class="fade-up fade-up-d4" id="trackBadges"></div>
   </div>
@@ -480,7 +482,7 @@ footer p{
 <!-- TAB DAILY -->
 <div class="tab-pane fade" id="tabDaily">
   <h4 class="mb-1">Rotina Diária — 15,5h de estudo efetivo</h4>
-  <p class="text-muted small mb-3">05:30 às 00:00 com 1h de almoço + 2h de treino/refeição. Total de estudo efetivo: 15,5 horas, com 9 trilhas paralelas e blocos redistribuídos.</p>
+  <p class="text-muted small mb-3">05:30 às 00:00 com 1h de almoço + 2h de treino/refeição. Total de estudo efetivo: 15,5 horas, com 10 trilhas paralelas e blocos redistribuídos.</p>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden" class="mb-4" id="dailySchedule"></div>
   <h5 class="mb-2">Foco por dia da semana</h5>
   <div class="row g-2 mb-4" id="weeklyFocus"></div>
@@ -496,7 +498,7 @@ footer p{
 
 <!-- TAB TRACKS -->
 <div class="tab-pane fade" id="tabTracks">
-  <h4 class="mb-1">Todas as 9 Trilhas — Progressão por Fase</h4>
+  <h4 class="mb-1">Todas as 10 Trilhas — Progressão por Fase</h4>
   <p class="text-muted small mb-3">Selecione uma trilha para ver sua progressão completa ao longo das 8 fases.</p>
   <div class="d-flex flex-wrap gap-1 mb-3 track-filter" id="trackFilterBtns"></div>
   <div id="trackProgression"></div>
@@ -529,9 +531,9 @@ footer p{
       <span class="htag htag-b">Java Backend Pleno 2026</span>
       <span class="htag htag-p">DevCore Platform v2.0</span>
       <span class="htag htag-g">AWS Certifications</span>
-      <span class="htag htag-o">Python · IA · DevOps</span>
+      <span class="htag htag-o">Python · IA · Inglês Técnico · DevOps</span>
     </div>
-    <p class="mb-0">Banco de Dados SQL/NoSQL · Matemática · Trilha IA · Trilha Financeira · Treino Híbrido · 9 trilhas + rotina física · 64 semanas</p>
+    <p class="mb-0">Banco de Dados SQL/NoSQL · Inglês Técnico · Matemática · Trilha IA · Trilha Financeira · Treino Híbrido · 10 trilhas + rotina física · 64 semanas</p>
   </div>
 </footer>
 
@@ -545,6 +547,7 @@ const PBG=["#0d1a2e","#0d2e28","#1a1735","#2e1a10","#0e2538","#2e1025","#0d2e1a"
 
 const CK={
   java:  {t:"#22c55e",b:"#0d2e1a"},
+  ingles:{t:"#14b8a6",b:"#0c2f2b"},
   blog:  {t:"#7c6ae8",b:"#1e1a3a"},
   aws:   {t:"#f59e0b",b:"#2e2010"},
   py:    {t:"#60a5fa",b:"#0d1e35"},
@@ -563,12 +566,13 @@ const CK={
 const heroTagsData=[
   {label:"15,5h/dia",cls:"htag-b"},{label:"108,5h/semana",cls:"htag-b"},
   {label:"64 semanas",cls:"htag-g"},{label:"~6.944 horas",cls:"htag-g"},
-  {label:"8 fases",cls:"htag-p"},{label:"9 trilhas + treino",cls:"htag-p"},
+  {label:"8 fases",cls:"htag-p"},{label:"10 trilhas + treino",cls:"htag-p"},
   {label:"3+ Certs AWS",cls:"htag-o"},{label:"9 Livros IA",cls:"htag-o"}
 ];
 
 const tracks=[
   {key:"java",  label:"Java + SW Eng",       h:"2h15+45min"},
+  {key:"ingles",label:"Inglês Técnico",      h:"30–45min"},
   {key:"blog",  label:"DevCore Platform",    h:"1h45+45min"},
   {key:"py",    label:"Python",              h:"1h"},
   {key:"devops",label:"DevOps",             h:"1h15"},
@@ -589,6 +593,12 @@ const quickTracks=[
    href:"./trilhas/java.html",
    badge:"Backend",
    desc:"Java 21, Spring Boot em produção, JPA/Hibernate avançado, Security, APIs profissionais, Kafka, Redis, observabilidade, performance, legado e arquitetura."},
+
+  {key:"ingles",
+   label:"Inglês Técnico para Programação",
+   href:"./trilhas/ingles.html",
+   badge:"Fluência técnica",
+   desc:"Inglês aplicado ao fluxo real de desenvolvimento: documentação oficial, debugging, logs, commits, PRs, README, escrita técnica, speaking, entrevistas, arquitetura e comunicação profissional."},
 
   {key:"blog",
    label:"DevCore Platform",
@@ -746,11 +756,27 @@ fin:["Planejamento 12 meses com nova renda","Produtos digitais: lançamento com 
 ];
 
 /* ═══════════════════════════════════════════════
+   ENGLISH TECHNICAL TRACK DATA
+═══════════════════════════════════════════════ */
+const englishByPhase={
+  1:["Base de leitura técnica: documentação oficial de Java, Spring, AWS, GitHub e MDN sem tradução automática como primeira opção","Vocabulário de debugging: error, failure, timeout, stack trace, root cause, payload, request, response, retry, fallback e edge case","Sentence mining: extrair frases completas de documentação e logs, não apenas palavras soltas","Flashcards com recuperação ativa: transformar frases técnicas em perguntas e respostas para revisão espaçada","Commits simples em inglês usando imperativo: Add, Fix, Update, Refactor, Improve e Remove","Meta: compreender trechos curtos de documentação, mensagens de erro e explicações básicas de código"],
+  2:["Escrita técnica básica: README, issues, bug reports, descrição de endpoints, comentários de revisão e documentação curta","Conventional Commits: feat, fix, docs, test, refactor, chore e escopos por domínio do projeto","Pull request description: What changed, Why, How it was tested e possíveis trade-offs","Estilo técnico direto: clareza, frases curtas, voz ativa e consistência terminológica inspirada em guias como Google/Microsoft Style Guide","Reescrita de documentação: ler um trecho oficial e reescrever com contexto do próprio projeto","Meta: escrever documentação simples e histórico de GitHub profissional sem depender integralmente de tradutor"],
+  3:["Listening técnico: vídeos curtos sobre Java, Spring, AWS, Docker, Kafka, arquitetura e debugging com legenda em inglês","Shadowing: repetir frases técnicas em voz alta para melhorar pronúncia, ritmo e reconhecimento auditivo","Resumo pós-vídeo: escrever 5 linhas em inglês sobre o que foi aprendido e quais termos apareceram","Vocabulário de backend falado: endpoint, controller, service layer, repository, transaction, validation, authentication, authorization e latency","Treino de daily: Yesterday I worked on..., Today I will..., I am blocked by...","Meta: entender aulas técnicas com apoio de legenda em inglês e reconhecer termos comuns em velocidade natural"],
+  4:["Speaking técnico: explicar classes, endpoints, bugs, decisões de arquitetura e trade-offs em gravações curtas","Estrutura de resposta: Context → Problem → Solution → Trade-off → Result","Vocabulário de arquitetura: coupling, cohesion, boundary, adapter, port, use case, domain model, aggregate, scalability, resilience e observability","Mock talk semanal de 5-7 minutos explicando um conceito estudado ou uma feature do DevCore Platform","Correção ativa: gravar, ouvir, anotar travamentos e transformar frases ruins em flashcards","Meta: falar sobre projetos reais sem travar em explicações básicas"],
+  5:["Inglês para entrevistas: perguntas técnicas sobre Java, Spring, SQL, Kafka, AWS, testes, arquitetura e troubleshooting","Respostas comportamentais com STAR: Situation, Task, Action, Result aplicadas a bugs, entregas e conflitos técnicos","Project pitch: explicar objetivo, stack, arquitetura, decisões, trade-offs, testes e resultados do projeto em inglês","Bug explanation: The issue was caused by..., The stack trace indicates..., The fix was..., I validated it by...","Simulações quinzenais de entrevista técnica gravada com revisão de clareza e vocabulário","Meta: responder perguntas técnicas e comportamentais com estrutura, precisão e segurança"],
+  6:["Inglês no workflow real: documentação oficial, tickets, code review, PRs, commits, logs e troubleshooting como fontes principais de estudo","Leitura profunda de docs: Spring, AWS, GitHub, MDN, Java e ferramentas usadas no portfólio","Escrita de ADRs e decisões técnicas em inglês: contexto, decisão, alternativas, consequências e trade-offs","Revisão de PR em inglês: suggest changes, approve, request changes, nit, blocking issue e follow-up","Comunicação de incidentes: impact, root cause, mitigation, rollback, postmortem e next actions","Meta: operar tecnicamente em inglês dentro de um fluxo de desenvolvimento profissional"],
+  7:["Portfólio em inglês: README completo, descrição de projetos, arquitetura, setup local, testes, endpoints e decisões técnicas","Artigos curtos em inglês sobre problemas resolvidos: bug, melhoria de performance, decisão de arquitetura ou integração cloud","LinkedIn/GitHub: descrições profissionais de projetos, stacks, resultados e aprendizados","Bilinguismo estratégico no DevCore: conteúdo técnico em pt-BR com versões ou resumos em inglês quando fizer sentido","Preparação internacional: explicar senioridade, experiência, impacto, autonomia e evolução técnica","Meta: transformar inglês técnico em diferencial visível no portfólio e em candidaturas"],
+  8:["Consolidação: revisão de vocabulário, frases, gravações, READMEs, PRs, artigos e simulações de entrevista","Mock interviews completas: apresentação pessoal, projeto principal, system design, debugging, comportamento e perguntas finais","Produção avançada: post técnico longo em inglês ou case study completo com arquitetura, testes, resultados e trade-offs","Manutenção de fluência: leitura diária curta, output semanal e revisão espaçada contínua","Prontidão profissional: participar de reuniões, escrever documentação, explicar incidentes e defender decisões técnicas em inglês","Meta final: atingir inglês técnico funcional B1+/B2 orientado a programação, documentação, entrevistas e trabalho remoto/internacional"]
+};
+P.forEach(p=>{p.ingles=englishByPhase[p.id]||[]});
+
+
+/* ═══════════════════════════════════════════════
    DAILY SCHEDULE DATA
 ═══════════════════════════════════════════════ */
 const daily=[
   {time:"05:30–06:00",dur:"30min",block:"Revisão + Obsidian SR + planejamento",k:"n",d:"Spaced repetition no Obsidian: erros de código, vocabulário técnico, SQL, APIs, AWS e decisões arquiteturais. Definir meta do dia."},
-  {time:"06:00–06:30",dur:"30min",block:"Inglês técnico diário",k:"n",d:"Commits em inglês, leitura de documentação oficial, 5 termos técnicos novos e 1x/semana mock talk gravado de 5-7min."},
+  {time:"06:00–06:30",dur:"30min",block:"Inglês técnico diário",k:"ingles",d:"Commits em inglês, leitura de documentação oficial, 5 termos técnicos novos e 1x/semana mock talk gravado de 5-7min."},
   {time:"06:30–08:45",dur:"2h15",block:"Estudo core — Java + SW Engineering",k:"java",d:"Java/Spring em produção: linguagem, APIs, JPA, segurança, testes, arquitetura, mensageria, observabilidade, performance e legado. Debug-first 20-30min."},
   {time:"08:45–10:30",dur:"1h45",block:"DevCore Platform — implementação",k:"blog",d:"Feature da fase: módulos auth, posts, knowledge base, editorial, projetos, case studies, busca FTS, SEO, newsletter ou IA/RAG. Commit útil, testes mínimos, integração com conteúdo técnico estudado."},
   {time:"10:30–11:30",dur:"1h",block:"Banco de Dados SQL/NoSQL",k:"db",d:"SQL, PostgreSQL, JPA/Hibernate, query tuning, MongoDB, Redis, DynamoDB, modelagem, índices, transações, consistência, backup e observabilidade."},
@@ -780,6 +806,7 @@ const weekly=[
 
 const rules=[
   {k:"java",r:"Todo commit em inglês desde o Dia 1. READMEs, Javadocs, comentários e ADRs também. Sem exceção."},
+  {k:"ingles",r:"O estudo de inglês precisa gerar output técnico semanal: resumo de documentação, PR description, bug report, README, explicação oral ou simulação de entrevista técnica."},
   {k:"blog",r:"Nunca terminar o bloco do DevCore Platform sem pelo menos 1 commit útil. Push no final de cada bloco. Cada feature deve gerar evidência técnica demonstrável: código versionado, teste escrito, ADR ou post técnico publicado."},
   {k:"aws",r:"Labs práticos no AWS Free Tier em paralelo ao teórico. Cada questão errada no simulado vira flashcard no Obsidian (plugin Spaced Repetition)."},
   {k:"py",r:"Todo estudo Python deve gerar artefato prático: script, API, teste, notebook, pipeline, worker, RAG ou agente. Código com type hints, pytest, lint/format e README técnico sempre que virar projeto."},
@@ -788,7 +815,7 @@ const rules=[
   {k:"math",r:"Todo conceito matemático deve terminar em uma aplicação prática: implementação em Python/Java/notebook, gráfico, benchmark, métrica, algoritmo, explicação no blog ou conexão direta com embeddings, loss, gradiente, attention, retrieval ou avaliação de IA."},
   {k:"n",r:"Debug-first learning: 20-30 min tentando resolver sozinho antes de consultar IA ou documentação."},
   {k:"n",r:"A cada 2 semanas: post técnico público sobre problema resolvido (LinkedIn, dev.to ou DevCore Platform)."},
-  {k:"n",r:"1x por semana: mock talk gravado de 5-7 min explicando o conceito principal em inglês."},
+  {k:"ingles",r:"1x por semana: mock talk gravado de 5-7 min explicando o conceito principal em inglês."},
   {k:"n",r:"Candidaturas começam na semana 25. Nunca esperar 'ficar pronto'. Entrevistas são diagnóstico."},
   {k:"n",r:"Treino físico diário (18:30–20:30) é não negociável. Performance mental depende de saúde física."},
   {k:"n",r:"Domingo à tarde: descanso real. 64 semanas exigem sustentabilidade, não apenas intensidade."}
@@ -881,7 +908,7 @@ function init(){
 
   // Track filter buttons
   const tf=[
-    {k:'java',l:'Java + SW Eng'},{k:'blog',l:'DevCore Platform'},
+    {k:'java',l:'Java + SW Eng'},{k:'ingles',l:'Inglês Técnico'},{k:'blog',l:'DevCore Platform'},
     {k:'py',l:'Python'},{k:'devops',l:'DevOps'},
     {k:'aws',l:'AWS Certs'},{k:'db',l:'Banco SQL/NoSQL'},
     {k:'math',l:'Matemática'},{k:'ia',l:'Trilha IA'},{k:'fin',l:'Financeiro'}
@@ -958,8 +985,8 @@ function renderPhaseDetails(filterId){
       <div class="phase-detail-body">
         <div class="row g-3">
           <div class="col-12 col-md-4">
-            ${['java','blog'].map(k=>`<div class="track-section">
-              <div class="section-head" style="color:${CK[k].t};border-color:${CK[k].t}">${k==='java'?'Java + SW Engineering':'DevCore Platform'}</div>
+            ${['java','ingles','blog'].map(k=>`<div class="track-section">
+              <div class="section-head" style="color:${CK[k].t};border-color:${CK[k].t}">${k==='java'?'Java + SW Engineering':k==='ingles'?'Inglês Técnico':'DevCore Platform'}</div>
               ${p[k].map(t=>`<div class="bullet-item">${t}</div>`).join('')}
             </div>`).join('')}
           </div>
@@ -993,7 +1020,7 @@ window.filterPhase=function(id){renderPhaseDetails(id)};
 
 /* ─── Track filter ───────────────────────── */
 window.filterTrack=function(k){
-  const labels={java:'Java + SW Eng',blog:'DevCore Platform',py:'Python',
+  const labels={java:'Java + SW Eng',ingles:'Inglês Técnico',blog:'DevCore Platform',py:'Python',
     devops:'DevOps',aws:'AWS Certs',db:'Banco SQL/NoSQL',
     math:'Matemática',ia:'Trilha IA',fin:'Financeiro'};
   const label=labels[k]||k;
@@ -1026,13 +1053,13 @@ window.filterTrack=function(k){
 function renderSync(){
   const html=`<thead><tr>
     <th style="color:var(--text2)">Semanas</th>
-    <th style="color:${CK.java.t}">Java + DevCore</th>
+    <th style="color:${CK.java.t}">Java + Inglês + DevCore</th>
     <th style="color:${CK.db.t}">Banco + Python</th>
     <th style="color:${CK.devops.t}">DevOps + AWS</th>
     <th style="color:${CK.ia.t}">Math + IA + Financeiro</th>
   </tr></thead><tbody>${P.map((p,i)=>`<tr>
     <td style="font-family:'IBM Plex Mono',monospace;color:${PC[i]};font-weight:700">${p.w.replace('Sem ','')}</td>
-    <td>${p.java[0].split(':')[0]}…<br><small style="color:${CK.blog.t}">DevCore: ${p.blog[0].split(':')[0]}…</small></td>
+    <td>${p.java[0].split(':')[0]}…<br><small style="color:${CK.ingles.t}">Inglês: ${p.ingles[0].split(':')[0]}…</small><br><small style="color:${CK.blog.t}">DevCore: ${p.blog[0].split(':')[0]}…</small></td>
     <td style="color:${CK.db.t}">${p.db[0].split(':')[0]}…<br><small style="color:${CK.py.t}">Python: ${p.py[0].split(':')[0]}…</small></td>
     <td style="color:${CK.devops.t}">DevOps: ${p.devops[0].split(':')[0]}…<br><small style="color:${CK.aws.t}">${p.aws.cert.split('—')[0]} ${p.aws.exam?'✓ PROVA':''}</small></td>
     <td style="color:${CK.math.t}">Math: ${p.math[0].split(':')[0]}…<br><small style="color:${CK.ia.t}">${p.ia[0]?.split('(')[0]||'Revisão'}</small><br><small style="color:${CK.fin.t}">${p.fin[0]?.split(':')[0]}…</small></td>
