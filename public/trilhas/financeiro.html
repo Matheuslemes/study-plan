@@ -1,850 +1,850 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Trilha Financeira Completa — Plano Integrado de Estudos</title>
-  <meta name="description" content="Página de referência da Trilha Financeira Completa: orçamento, dívidas, reserva, renda, investimentos, negócios digitais, IA aplicada e proteção patrimonial.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link href="../assets/css/styles.css" rel="stylesheet">
-  <style>
-
-    :root{
-      --bg:#07090f;
-      --surface:#0d1117;
-      --surface2:#141a24;
-      --surface3:rgba(255,255,255,.045);
-      --border:rgba(255,255,255,.09);
-      --border2:rgba(255,255,255,.15);
-      --accent:#fb923c;
-      --accent2:#f59e0b;
-      --accent3:#22d3b0;
-      --accent4:#4f9ef8;
-      --accent5:#a78bfa;
-      --finance-yellow:#f59e0b;
-      --text:#e2e8f0;
-      --muted:#64748b;
-      --muted2:#94a3b8;
-      --code-bg:#060a12;
-      --must:#fca5a5;
-      --should:#fcd34d;
-      --nice:#86efac;
-      --future:#93c5fd;
-      --fin-accent:var(--accent);
-      --fin-accent-2:var(--accent2);
-      --fin-bg:var(--bg);
-      --fin-surface:var(--surface);
-      --fin-surface-2:var(--surface2);
-      --fin-border:var(--border);
-      --fin-text:var(--text);
-      --fin-muted:var(--muted2);
-      --fin-code:var(--code-bg);
-    }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;font-size:15px}
-    body,
-    body.track-page{
-      font-family:'Inter',sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.7;
-      min-height:100vh;
-      background-image:
-        radial-gradient(ellipse 80% 40% at 10% -5%, rgba(251,146,60,.13) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 30% at 90% 5%, rgba(245,158,11,.08) 0%, transparent 42%),
-        radial-gradient(ellipse 50% 25% at 85% 25%, rgba(34,211,176,.055) 0%, transparent 42%);
-    }
-    ::selection{background:rgba(251,146,60,.28);color:#fff}
-    .container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
-
-    /* ─── HERO — mesmo padrão da trilha de referência ─── */
-    .hero,
-    .track-hero-page{
-      padding:4rem 0 3rem;
-      border-bottom:1px solid var(--border);
-      background:linear-gradient(135deg,rgba(251,146,60,.115) 0%,rgba(245,158,11,.052) 48%,rgba(34,211,176,.045) 100%);
-    }
-    .hero-label{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--accent3);
-      margin-bottom:.8rem;
-    }
-    .hero h1,
-    .track-title{
-      font-family:'Syne',sans-serif;
-      font-size:clamp(2rem,5vw,4rem);
-      font-weight:800;
-      letter-spacing:-.04em;
-      background:linear-gradient(135deg,#fff 38%,var(--accent) 76%,var(--finance-yellow) 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      line-height:1.1;
-      margin-bottom:.8rem;
-    }
-    .hero-sub,
-    .track-lead{color:var(--muted2);max-width:920px;font-size:1rem;margin-bottom:0}
-    .hero-back-link,
-    .footer-link{
-      display:inline-flex;
-      align-items:center;
-      gap:.4rem;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;
-      font-weight:500;
-      color:var(--muted2);
-      text-decoration:none;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:.32rem .75rem;
-      border-radius:6px;
-      margin-bottom:1.2rem;
-      transition:all .15s;
-    }
-    .hero-back-link:hover,
-    .footer-link:hover{color:#fff;border-color:rgba(251,146,60,.35);background:rgba(251,146,60,.08);text-decoration:none}
-    .hero-meta,
-    .track-badge-set{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
-    .tag,
-    .track-badge-set span,
-    .badge-cloud span{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;
-      font-weight:600;
-      padding:.3rem .7rem;
-      border-radius:6px;
-      border:1px solid rgba(251,146,60,.32);
-      background:rgba(251,146,60,.08);
-      color:var(--accent);
-    }
-    .tag.g,.track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(34,211,176,.3);background:rgba(34,211,176,.08);color:var(--accent3)}
-    .tag.p,.track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.085);color:var(--accent2)}
-    .tag.o{border-color:rgba(79,158,248,.3);background:rgba(79,158,248,.08);color:var(--accent4)}
-
-    /* ─── NAV — corrigida para o padrão DevCore/trilha blog ─── */
-    .sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-    .sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
-    .sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
-    .sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent3);border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
-    .nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
-    .nav-back:hover{color:#fff;border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.08)}
-    .nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
-    .sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
-    .search-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.3rem .7rem;color:#fff;font-size:.8rem;outline:none;width:250px;box-shadow:none}
-    .search-box::placeholder{color:var(--muted)}
-    .search-box:focus{border-color:rgba(251,146,60,.4)}
-    .sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
-    .sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(251,146,60,.4) rgba(255,255,255,.04);padding:0 32px}
-    .sitenav-bar-inner::-webkit-scrollbar{height:4px}
-    .sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
-    .sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(251,146,60,.4);border-radius:99px}
-    .sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(251,146,60,.7)}
-    .sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
-    .sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
-    .sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
-    .nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
-    .nav-scroll-btn:hover{color:#fff;background:rgba(251,146,60,.08)}
-    .nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
-    .nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
-    .nav-group:last-child{border-right:none;padding-right:.8rem}
-    .nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
-    .nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
-    .nav-link:hover{color:#fff;background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.25)}
-    .nav-link.active{color:var(--accent);background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.3)}
-
-    /* mantém compatibilidade se o HTML antigo ainda tiver track-local-nav */
-    .track-local-nav{display:none}
-
-    /* ─── LAYOUT COM SIDEBAR — ponto faltante corrigido ─── */
-    .main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
-    .sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-    .sidebar-group{margin-bottom:1.4rem}
-    .sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
-    .sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
-    .sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
-    .sidebar a.active{color:var(--accent);background:rgba(251,146,60,.08)}
-    .content{padding:2rem 0 4rem 2rem}
-    #financeMain{padding-top:0!important;padding-bottom:0!important}
-
-    /* ─── CONTENT ─── */
-    .section,.doc-section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem);box-shadow:none}
-    .section:target,.doc-section:target{border-color:rgba(251,146,60,.42);box-shadow:0 0 0 1px rgba(251,146,60,.15)}
-    .section-header,.doc-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-    .section-header h2,.doc-section-heading h2,.doc-section h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff;margin:0}
-    .section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
-    .section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(245,158,11,.32);background:rgba(245,158,11,.085);color:var(--accent2)}
-    h3,.doc-section h3,.module-card h3,.callout h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
-    h4,.doc-section h4,.module-card h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
-    p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}
-    .lead{font-size:.98rem;color:#cbd5e1}
-    ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}
-    li{margin-bottom:.3rem;font-size:.88rem}
-    strong{color:#e2e8f0;font-weight:600}
-    em{color:#fed7aa;font-style:normal;font-weight:700}
-    code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(251,146,60,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
-    .doc-hero-card{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.75fr);gap:1rem;align-items:center}
-    .doc-grid-2,.doc-grid-3,.doc-grid-4,.module-grid,.phase-grid{display:grid;gap:1rem}
-    .doc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .doc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .doc-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .phase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-    .metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}
-    .metric-pill{background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.22);border-radius:12px;padding:1rem;text-align:center}
-    .metric-pill span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}
-    .metric-pill small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
-    .mini-card,.project-card,.phase-card,.module-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color .15s,background .15s,transform .15s}
-    .mini-card strong,.project-card strong,.phase-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}
-    .mini-card span,.project-card span,.phase-card p,.module-card p{color:var(--muted2);font-size:.82rem}
-    .mini-card:hover,.project-card:hover,.phase-card:hover,.module-card:hover{border-color:rgba(251,146,60,.30);background:#151c27;transform:translateY(-1px)}
-    .callout{border-left:3px solid var(--accent3);background:rgba(34,211,176,.06);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:.8rem 0}
-    .callout.accent-orange{border-left-color:var(--accent);background:rgba(251,146,60,.06)}
-    .callout.success{border-left-color:#4ade80;background:rgba(74,222,128,.06)}
-    .callout h3,.callout h4{margin-top:0;color:#fff}.callout p,.callout ul{margin-bottom:0}
-    .module-card{position:relative;overflow:hidden;padding:1.1rem}.module-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--accent2))}.module-card.phase1::before{background:linear-gradient(180deg,#fb923c,#f59e0b)}.module-card.phase2::before{background:linear-gradient(180deg,#f59e0b,#fcd34d)}.module-card.phase3::before{background:linear-gradient(180deg,#22d3b0,#34d399)}.module-card.phase4::before{background:linear-gradient(180deg,#4f9ef8,#38bdf8)}.module-card.phase5::before{background:linear-gradient(180deg,#a78bfa,#fb923c)}
-    .module-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;padding-bottom:.6rem;margin-bottom:.7rem;border-bottom:1px solid var(--border)}.module-number{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:800;color:var(--accent);white-space:nowrap}.module-phase{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);text-align:right}.module-card h3{margin:.3rem 0 .55rem;color:#fff}
-    .doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}.doc-list li{margin-bottom:.35rem}
-    .roadmap-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;counter-reset:roadmap}.roadmap-list li{border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:.75rem;color:var(--muted2)}.roadmap-list span{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-weight:800;margin-right:.5rem}
-    .check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.check-item{border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:.75rem;color:var(--muted2);cursor:pointer;transition:border-color .15s,background .15s,transform .15s}.check-item:hover{border-color:rgba(251,146,60,.3);background:#151c27;transform:translateY(-1px)}.check-item input{accent-color:var(--accent);margin-right:.4rem}
-    .table-responsive,.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0 1rem}.doc-table,table{border-collapse:collapse;width:100%;min-width:760px;margin-bottom:0!important}.doc-table thead tr,.doc-table th,thead tr{background:rgba(251,146,60,.10)!important}th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem!important;text-align:left;color:#fff!important;border-bottom:1px solid var(--border2)!important;border-color:var(--border)!important;white-space:nowrap}td{padding:.65rem 1rem!important;font-size:.82rem;color:#cbd5e1!important;border-bottom:1px solid var(--border)!important;border-color:var(--border)!important;vertical-align:top}tr:last-child td{border-bottom:none!important}tr:hover td{background:rgba(255,255,255,.025)!important}.dense-table td,.dense-table th{font-size:.78rem!important}.table-dark,.table-dark>:not(caption)>*>*{background:transparent!important;color:var(--text)!important}.table-hover>tbody>tr:hover>*{background:rgba(255,255,255,.025)!important}.table-dark>:not(caption)>*{border-color:var(--border)!important}
-    pre,.code-block{background:var(--code-bg);border:1px solid rgba(251,146,60,.22);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#fdba74;max-height:620px;white-space:pre}pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
-    .mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.is-hidden-by-search{display:none!important}.search-hit{outline:1px solid rgba(251,146,60,.65);background:rgba(251,146,60,.08)!important}
-    .back-to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(251,146,60,.15);border:1px solid rgba(251,146,60,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}.back-to-top.is-visible{display:flex}.back-to-top:hover{background:rgba(251,146,60,.3)}
-    .page-footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}.page-footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px}.footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent)}.footer-pill.yellow{border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.06);color:var(--accent2)}.footer-pill.green{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent3)}.footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent4)}
-    @media(max-width:992px){.main{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem 0 3rem}.doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.module-grid,.phase-grid,.roadmap-list,.check-grid{grid-template-columns:1fr}.sitenav-top{flex-wrap:wrap;gap:.5rem}.sitenav-top-right{width:100%}.search-box{width:100%}.nav-ver{display:none}}
-    @media(max-width:576px){.hero,.track-hero-page{padding:3rem 0 2rem}.hero h1,.track-title{font-size:clamp(1.8rem,10vw,2.8rem)}.section,.doc-section{border-radius:10px;padding:1rem}.section-header,.doc-section-heading{flex-direction:column}.metrics-grid{grid-template-columns:1fr}.sitenav-brand span{display:none}.nav-back{font-size:.65rem;padding:.25rem .5rem}}
-
-  </style>
-
-
-  <!-- Responsividade refeita: estrutura baseada no HTML da Trilha Java. O CSS principal acima permanece intacto. -->
-  <style id="financeira-responsive-refactor">
-    /* ─────────────────────────────────────────────────────────────
-       RESPONSIVIDADE REFEITA — Finance Track
-       Estrutura baseada diretamente no HTML da Trilha Java.
-       Bloco complementar: preserva o CSS principal e corrige notebook,
-       tablet e mobile sem alterar o conteúdo da página.
-       ───────────────────────────────────────────────────────────── */
-
-    html,
-    body {
-      width: 100%;
-      max-width: 100%;
-    }
-
-    body,
-    body.track-page {
-      overflow-x: hidden;
-    }
-
-    .container,
-    .main,
-    .content,
-    .section,
-    .doc-section,
-    .table-wrap,
-    .table-responsive,
-    .phase-card,
-    .module-card,
-    .project-card,
-    .mini-card,
-    .callout,
-    .doc-hero-card {
-      min-width: 0;
-    }
-
-    .content,
-    #financeMain {
-      min-width: 0;
-    }
-
-    img,
-    video,
-    canvas,
-    iframe,
-    svg {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .section,
-    .doc-section {
-      scroll-margin-top: 126px;
-    }
-
-    .table-wrap,
-    .table-responsive,
-    pre,
-    .code-block {
-      max-width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-inline: contain;
-    }
-
-    .table-wrap table,
-    .table-responsive table,
-    .doc-table {
-      width: 100%;
-      min-width: max(720px, 100%);
-      table-layout: auto;
-    }
-
-    th,
-    td,
-    .doc-table th,
-    .doc-table td {
-      white-space: normal !important;
-      overflow-wrap: break-word;
-      word-break: normal;
-    }
-
-    pre,
-    .code-block {
-      white-space: pre;
-      overflow-y: auto;
-    }
-
-    pre code,
-    .code-block code {
-      white-space: inherit;
-    }
-
-    .hero h1,
-    .track-title,
-    .doc-section-heading h2,
-    .section-header h2,
-    .sitenav-brand,
-    .hero-sub,
-    .track-lead,
-    p,
-    li,
-    .mini-card span,
-    .mini-card p,
-    .project-card span,
-    .module-card p,
-    .phase-card p,
-    .callout p,
-    .roadmap-list li,
-    .check-item {
-      overflow-wrap: break-word;
-      word-break: normal;
-    }
-
-    .doc-grid-2 > *,
-    .doc-grid-3 > *,
-    .doc-grid-4 > *,
-    .module-grid > *,
-    .phase-grid > *,
-    .metrics-grid > *,
-    .roadmap-list > *,
-    .check-grid > *,
-    .doc-hero-card > * {
-      min-width: 0;
-    }
-
-    .sitenav,
-    .sitenav * {
-      min-width: 0;
-    }
-
-    .sitenav-top {
-      min-width: 0;
-    }
-
-    .sitenav-brand,
-    .nav-back,
-    .nav-ver {
-      flex-shrink: 0;
-    }
-
-    .sitenav-top-right {
-      min-width: 180px;
-    }
-
-    .search-box {
-      max-width: 100%;
-    }
-
-    /* Notebook e desktop estreito */
-    @media (max-width: 1180px) {
-      .container,
-      .main {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-      }
-
-      .main {
-        grid-template-columns: 200px minmax(0, 1fr);
-      }
-
-      .content,
-      #financeMain {
-        padding-left: 1.35rem;
-      }
-
-      .doc-grid-4,
-      .metrics-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .doc-grid-3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    /* Tablet: remove sidebar e preserva navegação superior */
-    @media (max-width: 980px) {
-      .main {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        display: none;
-      }
-
-      .content,
-      #financeMain {
-        padding: 1.5rem 0 3rem !important;
-      }
-
-      .section,
-      .doc-section {
-        scroll-margin-top: 148px;
-      }
-
-      .doc-grid-2,
-      .module-grid,
-      .phase-grid,
-      .roadmap-list,
-      .check-grid,
-      .doc-hero-card {
-        grid-template-columns: 1fr;
-      }
-
-      .sitenav-top {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: center;
-        gap: .55rem .75rem;
-      }
-
-      .sitenav-brand {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .nav-ver {
-        display: none;
-      }
-
-      .nav-back {
-        justify-self: end;
-      }
-
-      .sitenav-top-right {
-        grid-column: 1 / -1;
-        width: 100%;
-        min-width: 0;
-        margin-left: 0;
-      }
-
-      .search-box {
-        width: 100%;
-        min-height: 38px;
-      }
-    }
-
-    /* Tablet estreito e celulares grandes */
-    @media (max-width: 760px) {
-      html {
-        font-size: 14.5px;
-      }
-
-      .container,
-      .main {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-
-      .hero,
-      .track-hero-page {
-        padding: 2.8rem 0 2rem;
-      }
-
-      .hero h1,
-      .track-title {
-        font-size: clamp(2rem, 9vw, 3.1rem);
-        letter-spacing: -.035em;
-      }
-
-      .hero-sub,
-      .track-lead {
-        max-width: 100%;
-      }
-
-      .hero-meta,
-      .track-badge-set {
-        gap: .42rem;
-      }
-
-      .tag,
-      .track-badge-set span,
-      .badge-cloud span {
-        max-width: 100%;
-        white-space: normal;
-        line-height: 1.35;
-      }
-
-      .sitenav-bar-inner {
-        padding-left: 34px;
-        padding-right: 34px;
-      }
-
-      .nav-group {
-        padding: .25rem .3rem;
-      }
-
-      .nav-group-label {
-        font-size: .56rem;
-        padding-right: .4rem;
-        margin-right: .2rem;
-      }
-
-      .nav-link {
-        font-size: .66rem;
-        padding: .3rem .5rem;
-      }
-
-      .section,
-      .doc-section {
-        padding: 1rem;
-        border-radius: 12px;
-        scroll-margin-top: 154px;
-      }
-
-      .section-header,
-      .doc-section-heading,
-      .module-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .section-badge {
-        white-space: normal;
-      }
-
-      .doc-grid-3,
-      .doc-grid-4,
-      .metrics-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metric-pill span {
-        font-size: 1.75rem;
-      }
-
-      .table-wrap table,
-      .table-responsive table,
-      .doc-table {
-        min-width: 680px;
-      }
-
-      th,
-      td,
-      .doc-table th,
-      .doc-table td {
-        padding: .58rem .72rem !important;
-      }
-
-      pre,
-      .code-block {
-        padding: .9rem;
-        font-size: .72rem;
-        max-height: 520px;
-      }
-    }
-
-    /* Celulares */
-    @media (max-width: 520px) {
-      html {
-        font-size: 14px;
-      }
-
-      .container,
-      .main {
-        padding-left: .85rem;
-        padding-right: .85rem;
-      }
-
-      .hero,
-      .track-hero-page {
-        padding: 2.35rem 0 1.7rem;
-      }
-
-      .hero-label {
-        font-size: .66rem;
-      }
-
-      .hero-back-link {
-        max-width: 100%;
-      }
-
-      .sitenav-top {
-        grid-template-columns: 1fr;
-        gap: .45rem;
-      }
-
-      .sitenav-brand {
-        width: 100%;
-        white-space: normal;
-        justify-content: space-between;
-      }
-
-      .sitenav-brand span {
-        flex-shrink: 0;
-      }
-
-      .nav-back {
-        width: 100%;
-        justify-content: center;
-        justify-self: stretch;
-        text-align: center;
-      }
-
-      .nav-group-label {
-        display: none;
-      }
-
-      .nav-group {
-        border-right: none;
-        padding: .25rem .18rem;
-      }
-
-      .nav-link {
-        font-size: .64rem;
-        padding: .3rem .46rem;
-      }
-
-      .content,
-      #financeMain {
-        padding-top: 1rem !important;
-      }
-
-      .section,
-      .doc-section {
-        margin-bottom: 1rem;
-        padding: .9rem;
-        scroll-margin-top: 184px;
-      }
-
-      .doc-section-heading h2,
-      .section-header h2 {
-        font-size: 1.15rem;
-      }
-
-      h3,
-      .doc-section h3,
-      .module-card h3,
-      .callout h3 {
-        font-size: .96rem;
-      }
-
-      p,
-      li,
-      td,
-      .doc-table td {
-        font-size: .84rem !important;
-      }
-
-      th,
-      .doc-table th {
-        font-size: .66rem !important;
-      }
-
-      .tag,
-      .section-badge,
-      .track-badge-set span,
-      .badge-cloud span {
-        font-size: .64rem;
-      }
-
-      .metric-pill {
-        padding: .85rem;
-      }
-
-      .metric-pill span {
-        font-size: 1.62rem;
-      }
-
-      .mini-card,
-      .project-card,
-      .phase-card,
-      .module-card {
-        border-radius: 10px;
-      }
-
-      .table-wrap table,
-      .table-responsive table,
-      .doc-table {
-        min-width: 640px;
-      }
-
-      .footer-row {
-        flex-direction: column !important;
-        align-items: stretch !important;
-      }
-
-      .footer-link {
-        justify-content: center !important;
-        margin-bottom: 0;
-      }
-
-      .footer-pills {
-        justify-content: center !important;
-      }
-
-      .back-to-top,
-      #backToTop {
-        right: .85rem;
-        bottom: .85rem;
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    /* Celulares muito estreitos */
-    @media (max-width: 380px) {
-      .container,
-      .main {
-        padding-left: .7rem;
-        padding-right: .7rem;
-      }
-
-      .hero h1,
-      .track-title {
-        font-size: 1.85rem;
-      }
-
-      .sitenav-brand span {
-        display: none;
-      }
-
-      .section,
-      .doc-section {
-        padding: .78rem;
-      }
-
-      pre,
-      .code-block {
-        font-size: .68rem;
-      }
-
-      .table-wrap table,
-      .table-responsive table,
-      .doc-table {
-        min-width: 600px;
-      }
-    }
-
-    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
-    @media (pointer: coarse) {
-      .nav-scroll-btn,
-      .back-to-top,
-      #backToTop,
-      .nav-link,
-      .hero-back-link,
-      .nav-back,
-      .sidebar a,
-      .footer-link {
-        touch-action: manipulation;
-      }
-
-      .nav-link,
-      .hero-back-link,
-      .nav-back,
-      .footer-link {
-        min-height: 34px;
-      }
-    }
-  </style>
-
-  <!-- Correção visual do resumo executivo: mantém conteúdo e CSS principal, apenas ajusta texto + métricas. -->
-  <style id="financeira-summary-executive-visual-fix">
-    /*
-      A trilha financeira usa .doc-hero-card no resumo executivo. Em larguras
-      intermediárias, texto e métricas lado a lado deixam o texto estreito.
-      A correção replica a lógica da Trilha Java: texto em largura confortável
-      e métricas abaixo, ocupando toda a largura disponível.
-    */
-    #resumo .doc-hero-card,
-    #resumo .hero-content-grid {
-      grid-template-columns: 1fr !important;
-      align-items: start !important;
-      gap: 1rem !important;
-    }
-
-    #resumo .doc-hero-card > div:first-child,
-    #resumo .hero-content-grid > div:first-child {
-      max-width: 100%;
-      min-width: 0;
-    }
-
-    #resumo .lead {
-      max-width: 980px;
-    }
-
-    #resumo .metrics-grid,
-    #resumo .metrics {
-      width: 100%;
-      max-width: 100%;
-      grid-template-columns: repeat(4, minmax(130px, 1fr)) !important;
-      align-items: stretch;
-      margin-top: .35rem;
-    }
-
-    #resumo .metric-pill,
-    #resumo .metric {
-      min-width: 0;
-      min-height: 112px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    #resumo .metric-pill span,
-    #resumo .metric-pill small,
-    #resumo .metric span,
-    #resumo .metric small {
-      overflow-wrap: normal;
-      word-break: normal;
-    }
-
-    @media (max-width: 1180px) {
-      #resumo .metrics-grid,
-      #resumo .metrics {
-        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-      }
-    }
-
-    @media (max-width: 760px) {
-      #resumo .metrics-grid,
-      #resumo .metrics {
-        grid-template-columns: 1fr !important;
-      }
-
-      #resumo .metric-pill,
-      #resumo .metric {
-        min-height: auto;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trilha Financeira Completa — Plano Integrado de Estudos</title>
+<meta name="description" content="Página de referência da Trilha Financeira Completa: orçamento, dívidas, reserva, renda, investimentos, negócios digitais, IA aplicada e proteção patrimonial.">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../assets/css/styles.css" rel="stylesheet">
+<style>
+
+:root{
+  --bg:#07090f;
+  --surface:#0d1117;
+  --surface2:#141a24;
+  --surface3:rgba(255,255,255,.045);
+  --border:rgba(255,255,255,.09);
+  --border2:rgba(255,255,255,.15);
+  --accent:#fb923c;
+  --accent2:#f59e0b;
+  --accent3:#22d3b0;
+  --accent4:#4f9ef8;
+  --accent5:#a78bfa;
+  --finance-yellow:#f59e0b;
+  --text:#e2e8f0;
+  --muted:#64748b;
+  --muted2:#94a3b8;
+  --code-bg:#060a12;
+  --must:#fca5a5;
+  --should:#fcd34d;
+  --nice:#86efac;
+  --future:#93c5fd;
+  --fin-accent:var(--accent);
+  --fin-accent-2:var(--accent2);
+  --fin-bg:var(--bg);
+  --fin-surface:var(--surface);
+  --fin-surface-2:var(--surface2);
+  --fin-border:var(--border);
+  --fin-text:var(--text);
+  --fin-muted:var(--muted2);
+  --fin-code:var(--code-bg);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body,
+body.track-page{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 10% -5%, rgba(251,146,60,.13) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 30% at 90% 5%, rgba(245,158,11,.08) 0%, transparent 42%),
+    radial-gradient(ellipse 50% 25% at 85% 25%, rgba(34,211,176,.055) 0%, transparent 42%);
+}
+::selection{background:rgba(251,146,60,.28);color:#fff}
+.container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+
+/* ─── HERO — mesmo padrão da trilha de referência ─── */
+.hero,
+.track-hero-page{
+  padding:4rem 0 3rem;
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(135deg,rgba(251,146,60,.115) 0%,rgba(245,158,11,.052) 48%,rgba(34,211,176,.045) 100%);
+}
+.hero-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent3);
+  margin-bottom:.8rem;
+}
+.hero h1,
+.track-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,5vw,4rem);
+  font-weight:800;
+  letter-spacing:-.04em;
+  background:linear-gradient(135deg,#fff 38%,var(--accent) 76%,var(--finance-yellow) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1.1;
+  margin-bottom:.8rem;
+}
+.hero-sub,
+.track-lead{color:var(--muted2);max-width:920px;font-size:1rem;margin-bottom:0}
+.hero-back-link,
+.footer-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:500;
+  color:var(--muted2);
+  text-decoration:none;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  padding:.32rem .75rem;
+  border-radius:6px;
+  margin-bottom:1.2rem;
+  transition:all .15s;
+}
+.hero-back-link:hover,
+.footer-link:hover{color:#fff;border-color:rgba(251,146,60,.35);background:rgba(251,146,60,.08);text-decoration:none}
+.hero-meta,
+.track-badge-set{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.tag,
+.track-badge-set span,
+.badge-cloud span{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:600;
+  padding:.3rem .7rem;
+  border-radius:6px;
+  border:1px solid rgba(251,146,60,.32);
+  background:rgba(251,146,60,.08);
+  color:var(--accent);
+}
+.tag.g,.track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(34,211,176,.3);background:rgba(34,211,176,.08);color:var(--accent3)}
+.tag.p,.track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.085);color:var(--accent2)}
+.tag.o{border-color:rgba(79,158,248,.3);background:rgba(79,158,248,.08);color:var(--accent4)}
+
+/* ─── NAV — corrigida para o padrão DevCore/trilha blog ─── */
+.sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
+.sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent3);border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
+.nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+.nav-back:hover{color:#fff;border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.08)}
+.nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
+.sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+.search-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.3rem .7rem;color:#fff;font-size:.8rem;outline:none;width:250px;box-shadow:none}
+.search-box::placeholder{color:var(--muted)}
+.search-box:focus{border-color:rgba(251,146,60,.4)}
+.sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
+.sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(251,146,60,.4) rgba(255,255,255,.04);padding:0 32px}
+.sitenav-bar-inner::-webkit-scrollbar{height:4px}
+.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
+.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(251,146,60,.4);border-radius:99px}
+.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(251,146,60,.7)}
+.sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
+.sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
+.sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
+.nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
+.nav-scroll-btn:hover{color:#fff;background:rgba(251,146,60,.08)}
+.nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
+.nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
+.nav-group:last-child{border-right:none;padding-right:.8rem}
+.nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
+.nav-link:hover{color:#fff;background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.25)}
+.nav-link.active{color:var(--accent);background:rgba(251,146,60,.1);border-color:rgba(251,146,60,.3)}
+
+/* mantém compatibilidade se o HTML antigo ainda tiver track-local-nav */
+.track-local-nav{display:none}
+
+/* ─── LAYOUT COM SIDEBAR — ponto faltante corrigido ─── */
+.main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
+.sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.sidebar-group{margin-bottom:1.4rem}
+.sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
+.sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
+.sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.sidebar a.active{color:var(--accent);background:rgba(251,146,60,.08)}
+.content{padding:2rem 0 4rem 2rem}
+#financeMain{padding-top:0!important;padding-bottom:0!important}
+
+/* ─── CONTENT ─── */
+.section,.doc-section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem);box-shadow:none}
+.section:target,.doc-section:target{border-color:rgba(251,146,60,.42);box-shadow:0 0 0 1px rgba(251,146,60,.15)}
+.section-header,.doc-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-header h2,.doc-section-heading h2,.doc-section h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff;margin:0}
+.section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
+.section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(245,158,11,.32);background:rgba(245,158,11,.085);color:var(--accent2)}
+h3,.doc-section h3,.module-card h3,.callout h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
+h4,.doc-section h4,.module-card h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
+p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}
+.lead{font-size:.98rem;color:#cbd5e1}
+ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}
+li{margin-bottom:.3rem;font-size:.88rem}
+strong{color:#e2e8f0;font-weight:600}
+em{color:#fed7aa;font-style:normal;font-weight:700}
+code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(251,146,60,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
+.doc-hero-card{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.75fr);gap:1rem;align-items:center}
+.doc-grid-2,.doc-grid-3,.doc-grid-4,.module-grid,.phase-grid{display:grid;gap:1rem}
+.doc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.doc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.doc-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.module-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.phase-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}
+.metric-pill{background:rgba(251,146,60,.08);border:1px solid rgba(251,146,60,.22);border-radius:12px;padding:1rem;text-align:center}
+.metric-pill span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}
+.metric-pill small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+.mini-card,.project-card,.phase-card,.module-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color .15s,background .15s,transform .15s}
+.mini-card strong,.project-card strong,.phase-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}
+.mini-card span,.project-card span,.phase-card p,.module-card p{color:var(--muted2);font-size:.82rem}
+.mini-card:hover,.project-card:hover,.phase-card:hover,.module-card:hover{border-color:rgba(251,146,60,.30);background:#151c27;transform:translateY(-1px)}
+.callout{border-left:3px solid var(--accent3);background:rgba(34,211,176,.06);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:.8rem 0}
+.callout.accent-orange{border-left-color:var(--accent);background:rgba(251,146,60,.06)}
+.callout.success{border-left-color:#4ade80;background:rgba(74,222,128,.06)}
+.callout h3,.callout h4{margin-top:0;color:#fff}.callout p,.callout ul{margin-bottom:0}
+.module-card{position:relative;overflow:hidden;padding:1.1rem}.module-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--accent2))}.module-card.phase1::before{background:linear-gradient(180deg,#fb923c,#f59e0b)}.module-card.phase2::before{background:linear-gradient(180deg,#f59e0b,#fcd34d)}.module-card.phase3::before{background:linear-gradient(180deg,#22d3b0,#34d399)}.module-card.phase4::before{background:linear-gradient(180deg,#4f9ef8,#38bdf8)}.module-card.phase5::before{background:linear-gradient(180deg,#a78bfa,#fb923c)}
+.module-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;padding-bottom:.6rem;margin-bottom:.7rem;border-bottom:1px solid var(--border)}.module-number{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:800;color:var(--accent);white-space:nowrap}.module-phase{font-family:'IBM Plex Mono',monospace;font-size:.66rem;color:var(--muted);text-align:right}.module-card h3{margin:.3rem 0 .55rem;color:#fff}
+.doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}.doc-list li{margin-bottom:.35rem}
+.roadmap-list{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;counter-reset:roadmap}.roadmap-list li{border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:.75rem;color:var(--muted2)}.roadmap-list span{font-family:'IBM Plex Mono',monospace;color:var(--accent);font-weight:800;margin-right:.5rem}
+.check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.check-item{border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:.75rem;color:var(--muted2);cursor:pointer;transition:border-color .15s,background .15s,transform .15s}.check-item:hover{border-color:rgba(251,146,60,.3);background:#151c27;transform:translateY(-1px)}.check-item input{accent-color:var(--accent);margin-right:.4rem}
+.table-responsive,.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0 1rem}.doc-table,table{border-collapse:collapse;width:100%;min-width:760px;margin-bottom:0!important}.doc-table thead tr,.doc-table th,thead tr{background:rgba(251,146,60,.10)!important}th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem!important;text-align:left;color:#fff!important;border-bottom:1px solid var(--border2)!important;border-color:var(--border)!important;white-space:nowrap}td{padding:.65rem 1rem!important;font-size:.82rem;color:#cbd5e1!important;border-bottom:1px solid var(--border)!important;border-color:var(--border)!important;vertical-align:top}tr:last-child td{border-bottom:none!important}tr:hover td{background:rgba(255,255,255,.025)!important}.dense-table td,.dense-table th{font-size:.78rem!important}.table-dark,.table-dark>:not(caption)>*>*{background:transparent!important;color:var(--text)!important}.table-hover>tbody>tr:hover>*{background:rgba(255,255,255,.025)!important}.table-dark>:not(caption)>*{border-color:var(--border)!important}
+pre,.code-block{background:var(--code-bg);border:1px solid rgba(251,146,60,.22);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#fdba74;max-height:620px;white-space:pre}pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
+.mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.is-hidden-by-search{display:none!important}.search-hit{outline:1px solid rgba(251,146,60,.65);background:rgba(251,146,60,.08)!important}
+.back-to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(251,146,60,.15);border:1px solid rgba(251,146,60,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}.back-to-top.is-visible{display:flex}.back-to-top:hover{background:rgba(251,146,60,.3)}
+.page-footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}.page-footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px}.footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent)}.footer-pill.yellow{border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.06);color:var(--accent2)}.footer-pill.green{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent3)}.footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent4)}
+@media(max-width:992px){.main{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem 0 3rem}.doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.module-grid,.phase-grid,.roadmap-list,.check-grid{grid-template-columns:1fr}.sitenav-top{flex-wrap:wrap;gap:.5rem}.sitenav-top-right{width:100%}.search-box{width:100%}.nav-ver{display:none}}
+@media(max-width:576px){.hero,.track-hero-page{padding:3rem 0 2rem}.hero h1,.track-title{font-size:clamp(1.8rem,10vw,2.8rem)}.section,.doc-section{border-radius:10px;padding:1rem}.section-header,.doc-section-heading{flex-direction:column}.metrics-grid{grid-template-columns:1fr}.sitenav-brand span{display:none}.nav-back{font-size:.65rem;padding:.25rem .5rem}}
+
+</style>
+
+
+<!-- Responsividade refeita: estrutura baseada no HTML da Trilha Java. O CSS principal acima permanece intacto. -->
+<style id="financeira-responsive-refactor">
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVIDADE REFEITA — Finance Track
+   Estrutura baseada diretamente no HTML da Trilha Java.
+   Bloco complementar: preserva o CSS principal e corrige notebook,
+   tablet e mobile sem alterar o conteúdo da página.
+   ───────────────────────────────────────────────────────────── */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+body,
+body.track-page {
+  overflow-x: hidden;
+}
+
+.container,
+.main,
+.content,
+.section,
+.doc-section,
+.table-wrap,
+.table-responsive,
+.phase-card,
+.module-card,
+.project-card,
+.mini-card,
+.callout,
+.doc-hero-card {
+  min-width: 0;
+}
+
+.content,
+#financeMain {
+  min-width: 0;
+}
+
+img,
+video,
+canvas,
+iframe,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.section,
+.doc-section {
+  scroll-margin-top: 126px;
+}
+
+.table-wrap,
+.table-responsive,
+pre,
+.code-block {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+}
+
+.table-wrap table,
+.table-responsive table,
+.doc-table {
+  width: 100%;
+  min-width: max(720px, 100%);
+  table-layout: auto;
+}
+
+th,
+td,
+.doc-table th,
+.doc-table td {
+  white-space: normal !important;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+pre,
+.code-block {
+  white-space: pre;
+  overflow-y: auto;
+}
+
+pre code,
+.code-block code {
+  white-space: inherit;
+}
+
+.hero h1,
+.track-title,
+.doc-section-heading h2,
+.section-header h2,
+.sitenav-brand,
+.hero-sub,
+.track-lead,
+p,
+li,
+.mini-card span,
+.mini-card p,
+.project-card span,
+.module-card p,
+.phase-card p,
+.callout p,
+.roadmap-list li,
+.check-item {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.doc-grid-2 > *,
+.doc-grid-3 > *,
+.doc-grid-4 > *,
+.module-grid > *,
+.phase-grid > *,
+.metrics-grid > *,
+.roadmap-list > *,
+.check-grid > *,
+.doc-hero-card > * {
+  min-width: 0;
+}
+
+.sitenav,
+.sitenav * {
+  min-width: 0;
+}
+
+.sitenav-top {
+  min-width: 0;
+}
+
+.sitenav-brand,
+.nav-back,
+.nav-ver {
+  flex-shrink: 0;
+}
+
+.sitenav-top-right {
+  min-width: 180px;
+}
+
+.search-box {
+  max-width: 100%;
+}
+
+/* Notebook e desktop estreito */
+@media (max-width: 1180px) {
+  .container,
+  .main {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .main {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .content,
+  #financeMain {
+    padding-left: 1.35rem;
+  }
+
+  .doc-grid-4,
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .doc-grid-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablet: remove sidebar e preserva navegação superior */
+@media (max-width: 980px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .content,
+  #financeMain {
+    padding: 1.5rem 0 3rem !important;
+  }
+
+  .section,
+  .doc-section {
+    scroll-margin-top: 148px;
+  }
+
+  .doc-grid-2,
+  .module-grid,
+  .phase-grid,
+  .roadmap-list,
+  .check-grid,
+  .doc-hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .sitenav-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .55rem .75rem;
+  }
+
+  .sitenav-brand {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-ver {
+    display: none;
+  }
+
+  .nav-back {
+    justify-self: end;
+  }
+
+  .sitenav-top-right {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+
+  .search-box {
+    width: 100%;
+    min-height: 38px;
+  }
+}
+
+/* Tablet estreito e celulares grandes */
+@media (max-width: 760px) {
+  html {
+    font-size: 14.5px;
+  }
+
+  .container,
+  .main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero,
+  .track-hero-page {
+    padding: 2.8rem 0 2rem;
+  }
+
+  .hero h1,
+  .track-title {
+    font-size: clamp(2rem, 9vw, 3.1rem);
+    letter-spacing: -.035em;
+  }
+
+  .hero-sub,
+  .track-lead {
+    max-width: 100%;
+  }
+
+  .hero-meta,
+  .track-badge-set {
+    gap: .42rem;
+  }
+
+  .tag,
+  .track-badge-set span,
+  .badge-cloud span {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .sitenav-bar-inner {
+    padding-left: 34px;
+    padding-right: 34px;
+  }
+
+  .nav-group {
+    padding: .25rem .3rem;
+  }
+
+  .nav-group-label {
+    font-size: .56rem;
+    padding-right: .4rem;
+    margin-right: .2rem;
+  }
+
+  .nav-link {
+    font-size: .66rem;
+    padding: .3rem .5rem;
+  }
+
+  .section,
+  .doc-section {
+    padding: 1rem;
+    border-radius: 12px;
+    scroll-margin-top: 154px;
+  }
+
+  .section-header,
+  .doc-section-heading,
+  .module-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-badge {
+    white-space: normal;
+  }
+
+  .doc-grid-3,
+  .doc-grid-4,
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-pill span {
+    font-size: 1.75rem;
+  }
+
+  .table-wrap table,
+  .table-responsive table,
+  .doc-table {
+    min-width: 680px;
+  }
+
+  th,
+  td,
+  .doc-table th,
+  .doc-table td {
+    padding: .58rem .72rem !important;
+  }
+
+  pre,
+  .code-block {
+    padding: .9rem;
+    font-size: .72rem;
+    max-height: 520px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 520px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container,
+  .main {
+    padding-left: .85rem;
+    padding-right: .85rem;
+  }
+
+  .hero,
+  .track-hero-page {
+    padding: 2.35rem 0 1.7rem;
+  }
+
+  .hero-label {
+    font-size: .66rem;
+  }
+
+  .hero-back-link {
+    max-width: 100%;
+  }
+
+  .sitenav-top {
+    grid-template-columns: 1fr;
+    gap: .45rem;
+  }
+
+  .sitenav-brand {
+    width: 100%;
+    white-space: normal;
+    justify-content: space-between;
+  }
+
+  .sitenav-brand span {
+    flex-shrink: 0;
+  }
+
+  .nav-back {
+    width: 100%;
+    justify-content: center;
+    justify-self: stretch;
+    text-align: center;
+  }
+
+  .nav-group-label {
+    display: none;
+  }
+
+  .nav-group {
+    border-right: none;
+    padding: .25rem .18rem;
+  }
+
+  .nav-link {
+    font-size: .64rem;
+    padding: .3rem .46rem;
+  }
+
+  .content,
+  #financeMain {
+    padding-top: 1rem !important;
+  }
+
+  .section,
+  .doc-section {
+    margin-bottom: 1rem;
+    padding: .9rem;
+    scroll-margin-top: 184px;
+  }
+
+  .doc-section-heading h2,
+  .section-header h2 {
+    font-size: 1.15rem;
+  }
+
+  h3,
+  .doc-section h3,
+  .module-card h3,
+  .callout h3 {
+    font-size: .96rem;
+  }
+
+  p,
+  li,
+  td,
+  .doc-table td {
+    font-size: .84rem !important;
+  }
+
+  th,
+  .doc-table th {
+    font-size: .66rem !important;
+  }
+
+  .tag,
+  .section-badge,
+  .track-badge-set span,
+  .badge-cloud span {
+    font-size: .64rem;
+  }
+
+  .metric-pill {
+    padding: .85rem;
+  }
+
+  .metric-pill span {
+    font-size: 1.62rem;
+  }
+
+  .mini-card,
+  .project-card,
+  .phase-card,
+  .module-card {
+    border-radius: 10px;
+  }
+
+  .table-wrap table,
+  .table-responsive table,
+  .doc-table {
+    min-width: 640px;
+  }
+
+  .footer-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  .footer-link {
+    justify-content: center !important;
+    margin-bottom: 0;
+  }
+
+  .footer-pills {
+    justify-content: center !important;
+  }
+
+  .back-to-top,
+  #backToTop {
+    right: .85rem;
+    bottom: .85rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Celulares muito estreitos */
+@media (max-width: 380px) {
+  .container,
+  .main {
+    padding-left: .7rem;
+    padding-right: .7rem;
+  }
+
+  .hero h1,
+  .track-title {
+    font-size: 1.85rem;
+  }
+
+  .sitenav-brand span {
+    display: none;
+  }
+
+  .section,
+  .doc-section {
+    padding: .78rem;
+  }
+
+  pre,
+  .code-block {
+    font-size: .68rem;
+  }
+
+  .table-wrap table,
+  .table-responsive table,
+  .doc-table {
+    min-width: 600px;
+  }
+}
+
+/* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+@media (pointer: coarse) {
+  .nav-scroll-btn,
+  .back-to-top,
+  #backToTop,
+  .nav-link,
+  .hero-back-link,
+  .nav-back,
+  .sidebar a,
+  .footer-link {
+    touch-action: manipulation;
+  }
+
+  .nav-link,
+  .hero-back-link,
+  .nav-back,
+  .footer-link {
+    min-height: 34px;
+  }
+}
+</style>
+
+<!-- Correção visual do resumo executivo: mantém conteúdo e CSS principal, apenas ajusta texto + métricas. -->
+<style id="financeira-summary-executive-visual-fix">
+/*
+  A trilha financeira usa .doc-hero-card no resumo executivo. Em larguras
+  intermediárias, texto e métricas lado a lado deixam o texto estreito.
+  A correção replica a lógica da Trilha Java: texto em largura confortável
+  e métricas abaixo, ocupando toda a largura disponível.
+*/
+#resumo .doc-hero-card,
+#resumo .hero-content-grid {
+  grid-template-columns: 1fr !important;
+  align-items: start !important;
+  gap: 1rem !important;
+}
+
+#resumo .doc-hero-card > div:first-child,
+#resumo .hero-content-grid > div:first-child {
+  max-width: 100%;
+  min-width: 0;
+}
+
+#resumo .lead {
+  max-width: 980px;
+}
+
+#resumo .metrics-grid,
+#resumo .metrics {
+  width: 100%;
+  max-width: 100%;
+  grid-template-columns: repeat(4, minmax(130px, 1fr)) !important;
+  align-items: stretch;
+  margin-top: .35rem;
+}
+
+#resumo .metric-pill,
+#resumo .metric {
+  min-width: 0;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#resumo .metric-pill span,
+#resumo .metric-pill small,
+#resumo .metric span,
+#resumo .metric small {
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+@media (max-width: 1180px) {
+  #resumo .metrics-grid,
+  #resumo .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  #resumo .metrics-grid,
+  #resumo .metrics {
+    grid-template-columns: 1fr !important;
+  }
+
+  #resumo .metric-pill,
+  #resumo .metric {
+    min-height: auto;
+  }
+}
+</style>
 
 </head>
 <body class="track-page" data-track="financeiro">
@@ -938,399 +938,399 @@
   </aside>
 
   <div class="content" id="financeMain">
-    <section id="resumo" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Resumo executivo</h2><p class="section-subtitle">Base consolidada do PDF Trilha Financeira Completa - Maio de 2026.</p></div><span class="section-badge">Visão geral</span></div>
-      <div class="doc-hero-card">
-        <div>
-          <p class="lead">Esta trilha foi organizada para criar uma base financeira completa, partindo do controle do dinheiro no dia a dia até temas avançados como alocação de ativos, valuation, economia, impostos, negócios digitais e proteção patrimonial.</p>
-          <p>A ordem correta de estudo não começa por bolsa, cripto ou operações avançadas. Ela começa por controle, dívidas, reserva, aumento de renda e só depois evolui para investimentos e estratégias patrimoniais.</p>
-          <div class="callout"><h3>Princípio central</h3><p>Primeiro pare de perder dinheiro. Depois crie estabilidade. Em seguida aumente renda. Só então acelere a construção de patrimônio com investimentos e negócios.</p></div>
-        </div>
-        <div class="metrics-grid">
-          <div class="metric-pill"><span>31</span><small>Módulos</small></div>
-          <div class="metric-pill"><span>5</span><small>Macroáreas</small></div>
-          <div class="metric-pill"><span>64</span><small>Semanas</small></div>
-          <div class="metric-pill"><span>1h</span><small>Por dia</small></div>
-        </div>
+<section id="resumo" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Resumo executivo</h2><p class="section-subtitle">Base consolidada do PDF Trilha Financeira Completa - Maio de 2026.</p></div><span class="section-badge">Visão geral</span></div>
+  <div class="doc-hero-card">
+    <div>
+      <p class="lead">Esta trilha foi organizada para criar uma base financeira completa, partindo do controle do dinheiro no dia a dia até temas avançados como alocação de ativos, valuation, economia, impostos, negócios digitais e proteção patrimonial.</p>
+      <p>A ordem correta de estudo não começa por bolsa, cripto ou operações avançadas. Ela começa por controle, dívidas, reserva, aumento de renda e só depois evolui para investimentos e estratégias patrimoniais.</p>
+      <div class="callout"><h3>Princípio central</h3><p>Primeiro pare de perder dinheiro. Depois crie estabilidade. Em seguida aumente renda. Só então acelere a construção de patrimônio com investimentos e negócios.</p></div>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-pill"><span>31</span><small>Módulos</small></div>
+      <div class="metric-pill"><span>5</span><small>Macroáreas</small></div>
+      <div class="metric-pill"><span>64</span><small>Semanas</small></div>
+      <div class="metric-pill"><span>1h</span><small>Por dia</small></div>
+    </div>
+  </div>
+  <div class="doc-grid-3 mt-3">
+    <div class="mini-card"><strong>Aviso importante</strong><span>Material educacional e de organização de estudos. Não substitui orientação profissional personalizada, consultoria de investimentos, contabilidade ou assessoria jurídica/tributária.</span></div>
+    <div class="mini-card"><strong>Método de estudo</strong><span>70% prática, 20% teoria e 10% revisão, com planilhas, simulações, cálculos, comparações e decisões reais.</span></div>
+    <div class="mini-card"><strong>Maior virada esperada</strong><span>Parar vazamentos financeiros, aumentar renda como desenvolvedor e criar ativos digitais ou serviços com programação e IA.</span></div>
+  </div>
+</section>
+<section id="cronograma" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Cronograma dentro do Plano Integrado</h2><p class="section-subtitle">A trilha financeira ocupa o bloco diário 22:00-23:00 e se conecta às 8 fases do index.</p></div><span class="section-badge">64 semanas</span></div>
+  <div class="callout accent-orange"><h3>Bloco diário oficial</h3><p><strong>22:00-23:00 - Trilha Financeira.</strong> Estudo de orçamento, dívidas, reserva, renda, investimentos, precificação, produtos digitais, micro-SaaS e evolução de renda.</p></div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Fase do plano</th><th>Semanas</th><th>Conteúdo financeiro associado</th></tr></thead><tbody><tr><td>Fase 1</td><td>Semanas 1-8</td><td><ul class="doc-list"><li>Módulo 1: Mentalidade financeira</li><li>Módulos 2-3: Orçamento pessoal e métodos</li><li>Módulos 4-5: Diagnóstico financeiro e fluxo de caixa</li><li>Módulos 6-7: Dívidas, juros e estratégias de quitação</li></ul></td></tr><tr><td>Fase 2</td><td>Semanas 9-16</td><td><ul class="doc-list"><li>Módulos 8-9: Reserva de emergência, Tesouro Selic, CDB DI e liquidez</li><li>Módulos 10-11: Matemática financeira e sistema financeiro brasileiro</li><li>Módulos 12-13: Renda fixa básica e avançada</li><li>Módulos 14-15: Aumento de renda e precificação</li></ul></td></tr><tr><td>Fase 3</td><td>Semanas 17-24</td><td><ul class="doc-list"><li>Módulo 16: Fundos de investimento</li><li>Módulos 17-18: Ações e FIIs</li><li>Módulos 19-20: ETFs, BDRs, exterior e criptoativos</li><li>Módulos 21-22: Gestão de risco e alocação de ativos</li></ul></td></tr><tr><td>Fase 4</td><td>Semanas 25-32</td><td><ul class="doc-list"><li>Módulo 23: Impostos sobre investimentos e declaração</li><li>Módulo 24: Planejamento financeiro de vida</li><li>Módulos 25-26: Contabilidade básica e economia aplicada</li><li>Módulos 27-28: Empreendedorismo, negócios e produtos digitais</li></ul></td></tr><tr><td>Fase 5</td><td>Semanas 33-40</td><td><ul class="doc-list"><li>Módulo 29: IA aplicada a ganhos financeiros</li><li>Módulo 30: Finanças avançadas</li><li>Módulo 31: Proteção patrimonial e segurança</li><li>Checklist de domínio financeiro completo</li></ul></td></tr><tr><td>Fase 6</td><td>Semanas 41-48</td><td><ul class="doc-list"><li>Revisão geral do checklist financeiro</li><li>Aplicação prática: planilha, carteira simulada e oferta de serviço</li><li>Planejamento com projeção de nova renda</li><li>Correção de lacunas antes de avançar em risco</li></ul></td></tr><tr><td>Fase 7</td><td>Semanas 49-56</td><td><ul class="doc-list"><li>Empreendedorismo: micro-SaaS e automações como produto</li><li>Negociação salarial: CLT, PJ e remoto</li><li>Simulação de renda extra com programação e IA</li><li>Plano de produto digital ou serviço vendável</li></ul></td></tr><tr><td>Fase 8</td><td>Semanas 57-64</td><td><ul class="doc-list"><li>Planejamento de 12 meses com nova renda</li><li>Produtos digitais: lançamento com programação e IA</li><li>Independência financeira: projeção de longo prazo</li><li>Consolidação da estratégia patrimonial</li></ul></td></tr></tbody></table></div>
+</section>
+<section id="macroareas" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Macroáreas da trilha</h2><p class="section-subtitle">Sequência progressiva para reduzir risco e evitar lacunas.</p></div><span class="section-badge">5 macroáreas</span></div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Fase</th><th>Macroárea</th><th>Objetivo</th></tr></thead><tbody><tr><td>1</td><td>Sobrevivência financeira</td><td>Controlar dinheiro, entender gastos, organizar dívidas e evitar vazamentos.</td></tr><tr><td>2</td><td>Estabilidade</td><td>Criar reserva, dominar matemática financeira e entender o sistema financeiro.</td></tr><tr><td>3</td><td>Crescimento</td><td>Aumentar renda, melhorar carreira, precificar serviços e investir com consistência.</td></tr><tr><td>4</td><td>Multiplicação</td><td>Estudar renda fixa avançada, fundos, ações, FIIs, ETFs e exterior.</td></tr><tr><td>5</td><td>Avançado</td><td>Dominar economia, valuation, carteiras, negócios, IA aplicada e proteção patrimonial.</td></tr></tbody></table></div>
+  <h3>Como usar esta trilha</h3>
+  <ul class="doc-list"><li>Siga a ordem dos módulos. Ela foi pensada para evitar lacunas e reduzir risco financeiro.</li><li>Ao final de cada módulo, aplique o conteúdo na sua vida real: planilha, simulação, comparação, cálculo ou decisão.</li><li>Não avance para investimentos complexos antes de dominar dívidas, reserva, juros e orçamento.</li><li>Use a proporção 70/20/10: 70% prática, 20% teoria e 10% revisão.</li></ul>
+</section>
+<section id="modulos" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>31 módulos completos</h2><p class="section-subtitle">Transcrição organizada do conteúdo da trilha financeira, com acentuação e estrutura visual ajustadas.</p></div><span class="section-badge">Conteúdo integral</span></div>
+  <div class="module-grid">
+    <article class="module-card phase1 searchable-section" data-search-section data-module="1">
+      <div class="module-head">
+        <span class="module-number">Módulo 01</span>
+        <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
       </div>
-      <div class="doc-grid-3 mt-3">
-        <div class="mini-card"><strong>Aviso importante</strong><span>Material educacional e de organização de estudos. Não substitui orientação profissional personalizada, consultoria de investimentos, contabilidade ou assessoria jurídica/tributária.</span></div>
-        <div class="mini-card"><strong>Método de estudo</strong><span>70% prática, 20% teoria e 10% revisão, com planilhas, simulações, cálculos, comparações e decisões reais.</span></div>
-        <div class="mini-card"><strong>Maior virada esperada</strong><span>Parar vazamentos financeiros, aumentar renda como desenvolvedor e criar ativos digitais ou serviços com programação e IA.</span></div>
+      <h3>Mentalidade financeira e comportamento</h3>
+      <p>Antes de estudar investimentos, é necessário entender que dinheiro também envolve comportamento. Muitas decisões financeiras ruins não acontecem por falta de cálculo, mas por impulso, comparação social, consumo emocional e ausência de planejamento.</p>
+      <h4>Microáreas para estudar</h4><ul class="doc-list"><li>Diferença entre necessidade, desejo e status.</li><li>Consumo emocional e compras por impulso.</li><li>Custo de oportunidade: o que você deixa de ganhar ao escolher uma alternativa.</li><li>Mentalidade de curto prazo versus mentalidade de longo prazo.</li><li>Comparação social e pressão por aparência.</li><li>Disciplina, paciência, consistência e tomada de decisão.</li></ul><h4>Aplicação prática</h4><ul class="doc-list"><li>Durante uma semana, anote todos os gastos sem tentar corrigir nada. O objetivo inicial é enxergar o próprio comportamento financeiro com clareza.</li></ul>
+    </article>
+
+    <article class="module-card phase1 searchable-section" data-search-section data-module="2">
+      <div class="module-head">
+        <span class="module-number">Módulo 02</span>
+        <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
       </div>
-    </section>
-    <section id="cronograma" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Cronograma dentro do Plano Integrado</h2><p class="section-subtitle">A trilha financeira ocupa o bloco diário 22:00-23:00 e se conecta às 8 fases do index.</p></div><span class="section-badge">64 semanas</span></div>
-      <div class="callout accent-orange"><h3>Bloco diário oficial</h3><p><strong>22:00-23:00 - Trilha Financeira.</strong> Estudo de orçamento, dívidas, reserva, renda, investimentos, precificação, produtos digitais, micro-SaaS e evolução de renda.</p></div>
-      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Fase do plano</th><th>Semanas</th><th>Conteúdo financeiro associado</th></tr></thead><tbody><tr><td>Fase 1</td><td>Semanas 1-8</td><td><ul class="doc-list"><li>Módulo 1: Mentalidade financeira</li><li>Módulos 2-3: Orçamento pessoal e métodos</li><li>Módulos 4-5: Diagnóstico financeiro e fluxo de caixa</li><li>Módulos 6-7: Dívidas, juros e estratégias de quitação</li></ul></td></tr><tr><td>Fase 2</td><td>Semanas 9-16</td><td><ul class="doc-list"><li>Módulos 8-9: Reserva de emergência, Tesouro Selic, CDB DI e liquidez</li><li>Módulos 10-11: Matemática financeira e sistema financeiro brasileiro</li><li>Módulos 12-13: Renda fixa básica e avançada</li><li>Módulos 14-15: Aumento de renda e precificação</li></ul></td></tr><tr><td>Fase 3</td><td>Semanas 17-24</td><td><ul class="doc-list"><li>Módulo 16: Fundos de investimento</li><li>Módulos 17-18: Ações e FIIs</li><li>Módulos 19-20: ETFs, BDRs, exterior e criptoativos</li><li>Módulos 21-22: Gestão de risco e alocação de ativos</li></ul></td></tr><tr><td>Fase 4</td><td>Semanas 25-32</td><td><ul class="doc-list"><li>Módulo 23: Impostos sobre investimentos e declaração</li><li>Módulo 24: Planejamento financeiro de vida</li><li>Módulos 25-26: Contabilidade básica e economia aplicada</li><li>Módulos 27-28: Empreendedorismo, negócios e produtos digitais</li></ul></td></tr><tr><td>Fase 5</td><td>Semanas 33-40</td><td><ul class="doc-list"><li>Módulo 29: IA aplicada a ganhos financeiros</li><li>Módulo 30: Finanças avançadas</li><li>Módulo 31: Proteção patrimonial e segurança</li><li>Checklist de domínio financeiro completo</li></ul></td></tr><tr><td>Fase 6</td><td>Semanas 41-48</td><td><ul class="doc-list"><li>Revisão geral do checklist financeiro</li><li>Aplicação prática: planilha, carteira simulada e oferta de serviço</li><li>Planejamento com projeção de nova renda</li><li>Correção de lacunas antes de avançar em risco</li></ul></td></tr><tr><td>Fase 7</td><td>Semanas 49-56</td><td><ul class="doc-list"><li>Empreendedorismo: micro-SaaS e automações como produto</li><li>Negociação salarial: CLT, PJ e remoto</li><li>Simulação de renda extra com programação e IA</li><li>Plano de produto digital ou serviço vendável</li></ul></td></tr><tr><td>Fase 8</td><td>Semanas 57-64</td><td><ul class="doc-list"><li>Planejamento de 12 meses com nova renda</li><li>Produtos digitais: lançamento com programação e IA</li><li>Independência financeira: projeção de longo prazo</li><li>Consolidação da estratégia patrimonial</li></ul></td></tr></tbody></table></div>
-    </section>
-    <section id="macroareas" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Macroáreas da trilha</h2><p class="section-subtitle">Sequência progressiva para reduzir risco e evitar lacunas.</p></div><span class="section-badge">5 macroáreas</span></div>
-      <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Fase</th><th>Macroárea</th><th>Objetivo</th></tr></thead><tbody><tr><td>1</td><td>Sobrevivência financeira</td><td>Controlar dinheiro, entender gastos, organizar dívidas e evitar vazamentos.</td></tr><tr><td>2</td><td>Estabilidade</td><td>Criar reserva, dominar matemática financeira e entender o sistema financeiro.</td></tr><tr><td>3</td><td>Crescimento</td><td>Aumentar renda, melhorar carreira, precificar serviços e investir com consistência.</td></tr><tr><td>4</td><td>Multiplicação</td><td>Estudar renda fixa avançada, fundos, ações, FIIs, ETFs e exterior.</td></tr><tr><td>5</td><td>Avançado</td><td>Dominar economia, valuation, carteiras, negócios, IA aplicada e proteção patrimonial.</td></tr></tbody></table></div>
-      <h3>Como usar esta trilha</h3>
-      <ul class="doc-list"><li>Siga a ordem dos módulos. Ela foi pensada para evitar lacunas e reduzir risco financeiro.</li><li>Ao final de cada módulo, aplique o conteúdo na sua vida real: planilha, simulação, comparação, cálculo ou decisão.</li><li>Não avance para investimentos complexos antes de dominar dívidas, reserva, juros e orçamento.</li><li>Use a proporção 70/20/10: 70% prática, 20% teoria e 10% revisão.</li></ul>
-    </section>
-    <section id="modulos" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>31 módulos completos</h2><p class="section-subtitle">Transcrição organizada do conteúdo da trilha financeira, com acentuação e estrutura visual ajustadas.</p></div><span class="section-badge">Conteúdo integral</span></div>
-      <div class="module-grid">
-        <article class="module-card phase1 searchable-section" data-search-section data-module="1">
-          <div class="module-head">
-            <span class="module-number">Módulo 01</span>
-            <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
-          </div>
-          <h3>Mentalidade financeira e comportamento</h3>
-          <p>Antes de estudar investimentos, é necessário entender que dinheiro também envolve comportamento. Muitas decisões financeiras ruins não acontecem por falta de cálculo, mas por impulso, comparação social, consumo emocional e ausência de planejamento.</p>
-          <h4>Microáreas para estudar</h4><ul class="doc-list"><li>Diferença entre necessidade, desejo e status.</li><li>Consumo emocional e compras por impulso.</li><li>Custo de oportunidade: o que você deixa de ganhar ao escolher uma alternativa.</li><li>Mentalidade de curto prazo versus mentalidade de longo prazo.</li><li>Comparação social e pressão por aparência.</li><li>Disciplina, paciência, consistência e tomada de decisão.</li></ul><h4>Aplicação prática</h4><ul class="doc-list"><li>Durante uma semana, anote todos os gastos sem tentar corrigir nada. O objetivo inicial é enxergar o próprio comportamento financeiro com clareza.</li></ul>
-        </article>
+      <h3>Orçamento pessoal</h3>
+      <p>O orçamento é a ferramenta central da vida financeira. Ele mostra quanto entra, quanto sai, para onde o dinheiro vai e quanto sobra para dívidas, reserva, mudança, investimentos ou novos projetos.</p>
+      <h4>Microáreas para estudar</h4><ul class="doc-list"><li>Receita bruta e receita líquida.</li><li>Despesas fixas, variáveis, obrigatórias e supérfluas.</li><li>Fluxo de caixa mensal.</li><li>Saldo positivo e saldo negativo.</li><li>Planejamento por categoria.</li><li>Gastos invisíveis: pequenas compras recorrentes que drenam dinheiro.</li><li>Controle de assinaturas, aplicativos, delivery, transporte, lazer e parcelas.</li></ul><h4>Perguntas que você deve saber responder</h4><ul class="doc-list"><li>Quanto entra líquido por mês?</li><li>Quanto sai por mês?</li><li>Quais gastos são obrigatórios?</li><li>Quais gastos podem ser reduzidos?</li><li>Quanto está comprometido com parcelas?</li><li>Quanto pode ser guardado ou investido?</li></ul>
+    </article>
 
-        <article class="module-card phase1 searchable-section" data-search-section data-module="2">
-          <div class="module-head">
-            <span class="module-number">Módulo 02</span>
-            <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
-          </div>
-          <h3>Orçamento pessoal</h3>
-          <p>O orçamento é a ferramenta central da vida financeira. Ele mostra quanto entra, quanto sai, para onde o dinheiro vai e quanto sobra para dívidas, reserva, mudança, investimentos ou novos projetos.</p>
-          <h4>Microáreas para estudar</h4><ul class="doc-list"><li>Receita bruta e receita líquida.</li><li>Despesas fixas, variáveis, obrigatórias e supérfluas.</li><li>Fluxo de caixa mensal.</li><li>Saldo positivo e saldo negativo.</li><li>Planejamento por categoria.</li><li>Gastos invisíveis: pequenas compras recorrentes que drenam dinheiro.</li><li>Controle de assinaturas, aplicativos, delivery, transporte, lazer e parcelas.</li></ul><h4>Perguntas que você deve saber responder</h4><ul class="doc-list"><li>Quanto entra líquido por mês?</li><li>Quanto sai por mês?</li><li>Quais gastos são obrigatórios?</li><li>Quais gastos podem ser reduzidos?</li><li>Quanto está comprometido com parcelas?</li><li>Quanto pode ser guardado ou investido?</li></ul>
-        </article>
-
-        <article class="module-card phase1 searchable-section" data-search-section data-module="3">
-          <div class="module-head">
-            <span class="module-number">Módulo 03</span>
-            <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
-          </div>
-          <h3>Métodos de orçamento</h3>
-          <p>Existem vários modelos de orçamento. A escolha depende da fase financeira. Para reorganizar dívidas, planejar mudança e aumentar renda, o método mais eficiente costuma ser o orçamento base zero.</p>
-          <h4>Métodos</h4><ul class="doc-list"><li>Orçamento 50/30/20: divide a renda em necessidades, desejos e poupança/investimentos.</li><li>Orçamento base zero: cada real recebe uma finalidade antes de ser gasto.</li><li>Método dos envelopes: separa dinheiro por categorias para limitar consumo.</li><li>Orçamento de sobrevivência: usado em fase de crise, priorizando moradia, alimentação, transporte, dívidas essenciais e renda.</li><li>Orçamento por prioridade: organiza gastos de acordo com metas financeiras.</li></ul><h4>Prioridade recomendada</h4><ul class="doc-list"><li>Domine o orçamento base zero. Ele obriga você a planejar cada real e reduz o risco de gastar dinheiro que já está comprometido com contas futuras.</li></ul>
-        </article>
-
-        <article class="module-card phase1 searchable-section" data-search-section data-module="4">
-          <div class="module-head">
-            <span class="module-number">Módulo 04</span>
-            <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
-          </div>
-          <h3>Diagnóstico financeiro pessoal</h3>
-          <p>O diagnóstico transforma uma sensação vaga de desorganização em números concretos. Ele mostra sua situação real, seu grau de risco e a ordem correta de decisão.</p>
-          <h4>O que levantar</h4><ul class="doc-list"><li>Lista completa de dívidas.</li><li>Lista de contas mensais.</li><li>Lista de contas vencidas e a vencer.</li><li>Lista de parcelas futuras.</li><li>Lista de assinaturas e gastos recorrentes.</li><li>Lista de bens: moto, dinheiro em conta, equipamentos, investimentos.</li><li>Lista de metas: quitar dívidas, mudar, investir, empreender, estudar.</li></ul><h4>Fórmula</h4><ul class="doc-list"><li>Patrimônio líquido = tudo que você possui - tudo que você deve.</li><li>Exemplo: moto de R$ 21.000 + R$ 2.000 guardados - R$ 20.000 em dívidas = R$ 3.000 de patrimônio líquido.</li></ul><h4>Ponto-chave</h4><ul class="doc-list"><li>Salário não é patrimônio. Uma pessoa pode ganhar bem e estar quebrada se as dívidas, parcelas e padrão de vida forem maiores que a renda.</li></ul>
-        </article>
-
-        <article class="module-card phase1 searchable-section" data-search-section data-module="5">
-          <div class="module-head">
-            <span class="module-number">Módulo 05</span>
-            <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
-          </div>
-          <h3>Fluxo de caixa pessoal</h3>
-          <p>Fluxo de caixa é a previsão de entradas e saídas de dinheiro ao longo do tempo. Ele evita o erro de achar que dinheiro disponível na conta está livre para gasto.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Fluxo de caixa diário.</li><li>Fluxo de caixa semanal.</li><li>Fluxo de caixa mensal.</li><li>Saldo projetado.</li><li>Contas futuras.</li><li>Impacto de compras parceladas.</li><li>Previsão de despesas sazonais: IPVA, material, manutenção, presentes, viagens e mudança.</li></ul><h4>Regra prática</h4><ul class="doc-list"><li>Dinheiro na conta não significa dinheiro livre. Parte dele pode já pertencer a contas futuras.</li></ul>
-        </article>
-
-        <article class="module-card phase1 searchable-section" data-search-section data-module="6">
-          <div class="module-head">
-            <span class="module-number">Módulo 06</span>
-            <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
-          </div>
-          <h3>Dívidas, juros e crédito</h3>
-          <p>Dívidas precisam ser estudadas antes de investimentos porque juros altos destroem patrimônio mais rapidamente do que a maioria dos investimentos consegue construir.</p>
-          <h4>Tipos de dívida</h4><ul class="doc-list"><li>Cartão de crédito.</li><li>Cheque especial.</li><li>Empréstimo pessoal.</li><li>Financiamento.</li><li>Consórcio.</li><li>Parcelamentos.</li><li>Contas atrasadas.</li><li>Dívida com familiares.</li><li>Dívida sem juros.</li><li>Dívida com juros compostos.</li></ul><h4>Conceitos fundamentais</h4><ul class="doc-list"><li>Juros simples: juros calculados sobre o valor inicial.</li><li>Juros compostos: juros sobre juros.</li><li>CET - Custo Efetivo Total.</li><li>Taxa nominal e taxa efetiva.</li><li>IOF, tarifas e seguros embutidos.</li><li>Amortização e liquidação antecipada.</li></ul><h4>Regra prática</h4><ul class="doc-list"><li>Dívida cara vem antes de investimento. Não faz sentido buscar 1% ao mês em investimento enquanto paga juros muito maiores no cartão ou cheque especial.</li></ul>
-        </article>
-
-        <article class="module-card phase1 searchable-section" data-search-section data-module="7">
-          <div class="module-head">
-            <span class="module-number">Módulo 07</span>
-            <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
-          </div>
-          <h3>Estratégias de quitação de dívidas</h3>
-          <p>Este módulo organiza a decisão de pagamento, renegociação e priorização das dívidas para recuperar fluxo de caixa e reduzir risco financeiro.</p>
-          <h4>Estratégias</h4><ul class="doc-list"><li>Método avalanche: prioriza a dívida com maior taxa de juros.</li><li>Método bola de neve: prioriza as menores dívidas para gerar motivação e liberar fluxo de caixa.</li><li>Renegociação: busca desconto, redução de juros ou novo prazo.</li><li>Portabilidade de crédito: troca uma dívida cara por outra mais barata.</li><li>Liquidação antecipada: quita parcelas futuras com desconto proporcional quando houver vantagem.</li></ul><h4>Ordem sugerida de decisão</h4><ul class="doc-list"><li>Listar todas as dívidas.</li><li>Identificar juros, parcelas e vencimentos.</li><li>Separar dívidas essenciais das não essenciais.</li><li>Priorizar dívidas caras e atrasadas.</li><li>Negociar desconto para pagamento à vista quando possível.</li><li>Evitar assumir nova parcela antes de estabilizar o fluxo de caixa.</li></ul>
-        </article>
-
-        <article class="module-card phase2 searchable-section" data-search-section data-module="8">
-          <div class="module-head">
-            <span class="module-number">Módulo 08</span>
-            <span class="module-phase">Fase 2 - Estabilidade financeira</span>
-          </div>
-          <h3>Reserva de emergência</h3>
-          <p>Reserva de emergência não é investimento para enriquecer. Ela é uma proteção contra imprevistos e evita que você volte para dívidas caras quando algo sai do controle.</p>
-          <h4>Funções da reserva</h4><ul class="doc-list"><li>Perda de renda.</li><li>Problemas de saúde.</li><li>Manutenção de moto ou carro.</li><li>Mudança de cidade.</li><li>Desemprego.</li><li>Emergências familiares.</li><li>Contas urgentes.</li></ul><h4>Tamanho da reserva</h4><ul class="doc-list"><li>Reserva mínima: 1 mês de custo de vida.</li><li>Reserva inicial: 3 meses de custo de vida.</li><li>Reserva ideal: 6 a 12 meses de custo de vida.</li><li>Reserva para autônomos ou empreendedores: geralmente mais alta, pela instabilidade de renda.</li></ul><h4>Ordem para sua fase</h4><ul class="doc-list"><li>Quitar ou organizar dívidas caras.</li><li>Montar reserva inicial.</li><li>Planejar mudança.</li><li>Investir com consistência.</li><li>Assumir riscos maiores apenas depois.</li></ul>
-        </article>
-
-        <article class="module-card phase2 searchable-section" data-search-section data-module="9">
-          <div class="module-head">
-            <span class="module-number">Módulo 09</span>
-            <span class="module-phase">Fase 2 - Estabilidade financeira</span>
-          </div>
-          <h3>Onde deixar a reserva</h3>
-          <p>A reserva deve priorizar segurança e liquidez, não rentabilidade máxima.</p>
-          <h4>Critérios</h4><ul class="doc-list"><li>Liquidez diária.</li><li>Baixo risco.</li><li>Previsibilidade.</li><li>Facilidade de resgate.</li><li>Separação da conta de gastos.</li><li>Evitar volatilidade e prazos longos.</li></ul><h4>Produtos para estudar</h4><ul class="doc-list"><li>Tesouro Selic.</li><li>CDB com liquidez diária.</li><li>Fundos DI simples.</li><li>Contas remuneradas.</li><li>Poupança, entendendo suas limitações.</li></ul>
-        </article>
-
-        <article class="module-card phase2 searchable-section" data-search-section data-module="10">
-          <div class="module-head">
-            <span class="module-number">Módulo 10</span>
-            <span class="module-phase">Fase 2 - Estabilidade financeira</span>
-          </div>
-          <h3>Matemática financeira</h3>
-          <p>Matemática financeira permite comparar alternativas e não depender de opinião, propaganda ou recomendação superficial.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Porcentagem.</li><li>Regra de três.</li><li>Juros simples.</li><li>Juros compostos.</li><li>Taxa mensal versus taxa anual.</li><li>Taxa nominal versus taxa efetiva.</li><li>Valor presente e valor futuro.</li><li>Inflação.</li><li>Rentabilidade real.</li><li>Amortização.</li><li>Parcelas.</li><li>Desconto.</li><li>CDI, Selic e IPCA.</li><li>Risco versus retorno.</li></ul><h4>Fórmulas e exemplos</h4><ul class="doc-list"><li>Juros compostos: Montante = capital inicial x (1 + taxa) ^ tempo.</li><li>Exemplo: R$ 1.000 a 1% ao mês por 12 meses = aproximadamente R$ 1.126,82.</li><li>Rentabilidade real aproximada = rentabilidade nominal - inflação.</li><li>Exemplo: se um investimento rendeu 10% no ano e a inflação foi 5%, o ganho real aproximado foi 5%.</li></ul>
-        </article>
-
-        <article class="module-card phase2 searchable-section" data-search-section data-module="11">
-          <div class="module-head">
-            <span class="module-number">Módulo 11</span>
-            <span class="module-phase">Fase 2 - Estabilidade financeira</span>
-          </div>
-          <h3>Sistema financeiro brasileiro</h3>
-          <p>Para investir e tomar crédito com consciência, você precisa entender as instituições e referências que fazem o dinheiro circular.</p>
-          <h4>Instituições e conceitos</h4><ul class="doc-list"><li>Banco Central.</li><li>CVM.</li><li>Tesouro Nacional.</li><li>B3.</li><li>Bancos.</li><li>Corretoras.</li><li>Cooperativas de crédito.</li><li>Fintechs.</li><li>FGC.</li><li>Selic.</li><li>CDI.</li><li>IPCA.</li><li>Taxa básica de juros.</li><li>Mercado monetário.</li><li>Mercado de capitais.</li><li>Mercado cambial.</li></ul>
-        </article>
-
-        <article class="module-card phase3 searchable-section" data-search-section data-module="12">
-          <div class="module-head">
-            <span class="module-number">Módulo 12</span>
-            <span class="module-phase">Fase 3 - Crescimento financeiro</span>
-          </div>
-          <h3>Renda fixa básica</h3>
-          <p>Renda fixa deve ser estudada logo após reserva e matemática financeira. Ela ajuda a entender segurança, indexadores, liquidez, prazos e impostos.</p>
-          <h4>Conceitos principais</h4><ul class="doc-list"><li>Emissor.</li><li>Indexador.</li><li>Vencimento.</li><li>Liquidez.</li><li>Risco de crédito.</li><li>Risco de mercado.</li><li>Marcação a mercado.</li><li>Imposto de renda.</li><li>IOF.</li><li>FGC.</li><li>Rentabilidade bruta e líquida.</li></ul><h4>Produtos para estudar</h4><ul class="doc-list"><li>Tesouro Selic.</li><li>Tesouro Prefixado.</li><li>Tesouro IPCA+.</li><li>CDB.</li><li>LCI.</li><li>LCA.</li><li>LC.</li><li>RDB.</li><li>Debêntures.</li><li>Debêntures incentivadas.</li><li>CRI.</li><li>CRA.</li><li>Fundos de renda fixa.</li></ul><h4>Comparações que você deve saber fazer</h4><ul class="doc-list"><li>CDB 110% do CDI versus LCI 95% do CDI.</li><li>Tesouro Selic versus conta remunerada.</li><li>Tesouro IPCA+ versus CDB prefixado.</li><li>Fundo DI com taxa de administração versus Tesouro Selic.</li></ul>
-        </article>
-
-        <article class="module-card phase3 searchable-section" data-search-section data-module="13">
-          <div class="module-head">
-            <span class="module-number">Módulo 13</span>
-            <span class="module-phase">Fase 3 - Crescimento financeiro</span>
-          </div>
-          <h3>Renda fixa avançada</h3>
-          <p>A renda fixa avançada explica por que um produto aparentemente seguro pode oscilar e gerar perdas caso seja vendido antes do vencimento.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Curva de juros.</li><li>Duration.</li><li>Duration modificada.</li><li>Convexidade.</li><li>Marcação a mercado.</li><li>Prêmio de risco.</li><li>Crédito privado.</li><li>Rating.</li><li>Spread de crédito.</li><li>Risco de liquidez.</li><li>Risco de reinvestimento.</li><li>NTN-B, LTN e LFT.</li><li>Fundos high grade e high yield.</li><li>Securitização.</li><li>CRI, CRA e FIDC.</li></ul>
-        </article>
-
-        <article class="module-card phase3 searchable-section" data-search-section data-module="14">
-          <div class="module-head">
-            <span class="module-number">Módulo 14</span>
-            <span class="module-phase">Fase 3 - Crescimento financeiro</span>
-          </div>
-          <h3>Aumento de renda e carreira</h3>
-          <p>Para quem ainda está construindo patrimônio, aumentar a capacidade de gerar renda costuma ter impacto maior do que escolher o investimento perfeito.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Plano de carreira.</li><li>Negociação salarial.</li><li>Currículo e LinkedIn.</li><li>Portfólio.</li><li>Freelancing.</li><li>Proposta comercial.</li><li>Contratos.</li><li>Entrega de valor.</li><li>Especialização técnica.</li><li>Inglês.</li><li>Certificações.</li></ul><h4>Competências com maior ligação ao seu contexto de desenvolvedor</h4><ul class="doc-list"><li>Java e Spring Boot.</li><li>Microsserviços.</li><li>Kafka e RabbitMQ.</li><li>AWS e Azure.</li><li>Docker e CI/CD.</li><li>Testes automatizados.</li><li>Arquitetura de software.</li><li>Python.</li><li>IA aplicada a negócios.</li><li>Next.js para produtos próprios.</li></ul><h4>Ideia central</h4><ul class="doc-list"><li>Sua maior ferramenta financeira hoje provavelmente não é investimento. É aumentar renda com carreira, projetos, produtos e serviços.</li></ul>
-        </article>
-
-        <article class="module-card phase3 searchable-section" data-search-section data-module="15">
-          <div class="module-head">
-            <span class="module-number">Módulo 15</span>
-            <span class="module-phase">Fase 3 - Crescimento financeiro</span>
-          </div>
-          <h3>Precificação de serviços e freelas</h3>
-          <p>Precificar mal faz você trabalhar muito e lucrar pouco. Precificação deve considerar custo, valor entregue, complexidade, prazo, risco e manutenção.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Preço por hora.</li><li>Preço por projeto.</li><li>Preço por valor percebido.</li><li>Escopo fechado versus escopo aberto.</li><li>Manutenção mensal.</li><li>Margem de lucro.</li><li>Custo de ferramentas.</li><li>Tempo de suporte.</li><li>Risco de retrabalho.</li><li>Contrato e condições de pagamento.</li></ul><h4>Fórmula</h4><ul class="doc-list"><li>Lucro bruto simplificado = preço cobrado - custos diretos.</li><li>Exemplo: se você cobra R$ 1.200 e gasta R$ 200 em ferramentas e serviços, o lucro bruto é R$ 1.000.</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="16">
-          <div class="module-head">
-            <span class="module-number">Módulo 16</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>Fundos de investimento</h3>
-          <p>Fundos são veículos coletivos de investimento. O investidor compra cotas e delega a gestão a uma equipe profissional, pagando taxas e aceitando regras específicas de liquidez e risco.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Fundos de renda fixa.</li><li>Fundos DI.</li><li>Fundos multimercado.</li><li>Fundos de ações.</li><li>Fundos cambiais.</li><li>Fundos imobiliários.</li><li>ETFs.</li><li>Taxa de administração.</li><li>Taxa de performance.</li><li>Come-cotas.</li><li>Cotização e resgate.</li><li>Benchmark.</li><li>Lâmina do fundo.</li><li>Regulamento.</li><li>Volatilidade e drawdown.</li></ul><h4>Cuidado</h4><ul class="doc-list"><li>Fundo não é bom apenas porque rendeu bem no passado. É necessário entender estratégia, risco, taxas, liquidez e consistência.</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="17">
-          <div class="module-head">
-            <span class="module-number">Módulo 17</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>Renda variável e ações</h3>
-          <p>Renda variável exige maturidade financeira. Ela deve ser estudada depois da base, porque oscila e pode gerar perdas no curto prazo.</p>
-          <h4>Conceitos de ações</h4><ul class="doc-list"><li>O que é uma ação.</li><li>Acionista.</li><li>Dividendos.</li><li>Juros sobre capital próprio.</li><li>Governança corporativa.</li><li>Lucro, receita e margem.</li><li>Endividamento.</li><li>Fluxo de caixa.</li><li>Preço versus valor.</li></ul><h4>Indicadores para estudar</h4><ul class="doc-list"><li>P/L.</li><li>P/VP.</li><li>EV/EBITDA.</li><li>ROE.</li><li>ROIC.</li><li>Dividend yield.</li><li>Payout.</li><li>CAGR.</li></ul><h4>Análise fundamentalista</h4><ul class="doc-list"><li>Balanço patrimonial.</li><li>DRE.</li><li>Fluxo de caixa.</li><li>Dívida líquida.</li><li>Lucro líquido.</li><li>Lucro recorrente.</li><li>Vantagem competitiva.</li><li>Setor, gestão e governança.</li></ul><h4>Análise técnica como complemento</h4><ul class="doc-list"><li>Tendência.</li><li>Suporte e resistência.</li><li>Volume.</li><li>Médias móveis.</li><li>Volatilidade.</li><li>Candles.</li><li>Gestão de risco.</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="18">
-          <div class="module-head">
-            <span class="module-number">Módulo 18</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>Fundos imobiliários - FIIs</h3>
-          <p>FIIs permitem investir em ativos imobiliários ou papéis ligados ao setor imobiliário por meio de cotas negociadas em bolsa.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Fundos de tijolo.</li><li>Fundos de papel.</li><li>Fundos híbridos.</li><li>Dividend yield.</li><li>Vacância.</li><li>Inadimplência.</li><li>Contratos.</li><li>Indexadores.</li><li>Valor patrimonial.</li><li>P/VP.</li><li>Gestão.</li><li>Taxas.</li><li>Liquidez.</li><li>Emissão de cotas.</li></ul><h4>Setores para conhecer</h4><ul class="doc-list"><li>Shoppings.</li><li>Lajes corporativas.</li><li>Galpões logísticos.</li><li>Recebíveis imobiliários.</li><li>Hospitais.</li><li>Educacional.</li><li>Fundos híbridos.</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="19">
-          <div class="module-head">
-            <span class="module-number">Módulo 19</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>ETFs, BDRs e investimentos internacionais</h3>
-          <p>Investimentos globais ajudam a reduzir dependência de um único país, moeda e economia. Esse bloco deve ser estudado com atenção a câmbio, tributação e risco.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>ETF.</li><li>Índice de referência.</li><li>Taxa de administração.</li><li>Diversificação.</li><li>BDR.</li><li>S&amp;P 500.</li><li>Nasdaq.</li><li>MSCI World.</li><li>Câmbio e dólar.</li><li>Risco Brasil.</li><li>Risco global.</li><li>Tributação.</li><li>Corretoras internacionais.</li><li>Sucessão patrimonial.</li><li>Proteção cambial.</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="20">
-          <div class="module-head">
-            <span class="module-number">Módulo 20</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>Criptoativos</h3>
-          <p>Criptoativos devem ser estudados primeiro pelo risco, não pela promessa de riqueza. O mercado é volátil, técnico e sujeito a falhas operacionais, golpes e mudanças regulatórias.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Bitcoin.</li><li>Blockchain.</li><li>Ethereum.</li><li>Stablecoins.</li><li>Autocustódia.</li><li>Corretoras.</li><li>Carteiras digitais.</li><li>Risco tecnológico.</li><li>Risco regulatório.</li><li>Volatilidade.</li><li>Golpes.</li><li>Liquidez.</li><li>Diferença entre investimento e especulação.</li></ul><h4>Regra prática</h4><ul class="doc-list"><li>Antes de estudar cripto para investir, estude cripto para entender risco.</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="21">
-          <div class="module-head">
-            <span class="module-number">Módulo 21</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>Gestão de risco</h3>
-          <p>Gestão de risco é o que impede que uma decisão ruim destrua anos de progresso financeiro.</p>
-          <h4>Riscos e conceitos</h4><ul class="doc-list"><li>Risco de mercado.</li><li>Risco de crédito.</li><li>Risco de liquidez.</li><li>Risco operacional.</li><li>Risco regulatório.</li><li>Risco cambial.</li><li>Risco de concentração.</li><li>Risco de inflação.</li><li>Risco de contraparte.</li><li>Diversificação.</li><li>Correlação.</li><li>Volatilidade.</li><li>Drawdown.</li><li>Margem de segurança.</li></ul><h4>Perguntas antes de investir</h4><ul class="doc-list"><li>Quanto posso perder?</li><li>Por quanto tempo posso deixar esse dinheiro parado?</li><li>Esse dinheiro tem prazo?</li><li>O investimento tem liquidez?</li><li>Estou concentrado demais?</li><li>Eu entendo o produto?</li><li>Se cair 30%, eu vendo, mantenho ou compro mais?</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="22">
-          <div class="module-head">
-            <span class="module-number">Módulo 22</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>Alocação de ativos</h3>
-          <p>Alocação é a distribuição do patrimônio entre classes de ativos conforme objetivos, prazo, tolerância a risco e necessidade de liquidez.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Perfil de investidor.</li><li>Objetivos financeiros.</li><li>Horizonte de tempo.</li><li>Carteira conservadora.</li><li>Carteira moderada.</li><li>Carteira arrojada.</li><li>Rebalanceamento.</li><li>Diversificação.</li><li>Alocação estratégica.</li><li>Alocação tática.</li><li>Reserva de oportunidade.</li><li>Carteira previdenciária.</li><li>Carteira de crescimento.</li><li>Carteira de renda passiva.</li></ul><h4>Classes de ativos para mapear</h4><ul class="doc-list"><li>Reserva de emergência.</li><li>Renda fixa pós-fixada.</li><li>Renda fixa IPCA+.</li><li>Renda fixa prefixada.</li><li>Ações.</li><li>FIIs.</li><li>ETFs.</li><li>Investimentos internacionais.</li><li>Criptoativos, se fizer sentido e com baixa exposição.</li><li>Caixa para oportunidades.</li></ul>
-        </article>
-
-        <article class="module-card phase4 searchable-section" data-search-section data-module="23">
-          <div class="module-head">
-            <span class="module-number">Módulo 23</span>
-            <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
-          </div>
-          <h3>Impostos e declaração</h3>
-          <p>Você não precisa virar contador, mas precisa entender o suficiente para não se complicar e para saber quando procurar ajuda especializada.</p>
-          <h4>Impostos e declaração</h4><ul class="doc-list"><li>Imposto de Renda Pessoa Física.</li><li>Declaração de investimentos.</li><li>DARF.</li><li>Lucro e prejuízo.</li><li>Compensação de prejuízo.</li><li>Imposto em renda fixa.</li><li>Imposto em ações.</li><li>Imposto em FIIs.</li><li>Imposto em fundos.</li><li>Come-cotas.</li><li>IOF.</li><li>Previdência PGBL e VGBL.</li><li>Carnê-leão, quando aplicável.</li></ul><h4>Para quem quer ganhar dinheiro com programação, produtos digitais e IA</h4><ul class="doc-list"><li>Nota fiscal.</li><li>MEI.</li><li>Empresário individual.</li><li>Sociedade limitada unipessoal.</li><li>Regime tributário.</li><li>CNAE.</li><li>Contabilidade básica.</li><li>Separação entre pessoa física e empresa.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="24">
-          <div class="module-head">
-            <span class="module-number">Módulo 24</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>Planejamento financeiro de vida</h3>
-          <p>Planejamento financeiro liga o dinheiro aos objetivos reais: morar sozinho, mudar de cidade, casar, estudar, investir, empreender ou conquistar independência financeira.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Metas de curto prazo: 0 a 12 meses.</li><li>Metas de médio prazo: 1 a 5 anos.</li><li>Metas de longo prazo: acima de 5 anos.</li><li>Compra de veículo.</li><li>Mudança para morar sozinho.</li><li>Casamento e família.</li><li>Faculdade e certificações.</li><li>Carreira.</li><li>Aposentadoria.</li><li>Independência financeira.</li><li>Renda passiva.</li><li>Sucessão patrimonial.</li></ul><h4>Ordem racional para sua realidade</h4><ul class="doc-list"><li>Regularizar dívidas.</li><li>Montar reserva inicial.</li><li>Planejar mudança para Goiânia ou outra capital com números reais.</li><li>Melhorar renda como desenvolvedor.</li><li>Criar renda extra com programação e IA.</li><li>Investir mensalmente.</li><li>Construir patrimônio.</li><li>Criar produtos digitais ou micro-SaaS.</li><li>Buscar liberdade geográfica e financeira.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="25">
-          <div class="module-head">
-            <span class="module-number">Módulo 25</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>Contabilidade básica</h3>
-          <p>Contabilidade permite entender sua própria vida financeira, analisar empresas, abrir negócios e interpretar resultados.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Ativo.</li><li>Passivo.</li><li>Patrimônio líquido.</li><li>Receita.</li><li>Despesa.</li><li>Custo.</li><li>Lucro.</li><li>Caixa.</li><li>Regime de caixa e regime de competência.</li><li>Balanço patrimonial.</li><li>DRE.</li><li>Fluxo de caixa.</li><li>Margem bruta.</li><li>Margem operacional.</li><li>Margem líquida.</li><li>Depreciação e amortização.</li><li>Endividamento.</li><li>Liquidez.</li><li>Capital de giro.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="26">
-          <div class="module-head">
-            <span class="module-number">Módulo 26</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>Economia aplicada</h3>
-          <p>Economia ajuda a entender o ambiente que afeta salário, aluguel, investimentos, alimentos, dólar, tecnologia e oportunidades profissionais.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Inflação.</li><li>Taxa Selic.</li><li>PIB.</li><li>Desemprego.</li><li>Câmbio.</li><li>Dólar.</li><li>Juros reais.</li><li>Política monetária.</li><li>Política fiscal.</li><li>Dívida pública.</li><li>Déficit e superávit.</li><li>Commodities.</li><li>Ciclos econômicos.</li><li>Recessão e crescimento.</li><li>Produtividade.</li><li>Crédito.</li><li>Consumo.</li><li>Renda.</li><li>Globalização.</li></ul><h4>Aplicação prática</h4><ul class="doc-list"><li>Sempre que estudar economia, conecte o conceito a algo concreto: aluguel, salário, financiamento, preço dos alimentos, dólar, mercado de tecnologia ou investimentos.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="27">
-          <div class="module-head">
-            <span class="module-number">Módulo 27</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>Empreendedorismo e negócios</h3>
-          <p>Esse bloco conecta finanças com geração de renda por serviços, produtos digitais, SaaS, consultoria, automações e IA.</p>
-          <h4>Fundamentos de negócio</h4><ul class="doc-list"><li>Oferta.</li><li>Demanda.</li><li>Público-alvo.</li><li>Nicho.</li><li>Dor do cliente.</li><li>Proposta de valor.</li><li>Posicionamento.</li><li>Diferenciação.</li><li>Precificação.</li><li>Margem.</li><li>Lucro.</li><li>Custo fixo.</li><li>Custo variável.</li><li>Capital de giro.</li><li>Ponto de equilíbrio.</li></ul><h4>Métricas de negócio</h4><ul class="doc-list"><li>Faturamento.</li><li>Lucro bruto.</li><li>Lucro líquido.</li><li>Margem líquida.</li><li>Ticket médio.</li><li>CAC.</li><li>LTV.</li><li>Churn.</li><li>MRR.</li><li>ARR.</li><li>ROI.</li><li>ROAS.</li><li>Payback.</li><li>Conversão.</li><li>Retenção.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="28">
-          <div class="module-head">
-            <span class="module-number">Módulo 28</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>Produtos digitais</h3>
-          <p>Produtos digitais podem transformar conhecimento em ativo vendável. O estudo deve combinar oferta, entrega, marketing, suporte, margem e escalabilidade.</p>
-          <h4>Formatos</h4><ul class="doc-list"><li>Ebook.</li><li>Planilha.</li><li>Guia prático.</li><li>Template.</li><li>Mentoria.</li><li>Curso.</li><li>Comunidade.</li><li>Automação.</li><li>Micro-SaaS.</li><li>Consultoria.</li><li>Assinatura.</li></ul><h4>Conteúdos para estudar junto</h4><ul class="doc-list"><li>Copywriting.</li><li>Página de vendas.</li><li>Funil simples.</li><li>Checkout.</li><li>Upsell e order bump.</li><li>Suporte ao cliente.</li><li>Política de reembolso.</li><li>Distribuição orgânica.</li><li>Conteúdo para Instagram, TikTok, blog e email.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="29">
-          <div class="module-head">
-            <span class="module-number">Módulo 29</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>IA aplicada a ganhos financeiros</h3>
-          <p>IA deve ser estudada como ferramenta para resolver problemas reais, reduzir custo, aumentar produtividade, criar produtos e prestar serviços melhores.</p>
-          <h4>Conteúdos</h4><ul class="doc-list"><li>Automações com IA.</li><li>Agentes de IA.</li><li>Chatbots.</li><li>Atendimento automatizado.</li><li>Análise de documentos.</li><li>Geração de relatórios.</li><li>Copilotos internos.</li><li>Integração com APIs.</li><li>RAG.</li><li>Embeddings.</li><li>Bancos vetoriais.</li><li>Automação de marketing.</li><li>Automação de vendas.</li><li>Análise de dados.</li><li>Dashboards inteligentes.</li></ul><h4>Conexão com programação</h4><ul class="doc-list"><li>A oportunidade está em unir Java/Spring, Python, APIs, bancos de dados, automações, cloud e IA para criar soluções vendáveis para empresas e profissionais.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="30">
-          <div class="module-head">
-            <span class="module-number">Módulo 30</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>Finanças avançadas</h3>
-          <p>Finanças avançadas devem ser estudadas depois de uma base sólida. Elas ajudam a avaliar empresas, carteiras e estratégias com rigor técnico.</p>
-          <h4>Valuation</h4><ul class="doc-list"><li>Fluxo de caixa descontado.</li><li>WACC.</li><li>CAPM.</li><li>Taxa livre de risco.</li><li>Prêmio de risco.</li><li>Crescimento perpétuo.</li><li>Múltiplos.</li><li>Valuation relativo.</li><li>Margem de segurança.</li></ul><h4>Carteiras</h4><ul class="doc-list"><li>Teoria moderna do portfólio.</li><li>Fronteira eficiente.</li><li>Beta.</li><li>Alfa.</li><li>Sharpe.</li><li>Sortino.</li><li>Correlação.</li><li>Volatilidade.</li><li>Backtesting.</li><li>Rebalanceamento.</li></ul><h4>Derivativos</h4><ul class="doc-list"><li>Opções.</li><li>Futuros.</li><li>Swaps.</li><li>Hedge.</li><li>Proteção cambial.</li><li>Alavancagem.</li><li>Chamada de margem.</li><li>Perda máxima.</li><li>Assimetria de risco.</li></ul><h4>Cuidado com derivativos</h4><ul class="doc-list"><li>Estude derivativos primeiro para entender risco e proteção. Não trate alavancagem como atalho para enriquecer.</li></ul>
-        </article>
-
-        <article class="module-card phase5 searchable-section" data-search-section data-module="31">
-          <div class="module-head">
-            <span class="module-number">Módulo 31</span>
-            <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
-          </div>
-          <h3>Proteção patrimonial e segurança</h3>
-          <p>Ganhar dinheiro é apenas uma parte. Proteger patrimônio, renda, família e dados também faz parte da maturidade financeira.</p>
-          <h4>Proteção patrimonial</h4><ul class="doc-list"><li>Seguros.</li><li>Seguro de vida.</li><li>Seguro residencial.</li><li>Seguro de veículo.</li><li>Plano de saúde.</li><li>Proteção contra perda de renda.</li><li>Previdência.</li><li>Sucessão.</li><li>Testamento.</li><li>Holding patrimonial, quando fizer sentido e com orientação especializada.</li><li>Planejamento tributário.</li><li>Separação de bens.</li><li>Reserva familiar.</li><li>Segurança digital financeira.</li></ul><h4>Golpes financeiros para estudar e evitar</h4><ul class="doc-list"><li>Pirâmides financeiras.</li><li>Promessas de rentabilidade garantida.</li><li>Falsos traders.</li><li>Phishing.</li><li>Links falsos.</li><li>Engenharia social.</li><li>Apps maliciosos.</li><li>Clonagem de cartão.</li><li>Golpes via Pix.</li></ul>
-        </article></div>
-    </section>
-    <section id="roadmap" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Roadmap consolidado de estudo</h2><p class="section-subtitle">Ordem final recomendada, da base ao avançado.</p></div><span class="section-badge">29 passos</span></div>
-      <ol class="roadmap-list"><li><span>01</span>Mentalidade financeira</li><li><span>02</span>Orçamento e controle de gastos</li><li><span>03</span>Diagnóstico financeiro e patrimônio líquido</li><li><span>04</span>Fluxo de caixa pessoal</li><li><span>05</span>Dívidas, juros e crédito</li><li><span>06</span>Estratégias de quitação</li><li><span>07</span>Reserva de emergência</li><li><span>08</span>Matemática financeira</li><li><span>09</span>Sistema financeiro brasileiro</li><li><span>10</span>Renda fixa básica</li><li><span>11</span>Renda fixa avançada</li><li><span>12</span>Aumento de renda e carreira</li><li><span>13</span>Precificação de serviços</li><li><span>14</span>Fundos de investimento</li><li><span>15</span>Renda variável e ações</li><li><span>16</span>FIIs</li><li><span>17</span>ETFs, BDRs e exterior</li><li><span>18</span>Criptoativos</li><li><span>19</span>Gestão de risco</li><li><span>20</span>Alocação de ativos</li><li><span>21</span>Impostos e declaração</li><li><span>22</span>Planejamento financeiro de vida</li><li><span>23</span>Contabilidade básica</li><li><span>24</span>Economia aplicada</li><li><span>25</span>Empreendedorismo e negócios</li><li><span>26</span>Produtos digitais</li><li><span>27</span>IA aplicada a ganhos financeiros</li><li><span>28</span>Finanças avançadas</li><li><span>29</span>Proteção patrimonial e segurança</li></ol>
-    </section>
-    <section id="checklist" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Checklist de domínio financeiro</h2><p class="section-subtitle">Use como checklist mensal de progresso e como critério de saída da trilha.</p></div><span class="section-badge">28 itens</span></div>
-      <div class="check-grid"><label class="check-item"><input type="checkbox"> <span>Sei exatamente quanto ganho líquido.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto gasto por mês.</span></label><label class="check-item"><input type="checkbox"> <span>Sei para onde meu dinheiro vai.</span></label><label class="check-item"><input type="checkbox"> <span>Tenho lista de todas as dívidas.</span></label><label class="check-item"><input type="checkbox"> <span>Sei qual dívida tem maior juros.</span></label><label class="check-item"><input type="checkbox"> <span>Conheço meu patrimônio líquido.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto preciso para morar sozinho.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto preciso de reserva de emergência.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto posso guardar ou investir por mês.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo ativo e passivo.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo renda e patrimônio.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo poupar e investir.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo juros simples e compostos.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo Selic, CDI e IPCA.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo liquidez e rentabilidade.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo risco e volatilidade.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo renda fixa e renda variável.</span></label><label class="check-item"><input type="checkbox"> <span>Sei comparar CDB, LCI, LCA e Tesouro.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo imposto sobre investimentos.</span></label><label class="check-item"><input type="checkbox"> <span>Sei montar uma carteira simples.</span></label><label class="check-item"><input type="checkbox"> <span>Sei rebalancear investimentos.</span></label><label class="check-item"><input type="checkbox"> <span>Sei calcular lucro real.</span></label><label class="check-item"><input type="checkbox"> <span>Sei precificar um serviço.</span></label><label class="check-item"><input type="checkbox"> <span>Sei calcular margem de lucro.</span></label><label class="check-item"><input type="checkbox"> <span>Sei separar finanças pessoais e empresariais.</span></label><label class="check-item"><input type="checkbox"> <span>Sei analisar uma empresa em nível básico.</span></label><label class="check-item"><input type="checkbox"> <span>Sei reconhecer golpes financeiros.</span></label><label class="check-item"><input type="checkbox"> <span>Tenho plano para aumentar renda.</span></label></div>
-    </section>
-    <section id="aplicacao" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Aplicação direta para sua realidade</h2><p class="section-subtitle">Ordem racional e conservadora para reorganização financeira, mudança e crescimento como desenvolvedor.</p></div><span class="section-badge">Execução</span></div>
-      <div class="doc-grid-2">
-        <div class="callout"><h3>Ordem recomendada</h3><ul class="doc-list"><li>Controle financeiro pessoal</li><li>Quitação e renegociação de dívidas</li><li>Matemática financeira</li><li>Reserva de emergência</li><li>Planejamento da mudança</li><li>Aumento de renda como desenvolvedor</li><li>Renda fixa</li><li>Produtos digitais e freelas</li><li>Investimentos diversificados</li><li>Negócio próprio com programação e IA</li></ul></div>
-        <div class="callout success"><h3>Método 70/20/10</h3><ul class="doc-list"><li>70% prática: planilhas, simulações, cálculos, comparações e decisões reais.</li><li>20% teoria: livros, cursos, vídeos, artigos e materiais oficiais.</li><li>10% revisão: resumo, flashcards, checklist e correção de erros.</li></ul></div>
+    <article class="module-card phase1 searchable-section" data-search-section data-module="3">
+      <div class="module-head">
+        <span class="module-number">Módulo 03</span>
+        <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
       </div>
-      <h3>Exemplos de aplicação</h3>
-      <div class="doc-grid-3"><div class="project-card"><strong>Estudou orçamento</strong><span>Estudou orçamento? Monte sua planilha.</span></div><div class="project-card"><strong>Estudou dívidas</strong><span>Estudou dívidas? Liste todas e ordene por juros.</span></div><div class="project-card"><strong>Estudou juros</strong><span>Estudou juros? Calcule o custo real das parcelas.</span></div><div class="project-card"><strong>Estudou renda fixa</strong><span>Estudou renda fixa? Compare três produtos.</span></div><div class="project-card"><strong>Estudou investimentos</strong><span>Estudou investimentos? Monte uma carteira simulada.</span></div><div class="project-card"><strong>Estudou negócios</strong><span>Estudou negócios? Crie uma oferta real.</span></div><div class="project-card"><strong>Estudou IA</strong><span>Estudou IA? Crie uma automação vendável.</span></div></div>
-    </section>
-    <section id="projetos" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Projetos práticos da trilha</h2><p class="section-subtitle">Artefatos que transformam estudo financeiro em decisão mensurável.</p></div><span class="section-badge">Portfólio pessoal</span></div>
-      <div class="doc-grid-3">
-        <div class="project-card"><strong>Planilha de diagnóstico financeiro</strong><span>Receitas, gastos fixos/variáveis, dívidas, parcelas, patrimônio líquido, vencimentos e metas.</span></div>
-        <div class="project-card"><strong>Plano de quitação de dívidas</strong><span>Lista de dívidas, juros, método avalanche/bola de neve, renegociação e impacto no fluxo de caixa.</span></div>
-        <div class="project-card"><strong>Simulador de reserva</strong><span>Custo de vida mensal, reserva mínima, inicial e ideal, com projeção de prazo para formação.</span></div>
-        <div class="project-card"><strong>Comparador de renda fixa</strong><span>Comparar Tesouro Selic, CDB, LCI, LCA e fundos DI considerando liquidez, risco, imposto e objetivo.</span></div>
-        <div class="project-card"><strong>Precificador de serviços</strong><span>Preço por hora/projeto, custos diretos, margem, risco, manutenção e contrato.</span></div>
-        <div class="project-card"><strong>Oferta com programação e IA</strong><span>Oferta real de automação, dashboard, agente, chatbot ou micro-SaaS, com cálculo de preço e margem.</span></div>
+      <h3>Métodos de orçamento</h3>
+      <p>Existem vários modelos de orçamento. A escolha depende da fase financeira. Para reorganizar dívidas, planejar mudança e aumentar renda, o método mais eficiente costuma ser o orçamento base zero.</p>
+      <h4>Métodos</h4><ul class="doc-list"><li>Orçamento 50/30/20: divide a renda em necessidades, desejos e poupança/investimentos.</li><li>Orçamento base zero: cada real recebe uma finalidade antes de ser gasto.</li><li>Método dos envelopes: separa dinheiro por categorias para limitar consumo.</li><li>Orçamento de sobrevivência: usado em fase de crise, priorizando moradia, alimentação, transporte, dívidas essenciais e renda.</li><li>Orçamento por prioridade: organiza gastos de acordo com metas financeiras.</li></ul><h4>Prioridade recomendada</h4><ul class="doc-list"><li>Domine o orçamento base zero. Ele obriga você a planejar cada real e reduz o risco de gastar dinheiro que já está comprometido com contas futuras.</li></ul>
+    </article>
+
+    <article class="module-card phase1 searchable-section" data-search-section data-module="4">
+      <div class="module-head">
+        <span class="module-number">Módulo 04</span>
+        <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
       </div>
-    </section>
-    <section id="consulta" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Consulta rápida</h2><p class="section-subtitle">Regras e fórmulas para revisão diária.</p></div><span class="section-badge">Revisão</span></div>
-      <div class="doc-grid-2">
-        <div class="mini-card"><strong>Patrimônio líquido</strong><span>Tudo que você possui - tudo que você deve.</span></div>
-        <div class="mini-card"><strong>Juros compostos</strong><span>Montante = capital inicial x (1 + taxa) ^ tempo.</span></div>
-        <div class="mini-card"><strong>Rentabilidade real aproximada</strong><span>Rentabilidade nominal - inflação.</span></div>
-        <div class="mini-card"><strong>Lucro bruto simplificado</strong><span>Preço cobrado - custos diretos.</span></div>
-        <div class="mini-card"><strong>Regra de dívida</strong><span>Dívida cara vem antes de investimento.</span></div>
-        <div class="mini-card"><strong>Regra de cripto</strong><span>Antes de estudar cripto para investir, estude cripto para entender risco.</span></div>
+      <h3>Diagnóstico financeiro pessoal</h3>
+      <p>O diagnóstico transforma uma sensação vaga de desorganização em números concretos. Ele mostra sua situação real, seu grau de risco e a ordem correta de decisão.</p>
+      <h4>O que levantar</h4><ul class="doc-list"><li>Lista completa de dívidas.</li><li>Lista de contas mensais.</li><li>Lista de contas vencidas e a vencer.</li><li>Lista de parcelas futuras.</li><li>Lista de assinaturas e gastos recorrentes.</li><li>Lista de bens: moto, dinheiro em conta, equipamentos, investimentos.</li><li>Lista de metas: quitar dívidas, mudar, investir, empreender, estudar.</li></ul><h4>Fórmula</h4><ul class="doc-list"><li>Patrimônio líquido = tudo que você possui - tudo que você deve.</li><li>Exemplo: moto de R$ 21.000 + R$ 2.000 guardados - R$ 20.000 em dívidas = R$ 3.000 de patrimônio líquido.</li></ul><h4>Ponto-chave</h4><ul class="doc-list"><li>Salário não é patrimônio. Uma pessoa pode ganhar bem e estar quebrada se as dívidas, parcelas e padrão de vida forem maiores que a renda.</li></ul>
+    </article>
+
+    <article class="module-card phase1 searchable-section" data-search-section data-module="5">
+      <div class="module-head">
+        <span class="module-number">Módulo 05</span>
+        <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
       </div>
-      <h3>Conclusão operacional</h3>
-      <p>A ordem correta não é investir para ficar rico rapidamente. A ordem correta é controlar dinheiro, eliminar dívidas ruins, criar reserva, aumentar renda, investir com consistência, criar ativos, proteger patrimônio e escalar renda.</p>
-      <p>Para a fase atual de reorganização financeira, os conteúdos mais importantes são: orçamento pessoal, dívidas e juros, reserva de emergência, matemática financeira, aumento de renda, renda fixa, precificação de serviços, produtos digitais, IA aplicada a negócios e investimentos de longo prazo.</p>
-    </section>
-    <section id="referencias" class="section doc-section searchable-section" data-search-section>
-      <div class="doc-section-heading"><div><h2>Referências e fontes oficiais recomendadas</h2><p class="section-subtitle">Fontes citadas no PDF para aprofundamento educacional.</p></div><span class="section-badge">Fontes</span></div>
-      <ul class="doc-list"><li>Banco Central do Brasil - Cidadania Financeira.</li><li>CVM - Portal do Investidor e materiais de educação financeira.</li><li>Tesouro Direto - materiais educativos sobre títulos públicos.</li><li>B3 - conteúdos educacionais sobre mercado financeiro.</li><li>Receita Federal - orientações sobre Imposto de Renda e declarações.</li></ul>
-      <div class="callout accent-orange"><h3>Nota de atualização</h3><p>O conteúdo foi transcrito e organizado em HTML com correção de acentuação e estrutura visual. Como regras tributárias, produtos financeiros e normas podem mudar, a validação final deve ser feita nas fontes oficiais acima antes de qualquer decisão real.</p></div>
-    </section>
-  </div><!-- /content -->
+      <h3>Fluxo de caixa pessoal</h3>
+      <p>Fluxo de caixa é a previsão de entradas e saídas de dinheiro ao longo do tempo. Ele evita o erro de achar que dinheiro disponível na conta está livre para gasto.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Fluxo de caixa diário.</li><li>Fluxo de caixa semanal.</li><li>Fluxo de caixa mensal.</li><li>Saldo projetado.</li><li>Contas futuras.</li><li>Impacto de compras parceladas.</li><li>Previsão de despesas sazonais: IPVA, material, manutenção, presentes, viagens e mudança.</li></ul><h4>Regra prática</h4><ul class="doc-list"><li>Dinheiro na conta não significa dinheiro livre. Parte dele pode já pertencer a contas futuras.</li></ul>
+    </article>
+
+    <article class="module-card phase1 searchable-section" data-search-section data-module="6">
+      <div class="module-head">
+        <span class="module-number">Módulo 06</span>
+        <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
+      </div>
+      <h3>Dívidas, juros e crédito</h3>
+      <p>Dívidas precisam ser estudadas antes de investimentos porque juros altos destroem patrimônio mais rapidamente do que a maioria dos investimentos consegue construir.</p>
+      <h4>Tipos de dívida</h4><ul class="doc-list"><li>Cartão de crédito.</li><li>Cheque especial.</li><li>Empréstimo pessoal.</li><li>Financiamento.</li><li>Consórcio.</li><li>Parcelamentos.</li><li>Contas atrasadas.</li><li>Dívida com familiares.</li><li>Dívida sem juros.</li><li>Dívida com juros compostos.</li></ul><h4>Conceitos fundamentais</h4><ul class="doc-list"><li>Juros simples: juros calculados sobre o valor inicial.</li><li>Juros compostos: juros sobre juros.</li><li>CET - Custo Efetivo Total.</li><li>Taxa nominal e taxa efetiva.</li><li>IOF, tarifas e seguros embutidos.</li><li>Amortização e liquidação antecipada.</li></ul><h4>Regra prática</h4><ul class="doc-list"><li>Dívida cara vem antes de investimento. Não faz sentido buscar 1% ao mês em investimento enquanto paga juros muito maiores no cartão ou cheque especial.</li></ul>
+    </article>
+
+    <article class="module-card phase1 searchable-section" data-search-section data-module="7">
+      <div class="module-head">
+        <span class="module-number">Módulo 07</span>
+        <span class="module-phase">Fase 1 - Sobrevivência financeira</span>
+      </div>
+      <h3>Estratégias de quitação de dívidas</h3>
+      <p>Este módulo organiza a decisão de pagamento, renegociação e priorização das dívidas para recuperar fluxo de caixa e reduzir risco financeiro.</p>
+      <h4>Estratégias</h4><ul class="doc-list"><li>Método avalanche: prioriza a dívida com maior taxa de juros.</li><li>Método bola de neve: prioriza as menores dívidas para gerar motivação e liberar fluxo de caixa.</li><li>Renegociação: busca desconto, redução de juros ou novo prazo.</li><li>Portabilidade de crédito: troca uma dívida cara por outra mais barata.</li><li>Liquidação antecipada: quita parcelas futuras com desconto proporcional quando houver vantagem.</li></ul><h4>Ordem sugerida de decisão</h4><ul class="doc-list"><li>Listar todas as dívidas.</li><li>Identificar juros, parcelas e vencimentos.</li><li>Separar dívidas essenciais das não essenciais.</li><li>Priorizar dívidas caras e atrasadas.</li><li>Negociar desconto para pagamento à vista quando possível.</li><li>Evitar assumir nova parcela antes de estabilizar o fluxo de caixa.</li></ul>
+    </article>
+
+    <article class="module-card phase2 searchable-section" data-search-section data-module="8">
+      <div class="module-head">
+        <span class="module-number">Módulo 08</span>
+        <span class="module-phase">Fase 2 - Estabilidade financeira</span>
+      </div>
+      <h3>Reserva de emergência</h3>
+      <p>Reserva de emergência não é investimento para enriquecer. Ela é uma proteção contra imprevistos e evita que você volte para dívidas caras quando algo sai do controle.</p>
+      <h4>Funções da reserva</h4><ul class="doc-list"><li>Perda de renda.</li><li>Problemas de saúde.</li><li>Manutenção de moto ou carro.</li><li>Mudança de cidade.</li><li>Desemprego.</li><li>Emergências familiares.</li><li>Contas urgentes.</li></ul><h4>Tamanho da reserva</h4><ul class="doc-list"><li>Reserva mínima: 1 mês de custo de vida.</li><li>Reserva inicial: 3 meses de custo de vida.</li><li>Reserva ideal: 6 a 12 meses de custo de vida.</li><li>Reserva para autônomos ou empreendedores: geralmente mais alta, pela instabilidade de renda.</li></ul><h4>Ordem para sua fase</h4><ul class="doc-list"><li>Quitar ou organizar dívidas caras.</li><li>Montar reserva inicial.</li><li>Planejar mudança.</li><li>Investir com consistência.</li><li>Assumir riscos maiores apenas depois.</li></ul>
+    </article>
+
+    <article class="module-card phase2 searchable-section" data-search-section data-module="9">
+      <div class="module-head">
+        <span class="module-number">Módulo 09</span>
+        <span class="module-phase">Fase 2 - Estabilidade financeira</span>
+      </div>
+      <h3>Onde deixar a reserva</h3>
+      <p>A reserva deve priorizar segurança e liquidez, não rentabilidade máxima.</p>
+      <h4>Critérios</h4><ul class="doc-list"><li>Liquidez diária.</li><li>Baixo risco.</li><li>Previsibilidade.</li><li>Facilidade de resgate.</li><li>Separação da conta de gastos.</li><li>Evitar volatilidade e prazos longos.</li></ul><h4>Produtos para estudar</h4><ul class="doc-list"><li>Tesouro Selic.</li><li>CDB com liquidez diária.</li><li>Fundos DI simples.</li><li>Contas remuneradas.</li><li>Poupança, entendendo suas limitações.</li></ul>
+    </article>
+
+    <article class="module-card phase2 searchable-section" data-search-section data-module="10">
+      <div class="module-head">
+        <span class="module-number">Módulo 10</span>
+        <span class="module-phase">Fase 2 - Estabilidade financeira</span>
+      </div>
+      <h3>Matemática financeira</h3>
+      <p>Matemática financeira permite comparar alternativas e não depender de opinião, propaganda ou recomendação superficial.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Porcentagem.</li><li>Regra de três.</li><li>Juros simples.</li><li>Juros compostos.</li><li>Taxa mensal versus taxa anual.</li><li>Taxa nominal versus taxa efetiva.</li><li>Valor presente e valor futuro.</li><li>Inflação.</li><li>Rentabilidade real.</li><li>Amortização.</li><li>Parcelas.</li><li>Desconto.</li><li>CDI, Selic e IPCA.</li><li>Risco versus retorno.</li></ul><h4>Fórmulas e exemplos</h4><ul class="doc-list"><li>Juros compostos: Montante = capital inicial x (1 + taxa) ^ tempo.</li><li>Exemplo: R$ 1.000 a 1% ao mês por 12 meses = aproximadamente R$ 1.126,82.</li><li>Rentabilidade real aproximada = rentabilidade nominal - inflação.</li><li>Exemplo: se um investimento rendeu 10% no ano e a inflação foi 5%, o ganho real aproximado foi 5%.</li></ul>
+    </article>
+
+    <article class="module-card phase2 searchable-section" data-search-section data-module="11">
+      <div class="module-head">
+        <span class="module-number">Módulo 11</span>
+        <span class="module-phase">Fase 2 - Estabilidade financeira</span>
+      </div>
+      <h3>Sistema financeiro brasileiro</h3>
+      <p>Para investir e tomar crédito com consciência, você precisa entender as instituições e referências que fazem o dinheiro circular.</p>
+      <h4>Instituições e conceitos</h4><ul class="doc-list"><li>Banco Central.</li><li>CVM.</li><li>Tesouro Nacional.</li><li>B3.</li><li>Bancos.</li><li>Corretoras.</li><li>Cooperativas de crédito.</li><li>Fintechs.</li><li>FGC.</li><li>Selic.</li><li>CDI.</li><li>IPCA.</li><li>Taxa básica de juros.</li><li>Mercado monetário.</li><li>Mercado de capitais.</li><li>Mercado cambial.</li></ul>
+    </article>
+
+    <article class="module-card phase3 searchable-section" data-search-section data-module="12">
+      <div class="module-head">
+        <span class="module-number">Módulo 12</span>
+        <span class="module-phase">Fase 3 - Crescimento financeiro</span>
+      </div>
+      <h3>Renda fixa básica</h3>
+      <p>Renda fixa deve ser estudada logo após reserva e matemática financeira. Ela ajuda a entender segurança, indexadores, liquidez, prazos e impostos.</p>
+      <h4>Conceitos principais</h4><ul class="doc-list"><li>Emissor.</li><li>Indexador.</li><li>Vencimento.</li><li>Liquidez.</li><li>Risco de crédito.</li><li>Risco de mercado.</li><li>Marcação a mercado.</li><li>Imposto de renda.</li><li>IOF.</li><li>FGC.</li><li>Rentabilidade bruta e líquida.</li></ul><h4>Produtos para estudar</h4><ul class="doc-list"><li>Tesouro Selic.</li><li>Tesouro Prefixado.</li><li>Tesouro IPCA+.</li><li>CDB.</li><li>LCI.</li><li>LCA.</li><li>LC.</li><li>RDB.</li><li>Debêntures.</li><li>Debêntures incentivadas.</li><li>CRI.</li><li>CRA.</li><li>Fundos de renda fixa.</li></ul><h4>Comparações que você deve saber fazer</h4><ul class="doc-list"><li>CDB 110% do CDI versus LCI 95% do CDI.</li><li>Tesouro Selic versus conta remunerada.</li><li>Tesouro IPCA+ versus CDB prefixado.</li><li>Fundo DI com taxa de administração versus Tesouro Selic.</li></ul>
+    </article>
+
+    <article class="module-card phase3 searchable-section" data-search-section data-module="13">
+      <div class="module-head">
+        <span class="module-number">Módulo 13</span>
+        <span class="module-phase">Fase 3 - Crescimento financeiro</span>
+      </div>
+      <h3>Renda fixa avançada</h3>
+      <p>A renda fixa avançada explica por que um produto aparentemente seguro pode oscilar e gerar perdas caso seja vendido antes do vencimento.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Curva de juros.</li><li>Duration.</li><li>Duration modificada.</li><li>Convexidade.</li><li>Marcação a mercado.</li><li>Prêmio de risco.</li><li>Crédito privado.</li><li>Rating.</li><li>Spread de crédito.</li><li>Risco de liquidez.</li><li>Risco de reinvestimento.</li><li>NTN-B, LTN e LFT.</li><li>Fundos high grade e high yield.</li><li>Securitização.</li><li>CRI, CRA e FIDC.</li></ul>
+    </article>
+
+    <article class="module-card phase3 searchable-section" data-search-section data-module="14">
+      <div class="module-head">
+        <span class="module-number">Módulo 14</span>
+        <span class="module-phase">Fase 3 - Crescimento financeiro</span>
+      </div>
+      <h3>Aumento de renda e carreira</h3>
+      <p>Para quem ainda está construindo patrimônio, aumentar a capacidade de gerar renda costuma ter impacto maior do que escolher o investimento perfeito.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Plano de carreira.</li><li>Negociação salarial.</li><li>Currículo e LinkedIn.</li><li>Portfólio.</li><li>Freelancing.</li><li>Proposta comercial.</li><li>Contratos.</li><li>Entrega de valor.</li><li>Especialização técnica.</li><li>Inglês.</li><li>Certificações.</li></ul><h4>Competências com maior ligação ao seu contexto de desenvolvedor</h4><ul class="doc-list"><li>Java e Spring Boot.</li><li>Microsserviços.</li><li>Kafka e RabbitMQ.</li><li>AWS e Azure.</li><li>Docker e CI/CD.</li><li>Testes automatizados.</li><li>Arquitetura de software.</li><li>Python.</li><li>IA aplicada a negócios.</li><li>Next.js para produtos próprios.</li></ul><h4>Ideia central</h4><ul class="doc-list"><li>Sua maior ferramenta financeira hoje provavelmente não é investimento. É aumentar renda com carreira, projetos, produtos e serviços.</li></ul>
+    </article>
+
+    <article class="module-card phase3 searchable-section" data-search-section data-module="15">
+      <div class="module-head">
+        <span class="module-number">Módulo 15</span>
+        <span class="module-phase">Fase 3 - Crescimento financeiro</span>
+      </div>
+      <h3>Precificação de serviços e freelas</h3>
+      <p>Precificar mal faz você trabalhar muito e lucrar pouco. Precificação deve considerar custo, valor entregue, complexidade, prazo, risco e manutenção.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Preço por hora.</li><li>Preço por projeto.</li><li>Preço por valor percebido.</li><li>Escopo fechado versus escopo aberto.</li><li>Manutenção mensal.</li><li>Margem de lucro.</li><li>Custo de ferramentas.</li><li>Tempo de suporte.</li><li>Risco de retrabalho.</li><li>Contrato e condições de pagamento.</li></ul><h4>Fórmula</h4><ul class="doc-list"><li>Lucro bruto simplificado = preço cobrado - custos diretos.</li><li>Exemplo: se você cobra R$ 1.200 e gasta R$ 200 em ferramentas e serviços, o lucro bruto é R$ 1.000.</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="16">
+      <div class="module-head">
+        <span class="module-number">Módulo 16</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>Fundos de investimento</h3>
+      <p>Fundos são veículos coletivos de investimento. O investidor compra cotas e delega a gestão a uma equipe profissional, pagando taxas e aceitando regras específicas de liquidez e risco.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Fundos de renda fixa.</li><li>Fundos DI.</li><li>Fundos multimercado.</li><li>Fundos de ações.</li><li>Fundos cambiais.</li><li>Fundos imobiliários.</li><li>ETFs.</li><li>Taxa de administração.</li><li>Taxa de performance.</li><li>Come-cotas.</li><li>Cotização e resgate.</li><li>Benchmark.</li><li>Lâmina do fundo.</li><li>Regulamento.</li><li>Volatilidade e drawdown.</li></ul><h4>Cuidado</h4><ul class="doc-list"><li>Fundo não é bom apenas porque rendeu bem no passado. É necessário entender estratégia, risco, taxas, liquidez e consistência.</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="17">
+      <div class="module-head">
+        <span class="module-number">Módulo 17</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>Renda variável e ações</h3>
+      <p>Renda variável exige maturidade financeira. Ela deve ser estudada depois da base, porque oscila e pode gerar perdas no curto prazo.</p>
+      <h4>Conceitos de ações</h4><ul class="doc-list"><li>O que é uma ação.</li><li>Acionista.</li><li>Dividendos.</li><li>Juros sobre capital próprio.</li><li>Governança corporativa.</li><li>Lucro, receita e margem.</li><li>Endividamento.</li><li>Fluxo de caixa.</li><li>Preço versus valor.</li></ul><h4>Indicadores para estudar</h4><ul class="doc-list"><li>P/L.</li><li>P/VP.</li><li>EV/EBITDA.</li><li>ROE.</li><li>ROIC.</li><li>Dividend yield.</li><li>Payout.</li><li>CAGR.</li></ul><h4>Análise fundamentalista</h4><ul class="doc-list"><li>Balanço patrimonial.</li><li>DRE.</li><li>Fluxo de caixa.</li><li>Dívida líquida.</li><li>Lucro líquido.</li><li>Lucro recorrente.</li><li>Vantagem competitiva.</li><li>Setor, gestão e governança.</li></ul><h4>Análise técnica como complemento</h4><ul class="doc-list"><li>Tendência.</li><li>Suporte e resistência.</li><li>Volume.</li><li>Médias móveis.</li><li>Volatilidade.</li><li>Candles.</li><li>Gestão de risco.</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="18">
+      <div class="module-head">
+        <span class="module-number">Módulo 18</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>Fundos imobiliários - FIIs</h3>
+      <p>FIIs permitem investir em ativos imobiliários ou papéis ligados ao setor imobiliário por meio de cotas negociadas em bolsa.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Fundos de tijolo.</li><li>Fundos de papel.</li><li>Fundos híbridos.</li><li>Dividend yield.</li><li>Vacância.</li><li>Inadimplência.</li><li>Contratos.</li><li>Indexadores.</li><li>Valor patrimonial.</li><li>P/VP.</li><li>Gestão.</li><li>Taxas.</li><li>Liquidez.</li><li>Emissão de cotas.</li></ul><h4>Setores para conhecer</h4><ul class="doc-list"><li>Shoppings.</li><li>Lajes corporativas.</li><li>Galpões logísticos.</li><li>Recebíveis imobiliários.</li><li>Hospitais.</li><li>Educacional.</li><li>Fundos híbridos.</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="19">
+      <div class="module-head">
+        <span class="module-number">Módulo 19</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>ETFs, BDRs e investimentos internacionais</h3>
+      <p>Investimentos globais ajudam a reduzir dependência de um único país, moeda e economia. Esse bloco deve ser estudado com atenção a câmbio, tributação e risco.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>ETF.</li><li>Índice de referência.</li><li>Taxa de administração.</li><li>Diversificação.</li><li>BDR.</li><li>S&amp;P 500.</li><li>Nasdaq.</li><li>MSCI World.</li><li>Câmbio e dólar.</li><li>Risco Brasil.</li><li>Risco global.</li><li>Tributação.</li><li>Corretoras internacionais.</li><li>Sucessão patrimonial.</li><li>Proteção cambial.</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="20">
+      <div class="module-head">
+        <span class="module-number">Módulo 20</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>Criptoativos</h3>
+      <p>Criptoativos devem ser estudados primeiro pelo risco, não pela promessa de riqueza. O mercado é volátil, técnico e sujeito a falhas operacionais, golpes e mudanças regulatórias.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Bitcoin.</li><li>Blockchain.</li><li>Ethereum.</li><li>Stablecoins.</li><li>Autocustódia.</li><li>Corretoras.</li><li>Carteiras digitais.</li><li>Risco tecnológico.</li><li>Risco regulatório.</li><li>Volatilidade.</li><li>Golpes.</li><li>Liquidez.</li><li>Diferença entre investimento e especulação.</li></ul><h4>Regra prática</h4><ul class="doc-list"><li>Antes de estudar cripto para investir, estude cripto para entender risco.</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="21">
+      <div class="module-head">
+        <span class="module-number">Módulo 21</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>Gestão de risco</h3>
+      <p>Gestão de risco é o que impede que uma decisão ruim destrua anos de progresso financeiro.</p>
+      <h4>Riscos e conceitos</h4><ul class="doc-list"><li>Risco de mercado.</li><li>Risco de crédito.</li><li>Risco de liquidez.</li><li>Risco operacional.</li><li>Risco regulatório.</li><li>Risco cambial.</li><li>Risco de concentração.</li><li>Risco de inflação.</li><li>Risco de contraparte.</li><li>Diversificação.</li><li>Correlação.</li><li>Volatilidade.</li><li>Drawdown.</li><li>Margem de segurança.</li></ul><h4>Perguntas antes de investir</h4><ul class="doc-list"><li>Quanto posso perder?</li><li>Por quanto tempo posso deixar esse dinheiro parado?</li><li>Esse dinheiro tem prazo?</li><li>O investimento tem liquidez?</li><li>Estou concentrado demais?</li><li>Eu entendo o produto?</li><li>Se cair 30%, eu vendo, mantenho ou compro mais?</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="22">
+      <div class="module-head">
+        <span class="module-number">Módulo 22</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>Alocação de ativos</h3>
+      <p>Alocação é a distribuição do patrimônio entre classes de ativos conforme objetivos, prazo, tolerância a risco e necessidade de liquidez.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Perfil de investidor.</li><li>Objetivos financeiros.</li><li>Horizonte de tempo.</li><li>Carteira conservadora.</li><li>Carteira moderada.</li><li>Carteira arrojada.</li><li>Rebalanceamento.</li><li>Diversificação.</li><li>Alocação estratégica.</li><li>Alocação tática.</li><li>Reserva de oportunidade.</li><li>Carteira previdenciária.</li><li>Carteira de crescimento.</li><li>Carteira de renda passiva.</li></ul><h4>Classes de ativos para mapear</h4><ul class="doc-list"><li>Reserva de emergência.</li><li>Renda fixa pós-fixada.</li><li>Renda fixa IPCA+.</li><li>Renda fixa prefixada.</li><li>Ações.</li><li>FIIs.</li><li>ETFs.</li><li>Investimentos internacionais.</li><li>Criptoativos, se fizer sentido e com baixa exposição.</li><li>Caixa para oportunidades.</li></ul>
+    </article>
+
+    <article class="module-card phase4 searchable-section" data-search-section data-module="23">
+      <div class="module-head">
+        <span class="module-number">Módulo 23</span>
+        <span class="module-phase">Fase 4 - Multiplicação patrimonial</span>
+      </div>
+      <h3>Impostos e declaração</h3>
+      <p>Você não precisa virar contador, mas precisa entender o suficiente para não se complicar e para saber quando procurar ajuda especializada.</p>
+      <h4>Impostos e declaração</h4><ul class="doc-list"><li>Imposto de Renda Pessoa Física.</li><li>Declaração de investimentos.</li><li>DARF.</li><li>Lucro e prejuízo.</li><li>Compensação de prejuízo.</li><li>Imposto em renda fixa.</li><li>Imposto em ações.</li><li>Imposto em FIIs.</li><li>Imposto em fundos.</li><li>Come-cotas.</li><li>IOF.</li><li>Previdência PGBL e VGBL.</li><li>Carnê-leão, quando aplicável.</li></ul><h4>Para quem quer ganhar dinheiro com programação, produtos digitais e IA</h4><ul class="doc-list"><li>Nota fiscal.</li><li>MEI.</li><li>Empresário individual.</li><li>Sociedade limitada unipessoal.</li><li>Regime tributário.</li><li>CNAE.</li><li>Contabilidade básica.</li><li>Separação entre pessoa física e empresa.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="24">
+      <div class="module-head">
+        <span class="module-number">Módulo 24</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>Planejamento financeiro de vida</h3>
+      <p>Planejamento financeiro liga o dinheiro aos objetivos reais: morar sozinho, mudar de cidade, casar, estudar, investir, empreender ou conquistar independência financeira.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Metas de curto prazo: 0 a 12 meses.</li><li>Metas de médio prazo: 1 a 5 anos.</li><li>Metas de longo prazo: acima de 5 anos.</li><li>Compra de veículo.</li><li>Mudança para morar sozinho.</li><li>Casamento e família.</li><li>Faculdade e certificações.</li><li>Carreira.</li><li>Aposentadoria.</li><li>Independência financeira.</li><li>Renda passiva.</li><li>Sucessão patrimonial.</li></ul><h4>Ordem racional para sua realidade</h4><ul class="doc-list"><li>Regularizar dívidas.</li><li>Montar reserva inicial.</li><li>Planejar mudança para Goiânia ou outra capital com números reais.</li><li>Melhorar renda como desenvolvedor.</li><li>Criar renda extra com programação e IA.</li><li>Investir mensalmente.</li><li>Construir patrimônio.</li><li>Criar produtos digitais ou micro-SaaS.</li><li>Buscar liberdade geográfica e financeira.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="25">
+      <div class="module-head">
+        <span class="module-number">Módulo 25</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>Contabilidade básica</h3>
+      <p>Contabilidade permite entender sua própria vida financeira, analisar empresas, abrir negócios e interpretar resultados.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Ativo.</li><li>Passivo.</li><li>Patrimônio líquido.</li><li>Receita.</li><li>Despesa.</li><li>Custo.</li><li>Lucro.</li><li>Caixa.</li><li>Regime de caixa e regime de competência.</li><li>Balanço patrimonial.</li><li>DRE.</li><li>Fluxo de caixa.</li><li>Margem bruta.</li><li>Margem operacional.</li><li>Margem líquida.</li><li>Depreciação e amortização.</li><li>Endividamento.</li><li>Liquidez.</li><li>Capital de giro.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="26">
+      <div class="module-head">
+        <span class="module-number">Módulo 26</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>Economia aplicada</h3>
+      <p>Economia ajuda a entender o ambiente que afeta salário, aluguel, investimentos, alimentos, dólar, tecnologia e oportunidades profissionais.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Inflação.</li><li>Taxa Selic.</li><li>PIB.</li><li>Desemprego.</li><li>Câmbio.</li><li>Dólar.</li><li>Juros reais.</li><li>Política monetária.</li><li>Política fiscal.</li><li>Dívida pública.</li><li>Déficit e superávit.</li><li>Commodities.</li><li>Ciclos econômicos.</li><li>Recessão e crescimento.</li><li>Produtividade.</li><li>Crédito.</li><li>Consumo.</li><li>Renda.</li><li>Globalização.</li></ul><h4>Aplicação prática</h4><ul class="doc-list"><li>Sempre que estudar economia, conecte o conceito a algo concreto: aluguel, salário, financiamento, preço dos alimentos, dólar, mercado de tecnologia ou investimentos.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="27">
+      <div class="module-head">
+        <span class="module-number">Módulo 27</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>Empreendedorismo e negócios</h3>
+      <p>Esse bloco conecta finanças com geração de renda por serviços, produtos digitais, SaaS, consultoria, automações e IA.</p>
+      <h4>Fundamentos de negócio</h4><ul class="doc-list"><li>Oferta.</li><li>Demanda.</li><li>Público-alvo.</li><li>Nicho.</li><li>Dor do cliente.</li><li>Proposta de valor.</li><li>Posicionamento.</li><li>Diferenciação.</li><li>Precificação.</li><li>Margem.</li><li>Lucro.</li><li>Custo fixo.</li><li>Custo variável.</li><li>Capital de giro.</li><li>Ponto de equilíbrio.</li></ul><h4>Métricas de negócio</h4><ul class="doc-list"><li>Faturamento.</li><li>Lucro bruto.</li><li>Lucro líquido.</li><li>Margem líquida.</li><li>Ticket médio.</li><li>CAC.</li><li>LTV.</li><li>Churn.</li><li>MRR.</li><li>ARR.</li><li>ROI.</li><li>ROAS.</li><li>Payback.</li><li>Conversão.</li><li>Retenção.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="28">
+      <div class="module-head">
+        <span class="module-number">Módulo 28</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>Produtos digitais</h3>
+      <p>Produtos digitais podem transformar conhecimento em ativo vendável. O estudo deve combinar oferta, entrega, marketing, suporte, margem e escalabilidade.</p>
+      <h4>Formatos</h4><ul class="doc-list"><li>Ebook.</li><li>Planilha.</li><li>Guia prático.</li><li>Template.</li><li>Mentoria.</li><li>Curso.</li><li>Comunidade.</li><li>Automação.</li><li>Micro-SaaS.</li><li>Consultoria.</li><li>Assinatura.</li></ul><h4>Conteúdos para estudar junto</h4><ul class="doc-list"><li>Copywriting.</li><li>Página de vendas.</li><li>Funil simples.</li><li>Checkout.</li><li>Upsell e order bump.</li><li>Suporte ao cliente.</li><li>Política de reembolso.</li><li>Distribuição orgânica.</li><li>Conteúdo para Instagram, TikTok, blog e email.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="29">
+      <div class="module-head">
+        <span class="module-number">Módulo 29</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>IA aplicada a ganhos financeiros</h3>
+      <p>IA deve ser estudada como ferramenta para resolver problemas reais, reduzir custo, aumentar produtividade, criar produtos e prestar serviços melhores.</p>
+      <h4>Conteúdos</h4><ul class="doc-list"><li>Automações com IA.</li><li>Agentes de IA.</li><li>Chatbots.</li><li>Atendimento automatizado.</li><li>Análise de documentos.</li><li>Geração de relatórios.</li><li>Copilotos internos.</li><li>Integração com APIs.</li><li>RAG.</li><li>Embeddings.</li><li>Bancos vetoriais.</li><li>Automação de marketing.</li><li>Automação de vendas.</li><li>Análise de dados.</li><li>Dashboards inteligentes.</li></ul><h4>Conexão com programação</h4><ul class="doc-list"><li>A oportunidade está em unir Java/Spring, Python, APIs, bancos de dados, automações, cloud e IA para criar soluções vendáveis para empresas e profissionais.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="30">
+      <div class="module-head">
+        <span class="module-number">Módulo 30</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>Finanças avançadas</h3>
+      <p>Finanças avançadas devem ser estudadas depois de uma base sólida. Elas ajudam a avaliar empresas, carteiras e estratégias com rigor técnico.</p>
+      <h4>Valuation</h4><ul class="doc-list"><li>Fluxo de caixa descontado.</li><li>WACC.</li><li>CAPM.</li><li>Taxa livre de risco.</li><li>Prêmio de risco.</li><li>Crescimento perpétuo.</li><li>Múltiplos.</li><li>Valuation relativo.</li><li>Margem de segurança.</li></ul><h4>Carteiras</h4><ul class="doc-list"><li>Teoria moderna do portfólio.</li><li>Fronteira eficiente.</li><li>Beta.</li><li>Alfa.</li><li>Sharpe.</li><li>Sortino.</li><li>Correlação.</li><li>Volatilidade.</li><li>Backtesting.</li><li>Rebalanceamento.</li></ul><h4>Derivativos</h4><ul class="doc-list"><li>Opções.</li><li>Futuros.</li><li>Swaps.</li><li>Hedge.</li><li>Proteção cambial.</li><li>Alavancagem.</li><li>Chamada de margem.</li><li>Perda máxima.</li><li>Assimetria de risco.</li></ul><h4>Cuidado com derivativos</h4><ul class="doc-list"><li>Estude derivativos primeiro para entender risco e proteção. Não trate alavancagem como atalho para enriquecer.</li></ul>
+    </article>
+
+    <article class="module-card phase5 searchable-section" data-search-section data-module="31">
+      <div class="module-head">
+        <span class="module-number">Módulo 31</span>
+        <span class="module-phase">Fase 5 - Nível avançado e estratégia patrimonial</span>
+      </div>
+      <h3>Proteção patrimonial e segurança</h3>
+      <p>Ganhar dinheiro é apenas uma parte. Proteger patrimônio, renda, família e dados também faz parte da maturidade financeira.</p>
+      <h4>Proteção patrimonial</h4><ul class="doc-list"><li>Seguros.</li><li>Seguro de vida.</li><li>Seguro residencial.</li><li>Seguro de veículo.</li><li>Plano de saúde.</li><li>Proteção contra perda de renda.</li><li>Previdência.</li><li>Sucessão.</li><li>Testamento.</li><li>Holding patrimonial, quando fizer sentido e com orientação especializada.</li><li>Planejamento tributário.</li><li>Separação de bens.</li><li>Reserva familiar.</li><li>Segurança digital financeira.</li></ul><h4>Golpes financeiros para estudar e evitar</h4><ul class="doc-list"><li>Pirâmides financeiras.</li><li>Promessas de rentabilidade garantida.</li><li>Falsos traders.</li><li>Phishing.</li><li>Links falsos.</li><li>Engenharia social.</li><li>Apps maliciosos.</li><li>Clonagem de cartão.</li><li>Golpes via Pix.</li></ul>
+    </article></div>
+</section>
+<section id="roadmap" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Roadmap consolidado de estudo</h2><p class="section-subtitle">Ordem final recomendada, da base ao avançado.</p></div><span class="section-badge">29 passos</span></div>
+  <ol class="roadmap-list"><li><span>01</span>Mentalidade financeira</li><li><span>02</span>Orçamento e controle de gastos</li><li><span>03</span>Diagnóstico financeiro e patrimônio líquido</li><li><span>04</span>Fluxo de caixa pessoal</li><li><span>05</span>Dívidas, juros e crédito</li><li><span>06</span>Estratégias de quitação</li><li><span>07</span>Reserva de emergência</li><li><span>08</span>Matemática financeira</li><li><span>09</span>Sistema financeiro brasileiro</li><li><span>10</span>Renda fixa básica</li><li><span>11</span>Renda fixa avançada</li><li><span>12</span>Aumento de renda e carreira</li><li><span>13</span>Precificação de serviços</li><li><span>14</span>Fundos de investimento</li><li><span>15</span>Renda variável e ações</li><li><span>16</span>FIIs</li><li><span>17</span>ETFs, BDRs e exterior</li><li><span>18</span>Criptoativos</li><li><span>19</span>Gestão de risco</li><li><span>20</span>Alocação de ativos</li><li><span>21</span>Impostos e declaração</li><li><span>22</span>Planejamento financeiro de vida</li><li><span>23</span>Contabilidade básica</li><li><span>24</span>Economia aplicada</li><li><span>25</span>Empreendedorismo e negócios</li><li><span>26</span>Produtos digitais</li><li><span>27</span>IA aplicada a ganhos financeiros</li><li><span>28</span>Finanças avançadas</li><li><span>29</span>Proteção patrimonial e segurança</li></ol>
+</section>
+<section id="checklist" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Checklist de domínio financeiro</h2><p class="section-subtitle">Use como checklist mensal de progresso e como critério de saída da trilha.</p></div><span class="section-badge">28 itens</span></div>
+  <div class="check-grid"><label class="check-item"><input type="checkbox"> <span>Sei exatamente quanto ganho líquido.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto gasto por mês.</span></label><label class="check-item"><input type="checkbox"> <span>Sei para onde meu dinheiro vai.</span></label><label class="check-item"><input type="checkbox"> <span>Tenho lista de todas as dívidas.</span></label><label class="check-item"><input type="checkbox"> <span>Sei qual dívida tem maior juros.</span></label><label class="check-item"><input type="checkbox"> <span>Conheço meu patrimônio líquido.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto preciso para morar sozinho.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto preciso de reserva de emergência.</span></label><label class="check-item"><input type="checkbox"> <span>Sei quanto posso guardar ou investir por mês.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo ativo e passivo.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo renda e patrimônio.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo poupar e investir.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo juros simples e compostos.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo Selic, CDI e IPCA.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo liquidez e rentabilidade.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo risco e volatilidade.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo renda fixa e renda variável.</span></label><label class="check-item"><input type="checkbox"> <span>Sei comparar CDB, LCI, LCA e Tesouro.</span></label><label class="check-item"><input type="checkbox"> <span>Entendo imposto sobre investimentos.</span></label><label class="check-item"><input type="checkbox"> <span>Sei montar uma carteira simples.</span></label><label class="check-item"><input type="checkbox"> <span>Sei rebalancear investimentos.</span></label><label class="check-item"><input type="checkbox"> <span>Sei calcular lucro real.</span></label><label class="check-item"><input type="checkbox"> <span>Sei precificar um serviço.</span></label><label class="check-item"><input type="checkbox"> <span>Sei calcular margem de lucro.</span></label><label class="check-item"><input type="checkbox"> <span>Sei separar finanças pessoais e empresariais.</span></label><label class="check-item"><input type="checkbox"> <span>Sei analisar uma empresa em nível básico.</span></label><label class="check-item"><input type="checkbox"> <span>Sei reconhecer golpes financeiros.</span></label><label class="check-item"><input type="checkbox"> <span>Tenho plano para aumentar renda.</span></label></div>
+</section>
+<section id="aplicacao" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Aplicação direta para sua realidade</h2><p class="section-subtitle">Ordem racional e conservadora para reorganização financeira, mudança e crescimento como desenvolvedor.</p></div><span class="section-badge">Execução</span></div>
+  <div class="doc-grid-2">
+    <div class="callout"><h3>Ordem recomendada</h3><ul class="doc-list"><li>Controle financeiro pessoal</li><li>Quitação e renegociação de dívidas</li><li>Matemática financeira</li><li>Reserva de emergência</li><li>Planejamento da mudança</li><li>Aumento de renda como desenvolvedor</li><li>Renda fixa</li><li>Produtos digitais e freelas</li><li>Investimentos diversificados</li><li>Negócio próprio com programação e IA</li></ul></div>
+    <div class="callout success"><h3>Método 70/20/10</h3><ul class="doc-list"><li>70% prática: planilhas, simulações, cálculos, comparações e decisões reais.</li><li>20% teoria: livros, cursos, vídeos, artigos e materiais oficiais.</li><li>10% revisão: resumo, flashcards, checklist e correção de erros.</li></ul></div>
+  </div>
+  <h3>Exemplos de aplicação</h3>
+  <div class="doc-grid-3"><div class="project-card"><strong>Estudou orçamento</strong><span>Estudou orçamento? Monte sua planilha.</span></div><div class="project-card"><strong>Estudou dívidas</strong><span>Estudou dívidas? Liste todas e ordene por juros.</span></div><div class="project-card"><strong>Estudou juros</strong><span>Estudou juros? Calcule o custo real das parcelas.</span></div><div class="project-card"><strong>Estudou renda fixa</strong><span>Estudou renda fixa? Compare três produtos.</span></div><div class="project-card"><strong>Estudou investimentos</strong><span>Estudou investimentos? Monte uma carteira simulada.</span></div><div class="project-card"><strong>Estudou negócios</strong><span>Estudou negócios? Crie uma oferta real.</span></div><div class="project-card"><strong>Estudou IA</strong><span>Estudou IA? Crie uma automação vendável.</span></div></div>
+</section>
+<section id="projetos" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Projetos práticos da trilha</h2><p class="section-subtitle">Artefatos que transformam estudo financeiro em decisão mensurável.</p></div><span class="section-badge">Portfólio pessoal</span></div>
+  <div class="doc-grid-3">
+    <div class="project-card"><strong>Planilha de diagnóstico financeiro</strong><span>Receitas, gastos fixos/variáveis, dívidas, parcelas, patrimônio líquido, vencimentos e metas.</span></div>
+    <div class="project-card"><strong>Plano de quitação de dívidas</strong><span>Lista de dívidas, juros, método avalanche/bola de neve, renegociação e impacto no fluxo de caixa.</span></div>
+    <div class="project-card"><strong>Simulador de reserva</strong><span>Custo de vida mensal, reserva mínima, inicial e ideal, com projeção de prazo para formação.</span></div>
+    <div class="project-card"><strong>Comparador de renda fixa</strong><span>Comparar Tesouro Selic, CDB, LCI, LCA e fundos DI considerando liquidez, risco, imposto e objetivo.</span></div>
+    <div class="project-card"><strong>Precificador de serviços</strong><span>Preço por hora/projeto, custos diretos, margem, risco, manutenção e contrato.</span></div>
+    <div class="project-card"><strong>Oferta com programação e IA</strong><span>Oferta real de automação, dashboard, agente, chatbot ou micro-SaaS, com cálculo de preço e margem.</span></div>
+  </div>
+</section>
+<section id="consulta" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Consulta rápida</h2><p class="section-subtitle">Regras e fórmulas para revisão diária.</p></div><span class="section-badge">Revisão</span></div>
+  <div class="doc-grid-2">
+    <div class="mini-card"><strong>Patrimônio líquido</strong><span>Tudo que você possui - tudo que você deve.</span></div>
+    <div class="mini-card"><strong>Juros compostos</strong><span>Montante = capital inicial x (1 + taxa) ^ tempo.</span></div>
+    <div class="mini-card"><strong>Rentabilidade real aproximada</strong><span>Rentabilidade nominal - inflação.</span></div>
+    <div class="mini-card"><strong>Lucro bruto simplificado</strong><span>Preço cobrado - custos diretos.</span></div>
+    <div class="mini-card"><strong>Regra de dívida</strong><span>Dívida cara vem antes de investimento.</span></div>
+    <div class="mini-card"><strong>Regra de cripto</strong><span>Antes de estudar cripto para investir, estude cripto para entender risco.</span></div>
+  </div>
+  <h3>Conclusão operacional</h3>
+  <p>A ordem correta não é investir para ficar rico rapidamente. A ordem correta é controlar dinheiro, eliminar dívidas ruins, criar reserva, aumentar renda, investir com consistência, criar ativos, proteger patrimônio e escalar renda.</p>
+  <p>Para a fase atual de reorganização financeira, os conteúdos mais importantes são: orçamento pessoal, dívidas e juros, reserva de emergência, matemática financeira, aumento de renda, renda fixa, precificação de serviços, produtos digitais, IA aplicada a negócios e investimentos de longo prazo.</p>
+</section>
+<section id="referencias" class="section doc-section searchable-section" data-search-section>
+  <div class="doc-section-heading"><div><h2>Referências e fontes oficiais recomendadas</h2><p class="section-subtitle">Fontes citadas no PDF para aprofundamento educacional.</p></div><span class="section-badge">Fontes</span></div>
+  <ul class="doc-list"><li>Banco Central do Brasil - Cidadania Financeira.</li><li>CVM - Portal do Investidor e materiais de educação financeira.</li><li>Tesouro Direto - materiais educativos sobre títulos públicos.</li><li>B3 - conteúdos educacionais sobre mercado financeiro.</li><li>Receita Federal - orientações sobre Imposto de Renda e declarações.</li></ul>
+  <div class="callout accent-orange"><h3>Nota de atualização</h3><p>O conteúdo foi transcrito e organizado em HTML com correção de acentuação e estrutura visual. Como regras tributárias, produtos financeiros e normas podem mudar, a validação final deve ser feita nas fontes oficiais acima antes de qualquer decisão real.</p></div>
+</section>
+</div><!-- /content -->
 </div><!-- /main -->
 
 <footer class="page-footer">
@@ -1348,80 +1348,80 @@
 <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  (function(){
-    const backToTop = document.getElementById('backToTop');
-    const searchInput = document.getElementById('searchInput');
-    const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-    const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-    const bar = document.getElementById('navSectionsBar');
-    const btnL = document.getElementById('navScrollLeft');
-    const btnR = document.getElementById('navScrollRight');
-    const STEP = 320;
+(function(){
+  const backToTop = document.getElementById('backToTop');
+  const searchInput = document.getElementById('searchInput');
+  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+  const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+  const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
+  const bar = document.getElementById('navSectionsBar');
+  const btnL = document.getElementById('navScrollLeft');
+  const btnR = document.getElementById('navScrollRight');
+  const STEP = 320;
 
-    function normalize(value){
-      return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-    }
+  function normalize(value){
+    return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  }
 
-    function updateScrollButtons(){
-      if(!bar || !btnL || !btnR) return;
-      const atStart = bar.scrollLeft <= 4;
-      const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-      btnL.classList.toggle('hidden', atStart);
-      btnR.classList.toggle('hidden', atEnd);
-    }
+  function updateScrollButtons(){
+    if(!bar || !btnL || !btnR) return;
+    const atStart = bar.scrollLeft <= 4;
+    const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+    btnL.classList.toggle('hidden', atStart);
+    btnR.classList.toggle('hidden', atEnd);
+  }
 
-    if(bar && btnL && btnR){
-      btnL.addEventListener('click', () => bar.scrollBy({left:-STEP, behavior:'smooth'}));
-      btnR.addEventListener('click', () => bar.scrollBy({left: STEP, behavior:'smooth'}));
-      bar.addEventListener('scroll', updateScrollButtons, {passive:true});
-      window.addEventListener('resize', updateScrollButtons);
-      setTimeout(updateScrollButtons, 300);
-    }
+  if(bar && btnL && btnR){
+    btnL.addEventListener('click', () => bar.scrollBy({left:-STEP, behavior:'smooth'}));
+    btnR.addEventListener('click', () => bar.scrollBy({left: STEP, behavior:'smooth'}));
+    bar.addEventListener('scroll', updateScrollButtons, {passive:true});
+    window.addEventListener('resize', updateScrollButtons);
+    setTimeout(updateScrollButtons, 300);
+  }
 
-    window.addEventListener('scroll', () => {
-      if(backToTop) backToTop.classList.toggle('is-visible', window.scrollY > 500);
+  window.addEventListener('scroll', () => {
+    if(backToTop) backToTop.classList.toggle('is-visible', window.scrollY > 500);
+  });
+  if(backToTop){
+    backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if(target){
+        event.preventDefault();
+        target.scrollIntoView({behavior:'smooth', block:'start'});
+      }
     });
-    if(backToTop){
-      backToTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
-    }
+  });
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', event => {
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if(target){
-          event.preventDefault();
-          target.scrollIntoView({behavior:'smooth', block:'start'});
-        }
+  if(searchInput){
+    searchInput.addEventListener('input', () => {
+      const query = normalize(searchInput.value.trim());
+      sections.forEach(section => {
+        section.classList.remove('is-hidden-by-search','search-hit');
+        if(!query) return;
+        const match = normalize(section.innerText).includes(query);
+        section.classList.toggle('is-hidden-by-search', !match);
+        section.classList.toggle('search-hit', match);
       });
     });
+  }
 
-    if(searchInput){
-      searchInput.addEventListener('input', () => {
-        const query = normalize(searchInput.value.trim());
-        sections.forEach(section => {
-          section.classList.remove('is-hidden-by-search','search-hit');
-          if(!query) return;
-          const match = normalize(section.innerText).includes(query);
-          section.classList.toggle('is-hidden-by-search', !match);
-          section.classList.toggle('search-hit', match);
-        });
-      });
-    }
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          const id = entry.target.id;
-          navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-          sidebarLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-          const active = bar ? bar.querySelector('.nav-link.active') : null;
-          if(active) active.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
-        }
-      });
-    }, { threshold:0.15, rootMargin:'-100px 0px -55% 0px' });
-    sections.forEach(section => observer.observe(section));
-  })();
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        const id = entry.target.id;
+        navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+        sidebarLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+        const active = bar ? bar.querySelector('.nav-link.active') : null;
+        if(active) active.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
+      }
+    });
+  }, { threshold:0.15, rootMargin:'-100px 0px -55% 0px' });
+  sections.forEach(section => observer.observe(section));
+})();
 </script>
 </body>
 </html>

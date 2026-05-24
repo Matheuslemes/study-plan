@@ -1,966 +1,966 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Trilha completa de matemática aplicada à programação, algoritmos, machine learning, deep learning, LLMs, RAG e avaliação de IA, alinhada ao cronograma do Plano Integrado de Estudos.">
-  <title>Matemática para Programação e IA — Plano Integrado de Estudos</title>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <style>
-    /* ═══════════════════════════════════════════════════
-       DESIGN SYSTEM — DevCore Platform / Track Pages
-       Base visual alinhada ao index e à trilha Python
-    ═══════════════════════════════════════════════════ */
-    :root{
-      /* backgrounds */
-      --bg:#07090f;
-      --surface:#0d1117;
-      --surface2:#141a24;
-      --surface3:rgba(255,255,255,.045);
-      --surface4:rgba(255,255,255,.025);
-
-      /* borders / shadows */
-      --border:rgba(255,255,255,.09);
-      --border2:rgba(255,255,255,.15);
-      --shadow:0 18px 48px rgba(0,0,0,.32);
-      --shadow-soft:0 10px 28px rgba(0,0,0,.24);
-
-      /* text */
-      --text:#e2e8f0;
-      --text1:#e2e8f0;
-      --text2:#94a3b8;
-      --text3:#64748b;
-      --muted:#64748b;
-      --muted2:#94a3b8;
-
-      /* system accents */
-      --accent:#34d399;
-      --accent2:#4f9ef8;
-      --accent3:#a78bfa;
-      --accent4:#fb923c;
-      --math:#34d399;
-      --math-bg:#0d2e20;
-      --code-bg:#060a12;
-
-      /* priority palette */
-      --must:#fca5a5;
-      --should:#fcd34d;
-      --nice:#86efac;
-      --future:#93c5fd;
-    }
-
-    /* ─── RESET / BASE ─── */
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;font-size:15px}
-    body{
-      font-family:'Inter',sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.7;
-      min-height:100vh;
-      background-image:
-        radial-gradient(ellipse 80% 40% at 10% -5%, rgba(52,211,153,.12) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 30% at 90% 5%, rgba(79,158,248,.08) 0%, transparent 42%),
-        radial-gradient(ellipse 50% 25% at 85% 25%, rgba(167,139,250,.06) 0%, transparent 42%),
-        linear-gradient(180deg,rgba(255,255,255,.012),transparent 32rem);
-    }
-    ::selection{background:rgba(52,211,153,.22);color:#fff}
-    .container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
-
-    /* ─── HERO ─── */
-    .hero{
-      position:relative;
-      overflow:hidden;
-      padding:4rem 0 3rem;
-      border-bottom:1px solid var(--border);
-      background:
-        linear-gradient(135deg,rgba(52,211,153,.11) 0%,rgba(79,158,248,.05) 54%,rgba(167,139,250,.045) 100%);
-    }
-    .hero::before{
-      content:'';
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      background:
-        linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px),
-        linear-gradient(180deg,rgba(255,255,255,.025) 1px,transparent 1px);
-      background-size:72px 72px;
-      mask-image:linear-gradient(to bottom,rgba(0,0,0,.45),transparent 75%);
-    }
-    .hero .container{position:relative;z-index:1}
-    .hero-label{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--accent);
-      margin-bottom:.8rem;
-    }
-    .hero h1{
-      font-family:'Syne',sans-serif;
-      font-size:clamp(2rem,5vw,4rem);
-      font-weight:800;
-      letter-spacing:-.04em;
-      background:linear-gradient(135deg,#fff 34%,var(--accent) 72%,var(--accent2) 100%);
-      -webkit-background-clip:text;
-      -webkit-text-fill-color:transparent;
-      background-clip:text;
-      line-height:1.1;
-      margin-bottom:.8rem;
-    }
-    .hero-sub{color:var(--muted2);max-width:860px;font-size:1rem}
-    .hero-back-link{
-      display:inline-flex;
-      align-items:center;
-      gap:.4rem;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;
-      font-weight:500;
-      color:var(--muted2);
-      text-decoration:none;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:.32rem .75rem;
-      border-radius:6px;
-      margin-bottom:1.2rem;
-      transition:color .15s,border-color .15s,background .15s,transform .15s;
-    }
-    .hero-back-link:hover{color:#fff;border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.08);transform:translateY(-1px)}
-    .hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
-    .tag{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;
-      font-weight:600;
-      padding:.3rem .7rem;
-      border-radius:6px;
-      border:1px solid rgba(52,211,153,.3);
-      background:rgba(52,211,153,.08);
-      color:var(--accent);
-    }
-    .tag.g{border-color:rgba(79,158,248,.3);background:rgba(79,158,248,.08);color:var(--accent2)}
-    .tag.p{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:var(--accent3)}
-    .tag.o{border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.08);color:var(--accent4)}
-
-    /* ─── STICKY NAV — mesmo padrão da trilha Python ─── */
-    .sitenav{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      background:rgba(7,9,15,.95);
-      backdrop-filter:blur(18px);
-      border-bottom:1px solid var(--border);
-    }
-    .sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
-    .sitenav-brand{
-      font-family:'Syne',sans-serif;
-      font-size:.9rem;
-      font-weight:800;
-      color:#fff;
-      text-decoration:none;
-      letter-spacing:-.03em;
-      white-space:nowrap;
-      display:flex;
-      align-items:center;
-      gap:.45rem;
-    }
-    .sitenav-brand span{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.65rem;
-      font-weight:500;
-      color:var(--accent);
-      border:1px solid rgba(52,211,153,.3);
-      background:rgba(52,211,153,.08);
-      padding:.15rem .45rem;
-      border-radius:4px;
-      letter-spacing:.04em;
-    }
-    .nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
-    .nav-back{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.7rem;
-      font-weight:500;
-      color:var(--muted);
-      text-decoration:none;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.03);
-      padding:.3rem .65rem;
-      border-radius:6px;
-      transition:all .15s;
-      white-space:nowrap;
-      display:flex;
-      align-items:center;
-      gap:.35rem;
-    }
-    .nav-back:hover{color:#fff;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)}
-    .sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
-    .search-box{
-      background:var(--surface2);
-      border:1px solid var(--border);
-      border-radius:8px;
-      padding:.3rem .7rem;
-      color:#fff;
-      font-size:.8rem;
-      outline:none;
-      width:250px;
-      transition:border-color .15s,box-shadow .15s,background .15s;
-    }
-    .search-box::placeholder{color:var(--muted)}
-    .search-box:focus{border-color:rgba(52,211,153,.42);box-shadow:0 0 0 3px rgba(52,211,153,.08);background:#101722}
-    .sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
-    .sitenav-bar-inner{
-      display:flex;
-      align-items:stretch;
-      overflow-x:auto;
-      scroll-behavior:smooth;
-      scrollbar-width:thin;
-      scrollbar-color:rgba(52,211,153,.4) rgba(255,255,255,.04);
-      padding:0 32px;
-    }
-    .sitenav-bar-inner::-webkit-scrollbar{height:4px}
-    .sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
-    .sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(52,211,153,.4);border-radius:99px}
-    .sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(52,211,153,.7)}
-    .sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
-    .sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
-    .sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
-    .nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
-    .nav-scroll-btn:hover{color:#fff;background:rgba(52,211,153,.08)}
-    .nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
-    .nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
-    .nav-group:last-child{border-right:none;padding-right:.8rem}
-    .nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
-    .nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
-    .nav-link:hover{color:#fff;background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.25)}
-    .nav-link.active{color:var(--accent);background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3)}
-
-    /* ─── LAYOUT ─── */
-    .main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
-    .sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-    .sidebar-group{margin-bottom:1.4rem}
-    .sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
-    .sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
-    .sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
-    .sidebar a.active{color:var(--accent);background:rgba(52,211,153,.08)}
-
-    /* ─── CONTENT ─── */
-    .content{padding:2rem 0 4rem 2rem}
-    .section{
-      margin-bottom:2rem;
-      background:linear-gradient(180deg,rgba(255,255,255,.018),transparent 8rem),var(--surface);
-      border:1px solid var(--border);
-      border-radius:16px;
-      padding:clamp(1.2rem,2vw,1.8rem);
-      box-shadow:0 1px 0 rgba(255,255,255,.025) inset;
-    }
-    .section:hover{border-color:rgba(255,255,255,.13)}
-    .section:target{border-color:rgba(52,211,153,.4);box-shadow:0 0 0 1px rgba(52,211,153,.15),var(--shadow-soft)}
-    .section-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-    .section-header h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff}
-    .section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
-    .section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(79,158,248,.3);background:rgba(79,158,248,.08);color:var(--accent2)}
-    h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
-    h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
-    p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}
-    .lead{font-size:1rem;color:#cbd5e1}
-    ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}
-    li{margin-bottom:.3rem;font-size:.88rem}
-    strong{color:#e2e8f0;font-weight:600}
-    code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(52,211,153,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
-
-    /* ─── TABLES ─── */
-    .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0;background:rgba(255,255,255,.012)}
-    table{border-collapse:collapse;width:100%;min-width:560px}
-    thead tr{background:rgba(52,211,153,.1)}
-    th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem;text-align:left;color:#fff;border-bottom:1px solid var(--border2)}
-    td{padding:.6rem 1rem;font-size:.82rem;color:#cbd5e1;border-bottom:1px solid var(--border);vertical-align:top}
-    tr:last-child td{border-bottom:none}
-    tr:hover td{background:rgba(255,255,255,.02)}
-
-    /* ─── CODE BLOCKS ─── */
-    pre,.code-block{background:var(--code-bg);border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#7dd3fc;max-height:620px;white-space:pre;box-shadow:0 0 0 1px rgba(255,255,255,.015) inset}
-    pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
-
-    /* ─── CALLOUTS ─── */
-    .callout{border-left:3px solid var(--accent);background:rgba(52,211,153,.06);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:.8rem 0}
-    .callout.blue,.callout.accent-blue{border-color:var(--accent2);background:rgba(79,158,248,.06)}
-    .callout.purple,.callout.accent-purple{border-color:var(--accent3);background:rgba(167,139,250,.06)}
-    .callout.orange{border-color:var(--accent4);background:rgba(251,146,60,.06)}
-    .callout.green,.callout.success{border-color:#4ade80;background:rgba(74,222,128,.06)}
-    .callout h3,.callout h4{margin-top:0;color:#fff}
-    .callout p{margin-bottom:0}
-    .callout ul{margin-bottom:0}
-
-    /* ─── GRIDS / CARDS ─── */
-    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
-    .doc-hero-card{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.75fr);gap:1rem;align-items:center}
-    .mini-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;transition:border-color .18s,transform .18s,background .18s}
-    .mini-card:hover{border-color:rgba(52,211,153,.3);background:#151d29;transform:translateY(-2px)}
-    .mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}
-    .mini-card span{color:var(--muted2);font-size:.78rem}
-    .badge-cloud{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem}
-    .badge-cloud span{font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;padding:.18rem .48rem;border-radius:5px;border:1px solid rgba(52,211,153,.25);background:rgba(52,211,153,.06);color:var(--accent)}
-    .doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}
-
-    /* ─── METRICS ─── */
-    .metrics-grid,.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}
-    .metric-pill,.metric{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:1rem;text-align:center;transition:transform .18s,border-color .18s,background .18s}
-    .metric-pill:hover,.metric:hover{transform:translateY(-2px);border-color:rgba(52,211,153,.38);background:rgba(52,211,153,.11)}
-    .metric-pill span,.metric span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}
-    .metric-pill small,.metric small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
-
-    /* ─── PHASE CARDS ─── */
-    .phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-    .phase-doc-card{position:relative;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.1rem;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s,background .2s}
-    .phase-doc-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--accent2))}
-    .phase-doc-card:hover{transform:translateY(-2px);border-color:rgba(52,211,153,.32);box-shadow:var(--shadow-soft);background:#151d29}
-    .phase-doc-card ul{margin-bottom:0}
-    .phase-doc-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:.6rem;margin-bottom:.8rem;gap:.5rem;flex-wrap:wrap}
-    .phase-doc-head h3{margin:0;font-size:.92rem;color:#fff}
-    .phase-doc-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}
-
-    /* ─── PRIORITY BADGES ─── */
-    .priority,.pri{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}
-    .priority.must,.pri-must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}
-    .priority.should,.pri-should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}
-    .priority.nice,.pri-nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}
-    .priority.future,.pri-low{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
-
-    /* ─── UTILITIES / SEARCH ─── */
-    .mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}.mb-2{margin-bottom:.5rem}.small{font-size:.78rem}.text-center{text-align:center}.py-4{padding-top:1.5rem;padding-bottom:1.5rem}.text-muted{color:var(--muted2)!important}
-    .search-hit{outline:2px solid rgba(52,211,153,.65);background:rgba(52,211,153,.1)!important}
-    .is-hidden-by-search{display:none!important}
-    .footer-link{color:#d8ecff;text-decoration:none}
-
-    #btt{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}
-    #btt.show{display:flex}
-    #btt:hover{background:rgba(52,211,153,.3);transform:translateY(-2px)}
-    .page-footer,.footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}
-    .footer-row{max-width:1240px;margin:0 auto 1.2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
-    .footer-link{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted2);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.04);padding:.4rem .85rem;border-radius:7px;display:inline-flex;align-items:center;gap:.4rem;transition:all .15s}
-    .footer-link:hover{color:#fff;border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.08);text-decoration:none}
-    .footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
-    .footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px;white-space:nowrap}
-    .footer-pill.green{border:1px solid rgba(52,211,153,.25);background:rgba(52,211,153,.06);color:var(--accent)}
-    .footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent2)}
-    .footer-pill.purple{border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--accent3)}
-    .footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent4)}
-    .page-footer p,.footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}
-
-    /* ─── ACCESSIBILITY ─── */
-    a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid rgba(52,211,153,.65);outline-offset:2px}
-
-    /* ─── RESPONSIVE ─── */
-    @media(max-width:900px){
-      .main{grid-template-columns:1fr}
-      .sidebar{display:none}
-      .content{padding:1.5rem 0 3rem}
-      .grid2,.grid3,.grid4,.metrics,.metrics-grid,.phase-grid,.doc-hero-card{grid-template-columns:1fr}
-      .sitenav-top{flex-wrap:wrap;gap:.5rem}
-      .sitenav-top-right{width:100%}
-      .search-box{width:100%}
-      .nav-ver{display:none}
-    }
-    @media(max-width:580px){
-      html{font-size:14px}
-      .container,.main{padding:0 1rem}
-      .hero{padding:3rem 0 2rem}
-      .section{border-radius:10px;padding:1rem}
-      .section-header,.phase-doc-head{flex-direction:column}
-      .sitenav-brand span{display:none}
-      .nav-back{font-size:.65rem;padding:.25rem .5rem}
-      .nav-group-label{display:none}
-      .nav-group{border-right:none;padding:.25rem .25rem}
-      .nav-link{font-size:.66rem;padding:.25rem .48rem}
-    }
-
-  </style>
-
-
-  <!-- Responsividade refeita: estrutura baseada na Trilha Java anexada. O CSS original acima permanece intacto. -->
-  <style id="matematica-responsive-refactor">
-    /* ─────────────────────────────────────────────────────────────
-       RESPONSIVIDADE REFEITA — Math Track
-       Estrutura baseada na responsividade da Trilha Java anexada.
-       Bloco complementar: o CSS principal e o conteúdo permanecem intactos.
-       Objetivo: corrigir layout em notebook, tablet e celular sem alterar conteúdo.
-       ───────────────────────────────────────────────────────────── */
-
-    html,
-    body {
-      width: 100%;
-      max-width: 100%;
-    }
-
-    body {
-      overflow-x: hidden;
-    }
-
-    .container,
-    .main,
-    .content,
-    .section,
-    .table-wrap,
-    .phase-card,
-    .phase-doc-card,
-    .mini-card,
-    .callout,
-    .metrics,
-    .metrics-grid,
-    .doc-hero-card,
-    .badge-cloud,
-    pre,
-    .code-block {
-      min-width: 0;
-    }
-
-    .content {
-      min-width: 0;
-    }
-
-    img,
-    video,
-    canvas,
-    iframe,
-    svg {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .section {
-      scroll-margin-top: 126px;
-    }
-
-    .table-wrap,
-    pre,
-    .code-block {
-      max-width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-inline: contain;
-    }
-
-    .table-wrap table {
-      width: 100%;
-      min-width: max(720px, 100%);
-      table-layout: auto;
-    }
-
-    th,
-    td {
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: normal;
-    }
-
-    pre,
-    .code-block {
-      white-space: pre;
-      overflow-y: auto;
-    }
-
-    pre code,
-    .code-block code {
-      white-space: inherit;
-    }
-
-    .hero h1,
-    .section-header h2,
-    .sitenav-brand,
-    .hero-sub,
-    p,
-    li,
-    .mini-card span,
-    .mini-card p,
-    .callout p,
-    .phase-doc-card p,
-    .timeline-item span {
-      overflow-wrap: break-word;
-      word-break: normal;
-    }
-
-    .grid2 > *,
-    .grid3 > *,
-    .grid4 > *,
-    .metrics > *,
-    .metrics-grid > *,
-    .phase-grid > *,
-    .doc-hero-card > * {
-      min-width: 0;
-    }
-
-    .sitenav,
-    .sitenav * {
-      min-width: 0;
-    }
-
-    .sitenav-top {
-      min-width: 0;
-    }
-
-    .sitenav-brand,
-    .nav-back,
-    .nav-ver {
-      flex-shrink: 0;
-    }
-
-    .sitenav-top-right {
-      min-width: 180px;
-    }
-
-    .search-box {
-      max-width: 100%;
-    }
-
-    /* Notebook e desktop estreito */
-    @media (max-width: 1180px) {
-      .container,
-      .main {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-      }
-
-      .main {
-        grid-template-columns: 200px minmax(0, 1fr);
-      }
-
-      .content {
-        padding-left: 1.35rem;
-      }
-
-      .grid4,
-      .metrics,
-      .metrics-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .grid3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    /* Tablet: remove sidebar e preserva navegação superior */
-    @media (max-width: 980px) {
-      .main {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        display: none;
-      }
-
-      .content {
-        padding: 1.5rem 0 3rem;
-      }
-
-      .section {
-        scroll-margin-top: 148px;
-      }
-
-      .grid2,
-      .phase-grid,
-      .doc-hero-card {
-        grid-template-columns: 1fr;
-      }
-
-      .sitenav-top {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: center;
-        gap: .55rem .75rem;
-      }
-
-      .sitenav-brand {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .nav-ver {
-        display: none;
-      }
-
-      .nav-back {
-        justify-self: end;
-      }
-
-      .sitenav-top-right {
-        grid-column: 1 / -1;
-        width: 100%;
-        min-width: 0;
-        margin-left: 0;
-      }
-
-      .search-box {
-        width: 100%;
-        min-height: 38px;
-      }
-    }
-
-    /* Tablet estreito e celulares grandes */
-    @media (max-width: 760px) {
-      html {
-        font-size: 14.5px;
-      }
-
-      .container,
-      .main {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-
-      .hero {
-        padding: 2.8rem 0 2rem;
-      }
-
-      .hero h1 {
-        font-size: clamp(2rem, 9vw, 3.1rem);
-        letter-spacing: -.035em;
-      }
-
-      .hero-sub {
-        max-width: 100%;
-      }
-
-      .hero-meta {
-        gap: .42rem;
-      }
-
-      .tag,
-      .badge-cloud span {
-        max-width: 100%;
-        white-space: normal;
-        line-height: 1.35;
-      }
-
-      .sitenav-bar-inner {
-        padding-left: 34px;
-        padding-right: 34px;
-      }
-
-      .nav-group {
-        padding: .25rem .3rem;
-      }
-
-      .nav-group-label {
-        font-size: .56rem;
-        padding-right: .4rem;
-        margin-right: .2rem;
-      }
-
-      .nav-link {
-        font-size: .66rem;
-        padding: .3rem .5rem;
-      }
-
-      .section {
-        padding: 1rem;
-        border-radius: 12px;
-        scroll-margin-top: 154px;
-      }
-
-      .section-header,
-      .phase-doc-head {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .section-badge {
-        white-space: normal;
-      }
-
-      .grid3,
-      .grid4,
-      .metrics,
-      .metrics-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metric span,
-      .metric-pill span {
-        font-size: 1.75rem;
-      }
-
-      .table-wrap table {
-        min-width: 680px;
-      }
-
-      th,
-      td {
-        padding: .58rem .72rem;
-      }
-
-      pre,
-      .code-block {
-        padding: .9rem;
-        font-size: .72rem;
-        max-height: 520px;
-      }
-
-      .phase-head,
-      .phase-doc-head {
-        align-items: flex-start;
-      }
-    }
-
-    /* Celulares */
-    @media (max-width: 520px) {
-      html {
-        font-size: 14px;
-      }
-
-      .container,
-      .main {
-        padding-left: .85rem;
-        padding-right: .85rem;
-      }
-
-      .hero {
-        padding: 2.35rem 0 1.7rem;
-      }
-
-      .hero-label {
-        font-size: .66rem;
-      }
-
-      .hero-back-link {
-        max-width: 100%;
-      }
-
-      .sitenav-top {
-        grid-template-columns: 1fr;
-        gap: .45rem;
-      }
-
-      .sitenav-brand {
-        width: 100%;
-        white-space: normal;
-        justify-content: space-between;
-      }
-
-      .sitenav-brand span {
-        flex-shrink: 0;
-      }
-
-      .nav-back {
-        width: 100%;
-        justify-content: center;
-        justify-self: stretch;
-        text-align: center;
-      }
-
-      .nav-group-label {
-        display: none;
-      }
-
-      .nav-group {
-        border-right: none;
-        padding: .25rem .18rem;
-      }
-
-      .nav-link {
-        font-size: .64rem;
-        padding: .3rem .46rem;
-      }
-
-      .content {
-        padding-top: 1rem;
-      }
-
-      .section {
-        margin-bottom: 1rem;
-        padding: .9rem;
-        scroll-margin-top: 184px;
-      }
-
-      .section-header h2 {
-        font-size: 1.15rem;
-      }
-
-      h3 {
-        font-size: .96rem;
-      }
-
-      p,
-      li,
-      td {
-        font-size: .84rem;
-      }
-
-      th {
-        font-size: .66rem;
-      }
-
-      .tag,
-      .priority,
-      .pri,
-      .section-badge {
-        font-size: .64rem;
-      }
-
-      .metric,
-      .metric-pill {
-        padding: .85rem;
-      }
-
-      .metric span,
-      .metric-pill span {
-        font-size: 1.62rem;
-      }
-
-      .mini-card,
-      .phase-card,
-      .phase-doc-card {
-        border-radius: 10px;
-      }
-
-      .table-wrap table {
-        min-width: 640px;
-      }
-
-      footer > div > div,
-      .footer-row {
-        flex-direction: column !important;
-        align-items: stretch !important;
-      }
-
-      footer a[style],
-      .footer-link {
-        justify-content: center !important;
-      }
-
-      footer div[style*="display:flex"],
-      .footer-pills {
-        justify-content: center !important;
-      }
-
-      #btt {
-        right: .85rem;
-        bottom: .85rem;
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    /* Celulares muito estreitos */
-    @media (max-width: 380px) {
-      .container,
-      .main {
-        padding-left: .7rem;
-        padding-right: .7rem;
-      }
-
-      .hero h1 {
-        font-size: 1.85rem;
-      }
-
-      .sitenav-brand span {
-        display: none;
-      }
-
-      .section {
-        padding: .78rem;
-      }
-
-      pre,
-      .code-block {
-        font-size: .68rem;
-      }
-
-      .table-wrap table {
-        min-width: 600px;
-      }
-    }
-
-    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
-    @media (pointer: coarse) {
-      .nav-scroll-btn,
-      #btt,
-      .nav-link,
-      .hero-back-link,
-      .nav-back,
-      .sidebar a {
-        touch-action: manipulation;
-      }
-
-      .nav-link,
-      .hero-back-link,
-      .nav-back {
-        min-height: 34px;
-      }
-    }
-
-  </style>
-
-  <!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta texto + métricas. -->
-  <style id="matematica-summary-executive-visual-fix">
-    /*
-      Correção visual do resumo executivo usando a mesma lógica aplicada na Trilha Java:
-      texto em largura confortável e métricas abaixo, sem alterar o conteúdo.
-    */
-    #resumo .doc-hero-card{
-      grid-template-columns:1fr !important;
-      align-items:start !important;
-      gap:1rem !important;
-    }
-
-    #resumo .doc-hero-card > div:first-child{
-      max-width:100%;
-      min-width:0;
-    }
-
-    #resumo .lead{
-      max-width:980px;
-    }
-
-    #resumo .metrics-grid,
-    #resumo .metrics{
-      width:100%;
-      max-width:100%;
-      grid-template-columns:repeat(4,minmax(130px,1fr)) !important;
-      align-items:stretch;
-      margin-top:.35rem;
-    }
-
-    #resumo .metric-pill,
-    #resumo .metric{
-      min-width:0;
-      min-height:112px;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-    }
-
-    #resumo .metric-pill span,
-    #resumo .metric-pill small,
-    #resumo .metric span,
-    #resumo .metric small{
-      overflow-wrap:normal;
-      word-break:normal;
-    }
-
-    @media(max-width:1180px){
-      #resumo .metrics-grid,
-      #resumo .metrics{
-        grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-      }
-    }
-
-    @media(max-width:760px){
-      #resumo .metrics-grid,
-      #resumo .metrics{
-        grid-template-columns:1fr !important;
-      }
-
-      #resumo .metric-pill,
-      #resumo .metric{
-        min-height:auto;
-      }
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Trilha completa de matemática aplicada à programação, algoritmos, machine learning, deep learning, LLMs, RAG e avaliação de IA, alinhada ao cronograma do Plano Integrado de Estudos.">
+<title>Matemática para Programação e IA — Plano Integrado de Estudos</title>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════
+   DESIGN SYSTEM — DevCore Platform / Track Pages
+   Base visual alinhada ao index e à trilha Python
+═══════════════════════════════════════════════════ */
+:root{
+  /* backgrounds */
+  --bg:#07090f;
+  --surface:#0d1117;
+  --surface2:#141a24;
+  --surface3:rgba(255,255,255,.045);
+  --surface4:rgba(255,255,255,.025);
+
+  /* borders / shadows */
+  --border:rgba(255,255,255,.09);
+  --border2:rgba(255,255,255,.15);
+  --shadow:0 18px 48px rgba(0,0,0,.32);
+  --shadow-soft:0 10px 28px rgba(0,0,0,.24);
+
+  /* text */
+  --text:#e2e8f0;
+  --text1:#e2e8f0;
+  --text2:#94a3b8;
+  --text3:#64748b;
+  --muted:#64748b;
+  --muted2:#94a3b8;
+
+  /* system accents */
+  --accent:#34d399;
+  --accent2:#4f9ef8;
+  --accent3:#a78bfa;
+  --accent4:#fb923c;
+  --math:#34d399;
+  --math-bg:#0d2e20;
+  --code-bg:#060a12;
+
+  /* priority palette */
+  --must:#fca5a5;
+  --should:#fcd34d;
+  --nice:#86efac;
+  --future:#93c5fd;
+}
+
+/* ─── RESET / BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:15px}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 10% -5%, rgba(52,211,153,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 30% at 90% 5%, rgba(79,158,248,.08) 0%, transparent 42%),
+    radial-gradient(ellipse 50% 25% at 85% 25%, rgba(167,139,250,.06) 0%, transparent 42%),
+    linear-gradient(180deg,rgba(255,255,255,.012),transparent 32rem);
+}
+::selection{background:rgba(52,211,153,.22);color:#fff}
+.container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;
+  overflow:hidden;
+  padding:4rem 0 3rem;
+  border-bottom:1px solid var(--border);
+  background:
+    linear-gradient(135deg,rgba(52,211,153,.11) 0%,rgba(79,158,248,.05) 54%,rgba(167,139,250,.045) 100%);
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(180deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(to bottom,rgba(0,0,0,.45),transparent 75%);
+}
+.hero .container{position:relative;z-index:1}
+.hero-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:.8rem;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2rem,5vw,4rem);
+  font-weight:800;
+  letter-spacing:-.04em;
+  background:linear-gradient(135deg,#fff 34%,var(--accent) 72%,var(--accent2) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+  line-height:1.1;
+  margin-bottom:.8rem;
+}
+.hero-sub{color:var(--muted2);max-width:860px;font-size:1rem}
+.hero-back-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.4rem;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:500;
+  color:var(--muted2);
+  text-decoration:none;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.04);
+  padding:.32rem .75rem;
+  border-radius:6px;
+  margin-bottom:1.2rem;
+  transition:color .15s,border-color .15s,background .15s,transform .15s;
+}
+.hero-back-link:hover{color:#fff;border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.08);transform:translateY(-1px)}
+.hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
+.tag{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:600;
+  padding:.3rem .7rem;
+  border-radius:6px;
+  border:1px solid rgba(52,211,153,.3);
+  background:rgba(52,211,153,.08);
+  color:var(--accent);
+}
+.tag.g{border-color:rgba(79,158,248,.3);background:rgba(79,158,248,.08);color:var(--accent2)}
+.tag.p{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:var(--accent3)}
+.tag.o{border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.08);color:var(--accent4)}
+
+/* ─── STICKY NAV — mesmo padrão da trilha Python ─── */
+.sitenav{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:rgba(7,9,15,.95);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+.sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+.sitenav-brand{
+  font-family:'Syne',sans-serif;
+  font-size:.9rem;
+  font-weight:800;
+  color:#fff;
+  text-decoration:none;
+  letter-spacing:-.03em;
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  gap:.45rem;
+}
+.sitenav-brand span{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.65rem;
+  font-weight:500;
+  color:var(--accent);
+  border:1px solid rgba(52,211,153,.3);
+  background:rgba(52,211,153,.08);
+  padding:.15rem .45rem;
+  border-radius:4px;
+  letter-spacing:.04em;
+}
+.nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
+.nav-back{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.7rem;
+  font-weight:500;
+  color:var(--muted);
+  text-decoration:none;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.03);
+  padding:.3rem .65rem;
+  border-radius:6px;
+  transition:all .15s;
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  gap:.35rem;
+}
+.nav-back:hover{color:#fff;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.08)}
+.sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+.search-box{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:.3rem .7rem;
+  color:#fff;
+  font-size:.8rem;
+  outline:none;
+  width:250px;
+  transition:border-color .15s,box-shadow .15s,background .15s;
+}
+.search-box::placeholder{color:var(--muted)}
+.search-box:focus{border-color:rgba(52,211,153,.42);box-shadow:0 0 0 3px rgba(52,211,153,.08);background:#101722}
+.sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
+.sitenav-bar-inner{
+  display:flex;
+  align-items:stretch;
+  overflow-x:auto;
+  scroll-behavior:smooth;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(52,211,153,.4) rgba(255,255,255,.04);
+  padding:0 32px;
+}
+.sitenav-bar-inner::-webkit-scrollbar{height:4px}
+.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
+.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(52,211,153,.4);border-radius:99px}
+.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(52,211,153,.7)}
+.sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
+.sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
+.sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
+.nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
+.nav-scroll-btn:hover{color:#fff;background:rgba(52,211,153,.08)}
+.nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
+.nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
+.nav-group:last-child{border-right:none;padding-right:.8rem}
+.nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
+.nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
+.nav-link:hover{color:#fff;background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.25)}
+.nav-link.active{color:var(--accent);background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.3)}
+
+/* ─── LAYOUT ─── */
+.main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
+.sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+.sidebar-group{margin-bottom:1.4rem}
+.sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
+.sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
+.sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
+.sidebar a.active{color:var(--accent);background:rgba(52,211,153,.08)}
+
+/* ─── CONTENT ─── */
+.content{padding:2rem 0 4rem 2rem}
+.section{
+  margin-bottom:2rem;
+  background:linear-gradient(180deg,rgba(255,255,255,.018),transparent 8rem),var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:clamp(1.2rem,2vw,1.8rem);
+  box-shadow:0 1px 0 rgba(255,255,255,.025) inset;
+}
+.section:hover{border-color:rgba(255,255,255,.13)}
+.section:target{border-color:rgba(52,211,153,.4);box-shadow:0 0 0 1px rgba(52,211,153,.15),var(--shadow-soft)}
+.section-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.section-header h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff}
+.section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
+.section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(79,158,248,.3);background:rgba(79,158,248,.08);color:var(--accent2)}
+h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
+h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
+p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}
+.lead{font-size:1rem;color:#cbd5e1}
+ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}
+li{margin-bottom:.3rem;font-size:.88rem}
+strong{color:#e2e8f0;font-weight:600}
+code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(52,211,153,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
+
+/* ─── TABLES ─── */
+.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0;background:rgba(255,255,255,.012)}
+table{border-collapse:collapse;width:100%;min-width:560px}
+thead tr{background:rgba(52,211,153,.1)}
+th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem;text-align:left;color:#fff;border-bottom:1px solid var(--border2)}
+td{padding:.6rem 1rem;font-size:.82rem;color:#cbd5e1;border-bottom:1px solid var(--border);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(255,255,255,.02)}
+
+/* ─── CODE BLOCKS ─── */
+pre,.code-block{background:var(--code-bg);border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#7dd3fc;max-height:620px;white-space:pre;box-shadow:0 0 0 1px rgba(255,255,255,.015) inset}
+pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
+
+/* ─── CALLOUTS ─── */
+.callout{border-left:3px solid var(--accent);background:rgba(52,211,153,.06);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:.8rem 0}
+.callout.blue,.callout.accent-blue{border-color:var(--accent2);background:rgba(79,158,248,.06)}
+.callout.purple,.callout.accent-purple{border-color:var(--accent3);background:rgba(167,139,250,.06)}
+.callout.orange{border-color:var(--accent4);background:rgba(251,146,60,.06)}
+.callout.green,.callout.success{border-color:#4ade80;background:rgba(74,222,128,.06)}
+.callout h3,.callout h4{margin-top:0;color:#fff}
+.callout p{margin-bottom:0}
+.callout ul{margin-bottom:0}
+
+/* ─── GRIDS / CARDS ─── */
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+.doc-hero-card{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(260px,.75fr);gap:1rem;align-items:center}
+.mini-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem;transition:border-color .18s,transform .18s,background .18s}
+.mini-card:hover{border-color:rgba(52,211,153,.3);background:#151d29;transform:translateY(-2px)}
+.mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}
+.mini-card span{color:var(--muted2);font-size:.78rem}
+.badge-cloud{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem}
+.badge-cloud span{font-family:'IBM Plex Mono',monospace;font-size:.62rem;font-weight:600;padding:.18rem .48rem;border-radius:5px;border:1px solid rgba(52,211,153,.25);background:rgba(52,211,153,.06);color:var(--accent)}
+.doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}
+
+/* ─── METRICS ─── */
+.metrics-grid,.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}
+.metric-pill,.metric{background:rgba(52,211,153,.08);border:1px solid rgba(52,211,153,.2);border-radius:12px;padding:1rem;text-align:center;transition:transform .18s,border-color .18s,background .18s}
+.metric-pill:hover,.metric:hover{transform:translateY(-2px);border-color:rgba(52,211,153,.38);background:rgba(52,211,153,.11)}
+.metric-pill span,.metric span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}
+.metric-pill small,.metric small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+
+/* ─── PHASE CARDS ─── */
+.phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.phase-doc-card{position:relative;background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.1rem;overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s,background .2s}
+.phase-doc-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--accent2))}
+.phase-doc-card:hover{transform:translateY(-2px);border-color:rgba(52,211,153,.32);box-shadow:var(--shadow-soft);background:#151d29}
+.phase-doc-card ul{margin-bottom:0}
+.phase-doc-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:.6rem;margin-bottom:.8rem;gap:.5rem;flex-wrap:wrap}
+.phase-doc-head h3{margin:0;font-size:.92rem;color:#fff}
+.phase-doc-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}
+
+/* ─── PRIORITY BADGES ─── */
+.priority,.pri{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}
+.priority.must,.pri-must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}
+.priority.should,.pri-should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}
+.priority.nice,.pri-nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}
+.priority.future,.pri-low{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
+
+/* ─── UTILITIES / SEARCH ─── */
+.mt-2{margin-top:.5rem}.mt-3{margin-top:1rem}.mb-2{margin-bottom:.5rem}.small{font-size:.78rem}.text-center{text-align:center}.py-4{padding-top:1.5rem;padding-bottom:1.5rem}.text-muted{color:var(--muted2)!important}
+.search-hit{outline:2px solid rgba(52,211,153,.65);background:rgba(52,211,153,.1)!important}
+.is-hidden-by-search{display:none!important}
+.footer-link{color:#d8ecff;text-decoration:none}
+
+#btt{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}
+#btt.show{display:flex}
+#btt:hover{background:rgba(52,211,153,.3);transform:translateY(-2px)}
+.page-footer,.footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}
+.footer-row{max-width:1240px;margin:0 auto 1.2rem;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem}
+.footer-link{font-family:'IBM Plex Mono',monospace;font-size:.75rem;color:var(--muted2);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.04);padding:.4rem .85rem;border-radius:7px;display:inline-flex;align-items:center;gap:.4rem;transition:all .15s}
+.footer-link:hover{color:#fff;border-color:rgba(52,211,153,.35);background:rgba(52,211,153,.08);text-decoration:none}
+.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
+.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px;white-space:nowrap}
+.footer-pill.green{border:1px solid rgba(52,211,153,.25);background:rgba(52,211,153,.06);color:var(--accent)}
+.footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent2)}
+.footer-pill.purple{border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--accent3)}
+.footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent4)}
+.page-footer p,.footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}
+
+/* ─── ACCESSIBILITY ─── */
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid rgba(52,211,153,.65);outline-offset:2px}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .content{padding:1.5rem 0 3rem}
+  .grid2,.grid3,.grid4,.metrics,.metrics-grid,.phase-grid,.doc-hero-card{grid-template-columns:1fr}
+  .sitenav-top{flex-wrap:wrap;gap:.5rem}
+  .sitenav-top-right{width:100%}
+  .search-box{width:100%}
+  .nav-ver{display:none}
+}
+@media(max-width:580px){
+  html{font-size:14px}
+  .container,.main{padding:0 1rem}
+  .hero{padding:3rem 0 2rem}
+  .section{border-radius:10px;padding:1rem}
+  .section-header,.phase-doc-head{flex-direction:column}
+  .sitenav-brand span{display:none}
+  .nav-back{font-size:.65rem;padding:.25rem .5rem}
+  .nav-group-label{display:none}
+  .nav-group{border-right:none;padding:.25rem .25rem}
+  .nav-link{font-size:.66rem;padding:.25rem .48rem}
+}
+
+</style>
+
+
+<!-- Responsividade refeita: estrutura baseada na Trilha Java anexada. O CSS original acima permanece intacto. -->
+<style id="matematica-responsive-refactor">
+/* ─────────────────────────────────────────────────────────────
+   RESPONSIVIDADE REFEITA — Math Track
+   Estrutura baseada na responsividade da Trilha Java anexada.
+   Bloco complementar: o CSS principal e o conteúdo permanecem intactos.
+   Objetivo: corrigir layout em notebook, tablet e celular sem alterar conteúdo.
+   ───────────────────────────────────────────────────────────── */
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.container,
+.main,
+.content,
+.section,
+.table-wrap,
+.phase-card,
+.phase-doc-card,
+.mini-card,
+.callout,
+.metrics,
+.metrics-grid,
+.doc-hero-card,
+.badge-cloud,
+pre,
+.code-block {
+  min-width: 0;
+}
+
+.content {
+  min-width: 0;
+}
+
+img,
+video,
+canvas,
+iframe,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.section {
+  scroll-margin-top: 126px;
+}
+
+.table-wrap,
+pre,
+.code-block {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-inline: contain;
+}
+
+.table-wrap table {
+  width: 100%;
+  min-width: max(720px, 100%);
+  table-layout: auto;
+}
+
+th,
+td {
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+pre,
+.code-block {
+  white-space: pre;
+  overflow-y: auto;
+}
+
+pre code,
+.code-block code {
+  white-space: inherit;
+}
+
+.hero h1,
+.section-header h2,
+.sitenav-brand,
+.hero-sub,
+p,
+li,
+.mini-card span,
+.mini-card p,
+.callout p,
+.phase-doc-card p,
+.timeline-item span {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.grid2 > *,
+.grid3 > *,
+.grid4 > *,
+.metrics > *,
+.metrics-grid > *,
+.phase-grid > *,
+.doc-hero-card > * {
+  min-width: 0;
+}
+
+.sitenav,
+.sitenav * {
+  min-width: 0;
+}
+
+.sitenav-top {
+  min-width: 0;
+}
+
+.sitenav-brand,
+.nav-back,
+.nav-ver {
+  flex-shrink: 0;
+}
+
+.sitenav-top-right {
+  min-width: 180px;
+}
+
+.search-box {
+  max-width: 100%;
+}
+
+/* Notebook e desktop estreito */
+@media (max-width: 1180px) {
+  .container,
+  .main {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .main {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .content {
+    padding-left: 1.35rem;
+  }
+
+  .grid4,
+  .metrics,
+  .metrics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Tablet: remove sidebar e preserva navegação superior */
+@media (max-width: 980px) {
+  .main {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .content {
+    padding: 1.5rem 0 3rem;
+  }
+
+  .section {
+    scroll-margin-top: 148px;
+  }
+
+  .grid2,
+  .phase-grid,
+  .doc-hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .sitenav-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .55rem .75rem;
+  }
+
+  .sitenav-brand {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .nav-ver {
+    display: none;
+  }
+
+  .nav-back {
+    justify-self: end;
+  }
+
+  .sitenav-top-right {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    margin-left: 0;
+  }
+
+  .search-box {
+    width: 100%;
+    min-height: 38px;
+  }
+}
+
+/* Tablet estreito e celulares grandes */
+@media (max-width: 760px) {
+  html {
+    font-size: 14.5px;
+  }
+
+  .container,
+  .main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero {
+    padding: 2.8rem 0 2rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 9vw, 3.1rem);
+    letter-spacing: -.035em;
+  }
+
+  .hero-sub {
+    max-width: 100%;
+  }
+
+  .hero-meta {
+    gap: .42rem;
+  }
+
+  .tag,
+  .badge-cloud span {
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .sitenav-bar-inner {
+    padding-left: 34px;
+    padding-right: 34px;
+  }
+
+  .nav-group {
+    padding: .25rem .3rem;
+  }
+
+  .nav-group-label {
+    font-size: .56rem;
+    padding-right: .4rem;
+    margin-right: .2rem;
+  }
+
+  .nav-link {
+    font-size: .66rem;
+    padding: .3rem .5rem;
+  }
+
+  .section {
+    padding: 1rem;
+    border-radius: 12px;
+    scroll-margin-top: 154px;
+  }
+
+  .section-header,
+  .phase-doc-head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-badge {
+    white-space: normal;
+  }
+
+  .grid3,
+  .grid4,
+  .metrics,
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric span,
+  .metric-pill span {
+    font-size: 1.75rem;
+  }
+
+  .table-wrap table {
+    min-width: 680px;
+  }
+
+  th,
+  td {
+    padding: .58rem .72rem;
+  }
+
+  pre,
+  .code-block {
+    padding: .9rem;
+    font-size: .72rem;
+    max-height: 520px;
+  }
+
+  .phase-head,
+  .phase-doc-head {
+    align-items: flex-start;
+  }
+}
+
+/* Celulares */
+@media (max-width: 520px) {
+  html {
+    font-size: 14px;
+  }
+
+  .container,
+  .main {
+    padding-left: .85rem;
+    padding-right: .85rem;
+  }
+
+  .hero {
+    padding: 2.35rem 0 1.7rem;
+  }
+
+  .hero-label {
+    font-size: .66rem;
+  }
+
+  .hero-back-link {
+    max-width: 100%;
+  }
+
+  .sitenav-top {
+    grid-template-columns: 1fr;
+    gap: .45rem;
+  }
+
+  .sitenav-brand {
+    width: 100%;
+    white-space: normal;
+    justify-content: space-between;
+  }
+
+  .sitenav-brand span {
+    flex-shrink: 0;
+  }
+
+  .nav-back {
+    width: 100%;
+    justify-content: center;
+    justify-self: stretch;
+    text-align: center;
+  }
+
+  .nav-group-label {
+    display: none;
+  }
+
+  .nav-group {
+    border-right: none;
+    padding: .25rem .18rem;
+  }
+
+  .nav-link {
+    font-size: .64rem;
+    padding: .3rem .46rem;
+  }
+
+  .content {
+    padding-top: 1rem;
+  }
+
+  .section {
+    margin-bottom: 1rem;
+    padding: .9rem;
+    scroll-margin-top: 184px;
+  }
+
+  .section-header h2 {
+    font-size: 1.15rem;
+  }
+
+  h3 {
+    font-size: .96rem;
+  }
+
+  p,
+  li,
+  td {
+    font-size: .84rem;
+  }
+
+  th {
+    font-size: .66rem;
+  }
+
+  .tag,
+  .priority,
+  .pri,
+  .section-badge {
+    font-size: .64rem;
+  }
+
+  .metric,
+  .metric-pill {
+    padding: .85rem;
+  }
+
+  .metric span,
+  .metric-pill span {
+    font-size: 1.62rem;
+  }
+
+  .mini-card,
+  .phase-card,
+  .phase-doc-card {
+    border-radius: 10px;
+  }
+
+  .table-wrap table {
+    min-width: 640px;
+  }
+
+  footer > div > div,
+  .footer-row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+
+  footer a[style],
+  .footer-link {
+    justify-content: center !important;
+  }
+
+  footer div[style*="display:flex"],
+  .footer-pills {
+    justify-content: center !important;
+  }
+
+  #btt {
+    right: .85rem;
+    bottom: .85rem;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Celulares muito estreitos */
+@media (max-width: 380px) {
+  .container,
+  .main {
+    padding-left: .7rem;
+    padding-right: .7rem;
+  }
+
+  .hero h1 {
+    font-size: 1.85rem;
+  }
+
+  .sitenav-brand span {
+    display: none;
+  }
+
+  .section {
+    padding: .78rem;
+  }
+
+  pre,
+  .code-block {
+    font-size: .68rem;
+  }
+
+  .table-wrap table {
+    min-width: 600px;
+  }
+}
+
+/* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+@media (pointer: coarse) {
+  .nav-scroll-btn,
+  #btt,
+  .nav-link,
+  .hero-back-link,
+  .nav-back,
+  .sidebar a {
+    touch-action: manipulation;
+  }
+
+  .nav-link,
+  .hero-back-link,
+  .nav-back {
+    min-height: 34px;
+  }
+}
+
+</style>
+
+<!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta texto + métricas. -->
+<style id="matematica-summary-executive-visual-fix">
+/*
+  Correção visual do resumo executivo usando a mesma lógica aplicada na Trilha Java:
+  texto em largura confortável e métricas abaixo, sem alterar o conteúdo.
+*/
+#resumo .doc-hero-card{
+  grid-template-columns:1fr !important;
+  align-items:start !important;
+  gap:1rem !important;
+}
+
+#resumo .doc-hero-card > div:first-child{
+  max-width:100%;
+  min-width:0;
+}
+
+#resumo .lead{
+  max-width:980px;
+}
+
+#resumo .metrics-grid,
+#resumo .metrics{
+  width:100%;
+  max-width:100%;
+  grid-template-columns:repeat(4,minmax(130px,1fr)) !important;
+  align-items:stretch;
+  margin-top:.35rem;
+}
+
+#resumo .metric-pill,
+#resumo .metric{
+  min-width:0;
+  min-height:112px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+#resumo .metric-pill span,
+#resumo .metric-pill small,
+#resumo .metric span,
+#resumo .metric small{
+  overflow-wrap:normal;
+  word-break:normal;
+}
+
+@media(max-width:1180px){
+  #resumo .metrics-grid,
+  #resumo .metrics{
+    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  }
+}
+
+@media(max-width:760px){
+  #resumo .metrics-grid,
+  #resumo .metrics{
+    grid-template-columns:1fr !important;
+  }
+
+  #resumo .metric-pill,
+  #resumo .metric{
+    min-height:auto;
+  }
+}
+
+</style>
 
 </head>
 <body>
@@ -993,279 +993,279 @@
   <div class="content" id="mainContent">
     <section class="section" id="resumo">
 
-      <div class="section-header">
-        <div>
-          <h2>Resumo executivo</h2>
-          <p class="section-subtitle">Base da trilha de Matemática do index: 13:30–14:30, 1h por dia, 8 fases e 64 semanas.</p>
-        </div>
-        <span class="section-badge">Visão geral</span>
-      </div>
-      <div class="doc-hero-card">
-        <div>
-          <p class="lead">Esta trilha existe para garantir que matemática seja usada como ferramenta de engenharia, não como estudo abstrato. Todo conceito precisa terminar em código, notebook, benchmark, gráfico, métrica, artigo ou decisão técnica.</p>
-          <p>O foco principal é programação e desenvolvimento de IA: algoritmos, complexidade, estruturas de dados, embeddings, machine learning, deep learning, transformers, RAG, retrieval, ranking e avaliação de sistemas inteligentes.</p>
-          <div class="callout success"><h3>Regra central</h3><p>Todo conceito matemático deve terminar em uma aplicação prática: implementação em Python/Java/notebook, gráfico, benchmark, métrica, algoritmo, explicação no blog ou conexão direta com embeddings, loss, gradiente, attention, retrieval ou avaliação de IA.</p></div>
-        </div>
-        <div class="metrics-grid">
-          <div class="metric-pill"><span>1h</span><small>Por dia</small></div>
-          <div class="metric-pill"><span>64</span><small>Semanas</small></div>
-          <div class="metric-pill"><span>8</span><small>Fases</small></div>
-          <div class="metric-pill"><span>8+</span><small>Projetos matemáticos</small></div>
-        </div>
-      </div>
+<div class="section-header">
+<div>
+<h2>Resumo executivo</h2>
+<p class="section-subtitle">Base da trilha de Matemática do index: 13:30–14:30, 1h por dia, 8 fases e 64 semanas.</p>
+</div>
+<span class="section-badge">Visão geral</span>
+</div>
+<div class="doc-hero-card">
+<div>
+<p class="lead">Esta trilha existe para garantir que matemática seja usada como ferramenta de engenharia, não como estudo abstrato. Todo conceito precisa terminar em código, notebook, benchmark, gráfico, métrica, artigo ou decisão técnica.</p>
+<p>O foco principal é programação e desenvolvimento de IA: algoritmos, complexidade, estruturas de dados, embeddings, machine learning, deep learning, transformers, RAG, retrieval, ranking e avaliação de sistemas inteligentes.</p>
+<div class="callout success"><h3>Regra central</h3><p>Todo conceito matemático deve terminar em uma aplicação prática: implementação em Python/Java/notebook, gráfico, benchmark, métrica, algoritmo, explicação no blog ou conexão direta com embeddings, loss, gradiente, attention, retrieval ou avaliação de IA.</p></div>
+</div>
+<div class="metrics-grid">
+<div class="metric-pill"><span>1h</span><small>Por dia</small></div>
+<div class="metric-pill"><span>64</span><small>Semanas</small></div>
+<div class="metric-pill"><span>8</span><small>Fases</small></div>
+<div class="metric-pill"><span>8+</span><small>Projetos matemáticos</small></div>
+</div>
+</div>
 
-    </section><section class="section" id="perfil">
+</section><section class="section" id="perfil">
 
-    <div class="section-header">
-      <div><h2>Perfil esperado ao final da trilha</h2><p class="section-subtitle">O objetivo é formar matemática suficiente para desenvolvimento forte e IA aplicada.</p></div>
-      <span class="section-badge">Resultado</span>
-    </div>
-    <div class="grid3">
-      <div class="mini-card"><strong>Programação</strong><span>Entender complexidade, corretude, grafos, hashing, recorrências, estruturas discretas, algoritmos e trade-offs de performance.</span></div>
-      <div class="mini-card"><strong>Machine Learning</strong><span>Compreender vetores, matrizes, probabilidade, estatística, regressão, métricas, regularização, otimização e validação de modelos.</span></div>
-      <div class="mini-card"><strong>IA moderna</strong><span>Explicar embeddings, softmax, attention, loss, gradient descent, transformers, RAG, ranking e métricas de avaliação com código.</span></div>
-    </div>
-    <h3>Competências práticas esperadas</h3>
-    <ul class="doc-list">
-      <li>Implementar algoritmos de grafos e explicar sua complexidade.</li>
-      <li>Usar NumPy/PyTorch para manipular vetores, matrizes, tensores e atenção.</li>
-      <li>Calcular e interpretar métricas de classificação, regressão, ranking, retrieval e RAG.</li>
-      <li>Explicar cosine similarity, dot product, normalização, high-dimensional spaces e embeddings.</li>
-      <li>Implementar gradient descent e explicar learning rate, convergência, overfitting e regularização.</li>
-      <li>Validar experimentos com estatística, intervalos de confiança, p-value, poder estatístico e A/B testing.</li>
-      <li>Documentar cada aplicação matemática em README, notebook ou artigo técnico.</li>
-    </ul>
+<div class="section-header">
+<div><h2>Perfil esperado ao final da trilha</h2><p class="section-subtitle">O objetivo é formar matemática suficiente para desenvolvimento forte e IA aplicada.</p></div>
+<span class="section-badge">Resultado</span>
+</div>
+<div class="grid3">
+<div class="mini-card"><strong>Programação</strong><span>Entender complexidade, corretude, grafos, hashing, recorrências, estruturas discretas, algoritmos e trade-offs de performance.</span></div>
+<div class="mini-card"><strong>Machine Learning</strong><span>Compreender vetores, matrizes, probabilidade, estatística, regressão, métricas, regularização, otimização e validação de modelos.</span></div>
+<div class="mini-card"><strong>IA moderna</strong><span>Explicar embeddings, softmax, attention, loss, gradient descent, transformers, RAG, ranking e métricas de avaliação com código.</span></div>
+</div>
+<h3>Competências práticas esperadas</h3>
+<ul class="doc-list">
+<li>Implementar algoritmos de grafos e explicar sua complexidade.</li>
+<li>Usar NumPy/PyTorch para manipular vetores, matrizes, tensores e atenção.</li>
+<li>Calcular e interpretar métricas de classificação, regressão, ranking, retrieval e RAG.</li>
+<li>Explicar cosine similarity, dot product, normalização, high-dimensional spaces e embeddings.</li>
+<li>Implementar gradient descent e explicar learning rate, convergência, overfitting e regularização.</li>
+<li>Validar experimentos com estatística, intervalos de confiança, p-value, poder estatístico e A/B testing.</li>
+<li>Documentar cada aplicação matemática em README, notebook ou artigo técnico.</li>
+</ul>
 
-  </section><section class="section" id="conteudos">
+</section><section class="section" id="conteudos">
 
-    <div class="section-header">
-      <div><h2>Mapa completo de conteúdos</h2><p class="section-subtitle">A trilha está organizada por finalidade prática, não por matemática acadêmica isolada.</p></div>
-      <span class="section-badge">Conteúdos</span>
-    </div>
-    <div class="grid4">
-      <div class="mini-card"><strong>Lógica, conjuntos e Big O</strong><span>Base para raciocínio de código, validação de regras, análise de algoritmos e entrevistas técnicas.</span><div class="badge-cloud mt-2"><span>Lógica booleana</span><span>Tabelas-verdade</span><span>Conjuntos</span><span>Big O</span><span>Indução</span><span>Invariantes</span></div></div>
-      <div class="mini-card"><strong>Grafos e matemática discreta</strong><span>Base para workflows, dependências, rotas, filas, agentes, busca e estruturas de dados.</span><div class="badge-cloud mt-2"><span>BFS/DFS</span><span>Dijkstra</span><span>Topological sort</span><span>Union-Find</span><span>DAGs</span><span>Recorrências</span></div></div>
-      <div class="mini-card"><strong>Álgebra linear aplicada</strong><span>Base de embeddings, busca vetorial, matrizes em transformers, PCA, SVD e similaridade.</span><div class="badge-cloud mt-2"><span>Vetores</span><span>Normas</span><span>Produto interno</span><span>Matrizes</span><span>PCA</span><span>SVD</span></div></div>
-      <div class="mini-card"><strong>Probabilidade e estatística</strong><span>Base para incerteza, validação de modelos, métricas, A/B testing e tomada de decisão.</span><div class="badge-cloud mt-2"><span>Bayes</span><span>Variáveis aleatórias</span><span>Distribuições</span><span>Intervalos</span><span>p-value</span><span>A/B testing</span></div></div>
-      <div class="mini-card"><strong>Cálculo e otimização</strong><span>Base de treinamento de modelos, backpropagation, gradient descent e ajuste de parâmetros.</span><div class="badge-cloud mt-2"><span>Derivadas</span><span>Gradiente</span><span>Regra da cadeia</span><span>SGD</span><span>Adam</span><span>Regularização</span></div></div>
-      <div class="mini-card"><strong>Deep Learning e LLMs</strong><span>Matemática de attention, softmax, losses, normalização, embeddings, transformers e avaliação.</span><div class="badge-cloud mt-2"><span>Attention</span><span>Softmax</span><span>Cross-entropy</span><span>RMSNorm</span><span>Temperature</span><span>Perplexidade</span></div></div>
-      <div class="mini-card"><strong>Retrieval, ranking e RAG</strong><span>Métricas e matemática para avaliar busca semântica, BM25, embeddings, reranking e respostas com contexto.</span><div class="badge-cloud mt-2"><span>TF-IDF</span><span>BM25</span><span>MRR</span><span>MAP</span><span>NDCG</span><span>Faithfulness</span></div></div>
-      <div class="mini-card"><strong>Produto e experimentação</strong><span>Uso de matemática para decidir se uma feature realmente melhorou métricas de produto ou qualidade de IA.</span><div class="badge-cloud mt-2"><span>Uplift</span><span>Coortes</span><span>Significância</span><span>Poder estatístico</span><span>Conversão</span><span>Correlação vs causalidade</span></div></div>
-    </div>
+<div class="section-header">
+<div><h2>Mapa completo de conteúdos</h2><p class="section-subtitle">A trilha está organizada por finalidade prática, não por matemática acadêmica isolada.</p></div>
+<span class="section-badge">Conteúdos</span>
+</div>
+<div class="grid4">
+<div class="mini-card"><strong>Lógica, conjuntos e Big O</strong><span>Base para raciocínio de código, validação de regras, análise de algoritmos e entrevistas técnicas.</span><div class="badge-cloud mt-2"><span>Lógica booleana</span><span>Tabelas-verdade</span><span>Conjuntos</span><span>Big O</span><span>Indução</span><span>Invariantes</span></div></div>
+<div class="mini-card"><strong>Grafos e matemática discreta</strong><span>Base para workflows, dependências, rotas, filas, agentes, busca e estruturas de dados.</span><div class="badge-cloud mt-2"><span>BFS/DFS</span><span>Dijkstra</span><span>Topological sort</span><span>Union-Find</span><span>DAGs</span><span>Recorrências</span></div></div>
+<div class="mini-card"><strong>Álgebra linear aplicada</strong><span>Base de embeddings, busca vetorial, matrizes em transformers, PCA, SVD e similaridade.</span><div class="badge-cloud mt-2"><span>Vetores</span><span>Normas</span><span>Produto interno</span><span>Matrizes</span><span>PCA</span><span>SVD</span></div></div>
+<div class="mini-card"><strong>Probabilidade e estatística</strong><span>Base para incerteza, validação de modelos, métricas, A/B testing e tomada de decisão.</span><div class="badge-cloud mt-2"><span>Bayes</span><span>Variáveis aleatórias</span><span>Distribuições</span><span>Intervalos</span><span>p-value</span><span>A/B testing</span></div></div>
+<div class="mini-card"><strong>Cálculo e otimização</strong><span>Base de treinamento de modelos, backpropagation, gradient descent e ajuste de parâmetros.</span><div class="badge-cloud mt-2"><span>Derivadas</span><span>Gradiente</span><span>Regra da cadeia</span><span>SGD</span><span>Adam</span><span>Regularização</span></div></div>
+<div class="mini-card"><strong>Deep Learning e LLMs</strong><span>Matemática de attention, softmax, losses, normalização, embeddings, transformers e avaliação.</span><div class="badge-cloud mt-2"><span>Attention</span><span>Softmax</span><span>Cross-entropy</span><span>RMSNorm</span><span>Temperature</span><span>Perplexidade</span></div></div>
+<div class="mini-card"><strong>Retrieval, ranking e RAG</strong><span>Métricas e matemática para avaliar busca semântica, BM25, embeddings, reranking e respostas com contexto.</span><div class="badge-cloud mt-2"><span>TF-IDF</span><span>BM25</span><span>MRR</span><span>MAP</span><span>NDCG</span><span>Faithfulness</span></div></div>
+<div class="mini-card"><strong>Produto e experimentação</strong><span>Uso de matemática para decidir se uma feature realmente melhorou métricas de produto ou qualidade de IA.</span><div class="badge-cloud mt-2"><span>Uplift</span><span>Coortes</span><span>Significância</span><span>Poder estatístico</span><span>Conversão</span><span>Correlação vs causalidade</span></div></div>
+</div>
 
-  </section><section class="section" id="aplicacoes">
+</section><section class="section" id="aplicacoes">
 
-    <div class="section-header">
-      <div><h2>Aplicações diretas em programação e IA</h2><p class="section-subtitle">Cada assunto precisa ser conectado a uma aplicação técnica verificável.</p></div>
-      <span class="section-badge">Aplicação</span>
-    </div>
-    <div class="table-wrap">
-      <table class="">
-        <thead><tr><th>Conceito matemático</th><th>Aplicação em programação</th><th>Aplicação em IA</th><th>Entregável recomendado</th></tr></thead>
-        <tbody>
-        <tr><td>Lógica booleana</td><td>Validação de regras, filtros, condicionais, feature flags.</td><td>Regras de guardrails, validação de output, filtros de segurança.</td><td>Tabela-verdade implementada em Python.</td></tr>
-        <tr><td>Big O</td><td>Análise de performance, estruturas de dados, entrevistas.</td><td>Custo de busca, retrieval, inferência e pré-processamento.</td><td>Benchmark com gráficos e README.</td></tr>
-        <tr><td>Grafos</td><td>Dependências, workflows, rotas, filas, build graph.</td><td>Knowledge graphs, agentes, PageRank, recomendação.</td><td>Implementar BFS/DFS/Dijkstra/topological sort.</td></tr>
-        <tr><td>Vetores e matrizes</td><td>Computação vetorial, transformação de dados, otimização.</td><td>Embeddings, transformers, similarity search, PCA/SVD.</td><td>Notebook NumPy de similaridade.</td></tr>
-        <tr><td>Probabilidade</td><td>Risco, incerteza, filas, sistemas distribuídos.</td><td>Classificação probabilística, Bayes, calibration, uncertainty.</td><td>Classificador Bayesiano simples.</td></tr>
-        <tr><td>Estatística</td><td>Experimentos, métricas, decisão de produto.</td><td>Avaliação de modelos, intervalos, p-value, A/B testing.</td><td>Relatório estatístico de experimento.</td></tr>
-        <tr><td>Cálculo e gradiente</td><td>Otimização de funções e parâmetros.</td><td>Backpropagation, gradient descent, training loops.</td><td>Gradient descent do zero.</td></tr>
-        <tr><td>Information retrieval</td><td>Busca textual, ranking, filtros, recomendação.</td><td>RAG, BM25, embeddings, reranking, NDCG, MRR.</td><td>BM25 vs embeddings com métricas.</td></tr>
-        </tbody>
-      </table>
-    </div>
+<div class="section-header">
+<div><h2>Aplicações diretas em programação e IA</h2><p class="section-subtitle">Cada assunto precisa ser conectado a uma aplicação técnica verificável.</p></div>
+<span class="section-badge">Aplicação</span>
+</div>
+<div class="table-wrap">
+<table class="">
+<thead><tr><th>Conceito matemático</th><th>Aplicação em programação</th><th>Aplicação em IA</th><th>Entregável recomendado</th></tr></thead>
+<tbody>
+<tr><td>Lógica booleana</td><td>Validação de regras, filtros, condicionais, feature flags.</td><td>Regras de guardrails, validação de output, filtros de segurança.</td><td>Tabela-verdade implementada em Python.</td></tr>
+<tr><td>Big O</td><td>Análise de performance, estruturas de dados, entrevistas.</td><td>Custo de busca, retrieval, inferência e pré-processamento.</td><td>Benchmark com gráficos e README.</td></tr>
+<tr><td>Grafos</td><td>Dependências, workflows, rotas, filas, build graph.</td><td>Knowledge graphs, agentes, PageRank, recomendação.</td><td>Implementar BFS/DFS/Dijkstra/topological sort.</td></tr>
+<tr><td>Vetores e matrizes</td><td>Computação vetorial, transformação de dados, otimização.</td><td>Embeddings, transformers, similarity search, PCA/SVD.</td><td>Notebook NumPy de similaridade.</td></tr>
+<tr><td>Probabilidade</td><td>Risco, incerteza, filas, sistemas distribuídos.</td><td>Classificação probabilística, Bayes, calibration, uncertainty.</td><td>Classificador Bayesiano simples.</td></tr>
+<tr><td>Estatística</td><td>Experimentos, métricas, decisão de produto.</td><td>Avaliação de modelos, intervalos, p-value, A/B testing.</td><td>Relatório estatístico de experimento.</td></tr>
+<tr><td>Cálculo e gradiente</td><td>Otimização de funções e parâmetros.</td><td>Backpropagation, gradient descent, training loops.</td><td>Gradient descent do zero.</td></tr>
+<tr><td>Information retrieval</td><td>Busca textual, ranking, filtros, recomendação.</td><td>RAG, BM25, embeddings, reranking, NDCG, MRR.</td><td>BM25 vs embeddings com métricas.</td></tr>
+</tbody>
+</table>
+</div>
 
-  </section><section class="section" id="roadmap">
+</section><section class="section" id="roadmap">
 
-    <div class="section-header">
-      <div><h2>Roadmap em 8 fases</h2><p class="section-subtitle">Cronograma alinhado ao index do Plano Integrado: 1h/dia, 64 semanas.</p></div>
-      <span class="section-badge">64 semanas</span>
-    </div>
-    <div class="phase-grid">
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 1 — Base lógica, discreta e complexidade inicial</h3><span>Semanas 1–8</span></div>
-        <p><strong>Foco:</strong> Programação, lógica de código, Big O, recursão e corretude básica.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Lógica booleana aplicada a código: AND, OR, NOT, XOR, curto-circuito, expressões condicionais e validação de regras</li>
-          <li>Lógica proposicional: conectivos, tabelas-verdade, equivalências, De Morgan e implementação de tabelas-verdade em Python</li>
-          <li>Teoria de conjuntos aplicada: união, interseção, diferença, cardinalidade, Venn, conjuntos em Java/Python e uso em filtros/consultas</li>
-          <li>Álgebra básica para programação: equações, funções lineares/quadráticas, gráficos, crescimento linear/quadrático e leitura de funções</li>
-          <li>Sistemas numéricos: binário, octal, hexadecimal, conversões, bits, bytes, máscaras, flags e representação de inteiros</li>
-          <li>Combinatória: princípio da contagem, permutações, combinações, busca exaustiva, explosão combinatória e custo de brute force</li>
-          <li>Notação Big O: tempo, espaço, comparação de complexidades, benchmark real, loops aninhados, recursão e análise assintótica</li>
-          <li>Indução matemática e corretude: provas simples para algoritmos recursivos, invariantes de loop e raciocínio formal básico</li>
-          <li>Entregável: notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e explicação no README</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>Notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e README.</p></div>
-      </article>
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 2 — Funções, grafos, relações e algoritmos</h3><span>Semanas 9–16</span></div>
-        <p><strong>Foco:</strong> Grafos, dependências, workflows, rotas, hashing, recorrências e entrevistas técnicas.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Funções aplicadas: domínio, imagem, composição, inversa, monotonicidade e interpretação de funções como transformação de dados</li>
-          <li>Grafos I: representação por lista/matriz de adjacência, grau, conectividade, componentes, BFS, DFS e complexidade</li>
-          <li>Grafos II: Dijkstra, topological sort, Union-Find, árvores, DAGs, heaps e aplicações em dependências, rotas e workflows</li>
-          <li>Relações: equivalência, ordem parcial, fecho transitivo, ordenação topológica e modelagem de dependências entre módulos</li>
-          <li>Lógica de predicados: quantificadores, predicados, provas, pré/pós-condições e validação formal de regras de negócio</li>
-          <li>Aritmética modular: congruência, hashing, checksums, criptografia básica, colisões e distribuição de chaves</li>
-          <li>Teoria dos números: MDC, MMC, algoritmo de Euclides, primalidade básica e aplicações em criptografia e hashing</li>
-          <li>Complexidade avançada: análise amortizada, recorrências, Teorema Mestre, recursão em divide-and-conquer e custo de algoritmos</li>
-          <li>Entregável: implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O no README</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>Implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O.</p></div>
-      </article>
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 3 — Álgebra linear, geometria vetorial e probabilidade</h3><span>Semanas 17–24</span></div>
-        <p><strong>Foco:</strong> Embeddings, similaridade, vetores, matrizes, incerteza e fundamentos de ML.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Álgebra linear I: vetores, escalares, operações, norma L1/L2, produto interno, ângulo entre vetores e ortogonalidade</li>
-          <li>Geometria vetorial aplicada: distância euclidiana, Manhattan e Mahalanobis, projeção vetorial, mudança de base e subespaços</li>
-          <li>Matrizes: tipos, transposta, determinante, inversa, sistemas lineares, multiplicação matricial e interpretação computacional</li>
-          <li>Transformações lineares: rotação, escala, cisalhamento, projeção, composição de transformações e matrizes como funções</li>
-          <li>Embeddings: vetores em alta dimensão, normalização, curse of dimensionality, dot product, cosine similarity e busca vetorial</li>
-          <li>Probabilidade I: axiomas, eventos, probabilidade condicional, independência, Bayes e interpretação de incerteza</li>
-          <li>Variáveis aleatórias: esperança, variância, desvio padrão, covariância e distribuições binomial, Poisson e normal</li>
-          <li>Aplicação em IA: matrizes em transformers, embeddings, similaridade semântica, recomendação e clustering</li>
-          <li>Entregável: notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade entre textos</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>Notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade entre textos.</p></div>
-      </article>
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 4 — PCA, SVD, cálculo, gradiente e otimização</h3><span>Semanas 25–32</span></div>
-        <p><strong>Foco:</strong> Redução de dimensionalidade, gradient descent, MLE/MAP e otimização aplicada.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Álgebra linear II: autovalores, autovetores, decomposição espectral, diagonalização e interpretação geométrica</li>
-          <li>PCA: centralização, matriz de covariância, componentes principais, variância explicada e redução de dimensionalidade</li>
-          <li>SVD: decomposição, compressão, recomendação, latent factors e comparação com PCA em dados reais</li>
-          <li>Cálculo I: limites, derivadas, derivadas parciais, taxa de variação e interpretação geométrica do gradiente</li>
-          <li>Gradiente: vetor gradiente, gradiente descendente, função de custo, learning rate e convergência</li>
-          <li>Cálculo II: regra da cadeia, integrais básicas, Jacobiano, Hessiana e noção de curvatura</li>
-          <li>Probabilidade aplicada: likelihood, log-likelihood, MLE, MAP, prior, posterior, evidence e calibration</li>
-          <li>Otimização: pontos críticos, convexidade, Lagrange, saddle points, mínimos locais/globais e gradient checking</li>
-          <li>Entregável: PCA/SVD manual com NumPy + comparação com scikit-learn + implementação manual de gradient descent</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>PCA/SVD manual com NumPy + comparação com scikit-learn + gradient descent manual.</p></div>
-      </article>
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 5 — Estatística, experimentação e métricas de ML</h3><span>Semanas 33–40</span></div>
-        <p><strong>Foco:</strong> A/B testing, inferência, regressão, métricas, regularização e validação de modelos.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Estatística I: estimadores, viés, variância, intervalo de confiança, erro padrão e interpretação prática</li>
-          <li>Estatística II: teste de hipótese, p-value, erro tipo I/II, poder estatístico, tamanho de amostra e significância</li>
-          <li>Produto e experimentação: A/B testing, uplift, análise de coorte, métricas de conversão, correlação vs causalidade e multiple testing</li>
-          <li>Regressão e correlação: regressão linear, regressão logística, ANOVA, correlação Pearson/Spearman e interpretação de coeficientes</li>
-          <li>Bayes aplicado: prior, posterior, atualização bayesiana, incerteza, calibration e tomada de decisão probabilística</li>
-          <li>Entropia e informação: entropia, entropia cruzada, divergência KL, perplexidade e relação com classificação/LLMs</li>
-          <li>Otimização em ML: SGD, Adam, momentum, learning rate schedules, batch size effect e gradient clipping</li>
-          <li>Regularização: L1, L2, dropout, early stopping, weight decay, overfitting, underfitting e bias-variance tradeoff</li>
-          <li>Métricas ML: accuracy, precision, recall, F1, ROC-AUC, PR-AUC, confusion matrix, MAE, RMSE, R² e threshold tuning</li>
-          <li>Entregável: experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório interpretativo</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>Experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório interpretativo.</p></div>
-      </article>
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 6 — Deep Learning, attention, losses e métricas RAG/LLM</h3><span>Semanas 41–48</span></div>
-        <p><strong>Foco:</strong> Transformers, self-attention, backpropagation, losses, normalização e avaliação de IA.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Álgebra linear para deep learning: batch matrix multiplication, broadcasting, tensores, shapes e custo computacional</li>
-          <li>Attention: Q·K^T/√d, softmax, multiplicação por V, masked attention, cross-attention e interpretação de pesos</li>
-          <li>Backpropagation: regra da cadeia, computational graph, autograd, fluxo de gradiente e cálculo de loss</li>
-          <li>Loss functions: MSE, cross-entropy, focal loss, contrastive loss e relação com objetivos de treinamento</li>
-          <li>Ativações: ReLU, GELU, SiLU, sigmoid, tanh, saturação, propriedades de gradiente e escolha prática</li>
-          <li>Normalização: batch norm, layer norm, RMSNorm, estabilização, treinamento profundo e transformers</li>
-          <li>Similaridade e retrieval: cosine, dot product, euclidiana, Jaccard, threshold de similaridade e normalização de embeddings</li>
-          <li>Problemas de otimização: vanishing gradient, exploding gradient, gradient clipping, saddle points e estabilidade numérica</li>
-          <li>Métricas RAG/LLM: faithfulness, answer relevance, context precision, context recall, hallucination rate e groundedness</li>
-          <li>Entregável: implementação de self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>Self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes.</p></div>
-      </article>
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 7 — Informação, ranking, retrieval, séries e métodos numéricos</h3><span>Semanas 49–56</span></div>
-        <p><strong>Foco:</strong> BM25, TF-IDF, dense/hybrid retrieval, MRR, MAP, NDCG, PageRank e ranking.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Teoria da informação: entropia de Shannon, informação mútua, compressão, incerteza e relação com modelos probabilísticos</li>
-          <li>Probabilistic ML: Naive Bayes, Gaussian Mixture, EM em nível prático e interpretação probabilística</li>
-          <li>Kernels: RBF, polynomial, SVM, kernel trick e noção de espaço de características</li>
-          <li>Séries temporais: autocorrelação, tendência, sazonalidade, ARIMA básico, previsão e validação temporal</li>
-          <li>Grafos e redes: PageRank, community detection, centralidade, ranking e aplicações em busca/recomendação</li>
-          <li>Retrieval e ranking: TF-IDF, BM25, dense retrieval, sparse retrieval, hybrid search, reranking e score de similaridade</li>
-          <li>Métricas de busca/RAG: precision@k, recall@k, hit rate, MRR, MAP, NDCG, retrieval hit rate e threshold tuning</li>
-          <li>Otimização convexa: dualidade, KKT, programação linear e trade-offs em problemas de otimização</li>
-          <li>Métodos numéricos: floating point, overflow/underflow, estabilidade numérica, condicionamento e erros de arredondamento</li>
-          <li>Entregável: comparação BM25 vs embeddings em um dataset próprio, avaliando MRR/NDCG e documentando decisão técnica</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>Comparação BM25 vs embeddings em dataset próprio, avaliando MRR/NDCG e documentando decisão técnica.</p></div>
-      </article>
-      <article class="phase-doc-card searchable-section" data-search-section="">
-        <div class="phase-doc-head"><h3>Fase 8 — Consolidação, entrevistas e portfólio Math for AI Engineering</h3><span>Semanas 57–64</span></div>
-        <p><strong>Foco:</strong> Revisão integral, aplicação em IA, entrevistas, artigos técnicos e caderno público.</p>
-        <h4>Conteúdos obrigatórios</h4>
-        <ul class="doc-list"><li>Revisão integral: lógica, Big O, grafos, álgebra linear, cálculo, probabilidade, estatística, otimização e métricas</li>
-          <li>Problemas de entrevista: puzzles, estimativas Fermi, análise de complexidade, grafos, árvores, recursão e programação dinâmica</li>
-          <li>Matemática de LLMs: attention, softmax, temperature, cross-entropy, perplexidade, embeddings e normalização</li>
-          <li>Matemática de embeddings: projeções, subespaços, normalização, cosine similarity, subspace clustering e alta dimensionalidade</li>
-          <li>Matemática de avaliação: intervalos de confiança, significância estatística, A/B testing, métricas de ML e métricas de RAG</li>
-          <li>Aplicação em produto: decidir métrica correta, interpretar experimento, explicar trade-off e medir melhoria real</li>
-          <li>Portfólio: caderno público 'Matemática para AI Engineering' com notebooks, gráficos, código e explicações</li>
-          <li>Artigos técnicos: cosine similarity com código, attention matematicamente, avaliação de RAG com NDCG/MRR e gradient descent do zero</li>
-          <li>Entregável final: página/blog post consolidando cada conceito matemático com uma aplicação real em programação ou IA</li></ul>
-        <div class="callout success"><h4>Entregável da fase</h4><p>Página/blog post consolidando cada conceito matemático com aplicação real em programação ou IA.</p></div>
-      </article>
-    </div>
+<div class="section-header">
+<div><h2>Roadmap em 8 fases</h2><p class="section-subtitle">Cronograma alinhado ao index do Plano Integrado: 1h/dia, 64 semanas.</p></div>
+<span class="section-badge">64 semanas</span>
+</div>
+<div class="phase-grid">
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 1 — Base lógica, discreta e complexidade inicial</h3><span>Semanas 1–8</span></div>
+<p><strong>Foco:</strong> Programação, lógica de código, Big O, recursão e corretude básica.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Lógica booleana aplicada a código: AND, OR, NOT, XOR, curto-circuito, expressões condicionais e validação de regras</li>
+<li>Lógica proposicional: conectivos, tabelas-verdade, equivalências, De Morgan e implementação de tabelas-verdade em Python</li>
+<li>Teoria de conjuntos aplicada: união, interseção, diferença, cardinalidade, Venn, conjuntos em Java/Python e uso em filtros/consultas</li>
+<li>Álgebra básica para programação: equações, funções lineares/quadráticas, gráficos, crescimento linear/quadrático e leitura de funções</li>
+<li>Sistemas numéricos: binário, octal, hexadecimal, conversões, bits, bytes, máscaras, flags e representação de inteiros</li>
+<li>Combinatória: princípio da contagem, permutações, combinações, busca exaustiva, explosão combinatória e custo de brute force</li>
+<li>Notação Big O: tempo, espaço, comparação de complexidades, benchmark real, loops aninhados, recursão e análise assintótica</li>
+<li>Indução matemática e corretude: provas simples para algoritmos recursivos, invariantes de loop e raciocínio formal básico</li>
+<li>Entregável: notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e explicação no README</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>Notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e README.</p></div>
+</article>
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 2 — Funções, grafos, relações e algoritmos</h3><span>Semanas 9–16</span></div>
+<p><strong>Foco:</strong> Grafos, dependências, workflows, rotas, hashing, recorrências e entrevistas técnicas.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Funções aplicadas: domínio, imagem, composição, inversa, monotonicidade e interpretação de funções como transformação de dados</li>
+<li>Grafos I: representação por lista/matriz de adjacência, grau, conectividade, componentes, BFS, DFS e complexidade</li>
+<li>Grafos II: Dijkstra, topological sort, Union-Find, árvores, DAGs, heaps e aplicações em dependências, rotas e workflows</li>
+<li>Relações: equivalência, ordem parcial, fecho transitivo, ordenação topológica e modelagem de dependências entre módulos</li>
+<li>Lógica de predicados: quantificadores, predicados, provas, pré/pós-condições e validação formal de regras de negócio</li>
+<li>Aritmética modular: congruência, hashing, checksums, criptografia básica, colisões e distribuição de chaves</li>
+<li>Teoria dos números: MDC, MMC, algoritmo de Euclides, primalidade básica e aplicações em criptografia e hashing</li>
+<li>Complexidade avançada: análise amortizada, recorrências, Teorema Mestre, recursão em divide-and-conquer e custo de algoritmos</li>
+<li>Entregável: implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O no README</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>Implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O.</p></div>
+</article>
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 3 — Álgebra linear, geometria vetorial e probabilidade</h3><span>Semanas 17–24</span></div>
+<p><strong>Foco:</strong> Embeddings, similaridade, vetores, matrizes, incerteza e fundamentos de ML.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Álgebra linear I: vetores, escalares, operações, norma L1/L2, produto interno, ângulo entre vetores e ortogonalidade</li>
+<li>Geometria vetorial aplicada: distância euclidiana, Manhattan e Mahalanobis, projeção vetorial, mudança de base e subespaços</li>
+<li>Matrizes: tipos, transposta, determinante, inversa, sistemas lineares, multiplicação matricial e interpretação computacional</li>
+<li>Transformações lineares: rotação, escala, cisalhamento, projeção, composição de transformações e matrizes como funções</li>
+<li>Embeddings: vetores em alta dimensão, normalização, curse of dimensionality, dot product, cosine similarity e busca vetorial</li>
+<li>Probabilidade I: axiomas, eventos, probabilidade condicional, independência, Bayes e interpretação de incerteza</li>
+<li>Variáveis aleatórias: esperança, variância, desvio padrão, covariância e distribuições binomial, Poisson e normal</li>
+<li>Aplicação em IA: matrizes em transformers, embeddings, similaridade semântica, recomendação e clustering</li>
+<li>Entregável: notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade entre textos</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>Notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade entre textos.</p></div>
+</article>
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 4 — PCA, SVD, cálculo, gradiente e otimização</h3><span>Semanas 25–32</span></div>
+<p><strong>Foco:</strong> Redução de dimensionalidade, gradient descent, MLE/MAP e otimização aplicada.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Álgebra linear II: autovalores, autovetores, decomposição espectral, diagonalização e interpretação geométrica</li>
+<li>PCA: centralização, matriz de covariância, componentes principais, variância explicada e redução de dimensionalidade</li>
+<li>SVD: decomposição, compressão, recomendação, latent factors e comparação com PCA em dados reais</li>
+<li>Cálculo I: limites, derivadas, derivadas parciais, taxa de variação e interpretação geométrica do gradiente</li>
+<li>Gradiente: vetor gradiente, gradiente descendente, função de custo, learning rate e convergência</li>
+<li>Cálculo II: regra da cadeia, integrais básicas, Jacobiano, Hessiana e noção de curvatura</li>
+<li>Probabilidade aplicada: likelihood, log-likelihood, MLE, MAP, prior, posterior, evidence e calibration</li>
+<li>Otimização: pontos críticos, convexidade, Lagrange, saddle points, mínimos locais/globais e gradient checking</li>
+<li>Entregável: PCA/SVD manual com NumPy + comparação com scikit-learn + implementação manual de gradient descent</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>PCA/SVD manual com NumPy + comparação com scikit-learn + gradient descent manual.</p></div>
+</article>
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 5 — Estatística, experimentação e métricas de ML</h3><span>Semanas 33–40</span></div>
+<p><strong>Foco:</strong> A/B testing, inferência, regressão, métricas, regularização e validação de modelos.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Estatística I: estimadores, viés, variância, intervalo de confiança, erro padrão e interpretação prática</li>
+<li>Estatística II: teste de hipótese, p-value, erro tipo I/II, poder estatístico, tamanho de amostra e significância</li>
+<li>Produto e experimentação: A/B testing, uplift, análise de coorte, métricas de conversão, correlação vs causalidade e multiple testing</li>
+<li>Regressão e correlação: regressão linear, regressão logística, ANOVA, correlação Pearson/Spearman e interpretação de coeficientes</li>
+<li>Bayes aplicado: prior, posterior, atualização bayesiana, incerteza, calibration e tomada de decisão probabilística</li>
+<li>Entropia e informação: entropia, entropia cruzada, divergência KL, perplexidade e relação com classificação/LLMs</li>
+<li>Otimização em ML: SGD, Adam, momentum, learning rate schedules, batch size effect e gradient clipping</li>
+<li>Regularização: L1, L2, dropout, early stopping, weight decay, overfitting, underfitting e bias-variance tradeoff</li>
+<li>Métricas ML: accuracy, precision, recall, F1, ROC-AUC, PR-AUC, confusion matrix, MAE, RMSE, R² e threshold tuning</li>
+<li>Entregável: experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório interpretativo</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>Experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório interpretativo.</p></div>
+</article>
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 6 — Deep Learning, attention, losses e métricas RAG/LLM</h3><span>Semanas 41–48</span></div>
+<p><strong>Foco:</strong> Transformers, self-attention, backpropagation, losses, normalização e avaliação de IA.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Álgebra linear para deep learning: batch matrix multiplication, broadcasting, tensores, shapes e custo computacional</li>
+<li>Attention: Q·K^T/√d, softmax, multiplicação por V, masked attention, cross-attention e interpretação de pesos</li>
+<li>Backpropagation: regra da cadeia, computational graph, autograd, fluxo de gradiente e cálculo de loss</li>
+<li>Loss functions: MSE, cross-entropy, focal loss, contrastive loss e relação com objetivos de treinamento</li>
+<li>Ativações: ReLU, GELU, SiLU, sigmoid, tanh, saturação, propriedades de gradiente e escolha prática</li>
+<li>Normalização: batch norm, layer norm, RMSNorm, estabilização, treinamento profundo e transformers</li>
+<li>Similaridade e retrieval: cosine, dot product, euclidiana, Jaccard, threshold de similaridade e normalização de embeddings</li>
+<li>Problemas de otimização: vanishing gradient, exploding gradient, gradient clipping, saddle points e estabilidade numérica</li>
+<li>Métricas RAG/LLM: faithfulness, answer relevance, context precision, context recall, hallucination rate e groundedness</li>
+<li>Entregável: implementação de self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>Self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes.</p></div>
+</article>
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 7 — Informação, ranking, retrieval, séries e métodos numéricos</h3><span>Semanas 49–56</span></div>
+<p><strong>Foco:</strong> BM25, TF-IDF, dense/hybrid retrieval, MRR, MAP, NDCG, PageRank e ranking.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Teoria da informação: entropia de Shannon, informação mútua, compressão, incerteza e relação com modelos probabilísticos</li>
+<li>Probabilistic ML: Naive Bayes, Gaussian Mixture, EM em nível prático e interpretação probabilística</li>
+<li>Kernels: RBF, polynomial, SVM, kernel trick e noção de espaço de características</li>
+<li>Séries temporais: autocorrelação, tendência, sazonalidade, ARIMA básico, previsão e validação temporal</li>
+<li>Grafos e redes: PageRank, community detection, centralidade, ranking e aplicações em busca/recomendação</li>
+<li>Retrieval e ranking: TF-IDF, BM25, dense retrieval, sparse retrieval, hybrid search, reranking e score de similaridade</li>
+<li>Métricas de busca/RAG: precision@k, recall@k, hit rate, MRR, MAP, NDCG, retrieval hit rate e threshold tuning</li>
+<li>Otimização convexa: dualidade, KKT, programação linear e trade-offs em problemas de otimização</li>
+<li>Métodos numéricos: floating point, overflow/underflow, estabilidade numérica, condicionamento e erros de arredondamento</li>
+<li>Entregável: comparação BM25 vs embeddings em um dataset próprio, avaliando MRR/NDCG e documentando decisão técnica</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>Comparação BM25 vs embeddings em dataset próprio, avaliando MRR/NDCG e documentando decisão técnica.</p></div>
+</article>
+<article class="phase-doc-card searchable-section" data-search-section="">
+<div class="phase-doc-head"><h3>Fase 8 — Consolidação, entrevistas e portfólio Math for AI Engineering</h3><span>Semanas 57–64</span></div>
+<p><strong>Foco:</strong> Revisão integral, aplicação em IA, entrevistas, artigos técnicos e caderno público.</p>
+<h4>Conteúdos obrigatórios</h4>
+<ul class="doc-list"><li>Revisão integral: lógica, Big O, grafos, álgebra linear, cálculo, probabilidade, estatística, otimização e métricas</li>
+<li>Problemas de entrevista: puzzles, estimativas Fermi, análise de complexidade, grafos, árvores, recursão e programação dinâmica</li>
+<li>Matemática de LLMs: attention, softmax, temperature, cross-entropy, perplexidade, embeddings e normalização</li>
+<li>Matemática de embeddings: projeções, subespaços, normalização, cosine similarity, subspace clustering e alta dimensionalidade</li>
+<li>Matemática de avaliação: intervalos de confiança, significância estatística, A/B testing, métricas de ML e métricas de RAG</li>
+<li>Aplicação em produto: decidir métrica correta, interpretar experimento, explicar trade-off e medir melhoria real</li>
+<li>Portfólio: caderno público 'Matemática para AI Engineering' com notebooks, gráficos, código e explicações</li>
+<li>Artigos técnicos: cosine similarity com código, attention matematicamente, avaliação de RAG com NDCG/MRR e gradient descent do zero</li>
+<li>Entregável final: página/blog post consolidando cada conceito matemático com uma aplicação real em programação ou IA</li></ul>
+<div class="callout success"><h4>Entregável da fase</h4><p>Página/blog post consolidando cada conceito matemático com aplicação real em programação ou IA.</p></div>
+</article>
+</div>
 
-  </section><section class="section" id="checklist">
+</section><section class="section" id="checklist">
 
-    <div class="section-header">
-      <div><h2>Checklist de execução</h2><p class="section-subtitle">Use estes critérios para impedir que a trilha vire apenas teoria.</p></div>
-      <span class="section-badge">Checklist</span>
-    </div>
-    <div class="grid2">
-      <div class="callout"><h3>Checklist semanal</h3><ul class="doc-list">
-        <li>Estude pelo menos 5 blocos de 1h na semana.</li>
-        <li>Implemente pelo menos 1 conceito em Python, Java ou notebook.</li>
-        <li>Registre fórmulas, intuições e erros no Obsidian.</li>
-        <li>Gere pelo menos 1 gráfico, benchmark, teste ou visualização.</li>
-        <li>Conecte o conceito ao blog, IA, banco, DevOps ou entrevistas.</li>
-        <li>Crie flashcards para fórmulas, métricas e interpretações.</li>
-      </ul></div>
-      <div class="callout accent-blue"><h3>Checklist de domínio</h3><ul class="doc-list">
-        <li>Consigo explicar o conceito sem decorar.</li>
-        <li>Consigo implementar uma versão mínima do conceito.</li>
-        <li>Consigo apontar um uso real em programação ou IA.</li>
-        <li>Consigo dizer quando o conceito não deve ser usado.</li>
-        <li>Consigo interpretar uma métrica ou resultado gerado.</li>
-        <li>Consigo documentar a decisão em README, ADR ou artigo.</li>
-      </ul></div>
-    </div>
-    <h3>Checklist de prontidão para IA Engineering</h3>
-    <div class="table-wrap"><table class=""><thead><tr><th>Área</th><th>Critério de prontidão</th><th>Evidência esperada</th></tr></thead><tbody>
-    <tr><td>Algoritmos</td><td>Explica Big O, grafos, recursão, recorrências e análise amortizada.</td><td>Implementações com testes e README.</td></tr>
-    <tr><td>Álgebra linear</td><td>Explica vetores, matrizes, normas, produto interno, PCA, SVD e embeddings.</td><td>Notebook NumPy com busca vetorial.</td></tr>
-    <tr><td>Probabilidade</td><td>Explica Bayes, variáveis aleatórias, distribuições, likelihood e uncertainty.</td><td>Modelo probabilístico simples.</td></tr>
-    <tr><td>Estatística</td><td>Interpreta p-value, intervalo, poder, A/B test e métricas de modelo.</td><td>Relatório de experimento.</td></tr>
-    <tr><td>Deep Learning</td><td>Explica gradiente, backpropagation, losses, softmax, attention e normalização.</td><td>Self-attention em PyTorch.</td></tr>
-    <tr><td>RAG/Search</td><td>Calcula precision@k, recall@k, MRR, MAP, NDCG e compara BM25 vs embeddings.</td><td>Avaliação de retrieval documentada.</td></tr>
-    </tbody></table></div>
+<div class="section-header">
+<div><h2>Checklist de execução</h2><p class="section-subtitle">Use estes critérios para impedir que a trilha vire apenas teoria.</p></div>
+<span class="section-badge">Checklist</span>
+</div>
+<div class="grid2">
+<div class="callout"><h3>Checklist semanal</h3><ul class="doc-list">
+<li>Estude pelo menos 5 blocos de 1h na semana.</li>
+<li>Implemente pelo menos 1 conceito em Python, Java ou notebook.</li>
+<li>Registre fórmulas, intuições e erros no Obsidian.</li>
+<li>Gere pelo menos 1 gráfico, benchmark, teste ou visualização.</li>
+<li>Conecte o conceito ao blog, IA, banco, DevOps ou entrevistas.</li>
+<li>Crie flashcards para fórmulas, métricas e interpretações.</li>
+</ul></div>
+<div class="callout accent-blue"><h3>Checklist de domínio</h3><ul class="doc-list">
+<li>Consigo explicar o conceito sem decorar.</li>
+<li>Consigo implementar uma versão mínima do conceito.</li>
+<li>Consigo apontar um uso real em programação ou IA.</li>
+<li>Consigo dizer quando o conceito não deve ser usado.</li>
+<li>Consigo interpretar uma métrica ou resultado gerado.</li>
+<li>Consigo documentar a decisão em README, ADR ou artigo.</li>
+</ul></div>
+</div>
+<h3>Checklist de prontidão para IA Engineering</h3>
+<div class="table-wrap"><table class=""><thead><tr><th>Área</th><th>Critério de prontidão</th><th>Evidência esperada</th></tr></thead><tbody>
+<tr><td>Algoritmos</td><td>Explica Big O, grafos, recursão, recorrências e análise amortizada.</td><td>Implementações com testes e README.</td></tr>
+<tr><td>Álgebra linear</td><td>Explica vetores, matrizes, normas, produto interno, PCA, SVD e embeddings.</td><td>Notebook NumPy com busca vetorial.</td></tr>
+<tr><td>Probabilidade</td><td>Explica Bayes, variáveis aleatórias, distribuições, likelihood e uncertainty.</td><td>Modelo probabilístico simples.</td></tr>
+<tr><td>Estatística</td><td>Interpreta p-value, intervalo, poder, A/B test e métricas de modelo.</td><td>Relatório de experimento.</td></tr>
+<tr><td>Deep Learning</td><td>Explica gradiente, backpropagation, losses, softmax, attention e normalização.</td><td>Self-attention em PyTorch.</td></tr>
+<tr><td>RAG/Search</td><td>Calcula precision@k, recall@k, MRR, MAP, NDCG e compara BM25 vs embeddings.</td><td>Avaliação de retrieval documentada.</td></tr>
+</tbody></table></div>
 
-  </section><section class="section" id="projetos">
+</section><section class="section" id="projetos">
 
-    <div class="section-header">
-      <div><h2>Projetos práticos obrigatórios</h2><p class="section-subtitle">Um projeto por fase para transformar matemática em portfólio técnico.</p></div>
-      <span class="section-badge">Projetos</span>
-    </div>
-    <div class="grid2">
-      <div class="mini-card"><strong>Projeto 1 — Big O Visual</strong><span>Comparar algoritmos O(1), O(log n), O(n), O(n log n), O(n²) com Python, gráficos e README explicando custo de tempo/espaço.</span></div>
-      <div class="mini-card"><strong>Projeto 2 — Graph Algorithms Lab</strong><span>Implementar BFS, DFS, Dijkstra, topological sort e Union-Find com testes, visualização simples e análise de complexidade.</span></div>
-      <div class="mini-card"><strong>Projeto 3 — Embeddings Similarity Lab</strong><span>Criar notebook NumPy com normalização, dot product, cosine similarity, projeção vetorial e busca por textos similares.</span></div>
-      <div class="mini-card"><strong>Projeto 4 — PCA/SVD do Zero</strong><span>Implementar PCA e SVD manualmente, comparar com scikit-learn e explicar variância explicada, compressão e recomendação.</span></div>
-      <div class="mini-card"><strong>Projeto 5 — Statistical Experiment Lab</strong><span>Executar experimento com regressão/classificação, testes de hipótese, intervalos de confiança e métricas de ML.</span></div>
-      <div class="mini-card"><strong>Projeto 6 — Attention from Scratch</strong><span>Implementar self-attention em PyTorch, documentar Q/K/V, escala por raiz de d, masked attention, softmax e shapes.</span></div>
-      <div class="mini-card"><strong>Projeto 7 — Retrieval Metrics Lab</strong><span>Comparar TF-IDF/BM25 contra embeddings, medir precision@k, recall@k, MRR, MAP e NDCG em dataset próprio.</span></div>
-      <div class="mini-card"><strong>Projeto 8 — Math for AI Engineering</strong><span>Publicar caderno final com notebooks, gráficos, snippets e artigos conectando cada conceito a programação, IA ou RAG.</span></div>
-    </div>
+<div class="section-header">
+<div><h2>Projetos práticos obrigatórios</h2><p class="section-subtitle">Um projeto por fase para transformar matemática em portfólio técnico.</p></div>
+<span class="section-badge">Projetos</span>
+</div>
+<div class="grid2">
+<div class="mini-card"><strong>Projeto 1 — Big O Visual</strong><span>Comparar algoritmos O(1), O(log n), O(n), O(n log n), O(n²) com Python, gráficos e README explicando custo de tempo/espaço.</span></div>
+<div class="mini-card"><strong>Projeto 2 — Graph Algorithms Lab</strong><span>Implementar BFS, DFS, Dijkstra, topological sort e Union-Find com testes, visualização simples e análise de complexidade.</span></div>
+<div class="mini-card"><strong>Projeto 3 — Embeddings Similarity Lab</strong><span>Criar notebook NumPy com normalização, dot product, cosine similarity, projeção vetorial e busca por textos similares.</span></div>
+<div class="mini-card"><strong>Projeto 4 — PCA/SVD do Zero</strong><span>Implementar PCA e SVD manualmente, comparar com scikit-learn e explicar variância explicada, compressão e recomendação.</span></div>
+<div class="mini-card"><strong>Projeto 5 — Statistical Experiment Lab</strong><span>Executar experimento com regressão/classificação, testes de hipótese, intervalos de confiança e métricas de ML.</span></div>
+<div class="mini-card"><strong>Projeto 6 — Attention from Scratch</strong><span>Implementar self-attention em PyTorch, documentar Q/K/V, escala por raiz de d, masked attention, softmax e shapes.</span></div>
+<div class="mini-card"><strong>Projeto 7 — Retrieval Metrics Lab</strong><span>Comparar TF-IDF/BM25 contra embeddings, medir precision@k, recall@k, MRR, MAP e NDCG em dataset próprio.</span></div>
+<div class="mini-card"><strong>Projeto 8 — Math for AI Engineering</strong><span>Publicar caderno final com notebooks, gráficos, snippets e artigos conectando cada conceito a programação, IA ou RAG.</span></div>
+</div>
 
-  </section><section class="section" id="snippets">
+</section><section class="section" id="snippets">
 
-    <div class="section-header">
-      <div><h2>Snippets e fórmulas úteis</h2><p class="section-subtitle">Blocos mínimos para iniciar os entregáveis de cada fase.</p></div>
-      <span class="section-badge">Código</span>
-    </div>
-    <h3>Cosine similarity com NumPy</h3>
-    <pre class="code-block"><code class="python">import numpy as np
+<div class="section-header">
+<div><h2>Snippets e fórmulas úteis</h2><p class="section-subtitle">Blocos mínimos para iniciar os entregáveis de cada fase.</p></div>
+<span class="section-badge">Código</span>
+</div>
+<h3>Cosine similarity com NumPy</h3>
+<pre class="code-block"><code class="python">import numpy as np
 
 def cosine_similarity(a: np.ndarray, b: np.ndarray) -&gt; float:
     denom = np.linalg.norm(a) * np.linalg.norm(b)
@@ -1276,8 +1276,8 @@ def cosine_similarity(a: np.ndarray, b: np.ndarray) -&gt; float:
 v1 = np.array([0.2, 0.5, 0.1])
 v2 = np.array([0.1, 0.4, 0.3])
 print(cosine_similarity(v1, v2))</code></pre>
-    <h3>Softmax com estabilização numérica</h3>
-    <pre class="code-block"><code class="python">import numpy as np
+<h3>Softmax com estabilização numérica</h3>
+<pre class="code-block"><code class="python">import numpy as np
 
 def softmax(x: np.ndarray, temperature: float = 1.0) -&gt; np.ndarray:
     z = x / temperature
@@ -1287,8 +1287,8 @@ def softmax(x: np.ndarray, temperature: float = 1.0) -&gt; np.ndarray:
 
 logits = np.array([2.0, 1.0, 0.1])
 print(softmax(logits, temperature=0.7))</code></pre>
-    <h3>Self-attention simplificado em PyTorch</h3>
-    <pre class="code-block"><code class="python">import torch
+<h3>Self-attention simplificado em PyTorch</h3>
+<pre class="code-block"><code class="python">import torch
 import torch.nn.functional as F
 
 def scaled_dot_product_attention(Q, K, V, mask=None):
@@ -1305,8 +1305,8 @@ K = torch.randn(batch, tokens, dim)
 V = torch.randn(batch, tokens, dim)
 out, weights = scaled_dot_product_attention(Q, K, V)
 print(out.shape, weights.shape)</code></pre>
-    <h3>Métricas de retrieval: MRR simples</h3>
-    <pre class="code-block"><code class="python">def reciprocal_rank(results: list[str], expected_id: str) -&gt; float:
+<h3>Métricas de retrieval: MRR simples</h3>
+<pre class="code-block"><code class="python">def reciprocal_rank(results: list[str], expected_id: str) -&gt; float:
     for index, item_id in enumerate(results, start=1):
         if item_id == expected_id:
             return 1.0 / index
@@ -1319,49 +1319,49 @@ queries = [
 mrr = sum(reciprocal_rank(r, expected) for r, expected in queries) / len(queries)
 print(mrr)</code></pre>
 
-  </section><section class="section" id="consulta">
+</section><section class="section" id="consulta">
 
-    <div class="section-header">
-      <div><h2>Consulta rápida por objetivo</h2><p class="section-subtitle">Use esta seção como guia de revisão antes de implementar, estudar ou explicar em entrevista.</p></div>
-      <span class="section-badge">Consulta</span>
-    </div>
-    <div class="table-wrap"><table class=""><thead><tr><th>Objetivo</th><th>Estudar</th><th>Aplicar em</th></tr></thead><tbody>
-    <tr><td>Melhorar lógica de programação</td><td>Lógica booleana, predicados, conjuntos, indução.</td><td>Validações, regras de negócio, filtros, testes.</td></tr>
-    <tr><td>Passar melhor em entrevistas</td><td>Big O, grafos, recorrências, árvores, programação dinâmica.</td><td>Coding interviews, análise de algoritmos.</td></tr>
-    <tr><td>Entender embeddings</td><td>Vetores, normas, produto interno, cosine similarity, alta dimensionalidade.</td><td>RAG, busca semântica, recomendação.</td></tr>
-    <tr><td>Entender transformers</td><td>Matrizes, tensores, softmax, attention, normalização, backpropagation.</td><td>LLMs, fine-tuning, inferência e avaliação.</td></tr>
-    <tr><td>Avaliar modelos</td><td>Estatística, métricas ML, intervalos, testes, calibration.</td><td>Classificação, regressão, experimentos e relatórios.</td></tr>
-    <tr><td>Avaliar RAG</td><td>TF-IDF, BM25, MRR, NDCG, context precision, faithfulness.</td><td>Retrieval, reranking, busca híbrida e resposta com fonte.</td></tr>
-    <tr><td>Decidir produto com dados</td><td>A/B testing, poder estatístico, p-value, uplift, coortes.</td><td>Features de blog, SaaS, IA aplicada e monetização.</td></tr>
-    </tbody></table></div>
+<div class="section-header">
+<div><h2>Consulta rápida por objetivo</h2><p class="section-subtitle">Use esta seção como guia de revisão antes de implementar, estudar ou explicar em entrevista.</p></div>
+<span class="section-badge">Consulta</span>
+</div>
+<div class="table-wrap"><table class=""><thead><tr><th>Objetivo</th><th>Estudar</th><th>Aplicar em</th></tr></thead><tbody>
+<tr><td>Melhorar lógica de programação</td><td>Lógica booleana, predicados, conjuntos, indução.</td><td>Validações, regras de negócio, filtros, testes.</td></tr>
+<tr><td>Passar melhor em entrevistas</td><td>Big O, grafos, recorrências, árvores, programação dinâmica.</td><td>Coding interviews, análise de algoritmos.</td></tr>
+<tr><td>Entender embeddings</td><td>Vetores, normas, produto interno, cosine similarity, alta dimensionalidade.</td><td>RAG, busca semântica, recomendação.</td></tr>
+<tr><td>Entender transformers</td><td>Matrizes, tensores, softmax, attention, normalização, backpropagation.</td><td>LLMs, fine-tuning, inferência e avaliação.</td></tr>
+<tr><td>Avaliar modelos</td><td>Estatística, métricas ML, intervalos, testes, calibration.</td><td>Classificação, regressão, experimentos e relatórios.</td></tr>
+<tr><td>Avaliar RAG</td><td>TF-IDF, BM25, MRR, NDCG, context precision, faithfulness.</td><td>Retrieval, reranking, busca híbrida e resposta com fonte.</td></tr>
+<tr><td>Decidir produto com dados</td><td>A/B testing, poder estatístico, p-value, uplift, coortes.</td><td>Features de blog, SaaS, IA aplicada e monetização.</td></tr>
+</tbody></table></div>
 
-  </section><section class="section" id="referencias">
+</section><section class="section" id="referencias">
 
-    <div class="section-header">
-      <div><h2>Referências recomendadas</h2><p class="section-subtitle">Fontes de estudo para sustentar a trilha com profundidade e prática.</p></div>
-      <span class="section-badge">Referências</span>
-    </div>
-    <div class="grid2">
-      <div class="callout"><h3>Livros e cursos</h3><ul class="doc-list">
-        <li>Mathematics for Machine Learning — Deisenroth, Faisal e Ong.</li>
-        <li>Deep Learning — Goodfellow, Bengio e Courville.</li>
-        <li>Introduction to Algorithms — Cormen, Leiserson, Rivest e Stein.</li>
-        <li>Think Stats / Think Bayes — Allen B. Downey.</li>
-        <li>3Blue1Brown — Essence of Linear Algebra e Neural Networks.</li>
-        <li>MIT OpenCourseWare — Linear Algebra, Probability e Calculus.</li>
-      </ul></div>
-      <div class="callout accent-purple"><h3>Documentações e prática</h3><ul class="doc-list">
-        <li>NumPy, SciPy, Matplotlib e SymPy para implementação matemática.</li>
-        <li>scikit-learn para PCA, SVM, métricas, validação e pipelines.</li>
-        <li>PyTorch para tensores, autograd, attention e deep learning.</li>
-        <li>Hugging Face para embeddings, transformers e avaliação prática.</li>
-        <li>Notebooks próprios versionados no GitHub com README e gráficos.</li>
-        <li>Blog pessoal como portfólio de explicações matemáticas aplicadas.</li>
-      </ul></div>
-    </div>
-    <div class="callout success mt-3"><h3>Como usar esta trilha</h3><p>Não estude matemática apenas por leitura. Para cada tópico: escreva a intuição, derive o mínimo necessário, implemente, visualize, teste, conecte com código real e documente o aprendizado.</p></div>
+<div class="section-header">
+<div><h2>Referências recomendadas</h2><p class="section-subtitle">Fontes de estudo para sustentar a trilha com profundidade e prática.</p></div>
+<span class="section-badge">Referências</span>
+</div>
+<div class="grid2">
+<div class="callout"><h3>Livros e cursos</h3><ul class="doc-list">
+<li>Mathematics for Machine Learning — Deisenroth, Faisal e Ong.</li>
+<li>Deep Learning — Goodfellow, Bengio e Courville.</li>
+<li>Introduction to Algorithms — Cormen, Leiserson, Rivest e Stein.</li>
+<li>Think Stats / Think Bayes — Allen B. Downey.</li>
+<li>3Blue1Brown — Essence of Linear Algebra e Neural Networks.</li>
+<li>MIT OpenCourseWare — Linear Algebra, Probability e Calculus.</li>
+</ul></div>
+<div class="callout accent-purple"><h3>Documentações e prática</h3><ul class="doc-list">
+<li>NumPy, SciPy, Matplotlib e SymPy para implementação matemática.</li>
+<li>scikit-learn para PCA, SVM, métricas, validação e pipelines.</li>
+<li>PyTorch para tensores, autograd, attention e deep learning.</li>
+<li>Hugging Face para embeddings, transformers e avaliação prática.</li>
+<li>Notebooks próprios versionados no GitHub com README e gráficos.</li>
+<li>Blog pessoal como portfólio de explicações matemáticas aplicadas.</li>
+</ul></div>
+</div>
+<div class="callout success mt-3"><h3>Como usar esta trilha</h3><p>Não estude matemática apenas por leitura. Para cada tópico: escreva a intuição, derive o mínimo necessário, implemente, visualize, teste, conecte com código real e documente o aprendizado.</p></div>
 
-  </section>
+</section>
   </div>
 </div>
 <footer class="page-footer">
@@ -1379,71 +1379,71 @@ print(mrr)</code></pre>
 <button id="btt" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
 
-  (function(){
-    const bar = document.getElementById('navSectionsBar');
-    const btnL = document.getElementById('navScrollLeft');
-    const btnR = document.getElementById('navScrollRight');
-    const STEP = 320;
-    if(!bar || !btnL || !btnR) return;
-    function updateArrows(){
-      const atStart = bar.scrollLeft <= 4;
-      const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-      btnL.classList.toggle('hidden', atStart);
-      btnR.classList.toggle('hidden', atEnd);
-    }
-    btnL.addEventListener('click', () => bar.scrollBy({left:-STEP, behavior:'smooth'}));
-    btnR.addEventListener('click', () => bar.scrollBy({left: STEP, behavior:'smooth'}));
-    bar.addEventListener('scroll', updateArrows, {passive:true});
-    updateArrows();
-    setTimeout(updateArrows, 400);
-    window._navScrollActiveIntoView = function(){
-      const active = bar.querySelector('.nav-link.active');
-      if(active) active.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
-    };
-  })();
-
-  const btt = document.getElementById('btt');
-  window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 400));
-
-  function normalizeText(value){
-    return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+(function(){
+  const bar = document.getElementById('navSectionsBar');
+  const btnL = document.getElementById('navScrollLeft');
+  const btnR = document.getElementById('navScrollRight');
+  const STEP = 320;
+  if(!bar || !btnL || !btnR) return;
+  function updateArrows(){
+    const atStart = bar.scrollLeft <= 4;
+    const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+    btnL.classList.toggle('hidden', atStart);
+    btnR.classList.toggle('hidden', atEnd);
   }
+  btnL.addEventListener('click', () => bar.scrollBy({left:-STEP, behavior:'smooth'}));
+  btnR.addEventListener('click', () => bar.scrollBy({left: STEP, behavior:'smooth'}));
+  bar.addEventListener('scroll', updateArrows, {passive:true});
+  updateArrows();
+  setTimeout(updateArrows, 400);
+  window._navScrollActiveIntoView = function(){
+    const active = bar.querySelector('.nav-link.active');
+    if(active) active.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});
+  };
+})();
 
-  document.getElementById('searchInput').addEventListener('input', function(){
-    const q = normalizeText(this.value.trim());
-    document.querySelectorAll('.section').forEach(sec => {
-      sec.classList.remove('search-hit','is-hidden-by-search');
-      if(!q) return;
-      const match = normalizeText(sec.innerText).includes(q);
-      sec.classList.toggle('is-hidden-by-search', !match);
-      sec.classList.toggle('search-hit', match);
-    });
+const btt = document.getElementById('btt');
+window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 400));
+
+function normalizeText(value){
+  return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+document.getElementById('searchInput').addEventListener('input', function(){
+  const q = normalizeText(this.value.trim());
+  document.querySelectorAll('.section').forEach(sec => {
+    sec.classList.remove('search-hit','is-hidden-by-search');
+    if(!q) return;
+    const match = normalizeText(sec.innerText).includes(q);
+    sec.classList.toggle('is-hidden-by-search', !match);
+    sec.classList.toggle('search-hit', match);
   });
+});
 
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', event => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if(target){
-        event.preventDefault();
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-      }
-    });
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', event => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if(target){
+      event.preventDefault();
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }
   });
+});
 
-  const sections = document.querySelectorAll('.section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sidebarLinks = document.querySelectorAll('.sidebar a');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const id = entry.target.id;
-        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-        sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-        if(window._navScrollActiveIntoView) window._navScrollActiveIntoView();
-      }
-    });
-  }, { threshold:0.15, rootMargin:'-100px 0px -55% 0px' });
-  sections.forEach(s => observer.observe(s));
+const sections = document.querySelectorAll('.section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+const sidebarLinks = document.querySelectorAll('.sidebar a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const id = entry.target.id;
+      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+      if(window._navScrollActiveIntoView) window._navScrollActiveIntoView();
+    }
+  });
+}, { threshold:0.15, rootMargin:'-100px 0px -55% 0px' });
+sections.forEach(s => observer.observe(s));
 
 </script>
 </body>
