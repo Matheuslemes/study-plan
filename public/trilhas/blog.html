@@ -580,7 +580,7 @@ pre code{background:none;color:inherit;padding:0;font-size:inherit}
         <a class="nav-link" href="#s25">25 · ADRs</a>
         <a class="nav-link" href="#s26">26 · Entregáveis</a>
         <a class="nav-link" href="#s27">27 · Conclusão</a>
-        <a class="nav-link" href="#s28">28 · Referências</a>
+        <a class="nav-link" href="#referencias">28 · Referências</a>
       </div>
 
     </div><!-- /navSectionsBar -->
@@ -635,7 +635,7 @@ pre code{background:none;color:inherit;padding:0;font-size:inherit}
       <a href="#s25">25. Decisões arquiteturais</a>
       <a href="#s26">26. Entregáveis públicos</a>
       <a href="#s27">27. Conclusão</a>
-      <a href="#s28">28. Referências</a>
+      <a href="#referencias">28. Referências</a>
     </div>
   </aside>
 
@@ -2300,18 +2300,153 @@ flowchart LR
     </section>
 
     <!-- ═══════════════════════════════════ S28 ═══ -->
-    <section class="section" id="s28">
-      <div class="section-header">
-        <h2>Referências internas</h2>
+    <section class="section doc-section searchable-section" data-search-section id="referencias">
+      <div class="section-header doc-section-heading">
+        <div>
+          <h2>Referências oficiais e materiais confiáveis</h2>
+          <p class="section-subtitle">Fontes oficiais para validar arquitetura, stack, segurança, DevOps, documentação técnica e evolução da DevCore Platform.</p>
+        </div>
         <span class="section-badge">Referências</span>
       </div>
-      <ul>
-        <li><strong>Base de elaboração:</strong> Documento técnico anterior da Plataforma de Blog Técnico Pessoal — arquitetura, requisitos funcionais e não funcionais, modelo de dados, segurança, infraestrutura e fases.</li>
-        <li><strong>Documentação técnica anterior:</strong> DevCore Platform v1.0, 29 páginas, com arquitetura, requisitos, roadmap, casos de uso e diagramas Mermaid.</li>
-        <li><strong>Análise arquitetural complementar:</strong> reposicionamento como DevCore Platform, refinamento de MVP, knowledge base como domínio de primeira classe e reestruturação das fases.</li>
-        <li><strong>Melhoria aplicada nesta revisão:</strong> inclusão da Estratégia Editorial e Mapa de Conhecimento do Desenvolvedor, melhor descrição dos diagramas e reformatação completa para o formato retrato.</li>
-        <li><strong>Stack preferencial:</strong> Next.js, React, TypeScript, Tailwind, shadcn/ui, Java 21, Spring Boot 3, PostgreSQL, Redis, Object Storage, Docker, GitHub Actions, SonarQube, Trivy, Actuator, Micrometer e Sentry.</li>
-      </ul>
+
+      <div class="ref-grid">
+        <article class="ref-card">
+          <strong>Next.js Documentation</strong>
+          <p>Referência oficial para App Router, renderização, metadata, routing, server components, ISR, SEO e deploy frontend.</p>
+          <a href="https://nextjs.org/docs" rel="noopener" target="_blank">nextjs.org/docs</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>React Documentation</strong>
+          <p>Base oficial para componentes, estado, hooks, renderização, composição e padrões modernos usados no frontend público/admin.</p>
+          <a href="https://react.dev/learn" rel="noopener" target="_blank">react.dev/learn</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>TypeScript Handbook</strong>
+          <p>Guia oficial para tipagem, interfaces, generics, narrowing, configuração e manutenção de contratos no frontend.</p>
+          <a href="https://www.typescriptlang.org/docs/" rel="noopener" target="_blank">typescriptlang.org/docs</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Tailwind CSS Documentation</strong>
+          <p>Referência oficial para design tokens, utilitários, responsividade, dark theme e composição visual da interface.</p>
+          <a href="https://tailwindcss.com/docs" rel="noopener" target="_blank">tailwindcss.com/docs</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>shadcn/ui Documentation</strong>
+          <p>Referência para componentes reutilizáveis baseados em Radix UI, acessibilidade e composição de UI moderna.</p>
+          <a href="https://ui.shadcn.com/docs" rel="noopener" target="_blank">ui.shadcn.com/docs</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Spring Boot Reference</strong>
+          <p>Documentação oficial para configuração, auto configuration, actuator, testes, produção e desenvolvimento backend em Spring Boot.</p>
+          <a href="https://docs.spring.io/spring-boot/index.html" rel="noopener" target="_blank">docs.spring.io/spring-boot</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Spring Security Reference</strong>
+          <p>Fonte oficial para autenticação, autorização, OAuth2 Resource Server, JWT, filtros, CSRF, CORS e proteção de endpoints.</p>
+          <a href="https://docs.spring.io/spring-security/reference/" rel="noopener" target="_blank">docs.spring.io/spring-security/reference</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Spring Data JPA</strong>
+          <p>Referência oficial para repositories, consultas, paginação, auditoria, integração JPA e persistência relacional.</p>
+          <a href="https://docs.spring.io/spring-data/jpa/reference/" rel="noopener" target="_blank">docs.spring.io/spring-data/jpa/reference</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>PostgreSQL Documentation</strong>
+          <p>Fonte oficial para modelagem relacional, constraints, índices, JSONB, Full Text Search, performance e administração.</p>
+          <a href="https://www.postgresql.org/docs/" rel="noopener" target="_blank">postgresql.org/docs</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Flyway Documentation</strong>
+          <p>Referência para versionamento de schema, migrations reprodutíveis, ambientes, baseline, repair e evolução de banco.</p>
+          <a href="https://documentation.red-gate.com/fd" rel="noopener" target="_blank">documentation.red-gate.com/fd</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Redis Documentation</strong>
+          <p>Base oficial para cache, TTL, rate limiting, locks, estruturas de dados, operação e integração com serviços backend.</p>
+          <a href="https://redis.io/docs/latest/" rel="noopener" target="_blank">redis.io/docs/latest</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Docker Documentation</strong>
+          <p>Referência oficial para containers, Dockerfile, Compose, imagens, networking, volumes, build e segurança básica.</p>
+          <a href="https://docs.docker.com/" rel="noopener" target="_blank">docs.docker.com</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>GitHub Actions Documentation</strong>
+          <p>Fonte oficial para workflows, jobs, secrets, environments, CI/CD, quality gates, deploy e automação de pipeline.</p>
+          <a href="https://docs.github.com/en/actions" rel="noopener" target="_blank">docs.github.com/en/actions</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>OpenAPI Specification</strong>
+          <p>Referência para contratos REST, schemas, exemplos, documentação de API, autenticação e padronização de endpoints.</p>
+          <a href="https://spec.openapis.org/oas/latest.html" rel="noopener" target="_blank">spec.openapis.org/oas/latest.html</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>RFC 7807 — Problem Details</strong>
+          <p>Especificação para respostas de erro padronizadas em APIs HTTP, útil no contrato de erros do backend.</p>
+          <a href="https://datatracker.ietf.org/doc/html/rfc7807" rel="noopener" target="_blank">datatracker.ietf.org/doc/html/rfc7807</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>OWASP Top 10</strong>
+          <p>Referência para principais riscos de aplicações web, incluindo Broken Access Control, Injection e Security Misconfiguration.</p>
+          <a href="https://owasp.org/www-project-top-ten/" rel="noopener" target="_blank">owasp.org/www-project-top-ten</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>OWASP ASVS</strong>
+          <p>Base para requisitos verificáveis de segurança em aplicações web: autenticação, sessões, APIs, validação e configuração.</p>
+          <a href="https://owasp.org/www-project-application-security-verification-standard/" rel="noopener" target="_blank">owasp.org/www-project-application-security-verification-standard</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>NIST SSDF</strong>
+          <p>Framework de desenvolvimento seguro para integrar requisitos, proteção de código, verificação e resposta a vulnerabilidades.</p>
+          <a href="https://csrc.nist.gov/pubs/sp/800/218/final" rel="noopener" target="_blank">csrc.nist.gov/pubs/sp/800/218/final</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Micrometer Documentation</strong>
+          <p>Referência para métricas de aplicação, integração com Spring Boot Actuator, Prometheus e observabilidade backend.</p>
+          <a href="https://docs.micrometer.io/micrometer/reference/" rel="noopener" target="_blank">docs.micrometer.io/micrometer/reference</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>OpenTelemetry Documentation</strong>
+          <p>Base para traces, métricas, logs, propagação de contexto, instrumentação e observabilidade distribuída.</p>
+          <a href="https://opentelemetry.io/docs/" rel="noopener" target="_blank">opentelemetry.io/docs</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Sentry Documentation</strong>
+          <p>Referência para captura de erros, performance monitoring, releases, ambientes e investigação de falhas frontend/backend.</p>
+          <a href="https://docs.sentry.io/" rel="noopener" target="_blank">docs.sentry.io</a>
+        </article>
+
+        <article class="ref-card">
+          <strong>Mermaid Documentation</strong>
+          <p>Fonte oficial para diagramas como flowchart, sequence, ERD, gantt e documentação visual de arquitetura.</p>
+          <a href="https://mermaid.js.org/intro/" rel="noopener" target="_blank">mermaid.js.org/intro</a>
+        </article>
+      </div>
+
+      <div class="callout blue mt-3">
+        <h4>Observação de versão</h4>
+        <p>Antes de aplicar qualquer decisão em produção, valide a versão atual da documentação oficial, bibliotecas, frameworks, scanners, provedores cloud e standards usados no projeto. A documentação interna anterior da DevCore Platform deve ser tratada como base histórica e revisada conforme a stack evoluir.</p>
+      </div>
     </section>
 
   </div><!-- /content -->
@@ -2915,6 +3050,132 @@ li,
   .hero-back-link,
   .nav-back {
     min-height: 34px;
+  }
+}
+</style>
+
+
+<style id="reference-card-style">
+/* ─────────────────────────────────────────────────────────────
+   REFERÊNCIAS EM CARDS — DevCore Platform
+   Padrão visual reaproveitável para páginas técnicas.
+   ───────────────────────────────────────────────────────────── */
+
+.ref-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ref-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  transition: border-color .15s, background .15s, transform .15s;
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  min-width: 0;
+}
+
+.ref-grid > * {
+  min-width: 0;
+}
+
+.ref-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+}
+
+.ref-card:hover {
+  border-color: rgba(52,211,153,.30);
+  background: #151c27;
+  transform: translateY(-1px);
+}
+
+.ref-card strong {
+  display: block;
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: .95rem;
+  margin-bottom: .35rem;
+}
+
+.ref-card p {
+  color: var(--muted2);
+  font-size: .82rem;
+  margin-bottom: .75rem;
+}
+
+.ref-card a,
+.ref-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  max-width: 100%;
+  color: #d8ecff;
+  text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .72rem;
+  font-weight: 600;
+  line-height: 1.45;
+  border: 1px solid rgba(56,189,248,.18);
+  background: rgba(56,189,248,.055);
+  padding: .28rem .55rem;
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  transition: all .14s;
+}
+
+.ref-card a::after,
+.ref-list a::after {
+  content: '↗';
+  font-size: .72rem;
+  color: var(--accent2);
+  line-height: 1;
+}
+
+.ref-card a:hover,
+.ref-list a:hover {
+  color: #fff;
+  border-color: rgba(52,211,153,.42);
+  background: rgba(52,211,153,.09);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+@media(max-width:1180px) {
+  .ref-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media(max-width:980px) {
+  .ref-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media(max-width:520px) {
+  .ref-card {
+    border-radius: 10px;
+  }
+
+  .ref-card a,
+  .ref-list a {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 </style>

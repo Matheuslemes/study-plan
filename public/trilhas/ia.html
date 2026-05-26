@@ -209,14 +209,98 @@
   .track-badge-set span.tag{display:inline-flex}
 
   /* IA field/reference cards normalized to Java technical tokens */
-  .reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin-top:1rem}
+  .ref-grid{display:grid;gap:1rem;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1rem}
+  .ref-card{
+    background:var(--surface2);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:1rem;
+    transition:border-color .15s,background .15s,transform .15s;
+    position:relative;
+    overflow:hidden;
+    min-width:0;
+    min-height:100%;
+  }
+  .ref-card.ref-card-wide{grid-column:1 / -1}
+  .ref-card::before{
+    content:"";
+    position:absolute;
+    inset:0 auto 0 0;
+    width:3px;
+    background:linear-gradient(180deg,var(--accent),var(--accent2));
+  }
+  .ref-card:hover{
+    border-color:rgba(167,139,250,.30);
+    background:#151c27;
+    transform:translateY(-1px);
+  }
+  .ref-card strong{
+    display:block;
+    color:#fff;
+    font-family:'Syne',sans-serif;
+    font-size:.95rem;
+    margin-bottom:.35rem;
+  }
+  .ref-card p{
+    color:var(--muted2);
+    font-size:.82rem;
+    margin-bottom:.75rem;
+  }
+  .ref-card .doc-list{
+    margin:0;
+    padding-left:1.1rem;
+  }
+  .ref-card .doc-list li{
+    margin-bottom:.45rem;
+  }
+  .ref-card .doc-list li:last-child{
+    margin-bottom:0;
+  }
   .field-stack{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;margin:1rem 0}
   .field-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;position:relative;overflow:hidden;min-width:0}
   .field-card::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--field-accent,var(--accent))}
   .field-card h3{margin-top:0;color:#fff;font-size:.96rem}
   .field-card p:last-child,.field-card ul:last-child{margin-bottom:0}
+  .ref-card a,
+  .ref-list a{
+    display:inline-flex;
+    align-items:center;
+    gap:.35rem;
+    max-width:100%;
+    color:#d8ecff;
+    text-decoration:none;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    font-weight:600;
+    line-height:1.45;
+    border:1px solid rgba(56,189,248,.18);
+    border-bottom:none;
+    background:rgba(56,189,248,.055);
+    padding:.28rem .55rem;
+    border-radius:6px;
+    overflow-wrap:anywhere;
+    word-break:break-word;
+    transition:all .14s;
+  }
+  .ref-card a::after,
+  .ref-list a::after{
+    content:'↗';
+    font-size:.72rem;
+    color:var(--accent);
+    line-height:1;
+    flex-shrink:0;
+  }
+  .ref-card a:hover,
+  .ref-list a:hover{
+    color:#fff;
+    border-color:rgba(167,139,250,.42);
+    background:rgba(167,139,250,.09);
+    text-decoration:none;
+    transform:translateY(-1px);
+  }
   .doc-list a,.ref-link{color:#d8ecff;text-decoration:none;border-bottom:1px solid rgba(216,236,255,.25);transition:color .15s,border-color .15s}
   .doc-list a:hover,.ref-link:hover{color:#fff;border-color:rgba(167,139,250,.65)}
+  .ref-grid > *{min-width:0}
 </style><style id="ia-java-responsive-refactor">
 
     /* ─────────────────────────────────────────────────────────────
@@ -779,8 +863,22 @@
   
     @media (max-width: 980px) {
       .field-stack,
-      .reference-grid {
+      .ref-grid {
         grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .ref-card {
+        border-radius: 10px;
+      }
+
+      .ref-card a,
+      .ref-list a {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
       }
     }
 </style></head>
@@ -1566,7 +1664,10 @@ Importante: não invente dados; quando não souber, diga que precisa validar em 
 </div>
 <span class="section-badge">Fontes</span>
 </div>
-<h3>Documentos e livros-base da trilha</h3>
+<div class="ref-grid">
+<article class="ref-card ref-card-wide">
+<strong>Documentos e livros-base da trilha</strong>
+<p>Base conceitual e bibliográfica da trilha atual, preservando o documento de sequência e todos os títulos já definidos no conteúdo original.</p>
 <ul class="doc-list">
 <li><strong>sequencia_estudo_ia_livros.pdf</strong> — documento de sequência, macroetapas, roteiro prático, horas, monetização e lista dos livros.</li>
 <li><strong>Co-Intelligence</strong> — Ethan Mollick.</li>
@@ -1579,58 +1680,69 @@ Importante: não invente dados; quando não souber, diga que precisa validar em 
 <li><strong>Build a Large Language Model (From Scratch)</strong> — Sebastian Raschka.</li>
 <li><strong>Agentic Artificial Intelligence</strong> — Pascal Bornet et al.</li>
 </ul>
-<h3>Referências técnicas e oficiais para complementar os campos de estudo</h3>
-<div class="reference-grid">
-<div class="mini-card">
+</article>
+
+<article class="ref-card">
 <strong>Panorama, currículo e fundamentos</strong>
-<ul class="doc-list">
+<p>Fontes para visão macro do campo, currículos de formação e fundamentos de machine learning aplicados ao estudo estruturado da trilha.</p>
+<ul class="doc-list ref-list">
 <li><a href="https://hai.stanford.edu/ai-index/2025-ai-index-report" rel="noopener noreferrer" target="_blank">Stanford HAI — AI Index Report 2025</a></li>
 <li><a href="https://csed.acm.org/wp-content/uploads/2023/09/Version-Gamma.pdf" rel="noopener noreferrer" target="_blank">ACM/IEEE/AAAI — Computer Science Curricula 2023</a></li>
 <li><a href="https://developers.google.com/machine-learning/crash-course" rel="noopener noreferrer" target="_blank">Google Developers — Machine Learning Crash Course</a></li>
 </ul>
-</div>
-<div class="mini-card">
+</article>
+
+<article class="ref-card">
 <strong>Machine Learning e Deep Learning</strong>
-<ul class="doc-list">
+<p>Documentação e trilhas técnicas para implementar modelos, experimentar pipelines e consolidar base prática com frameworks amplamente usados.</p>
+<ul class="doc-list ref-list">
 <li><a href="https://scikit-learn.org/stable/user_guide.html" rel="noopener noreferrer" target="_blank">scikit-learn — User Guide</a></li>
 <li><a href="https://docs.pytorch.org/tutorials/index.html" rel="noopener noreferrer" target="_blank">PyTorch — Official Tutorials</a></li>
 <li><a href="https://docs.pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html" rel="noopener noreferrer" target="_blank">PyTorch — Deep Learning 60 Minute Blitz</a></li>
 </ul>
-</div>
-<div class="mini-card">
+</article>
+
+<article class="ref-card">
 <strong>NLP, LLMs e aplicações generativas</strong>
-<ul class="doc-list">
+<p>Referências para linguagem natural, modelos generativos, uso de APIs, documentação oficial e integração de ferramentas em aplicações reais.</p>
+<ul class="doc-list ref-list">
 <li><a href="https://huggingface.co/learn/llm-course/en/chapter1/1" rel="noopener noreferrer" target="_blank">Hugging Face — LLM/NLP Course</a></li>
 <li><a href="https://huggingface.co/docs/transformers/en/index" rel="noopener noreferrer" target="_blank">Hugging Face — Transformers Documentation</a></li>
 <li><a href="https://developers.openai.com/api/docs" rel="noopener noreferrer" target="_blank">OpenAI Developers — API Documentation</a></li>
 <li><a href="https://developers.openai.com/api/docs/guides/function-calling" rel="noopener noreferrer" target="_blank">OpenAI Developers — Function Calling / Tool Calling</a></li>
 </ul>
-</div>
-<div class="mini-card">
+</article>
+
+<article class="ref-card">
 <strong>RAG, busca vetorial e avaliação</strong>
-<ul class="doc-list">
+<p>Base de consulta para retrieval, bancos vetoriais, avaliação de respostas com contexto e métricas voltadas a sistemas RAG.</p>
+<ul class="doc-list ref-list">
 <li><a href="https://qdrant.tech/documentation/" rel="noopener noreferrer" target="_blank">Qdrant — Vector Database Documentation</a></li>
 <li><a href="https://developers.openai.com/cookbook/examples/vector_databases/qdrant/using_qdrant_for_embeddings_search" rel="noopener noreferrer" target="_blank">OpenAI Cookbook — Qdrant Embeddings Search</a></li>
 <li><a href="https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/" rel="noopener noreferrer" target="_blank">Ragas — RAG Evaluation Metrics</a></li>
 <li><a href="https://docs.ragas.io/en/stable/concepts/metrics/available_metrics/faithfulness/" rel="noopener noreferrer" target="_blank">Ragas — Faithfulness Metric</a></li>
 </ul>
-</div>
-<div class="mini-card">
+</article>
+
+<article class="ref-card">
 <strong>Agentes, memória e orquestração</strong>
-<ul class="doc-list">
+<p>Fontes voltadas a ferramentas, memória, coordenação de fluxos e orquestração de agentes em aplicações assistidas por IA.</p>
+<ul class="doc-list ref-list">
 <li><a href="https://docs.langchain.com/oss/python/langchain/tools" rel="noopener noreferrer" target="_blank">LangChain Docs — Tools</a></li>
 <li><a href="https://docs.langchain.com/oss/python/concepts/memory" rel="noopener noreferrer" target="_blank">LangChain/LangGraph Docs — Memory</a></li>
 <li><a href="https://www.langchain.com/langgraph" rel="noopener noreferrer" target="_blank">LangGraph — Agent Orchestration Framework</a></li>
 </ul>
-</div>
-<div class="mini-card">
+</article>
+
+<article class="ref-card">
 <strong>Segurança, risco e governança</strong>
-<ul class="doc-list">
+<p>Referências para risco, segurança de LLMs, práticas de governança e redução de exposição em sistemas com IA generativa.</p>
+<ul class="doc-list ref-list">
 <li><a href="https://owasp.org/www-project-top-10-for-large-language-model-applications/" rel="noopener noreferrer" target="_blank">OWASP — Top 10 for LLM Applications</a></li>
 <li><a href="https://genai.owasp.org/llm-top-10/" rel="noopener noreferrer" target="_blank">OWASP GenAI Security Project — LLM Top 10</a></li>
 <li><a href="https://www.nist.gov/itl/ai-risk-management-framework" rel="noopener noreferrer" target="_blank">NIST — AI Risk Management Framework</a></li>
 </ul>
-</div>
+</article>
 </div>
 <div class="callout accent-blue">
 <h3>Nota de atualização</h3>
@@ -1696,12 +1808,21 @@ Importante: não invente dados; quando não souber, diga que precisa validar em 
     }
 
     document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      const href = anchor.getAttribute('href');
+      if(!href || href === '#') return;
+
       anchor.addEventListener('click',event=>{
-        const target=document.querySelector(anchor.getAttribute('href'));
+        let target = null;
+        try{
+          target = document.querySelector(href);
+        }catch(error){
+          target = null;
+        }
+
         if(target){
           event.preventDefault();
           target.scrollIntoView({behavior:'smooth',block:'start'});
-          history.replaceState(null,'',anchor.getAttribute('href'));
+          history.replaceState(null,'',href);
         }
       });
     });

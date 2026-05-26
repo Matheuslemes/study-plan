@@ -753,9 +753,151 @@
         min-height: 34px;
       }
     }
-    /* ─── REFERENCE LINKS ─── */
-    .ref-list a{color:#d8ecff;text-decoration:none}
-    .ref-list a:hover,.footer-link:hover{color:#fff;text-decoration:underline}
+    /* ─── REFERENCE CARDS ─── */
+    .doc-section-heading{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:1rem;
+      margin-bottom:1.2rem;
+      padding-bottom:1rem;
+      border-bottom:1px solid var(--border);
+    }
+
+    .doc-section-heading h2{
+      font-family:'Syne',sans-serif;
+      font-size:1.35rem;
+      font-weight:800;
+      letter-spacing:-.03em;
+      color:#fff;
+    }
+
+    .ref-grid{
+      display:grid;
+      gap:1rem;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .ref-card{
+      background:var(--surface2);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:1rem;
+      transition:border-color .15s,background .15s,transform .15s;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+      min-width:0;
+    }
+
+    .ref-card::before{
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:3px;
+      background:linear-gradient(180deg,var(--accent),var(--accent2));
+    }
+
+    .ref-card:hover{
+      border-color:rgba(79,158,248,.34);
+      background:#151c27;
+      transform:translateY(-1px);
+    }
+
+    .ref-card strong{
+      display:block;
+      color:#fff;
+      font-family:'Syne',sans-serif;
+      font-size:.95rem;
+      margin-bottom:.35rem;
+      padding-left:.35rem;
+    }
+
+    .ref-card p{
+      color:var(--muted2);
+      font-size:.82rem;
+      margin-bottom:.75rem;
+      padding-left:.35rem;
+    }
+
+    .ref-card a,
+    .ref-list a{
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      max-width:100%;
+      color:#d8ecff;
+      text-decoration:none;
+      font-family:'IBM Plex Mono',monospace;
+      font-size:.72rem;
+      font-weight:600;
+      line-height:1.45;
+      border:1px solid rgba(79,158,248,.22);
+      background:rgba(79,158,248,.065);
+      padding:.28rem .55rem;
+      border-radius:6px;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      transition:all .14s;
+      margin-left:.35rem;
+    }
+
+    .ref-card a::after,
+    .ref-list a::after{
+      content:'↗';
+      font-size:.72rem;
+      color:var(--accent2);
+      line-height:1;
+      flex-shrink:0;
+    }
+
+    .ref-card a:hover,
+    .ref-list a:hover{
+      color:#fff;
+      border-color:rgba(34,211,176,.42);
+      background:rgba(34,211,176,.09);
+      text-decoration:none;
+      transform:translateY(-1px);
+    }
+
+    .ref-grid>*{
+      min-width:0;
+    }
+
+    .mt-3{
+      margin-top:1rem!important;
+    }
+
+    .footer-link:hover{
+      color:#fff;
+      text-decoration:underline;
+    }
+
+    @media(max-width:1180px){
+      .ref-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:980px){
+      .ref-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:520px){
+      .ref-card{
+        border-radius:10px;
+      }
+
+      .ref-card a,
+      .ref-list a{
+        display:flex;
+        width:calc(100% - .35rem);
+        justify-content:space-between;
+        align-items:center;
+      }
+    }
 
   </style>
 </head>
@@ -1195,124 +1337,152 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 # Alembic
 alembic revision --autogenerate -m "create_initial_tables"
 alembic upgrade head</code></pre>
-  </section><section class="section" data-search-section="" id="referencias">
-    <div class="section-header">
-      <div><h2>Referências técnicas</h2><p class="section-subtitle">Fontes oficiais e guias para aprofundamento.</p></div>
+  </section><section class="section doc-section searchable-section" data-search-section="" id="referencias">
+    <div class="section-header doc-section-heading">
+      <div>
+        <h2>Referências técnicas</h2>
+        <p class="section-subtitle">Fontes oficiais e guias confiáveis para aprofundamento em Python, backend, dados, IA aplicada, RAG, agentes e produção.</p>
+      </div>
       <span class="section-badge">Referências</span>
     </div>
-    <div class="grid2">
-      <div>
-        <h3>Python e backend</h3>
-        <ul class="doc-list ref-list">
-          <li>
-            <a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">
-              Python Documentation
-            </a>
-            — linguagem, biblioteca padrão, typing, asyncio, logging e packaging.
-          </li>
-          <li>
-            <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">
-              FastAPI Documentation
-            </a>
-            — APIs modernas, Pydantic, dependency injection, async e OpenAPI.
-          </li>
-          <li>
-            <a href="https://docs.djangoproject.com/" target="_blank" rel="noopener noreferrer">
-              Django Documentation
-            </a>
-            — framework web, ORM, auth, security e admin.
-          </li>
-          <li>
-            <a href="https://www.django-rest-framework.org/" target="_blank" rel="noopener noreferrer">
-              Django REST Framework
-            </a>
-            — serializers, viewsets, routers, permissions, throttling e pagination.
-          </li>
-          <li>
-            <a href="https://docs.sqlalchemy.org/" target="_blank" rel="noopener noreferrer">
-              SQLAlchemy Documentation
-            </a>
-            — ORM, Core, sessions, async e transações.
-          </li>
-          <li>
-            <a href="https://alembic.sqlalchemy.org/" target="_blank" rel="noopener noreferrer">
-              Alembic Documentation
-            </a>
-            — migrations versionadas para SQLAlchemy.
-          </li>
-          <li>
-            <a href="https://docs.pytest.org/" target="_blank" rel="noopener noreferrer">
-              pytest Documentation
-            </a>
-            — testes unitários, fixtures, parametrização e integração.
-          </li>
-        </ul>
-      </div>
-      <div>
-        <h3>Dados, IA e produção</h3>
-        <ul class="doc-list ref-list">
-          <li>
-            <a href="https://numpy.org/doc/" target="_blank" rel="noopener noreferrer">
-              NumPy Documentation
-            </a>,
-            <a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener noreferrer">
-              Pandas Documentation
-            </a>
-            e
-            <a href="https://docs.pola.rs/" target="_blank" rel="noopener noreferrer">
-              Polars Documentation
-            </a>
-            — manipulação e processamento eficiente de dados.
-          </li>
-          <li>
-            <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank" rel="noopener noreferrer">
-              scikit-learn User Guide
-            </a>
-            — ML clássico, pipelines, métricas e validação.
-          </li>
-          <li>
-            <a href="https://pytorch.org/tutorials/" target="_blank" rel="noopener noreferrer">
-              PyTorch Tutorials
-            </a>
-            — tensors, autograd, training loop e deep learning.
-          </li>
-          <li>
-            <a href="https://huggingface.co/docs" target="_blank" rel="noopener noreferrer">
-              Hugging Face Documentation
-            </a>
-            — transformers, tokenizers, datasets e inferência.
-          </li>
-          <li>
-            <a href="https://python.langchain.com/docs/" target="_blank" rel="noopener noreferrer">
-              LangChain Documentation
-            </a>,
-            <a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener noreferrer">
-              LangGraph Documentation
-            </a>
-            e
-            <a href="https://docs.llamaindex.ai/" target="_blank" rel="noopener noreferrer">
-              LlamaIndex Documentation
-            </a>
-            — RAG, agentes, tools e workflows.
-          </li>
-          <li>
-            <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener noreferrer">
-              MLflow Documentation
-            </a>
-            — experiment tracking, model registry, serving e avaliação.
-          </li>
-          <li>
-            <a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener noreferrer">
-              OpenTelemetry Documentation
-            </a>
-            e
-            <a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener noreferrer">
-              Prometheus Documentation
-            </a>
-            — observabilidade, métricas, traces e monitoramento.
-          </li>
-        </ul>
-      </div>
+
+    <div class="ref-grid">
+      <article class="ref-card">
+        <strong>Python Documentation</strong>
+        <p>Documentação oficial da linguagem, biblioteca padrão, typing, asyncio, logging, packaging e recursos centrais.</p>
+        <a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">docs.python.org/3</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Python Typing</strong>
+        <p>Referência oficial para type hints, Protocol, TypedDict, generics, overloads e recursos modernos de tipagem.</p>
+        <a href="https://docs.python.org/3/library/typing.html" target="_blank" rel="noopener noreferrer">docs.python.org/typing</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>FastAPI Documentation</strong>
+        <p>APIs modernas com Pydantic, dependency injection, async endpoints, OpenAPI, security e testes.</p>
+        <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">fastapi.tiangolo.com</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Pydantic Documentation</strong>
+        <p>Validação, serialização, modelos tipados, settings, validators e schemas usados em APIs Python profissionais.</p>
+        <a href="https://docs.pydantic.dev/" target="_blank" rel="noopener noreferrer">docs.pydantic.dev</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Django Documentation</strong>
+        <p>Framework web completo com ORM, migrations, auth, admin, segurança, templates e arquitetura produtiva.</p>
+        <a href="https://docs.djangoproject.com/" target="_blank" rel="noopener noreferrer">docs.djangoproject.com</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Django REST Framework</strong>
+        <p>Serializers, viewsets, routers, permissions, throttling, pagination e construção de APIs REST com Django.</p>
+        <a href="https://www.django-rest-framework.org/" target="_blank" rel="noopener noreferrer">django-rest-framework.org</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>SQLAlchemy Documentation</strong>
+        <p>ORM, Core, sessions, async database access, transações, relacionamentos e modelagem relacional.</p>
+        <a href="https://docs.sqlalchemy.org/" target="_blank" rel="noopener noreferrer">docs.sqlalchemy.org</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Alembic Documentation</strong>
+        <p>Migrations versionadas para projetos com SQLAlchemy, controle de schema e evolução segura de banco.</p>
+        <a href="https://alembic.sqlalchemy.org/" target="_blank" rel="noopener noreferrer">alembic.sqlalchemy.org</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>pytest Documentation</strong>
+        <p>Testes unitários e de integração com fixtures, parametrização, plugins, coverage e estrutura profissional.</p>
+        <a href="https://docs.pytest.org/" target="_blank" rel="noopener noreferrer">docs.pytest.org</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Ruff Documentation</strong>
+        <p>Linting e formatação rápida para projetos Python, com regras modernas e integração com pipelines.</p>
+        <a href="https://docs.astral.sh/ruff/" target="_blank" rel="noopener noreferrer">docs.astral.sh/ruff</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>NumPy Documentation</strong>
+        <p>Arrays, vetorização, broadcasting, operações matemáticas e base numérica para dados e machine learning.</p>
+        <a href="https://numpy.org/doc/" target="_blank" rel="noopener noreferrer">numpy.org/doc</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Pandas Documentation</strong>
+        <p>DataFrames, limpeza, transformação, agrupamentos, joins, séries temporais e análise exploratória de dados.</p>
+        <a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener noreferrer">pandas.pydata.org/docs</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Polars Documentation</strong>
+        <p>Processamento eficiente de dados com lazy evaluation, expressões, arquivos grandes e performance.</p>
+        <a href="https://docs.pola.rs/" target="_blank" rel="noopener noreferrer">docs.pola.rs</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>scikit-learn User Guide</strong>
+        <p>Machine learning clássico, pipelines, preprocessing, validação, métricas, regressão, classificação e clustering.</p>
+        <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank" rel="noopener noreferrer">scikit-learn.org/user_guide</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>PyTorch Tutorials</strong>
+        <p>Tensors, autograd, datasets, dataloaders, training loop, inferência e deep learning aplicado.</p>
+        <a href="https://pytorch.org/tutorials/" target="_blank" rel="noopener noreferrer">pytorch.org/tutorials</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Hugging Face Documentation</strong>
+        <p>Transformers, tokenizers, datasets, inference, modelos pré-treinados e ecossistema de NLP/LLMs.</p>
+        <a href="https://huggingface.co/docs" target="_blank" rel="noopener noreferrer">huggingface.co/docs</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>LangChain Documentation</strong>
+        <p>Chains, retrievers, tools, structured output, integrações e construção de aplicações com LLMs.</p>
+        <a href="https://python.langchain.com/docs/" target="_blank" rel="noopener noreferrer">python.langchain.com/docs</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>LangGraph Documentation</strong>
+        <p>Workflows com grafos, agentes controláveis, estados, loops, human-in-the-loop e orquestração robusta.</p>
+        <a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener noreferrer">langchain-ai.github.io/langgraph</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>LlamaIndex Documentation</strong>
+        <p>Ingestão, índices, RAG, conectores, retrievers, query engines e aplicações com dados privados.</p>
+        <a href="https://docs.llamaindex.ai/" target="_blank" rel="noopener noreferrer">docs.llamaindex.ai</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>MLflow Documentation</strong>
+        <p>Experiment tracking, model registry, artifacts, serving, comparação de execuções e MLOps básico.</p>
+        <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener noreferrer">mlflow.org/docs</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>OpenTelemetry Documentation</strong>
+        <p>Logs, métricas, traces, propagação de contexto e observabilidade para serviços em produção.</p>
+        <a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener noreferrer">opentelemetry.io/docs</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Prometheus Documentation</strong>
+        <p>Métricas, coleta, PromQL, alertas e monitoramento de aplicações e infraestrutura.</p>
+        <a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener noreferrer">prometheus.io/docs</a>
+      </article>
+    </div>
+
+    <div class="callout blue mt-3">
+      <h3>Observação de versão</h3>
+      <p>Python, frameworks, bibliotecas de IA, SDKs e ferramentas de produção evoluem rapidamente. Antes de aplicar em produção, valide a versão atual na documentação oficial e revise compatibilidade, segurança, licenças e limitações operacionais.</p>
     </div>
   </section>
   </div>

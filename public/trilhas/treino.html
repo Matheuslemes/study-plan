@@ -212,6 +212,89 @@
         }
     </style>
 
+
+    <style id="treino-references-refactor">
+        .ref-grid{
+          display:grid;
+          gap:1rem;
+          grid-template-columns:repeat(2,minmax(0,1fr));
+          margin-top:1rem;
+        }
+        .ref-card{
+          background:var(--surface2);
+          border:1px solid var(--border);
+          border-radius:12px;
+          padding:1rem;
+          position:relative;
+          overflow:hidden;
+          min-width:0;
+          transition:border-color .15s,background .15s,transform .15s;
+        }
+        .ref-card::before{
+          content:"";
+          position:absolute;
+          inset:0 auto 0 0;
+          width:3px;
+          background:linear-gradient(180deg,var(--accent),var(--cardio));
+        }
+        .ref-card:hover{
+          border-color:rgba(244,63,94,.30);
+          background:#151d29;
+          transform:translateY(-1px);
+        }
+        .ref-card strong{
+          display:block;
+          color:#fff;
+          font-family:'Syne',sans-serif;
+          font-size:.95rem;
+          margin-bottom:.35rem;
+        }
+        .ref-card p{
+          color:var(--muted2);
+          font-size:.82rem;
+          margin-bottom:.75rem;
+        }
+        .ref-card a{
+          display:inline-flex;
+          align-items:center;
+          gap:.35rem;
+          max-width:100%;
+          color:#ffe4e6;
+          text-decoration:none;
+          font-family:'IBM Plex Mono',monospace;
+          font-size:.72rem;
+          font-weight:600;
+          line-height:1.45;
+          border:1px solid rgba(244,63,94,.18);
+          background:rgba(244,63,94,.055);
+          padding:.28rem .55rem;
+          border-radius:6px;
+          overflow-wrap:anywhere;
+          word-break:break-word;
+          transition:all .14s;
+        }
+        .ref-card a::after{
+          content:'↗';
+          font-size:.72rem;
+          color:var(--cardio);
+          line-height:1;
+          flex-shrink:0;
+        }
+        .ref-card a:hover{
+          color:#fff;
+          border-color:rgba(244,63,94,.42);
+          background:rgba(244,63,94,.09);
+          text-decoration:none;
+          transform:translateY(-1px);
+        }
+        @media(max-width:980px){
+          .ref-grid{grid-template-columns:1fr}
+        }
+        @media(max-width:520px){
+          .ref-card a{display:flex;width:100%;justify-content:space-between;align-items:center}
+        }
+    </style>
+
 </head>
 <body>
 <header class="hero">
@@ -229,7 +312,7 @@
     <div class="container">
         <div class="sitenav-top">
             <a class="sitenav-brand" href="#">Hybrid Training <span>vHTML</span></a>
-            <span class="nav-ver">Extraído de TREINO-H.pdf · 16 páginas</span>
+            <span class="nav-ver">Plano técnico · revisão consolidada · fontes externas</span>
             <a class="nav-back" href="../index.html">← Dashboard principal</a>
             <div class="sitenav-top-right"><input class="search-box" type="search" placeholder="Buscar neste plano..." id="searchInput" aria-label="Buscar no plano de treino"></div>
         </div>
@@ -240,7 +323,7 @@
             <div class="nav-group"><span class="nav-group-label">Base</span><a class="nav-link" href="#resumo">01 · Resumo</a><a class="nav-link" href="#contexto">02 · Contexto</a><a class="nav-link" href="#principios">03 · Princípios</a><a class="nav-link" href="#analise">04 · Análise</a></div>
             <div class="nav-group"><span class="nav-group-label">Plano</span><a class="nav-link" href="#fases">05 · Fases</a><a class="nav-link" href="#semana">06 · Semana</a><a class="nav-link" href="#musculacao">07 · Musculação</a><a class="nav-link" href="#cardio">08 · Cardio</a></div>
             <div class="nav-group"><span class="nav-group-label">Execução</span><a class="nav-link" href="#aquecimento">09 · Aquecimento</a><a class="nav-link" href="#progressao">10 · Progressão</a><a class="nav-link" href="#adaptacao">11 · Adaptação</a><a class="nav-link" href="#sobrecarga">12 · Sobrecarga</a></div>
-            <div class="nav-group"><span class="nav-group-label">Fechamento</span><a class="nav-link" href="#recomendacoes">13 · Recomendações</a><a class="nav-link" href="#final">14 · Resumo</a><a class="nav-link" href="#transcricao">15 · Transcrição</a></div>
+            <div class="nav-group"><span class="nav-group-label">Fechamento</span><a class="nav-link" href="#recomendacoes">13 · Recomendações</a><a class="nav-link" href="#final">14 · Resumo</a><a class="nav-link" href="#referencias">15 · Referências</a><a class="nav-link" href="#transcricao">16 · Apêndice</a></div>
         </div>
         <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
     </div>
@@ -250,7 +333,7 @@
         <div class="sidebar-group"><div class="sidebar-label">Base</div><a href="#resumo">1. Resumo executivo</a><a href="#contexto">2. Contexto e objetivos</a><a href="#principios">3. Princípios híbridos</a><a href="#analise">4. Análise do treino original</a></div>
         <div class="sidebar-group"><div class="sidebar-label">Plano</div><a href="#fases">5. Fases progressivas</a><a href="#semana">6. Divisão semanal</a><a href="#musculacao">7. Treinos de musculação</a><a href="#cardio">8. Cardio e zonas</a></div>
         <div class="sidebar-group"><div class="sidebar-label">Execução</div><a href="#aquecimento">9. Aquecimento</a><a href="#progressao">10. Progressão</a><a href="#adaptacao">11. Semanas difíceis</a><a href="#sobrecarga">12. Sobrecarga</a></div>
-        <div class="sidebar-group"><div class="sidebar-label">Fechamento</div><a href="#recomendacoes">13. Recomendações</a><a href="#final">14. Resumo final</a><a href="#transcricao">15. Transcrição integral</a></div>
+        <div class="sidebar-group"><div class="sidebar-label">Fechamento</div><a href="#recomendacoes">13. Recomendações</a><a href="#final">14. Resumo final</a><a href="#referencias">15. Referências técnicas</a><a href="#transcricao">16. Apêndice técnico</a></div>
     </aside>
     <div class="content" id="mainContent">
         <section class="section" id="resumo" data-search-section>
@@ -510,9 +593,76 @@
             <div class="callout green"><h3>Mensagem final</h3><p>O objetivo é transformar o treino em parte natural da sua rotina de saúde - não em mais uma fonte de pressão. Com consistência e progressão gradual, os resultados virão: menos gordura, mais disposição, sistema cardiovascular saudável e massa muscular preservada. O treino deve dar energia para os estudos e o trabalho, não tirar.</p></div>
         </section>
 
+        
+        <section class="section" id="referencias" data-search-section>
+            <div class="section-header">
+                <div>
+                    <h2>Referências técnicas e fontes concretas</h2>
+                    <p class="section-subtitle">Fontes oficiais, diretrizes e artigos com base científica para cardio, treinamento concorrente, composição corporal e prescrição geral de atividade física.</p>
+                </div>
+                <span class="section-badge">Referências</span>
+            </div>
+            <div class="callout">
+                <h3>Critério desta seção</h3>
+                <p>As referências abaixo substituem a dependência de fonte documental isolada por materiais mais verificáveis: diretrizes de saúde pública, organizações profissionais e revisões/artigos indexados em bases biomédicas.</p>
+            </div>
+            <div class="ref-grid">
+                <article class="ref-card">
+                    <strong>WHO — Guidelines on Physical Activity and Sedentary Behaviour</strong>
+                    <p>Diretriz oficial da Organização Mundial da Saúde com recomendações para adultos sobre volume semanal de atividade aeróbica e fortalecimento muscular.</p>
+                    <a href="https://www.who.int/publications/i/item/9789240015128" target="_blank" rel="noopener noreferrer">Abrir diretriz da WHO</a>
+                </article>
+                <article class="ref-card">
+                    <strong>WHO — Physical activity (fact sheet)</strong>
+                    <p>Resumo público atualizado da OMS com faixas recomendadas de atividade física, contexto de inatividade e benefícios associados à saúde.</p>
+                    <a href="https://www.who.int/news-room/fact-sheets/detail/physical-activity" target="_blank" rel="noopener noreferrer">Abrir fact sheet da WHO</a>
+                </article>
+                <article class="ref-card">
+                    <strong>CDC — Adult Activity: An Overview</strong>
+                    <p>Recomendação objetiva para adultos: atividade aeróbica semanal e fortalecimento muscular envolvendo grandes grupos musculares.</p>
+                    <a href="https://www.cdc.gov/physical-activity-basics/guidelines/adults.html" target="_blank" rel="noopener noreferrer">Abrir guia do CDC</a>
+                </article>
+                <article class="ref-card">
+                    <strong>ACSM — Physical Activity Guidelines</strong>
+                    <p>Portal do American College of Sports Medicine com recomendações gerais e materiais de apoio para prescrição de atividade física.</p>
+                    <a href="https://acsm.org/education-resources/trending-topics-resources/physical-activity-guidelines/" target="_blank" rel="noopener noreferrer">Abrir guia da ACSM</a>
+                </article>
+                <article class="ref-card">
+                    <strong>ACSM — Resistance Training Guidelines Update (2026)</strong>
+                    <p>Atualização institucional da ACSM com síntese baseada em evidências sobre treino resistido para força, hipertrofia e consistência de longo prazo.</p>
+                    <a href="https://acsm.org/resistance-training-guidelines-update-2026/" target="_blank" rel="noopener noreferrer">Abrir atualização da ACSM</a>
+                </article>
+                <article class="ref-card">
+                    <strong>JAMA Network Open / PMC — Aerobic Exercise and Weight Loss in Adults (2024)</strong>
+                    <p>Revisão que associa maior volume semanal de exercício aeróbico a reduções em peso corporal, cintura e gordura corporal em adultos com sobrepeso/obesidade.</p>
+                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11672165/" target="_blank" rel="noopener noreferrer">Abrir artigo em PMC</a>
+                </article>
+                <article class="ref-card">
+                    <strong>Obesity Reviews / PMC — Resistance training effectiveness on body composition (2022)</strong>
+                    <p>Meta-análise sobre o impacto do treino resistido na composição corporal, incluindo preservação ou aumento de massa magra e redução de gordura.</p>
+                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9285060/" target="_blank" rel="noopener noreferrer">Abrir meta-análise em PMC</a>
+                </article>
+                <article class="ref-card">
+                    <strong>Journal of Applied Physiology / PMC — Effects of aerobic and/or resistance training on body mass and fat mass (2012)</strong>
+                    <p>Artigo comparando treino aeróbico, treino resistido e combinação dos dois para massa corporal, gordura e preservação de tecido magro.</p>
+                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3544497/" target="_blank" rel="noopener noreferrer">Abrir artigo comparativo em PMC</a>
+                </article>
+                <article class="ref-card">
+                    <strong>Sports Medicine Open / PMC — Zone 2 Intensity: individual variability and exercise prescription (2025)</strong>
+                    <p>Revisão sobre variabilidade individual na chamada “Zona 2”, útil para contextualizar prescrição prática sem tratar a faixa como regra rígida universal.</p>
+                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11986187/" target="_blank" rel="noopener noreferrer">Abrir revisão de Zona 2 em PMC</a>
+                </article>
+                <article class="ref-card">
+                    <strong>Review / PMC — The Regulation of Fat Metabolism during Aerobic Exercise (2020)</strong>
+                    <p>Revisão sobre metabolismo de gordura durante exercício aeróbico, intensidade, uso de substratos energéticos e adaptação fisiológica.</p>
+                    <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7767423/" target="_blank" rel="noopener noreferrer">Abrir revisão metabólica em PMC</a>
+                </article>
+            </div>
+        </section>
+
         <section class="section" id="transcricao" data-search-section>
-            <div class="section-header"><div><h2>Transcrição integral do PDF</h2><p class="section-subtitle">Conteúdo extraído página a página, preservado como apêndice para evitar perda de dados da fonte.</p></div><span class="section-badge">16 páginas</span></div>
-            <div class="callout orange"><h3>Controle de integridade</h3><p>Além da versão estruturada acima, este apêndice mantém a transcrição integral extraída do PDF. Isso permite conferência completa do conteúdo original.</p></div>
+            <div class="section-header"><div><h2>Apêndice técnico consolidado</h2><p class="section-subtitle">Conteúdo preservado em formato de apêndice para conferência estrutural e consulta complementar.</p></div><span class="section-badge">Apêndice</span></div>
+            <div class="callout orange"><h3>Controle de integridade</h3><p>Além da versão estruturada acima, este apêndice mantém o conteúdo-base preservado para conferência estrutural, comparação de blocos e revisão técnica.</p></div>
             <details class="page-transcript"><summary>Página 1</summary><pre>H
 
                     Plano de Treino
@@ -1524,9 +1674,9 @@ Musculação 3x/semana • Cardio 6x/semana • Máx. 90 min/dia • Sustentáve
 <footer>
     <div class="footer-row">
         <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
-        <div class="footer-pills"><span class="footer-pill">16 páginas extraídas</span><span class="footer-pill cyan">3 fases</span><span class="footer-pill green">3x força + 6x cardio</span><span class="footer-pill">90 min/dia</span></div>
+        <div class="footer-pills"><span class="footer-pill">Apêndice técnico</span><span class="footer-pill cyan">3 fases</span><span class="footer-pill green">3x força + 6x cardio</span><span class="footer-pill">90 min/dia</span></div>
     </div>
-    <p><strong style="color:var(--muted2)">Plano de Treino Híbrido Otimizado</strong> · HTML técnico gerado a partir de TREINO-H.pdf</p>
+    <p><strong style="color:var(--muted2)">Plano de Treino Híbrido Otimizado</strong> · HTML técnico consolidado com referências externas e artigos-base</p>
 </footer>
 <button id="btt" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 <script>
@@ -1543,7 +1693,7 @@ Musculação 3x/semana • Cardio 6x/semana • Máx. 90 min/dia • Sustentáve
       function upd(){if(!bar)return;btnL.classList.toggle('hidden',bar.scrollLeft<=4);btnR.classList.toggle('hidden',bar.scrollLeft+bar.clientWidth>=bar.scrollWidth-4);}
       if(bar){btnL.addEventListener('click',()=>bar.scrollBy({left:-320,behavior:'smooth'}));btnR.addEventListener('click',()=>bar.scrollBy({left:320,behavior:'smooth'}));bar.addEventListener('scroll',upd,{passive:true});upd();}
       window.addEventListener('scroll',()=>btt.classList.toggle('show',window.scrollY>420));
-      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href')); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}}));
+      document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const href=a.getAttribute('href'); if(!href||href==='#') return; const t=document.querySelector(href); if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}}));
       search.addEventListener('input',()=>{const q=norm(search.value.trim()); sections.forEach(s=>{s.classList.remove('is-hidden-by-search','search-hit'); if(!q)return; const m=norm(s.innerText).includes(q); s.classList.toggle('is-hidden-by-search',!m); s.classList.toggle('search-hit',m);});});
       const obs=new IntersectionObserver(entries=>{entries.forEach(en=>{if(en.isIntersecting){const id=en.target.id;navLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));sideLinks.forEach(l=>l.classList.toggle('active',l.getAttribute('href')==='#'+id));const active=bar?bar.querySelector('.nav-link.active'):null;if(active)active.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'});}});},{threshold:.15,rootMargin:'-100px 0px -55% 0px'});sections.forEach(s=>obs.observe(s));
     })();

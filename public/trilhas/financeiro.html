@@ -212,6 +212,86 @@ code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(251,14
 .check-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}.check-item{border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:.75rem;color:var(--muted2);cursor:pointer;transition:border-color .15s,background .15s,transform .15s}.check-item:hover{border-color:rgba(251,146,60,.3);background:#151c27;transform:translateY(-1px)}.check-item input{accent-color:var(--accent);margin-right:.4rem}
 .table-responsive,.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0 1rem}.doc-table,table{border-collapse:collapse;width:100%;min-width:760px;margin-bottom:0!important}.doc-table thead tr,.doc-table th,thead tr{background:rgba(251,146,60,.10)!important}th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem!important;text-align:left;color:#fff!important;border-bottom:1px solid var(--border2)!important;border-color:var(--border)!important;white-space:nowrap}td{padding:.65rem 1rem!important;font-size:.82rem;color:#cbd5e1!important;border-bottom:1px solid var(--border)!important;border-color:var(--border)!important;vertical-align:top}tr:last-child td{border-bottom:none!important}tr:hover td{background:rgba(255,255,255,.025)!important}.dense-table td,.dense-table th{font-size:.78rem!important}.table-dark,.table-dark>:not(caption)>*>*{background:transparent!important;color:var(--text)!important}.table-hover>tbody>tr:hover>*{background:rgba(255,255,255,.025)!important}.table-dark>:not(caption)>*{border-color:var(--border)!important}
 pre,.code-block{background:var(--code-bg);border:1px solid rgba(251,146,60,.22);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#fdba74;max-height:620px;white-space:pre}pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
+
+/* ─── REFERÊNCIAS ─── */
+.ref-grid{
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.ref-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1rem;
+  transition:border-color .15s,background .15s,transform .15s;
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  min-height:100%;
+}
+.ref-card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:3px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+}
+.ref-card:hover{
+  border-color:rgba(251,146,60,.30);
+  background:#151d29;
+  transform:translateY(-1px);
+}
+.ref-card strong{
+  display:block;
+  color:#fff;
+  font-family:'Syne',sans-serif;
+  font-size:.95rem;
+  margin-bottom:.35rem;
+}
+.ref-card p{
+  color:var(--muted2);
+  font-size:.82rem;
+  margin-bottom:.75rem;
+}
+.ref-card a,
+.ref-list a{
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  max-width:100%;
+  color:#d8ecff;
+  text-decoration:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:600;
+  line-height:1.45;
+  border:1px solid rgba(245,158,11,.18);
+  background:rgba(245,158,11,.055);
+  padding:.28rem .55rem;
+  border-radius:6px;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  transition:all .14s;
+}
+.ref-card a::after,
+.ref-list a::after{
+  content:'↗';
+  font-size:.72rem;
+  color:var(--accent);
+  line-height:1;
+  flex-shrink:0;
+}
+.ref-card a:hover,
+.ref-list a:hover{
+  color:#fff;
+  border-color:rgba(251,146,60,.42);
+  background:rgba(251,146,60,.09);
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+.ref-grid > *{min-width:0}
+
 .mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.is-hidden-by-search{display:none!important}.search-hit{outline:1px solid rgba(251,146,60,.65);background:rgba(251,146,60,.08)!important}
 .back-to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(251,146,60,.15);border:1px solid rgba(251,146,60,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}.back-to-top.is-visible{display:flex}.back-to-top:hover{background:rgba(251,146,60,.3)}
 .page-footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}.page-footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px}.footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent)}.footer-pill.yellow{border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.06);color:var(--accent2)}.footer-pill.green{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent3)}.footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent4)}
@@ -715,6 +795,18 @@ li,
     bottom: .85rem;
     width: 40px;
     height: 40px;
+  }
+
+  .ref-card {
+    border-radius: 10px;
+  }
+
+  .ref-card a,
+  .ref-list a {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -1326,9 +1418,50 @@ li,
   <p>Para a fase atual de reorganização financeira, os conteúdos mais importantes são: orçamento pessoal, dívidas e juros, reserva de emergência, matemática financeira, aumento de renda, renda fixa, precificação de serviços, produtos digitais, IA aplicada a negócios e investimentos de longo prazo.</p>
 </section>
 <section id="referencias" class="section doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading"><div><h2>Referências e fontes oficiais recomendadas</h2><p class="section-subtitle">Fontes citadas no PDF para aprofundamento educacional.</p></div><span class="section-badge">Fontes</span></div>
-  <ul class="doc-list"><li>Banco Central do Brasil - Cidadania Financeira.</li><li>CVM - Portal do Investidor e materiais de educação financeira.</li><li>Tesouro Direto - materiais educativos sobre títulos públicos.</li><li>B3 - conteúdos educacionais sobre mercado financeiro.</li><li>Receita Federal - orientações sobre Imposto de Renda e declarações.</li></ul>
-  <div class="callout accent-orange"><h3>Nota de atualização</h3><p>O conteúdo foi transcrito e organizado em HTML com correção de acentuação e estrutura visual. Como regras tributárias, produtos financeiros e normas podem mudar, a validação final deve ser feita nas fontes oficiais acima antes de qualquer decisão real.</p></div>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Referências e fontes oficiais recomendadas</h2>
+      <p class="section-subtitle">Fontes oficiais e educacionais para aprofundamento, validação e atualização dos temas estudados na trilha.</p>
+    </div>
+    <span class="section-badge">Fontes</span>
+  </div>
+  <p class="lead">A seção foi reorganizada no mesmo padrão técnico da trilha de referência: cartões por fonte, links com tratamento visual consistente e leitura mais rápida para consulta futura, sem alterar o restante da página.</p>
+  <div class="ref-grid">
+    <article class="ref-card">
+      <strong>Banco Central do Brasil</strong>
+      <p>Base oficial para cidadania financeira, sistema financeiro, juros, crédito, inflação, Pix e conceitos estruturais do mercado brasileiro.</p>
+      <a href="https://www.bcb.gov.br/cidadaniafinanceira" target="_blank" rel="noopener noreferrer">Cidadania Financeira</a>
+    </article>
+    <article class="ref-card">
+      <strong>CVM</strong>
+      <p>Fonte central para educação do investidor, fundos, ações, FIIs, ETFs, riscos, suitability e regras do mercado de capitais.</p>
+      <a href="https://www.gov.br/cvm/pt-br/assuntos/portal-do-investidor" target="_blank" rel="noopener noreferrer">Portal do Investidor</a>
+    </article>
+    <article class="ref-card">
+      <strong>Tesouro Direto</strong>
+      <p>Referência para títulos públicos, Tesouro Selic, prefixados, IPCA+, funcionamento, custos, prazos e marcação a mercado.</p>
+      <a href="https://www.tesourodireto.com.br/" target="_blank" rel="noopener noreferrer">Site oficial do Tesouro Direto</a>
+    </article>
+    <article class="ref-card">
+      <strong>B3</strong>
+      <p>Material educacional sobre bolsa, renda variável, ETFs, FIIs, derivativos, infraestrutura de mercado e produtos listados.</p>
+      <a href="https://www.b3.com.br/pt_br/para-voce" target="_blank" rel="noopener noreferrer">Conteúdos para você</a>
+    </article>
+    <article class="ref-card">
+      <strong>Receita Federal</strong>
+      <p>Fonte indispensável para declaração, regras tributárias, ganho de capital, imposto sobre investimentos e obrigações acessórias.</p>
+      <a href="https://www.gov.br/receitafederal/pt-br" target="_blank" rel="noopener noreferrer">Portal oficial da Receita Federal</a>
+    </article>
+    <article class="ref-card">
+      <strong>Planejamento e validação final</strong>
+      <p>Use estas fontes para confirmar qualquer regra operacional, tributária ou produto financeiro antes de tomar decisões reais com dinheiro.</p>
+      <a href="#consulta">Cruzar com a seção de consulta rápida</a>
+    </article>
+  </div>
+  <div class="callout accent-orange">
+    <h3>Nota de atualização</h3>
+    <p>O conteúdo foi transcrito e organizado em HTML com correção de acentuação e estrutura visual. Como regras tributárias, produtos financeiros e normas podem mudar, a validação final deve ser feita nas fontes oficiais acima antes de qualquer decisão real.</p>
+  </div>
 </section>
 </div><!-- /content -->
 </div><!-- /main -->
@@ -1388,7 +1521,9 @@ li,
 
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', event => {
-      const target = document.querySelector(anchor.getAttribute('href'));
+      const href = anchor.getAttribute('href');
+      if(!href || href === '#') return;
+      const target = document.querySelector(href);
       if(target){
         event.preventDefault();
         target.scrollIntoView({behavior:'smooth', block:'start'});

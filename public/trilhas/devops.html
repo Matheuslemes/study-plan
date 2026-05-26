@@ -793,6 +793,127 @@ li,
 </style>
 
 
+
+<style id="reference-card-style">
+/* ─────────────────────────────────────────────────────────────
+   REFERÊNCIAS EM CARDS — padrão Segurança Full Stack
+   Seção aplicada à trilha DevOps sem alterar o JS global.
+   ───────────────────────────────────────────────────────────── */
+.ref-grid {
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.ref-card {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1rem;
+  transition:border-color .15s,background .15s,transform .15s;
+  position:relative;
+  overflow:hidden;
+  min-height:100%;
+  min-width:0;
+}
+
+.ref-card::before {
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:3px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+}
+
+.ref-card:hover {
+  border-color:rgba(52,211,153,.30);
+  background:#151c27;
+  transform:translateY(-1px);
+}
+
+.ref-card strong {
+  display:block;
+  color:#fff;
+  font-family:'Syne',sans-serif;
+  font-size:.95rem;
+  margin-bottom:.35rem;
+}
+
+.ref-card p {
+  color:var(--muted2);
+  font-size:.82rem;
+  margin-bottom:.75rem;
+}
+
+.ref-card a,
+.ref-list a {
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  max-width:100%;
+  color:#d8ecff;
+  text-decoration:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:600;
+  line-height:1.45;
+  border:1px solid rgba(56,189,248,.18);
+  background:rgba(56,189,248,.055);
+  padding:.28rem .55rem;
+  border-radius:6px;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  transition:all .14s;
+}
+
+.ref-card a::after,
+.ref-list a::after {
+  content:'↗';
+  font-size:.72rem;
+  color:var(--accent2);
+  line-height:1;
+}
+
+.ref-card a:hover,
+.ref-list a:hover {
+  color:#fff;
+  border-color:rgba(52,211,153,.42);
+  background:rgba(52,211,153,.09);
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+
+.ref-grid > * {
+  min-width:0;
+}
+
+@media(max-width:1180px) {
+  .ref-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:980px) {
+  .ref-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:520px) {
+  .ref-card {
+    border-radius:10px;
+  }
+
+  .ref-card a,
+  .ref-list a {
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    align-items:center;
+  }
+}
+</style>
+
 </head>
 <body class="track-page" data-track="devops">
 
@@ -1648,28 +1769,161 @@ terraform destroy -target=module.dev_example</code></pre>
   <div class="doc-section-heading">
     <div>
       <h2>Referências e fontes oficiais</h2>
-      <p class="section-subtitle">Use estas páginas para validar conceitos, comandos e evolução das ferramentas.</p>
+      <p class="section-subtitle">Links em cards responsivos para validar conceitos, comandos, padrões operacionais e evolução das ferramentas.</p>
     </div>
     <span class="section-badge">Fontes</span>
   </div>
-  <ul class="doc-list ref-list">
-    <li><a href="https://docs.docker.com/get-started/get-docker/" target="_blank" rel="noopener">Docker Docs — Get Docker / fundamentos</a></li>
-    <li><a href="https://docs.github.com/actions" target="_blank" rel="noopener">GitHub Actions Documentation</a></li>
-    <li><a href="https://docs.github.com/en/actions/get-started/continuous-integration" target="_blank" rel="noopener">GitHub Actions — Continuous Integration</a></li>
-    <li><a href="https://dora.dev/guides/dora-metrics/" target="_blank" rel="noopener">DORA — Software Delivery Performance Metrics</a></li>
-    <li><a href="https://kubernetes.io/docs/home/" target="_blank" rel="noopener">Kubernetes Documentation</a></li>
-    <li><a href="https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/" target="_blank" rel="noopener">Kubernetes — Debug Pods</a></li>
-    <li><a href="https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/" target="_blank" rel="noopener">Kubernetes — Debug Services</a></li>
-    <li><a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">Kubernetes — Ingress</a></li>
-    <li><a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener">Kubernetes — Network Policies</a></li>
-    <li><a href="https://developer.hashicorp.com/terraform/language/state" target="_blank" rel="noopener">Terraform — State</a></li>
-    <li><a href="https://developer.hashicorp.com/terraform/language/backend" target="_blank" rel="noopener">Terraform — Backend Configuration</a></li>
-    <li><a href="https://developer.hashicorp.com/terraform/language/state/workspaces" target="_blank" rel="noopener">Terraform — Workspaces</a></li>
-    <li><a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener">Prometheus — Overview</a></li>
-    <li><a href="https://prometheus.io/docs/alerting/latest/alertmanager/" target="_blank" rel="noopener">Prometheus Alertmanager</a></li>
-    <li><a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener">OpenTelemetry Documentation</a></li>
-    <li>Referência interna: cronograma integrado de 8 fases / 64 semanas do Plano Integrado de Estudos.</li>
-  </ul>
+
+  <div class="ref-grid">
+    <article class="ref-card">
+      <strong>Docker Docs</strong>
+      <p>Documentação oficial para instalação, imagens, containers, Dockerfile, Compose, registry e boas práticas de containerização.</p>
+      <a href="https://docs.docker.com/get-started/get-docker/" target="_blank" rel="noopener">docs.docker.com/get-started/get-docker</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Docker Build</strong>
+      <p>Referência oficial para build de imagens, cache, layers, multi-stage builds e otimização de Dockerfiles.</p>
+      <a href="https://docs.docker.com/build/" target="_blank" rel="noopener">docs.docker.com/build</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>GitHub Actions</strong>
+      <p>Documentação oficial para workflows, jobs, runners, secrets, environments, reusable workflows e automação de CI/CD.</p>
+      <a href="https://docs.github.com/actions" target="_blank" rel="noopener">docs.github.com/actions</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>GitHub Actions — Continuous Integration</strong>
+      <p>Guia oficial para implementar pipelines de integração contínua com build, testes, matriz de execução e validações automatizadas.</p>
+      <a href="https://docs.github.com/en/actions/get-started/continuous-integration" target="_blank" rel="noopener">docs.github.com/actions/continuous-integration</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>DORA Metrics</strong>
+      <p>Referência para medir performance de entrega: deployment frequency, lead time, change failure rate, recovery time e reliability.</p>
+      <a href="https://dora.dev/guides/dora-metrics/" target="_blank" rel="noopener">dora.dev/guides/dora-metrics</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Kubernetes Documentation</strong>
+      <p>Documentação oficial de Kubernetes para workloads, services, ingress, config, secrets, RBAC, networking e operação de clusters.</p>
+      <a href="https://kubernetes.io/docs/home/" target="_blank" rel="noopener">kubernetes.io/docs</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Kubernetes — Debug Pods</strong>
+      <p>Guia oficial para investigar Pods, containers, logs, eventos, falhas de inicialização e problemas de runtime.</p>
+      <a href="https://kubernetes.io/docs/tasks/debug/debug-application/debug-pods/" target="_blank" rel="noopener">kubernetes.io/debug-pods</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Kubernetes — Debug Services</strong>
+      <p>Referência oficial para diagnosticar Services, endpoints, DNS interno, conectividade e roteamento dentro do cluster.</p>
+      <a href="https://kubernetes.io/docs/tasks/debug/debug-application/debug-service/" target="_blank" rel="noopener">kubernetes.io/debug-service</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Kubernetes — Ingress</strong>
+      <p>Documentação oficial sobre publicação HTTP/S, regras de roteamento, controladores de ingress e exposição de aplicações.</p>
+      <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/" target="_blank" rel="noopener">kubernetes.io/ingress</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Kubernetes — Network Policies</strong>
+      <p>Referência oficial para segmentação de tráfego entre Pods e namespaces usando políticas declarativas de rede.</p>
+      <a href="https://kubernetes.io/docs/concepts/services-networking/network-policies/" target="_blank" rel="noopener">kubernetes.io/network-policies</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Helm Documentation</strong>
+      <p>Documentação oficial para charts, templates, values por ambiente, releases, upgrades e rollback em Kubernetes.</p>
+      <a href="https://helm.sh/docs/" target="_blank" rel="noopener">helm.sh/docs</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Argo CD Documentation</strong>
+      <p>Referência oficial para GitOps, desired state, sync policies, rollbacks e entrega declarativa em Kubernetes.</p>
+      <a href="https://argo-cd.readthedocs.io/en/stable/" target="_blank" rel="noopener">argo-cd.readthedocs.io</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Terraform — State</strong>
+      <p>Documentação oficial sobre state, rastreamento de recursos, consistência e riscos operacionais em infraestrutura como código.</p>
+      <a href="https://developer.hashicorp.com/terraform/language/state" target="_blank" rel="noopener">developer.hashicorp.com/terraform/language/state</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Terraform — Backend Configuration</strong>
+      <p>Referência oficial para backend remoto, separação de estado, colaboração, locking e operação segura do Terraform.</p>
+      <a href="https://developer.hashicorp.com/terraform/language/backend" target="_blank" rel="noopener">developer.hashicorp.com/terraform/language/backend</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Terraform — Workspaces</strong>
+      <p>Documentação oficial sobre workspaces para isolamento de instâncias de state e organização de ambientes.</p>
+      <a href="https://developer.hashicorp.com/terraform/language/state/workspaces" target="_blank" rel="noopener">developer.hashicorp.com/terraform/workspaces</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Prometheus</strong>
+      <p>Documentação oficial para coleta de métricas, modelo de dados, PromQL, scraping e monitoramento de aplicações.</p>
+      <a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener">prometheus.io/docs</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Prometheus Alertmanager</strong>
+      <p>Referência oficial para agrupamento, silenciamento, deduplicação e roteamento de alertas operacionais.</p>
+      <a href="https://prometheus.io/docs/alerting/latest/alertmanager/" target="_blank" rel="noopener">prometheus.io/docs/alertmanager</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Grafana Documentation</strong>
+      <p>Documentação oficial para dashboards, datasources, alerting, visualizações e operação de observabilidade.</p>
+      <a href="https://grafana.com/docs/grafana/latest/" target="_blank" rel="noopener">grafana.com/docs/grafana</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>OpenTelemetry Documentation</strong>
+      <p>Referência oficial para instrumentação de logs, métricas e traces com padrão aberto e vendor-neutral.</p>
+      <a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener">opentelemetry.io/docs</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Jaeger Documentation</strong>
+      <p>Documentação oficial para tracing distribuído, análise de latência, dependências e fluxo de requests entre serviços.</p>
+      <a href="https://www.jaegertracing.io/docs/" target="_blank" rel="noopener">jaegertracing.io/docs</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Trivy</strong>
+      <p>Scanner open source para vulnerabilidades, imagens de container, IaC, Kubernetes, SBOM e supply chain security.</p>
+      <a href="https://trivy.dev/latest/" target="_blank" rel="noopener">trivy.dev/latest</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>OWASP ZAP</strong>
+      <p>Ferramenta OWASP para DAST e testes de segurança controlados em aplicações web e APIs.</p>
+      <a href="https://www.zaproxy.org/docs/" target="_blank" rel="noopener">zaproxy.org/docs</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>OpenSSF Scorecard</strong>
+      <p>Ferramenta para avaliar práticas de segurança em projetos open source e riscos de supply chain.</p>
+      <a href="https://github.com/ossf/scorecard" target="_blank" rel="noopener">github.com/ossf/scorecard</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>FinOps Framework</strong>
+      <p>Referência para cultura, processos e práticas de gestão financeira em cloud, custos, tags, budgets e otimização.</p>
+      <a href="https://www.finops.org/framework/" target="_blank" rel="noopener">finops.org/framework</a>
+    </article>
+  </div>
+
+  <div class="callout accent-blue mt-3">
+    <h3>Observação de versão</h3>
+    <p>Antes de aplicar qualquer comando, configuração, scanner, chart, provider, controller, métrica ou padrão em produção, valide a versão atual na documentação oficial da ferramenta e registre mudanças relevantes em ADR ou runbook.</p>
+  </div>
 </section>
 
 </div><!-- /content -->

@@ -922,6 +922,128 @@ li,
 }
 </style>
 
+
+<style id="reference-card-style">
+/* ─────────────────────────────────────────────────────────────
+   REFERÊNCIAS EM CARDS — padrão visual reutilizável
+   Mantém o tema dark, links em estilo pill técnico e responsividade.
+   ───────────────────────────────────────────────────────────── */
+
+.ref-grid {
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.ref-card {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1rem;
+  transition:border-color .15s,background .15s,transform .15s;
+  position:relative;
+  overflow:hidden;
+  min-height:100%;
+  min-width:0;
+}
+
+.ref-card::before {
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:3px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+}
+
+.ref-card:hover {
+  border-color:rgba(52,211,153,.30);
+  background:#151c27;
+  transform:translateY(-1px);
+}
+
+.ref-card strong {
+  display:block;
+  color:#fff;
+  font-family:'Syne',sans-serif;
+  font-size:.95rem;
+  margin-bottom:.35rem;
+}
+
+.ref-card p {
+  color:var(--muted2);
+  font-size:.82rem;
+  margin-bottom:.75rem;
+}
+
+.ref-card a,
+.ref-list a {
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  max-width:100%;
+  color:#d8ecff;
+  text-decoration:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:600;
+  line-height:1.45;
+  border:1px solid rgba(56,189,248,.18);
+  background:rgba(56,189,248,.055);
+  padding:.28rem .55rem;
+  border-radius:6px;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  transition:all .14s;
+}
+
+.ref-card a::after,
+.ref-list a::after {
+  content:'↗';
+  font-size:.72rem;
+  color:var(--accent2);
+  line-height:1;
+}
+
+.ref-card a:hover,
+.ref-list a:hover {
+  color:#fff;
+  border-color:rgba(52,211,153,.42);
+  background:rgba(52,211,153,.09);
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+
+.ref-grid > * {
+  min-width:0;
+}
+
+@media(max-width:1180px) {
+  .ref-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:980px) {
+  .ref-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:520px) {
+  .ref-card {
+    border-radius:10px;
+  }
+
+  .ref-card a,
+  .ref-list a {
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    align-items:center;
+  }
+}
+</style>
+
 </head>
 <body class="track-page" data-track="english">
 
@@ -973,7 +1095,7 @@ li,
       <div class="nav-group">
         <span class="nav-group-label">Execução</span>
         <a class="nav-link" href="#evitar">11 · Evitar</a>
-        <a class="nav-link" href="#recursos">12 · Recursos</a>
+        <a class="nav-link" href="#referencias">12 · Referências</a>
         <a class="nav-link" href="#checklist">13 · Checklist</a>
       </div>
     </div>
@@ -1005,7 +1127,7 @@ li,
     <div class="sidebar-group">
       <div class="sidebar-label">Execução</div>
       <a href="#evitar">11. O que evitar</a>
-      <a href="#recursos">12. Recursos e referências</a>
+      <a href="#referencias">12. Referências técnicas</a>
       <a href="#checklist">13. Checklist e entregáveis</a>
     </div>
   </aside>
@@ -1440,34 +1562,104 @@ This test verifies the expected behavior.</code></pre>
   </div>
 </section>
 
-<section id="recursos" class="doc-section searchable-section" data-search-section>
+<section class="doc-section searchable-section" data-search-section id="referencias">
   <div class="doc-section-heading">
     <div>
-      <h2>Recursos e referências</h2>
-      <p class="section-subtitle">Fontes para inglês geral, inglês técnico, documentação e escrita profissional.</p>
+      <h2>Referências técnicas</h2>
+      <p class="section-subtitle">Fontes oficiais e confiáveis para inglês geral, inglês técnico, documentação, escrita profissional, commits e aprendizagem ativa.</p>
     </div>
     <span class="section-badge">Referências</span>
   </div>
-  <div class="table-responsive">
-    <table class="doc-table">
-      <thead><tr><th>Categoria</th><th>Fonte</th><th>Uso na trilha</th></tr></thead>
-      <tbody>
-        <tr><td>Proficiência</td><td><a class="source-link" href="https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions" target="_blank" rel="noopener">CEFR — Level descriptions</a></td><td>Referência para entender níveis A1–C2 e mirar B1+/B2 técnico.</td></tr>
-        <tr><td>Inglês geral</td><td><a class="source-link" href="https://learnenglish.britishcouncil.org/" target="_blank" rel="noopener">British Council LearnEnglish</a></td><td>Reading, listening, speaking, pronunciation e vocabulário.</td></tr>
-        <tr><td>Inglês geral</td><td><a class="source-link" href="https://www.cambridgeenglish.org/learning-english/" target="_blank" rel="noopener">Cambridge English Learning English</a></td><td>Atividades estruturadas de leitura, escrita, escuta e fala.</td></tr>
-        <tr><td>Documentação Java/Spring</td><td><a class="source-link" href="https://docs.spring.io/spring-framework/reference/index.html" target="_blank" rel="noopener">Spring Framework Documentation</a></td><td>Vocabulário real de IoC, testing, data access, web e arquitetura Spring.</td></tr>
-        <tr><td>Documentação Spring Boot</td><td><a class="source-link" href="https://docs.spring.io/spring-boot/index.html" target="_blank" rel="noopener">Spring Boot Documentation</a></td><td>Leitura técnica para aplicações production-grade e configuração.</td></tr>
-        <tr><td>Cloud</td><td><a class="source-link" href="https://docs.aws.amazon.com/" target="_blank" rel="noopener">AWS Documentation</a></td><td>Vocabulário de cloud, arquitetura, segurança, storage, filas e operações.</td></tr>
-        <tr><td>Web</td><td><a class="source-link" href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank" rel="noopener">MDN Web Docs</a></td><td>Documentação clara para fundamentos web, JavaScript, HTTP e frontend.</td></tr>
-        <tr><td>GitHub</td><td><a class="source-link" href="https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests" target="_blank" rel="noopener">GitHub Docs — Pull Requests</a></td><td>Vocabulário de colaboração, revisão, mudanças e merge.</td></tr>
-        <tr><td>GitHub</td><td><a class="source-link" href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes" target="_blank" rel="noopener">GitHub Docs — README</a></td><td>Estrutura de README e documentação de projetos.</td></tr>
-        <tr><td>Escrita técnica</td><td><a class="source-link" href="https://developers.google.com/style" target="_blank" rel="noopener">Google Developer Documentation Style Guide</a></td><td>Estilo claro, direto e consistente para documentação técnica.</td></tr>
-        <tr><td>Escrita técnica</td><td><a class="source-link" href="https://learn.microsoft.com/en-us/style-guide/welcome/" target="_blank" rel="noopener">Microsoft Writing Style Guide</a></td><td>Comunicação objetiva sobre tecnologia, produtos e instruções.</td></tr>
-        <tr><td>Commits</td><td><a class="source-link" href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">Conventional Commits</a></td><td>Formato para commits semânticos em inglês.</td></tr>
-        <tr><td>Aprendizagem</td><td><a class="source-link" href="https://pubmed.ncbi.nlm.nih.gov/18276894/" target="_blank" rel="noopener">Karpicke & Roediger — Retrieval Practice</a></td><td>Base para revisão ativa por recuperação.</td></tr>
-        <tr><td>Aprendizagem</td><td><a class="source-link" href="https://pubmed.ncbi.nlm.nih.gov/16719566/" target="_blank" rel="noopener">Cepeda et al. — Distributed Practice</a></td><td>Base para revisão espaçada em vez de estudo concentrado.</td></tr>
-      </tbody>
-    </table>
+
+  <div class="ref-grid">
+    <article class="ref-card">
+      <strong>CEFR — Level descriptions</strong>
+      <p>Referência para entender níveis A1–C2 e mirar B1+/B2 técnico com critérios mais objetivos.</p>
+      <a href="https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions" target="_blank" rel="noopener">coe.int/cefr-levels</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>British Council LearnEnglish</strong>
+      <p>Base confiável para reading, listening, speaking, pronunciation e vocabulário geral aplicado.</p>
+      <a href="https://learnenglish.britishcouncil.org/" target="_blank" rel="noopener">learnenglish.britishcouncil.org</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Cambridge English Learning English</strong>
+      <p>Atividades estruturadas de leitura, escrita, escuta, fala, gramática e vocabulário por nível.</p>
+      <a href="https://www.cambridgeenglish.org/learning-english/" target="_blank" rel="noopener">cambridgeenglish.org/learning-english</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Spring Framework Documentation</strong>
+      <p>Fonte real para vocabulário técnico de IoC, testing, data access, web, architecture e Spring ecosystem.</p>
+      <a href="https://docs.spring.io/spring-framework/reference/index.html" target="_blank" rel="noopener">docs.spring.io/spring-framework</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Spring Boot Documentation</strong>
+      <p>Leitura técnica para expressões como production-grade applications, configuration, starters e deployment.</p>
+      <a href="https://docs.spring.io/spring-boot/index.html" target="_blank" rel="noopener">docs.spring.io/spring-boot</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Documentation</strong>
+      <p>Vocabulário de cloud, security, storage, queues, networking, observability, IAM e arquitetura operacional.</p>
+      <a href="https://docs.aws.amazon.com/" target="_blank" rel="noopener">docs.aws.amazon.com</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>MDN Web Docs</strong>
+      <p>Documentação clara para fundamentos web, HTTP, JavaScript, frontend, browser APIs e segurança web.</p>
+      <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank" rel="noopener">developer.mozilla.org/learn</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>GitHub Docs — Pull Requests</strong>
+      <p>Vocabulário de colaboração assíncrona: proposing changes, review, merge, conflicts e code discussion.</p>
+      <a href="https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests" target="_blank" rel="noopener">docs.github.com/pull-requests</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>GitHub Docs — README</strong>
+      <p>Estrutura de README para apresentar projetos, instalação, uso, arquitetura, testes e contribuição.</p>
+      <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes" target="_blank" rel="noopener">docs.github.com/about-readmes</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Google Developer Documentation Style Guide</strong>
+      <p>Guia para escrita técnica clara, direta, consistente e orientada a documentação de software.</p>
+      <a href="https://developers.google.com/style" target="_blank" rel="noopener">developers.google.com/style</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Microsoft Writing Style Guide</strong>
+      <p>Referência para comunicação objetiva sobre tecnologia, produtos, instruções e documentação profissional.</p>
+      <a href="https://learn.microsoft.com/en-us/style-guide/welcome/" target="_blank" rel="noopener">learn.microsoft.com/style-guide</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Conventional Commits</strong>
+      <p>Formato para escrever commits semânticos em inglês com escopo, tipo de mudança e histórico legível.</p>
+      <a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">conventionalcommits.org</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Retrieval Practice — Karpicke & Roediger</strong>
+      <p>Base científica para revisar inglês técnico por recuperação ativa em vez de releitura passiva.</p>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/18276894/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/18276894</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Distributed Practice — Cepeda et al.</strong>
+      <p>Base científica para revisão espaçada, evitando estudo concentrado e esquecimento rápido.</p>
+      <a href="https://pubmed.ncbi.nlm.nih.gov/16719566/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/16719566</a>
+    </article>
+  </div>
+
+  <div class="callout accent-blue mt-3">
+    <h3>Observação de uso</h3>
+    <p>Antes de usar qualquer conteúdo em produção, aula, artigo ou portfólio, valide versões, links, guias de estilo, documentação técnica e padrões oficiais diretamente nas fontes originais.</p>
   </div>
 </section>
 

@@ -7,7 +7,6 @@
 <meta name="description" content="Trilha técnica completa para dominar bancos relacionais, NoSQL, PostgreSQL, MongoDB, Redis, DynamoDB, JPA/Hibernate, modelagem, performance, segurança, observabilidade e operação para um dev pleno forte.">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="../assets/css/styles.css" rel="stylesheet">
 <style>
 
 :root{
@@ -131,7 +130,7 @@ body.track-page{
   text-decoration:none;
 }
 
-/* ─── STICKY NAV — padrão DevCore ─── */
+/* ─── STICKY NAV ─── */
 .sitenav{
   position:sticky;
   top:0;
@@ -498,8 +497,6 @@ pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inhe
 .timeline-item::before{content:"";position:absolute;left:-1.77rem;top:.3rem;width:.65rem;height:.65rem;border-radius:999px;background:var(--accent);box-shadow:0 0 0 5px rgba(6,182,212,.14)}
 .timeline-item strong{color:#fff;display:block}
 .timeline-item span{color:var(--muted2);font-size:.84rem}
-.ref-list a{color:#d8ecff;text-decoration:none}
-.ref-list a:hover{color:#fff;text-decoration:underline}
 
 /* ─── UTILITIES / SEARCH / FOOTER ─── */
 .mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}
@@ -540,619 +537,211 @@ mark.search-hit,.search-hit{outline:1px solid rgba(6,182,212,.65);background:rgb
 .footer-pill.purple{border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--accent3)}
 .footer-pill.orange{border:1px solid rgba(245,158,11,.25);background:rgba(245,158,11,.06);color:var(--accent4)}
 
-@media(max-width:992px){
-  .main{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .content{padding:1.5rem 0 3rem}
-  .doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid,.metrics-grid{grid-template-columns:1fr}
-  .sitenav-top{flex-wrap:wrap;gap:.5rem}
-  .sitenav-top-right{width:100%}
-  .search-box,.track-search{width:100%}
-  .nav-ver{display:none}
+/* ─── REFERÊNCIAS — ref-grid / ref-card ─── */
+.ref-grid{
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(2,minmax(0,1fr));
 }
-@media(max-width:576px){
-  html{font-size:14px}
-  .container,.main{padding:0 1rem}
-  .track-hero-page{padding:3rem 0 2rem}
-  .track-title{font-size:clamp(1.8rem,10vw,2.8rem)}
-  .doc-section{border-radius:10px;padding:1rem}
-  .doc-section-heading,.phase-doc-head{flex-direction:column}
-  .sitenav-brand span{display:none}
-  .nav-back{font-size:.65rem;padding:.25rem .5rem}
-  .nav-group-label{display:none}
-  .nav-group{border-right:none;padding:.25rem .25rem}
-  .nav-link{font-size:.66rem;padding:.25rem .48rem}
-}
-
-</style>
-
-<!-- Responsividade refeita: estrutura baseada diretamente na Trilha Java. O CSS original acima permanece intacto. -->
-<style id="bancos-responsive-refactor">
-/* ─────────────────────────────────────────────────────────────
-   RESPONSIVIDADE REFEITA — Database Track
-   Estrutura baseada na responsividade da Trilha Java.
-   Bloco complementar: o CSS original permanece intacto.
-   Objetivo: corrigir layout em notebook, tablet e celular sem alterar conteúdo.
-   ───────────────────────────────────────────────────────────── */
-
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-}
-
-body.track-page {
-  overflow-x: hidden;
-}
-
-.container,
-.main,
-.content,
-#trackMain,
-.doc-section,
-.table-responsive,
-.doc-hero-card,
-.doc-grid-2,
-.doc-grid-3,
-.doc-grid-4,
-.phase-doc-grid,
-.phase-doc-card,
-.domain-card,
-.mini-card,
-.callout,
-.metrics-grid,
-.timeline,
-pre,
-.code-block {
-  min-width: 0;
-}
-
-.content,
-#trackMain {
-  min-width: 0;
-}
-
-img,
-video,
-canvas,
-iframe,
-svg {
-  max-width: 100%;
-  height: auto;
-}
-
-.doc-section {
-  scroll-margin-top: 126px;
-}
-
-.table-responsive,
-pre,
-.code-block {
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-inline: contain;
-}
-
-.table-responsive table,
-.table-responsive .doc-table {
-  width: 100%;
-  min-width: max(720px, 100%);
-  table-layout: auto;
-}
-
-.doc-table th,
-.doc-table td,
-th,
-td {
-  white-space: normal !important;
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-pre,
-.code-block {
-  white-space: pre;
-  overflow-y: auto;
-}
-
-pre code,
-.code-block code {
-  white-space: inherit;
-}
-
-.track-title,
-.track-lead,
-.doc-section-heading h2,
-.sitenav-brand,
-p,
-li,
-.mini-card span,
-.mini-card p,
-.callout p,
-.phase-doc-card p,
-.domain-card p,
-.timeline-item span {
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-.doc-grid-2 > *,
-.doc-grid-3 > *,
-.doc-grid-4 > *,
-.phase-doc-grid > *,
-.metrics-grid > * {
-  min-width: 0;
-}
-
-.sitenav,
-.sitenav * {
-  min-width: 0;
-}
-
-.sitenav-top {
-  min-width: 0;
-}
-
-.sitenav-brand,
-.nav-back,
-.nav-ver {
-  flex-shrink: 0;
-}
-
-.sitenav-top-right {
-  min-width: 180px;
-}
-
-.search-box,
-.track-search {
-  max-width: 100%;
-}
-
-/* Notebook e desktop estreito */
-@media (max-width: 1180px) {
-  .container,
-  .main {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  .main {
-    grid-template-columns: 200px minmax(0, 1fr);
-  }
-
-  .content,
-  #trackMain {
-    padding-left: 1.35rem;
-  }
-
-  .doc-grid-4,
-  .metrics-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .doc-grid-3 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Tablet: remove sidebar e preserva navegação superior */
-@media (max-width: 980px) {
-  .main {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .content,
-  #trackMain {
-    padding: 1.5rem 0 3rem;
-  }
-
-  .doc-section {
-    scroll-margin-top: 148px;
-  }
-
-  .doc-hero-card,
-  .doc-grid-2,
-  .phase-doc-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sitenav-top {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: .55rem .75rem;
-  }
-
-  .sitenav-brand {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .nav-ver {
-    display: none;
-  }
-
-  .nav-back {
-    justify-self: end;
-  }
-
-  .sitenav-top-right {
-    grid-column: 1 / -1;
-    width: 100%;
-    min-width: 0;
-    margin-left: 0;
-  }
-
-  .search-box,
-  .track-search {
-    width: 100% !important;
-    min-height: 38px;
-  }
-}
-
-/* Tablet estreito e celulares grandes */
-@media (max-width: 760px) {
-  html {
-    font-size: 14.5px;
-  }
-
-  .container,
-  .main {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .track-hero-page {
-    padding: 2.8rem 0 2rem;
-  }
-
-  .track-title {
-    font-size: clamp(2rem, 9vw, 3.1rem);
-    letter-spacing: -.035em;
-  }
-
-  .track-lead {
-    max-width: 100%;
-  }
-
-  .track-badge-set,
-  .badge-cloud {
-    gap: .42rem;
-  }
-
-  .track-badge-set span,
-  .badge-cloud span {
-    max-width: 100%;
-    white-space: normal;
-    line-height: 1.35;
-  }
-
-  .sitenav-bar-inner {
-    padding-left: 34px;
-    padding-right: 34px;
-  }
-
-  .nav-group {
-    padding: .25rem .3rem;
-  }
-
-  .nav-group-label {
-    font-size: .56rem;
-    padding-right: .4rem;
-    margin-right: .2rem;
-  }
-
-  .nav-link {
-    font-size: .66rem;
-    padding: .3rem .5rem;
-  }
-
-  .doc-section {
-    padding: 1rem;
-    border-radius: 12px;
-    scroll-margin-top: 154px;
-  }
-
-  .doc-section-heading,
-  .phase-doc-head {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .section-badge {
-    white-space: normal;
-  }
-
-  .doc-grid-3,
-  .doc-grid-4,
-  .metrics-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .metric-pill span {
-    font-size: 1.75rem;
-  }
-
-  .table-responsive table,
-  .table-responsive .doc-table {
-    min-width: 680px;
-  }
-
-  .doc-table th,
-  .doc-table td,
-  th,
-  td {
-    padding: .58rem .72rem !important;
-  }
-
-  pre,
-  .code-block {
-    padding: .9rem;
-    font-size: .72rem;
-    max-height: 520px;
-  }
-
-  .phase-doc-head {
-    align-items: flex-start;
-  }
-}
-
-/* Celulares */
-@media (max-width: 520px) {
-  html {
-    font-size: 14px;
-  }
-
-  .container,
-  .main {
-    padding-left: .85rem;
-    padding-right: .85rem;
-  }
-
-  .track-hero-page {
-    padding: 2.35rem 0 1.7rem;
-  }
-
-  .footer-link,
-  .hero-back-link {
-    max-width: 100%;
-  }
-
-  .sitenav-top {
-    grid-template-columns: 1fr;
-    gap: .45rem;
-  }
-
-  .sitenav-brand {
-    width: 100%;
-    white-space: normal;
-    justify-content: space-between;
-  }
-
-  .sitenav-brand span {
-    flex-shrink: 0;
-  }
-
-  .nav-back {
-    width: 100%;
-    justify-content: center;
-    justify-self: stretch;
-    text-align: center;
-  }
-
-  .nav-group-label {
-    display: none;
-  }
-
-  .nav-group {
-    border-right: none;
-    padding: .25rem .18rem;
-  }
-
-  .nav-link {
-    font-size: .64rem;
-    padding: .3rem .46rem;
-  }
-
-  .content,
-  #trackMain {
-    padding-top: 1rem;
-  }
-
-  .doc-section {
-    margin-bottom: 1rem;
-    padding: .9rem;
-    scroll-margin-top: 184px;
-  }
-
-  .doc-section-heading h2 {
-    font-size: 1.15rem;
-  }
-
-  h3 {
-    font-size: .96rem;
-  }
-
-  p,
-  li,
-  td {
-    font-size: .84rem;
-  }
-
-  th {
-    font-size: .66rem;
-  }
-
-  .priority,
-  .section-badge,
-  .track-badge-set span,
-  .badge-cloud span {
-    font-size: .64rem;
-  }
-
-  .metric-pill {
-    padding: .85rem;
-  }
-
-  .metric-pill span {
-    font-size: 1.62rem;
-  }
-
-  .mini-card,
-  .phase-doc-card,
-  .domain-card {
-    border-radius: 10px;
-  }
-
-  .table-responsive table,
-  .table-responsive .doc-table {
-    min-width: 640px;
-  }
-
-  .footer-row {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-
-  .footer-link {
-    justify-content: center !important;
-  }
-
-  .footer-pills,
-  .track-badge-set,
-  .badge-cloud {
-    justify-content: center !important;
-  }
-
-  .back-to-top {
-    right: .85rem;
-    bottom: .85rem;
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* Celulares muito estreitos */
-@media (max-width: 380px) {
-  .container,
-  .main {
-    padding-left: .7rem;
-    padding-right: .7rem;
-  }
-
-  .track-title {
-    font-size: 1.85rem;
-  }
-
-  .sitenav-brand span {
-    display: none;
-  }
-
-  .doc-section {
-    padding: .78rem;
-  }
-
-  pre,
-  .code-block {
-    font-size: .68rem;
-  }
-
-  .table-responsive table,
-  .table-responsive .doc-table {
-    min-width: 600px;
-  }
-}
-
-/* Dispositivos de toque: melhora área clicável sem mudar estrutura */
-@media (pointer: coarse) {
-  .nav-scroll-btn,
-  .back-to-top,
-  .nav-link,
-  .footer-link,
-  .hero-back-link,
-  .nav-back,
-  .sidebar a {
-    touch-action: manipulation;
-  }
-
-  .nav-link,
-  .footer-link,
-  .hero-back-link,
-  .nav-back {
-    min-height: 34px;
-  }
-}
-
-</style>
-
-
-
-<!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta o encaixe texto + métricas. -->
-<style id="bancos-summary-executive-visual-fix">
-/*
-  Mesmo padrão aplicado na Trilha Java: o resumo executivo deixa de dividir
-  texto e métricas em duas colunas rígidas. O texto ocupa uma largura confortável
-  e os cards de métricas ficam abaixo em grid responsivo.
-*/
-#resumo .doc-hero-card{
-  grid-template-columns:1fr !important;
-  align-items:start !important;
-  gap:1rem !important;
-}
-
-#resumo .doc-hero-card > div:first-child{
-  max-width:100%;
+.ref-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1rem;
+  transition:border-color .15s,background .15s,transform .15s;
+  position:relative;
+  overflow:hidden;
   min-width:0;
+  min-height:100%;
 }
-
-#resumo .lead{
-  max-width:980px;
+.ref-card::before{
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:3px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
 }
-
-#resumo .metrics-grid{
-  width:100%;
-  max-width:100%;
-  grid-template-columns:repeat(4,minmax(130px,1fr)) !important;
-  align-items:stretch;
-  margin-top:.35rem;
+.ref-card:hover{
+  border-color:rgba(52,211,153,.30);
+  background:#151c27;
+  transform:translateY(-1px);
 }
-
-#resumo .metric-pill{
-  min-width:0;
-  min-height:112px;
-  display:flex;
-  flex-direction:column;
+.ref-card strong{
+  display:block;
+  color:#fff;
+  font-family:'Syne',sans-serif;
+  font-size:.95rem;
+  margin-bottom:.35rem;
+}
+.ref-card p{
+  color:var(--muted2);
+  font-size:.82rem;
+  margin-bottom:.75rem;
+}
+.ref-card a,
+.ref-list a{
+  display:inline-flex;
   align-items:center;
-  justify-content:center;
+  gap:.35rem;
+  max-width:100%;
+  color:#d8ecff;
+  text-decoration:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:600;
+  line-height:1.45;
+  border:1px solid rgba(56,189,248,.18);
+  background:rgba(56,189,248,.055);
+  padding:.28rem .55rem;
+  border-radius:6px;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  transition:all .14s;
 }
+.ref-card a::after,
+.ref-list a::after{
+  content:'↗';
+  font-size:.72rem;
+  color:var(--accent2);
+  line-height:1;
+  flex-shrink:0;
+}
+.ref-card a:hover,
+.ref-list a:hover{
+  color:#fff;
+  border-color:rgba(52,211,153,.42);
+  background:rgba(52,211,153,.09);
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+.ref-grid > *{min-width:0}
 
-#resumo .metric-pill span,
-#resumo .metric-pill small{
-  overflow-wrap:normal;
-  word-break:normal;
-}
+</style>
+
+<!-- Responsividade -->
+<style id="bancos-responsive-refactor">
+html,body{width:100%;max-width:100%}
+body.track-page{overflow-x:hidden}
+.container,.main,.content,#trackMain,.doc-section,.table-responsive,.doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid,.phase-doc-card,.domain-card,.mini-card,.callout,.metrics-grid,.timeline,pre,.code-block{min-width:0}
+.content,#trackMain{min-width:0}
+img,video,canvas,iframe,svg{max-width:100%;height:auto}
+.doc-section{scroll-margin-top:126px}
+.table-responsive,pre,.code-block{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-inline:contain}
+.table-responsive table,.table-responsive .doc-table{width:100%;min-width:max(720px,100%);table-layout:auto}
+.doc-table th,.doc-table td,th,td{white-space:normal!important;overflow-wrap:break-word;word-break:normal}
+pre,.code-block{white-space:pre;overflow-y:auto}
+pre code,.code-block code{white-space:inherit}
+.track-title,.track-lead,.doc-section-heading h2,.sitenav-brand,p,li,.mini-card span,.mini-card p,.callout p,.phase-doc-card p,.domain-card p,.timeline-item span{overflow-wrap:break-word;word-break:normal}
+.doc-grid-2>*,.doc-grid-3>*,.doc-grid-4>*,.phase-doc-grid>*,.metrics-grid>*{min-width:0}
+.sitenav,.sitenav *{min-width:0}
+.sitenav-top{min-width:0}
+.sitenav-brand,.nav-back,.nav-ver{flex-shrink:0}
+.sitenav-top-right{min-width:180px}
+.search-box,.track-search{max-width:100%}
 
 @media(max-width:1180px){
-  #resumo .metrics-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  }
+  .container,.main{padding-left:1.25rem;padding-right:1.25rem}
+  .main{grid-template-columns:200px minmax(0,1fr)}
+  .content,#trackMain{padding-left:1.35rem}
+  .doc-grid-4,.metrics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .doc-grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ref-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+@media(max-width:980px){
+  .main{grid-template-columns:1fr}
+  .sidebar{display:none}
+  .content,#trackMain{padding:1.5rem 0 3rem}
+  .doc-section{scroll-margin-top:148px}
+  .doc-hero-card,.doc-grid-2,.phase-doc-grid{grid-template-columns:1fr}
+  .sitenav-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.55rem .75rem}
+  .sitenav-brand{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .nav-ver{display:none}
+  .nav-back{justify-self:end}
+  .sitenav-top-right{grid-column:1 / -1;width:100%;min-width:0;margin-left:0}
+  .search-box,.track-search{width:100%!important;min-height:38px}
+  .ref-grid{grid-template-columns:1fr}
 }
 
 @media(max-width:760px){
-  #resumo .metrics-grid{
-    grid-template-columns:1fr !important;
-  }
-
-  #resumo .metric-pill{
-    min-height:auto;
-  }
+  html{font-size:14.5px}
+  .container,.main{padding-left:1rem;padding-right:1rem}
+  .track-hero-page{padding:2.8rem 0 2rem}
+  .track-title{font-size:clamp(2rem,9vw,3.1rem);letter-spacing:-.035em}
+  .track-lead{max-width:100%}
+  .track-badge-set,.badge-cloud{gap:.42rem}
+  .track-badge-set span,.badge-cloud span{max-width:100%;white-space:normal;line-height:1.35}
+  .sitenav-bar-inner{padding-left:34px;padding-right:34px}
+  .nav-group{padding:.25rem .3rem}
+  .nav-group-label{font-size:.56rem;padding-right:.4rem;margin-right:.2rem}
+  .nav-link{font-size:.66rem;padding:.3rem .5rem}
+  .doc-section{padding:1rem;border-radius:12px;scroll-margin-top:154px}
+  .doc-section-heading,.phase-doc-head{flex-direction:column;align-items:flex-start}
+  .section-badge{white-space:normal}
+  .doc-grid-3,.doc-grid-4,.metrics-grid{grid-template-columns:1fr}
+  .metric-pill span{font-size:1.75rem}
+  .table-responsive table,.table-responsive .doc-table{min-width:680px}
+  .doc-table th,.doc-table td,th,td{padding:.58rem .72rem!important}
+  pre,.code-block{padding:.9rem;font-size:.72rem;max-height:520px}
+  .phase-doc-head{align-items:flex-start}
 }
+
+@media(max-width:520px){
+  html{font-size:14px}
+  .container,.main{padding-left:.85rem;padding-right:.85rem}
+  .track-hero-page{padding:2.35rem 0 1.7rem}
+  .footer-link,.hero-back-link{max-width:100%}
+  .sitenav-top{grid-template-columns:1fr;gap:.45rem}
+  .sitenav-brand{width:100%;white-space:normal;justify-content:space-between}
+  .sitenav-brand span{flex-shrink:0}
+  .nav-back{width:100%;justify-content:center;justify-self:stretch;text-align:center}
+  .nav-group-label{display:none}
+  .nav-group{border-right:none;padding:.25rem .18rem}
+  .nav-link{font-size:.64rem;padding:.3rem .46rem}
+  .content,#trackMain{padding-top:1rem}
+  .doc-section{margin-bottom:1rem;padding:.9rem;scroll-margin-top:184px}
+  .doc-section-heading h2{font-size:1.15rem}
+  h3{font-size:.96rem}
+  p,li,td{font-size:.84rem}
+  th{font-size:.66rem}
+  .priority,.section-badge,.track-badge-set span,.badge-cloud span{font-size:.64rem}
+  .metric-pill{padding:.85rem}
+  .metric-pill span{font-size:1.62rem}
+  .mini-card,.phase-doc-card,.domain-card{border-radius:10px}
+  .table-responsive table,.table-responsive .doc-table{min-width:640px}
+  .footer-row{flex-direction:column!important;align-items:stretch!important}
+  .footer-link{justify-content:center!important}
+  .footer-pills,.track-badge-set,.badge-cloud{justify-content:center!important}
+  .back-to-top{right:.85rem;bottom:.85rem;width:40px;height:40px}
+  .ref-card{border-radius:10px}
+  .ref-card a,.ref-list a{display:flex;width:100%;justify-content:space-between;align-items:center}
+}
+
+@media(max-width:380px){
+  .container,.main{padding-left:.7rem;padding-right:.7rem}
+  .track-title{font-size:1.85rem}
+  .sitenav-brand span{display:none}
+  .doc-section{padding:.78rem}
+  pre,.code-block{font-size:.68rem}
+  .table-responsive table,.table-responsive .doc-table{min-width:600px}
+}
+
+@media(pointer:coarse){
+  .nav-scroll-btn,.back-to-top,.nav-link,.footer-link,.hero-back-link,.nav-back,.sidebar a{touch-action:manipulation}
+  .nav-link,.footer-link,.hero-back-link,.nav-back{min-height:34px}
+}
+</style>
+
+<!-- Resumo executivo fix -->
+<style id="bancos-summary-executive-visual-fix">
+#resumo .doc-hero-card{grid-template-columns:1fr!important;align-items:start!important;gap:1rem!important}
+#resumo .doc-hero-card>div:first-child{max-width:100%;min-width:0}
+#resumo .lead{max-width:980px}
+#resumo .metrics-grid{width:100%;max-width:100%;grid-template-columns:repeat(4,minmax(130px,1fr))!important;align-items:stretch;margin-top:.35rem}
+#resumo .metric-pill{min-width:0;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#resumo .metric-pill span,#resumo .metric-pill small{overflow-wrap:normal;word-break:normal}
+@media(max-width:1180px){#resumo .metrics-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:760px){#resumo .metrics-grid{grid-template-columns:1fr!important}#resumo .metric-pill{min-height:auto}}
 </style>
 
 </head>
@@ -1257,6 +846,7 @@ li,
   </aside>
   <div class="content" id="trackMain">
 
+<!-- ═══════════════════════════════════════ SEÇÃO 01 ═══ -->
 <section id="resumo" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1285,6 +875,7 @@ li,
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 02 ═══ -->
 <section id="perfil" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1315,6 +906,7 @@ li,
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 03 ═══ -->
 <section id="mapa" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1343,6 +935,7 @@ li,
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 04 ═══ -->
 <section id="sql" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1360,7 +953,7 @@ li,
   <div class="doc-grid-2">
     <div>
       <h4>Consultas</h4>
-      <ul class="doc-list">
+      <ul>
         <li><code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>.</li>
         <li><code>WHERE</code>, <code>ORDER BY</code>, <code>GROUP BY</code>, <code>HAVING</code>, <code>LIMIT/OFFSET</code>.</li>
         <li><code>INNER JOIN</code>, <code>LEFT JOIN</code>, <code>RIGHT JOIN</code>, <code>FULL JOIN</code>, self join e cross join.</li>
@@ -1372,7 +965,7 @@ li,
     </div>
     <div>
       <h4>Modelagem</h4>
-      <ul class="doc-list">
+      <ul>
         <li>Chaves primárias, estrangeiras, únicas e constraints de domínio.</li>
         <li>Relacionamentos 1:1, 1:N, N:N e tabela associativa.</li>
         <li>Normalização: 1FN, 2FN, 3FN e BCNF conceitual.</li>
@@ -1400,11 +993,12 @@ li,
 )
 SELECT *
 FROM post_stats
-WHERE published_at < :cursorPublishedAt
+WHERE published_at &lt; :cursorPublishedAt
 ORDER BY published_at DESC, id DESC
 LIMIT :pageSize;</code></pre>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 05 ═══ -->
 <section id="postgresql" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1463,7 +1057,7 @@ WHERE status = 'APPROVED';
 CREATE INDEX idx_page_views_post_viewed_at
 ON page_views(post_id, viewed_at DESC);</code></pre>
   <h3>EXPLAIN ANALYZE — rotina mínima</h3>
-  <ul class="doc-list">
+  <ul>
     <li>Compare linhas estimadas vs linhas reais.</li>
     <li>Identifique <code>Seq Scan</code> inesperado em tabelas grandes.</li>
     <li>Observe <code>Nested Loop</code>, <code>Hash Join</code>, <code>Merge Join</code> e custo de sort.</li>
@@ -1474,11 +1068,12 @@ ON page_views(post_id, viewed_at DESC);</code></pre>
 SELECT p.id, p.title, p.slug
 FROM posts p
 WHERE p.status = 'PUBLISHED'
-  AND p.published_at <= now()
+  AND p.published_at &lt;= now()
 ORDER BY p.published_at DESC
 LIMIT 20;</code></pre>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 06 ═══ -->
 <section id="jpa" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1490,7 +1085,7 @@ LIMIT 20;</code></pre>
   <div class="doc-grid-2">
     <div>
       <h3>Domínio obrigatório</h3>
-      <ul class="doc-list">
+      <ul>
         <li>Ciclo de vida da entidade: transient, managed, detached, removed.</li>
         <li>Persistence context, dirty checking, flush e clear.</li>
         <li>Lazy vs eager loading e consequências em API REST.</li>
@@ -1503,7 +1098,7 @@ LIMIT 20;</code></pre>
     </div>
     <div>
       <h3>Spring Transaction</h3>
-      <ul class="doc-list">
+      <ul>
         <li><code>@Transactional</code> no service, não como solução genérica em qualquer camada.</li>
         <li>Propagation: REQUIRED, REQUIRES_NEW, SUPPORTS, MANDATORY, NOT_SUPPORTED, NEVER, NESTED.</li>
         <li>Isolation: READ_COMMITTED, REPEATABLE_READ, SERIALIZABLE.</li>
@@ -1554,6 +1149,7 @@ public class ProductStock {
         order_updates: true</code></pre>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 07 ═══ -->
 <section id="nosql" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1564,7 +1160,7 @@ public class ProductStock {
   </div>
   <div class="callout accent-purple">
     <h3>Princípio central</h3>
-    <p>NoSQL não significa “sem regra”. Significa que a modelagem deixa de ser puramente relacional e passa a ser orientada por padrão de acesso, volume, latência, consistência, distribuição e custo operacional.</p>
+    <p>NoSQL não significa "sem regra". Significa que a modelagem deixa de ser puramente relacional e passa a ser orientada por padrão de acesso, volume, latência, consistência, distribuição e custo operacional.</p>
   </div>
   <div class="table-responsive">
     <table class="table table-dark table-hover align-middle doc-table">
@@ -1579,7 +1175,7 @@ public class ProductStock {
     </table>
   </div>
   <h3>Trade-offs que você precisa explicar</h3>
-  <ul class="doc-list">
+  <ul>
     <li>Consistência forte vs consistência eventual.</li>
     <li>Duplicação controlada vs normalização.</li>
     <li>Baixa latência vs flexibilidade de consulta.</li>
@@ -1589,6 +1185,7 @@ public class ProductStock {
   </ul>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 08 ═══ -->
 <section id="mongodb" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1600,7 +1197,7 @@ public class ProductStock {
   <div class="doc-grid-2">
     <div>
       <h3>Fundamentos</h3>
-      <ul class="doc-list">
+      <ul>
         <li>Database, collection, document, BSON e <code>_id</code>.</li>
         <li>CRUD, filtros, projections, sorting, paginação, update operators e upsert.</li>
         <li>Embedded documents, arrays, validação de schema e versionamento de schema.</li>
@@ -1609,7 +1206,7 @@ public class ProductStock {
     </div>
     <div>
       <h3>Modelagem</h3>
-      <ul class="doc-list">
+      <ul>
         <li>Embed quando os dados são lidos juntos e têm ciclo de vida parecido.</li>
         <li>Reference quando dados crescem muito, são compartilhados ou têm ciclo próprio.</li>
         <li>Evitar arrays infinitos e documentos com crescimento sem limite.</li>
@@ -1646,7 +1243,7 @@ public class ProductStock {
   { $limit: 20 }
 ]);</code></pre>
   <h3>Operação MongoDB</h3>
-  <ul class="doc-list">
+  <ul>
     <li>Replica set: primary, secondary, election e failover.</li>
     <li>Read preference e write concern.</li>
     <li>Sharding: shard key, chunks, balancer e hot shard.</li>
@@ -1655,6 +1252,7 @@ public class ProductStock {
   </ul>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 09 ═══ -->
 <section id="redis" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1682,7 +1280,7 @@ public class ProductStock {
     </table>
   </div>
   <h3>Problemas clássicos de cache</h3>
-  <ul class="doc-list">
+  <ul>
     <li><strong>Cache stampede:</strong> muitos requests recalculam o mesmo valor após expiração.</li>
     <li><strong>Cache penetration:</strong> consultas repetidas a chaves inexistentes atingem o banco.</li>
     <li><strong>Cache avalanche:</strong> muitas chaves expiram ao mesmo tempo.</li>
@@ -1690,7 +1288,7 @@ public class ProductStock {
     <li><strong>Invalidação incorreta:</strong> dado antigo permanece após update.</li>
   </ul>
   <h3>Redis Streams</h3>
-  <ul class="doc-list">
+  <ul>
     <li>Append-only log para eventos leves.</li>
     <li>Consumer groups, pending entries, ack, retry e dead-letter stream.</li>
     <li>Não substitui Kafka em cenários de streaming robusto, mas resolve filas internas simples.</li>
@@ -1705,6 +1303,7 @@ XGROUP CREATE blog:events email-workers $ MKSTREAM
 XREADGROUP GROUP email-workers worker-1 COUNT 10 STREAMS blog:events &gt;</code></pre>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 10 ═══ -->
 <section id="dynamodb" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1716,7 +1315,7 @@ XREADGROUP GROUP email-workers worker-1 COUNT 10 STREAMS blog:events &gt;</code>
   <div class="doc-grid-2">
     <div>
       <h3>Conteúdos essenciais</h3>
-      <ul class="doc-list">
+      <ul>
         <li>Table, item, attribute, partition key e sort key.</li>
         <li>GSI, LSI, sparse indexes e overload de índice.</li>
         <li>Single-table design e access patterns.</li>
@@ -1728,7 +1327,7 @@ XREADGROUP GROUP email-workers worker-1 COUNT 10 STREAMS blog:events &gt;</code>
     </div>
     <div>
       <h3>Quando usar</h3>
-      <ul class="doc-list">
+      <ul>
         <li>Baixa latência por chave em escala alta.</li>
         <li>Aplicações serverless com Lambda/API Gateway.</li>
         <li>Eventos, sessão, preferências, histórico simples, idempotency keys.</li>
@@ -1751,6 +1350,7 @@ XREADGROUP GROUP email-workers worker-1 COUNT 10 STREAMS blog:events &gt;</code>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 11 ═══ -->
 <section id="arquitetura" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1795,6 +1395,7 @@ ON outbox_events(status, created_at)
 WHERE status = 'PENDING';</code></pre>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 12 ═══ -->
 <section id="operacao" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1825,7 +1426,7 @@ WHERE status = 'PENDING';</code></pre>
     </table>
   </div>
   <h3>Checklist de segurança</h3>
-  <ul class="doc-list">
+  <ul>
     <li>Usuário de aplicação com menor privilégio.</li>
     <li>Credenciais fora do código e com rotação planejada.</li>
     <li>Prepared statements e parametrização contra SQL injection.</li>
@@ -1837,6 +1438,7 @@ WHERE status = 'PENDING';</code></pre>
   </ul>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 13 ═══ -->
 <section id="roadmap" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1849,7 +1451,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 1 — SQL e modelagem relacional</h3><span>Sem 1–8</span></div>
       <p><strong>Objetivo:</strong> construir base relacional sólida para APIs Java/Spring.</p>
-      <ul class="doc-list">
+      <ul>
         <li>SQL básico/intermediário, joins, constraints, normalização e modelagem ER.</li>
         <li>PostgreSQL básico: tipos, tabelas, chaves, índices simples e transações.</li>
         <li>Flyway migrations e convenções de nomenclatura.</li>
@@ -1859,7 +1461,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 2 — JPA/Hibernate + transações</h3><span>Sem 9–16</span></div>
       <p><strong>Objetivo:</strong> conectar banco real com Spring sem cair em antipadrões.</p>
-      <ul class="doc-list">
+      <ul>
         <li>Entidades, relacionamentos, lazy/eager, dirty checking e flush.</li>
         <li><code>@Transactional</code>, propagation, isolation, locking e HikariCP.</li>
         <li>N+1, EntityGraph, projections, batch fetching e paginação.</li>
@@ -1869,7 +1471,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 3 — Performance SQL</h3><span>Sem 17–24</span></div>
       <p><strong>Objetivo:</strong> diagnosticar e corrigir gargalos reais de banco.</p>
-      <ul class="doc-list">
+      <ul>
         <li>Índices compostos, parciais, funcionais, GIN/BRIN e seletividade.</li>
         <li><code>EXPLAIN ANALYZE</code>, scans, joins, sort, buffers e estatísticas.</li>
         <li>CTEs, window functions, materialized views e query rewrite.</li>
@@ -1879,7 +1481,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 4 — MongoDB</h3><span>Sem 25–32</span></div>
       <p><strong>Objetivo:</strong> modelar documentos corretamente para padrões de leitura/escrita.</p>
-      <ul class="doc-list">
+      <ul>
         <li>Documentos, BSON, embed vs reference e schema validation.</li>
         <li>Índices, aggregation, transactions, replica set e sharding conceitual.</li>
         <li>Spring Data MongoDB e testes com Testcontainers.</li>
@@ -1889,7 +1491,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 5 — Redis</h3><span>Sem 33–40</span></div>
       <p><strong>Objetivo:</strong> usar Redis com estratégia, não como cache aleatório.</p>
-      <ul class="doc-list">
+      <ul>
         <li>Estruturas de dados, TTL, eviction, persistence e monitoramento.</li>
         <li>Cache-aside, invalidation, stampede, locks e rate limiting.</li>
         <li>Redis Streams, consumer groups e DLQ simples.</li>
@@ -1899,7 +1501,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 6 — Dados em microsserviços</h3><span>Sem 41–48</span></div>
       <p><strong>Objetivo:</strong> desenhar consistência em sistemas distribuídos.</p>
-      <ul class="doc-list">
+      <ul>
         <li>Database per service, Outbox, Saga, CQRS, Event Sourcing e CDC.</li>
         <li>Idempotência, duplicidade de mensagens, DLQ e compensação.</li>
         <li>DynamoDB: access patterns, PK/SK, GSI, TTL, Streams e hot partitions.</li>
@@ -1909,7 +1511,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 7 — Operação e segurança</h3><span>Sem 49–56</span></div>
       <p><strong>Objetivo:</strong> operar banco com responsabilidade de produção.</p>
-      <ul class="doc-list">
+      <ul>
         <li>Backup/restore, PITR, RPO/RTO, DR drill e runbooks.</li>
         <li>Observabilidade: slow queries, locks, pool, cache hit, replication lag.</li>
         <li>Segurança: least privilege, TLS, secrets, audit log, LGPD e masking.</li>
@@ -1919,7 +1521,7 @@ WHERE status = 'PENDING';</code></pre>
     <article class="phase-doc-card">
       <div class="phase-doc-head"><h3>Fase 8 — Projeto final de dados</h3><span>Sem 57–64</span></div>
       <p><strong>Objetivo:</strong> provar domínio com portfólio técnico completo.</p>
-      <ul class="doc-list">
+      <ul>
         <li>PostgreSQL transacional + MongoDB documentos + Redis cache/rate limit + Kafka Outbox.</li>
         <li>Dashboards, tuning, migrations seguras, backup/restore e incidentes simulados.</li>
         <li>ADRs: PostgreSQL vs MongoDB, Redis como cache, consistência eventual, Outbox.</li>
@@ -1929,6 +1531,7 @@ WHERE status = 'PENDING';</code></pre>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 14 ═══ -->
 <section id="checklist" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -1940,7 +1543,7 @@ WHERE status = 'PENDING';</code></pre>
   <div class="doc-grid-2">
     <div class="callout">
       <h3>Checklist semanal</h3>
-      <ul class="doc-list">
+      <ul>
         <li>Escrever pelo menos 5 queries SQL à mão.</li>
         <li>Executar 1 lab com PostgreSQL, MongoDB, Redis ou DynamoDB.</li>
         <li>Gerar 1 migration Flyway ou Liquibase quando houver mudança de schema.</li>
@@ -1951,7 +1554,7 @@ WHERE status = 'PENDING';</code></pre>
     </div>
     <div class="callout accent-blue">
       <h3>Checklist de PR envolvendo banco</h3>
-      <ul class="doc-list">
+      <ul>
         <li>Existe migration versionada?</li>
         <li>A migration é compatível com deploy sem downtime?</li>
         <li>Índices foram pensados conforme query real?</li>
@@ -1982,6 +1585,7 @@ WHERE status = 'PENDING';</code></pre>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 15 ═══ -->
 <section id="projetos" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -2018,6 +1622,7 @@ WHERE status = 'PENDING';</code></pre>
   </div>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 16 ═══ -->
 <section id="consulta" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
@@ -2067,35 +1672,124 @@ redis-cli KEYS "blog:*"   # cuidado em produção; prefira SCAN
 redis-cli SCAN 0 MATCH "blog:*" COUNT 100</code></pre>
 </section>
 
+<!-- ═══════════════════════════════════════ SEÇÃO 17 — REFERÊNCIAS (NOVO PADRÃO) ═══ -->
 <section id="referencias" class="doc-section searchable-section" data-search-section>
   <div class="doc-section-heading">
     <div>
       <h2>Referências oficiais e materiais base</h2>
-      <p class="section-subtitle">Use para validar comportamento, sintaxe e boas práticas.</p>
+      <p class="section-subtitle">Fontes primárias para validar comportamento, sintaxe e boas práticas de cada tecnologia.</p>
     </div>
     <span class="section-badge">Fontes</span>
   </div>
-  <ul class="doc-list ref-list">
-    <li><a href="https://www.postgresql.org/docs/current/" target="_blank" rel="noopener">PostgreSQL Documentation</a></li>
-    <li><a href="https://www.postgresql.org/docs/current/indexes.html" target="_blank" rel="noopener">PostgreSQL — Indexes</a></li>
-    <li><a href="https://www.postgresql.org/docs/current/using-explain.html" target="_blank" rel="noopener">PostgreSQL — Using EXPLAIN</a></li>
-    <li><a href="https://www.postgresql.org/docs/current/transaction-iso.html" target="_blank" rel="noopener">PostgreSQL — Transaction Isolation</a></li>
-    <li><a href="https://hibernate.org/orm/documentation/" target="_blank" rel="noopener">Hibernate ORM Documentation</a></li>
-    <li><a href="https://docs.spring.io/spring-data/jpa/reference/" target="_blank" rel="noopener">Spring Data JPA Reference</a></li>
-    <li><a href="https://docs.spring.io/spring-data/mongodb/reference/" target="_blank" rel="noopener">Spring Data MongoDB Reference</a></li>
-    <li><a href="https://www.mongodb.com/docs/manual/" target="_blank" rel="noopener">MongoDB Manual</a></li>
-    <li><a href="https://www.mongodb.com/docs/manual/indexes/" target="_blank" rel="noopener">MongoDB — Indexes</a></li>
-    <li><a href="https://redis.io/docs/latest/" target="_blank" rel="noopener">Redis Documentation</a></li>
-    <li><a href="https://redis.io/docs/latest/develop/data-types/streams/" target="_blank" rel="noopener">Redis Streams</a></li>
-    <li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="noopener">Amazon DynamoDB Developer Guide</a></li>
-    <li><a href="https://flywaydb.org/documentation/" target="_blank" rel="noopener">Flyway Documentation</a></li>
-    <li><a href="https://www.liquibase.com/resources/guides" target="_blank" rel="noopener">Liquibase Guides</a></li>
-    <li><a href="https://testcontainers.com/guides/" target="_blank" rel="noopener">Testcontainers Guides</a></li>
-    <li>Referência interna: index atualizado com 9 trilhas e cronograma de Banco de Dados SQL/NoSQL.</li>
-  </ul>
+
+  <div class="ref-grid">
+
+    <!-- PostgreSQL -->
+    <article class="ref-card">
+      <strong>PostgreSQL Documentation</strong>
+      <p>Documentação oficial completa do PostgreSQL: tipos, índices, transações, particionamento, JSONB, FTS e operação.</p>
+      <a href="https://www.postgresql.org/docs/current/" target="_blank" rel="noopener">postgresql.org/docs/current</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>PostgreSQL — Indexes</strong>
+      <p>Referência completa sobre B-tree, Hash, GIN, GiST, BRIN, índices parciais, funcionais e compostos.</p>
+      <a href="https://www.postgresql.org/docs/current/indexes.html" target="_blank" rel="noopener">postgresql.org — indexes</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>PostgreSQL — Using EXPLAIN</strong>
+      <p>Guia oficial para leitura e interpretação de planos de execução com EXPLAIN e EXPLAIN ANALYZE.</p>
+      <a href="https://www.postgresql.org/docs/current/using-explain.html" target="_blank" rel="noopener">postgresql.org — using-explain</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>PostgreSQL — Transaction Isolation</strong>
+      <p>Documentação sobre níveis de isolamento, MVCC, locks, deadlocks e comportamento transacional.</p>
+      <a href="https://www.postgresql.org/docs/current/transaction-iso.html" target="_blank" rel="noopener">postgresql.org — transaction-iso</a>
+    </article>
+
+    <!-- Hibernate / Spring -->
+    <article class="ref-card">
+      <strong>Hibernate ORM Documentation</strong>
+      <p>Referência oficial do Hibernate: ciclo de vida de entidades, mapeamentos, caching, locking e performance.</p>
+      <a href="https://hibernate.org/orm/documentation/" target="_blank" rel="noopener">hibernate.org/orm/documentation</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Spring Data JPA Reference</strong>
+      <p>Documentação Spring Data JPA: repositórios, queries derivadas, projections, EntityGraph e paginação.</p>
+      <a href="https://docs.spring.io/spring-data/jpa/reference/" target="_blank" rel="noopener">docs.spring.io — spring-data/jpa</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Spring Data MongoDB Reference</strong>
+      <p>Referência Spring Data MongoDB: repositórios, MongoTemplate, aggregation, transactions e índices.</p>
+      <a href="https://docs.spring.io/spring-data/mongodb/reference/" target="_blank" rel="noopener">docs.spring.io — spring-data/mongodb</a>
+    </article>
+
+    <!-- MongoDB -->
+    <article class="ref-card">
+      <strong>MongoDB Manual</strong>
+      <p>Documentação oficial MongoDB: modelagem de documentos, CRUD, aggregation, sharding e replica sets.</p>
+      <a href="https://www.mongodb.com/docs/manual/" target="_blank" rel="noopener">mongodb.com/docs/manual</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>MongoDB — Indexes</strong>
+      <p>Guia completo de índices no MongoDB: single field, compound, multikey, text, TTL, partial e unique.</p>
+      <a href="https://www.mongodb.com/docs/manual/indexes/" target="_blank" rel="noopener">mongodb.com/docs — indexes</a>
+    </article>
+
+    <!-- Redis -->
+    <article class="ref-card">
+      <strong>Redis Documentation</strong>
+      <p>Documentação oficial Redis: estruturas de dados, comandos, persistence, replication, Sentinel e Cluster.</p>
+      <a href="https://redis.io/docs/latest/" target="_blank" rel="noopener">redis.io/docs/latest</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Redis Streams</strong>
+      <p>Referência de Redis Streams: append-only log, consumer groups, ACK, pending entries e retry.</p>
+      <a href="https://redis.io/docs/latest/develop/data-types/streams/" target="_blank" rel="noopener">redis.io/docs — streams</a>
+    </article>
+
+    <!-- DynamoDB -->
+    <article class="ref-card">
+      <strong>Amazon DynamoDB Developer Guide</strong>
+      <p>Guia oficial AWS DynamoDB: modelagem single-table, PK/SK, GSI/LSI, TTL, Streams e conditional writes.</p>
+      <a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Introduction.html" target="_blank" rel="noopener">docs.aws.amazon.com — dynamodb</a>
+    </article>
+
+    <!-- Migrations -->
+    <article class="ref-card">
+      <strong>Flyway Documentation</strong>
+      <p>Referência oficial Flyway: versionamento de schema, migrations SQL/Java, callbacks e configuração Spring Boot.</p>
+      <a href="https://flywaydb.org/documentation/" target="_blank" rel="noopener">flywaydb.org/documentation</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>Liquibase Guides</strong>
+      <p>Guias oficiais Liquibase: changelogs, rollback, diff, preconditions e integração com Spring Boot.</p>
+      <a href="https://www.liquibase.com/resources/guides" target="_blank" rel="noopener">liquibase.com/resources/guides</a>
+    </article>
+
+    <!-- Testcontainers -->
+    <article class="ref-card">
+      <strong>Testcontainers Guides</strong>
+      <p>Guias oficiais Testcontainers: testes de integração com PostgreSQL, MongoDB, Redis e DynamoDB em Java.</p>
+      <a href="https://testcontainers.com/guides/" target="_blank" rel="noopener">testcontainers.com/guides</a>
+    </article>
+
+  </div>
+
+  <div class="callout accent-orange" style="margin-top:1.2rem">
+    <h3>Validação antes de usar em produção</h3>
+    <p>Versões de frameworks, drivers, configurações de segurança, limites de recursos e comportamentos de replicação podem variar entre versões. Sempre valide nas documentações oficiais antes de aplicar qualquer configuração em ambiente produtivo. Esta trilha reflete práticas consolidadas até a data de publicação.</p>
+  </div>
 </section>
 
-</div><!-- /content -->
+  </div><!-- /content -->
 </div><!-- /main -->
 
 <footer class="page-footer">
@@ -2115,7 +1809,6 @@ redis-cli SCAN 0 MATCH "blog:*" COUNT 100</code></pre>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-
 (function(){
   const backToTop = document.getElementById('backToTop');
   const searchInput = document.getElementById('searchInput');
@@ -2191,7 +1884,6 @@ redis-cli SCAN 0 MATCH "blog:*" COUNT 100</code></pre>
 
   sections.forEach(section=>observer.observe(section));
 })();
-
 </script>
 </body>
 </html>

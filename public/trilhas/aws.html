@@ -732,6 +732,127 @@ li,
 }
 </style>
 
+
+<style id="reference-card-style">
+/* ─────────────────────────────────────────────────────────────
+   REFERÊNCIAS EM CARDS — AWS Track
+   Padrão visual compartilhado com a trilha Segurança Full Stack.
+   ───────────────────────────────────────────────────────────── */
+.ref-grid {
+  display:grid;
+  gap:1rem;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.ref-card {
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1rem;
+  transition:border-color .15s,background .15s,transform .15s;
+  position:relative;
+  overflow:hidden;
+  min-height:100%;
+  min-width:0;
+}
+
+.ref-card::before {
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:3px;
+  background:linear-gradient(180deg,var(--accent),var(--accent2));
+}
+
+.ref-card:hover {
+  border-color:rgba(52,211,153,.30);
+  background:#151c27;
+  transform:translateY(-1px);
+}
+
+.ref-card strong {
+  display:block;
+  color:#fff;
+  font-family:'Syne',sans-serif;
+  font-size:.95rem;
+  margin-bottom:.35rem;
+}
+
+.ref-card p {
+  color:var(--muted2);
+  font-size:.82rem;
+  margin-bottom:.75rem;
+}
+
+.ref-card a,
+.ref-list a {
+  display:inline-flex;
+  align-items:center;
+  gap:.35rem;
+  max-width:100%;
+  color:#d8ecff;
+  text-decoration:none;
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+  font-weight:600;
+  line-height:1.45;
+  border:1px solid rgba(56,189,248,.18);
+  background:rgba(56,189,248,.055);
+  padding:.28rem .55rem;
+  border-radius:6px;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  transition:all .14s;
+}
+
+.ref-card a::after,
+.ref-list a::after {
+  content:'↗';
+  font-size:.72rem;
+  color:var(--accent2);
+  line-height:1;
+}
+
+.ref-card a:hover,
+.ref-list a:hover {
+  color:#fff;
+  border-color:rgba(52,211,153,.42);
+  background:rgba(52,211,153,.09);
+  text-decoration:none;
+  transform:translateY(-1px);
+}
+
+.ref-grid > * {
+  min-width:0;
+}
+
+@media(max-width:1180px) {
+  .ref-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:980px) {
+  .ref-grid {
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:520px) {
+  .ref-card {
+    border-radius:10px;
+  }
+
+  .ref-card a,
+  .ref-list a {
+    display:flex;
+    width:100%;
+    justify-content:space-between;
+    align-items:center;
+  }
+}
+</style>
+
 </head>
 <body class="track-page" data-track="aws">
 
@@ -1217,17 +1338,92 @@ li,
 </section>
 
 <section id="referencias" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading"><div><h2>Referências e fontes oficiais</h2><p class="section-subtitle">Use estas páginas para validar mudanças de versão, domínios e materiais oficiais.</p></div><span class="section-badge">Fontes</span></div>
-  <ul class="doc-list ref-list">
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html" target="_blank" rel="noopener">AWS Exam Guide — CLF-C02</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html" target="_blank" rel="noopener">AWS Exam Guide — SAA-C03</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html" target="_blank" rel="noopener">AWS Exam Guide — DVA-C02</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.html" target="_blank" rel="noopener">AWS Exam Guide — SOA-C03 / CloudOps Engineer - Associate</a></li>
-    <li><a href="https://docs.aws.amazon.com/aws-certification/latest/devops-engineer-professional-02/devops-engineer-professional-02.html" target="_blank" rel="noopener">AWS Exam Guide — DOP-C02</a></li>
-    <li><a href="https://aws.amazon.com/certification/certification-prep/" target="_blank" rel="noopener">AWS Certification Exam Preparation</a></li>
-    <li><a href="https://aws.amazon.com/certification/policies/after-testing/" target="_blank" rel="noopener">AWS Certification — After Testing / Scoring and Retake Policy</a></li>
-    <li>Referência interna: cronograma integrado de 8 fases / 64 semanas do Plano Integrado de Estudos.</li>
-  </ul>
+  <div class="doc-section-heading">
+    <div>
+      <h2>Referências e fontes oficiais</h2>
+      <p class="section-subtitle">Links oficiais organizados em cards para validar versões, domínios, preparação, políticas e serviços AWS usados na trilha.</p>
+    </div>
+    <span class="section-badge">Fontes</span>
+  </div>
+
+  <div class="ref-grid">
+    <article class="ref-card">
+      <strong>AWS Exam Guide — CLF-C02</strong>
+      <p>Guia oficial do exame AWS Certified Cloud Practitioner, com domínios, escopo, formato e tópicos cobrados.</p>
+      <a href="https://docs.aws.amazon.com/aws-certification/latest/cloud-practitioner-02/cloud-practitioner-02.html" target="_blank" rel="noopener">cloud-practitioner-02</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Exam Guide — SAA-C03</strong>
+      <p>Guia oficial do exame Solutions Architect - Associate, base para arquitetura segura, resiliente, performática e otimizada por custo.</p>
+      <a href="https://docs.aws.amazon.com/aws-certification/latest/solutions-architect-associate-03/solutions-architect-associate-03.html" target="_blank" rel="noopener">solutions-architect-associate-03</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Exam Guide — DVA-C02</strong>
+      <p>Guia oficial do exame Developer - Associate, com foco em desenvolvimento, segurança, deploy e troubleshooting em serviços AWS.</p>
+      <a href="https://docs.aws.amazon.com/aws-certification/latest/developer-associate-02/developer-associate-02.html" target="_blank" rel="noopener">developer-associate-02</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Exam Guide — SOA-C03</strong>
+      <p>Guia oficial do exame CloudOps Engineer - Associate, voltado a operação, monitoramento, automação, segurança e continuidade.</p>
+      <a href="https://docs.aws.amazon.com/aws-certification/latest/sysops-administrator-associate-03/sysops-administrator-associate-03.html" target="_blank" rel="noopener">sysops-administrator-associate-03</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Exam Guide — DOP-C02</strong>
+      <p>Guia oficial do exame DevOps Engineer - Professional, usado como referência para CI/CD, IaC, automação, resiliência e compliance.</p>
+      <a href="https://docs.aws.amazon.com/aws-certification/latest/devops-engineer-professional-02/devops-engineer-professional-02.html" target="_blank" rel="noopener">devops-engineer-professional-02</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Certification Exam Preparation</strong>
+      <p>Página oficial de preparação para certificações AWS, com recursos de estudo, materiais de apoio e caminhos de preparação.</p>
+      <a href="https://aws.amazon.com/certification/certification-prep/" target="_blank" rel="noopener">certification-prep</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Certification Policies</strong>
+      <p>Políticas oficiais de prova, pontuação, resultado, retake e orientações pós-exame para certificações AWS.</p>
+      <a href="https://aws.amazon.com/certification/policies/after-testing/" target="_blank" rel="noopener">after-testing</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Skill Builder</strong>
+      <p>Plataforma oficial de treinamentos digitais, planos de aprendizado, laboratórios e preparação guiada para certificações AWS.</p>
+      <a href="https://skillbuilder.aws/" target="_blank" rel="noopener">skillbuilder.aws</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Well-Architected Framework</strong>
+      <p>Framework oficial para revisar workloads com base em excelência operacional, segurança, confiabilidade, performance, custo e sustentabilidade.</p>
+      <a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html" target="_blank" rel="noopener">wellarchitected/framework</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS IAM Documentation</strong>
+      <p>Documentação oficial de IAM para estudar usuários, grupos, roles, policies, permission boundaries e menor privilégio.</p>
+      <a href="https://docs.aws.amazon.com/iam/" target="_blank" rel="noopener">docs.aws.amazon.com/iam</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Architecture Center</strong>
+      <p>Centro oficial de arquitetura com padrões, referências, whitepapers e exemplos para workloads modernos na AWS.</p>
+      <a href="https://aws.amazon.com/architecture/" target="_blank" rel="noopener">aws.amazon.com/architecture</a>
+    </article>
+
+    <article class="ref-card">
+      <strong>AWS Pricing Calculator</strong>
+      <p>Ferramenta oficial para estimar custos de serviços AWS e validar decisões de arquitetura orientadas a custo.</p>
+      <a href="https://calculator.aws/" target="_blank" rel="noopener">calculator.aws</a>
+    </article>
+  </div>
+
+  <div class="callout accent-blue mt-3">
+    <h3>Validação antes de produção e prova</h3>
+    <p>Certificações, códigos de exame, domínios, serviços e políticas da AWS podem mudar. Antes de usar este material para prova, arquitetura real ou produção, valide sempre as versões atuais nos guias oficiais, na documentação AWS e no Skill Builder.</p>
+  </div>
 </section>
 
 </div><!-- /content -->

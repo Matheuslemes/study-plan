@@ -752,7 +752,130 @@
     .footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent4)}
     .track-badge-set span.tag{display:inline-flex}
 
-  </style></head>
+  </style>
+  <style id="reference-card-style">
+    /* ─────────────────────────────────────────────────────────────
+       REFERÊNCIAS EM CARDS — padrão visual reutilizável
+       Mantém compatibilidade com busca global, navegação e tema dark.
+       ───────────────────────────────────────────────────────────── */
+
+    .ref-grid {
+      display:grid;
+      gap:1rem;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .ref-card {
+      background:var(--surface2);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:1rem;
+      transition:border-color .15s,background .15s,transform .15s;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+      min-width:0;
+    }
+
+    .ref-card::before {
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:3px;
+      background:linear-gradient(180deg,var(--accent),var(--accent2));
+    }
+
+    .ref-card:hover {
+      border-color:rgba(52,211,153,.30);
+      background:#151c27;
+      transform:translateY(-1px);
+    }
+
+    .ref-card strong {
+      display:block;
+      color:#fff;
+      font-family:'Syne',sans-serif;
+      font-size:.95rem;
+      margin-bottom:.35rem;
+      padding-left:.15rem;
+    }
+
+    .ref-card p {
+      color:var(--muted2);
+      font-size:.82rem;
+      margin-bottom:.75rem;
+      padding-left:.15rem;
+    }
+
+    .ref-card a,
+    .ref-list a {
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      max-width:100%;
+      color:#d8ecff;
+      text-decoration:none;
+      font-family:'IBM Plex Mono',monospace;
+      font-size:.72rem;
+      font-weight:600;
+      line-height:1.45;
+      border:1px solid rgba(56,189,248,.18);
+      background:rgba(56,189,248,.055);
+      padding:.28rem .55rem;
+      border-radius:6px;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      transition:all .14s;
+    }
+
+    .ref-card a::after,
+    .ref-list a::after {
+      content:'↗';
+      font-size:.72rem;
+      color:var(--accent2);
+      line-height:1;
+    }
+
+    .ref-card a:hover,
+    .ref-list a:hover {
+      color:#fff;
+      border-color:rgba(52,211,153,.42);
+      background:rgba(52,211,153,.09);
+      text-decoration:none;
+      transform:translateY(-1px);
+    }
+
+    .ref-grid > * {
+      min-width:0;
+    }
+
+    @media(max-width:1180px) {
+      .ref-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:980px) {
+      .ref-grid {
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:520px) {
+      .ref-card {
+        border-radius:10px;
+      }
+
+      .ref-card a,
+      .ref-list a {
+        display:flex;
+        width:100%;
+        justify-content:space-between;
+        align-items:center;
+      }
+    }
+  </style>
+</head>
 <body class="track-page" data-track="java">
 <header class="track-hero-page">
   <div class="container">
@@ -1312,25 +1435,111 @@ jcmd &lt;PID&gt; Thread.print
 
 # Gerar heap dump
 jcmd &lt;PID&gt; GC.heap_dump /tmp/app.hprof</code></pre>
-  </section><section class="doc-section searchable-section" data-search-section="" id="referencias">
-    <div class="doc-section-heading"><div><h2>Referências oficiais e materiais de apoio</h2><p class="section-subtitle">Fontes para validar versões, recursos e práticas técnicas.</p></div><span class="section-badge">Fontes</span></div>
-    <ul class="doc-list ref-list">
-      <li><a href="https://docs.oracle.com/en/java/javase/21/" rel="noopener" target="_blank">Oracle — JDK 21 Documentation</a></li>
-      <li><a href="https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html" rel="noopener" target="_blank">Oracle — Virtual Threads</a></li>
-      <li><a href="https://spring.io/projects/spring-boot" rel="noopener" target="_blank">Spring Boot — Project Page</a></li>
-      <li><a href="https://docs.spring.io/spring-boot/system-requirements.html" rel="noopener" target="_blank">Spring Boot — System Requirements</a></li>
-      <li><a href="https://docs.spring.io/spring-boot/reference/actuator/" rel="noopener" target="_blank">Spring Boot Actuator — Reference</a></li>
-      <li><a href="https://docs.spring.io/spring-boot/reference/actuator/observability.html" rel="noopener" target="_blank">Spring Boot Observability</a></li>
-      <li><a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html" rel="noopener" target="_blank">Spring Security — OAuth2 Resource Server JWT</a></li>
-      <li><a href="https://docs.spring.io/spring-data/jpa/reference/" rel="noopener" target="_blank">Spring Data JPA — Reference</a></li>
-      <li><a href="https://hibernate.org/orm/documentation/" rel="noopener" target="_blank">Hibernate ORM — Documentation</a></li>
-      <li><a href="https://junit.org/junit5/docs/current/user-guide/" rel="noopener" target="_blank">JUnit 5 — User Guide</a></li>
-      <li><a href="https://java.testcontainers.org/" rel="noopener" target="_blank">Testcontainers for Java</a></li>
-      <li><a href="https://kafka.apache.org/documentation/" rel="noopener" target="_blank">Apache Kafka — Documentation</a></li>
-      <li><a href="https://micrometer.io/" rel="noopener" target="_blank">Micrometer — Observability Facade</a></li>
-      <li><a href="https://opentelemetry.io/docs/languages/java/" rel="noopener" target="_blank">OpenTelemetry Java</a></li>
-      <li>Referência interna: index do Plano Integrado de Estudos com a trilha Java + SW Engineering em 8 fases.</li>
-    </ul>
+  </section><section class="doc-section searchable-section" data-search-section id="referencias">
+    <div class="doc-section-heading">
+      <div>
+        <h2>Referências oficiais e materiais de apoio</h2>
+        <p class="section-subtitle">Fontes oficiais e confiáveis para validar versões, recursos e práticas técnicas da trilha Java.</p>
+      </div>
+      <span class="section-badge">Fontes</span>
+    </div>
+
+    <div class="ref-grid">
+      <article class="ref-card">
+        <strong>Oracle — JDK 21 Documentation</strong>
+        <p>Documentação oficial do Java 21, APIs da plataforma, ferramentas e recursos da linguagem.</p>
+        <a href="https://docs.oracle.com/en/java/javase/21/" rel="noopener" target="_blank">docs.oracle.com/java/javase/21</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Oracle — Virtual Threads</strong>
+        <p>Guia oficial sobre Virtual Threads, concorrência moderna e uso de threads leves no Java.</p>
+        <a href="https://docs.oracle.com/en/java/javase/21/core/virtual-threads.html" rel="noopener" target="_blank">Oracle Virtual Threads</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Spring Boot — Project Page</strong>
+        <p>Página oficial do Spring Boot com visão geral do projeto, releases, recursos e ecossistema.</p>
+        <a href="https://spring.io/projects/spring-boot" rel="noopener" target="_blank">spring.io/projects/spring-boot</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Spring Boot — System Requirements</strong>
+        <p>Requisitos oficiais de versão do Java, dependências e compatibilidade para Spring Boot.</p>
+        <a href="https://docs.spring.io/spring-boot/system-requirements.html" rel="noopener" target="_blank">Spring Boot System Requirements</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Spring Boot Actuator</strong>
+        <p>Referência oficial para health checks, métricas, endpoints operacionais e monitoramento.</p>
+        <a href="https://docs.spring.io/spring-boot/reference/actuator/" rel="noopener" target="_blank">Spring Boot Actuator Reference</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Spring Boot Observability</strong>
+        <p>Documentação oficial sobre observabilidade, métricas, tracing e integração com Micrometer.</p>
+        <a href="https://docs.spring.io/spring-boot/reference/actuator/observability.html" rel="noopener" target="_blank">Spring Boot Observability</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Spring Security — OAuth2 Resource Server JWT</strong>
+        <p>Referência oficial para proteger APIs Spring com JWT, Resource Server, claims e authorities.</p>
+        <a href="https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html" rel="noopener" target="_blank">Spring Security JWT Resource Server</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Spring Data JPA</strong>
+        <p>Documentação oficial sobre repositories, queries, paginação, projections e integração com JPA.</p>
+        <a href="https://docs.spring.io/spring-data/jpa/reference/" rel="noopener" target="_blank">Spring Data JPA Reference</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Hibernate ORM</strong>
+        <p>Documentação oficial do Hibernate ORM para mapeamento, transações, performance e persistência.</p>
+        <a href="https://hibernate.org/orm/documentation/" rel="noopener" target="_blank">hibernate.org/orm/documentation</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>JUnit 5</strong>
+        <p>Guia oficial do JUnit 5 para testes unitários, lifecycle, assertions, extensions e boas práticas.</p>
+        <a href="https://junit.org/junit5/docs/current/user-guide/" rel="noopener" target="_blank">JUnit 5 User Guide</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Testcontainers for Java</strong>
+        <p>Documentação oficial para testes de integração com bancos, filas e serviços reais em containers.</p>
+        <a href="https://java.testcontainers.org/" rel="noopener" target="_blank">java.testcontainers.org</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Apache Kafka Documentation</strong>
+        <p>Referência oficial para producers, consumers, topics, partitions, streams e operação Kafka.</p>
+        <a href="https://kafka.apache.org/documentation/" rel="noopener" target="_blank">kafka.apache.org/documentation</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Micrometer</strong>
+        <p>Observability facade usada no ecossistema Spring para métricas de aplicação e instrumentação.</p>
+        <a href="https://micrometer.io/" rel="noopener" target="_blank">micrometer.io</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>OpenTelemetry Java</strong>
+        <p>Documentação oficial para instrumentação, traces, métricas e propagação de contexto em Java.</p>
+        <a href="https://opentelemetry.io/docs/languages/java/" rel="noopener" target="_blank">OpenTelemetry Java</a>
+      </article>
+
+      <article class="ref-card">
+        <strong>Referência interna — Plano Integrado</strong>
+        <p>Index do Plano Integrado de Estudos com a trilha Java + Engenharia de Software em 8 fases.</p>
+        <a href="../index.html" rel="noopener">Abrir dashboard principal</a>
+      </article>
+    </div>
+
+    <div class="callout accent-blue mt-3">
+      <h3>Observação de versão</h3>
+      <p>Frameworks, runtimes, bibliotecas e práticas de engenharia mudam com frequência. Antes de aplicar em produção, valide a versão atual na documentação oficial do Java, Spring, Hibernate, Kafka, ferramentas de teste e stack de observabilidade usada no projeto.</p>
+    </div>
   </section>
   </div>
 </div>
