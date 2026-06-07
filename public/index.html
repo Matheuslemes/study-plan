@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Dashboard do Plano Integrado de Estudos — 16,5h/dia, 14 trilhas + treino, 8 fases, 60–64 semanas.">
-<title>Plano Integrado de Estudos — 16,5h/dia · 60–64 semanas</title>
+<meta name="description" content="Dashboard do Plano Integrado de Estudos — 36 meses, 156 semanas, 12 fases, rotina diária 24h flexível com estudo na madrugada, pausas e 14 trilhas + treino.">
+<title>Plano Integrado de Estudos — 36 meses · 156 semanas</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -243,6 +243,120 @@ body{
   padding:.55rem .85rem !important;vertical-align:top;
   line-height:1.4;border-color:var(--border) !important;
 }
+
+.sync-kpi-card{
+  background:var(--surface2);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:.9rem 1rem;
+  height:100%;
+}
+.sync-kpi-card .sync-kpi-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.63rem;
+  color:var(--text3);
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.sync-kpi-card .sync-kpi-value{
+  font-family:'Syne',sans-serif;
+  font-size:1.05rem;
+  font-weight:800;
+  color:var(--text1);
+  margin-top:.25rem;
+}
+.sync-kpi-card p{font-size:.76rem;color:var(--text2);margin:.35rem 0 0;line-height:1.55}
+.sync-cycle-card{
+  position:relative;
+  overflow:hidden;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1rem;
+  height:100%;
+}
+.sync-cycle-card::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--cycle-color,var(--accent));
+}
+.sync-cycle-card .cycle-eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.64rem;
+  font-weight:700;
+  color:var(--cycle-color,var(--accent));
+  text-transform:uppercase;
+  letter-spacing:.08em;
+}
+.sync-cycle-card h6{
+  font-family:'Syne',sans-serif;
+  font-size:.95rem;
+  font-weight:800;
+  color:var(--text1);
+  margin:.35rem 0 .35rem;
+}
+.sync-cycle-card p{font-size:.76rem;color:var(--text2);line-height:1.55;margin:0 0 .55rem}
+.sync-pill-row{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.55rem}
+.sync-pill{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.61rem;
+  font-weight:700;
+  padding:.18rem .48rem;
+  border-radius:4px;
+  background:rgba(255,255,255,.035);
+  border:1px solid var(--border);
+  color:var(--text2);
+}
+.sync-phase-title{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:800;
+  font-size:.72rem;
+}
+.sync-phase-sub{font-size:.66rem;color:var(--text3);display:block;margin-top:2px}
+.sync-cell-title{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.68rem;
+  font-weight:700;
+  display:block;
+  margin-bottom:2px;
+}
+.sync-cell-desc{font-size:.72rem;color:var(--text2);line-height:1.45}
+.sync-board{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:1rem;
+  height:100%;
+}
+.sync-board h6{
+  font-family:'Syne',sans-serif;
+  font-size:.92rem;
+  font-weight:800;
+  margin-bottom:.65rem;
+}
+.sync-board-item{
+  display:flex;
+  gap:.65rem;
+  padding:.55rem 0;
+  border-bottom:1px solid var(--border);
+}
+.sync-board-item:last-child{border-bottom:none}
+.sync-board-dot{
+  width:9px;
+  height:9px;
+  min-width:9px;
+  border-radius:50%;
+  margin-top:.45rem;
+  background:var(--item-color,var(--accent));
+}
+.sync-board-item strong{
+  color:var(--text1);
+  font-family:'IBM Plex Mono',monospace;
+  font-size:.72rem;
+}
+.sync-board-item p{font-size:.74rem;color:var(--text2);margin:.1rem 0 0;line-height:1.5}
 
 /* ── phase detail card ──────────────── */
 .phase-detail-card{
@@ -618,9 +732,9 @@ footer p{
 <!-- HERO -->
 <div class="hero">
   <div class="container">
-    <span class="hero-eyebrow fade-up">Plano integrado de estudos · 14 trilhas + treino · 60–64 semanas</span>
+    <span class="hero-eyebrow fade-up">Plano integrado de estudos · 14 trilhas + treino · 36 meses · 156 semanas</span>
     <h1 class="fade-up fade-up-d1">Plano Integrado de Estudos</h1>
-    <p class="hero-sub fade-up fade-up-d2">16,5h/dia · 7 dias/semana · 8 fases · ~7.392 horas · Java + Spring Boot · Git e Versionamento · Arquitetura de Solução/Integração · Frontend Engineering · Inglês Técnico · DevCore Platform · AWS Certifications · Python · DevOps · Segurança Full Stack · Banco de Dados SQL/NoSQL · Matemática · IA · Financeiro · Treino Híbrido</p>
+    <p class="hero-sub fade-up fade-up-d2">Rotina 24h flexível com estudo na madrugada · 65–75h/semana · 12 fases · 36 meses · 156 semanas · Java + Spring Boot · Git e Versionamento · Arquitetura de Solução/Integração · Frontend Engineering · Inglês Técnico · DevCore Platform · AWS Certifications · Python · DevOps · Segurança Full Stack · Banco de Dados SQL/NoSQL · Matemática · IA · Financeiro · Treino Híbrido</p>
     <div class="hero-tags fade-up fade-up-d3" id="heroTags"></div>
     <div class="fade-up fade-up-d4" id="trackBadges"></div>
   </div>
@@ -633,7 +747,7 @@ footer p{
       <ul class="nav nav-pills flex-nowrap overflow-auto gap-1 flex-grow-1" id="mainTabs" role="tablist" style="scrollbar-width:none">
         <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#tabFases">Visão Geral</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabQuick">Consulta rápida</a></li>
-        <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabDaily">Rotina 16,5h</a></li>
+        <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabDaily">Rotina 24h</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabDetail">Fases (detalhe)</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabTracks">Trilhas</a></li>
         <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabPdfs">PDF'S</a></li>
@@ -653,12 +767,53 @@ footer p{
 
 <!-- TAB FASES -->
 <div class="tab-pane fade show active" id="tabFases">
-  <h4 class="mb-1">8 Fases · 64 Semanas (plano-base)</h4>
-  <p class="text-muted small mb-3">Cada fase tem 8 semanas (924h). Com o aumento para 16,5h/dia, a carga total por fase sobe e a janela equivalente do plano cai para cerca de 60 semanas, mantendo 64 semanas como estrutura-base conservadora.</p>
+  <h4 class="mb-1">12 Fases · 156 Semanas (domínio real)</h4>
+  <p class="text-muted small mb-3">Cada fase representa um trimestre técnico: 12 semanas de execução profunda + 1 semana de checkpoint, revisão, refatoração e ajuste de rota. O plano deixa de ser uma corrida de 64 semanas e passa a ser um roadmap de 36 meses para domínio progressivo, com prática real, projetos, deploy, documentação e validação técnica.</p>
   <div class="hours-margin-note mb-3">
     <strong>Nota sobre margem de erro das horas:</strong>
-    As cargas horárias (<span class="mono">16,5h/dia</span>, <span class="mono">115,5h/semana</span>, <span class="mono">924h/fase</span> e <span class="mono">~7.392h totais</span>) passam a refletir a rotina estendida até 01:00. Considere margem prática de <span class="mono">±10% a ±15%</span>, pois revisões, bugs, simulados, entrevistas e refatorações alteram o tempo necessário. A estrutura continua em <span class="mono">64 semanas</span>, mas a janela equivalente otimizada cai para aproximadamente <span class="mono">60–75 semanas</span>.
+    As cargas horárias (<span class="mono">rotina 24h flexível por trilhas</span>, <span class="mono">65–75h/semana</span>, <span class="mono">~910h/fase</span> e <span class="mono">~10.920h totais</span>) refletem uma grade de estudo flexível com alocação por horário. Considere margem prática de <span class="mono">±10% a ±15%</span>, pois revisões, bugs, simulados, entrevistas, refatorações, deploys e incidentes simulados alteram o tempo necessário. A estrutura correta passa a ser <span class="mono">36 meses · 156 semanas · 12 fases</span>, com checkpoints mensais e critério mínimo de 80% para avançar.
   </div>
+  <section class="mb-4">
+    <div class="row g-3">
+      <div class="col-12 col-lg-4">
+        <div class="metric-card h-100">
+          <span class="val">36 meses</span>
+          <span class="lbl">tempo correto para domínio real</span>
+          <p class="text-muted small mt-2 mb-0">O plano agora considera estudo, revisão, prática, refatoração, bugs, deploy, documentação, simulação de produção e maturação arquitetural.</p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="metric-card h-100">
+          <span class="val">156 semanas</span>
+          <span class="lbl">12 fases + checkpoints</span>
+          <p class="text-muted small mt-2 mb-0">Cada trimestre combina 12 semanas de execução com 1 semana de checkpoint, validação, correções, revisão e ajuste de rota.</p>
+        </div>
+      </div>
+      <div class="col-12 col-lg-4">
+        <div class="metric-card h-100">
+          <span class="val">65–75h/sem</span>
+          <span class="lbl">carga intensiva sustentável</span>
+          <p class="text-muted small mt-2 mb-0">A grade diária cobre 24h com conteúdos das trilhas; o descanso é organizado fora do cronograma conforme sua janela real do dia.</p>
+        </div>
+      </div>
+    </div>
+    <div class="table-responsive mt-3">
+      <table class="table table-dark table-hover sync-table">
+        <thead><tr><th>Ciclo</th><th>Duração</th><th>Objetivo</th></tr></thead>
+        <tbody>
+          <tr><td>Ciclo 1</td><td>Meses 1–6</td><td>Base forte de engenharia: Java, Git, SQL, Spring, testes e projeto inicial.</td></tr>
+          <tr><td>Ciclo 2</td><td>Meses 7–12</td><td>Full stack + cloud inicial + projeto real integrado com frontend, backend e banco.</td></tr>
+          <tr><td>Ciclo 3</td><td>Meses 13–18</td><td>Pleno forte com produção, bancos, AWS, arquitetura, DDD e decisões documentadas.</td></tr>
+          <tr><td>Ciclo 4</td><td>Meses 19–24</td><td>Arquitetura, DevOps, segurança, mensageria, CI/CD, Kubernetes e sistemas distribuídos.</td></tr>
+          <tr><td>Ciclo 5</td><td>Meses 25–30</td><td>Segurança avançada, Python, IA aplicada, matemática, RAG e integração com produto.</td></tr>
+          <tr><td>Ciclo 6</td><td>Meses 31–36</td><td>Senioridade: liderança técnica, incidentes, scale, portfólio, entrevistas e inglês avançado.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hours-margin-note mt-3">
+      <strong>Regra de avanço:</strong> só avance de fase após cumprir pelo menos <span class="mono">80%</span> dos critérios: projeto entregue, testes, deploy ou execução reproduzível, README em inglês, ADR/RFC quando aplicável, revisão semanal, bugs corrigidos, explicação oral, evidência no GitHub e checkpoint técnico.
+    </div>
+  </section>
   <div class="row g-3 mb-4" id="phaseCards"></div>
   <h5 class="mb-2">Distribuição de horas</h5>
   <div id="phaseProgress" class="mb-4"></div>
@@ -683,8 +838,12 @@ footer p{
 
 <!-- TAB DAILY -->
 <div class="tab-pane fade" id="tabDaily">
-  <h4 class="mb-1">Rotina Diária — 16,5h de estudo efetivo</h4>
-  <p class="text-muted small mb-3">05:30 às 01:00 com 1h de almoço + 2h de treino/refeição. Total de estudo efetivo: 16,5 horas, com 14 trilhas paralelas e treino, mantendo Git, Arquitetura e Frontend como trilhas transversais integradas aos blocos de projeto, documentação, implementação e revisão.</p>
+  <h4 class="mb-1">Rotina Diária 24h — grade de estudo sem blocos de sono</h4>
+  <p class="text-muted small mb-3">Cronograma completo de 00:00 a 00:00 com todos os horários cobertos por blocos de estudo, prática, revisão, projeto, treino, alimentação ou pausa. O descanso fica fora desta grade e deve ser organizado separadamente conforme o dia: manhã, tarde, noite ou madrugada.</p>
+  <div class="hours-margin-note mb-3">
+    <strong>Uso correto desta grade:</strong>
+    este cronograma é um mapa de alocação de conteúdos por horário, não uma obrigação de estudar 24h seguidas. Quando você estiver acordado, use o bloco correspondente; quando for descansar, ignore os blocos daquele período e retome pelo próximo horário útil.
+  </div>
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden" class="mb-4" id="dailySchedule"></div>
   <h5 class="mb-2">Foco por dia da semana</h5>
   <div class="row g-2 mb-4" id="weeklyFocus"></div>
@@ -693,7 +852,7 @@ footer p{
 <!-- TAB DETAIL -->
 <div class="tab-pane fade" id="tabDetail">
   <h4 class="mb-1">Detalhamento por Fase</h4>
-  <p class="text-muted small mb-3">Todas as 14 trilhas de cada fase com tópicos completos.</p>
+  <p class="text-muted small mb-3">Todas as 14 trilhas organizadas em 12 fases trimestrais, com foco, tópicos de domínio e entregáveis por fase.</p>
   <div class="d-flex flex-wrap gap-1 mb-3" id="phaseFilterBtns"></div>
   <div id="phaseDetails"></div>
 </div>
@@ -701,7 +860,7 @@ footer p{
 <!-- TAB TRACKS -->
 <div class="tab-pane fade" id="tabTracks">
   <h4 class="mb-1">Todas as 14 Trilhas — Progressão por Fase</h4>
-  <p class="text-muted small mb-3">Selecione uma trilha para ver sua progressão completa ao longo das 8 fases.</p>
+  <p class="text-muted small mb-3">Selecione uma trilha para ver sua progressão completa ao longo das 12 fases.</p>
   <div class="d-flex flex-wrap gap-1 mb-3 track-filter" id="trackFilterBtns"></div>
   <div id="trackProgression"></div>
 </div>
@@ -729,19 +888,54 @@ footer p{
 
 <!-- TAB SYNC -->
 <div class="tab-pane fade" id="tabSync">
-  <h4 class="mb-1">Sincronização Semanal</h4>
-  <p class="text-muted small mb-3">Como as 14 trilhas se alinham fase a fase.</p>
+  <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-2">
+    <div>
+      <h4 class="mb-1">Sincronização do Plano — fases, trilhas e entregáveis</h4>
+      <p class="text-muted small mb-3">Visão reestruturada de como as 14 trilhas se conectam ao longo das 12 fases, 6 ciclos e 36 meses. A aba agora mostra dependências, checkpoints, entregáveis integrados, marcos AWS e a ordem correta de consolidação técnica.</p>
+    </div>
+    <span class="pdf-counter">12 fases · 6 ciclos · 36 meses</span>
+  </div>
+
+  <div class="hours-margin-note mb-3">
+    <strong>Como ler a sincronização:</strong>
+    cada fase possui um núcleo dominante, mas nenhuma trilha evolui isolada. <span class="mono">DevCore Platform</span> é o projeto integrador; <span class="mono">Git</span>, <span class="mono">Inglês</span> e <span class="mono">Arquitetura</span> atravessam todas as fases; <span class="mono">AWS</span>, <span class="mono">DevOps</span> e <span class="mono">Segurança</span> entram progressivamente conforme o projeto ganha maturidade.
+  </div>
+
+  <div class="row g-3 mb-4" id="syncKpis"></div>
+
+  <h5 class="mb-2">Ciclos de sincronização</h5>
+  <p class="text-muted small mb-3">Os ciclos agrupam as fases em blocos de maturidade: base, full stack, produção, sistemas distribuídos, IA aplicada e senioridade.</p>
+  <div class="row g-3 mb-4" id="syncCycleCards"></div>
+
+  <h5 class="mb-2">Matriz fase × trilhas</h5>
+  <p class="text-muted small mb-3">Resumo operacional do que deve avançar em paralelo em cada fase, com foco em dependências, projeto e validação prática.</p>
   <div class="table-responsive mb-4">
     <table class="table table-dark table-hover sync-table" id="syncTable"></table>
   </div>
-  <h5 class="mb-3">Marcos AWS</h5>
+
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-lg-6">
+      <div class="sync-board">
+        <h6>Dependências críticas entre trilhas</h6>
+        <div id="syncDependencies"></div>
+      </div>
+    </div>
+    <div class="col-12 col-lg-6">
+      <div class="sync-board">
+        <h6>Checkpoints de avanço</h6>
+        <div id="syncCheckpoints"></div>
+      </div>
+    </div>
+  </div>
+
+  <h5 class="mb-3">Marcos AWS e checkpoints de certificação</h5>
   <div id="awsTimeline" style="position:relative;padding-left:20px;margin-left:8px"></div>
 </div>
 
 <!-- TAB RULES -->
 <div class="tab-pane fade" id="tabRules">
   <h4 class="mb-1">Regras de Execução Não Negociáveis</h4>
-  <p class="text-muted small mb-3">Seguir todas é o que separa quem conclui 64 semanas de quem abandona no mês 2.</p>
+  <p class="text-muted small mb-3">Seguir todas é o que transforma exposição a conteúdo em domínio real, portfólio demonstrável e maturidade técnica.</p>
   <div id="rulesList"></div>
 </div>
 
@@ -756,7 +950,7 @@ footer p{
       <span class="htag htag-g">AWS Certifications</span>
       <span class="htag htag-o">Python · IA · Inglês · DevOps · Segurança · Git · Frontend · Arquitetura</span>
     </div>
-    <p class="mb-0">Banco de Dados SQL/NoSQL · Segurança Full Stack · Git e Versionamento · Arquitetura · Frontend Engineering · Inglês Técnico · Matemática · IA Engineering · Trilha Financeira · Treino Híbrido · 14 trilhas + rotina física · 60–64 semanas</p>
+    <p class="mb-0">Banco de Dados SQL/NoSQL · Segurança Full Stack · Git e Versionamento · Arquitetura · Frontend Engineering · Inglês Técnico · Matemática · IA Engineering · Trilha Financeira · Treino Híbrido · 14 trilhas + rotina física · 36 meses · 156 semanas</p>
   </div>
 </footer>
 
@@ -765,8 +959,34 @@ footer p{
 /* ═══════════════════════════════════════════════
    PHASE COLOR SYSTEM
 ═══════════════════════════════════════════════ */
-const PC =["#4f9ef8","#22d3b0","#a78bfa","#fb923c","#38bdf8","#f472b6","#34d399","#f59e0b"];
-const PBG=["#0d1a2e","#0d2e28","#1a1735","#2e1a10","#0e2538","#2e1025","#0d2e1a","#2e2010"];
+const PC=[
+  "#4f9ef8",
+  "#22d3b0",
+  "#a78bfa",
+  "#fb923c",
+  "#38bdf8",
+  "#f472b6",
+  "#34d399",
+  "#f59e0b",
+  "#2dd4bf",
+  "#60a5fa",
+  "#c084fc",
+  "#f87171"
+];
+const PBG=[
+  "#0d1a2e",
+  "#0d2e28",
+  "#1a1735",
+  "#2e1a10",
+  "#0e2538",
+  "#2e1025",
+  "#0d2e1a",
+  "#2e2010",
+  "#0c2623",
+  "#0d1e35",
+  "#22173a",
+  "#2f1115"
+];
 
 const CK={
   java:  {t:"#22c55e",b:"#0d2e1a"},
@@ -791,28 +1011,131 @@ const CK={
    HERO DATA
 ═══════════════════════════════════════════════ */
 const heroTagsData=[
-  {label:"16,5h/dia",cls:"htag-b"},{label:"115,5h/semana",cls:"htag-b"},
-  {label:"60–64 semanas",cls:"htag-g"},{label:"~7.392 horas",cls:"htag-g"},
-  {label:"8 fases",cls:"htag-p"},{label:"14 trilhas + treino",cls:"htag-p"},
-  {label:"3+ Certs AWS",cls:"htag-o"},{label:"IA Engineering",cls:"htag-o"}
+  {
+    "label": "36 meses",
+    "cls": "htag-b"
+  },
+  {
+    "label": "156 semanas",
+    "cls": "htag-b"
+  },
+  {
+    "label": "12 fases",
+    "cls": "htag-g"
+  },
+  {
+    "label": "12–13 semanas/fase",
+    "cls": "htag-g"
+  },
+  {
+    "label": "grade 24h flexível",
+    "cls": "htag-p"
+  },
+  {
+    "label": "65–75h/semana",
+    "cls": "htag-p"
+  },
+  {
+    "label": "14 trilhas + treino",
+    "cls": "htag-o"
+  },
+  {
+    "label": "domínio real progressivo",
+    "cls": "htag-o"
+  }
 ];
 
 const tracks=[
-  {key:"java",  label:"Java + SW Eng",       h:"2h15+45min"},
-  {key:"ingles",label:"Inglês Técnico",      h:"30–45min"},
-  {key:"blog",  label:"DevCore Platform",    h:"1h45+45min"},
-  {key:"git",   label:"Git & Versionamento", h:"transversal",suffix:""},
-  {key:"arquitetura",label:"Arquitetura",    h:"transversal",suffix:""},
-  {key:"frontend",label:"Frontend Eng",      h:"transversal",suffix:""},
-  {key:"py",    label:"Python",              h:"1h"},
-  {key:"devops",label:"DevOps",              h:"1h15"},
-  {key:"sec",   label:"Segurança Full Stack",h:"1h"},
-  {key:"aws",   label:"AWS Certs",           h:"1h15"},
-  {key:"db",    label:"Banco SQL/NoSQL",     h:"1h+30min"},
-  {key:"math",  label:"Matemática",          h:"1h"},
-  {key:"ia",    label:"IA Engineering",      h:"1,5h+30min"},
-  {key:"fin",   label:"Financeiro",          h:"1h"},
-  {key:"treino",label:"Treino Híbrido",      h:"2h"}
+  {
+    "key": "java",
+    "label": "Java + SW Eng",
+    "h": "5x/sem · 1h30–2h",
+    "suffix": ""
+  },
+  {
+    "key": "ingles",
+    "label": "Inglês Técnico",
+    "h": "7x/sem · 30–45min",
+    "suffix": ""
+  },
+  {
+    "key": "blog",
+    "label": "DevCore Platform",
+    "h": "5x/sem · 1h30–2h",
+    "suffix": ""
+  },
+  {
+    "key": "git",
+    "label": "Git & Versionamento",
+    "h": "transversal",
+    "suffix": ""
+  },
+  {
+    "key": "arquitetura",
+    "label": "Arquitetura",
+    "h": "3x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "frontend",
+    "label": "Frontend Eng",
+    "h": "3x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "py",
+    "label": "Python",
+    "h": "3x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "devops",
+    "label": "DevOps/SRE",
+    "h": "3x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "sec",
+    "label": "Segurança",
+    "h": "3x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "aws",
+    "label": "AWS",
+    "h": "4x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "db",
+    "label": "Banco SQL/NoSQL",
+    "h": "4x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "math",
+    "label": "Matemática",
+    "h": "3x/sem · 45–60min",
+    "suffix": ""
+  },
+  {
+    "key": "ia",
+    "label": "IA Engineering",
+    "h": "3x/sem · 1h",
+    "suffix": ""
+  },
+  {
+    "key": "fin",
+    "label": "Financeiro",
+    "h": "2x/sem · 45–60min",
+    "suffix": ""
+  },
+  {
+    "key": "treino",
+    "label": "Treino Híbrido",
+    "h": "5–6x/sem · 60–90min",
+    "suffix": ""
+  }
 ];
 
 /* ═══════════════════════════════════════════════
@@ -943,8 +1266,8 @@ const quickTracks=[
      {label:"DVA-C02", color:"#a78bfa"},
      {label:"SOA-C03", color:"#f59e0b"},
      {label:"DOP-C02", color:"#38bdf8"},
-     {label:"64 semanas", color:"#a78bfa"},
-     {label:"1.5h/dia AWS", color:"#fb923c"},
+     {label:"156 semanas", color:"#a78bfa"},
+     {label:"AWS 4x/semana", color:"#fb923c"},
      {label:"Free Tier Labs", color:"#38bdf8"},
      {label:"Simulados", color:"#a78bfa"},
      {label:"Obsidian SP", color:"#f59e0b"},
@@ -1047,9 +1370,9 @@ const quickTracks=[
    badge:"Base IA + Código",
    desc:"Matemática aplicada à programação e IA: lógica, Big O, grafos, álgebra linear com NumPy, probabilidade, estatística, cálculo, otimização, métricas ML/RAG, embeddings, attention e entregáveis por fase.",
    extraBadges:[
-     {label:"1h/dia", color:"#22d3b0"},
-     {label:"64 semanas", color:"#38bdf8"},
-     {label:"8 fases", color:"#a78bfa"},
+     {label:"3x/semana", color:"#22d3b0"},
+     {label:"156 semanas", color:"#38bdf8"},
+     {label:"12 fases", color:"#a78bfa"},
      {label:"Programação", color:"#fb923c"},
      {label:"Algoritmos", color:"#22c55e"},
      {label:"Machine Learning", color:"#60a5fa"},
@@ -1086,8 +1409,8 @@ const quickTracks=[
    extraBadges:[
      {label:"31 módulos", color:"#fb923c"},
      {label:"5 macroáreas", color:"#f59e0b"},
-     {label:"8 fases / 64 semanas", color:"#22d3b0"},
-     {label:"1h/dia", color:"#fb923c"},
+     {label:"12 fases / 156 semanas", color:"#22d3b0"},
+     {label:"3x/semana", color:"#fb923c"},
      {label:"70/20/10", color:"#f59e0b"},
      {label:"Orçamento", color:"#22d3b0"},
      {label:"Dívidas", color:"#fb923c"},
@@ -1139,110 +1462,898 @@ const pdfDocuments=[
    PHASE DATA
 ═══════════════════════════════════════════════ */
 const P=[
-{id:1,l:"Fase 1",w:"Sem 1–8",h:924,t:"Base técnica + fundamentos",cand:false,cn:"",
-java:["Java 21 Core: tipos, OOP, herança, polimorfismo, interfaces, generics, records, sealed classes","Clean Code, SOLID, Git convencional em inglês desde o dia 1","Estruturas de dados: Big O, arrays, listas, hashing, árvores BST, heaps","SQL e PostgreSQL: modelagem relacional, JOINs, CTEs, índices B-tree, transações ACID","Spring Boot 3: primeiros endpoints REST, JPA/Hibernate, Flyway migrations","Testes unitários: JUnit 5, Mockito (mocks, stubs, spies), cobertura >80%","MongoDB básico: CRUD com Spring Data MongoDB","Fundamentos: CPU, memória, SO (processos, threads), redes TCP/IP, HTTP, TLS"],
-blog:["Repositório público: README inglês, Conventional Commits, estrutura modular","Modelagem banco: users, posts, categories, tags, comments (Flyway)","Auth: JWT + refresh token rotation + Spring Security 6 + BCrypt","Posts CRUD: criar, editar, publicar, rascunho, markdown, slug, SEO fields","Categorias + tags: CRUD, relação N:N, slugs únicos","Testes unitários services, mappers, validators (>80%)","Swagger/OpenAPI com exemplos e schemas"],
-py:["Python moderno 3.12+: sintaxe idiomática, tipos, operadores, controle de fluxo, funções, módulos e organização limpa de pacotes","Estruturas e linguagem: listas, dicts, sets, tuples, comprehensions, slicing, unpacking, iterators, generators e context managers","OOP Python: classes, dataclasses, herança, dunder methods, @property, enums, exceptions customizadas e design pythônico","Typing profissional: list[str], dict[str, Any], Optional, Union, Literal, TypedDict, Protocol, Generic, Callable e Annotated","Ambiente e dependências: venv, pip, uv/Poetry, pyproject.toml, lockfiles, variáveis de ambiente, .env e estrutura de projeto","Standard library útil: pathlib, json, csv, datetime, collections, itertools, functools, logging, argparse/typer e manipulação de arquivos","Qualidade inicial: pytest básico, Ruff, Black, isort, mypy/pyright, pre-commit e README com execução local"],
-db:["SQL fundamentos: SELECT, INSERT, UPDATE, DELETE, WHERE, ORDER BY, GROUP BY, HAVING, LIMIT/OFFSET, DISTINCT e CASE WHEN","Modelagem relacional: entidades, atributos, PK/FK, cardinalidade, constraints, normalização 1FN/2FN/3FN e tabelas associativas","PostgreSQL base: schemas, tipos, UUID, timestamps, constraints, transações ACID, roles iniciais e migrations Flyway","Joins e consultas: INNER, LEFT, RIGHT, FULL, self join, subqueries, CTEs e leitura de dados sem depender apenas do ORM","Índices iniciais: B-tree, índice único, índice composto básico, seletividade, custo de escrita e quando não criar índice","Spring Data JPA base: entidades, repositories, relacionamentos simples, JPQL inicial, paginação e testes com Testcontainers","Entregável: DER do blog/projeto, migrations V1-V3, seed controlado e README explicando decisões de modelagem"],
-devops:["Linux operacional: terminal, permissões chmod/chown, systemd, journalctl, cron e gerenciamento de serviços","Processos e troubleshooting: ps, top, htop, lsof, netstat/ss, logs, exit codes e análise de consumo","Shell scripting profissional: bash, variáveis, condicionais, loops, funções, pipes, grep/sed/awk e scripts de automação","Git profundo: branching, merge vs rebase, hooks, .gitignore, Conventional Commits e fluxo Pull Request","Networking para DevOps: TCP/IP, DNS, TLS, HTTP, portas, CIDR, NAT, proxy reverso, curl, dig e traceroute","SSH e acesso seguro: keys, agent forwarding, SCP, tunneling, bastion host, permissões e hardening básico","Filesystem e storage Linux: mount, df, du, links simbólicos, logs em /var/log, permissões, ownership e rotação de logs"],sec:["Fundamentos de segurança: CIA, autenticação x autorização, classificação de dados, superfícies de ataque e princípio do menor privilégio","Credenciais e login: políticas de senha, MFA, hash com BCrypt/Argon2, reset seguro e armazenamento sem segredo hardcoded","Web security base: HTTPS/TLS, cookies Secure/HttpOnly/SameSite, headers básicos e CORS sem wildcards inseguros","Validação de entrada: normalização, encoding, sanitização, DTO validation e noção clara de trust boundaries","OWASP Top 10 + secure coding checklist aplicado ao DevCore e às APIs iniciais"],
-git:["Git fundamental: repositório, working tree, staging area, commit, branch, remote, clone, fetch, pull e push","Comandos base: status, diff, log, add, commit, switch, merge e .gitignore com commits pequenos e claros","GitHub básico: README, issues, Pull Request simples, branch local/remota e commits em inglês com Conventional Commits","Entregável: repositório do plano com README, branches de estudo e histórico limpo"],
-arquitetura:["Fundamentos: arquitetura de software, arquitetura de solução, arquitetura de integração, requisitos, restrições, stakeholders e trade-offs","Diagramas C4 iniciais: contexto, containers, fluxo frontend-backend-banco-API externa e limites de responsabilidade","ADRs básicos: contexto, decisão, alternativas, consequências e critérios de aceite arquitetural","Entregável: documentação inicial do DevCore com C4, NFRs e 3 ADRs"],
-frontend:["HTML semântico: landmarks, headings, formulários, labels, links, listas, tabelas, SEO técnico inicial e estrutura acessível","CSS base: box model, display, flexbox, grid, responsividade mobile-first, unidades e organização de estilos","Acessibilidade básica: navegação por teclado, contraste, foco visível, aria apenas quando necessário e Lighthouse","Entregável: landing page sem framework com README e deploy simples"],
-aws:{cert:"CLF-C02 — Cloud Practitioner",exam:"Prova semana 8-9",topics:["Cloud Concepts (24%): IaaS/PaaS/SaaS, regiões, AZs, edge","Security (30%): IAM, shared responsibility, MFA, encryption","Technology (34%): EC2, Lambda, S3, EBS, RDS, DynamoDB, VPC","Billing (12%): pricing models, Cost Explorer, Budgets"]},
-math:["Lógica booleana aplicada a código: AND, OR, NOT, XOR, curto-circuito, expressões condicionais e validação de regras","Lógica proposicional: conectivos, tabelas-verdade, equivalências, De Morgan e implementação em Python","Teoria de conjuntos aplicada: união, interseção, diferença, cardinalidade, Venn, conjuntos em Java/Python","Álgebra básica para programação: equações, funções lineares/quadráticas, gráficos, crescimento linear/quadrático","Sistemas numéricos: binário, octal, hexadecimal, conversões, bits, bytes, máscaras, flags e representação de inteiros","Combinatória: princípio da contagem, permutações, combinações, busca exaustiva, explosão combinatória","Notação Big O: tempo, espaço, comparação de complexidades, benchmark real, loops aninhados, recursão e análise assintótica","Indução matemática e corretude: provas simples para algoritmos recursivos, invariantes de loop","Entregável: notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e README"],
-ia:["Co-Intelligence (Sem 1–2): fluência prática, validação crítica, IA como tutor/coworker/coach e workflow pessoal de IA","Prediction Machines (Sem 3–4): IA como previsão, decisão, julgamento, ação, risco e ROI","The AI Advantage + Human + Machine (Sem 5–8): IA empresarial, processos, tarefas híbridas, responsible AI e redesenho humano + máquina","Campos essenciais: fundamentos de IA, matemática aplicada, dados/Python, ML clássico e visão inicial de NLP/LLMs"],
-fin:["Mód 1: Mentalidade financeira","Mód 2–3: Orçamento pessoal e métodos","Mód 4–5: Diagnóstico financeiro e fluxo de caixa","Mód 6–7: Dívidas, juros e estratégias de quitação"]},
-{id:2,l:"Fase 2",w:"Sem 9–16",h:924,t:"Desenvolvimento profissional",cand:false,cn:"",
-java:["Spring Boot 3 avançado: REST, validação, DTOs, mappers MapStruct","Spring Security: JWT, OAuth2, OpenID Connect, roles, scopes","Integrações: Feign, WebClient, timeout, retry Resilience4j, circuit breaker","Redis: cache, TTL, invalidação, idempotência, rate limiting","Testes integração: Testcontainers, MockMvc, RestAssured","SonarQube, JaCoCo, quality gates","Paradigmas: funcional Streams, Optional, concorrência básica"],
-blog:["Comentários: threaded com reply, moderação","Newsletter: double opt-in, confirmação, preferências","Busca full-text: PostgreSQL tsvector + tsquery","Admin panel API: gestão de usuários, posts, moderação","Redis: cache posts populares, rate limiting por IP","Testes integração: Testcontainers, MockMvc + security","Swagger atualizado com todos os endpoints + erros"],
-py:["FastAPI base: rotas, path/query/body params, Pydantic v2, response models, dependency injection, middleware e exception handlers","Backend com banco: SQLAlchemy 2, Alembic migrations, PostgreSQL, sessões, repositories, Unit of Work simples e transações","Django/DRF fundamentos: models, migrations, admin, serializers, viewsets, routers, permissions, pagination e filtering","APIs profissionais: OpenAPI, status codes, versionamento, paginação, filtros, ordenação, idempotência e RFC 7807/Problem Details","Testes com pytest: fixtures, parametrize, mocking, monkeypatch, factory_boy, Faker, coverage, TestClient/httpx e banco real","Async Python: async/await, asyncio, event loop, httpx/aiohttp, timeouts, cancellation, concorrência vs paralelismo e limites do GIL","Qualidade de projeto: Ruff, Black, mypy/pyright, pre-commit, logs estruturados, settings por ambiente e organização por camadas"],
-db:["JPA/Hibernate avançado: ciclo de vida da entidade, persistence context, dirty checking, flush, lazy/eager e relacionamento bidirecional","Transações Spring: @Transactional, propagation, isolation, rollback rules, transações longas, boundary em service e lazy loading","Concorrência relacional: lost update, dirty read, non-repeatable read, phantom read, optimistic/pessimistic locking e @Version","Query tuning inicial: EXPLAIN, EXPLAIN ANALYZE, sequential scan, index scan, nested loop, hash join e diferença estimado vs real","Pool de conexão: HikariCP, max pool size, idle timeout, max lifetime, leak detection, saturação e métricas de conexões","Paginação e leitura eficiente: offset vs cursor pagination, projections, DTO queries, EntityGraph e prevenção de N+1","Entregável: corrigir N+1 em uma API real, documentar antes/depois com logs SQL e EXPLAIN ANALYZE"],
-devops:["Docker essencial: images, containers, Dockerfile, build context, layers, cache e debugging com logs/exec/inspect","Docker multi-stage para Java: build Maven/Gradle, imagem JRE slim, otimização de tamanho e tempo de startup","Docker Compose: serviços, networks, volumes, env vars, health checks, profiles e dependências locais do blog","Container registry: Docker Hub/GHCR, tagging semântico, imutabilidade, scan e política de publicação","Dockerfile seguro: least privilege, usuário non-root, .dockerignore, secrets fora da imagem, distroless quando fizer sentido","Docker networking/storage: bridge, host, DNS interno, bind mounts vs named volumes, backup e restore local","DevSecOps inicial: Trivy, Dependabot, CodeQL, secret scanning, SBOM básico e correção de CVEs críticas"],sec:["Frontend/AppSec: XSS, CSRF, CSP, armazenamento seguro de tokens, upload de arquivos e exposição mínima no cliente","Backend defensivo: validação server-side, tratamento seguro de erros, mensagens neutras e logs sem vazamento de dados sensíveis","Injection prevention: prepared statements, ORM seguro, validação de filtros, mass assignment e bloqueio de payloads inesperados","Sessões e tokens: JWT básico, refresh token rotation, revogação, logout consistente e proteção contra replay","Secrets management inicial: variáveis de ambiente, .env hygiene e segregação por ambiente"],
-git:["Fluxo colaborativo: issue → branch → commit → Pull Request/Merge Request → review → merge","Merge vs rebase, squash merge, atualização de branch, resolução de conflitos e PRs pequenas","Code review básico: descrição clara, evidência de teste, screenshots/logs quando necessário e checklist de revisão","Entregável: PR documentada com conflito resolvido e evidência de teste"],
-arquitetura:["APIs síncronas: HTTP, REST, OpenAPI, versionamento, paginação, filtros, status codes, API Gateway e BFF","Segurança de integração: OAuth2/OIDC, JWT, scopes, RBAC/ABAC, rate limit e fronteiras de confiança","Resiliência base: timeout, retry com backoff/jitter, circuit breaker, bulkhead e idempotência","Entregável: API Java/Spring integrada a client externo com OpenAPI e diagrama de sequência"],
-frontend:["CSS moderno: cascade, specificity, custom properties, tokens, dark mode, utility patterns e arquitetura de estilos","Layout responsivo: Flexbox/Grid avançado, media queries, container queries introdutório e componentes adaptáveis","JavaScript DOM: eventos, validação de formulário, Fetch, async/await, loading/error/empty states","Entregável: UI responsiva consumindo API com tratamento de estados"],
-aws:{cert:"SAA-C03 — Solutions Architect (início)",exam:null,topics:["VPC: peering, Transit Gateway, PrivateLink, NAT Gateway","EC2: placement groups, spot/reserved, Savings Plans","ELB: ALB vs NLB, target groups, health checks, SSL","Auto Scaling: launch templates, policies, lifecycle hooks","S3: versioning, replication, lifecycle, encryption, presigned","RDS: Multi-AZ, read replicas, snapshots, RDS Proxy","Aurora: clusters, serverless v2, global databases"]},
-math:["Funções aplicadas: domínio, imagem, composição, inversa, monotonicidade e interpretação de funções como transformação de dados","Grafos I: representação por lista/matriz de adjacência, grau, conectividade, componentes, BFS, DFS e complexidade","Grafos II: Dijkstra, topological sort, Union-Find, árvores, DAGs, heaps e aplicações em dependências, rotas e workflows","Relações: equivalência, ordem parcial, fecho transitivo, ordenação topológica e modelagem de dependências entre módulos","Lógica de predicados: quantificadores, predicados, provas, pré/pós-condições e validação formal de regras de negócio","Aritmética modular: congruência, hashing, checksums, criptografia básica, colisões e distribuição de chaves","Teoria dos números: MDC, MMC, algoritmo de Euclides, primalidade básica e aplicações em criptografia e hashing","Complexidade avançada: análise amortizada, recorrências, Teorema Mestre, recursão em divide-and-conquer","Entregável: implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O no README"],
-ia:["All-In on AI (Sem 9–10): organizações AI-fueled, dados, tecnologia, cultura, capacidades e casos de uso","Competing in the Age of AI (Sem 11–12): AI Factory, operating model, learning loops, escala e governança","Untangling AI (Sem 13–14): roadmap estratégico 30/60/90, pessoas, tecnologia, execução e automação planejada","Campos essenciais: deep learning, transformers, estratégia de IA, governança, segurança e priorização de casos de uso"],
-fin:["Mód 8–9: Reserva emergência, Tesouro Selic, CDB DI","Mód 10–11: Matemática financeira e sistema financeiro","Mód 12–13: Renda fixa básica e avançada","Mód 14–15: Aumento de renda e precificação"]},
-{id:3,l:"Fase 3",w:"Sem 17–24",h:924,t:"Engenharia de software real",cand:false,cn:"",
-java:["Kafka: produtores, consumidores, DLQ, retry, schemas","Arquitetura hexagonal: ports, adapters, domínio isolado","DDD: entidades, Value Objects, Aggregates, Domain Events","Microsserviços: decomposição, contratos, trade-offs","Segurança: OWASP Top 10, DevSecOps, LGPD","Performance: profiling, N+1, EntityGraph, batch insert","Engenharia de requisitos: user stories, critérios aceite"],
-blog:["Refatoração hexagonal: domain / ports / adapters","DDD: Post com comportamento, Slug Value Object, Domain Events","Kafka: PostPublished → email + notification + analytics","OAuth2 social login: GitHub + Google","OWASP hardening: XSS, CSRF, CORS, security headers","ADRs: hexagonal vs layered, Kafka vs RabbitMQ","Moderação assíncrona via Kafka"],
-py:["FastAPI avançado: autenticação JWT/OAuth2, authorization dependencies, background tasks, lifespan events, WebSockets e middlewares de auditoria","Integrações e workers: Celery, RQ, Dramatiq/Arq, Redis/RabbitMQ/SQS, retries, DLQ, idempotência, scheduled jobs e task monitoring","Mensageria: Kafka básico/intermediário, producers/consumers, consumer groups, offsets, retry, poison messages e contratos de eventos","Observabilidade Python: logging estruturado, correlation ID, Sentry, OpenTelemetry, métricas HTTP, traces e health checks","Segurança backend: CORS, CSRF quando aplicável, hash de senha, secrets management, SQL/NoSQL injection, validação de input, rate limit e LGPD","Deploy backend: Dockerfile, Docker Compose, Uvicorn/Gunicorn, Nginx/reverse proxy, env vars, CI/CD, rollback e cloud básico","Projeto: API FastAPI profissional com PostgreSQL, Redis, auth, testes, Docker, OpenAPI, logs, migrations e README técnico"],
-db:["PostgreSQL intermediário/avançado: JSONB, arrays, enums, full-text search, expression indexes, partial indexes, GIN/GiST/BRIN","SQL analítico: window functions, CTEs recursivas, ranking, agregações, views, materialized views e relatórios performáticos","Performance SQL: reescrita de queries lentas, índices por padrão de acesso, estatísticas, cardinalidade e custo de ordenação","Migrations seguras: expand-contract, backfill, criação de índice sem travar produção, mudanças compatíveis entre versões","Observabilidade de banco: slow queries, locks, deadlocks, cache hit ratio, I/O, CPU, pool, timeouts e dashboards mínimos","MongoDB fundamentos: document, collection, BSON, _id, CRUD, projections, sort, pagination, update operators e schema validation","Entregável: relatório de query tuning com 3 queries lentas, plano antes/depois, índice aplicado e impacto medido"],
-devops:["CI/CD profissional: GitHub Actions com build → test → quality gate → security scan → package → deploy","GitHub Actions avançado: matrix builds, environments, secrets, artifacts, reusable workflows, cache Maven/Gradle/Docker","Jenkins: Jenkinsfile declarativo, stages, agents, credentials, shared libraries e comparação com GitHub Actions","Estratégias de entrega: trunk-based development, feature flags, canary, blue/green, approval gates e rollback","Quality gates: SonarQube, JaCoCo, lint, testes unitários/integração, cobertura mínima e bloqueio de merge","DevSecOps no pipeline: Trivy, Dependabot, CodeQL, secret scanning, OWASP ZAP básico e análise de risco por CVE","DORA Metrics: deployment frequency, lead time for changes, change failure rate, MTTR e coleta inicial por pipeline"],sec:["Auth/Authz em produção: OAuth2, OIDC, audience/issuer validation, scopes, claims e expiração coerente de tokens","RBAC e ABAC: autorização por recurso, tenant isolation, policy tests e negação por padrão","OWASP API Security Top 10: BOLA/BFLA, schema validation, rate limiting, idempotência e proteção contra abuse","Mensageria e cache seguros: autenticação em Redis/Kafka, namespaces, TTLs corretos e validação de payload/evento","Threat modeling STRIDE dos fluxos críticos do DevCore antes de escalar a plataforma"],
-git:["Git interno: HEAD, refs, objects, blobs, trees, commits, tags, hashes e DAG do histórico","Recuperação e diagnóstico: reset, revert, restore, stash, reflog, cherry-pick e bisect","Release básico: SemVer, tags anotadas, changelog, release notes e rastreabilidade de versão","Entregável: simular regressão e localizar commit causador com git bisect"],
-arquitetura:["Mensageria: queue, topic, pub/sub, DLQ, retry, poison message, correlation ID, routing e transformation","Enterprise Integration Patterns: idempotent receiver, splitter, aggregator, translator, router e compensação","Observabilidade de integração: traceId, spanId, logs estruturados, métricas de consumo e rastreio ponta a ponta","Entregável: fluxo fila-consumidor-DLQ-reprocessamento com documentação operacional"],
-frontend:["JavaScript profundo: event loop, microtasks/macrotasks, promises, modules, errors e debugging no browser","Browser APIs: Fetch, AbortController, Storage, URL APIs, History, IntersectionObserver e performance timeline","TypeScript base: strict mode, unions, narrowing, generics, API types, schema validation e tsconfig","Entregável: app vanilla + TypeScript consumindo API com cancelamento e validação"],
-aws:{cert:"SAA-C03 (continuação)",exam:null,topics:["ElastiCache: Redis vs Memcached, cluster mode","DynamoDB: single-table, GSI/LSI, streams, DAX, TTL","Lambda: triggers, layers, concurrency, Lambda@Edge","API Gateway: REST vs HTTP, authorizers, caching","SQS + SNS: FIFO, DLQ, fan-out, filter policies","CloudFront: distributions, OAC, cache policies","Route 53: routing policies, health checks, failover"]},
-math:["Álgebra linear I: vetores, escalares, operações, norma L1/L2, produto interno, ângulo entre vetores e ortogonalidade","Geometria vetorial aplicada: distância euclidiana, Manhattan e Mahalanobis, projeção vetorial, mudança de base e subespaços","Matrizes: tipos, transposta, determinante, inversa, sistemas lineares, multiplicação matricial e interpretação computacional","Transformações lineares: rotação, escala, cisalhamento, projeção, composição de transformações e matrizes como funções","Embeddings: vetores em alta dimensão, normalização, curse of dimensionality, dot product, cosine similarity e busca vetorial","Probabilidade I: axiomas, eventos, probabilidade condicional, independência, Bayes e interpretação de incerteza","Variáveis aleatórias: esperança, variância, desvio padrão, covariância e distribuições binomial, Poisson e normal","Aplicação em IA: matrizes em transformers, embeddings, similaridade semântica, recomendação e clustering","Entregável: notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade entre textos"],
-ia:["Build a Large Language Model — Raschka (Sem 15–24): tokenização, BPE, datasets, embeddings, positional encoding e attention","Transformers técnicos: causal attention, multi-head attention, layer norm, GELU, residual connections e GPT small","NLP/LLMs: contexto, geração, decoding, temperature, top-k/top-p, avaliação inicial e limitações","Entregáveis: tokenizer educacional, notebook de attention, mini GPT e artigo técnico com trade-offs"],
-fin:["Mód 16: Fundos de investimento","Mód 17–18: Ações (P/L, ROE, DY), FIIs","Mód 19–20: ETFs, BDRs, exterior, criptoativos","Mód 21–22: Gestão de risco e alocação"]},
-{id:4,l:"Fase 4",w:"Sem 25–32",h:924,t:"Arquitetura + candidaturas",cand:true,cn:"Candidaturas iniciam semana 25 — portfólio com Spring Boot + testes + Docker + K8s + 2 certs AWS",
-java:["Spring Boot avançado: profiles, starters customizados, Actuator","Padrões distribuídos: Saga, Outbox, CQRS, idempotência","Resilience4j: circuit breaker, retry, rate limiter, bulkhead","Caching: cache aside, write-through, invalidação Kafka","OpenAPI Generator: client/server a partir de contratos","Concorrência: CompletableFuture, virtual threads Java 21","Refatoração: módulos, bounded contexts em monólito modular"],
-blog:["Rate limiting granular: IP, usuário, endpoint com Redis","Email assíncrono: Thymeleaf + Kafka → email-worker","Paginação cursor-based para feeds de posts","Versionamento de API: v1/v2 com strategy pattern","OpenAPI Generator: SDK client em Python","Métricas: SonarQube integrado, dashboard cobertura","Moderação inteligente: filtro spam + fila aprovação"],
-py:["Dados com NumPy: arrays, broadcasting, slicing, vetorização, álgebra linear básica, random, shapes e operações performáticas","Pandas forte: DataFrames, Series, leitura CSV/Parquet/JSON, filtros, merge/join, groupby, pivot, datas, missing values e tipos","Polars diferencial: lazy evaluation, expressões, leitura de arquivos grandes, joins performáticos e quando preferir Polars a Pandas","Visualização: Matplotlib, Seaborn/Plotly, distribuição, correlação, séries temporais, outliers e análise exploratória","Feature engineering: encoding, scaling, normalização, tratamento de nulos, criação de variáveis, data leakage e separação train/test","Scikit-learn I: preprocessing, pipelines, train/test split, cross-validation, regressão, classificação e baseline models","Métricas ML: accuracy, precision, recall, F1, ROC-AUC, PR-AUC, confusion matrix, MAE, RMSE, R² e threshold tuning"],
-db:["MongoDB modelagem: embed vs reference, one-to-one, one-to-many, many-to-many, arrays crescentes, documentos grandes e duplicação controlada","MongoDB índices: single field, compound, multikey, text, TTL, sparse, partial, unique, covered queries e explain plan","Aggregation Framework: $match, $project, $group, $sort, $limit, $lookup, $unwind, $facet, $merge e quando evitar agregação pesada","Transações MongoDB: atomicidade por documento, multi-document transactions, session, read concern, write concern e custo operacional","Operação MongoDB: replica set, primary/secondary, election, read preference, write concern, backup/restore e limites de documento","NoSQL design: modelagem orientada ao padrão de acesso, consistência eventual, duplicação controlada e anti-patterns de documento","Entregável: ADR PostgreSQL vs MongoDB para um módulo do blog/projeto com exemplos de documentos, índices e consultas"],
-devops:["Kubernetes core: pods, deployments, replica sets, services, namespaces, labels, selectors e kubectl","K8s config e segurança: ConfigMaps, Secrets, resource requests/limits, service accounts e princípio de menor privilégio","K8s networking operacional: ClusterIP, NodePort, LoadBalancer, ingress NGINX, DNS interno, service endpoints e troubleshooting","K8s storage: PV, PVC, StorageClasses, dynamic provisioning, montagem de volumes e falhas comuns de mount","K8s probes: liveness, readiness, startup + Actuator, tuning para evitar restart indevido e indisponibilidade falsa","K8s troubleshooting: CrashLoopBackOff, ImagePullBackOff, rollout travado, kubectl describe/logs/events, resource pressure e rollback","Minikube/k3d: cluster local, deploy do blog, debug de pods, simulação de falhas e documentação do processo"],sec:["Cloud security base: IAM least privilege, roles separadas, KMS, Secrets Manager e redes privadas por ambiente","Proteção de dados: criptografia em repouso e em trânsito, backups, rotação de chaves e controles de acesso a objetos","Containers seguros: imagens mínimas, usuário não-root, base image hygiene, secrets injection e hardening inicial","Supply chain: SCA, versões fixadas, proveniência de pacotes, registries confiáveis e política de atualização","WAF, CDN e mitigação básica de abuso para endpoints públicos e assets"],
-git:["CI/CD conectado ao Git: GitHub Actions, GitLab CI, Azure Pipelines, Bitbucket Pipelines e checks obrigatórios","Pipelines de PR: testes, build, lint, cache, artifacts, matrix builds e ambientes","Hooks e automação local: pre-commit, commitlint, lint-staged, secret checks e validações antes do push","Entregável: pipeline obrigatório rodando teste, build e quality gate antes do merge"],
-arquitetura:["Event-driven architecture: eventos de domínio, eventos de integração, Kafka, EventBridge e contratos assíncronos","AsyncAPI, CloudEvents, Schema Registry, compatibility, event catalog, replay, ordering e consumer lag","Padrões de consistência: Outbox, Inbox, consumidor idempotente, deduplicação e evolução de schema","Entregável: fluxo order.created → payment.approved → invoice.issued com contrato versionado"],
-frontend:["React: componentes, props, state, hooks, composição, forms, controlled/uncontrolled e boas práticas de renderização","Server state: TanStack Query/SWR, cache, invalidation, optimistic updates, retries e sincronização com API","Testes: Vitest/Jest, React Testing Library, MSW, testes de acessibilidade e cobertura de fluxos críticos","Entregável: dashboard React + TypeScript com filtros, paginação, testes e estados"],
-aws:{cert:"SAA-C03 (prova) + DVA-C02 (início)",exam:"Prova SAA-C03 semana 30-31",topics:["DR: backup/restore, pilot light, warm standby, active-active","Decoupled architectures: event-driven, saga, CQRS na AWS","Well-Architected Framework: 6 pillars","DVA-C02: Lambda + DynamoDB + API Gateway + SDK","Cognito: user pools, identity pools, JWT, hosted UI","CodePipeline + CodeBuild + CodeDeploy","X-Ray: tracing, sampling, service map"]},
-math:["Álgebra linear II: autovalores, autovetores, decomposição espectral, diagonalização e interpretação geométrica","PCA: centralização, matriz de covariância, componentes principais, variância explicada e redução de dimensionalidade","SVD: decomposição, compressão, recomendação, latent factors e comparação com PCA em dados reais","Cálculo I: limites, derivadas, derivadas parciais, taxa de variação e interpretação geométrica do gradiente","Gradiente: vetor gradiente, gradiente descendente, função de custo, learning rate e convergência","Cálculo II: regra da cadeia, integrais básicas, Jacobiano, Hessiana e noção de curvatura","Probabilidade aplicada: likelihood, log-likelihood, MLE, MAP, prior, posterior, evidence e calibration","Otimização: pontos críticos, convexidade, Lagrange, saddle points, mínimos locais/globais e gradient checking","Entregável: PCA/SVD manual com NumPy + comparação com scikit-learn + implementação manual de gradient descent"],
-ia:["Build LLM (cont.): training loop, loss, perplexidade, avaliação, geração controlada, classificação e instruction fine-tuning","Fine-tuning/LoRA: PEFT, dataset supervisionado, comparação com baseline, relatório técnico e README de portfólio","Avaliação técnica: loss, perplexidade, BLEU/ROUGE/BERTScore quando aplicável, análise de erro e limitações","Responsible AI inicial: vieses, privacidade, segurança, model card, dataset card e critérios de uso seguro"],
-fin:["Mód 23: Impostos sobre investimentos","Mód 24: Planejamento financeiro de vida","Mód 25–26: Contabilidade e economia aplicada","Mód 27–28: Empreendedorismo e produtos digitais"]},
-{id:5,l:"Fase 5",w:"Sem 33–40",h:924,t:"Cloud + sistemas distribuídos",cand:true,cn:"Candidaturas ativas — processos seletivos geram feedback real",
-java:["AWS aplicado: EKS, RDS, ElastiCache, S3, CloudFront, SQS/SNS","Sistemas distribuídos: CAP, consistência eventual, relógios lógicos","Mensageria: Kafka Streams, particionamento, exactly-once","Redis avançado: Lua scripts, pub/sub, Streams, geospatial","gRPC: Protocol Buffers, streaming, interceptors, deadline","Event Sourcing: append-only, projeções, snapshots","SRE: SLI/SLO/SLA, error budget, postmortem"],
-blog:["Deploy AWS: EKS + RDS Multi-AZ + ElastiCache + S3 + CloudFront","OpenTelemetry: trace ponta a ponta com correlation ID","Analytics: page views, tempo leitura, trending, funil","RSS + Atom + sitemap.xml + meta og/twitter + JSON-LD","Terraform: VPC, EKS, RDS, S3, CloudFront, Route 53 como código","SRE: health checks, alertas CloudWatch, SLO 99.9%","Feature flags: deploy sem risco, A/B testing"],
-py:["Scikit-learn II: Random Forest, Gradient Boosting, SVM, KNN, clustering, PCA, model selection e hyperparameter tuning","MLflow básico: experiment tracking, parâmetros, métricas, artifacts, model registry inicial e comparação de experimentos","PyTorch fundamentos: tensors, shapes, broadcasting, autograd, nn.Module, loss functions, optimizers e training loop","Datasets e treinamento: Dataset/DataLoader, batching, checkpoints, validation loop, early stopping, GPU básica e inferência","Embeddings e NLP: tokenização, sentence embeddings, Hugging Face tokenizers/pipelines e uso de modelos pré-treinados","Fine-tuning prático: LoRA/PEFT conceitual, classificação com transformer pré-treinado, avaliação e limites de custo","Projeto: pipeline ML com Pandas/Scikit-learn/MLflow + endpoint FastAPI de inferência + Docker"],
-db:["Redis estruturas: Strings, Hashes, Lists, Sets, Sorted Sets, Bitmaps, HyperLogLog, Streams, TTL e convenção de nomes de chaves","Cache profissional: cache-aside, read-through, write-through, write-behind, cache warming, stale-while-revalidate e invalidação por evento","Problemas de cache: cache stampede, cache penetration, cache avalanche, chaves sem TTL, payload grande e inconsistência","Redis produção: persistence RDB/AOF, replication, Sentinel, Cluster, maxmemory, eviction policies, slowlog, ACL e TLS","Redis Streams: consumer groups, pending entries, ACK, retry, DLQ, ordering, trimming e idempotência no consumidor","DynamoDB inicial: partition key, sort key, GSI/LSI, single-table design, conditional writes, TTL, Streams e hot partitions","Entregável: cache Redis com TTL/invalidação + rate limit + dashboard simples de hit/miss e memória"],
-devops:["K8s avançado: Helm charts, values.yaml, chart repos, templates, releases, rollback e versionamento","K8s autoscaling: HPA, VPA, cluster autoscaler, requests/limits coerentes e análise de saturação","K8s security: RBAC, NetworkPolicies, secrets encryption, admission policies básicas e container security context","Terraform profissional: providers, resources, variables, outputs, locals, state, modules, naming e tagging padrão","Terraform por ambiente: dev/staging/prod, workspaces ou diretórios, remote state S3+DynamoDB, locking, plan em Pull Request e drift review","Observabilidade: Prometheus, Grafana, PromQL, alertas acionáveis, OpenTelemetry, Jaeger, logs estruturados e correlation IDs","FinOps inicial: budgets, tags de custo, rightsizing, custo de logs, NAT Gateway, EKS, storage e relatório mensal por ambiente"],sec:["DevSecOps pipeline: SAST, SCA, secrets scanning, container scanning, quality gates e bloqueio de merge por risco crítico","IaC security: tfsec/checkov, policy as code, revisão de drift e compliance automática em Terraform/Kubernetes","Kubernetes security: RBAC, NetworkPolicies, securityContext, admission policies e hardening de cluster","Supply chain avançada: SBOM, assinatura de artefatos, provenance e controle de dependências transitivas","Detecção inicial: alertas de segurança, auditoria, correlação com observabilidade e trilha de eventos sensíveis"],
-git:["Segurança em repositório: secret scanning, code scanning, Dependabot/Renovate, tokens, permissões e .env seguro","Governança: branch protection, CODEOWNERS, signed commits/tags, approvals, environments e auditoria","Release management: versionamento, changelog, rollback, aprovação por ambiente e rastreabilidade task → PR → deploy","Entregável: repositório protegido com CODEOWNERS, scans e política de release"],
-arquitetura:["Integração de dados: CDC, Debezium, ETL/ELT, batch, arquivos, modelo canônico e data contracts","Governança de dados: lineage, schema evolution, LGPD, privacidade, catálogo, qualidade e rejeições","Consistência distribuída: Saga, compensação, consistência eventual, CQRS e limites transacionais","Entregável: PostgreSQL → Debezium → Kafka → consumidor e batch com relatório de rejeições"],
-frontend:["Next.js: App Router, Server Components, Client Components, SSR, SSG, ISR, route handlers, cache e metadata","Segurança frontend: cookies HttpOnly, CSRF, XSS, CSP, RBAC, validação de formulário e proteção de rotas","Performance: Core Web Vitals, bundle analysis, imagens, streaming, lazy loading, cache e métricas","Entregável: app Next.js com auth, CRUD, metadata, sitemap e relatório de performance"],
-aws:{cert:"DVA-C02 — Developer Associate (cont.)",exam:null,topics:["DynamoDB: transactions, conditional writes, TTL, PartiQL","Lambda: SnapStart Java, provisioned concurrency, extensions","CloudFormation: templates, intrinsic functions, change sets","Secrets Manager vs Parameter Store: rotation, referência","EventBridge: rules, schedules, pipes, schema registry","Step Functions: standard vs express, error handling","ECS vs EKS: Fargate, task definitions, service discovery"]},
-math:["Estatística I: estimadores, viés, variância, intervalo de confiança, erro padrão e interpretação prática","Estatística II: teste de hipótese, p-value, erro tipo I/II, poder estatístico, tamanho de amostra e significância","Produto e experimentação: A/B testing, uplift, análise de coorte, métricas de conversão, correlação vs causalidade","Regressão e correlação: regressão linear, regressão logística, ANOVA, correlação Pearson/Spearman e interpretação de coeficientes","Bayes aplicado: prior, posterior, atualização bayesiana, incerteza, calibration e tomada de decisão probabilística","Entropia e informação: entropia, entropia cruzada, divergência KL, perplexidade e relação com classificação/LLMs","Otimização em ML: SGD, Adam, momentum, learning rate schedules, batch size effect e gradient clipping","Regularização: L1, L2, dropout, early stopping, weight decay, overfitting, underfitting e bias-variance tradeoff","Entregável: experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório interpretativo"],
-ia:["Agentic Artificial Intelligence (Sem 33–40): níveis de autonomia, tool use, reasoning, memory e sistemas multiagentes","Agentes seguros: catálogo de tools, permissões mínimas, limites de ação, timeout, fallback humano e audit log","LLMOps inicial: versionamento de prompt/modelo, custo, latência, qualidade, logs, rollback e monitoramento","Entregáveis: especificação de agente por nível de autonomia, tool registry e protótipo com tool use controlado"],
-fin:["Mód 29: IA aplicada a ganhos financeiros","Mód 30: Finanças avançadas (DCF, WACC, CAPM)","Mód 31: Proteção patrimonial e segurança","Checklist domínio financeiro completo"]},
-{id:6,l:"Fase 6",w:"Sem 41–48",h:924,t:"IA aplicada + RAG + agentes",cand:true,cn:"Entrevistas técnicas ativas — feedback vira priorização",
-java:["Embeddings e pgvector: indexação HNSW, cosine similarity","RAG: chunking, retrieval, reranking, citação, controle acesso","Avaliação LLM: suite testes, detecção alucinação, métricas","Agentes IA: tool use, ReAct, memória, fallback humano","LLMOps: custo, latência p95, versionamento prompts, A/B","Integração Java-Python: Spring Boot ↔ FastAPI via REST/gRPC","API Gateway patterns: BFF, composition, rate limiting"],
-blog:["pgvector: embeddings posts para busca semântica","Posts relacionados via RAG: similaridade semântica","Auto-tagging: LLM sugere tags com confidence score","Agente blog: chat RAG com citação de fontes","Sugestão SEO: LLM gera títulos, meta description","LLMOps: painel custo IA, latência, avaliação","Cache inteligente: embeddings pré-computados"],
-py:["LLM fundamentals: tokens, context window, temperature, top-p, system/user prompt, structured output, function/tool calling e streaming","RAG pipeline: ingestão, parsing, chunking, overlap, embeddings, vector store, retrieve, rerank, generate, citations e grounding","Vector stores: pgvector, Chroma, Qdrant/Pinecone/Weaviate, FAISS, HNSW, metadata filters, namespaces e similarity search","LangChain/LlamaIndex: loaders, retrievers, chains, tools, memory, agents básicos e quando evitar abstração excessiva","LangGraph e agentes: tool use, ReAct, workflows com estado, human-in-the-loop, retries, validação Pydantic e auditoria","Avaliação RAG/LLM: faithfulness, context relevance, answer relevance, hallucination checks, golden datasets e testes automatizados","Segurança em IA: prompt injection, data leakage, ACL por documento, masking, logs sem PII, rate limiting e proteção de ferramentas"],
-db:["Bancos em microsserviços: database per service, shared database anti-pattern, ownership de dados, boundaries e integração por eventos","Outbox Pattern: gravação transacional, publicação assíncrona, polling/CDC, idempotência, reprocessamento e limpeza de outbox","Saga e consistência: orchestration vs choreography, compensações, estados intermediários, falhas parciais e reconciliação","CQRS e read models: separação leitura/escrita, projeções, materialized views, atualização eventual e rebuild de projeções","Event Sourcing: append-only log, snapshots, replay, auditoria, versionamento de eventos e quando evitar complexidade","CDC: Debezium conceitual, captura de mudanças, integração com Kafka, ordenação, schema evolution e consumidores idempotentes","Entregável: fluxo pedido/post publicado com PostgreSQL + Outbox + Kafka + Redis/Mongo read model documentado"],
-devops:["Terraform avançado: import, lifecycle, data sources, for_each, moved blocks, refactoring seguro e rollback de infraestrutura","AWS CDK: constructs, stacks, L1/L2/L3, synth, deploy, diff e comparação prática com Terraform","IaC testing e compliance: Terratest, Checkov, tfsec, Sentinel/OPA, policy as code e validação em pipeline","Kubernetes operators: custom resources, controller pattern, reconciliação e quando não criar complexidade desnecessária","Service mesh: Istio basics, traffic splitting, retries, circuit breaking, mTLS, observability e riscos operacionais","SRE prático: SLIs, SLOs, error budgets, golden signals, alertas por sintoma, runbooks e incident response","Chaos engineering: Litmus, game days, blast radius, simulação controlada de falhas e postmortem blameless"],sec:["AppSec avançado: SSRF, path traversal, deserialization, file processing inseguro, object storage ACL e parser abuse","Zero Trust e service-to-service security: mTLS, identidade de workload, gateway policies e segmentação entre serviços","Runtime/container security: detecção de comportamento anômalo, capabilities mínimas e enforcement em produção","Multi-tenant security: isolamento de dados, cache namespace safety, row-level security e boundary tests","Security chaos drills e validação periódica dos controles implantados no ecossistema"],
-git:["Estratégia sênior de branching: trunk-based, GitFlow, release branches, feature flags e critérios de escolha","Monorepo vs multirepo: boundaries, packages, workspaces, CODEOWNERS, affected builds e ownership","GitOps: Git como fonte da verdade, ArgoCD/Flux, drift detection, pull-based deploy e rollback","Entregável: documento de governança de versionamento para um projeto real"],
-arquitetura:["Solução cloud: Well-Architected, VPC/VNet, containers, Kubernetes/ECS, serverless, API Management e event bus","Arquitetura operacional: observabilidade, segurança, FinOps, backup, DR, rollback, ambientes e CI/CD","Architecture review: reliability, security, performance, cost, operational excellence e riscos","Entregável: solução AWS/Azure com C4, ADRs, rollback e estimativa de custo"],
-frontend:["Design System: tokens, Storybook, componentes headless, compound components, theming e documentação","Component API: acessibilidade, variantes, slots, estado controlado, composição e compatibilidade entre produtos","Testes visuais e governança: Playwright/Chromatic, versionamento, changelog e guidelines de contribuição","Entregável: design system documentado, testado e versionável"],
-aws:{cert:"DVA-C02 (prova) + revisão",exam:"Prova DVA-C02 semana 46-47",topics:["Elastic Beanstalk: deployment policies, .ebextensions","Kinesis: Data Streams vs Firehose vs Analytics","CloudWatch: custom metrics, composite alarms, Evidently","IAM: permission boundaries, SCP, resource-based, ABAC","Revisão DVA-C02: simulados Tutorials Dojo","Well-Architected Tool: review do blog","Cost optimization: Compute Optimizer, rightsizing"]},
-math:["Álgebra linear para deep learning: batch matrix multiplication, broadcasting, tensores, shapes e custo computacional","Attention: Q·K^T/√d, softmax, multiplicação por V, masked attention, cross-attention e interpretação de pesos","Backpropagation: regra da cadeia, computational graph, autograd, fluxo de gradiente e cálculo de loss","Loss functions: MSE, cross-entropy, focal loss, contrastive loss e relação com objetivos de treinamento","Ativações: ReLU, GELU, SiLU, sigmoid, tanh, saturação, propriedades de gradiente e escolha prática","Normalização: batch norm, layer norm, RMSNorm, estabilização, treinamento profundo e transformers","Similaridade e retrieval: cosine, dot product, euclidiana, Jaccard, threshold de similaridade e normalização de embeddings","Métricas RAG/LLM: faithfulness, answer relevance, context precision, context recall, hallucination rate e groundedness","Entregável: implementação de self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes"],
-ia:["RAG em produção: ingestão, parsing, chunking, embeddings, retrieval, reranking, geração com citações, grounding e ACL","Avaliação LLM/RAG: golden dataset, faithfulness, answer relevance, context precision/recall e regressão automática","Agentes com RAG: memória, tools, logs, avaliação, human-in-the-loop, fallback, limites de custo e segurança contra prompt injection","Projeto: agente RAG com ferramentas, dashboard de custo/latência/qualidade e documentação de segurança"],
-fin:["Revisão geral checklist financeiro","Aplicação: planilha, carteira simulada, oferta serviço","Planejamento com projeção de nova renda"]},
-{id:7,l:"Fase 7",w:"Sem 49–56",h:924,t:"Produto + frontend + escala",cand:true,cn:"Candidaturas maduras — portfólio completo",
-java:["Produto completo: arquitetura end-to-end, diagramas C4","Multi-tenancy: schema per tenant, row-level security","Webhooks: retry, idempotência, signature verification","Job scheduling: Quartz, Spring Batch, processamento batch","API versioning: header vs URL, deprecation, migration","Testes de carga: Gatling/k6, profiling, tuning","Documentação: ADRs, RFCs, runbooks"],
-blog:["Frontend Next.js 15: App Router, SSG, ISR, server components","Design system: shadcn/ui + Tailwind, dark mode, tokens","Acessibilidade: WCAG 2.1 AA, aria-labels, keyboard nav","Performance: Lighthouse > 90, WebP, code splitting, lazy load","PWA: service worker, manifest.json, offline reading","Analytics frontend: scroll depth, click events, conversão","i18n: suporte pt-BR e en-US com next-intl"],
-py:["MLOps/LLMOps: MLflow avançado, model registry, prompt/version tracking, dataset versioning, evaluation, monitoring, rollback e A/B testing","Data pipelines: Airflow básico, DAGs, operators, retries, scheduling, logs, backfill e pipelines para ingestão/avaliação de IA","Serving e produção: FastAPI model serving, batch vs online inference, filas, cache, latência p95, custo por request e fallback","Observabilidade de IA: logs de prompt/contexto/resposta, métricas de qualidade, custo, latência, taxa de erro, feedback loop e drift básico","Python performance: cProfile, memory profiling, async vs threading vs multiprocessing, otimização de I/O e análise de gargalos","Packaging e ferramentas: criação de pacote interno, CLI com Typer/Rich, distribuição com pipx e automações de deploy/análise de logs","Projeto: RAG privado com upload de documentos, ACL por usuário, vector DB, citações, avaliação, segurança e dashboard de custo/latência"],
-db:["Operação SQL/NoSQL: backup lógico/físico, snapshot, point-in-time recovery, restore testado, retenção, RPO, RTO e drill","Segurança de dados: menor privilégio, roles/grants, secrets, rotação de senha, TLS, encryption at rest/in transit e audit log","LGPD aplicada: minimização, consentimento, retenção, exclusão, exportação, masking, pseudonimização e trilha de auditoria","Troubleshooting de produção: query lenta, lock, deadlock, pool saturado, replication lag, timeouts, disk I/O e falta de índice","Particionamento e escala: range/list/hash partitioning, sharding conceitual, replicas de leitura, read/write split e limites","OpenSearch/Elasticsearch: inverted index, mappings, analyzers, full-text search, aggregations, shards, replicas e uso para logs/busca","Entregável: runbook de banco lento + restore testado + checklist de segurança para PostgreSQL, MongoDB e Redis"],
-devops:["GitOps em produção: ArgoCD, sync policies, auto-sync, manual sync, rollback, app-of-apps e drift detection","K8s production readiness: PDB, topology spread, affinity/anti-affinity, taints/tolerations e capacity planning","Logging centralizado: Fluentd/Fluent Bit → Elasticsearch/OpenSearch → Kibana, retenção, parsing e custo de ingestão","APM e tracing: Elastic APM ou Datadog, distributed tracing, traceId, spanId, RED/USE metrics e investigação de latência","Infrastructure monitoring: node exporter, kube-state-metrics, blackbox exporter, dashboards por serviço e alertas úteis","CI/CD avançado: multi-env, approval gates, progressive delivery, rollback automatizado, change calendar e auditoria de deploy","Container security avançado: distroless, non-root, readonly filesystem, seccomp, capabilities, image signing e SBOM"],sec:["Threat modeling avançado: abuse cases, misuse cases, data flow diagrams e revisão de trust boundaries do sistema completo","Vulnerability management: triagem, CVSS, SLA de correção, backlog de remediação e evidência de fechamento","Incident response: runbooks, severidades, contenção, recuperação, comunicação e postmortem blameless","Governança e conformidade: LGPD, retenção, access review, evidências de auditoria e segregação de funções","Security architecture review de microservices, eventos, integrações externas e cadeias de autenticação"],
-git:["Governança avançada: auditoria, migração entre plataformas, arquivamento, compliance e política de retenção","GitOps em produção: sync policies, promoção de ambientes, rollback, app-of-apps e trilha de aprovação","Métricas de fluxo: DORA, tamanho de PR, tempo de review, checks instáveis, lead time e gargalos","Entregável: relatório de saúde do fluxo de desenvolvimento com plano de melhoria"],
-arquitetura:["Arquitetura avançada: Saga, CQRS, Event Sourcing, Service Mesh, Zero Trust, multi-region e multi-tenancy","Modernização de legado: Strangler Fig, Anti-Corruption Layer, migração incremental e coexistência","Governança sênior: RFCs, design authority, risk assessment, trade-off analysis e roadmap técnico","Entregável: migração incremental de monólito para eventos com RFC, ADRs e rollback"],
-frontend:["Arquitetura frontend: organização por features, boundaries, BFF, critérios para micro-frontends e integração com backend","Observabilidade: RUM, Web Vitals, logs de erro, tracing frontend-backend, alertas e error budget","Migração: modernização de legado, strangler pattern, feature flags, rollout gradual e compatibilidade","Entregável: arquitetura frontend sênior integrada ao backend com ADRs e métricas"],
-aws:{cert:"SOA-C03 ou revisão avançada",exam:"Planejamento próxima cert",topics:["Systems Manager: Run Command, Patch Manager","CloudWatch: Logs Insights, anomaly detection","Organizations: SCPs, consolidated billing, OUs","Config + GuardDuty + Security Hub","Backup: lifecycle, cross-region, cross-account","Migration: DMS, SCT, strategies","Cost management: Explorer, Savings Plans, Spot fleet"]},
-math:["Teoria da informação: entropia de Shannon, informação mútua, compressão, incerteza e relação com modelos probabilísticos","Probabilistic ML: Naive Bayes, Gaussian Mixture, EM em nível prático e interpretação probabilística","Kernels: RBF, polynomial, SVM, kernel trick e noção de espaço de características","Séries temporais: autocorrelação, tendência, sazonalidade, ARIMA básico, previsão e validação temporal","Grafos e redes: PageRank, community detection, centralidade, ranking e aplicações em busca/recomendação","Retrieval e ranking: TF-IDF, BM25, dense retrieval, sparse retrieval, hybrid search, reranking e score de similaridade","Métricas de busca/RAG: precision@k, recall@k, hit rate, MRR, MAP, NDCG, retrieval hit rate e threshold tuning","Otimização convexa: dualidade, KKT, programação linear e trade-offs em problemas de otimização","Entregável: comparação BM25 vs embeddings em um dataset próprio, avaliando MRR/NDCG e documentando decisão técnica"],
-ia:["Consolidação dos 9 livros + campos de IA em uma arquitetura de produto: dados → modelos → decisões → ações → feedback → governança","Projeto integrado: microSaaS com IA, plataforma de agentes ou copiloto RAG com autenticação, billing, logs e métricas","Portfólio técnico: artigos sobre LLMs, RAG, agentes, evals, segurança, LLMOps, AI Factory e estudos de caso","Critérios de aceite: demo funcional, README, diagramas, métricas de custo/latência/qualidade, testes e runbook operacional"],
-fin:["Empreendedorismo: microSaaS, automações como produto","Negociação salarial: CLT vs PJ vs remoto"]},
-{id:8,l:"Fase 8",w:"Sem 57–64",h:924,t:"Portfólio final + negociação",cand:true,cn:"Entrevistas finais + negociação de oferta",
-java:["System design: sharding, replication, caching, CDN, queues","Coding interviews: HashMap, BFS/DFS, DP, sliding window","Behavioral: STAR method, trade-offs, conflict resolution","Mock interviews: system design + coding + behavioral semanais","Revisão: Kafka, Redis, Spring Security, K8s, AWS, testes","Negociação: contratos, equity, RSU, stock options","Career planning: arquitetura? IA? plataforma? liderança?"],
-blog:["Launch: pentest OWASP ZAP, performance audit, SEO, a11y","Domínio próprio + SSL ACM + CloudFront + Route 53","10+ posts técnicos: ADRs públicos, comparações, tutoriais","Vídeo apresentação (15-20min): arquitetura, decisões","Case study: MVP ao produto com IA em produção","Blog como portfólio vivo: posts = competências"],
-py:["Python system design: quando usar Python vs Java, serviços híbridos, FastAPI para IA, workers assíncronos e contratos REST/gRPC/Kafka","Portfólio backend: API FastAPI completa, worker assíncrono, pipeline ML, RAG privado e agente com ferramentas documentados no GitHub","Python avançado: metaprogramação, descriptors, context managers avançados, decorators robustos, protocols e arquitetura de libs internas","Open source e qualidade: PR em FastAPI/LangChain/LlamaIndex ou lib menor, issue bem documentada, testes e contribuição rastreável","Revisão técnica: FastAPI, Django/DRF, SQLAlchemy, pytest, Docker, Pandas, Scikit-learn, PyTorch, LangChain/LangGraph e MLflow","Entrevistas: explicar async, GIL, typing, validação Pydantic, filas, testes, RAG, métricas de ML, segurança em IA, custo e latência","Case study: produto de IA em produção com Python + Java, API, RAG/agente, avaliação, observabilidade, CI/CD e trade-offs"],
-db:["Projeto final de dados: PostgreSQL transacional + MongoDB documental + Redis cache/rate limit + Kafka/Outbox + testes de integração","Case study: modelagem relacional, modelagem de documentos, chaves Redis, índices, migrations, queries complexas e decisões SQL/NoSQL","Performance final: EXPLAIN ANALYZE, correção de N+1, otimização de paginação, pool HikariCP, slow queries e métricas antes/depois","Observabilidade final: dashboards de banco, pool, latência, erros, locks, cache hit ratio, replication lag e alertas acionáveis","DR e segurança final: backup/restore real, RPO/RTO, roles, secrets, criptografia, auditoria, LGPD e plano de incidentes","Entrevistas: explicar ACID vs BASE, CAP, transações, índices, Mongo embed/reference, Redis cache, Outbox, Saga e consistência eventual","Portfólio: ADRs de banco, DER, collections Mongo, estratégia Redis, migrations Flyway, Testcontainers e relatório de tuning"],
-devops:["Infrastructure review final: auditoria completa da infra do blog, IAM, rede, custos, observabilidade, backups e segurança","Disaster recovery: backup, restore real, RTO/RPO, runbook, drill, failover simulado e validação pós-recuperação","Incident response: severidades SEV1/SEV2/SEV3, on-call simulado, timeline, comunicação, MTTR e postmortem blameless","Platform engineering: Developer Experience, self-service, golden paths, templates, paved roads e redução de toil","Documentação operacional: diagrama C4 de deploy, runbooks, playbooks, escalation policy, ADRs e catálogo de serviços","Performance e capacidade: load testing final com k6/Gatling, capacity planning, p95/p99, gargalos e plano de escala","Portfólio DevOps pleno: IaC documentada, pipeline completo, DORA Metrics, FinOps report, incidente simulado e case study técnico"],sec:["Secure SDLC consolidado: checklists por camada, gates por fase, threat model vivo e critérios mínimos antes de deploy","Portfólio de segurança: APIs endurecidas, auth segura, pipeline DevSecOps, IAM model, hardening e observabilidade de segurança","Conteúdo público: ADRs, posts técnicos, checklists OWASP aplicados e estudos de incidentes/remediações","Interview prep: OWASP, OAuth2/OIDC, JWT pitfalls, cloud/IAM, DevSecOps, threat modeling e secure design","Roadmap de 12 meses para AppSec/Cloud Security/DevSecOps como diferencial profissional forte"],
-git:["Maturidade final de repositório: README, ADRs, releases, tags, branch protection, CI/CD, security scans e evidências","Entrevistas: explicar merge/rebase, reset/revert, conflitos, branching strategy, monorepo, GitOps e governança","Portfólio: perfil GitHub/GitLab profissional, repositórios fixados, histórico de PRs/issues e changelog","Entregável: auditoria dos repositórios de portfólio e apresentação do fluxo de entrega"],
-arquitetura:["Arquitetura sênior: solução end-to-end, architecture review, security review, cost review e operational readiness","Comunicação executiva: trade-offs, riscos, roadmap, NFRs, RPO/RTO, FinOps e modelo operacional","Facilitação técnica: event storming, processo de ADR/RFC, mentoria, design review e governança evolutiva","Entregável: documento completo de arquitetura e apresentação para liderança técnica e negócio"],
-frontend:["Portfólio frontend final: Next.js production-like app, RUM, Web Vitals, E2E, CI/CD e deploy documentado","Auditoria sênior: segurança, performance, acessibilidade, SEO, testes, arquitetura e plano de correção","System design frontend: cache, BFF, auth, state, rendering strategy, deployment e observabilidade","Entregável: case study frontend sênior com demo, README, ADRs, testes e métricas"],
-aws:{cert:"Revisão + planejamento avançado",exam:"SOA-C03 ou DOP-C02 se aplicável",topics:["Revisão 3 certs: CLF + SAA + DVA","Well-Architected review completo do blog","Cost optimization final: rightsizing, Savings Plans","Security posture: IAM, GuardDuty, Security Hub","SOA-C03 ou DOP-C02 conforme carreira","AWS Community: artigos, perguntas, networking"]},
-math:["Revisão integral: lógica, Big O, grafos, álgebra linear, cálculo, probabilidade, estatística, otimização e métricas","Problemas de entrevista: puzzles, estimativas Fermi, análise de complexidade, grafos, árvores, recursão e programação dinâmica","Matemática de LLMs: attention, softmax, temperature, cross-entropy, perplexidade, embeddings e normalização","Matemática de embeddings: projeções, subespaços, normalização, cosine similarity, subspace clustering e alta dimensionalidade","Matemática de avaliação: intervalos de confiança, significância estatística, A/B testing, métricas de ML e métricas de RAG","Aplicação em produto: decidir métrica correta, interpretar experimento, explicar trade-off e medir melhoria real","Portfólio: caderno público 'Matemática para AI Engineering' com notebooks, gráficos, código e explicações","Entregável final: página/blog post consolidando cada conceito matemático com uma aplicação real em programação ou IA"],
-ia:["Consolidação final: revisão dos frameworks, checklists, projetos, evals, runbooks, documentação e entregáveis públicos","Monetização segura: diagnóstico de IA, agentes verticais, automações e consultoria apenas com validação, logs, limites e documentação","Case study completo: problema, arquitetura, dados, modelo, RAG/agente, avaliação, segurança, custos, trade-offs e próximos passos","Plano de evolução: LLMOps avançado, fine-tuning, multimodalidade, benchmark, governança e melhoria contínua"],
-fin:["Planejamento 12 meses com nova renda","Produtos digitais: lançamento com programação + IA","Independência financeira: projeção longo prazo"]}
+  {
+    "id": 1,
+    "l": "Fase 1",
+    "w": "Sem 1–13 · Meses 1–3",
+    "h": 910,
+    "t": "Fundamentos sólidos de engenharia",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java 21 Core: tipos, OOP, herança, polimorfismo, interfaces, collections, exceptions, generics, records e streams",
+      "Algoritmos básicos: arrays, listas, hashing, pilhas, filas, Big O e resolução diária de exercícios",
+      "Testes iniciais: JUnit 5, Mockito básico, assertions, mocks simples e cobertura mínima por feature",
+      "Clean Code e SOLID: nomes, funções pequenas, separação de responsabilidades e refatoração guiada"
+    ],
+    "blog": [
+      "DevCore base: repositório público, estrutura inicial, README em inglês e commits pequenos",
+      "API Java simples: CRUD inicial com validação e documentação básica",
+      "Entregáveis da fase: 1 API Java, 1 landing page, 50 exercícios Java, 30 exercícios SQL e 20 commits em inglês"
+    ],
+    "py": [
+      "Python base: sintaxe, funções, coleções, módulos, venv, pyproject e scripts pequenos",
+      "Automação simples: leitura de arquivos, JSON/CSV, logging e CLI básica para estudos"
+    ],
+    "db": [
+      "SQL básico/intermediário: SELECT, JOIN, GROUP BY, HAVING, CTE, subquery e constraints",
+      "Modelagem inicial: entidades, PK/FK, normalização, DER e migrations Flyway iniciais",
+      "PostgreSQL local: schemas, índices básicos, transações e seed controlado"
+    ],
+    "devops": [
+      "Linux e terminal: shell, permissões, processos, logs, curl, dig e troubleshooting básico",
+      "Docker base: Dockerfile simples, docker compose, containers para Postgres e aplicação"
+    ],
+    "sec": [
+      "Segurança base: CIA, autenticação x autorização, HTTPS, cookies seguros, validação e OWASP Top 10 visão geral",
+      "Práticas iniciais: secrets fora do repositório, .env seguro, BCrypt e checklist básico por endpoint"
+    ],
+    "git": [
+      "Git fundamental: working tree, staging, commit, branch, merge, remote, clone, fetch, pull e push",
+      "GitHub: README, issues, Pull Request simples, Conventional Commits e histórico limpo"
+    ],
+    "arquitetura": [
+      "Fundamentos: requisitos, restrições, stakeholders, trade-offs e diferença entre arquitetura de solução e integração",
+      "C4 inicial: contexto, containers, fluxo frontend-backend-banco e limites de responsabilidade"
+    ],
+    "frontend": [
+      "HTML semântico: headings, landmarks, formulários, labels, tabelas e SEO técnico inicial",
+      "CSS base: box model, flexbox, grid, responsividade mobile-first e acessibilidade básica",
+      "Landing page: deploy simples, Lighthouse inicial e README"
+    ],
+    "aws": {
+      "cert": "AWS Fundamentos — Preparação CLF-C02",
+      "exam": "Simulado diagnóstico no checkpoint",
+      "topics": [
+        "Cloud concepts, regiões, AZs, modelos IaaS/PaaS/SaaS e shared responsibility",
+        "IAM, MFA, S3, EC2, RDS, VPC e CloudWatch visão geral",
+        "Billing, budgets, Free Tier e noções de custo"
+      ]
+    },
+    "math": [
+      "Lógica matemática: proposições, tabelas-verdade, De Morgan, conjuntos e relações",
+      "Big O: crescimento constante, linear, logarítmico, quadrático e análise de loops"
+    ],
+    "ia": [
+      "Fundamentos de IA: o que é ML, DL, LLM, embeddings, RAG e limitações de IA generativa",
+      "Uso seguro de LLMs: prompts para estudo, validação de resposta e documentação de aprendizado"
+    ],
+    "fin": [
+      "Financeiro base: orçamento, receitas, despesas, reserva, dívidas e controle mensal",
+      "Registro financeiro: planilha/app de acompanhamento e revisão semanal"
+    ],
+    "ingles": [
+      "Reading técnico diário: documentação oficial, erros comuns, vocabulário e resumo curto",
+      "Commits e README em inglês desde o início",
+      "Speaking: 1 explicação oral curta por semana sobre o que foi implementado"
+    ],
+    "treino": [
+      "Treino: base aeróbica, mobilidade, cardio leve/moderado e consistência sem exageros"
+    ]
+  },
+  {
+    "id": 2,
+    "l": "Fase 2",
+    "w": "Sem 14–26 · Meses 4–6",
+    "h": 910,
+    "t": "Backend profissional com Spring",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Spring Boot 3: REST APIs, controllers, services, DTOs, validation, exception handling e OpenAPI",
+      "Spring Data JPA: entidades, repositories, relacionamentos, paginação, specifications e transações",
+      "Testes profissionais: JUnit, Mockito, Testcontainers inicial, testes de integração e cobertura por regra de negócio",
+      "Spring Security: autenticação JWT, filtros, roles, BCrypt e refresh token inicial"
+    ],
+    "blog": [
+      "DevCore API v1: autenticação, usuários, posts, categorias, tags e CRUD completo",
+      "Infra local: Docker Compose com app, PostgreSQL, Redis opcional e profiles",
+      "Entregáveis: Swagger, migrations, testes unitários/integração e deploy local reproduzível"
+    ],
+    "py": [
+      "Python manutenção: pytest básico, typing, scripts auxiliares e consumo de APIs",
+      "Pequena automação para gerar relatórios de estudo ou manipular dados do projeto"
+    ],
+    "db": [
+      "PostgreSQL aplicado: constraints, índices, migrations versionadas, transações e consultas JPQL/SQL",
+      "JPA prático: N+1 inicial, fetch join, lazy/eager, cascade e pitfalls comuns"
+    ],
+    "devops": [
+      "Docker Compose real: app + banco + cache, healthchecks, logs e variáveis por ambiente",
+      "CI inicial: pipeline de build, testes, lint e validação de PR"
+    ],
+    "sec": [
+      "API Security: validação robusta, tratamento de erro seguro, rate limit básico e proteção contra injection",
+      "Auth segura: JWT correto, expiração, refresh, BCrypt e roles por endpoint"
+    ],
+    "git": [
+      "Pull Requests: descrição, revisão, squash/rebase, resolução de conflitos e branch naming",
+      "CODEOWNERS e proteção básica de branches para projeto principal"
+    ],
+    "arquitetura": [
+      "Arquitetura em camadas: controller, application/service, domain e infrastructure",
+      "ADRs: auth, banco, estrutura modular, estratégia de testes e padrão de erro"
+    ],
+    "frontend": [
+      "Frontend base com JS/TS: consumo de API, formulários, estados de loading/erro e validação",
+      "UI inicial para login, dashboard simples e CRUD de posts"
+    ],
+    "aws": {
+      "cert": "AWS CLF-C02 — Cloud Practitioner",
+      "exam": "Prova ao final da fase, se simulados ≥80%",
+      "topics": [
+        "IAM, S3, EC2, RDS, Lambda, VPC e CloudWatch",
+        "Billing, Cost Explorer, Budgets, Well-Architected visão geral",
+        "Simulados, revisão de erros e labs Free Tier"
+      ]
+    },
+    "math": [
+      "Probabilidade básica: eventos, média, mediana, variância, distribuição e interpretação de métricas",
+      "Estatística aplicada a testes, performance e análise de dados simples"
+    ],
+    "ia": [
+      "LLMs aplicados ao desenvolvimento: geração de testes, revisão de código e documentação com validação humana",
+      "Introdução a embeddings e busca semântica conceitual"
+    ],
+    "fin": [
+      "Reserva e organização: meta de reserva, categorização de gastos e plano de redução de despesas",
+      "Precificação inicial de serviços/projetos pequenos"
+    ],
+    "ingles": [
+      "Writing técnico: PR description, bug report, issue, changelog e README",
+      "Listening técnico: vídeos/documentação oficial com anotações",
+      "Speaking: explicar endpoints, erros e decisões da API"
+    ],
+    "treino": [
+      "Treino: progressão leve de musculação/cardio, controle de fadiga e rotina sustentável"
+    ]
+  },
+  {
+    "id": 3,
+    "l": "Fase 3",
+    "w": "Sem 27–39 · Meses 7–9",
+    "h": 910,
+    "t": "Banco de dados, JPA e performance",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java performance: profiling básico, logs, exceptions, memory leaks comuns e análise de gargalos",
+      "JPA avançado: N+1, fetch join, EntityGraph, batch size, HikariCP e paginação por cursor",
+      "Testes de concorrência e integração com PostgreSQL real"
+    ],
+    "blog": [
+      "DevCore Data v1: otimização de queries, filtros, busca, paginação e métricas de banco",
+      "Entregáveis: relatório de performance, 10 queries otimizadas, dashboard simples e README técnico"
+    ],
+    "py": [
+      "Python para dados: pandas básico, leitura CSV/JSON, geração de relatórios e validação de dados",
+      "Scripts para popular banco, medir tempo e comparar consultas"
+    ],
+    "db": [
+      "Modelagem avançada: normalização, índices compostos/parciais, EXPLAIN ANALYZE, locks e deadlocks",
+      "Transações: isolation levels, ACID, rollback, idempotência e impactos de migration",
+      "Redis e MongoDB base: quando usar, modelagem inicial e limites"
+    ],
+    "devops": [
+      "Observabilidade local: logs estruturados, métricas de tempo de query e tracing simples",
+      "Ambiente reproduzível para teste de carga local"
+    ],
+    "sec": [
+      "Segurança em dados: LGPD, dados sensíveis, mascaramento, criptografia em repouso/trânsito e menor privilégio",
+      "Prevenção de SQL Injection e validação em queries dinâmicas"
+    ],
+    "git": [
+      "Git avançado: rebase interativo, cherry-pick, bisect, reflog, tags e releases",
+      "Histórico limpo e rastreável para mudanças de schema"
+    ],
+    "arquitetura": [
+      "Decisões de dados: trade-offs SQL/NoSQL/cache, consistência, latência e custo",
+      "ADRs sobre índices, cache, paginação e estratégia de migrations"
+    ],
+    "frontend": [
+      "Frontend com dados reais: tabelas, filtros, paginação, empty states, erros e feedback de usuário",
+      "Performance frontend inicial: bundle, lazy loading e Lighthouse"
+    ],
+    "aws": {
+      "cert": "AWS SAA-C03 — Fundamentos Associate",
+      "exam": "Simulados parciais",
+      "topics": [
+        "VPC, subnets, routing, security groups, ALB, EC2, RDS e S3",
+        "Arquiteturas resilientes, alta disponibilidade e backups",
+        "Custos, storage classes e monitoramento"
+      ]
+    },
+    "math": [
+      "Álgebra linear base: vetores, matrizes, produto escalar, norma e similaridade",
+      "Estatística aplicada: distribuição, outliers, amostragem e leitura de métricas"
+    ],
+    "ia": [
+      "Embeddings conceituais: vetores, similaridade, busca semântica e limitações",
+      "Primeiro experimento de busca semântica com dataset pequeno"
+    ],
+    "fin": [
+      "Investimentos base: renda fixa, liquidez, risco, objetivos e reserva",
+      "Controle mensal com indicadores simples"
+    ],
+    "ingles": [
+      "Leitura de docs: PostgreSQL, Hibernate, AWS e artigos técnicos",
+      "Resumo semanal em inglês sobre uma otimização feita"
+    ],
+    "treino": [
+      "Treino: manter cardio e força com ajuste de volume nas semanas de carga técnica alta"
+    ]
+  },
+  {
+    "id": 4,
+    "l": "Fase 4",
+    "w": "Sem 40–52 · Meses 10–12",
+    "h": 910,
+    "t": "Frontend Engineering e integração full stack",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Backend para frontend: contratos estáveis, versionamento de API, CORS, erros padronizados e autenticação",
+      "Testes de contrato e integração full stack"
+    ],
+    "blog": [
+      "DevCore Frontend v1: login, dashboard, CRUD de posts, upload básico e integração com API Java",
+      "Entregáveis: deploy frontend + backend, Lighthouse mínimo e documentação de setup"
+    ],
+    "py": [
+      "Python manutenção: APIs pequenas, scripts de integração e automação de conteúdo",
+      "Validação de dados e pequenas ferramentas internas"
+    ],
+    "db": [
+      "Banco para aplicação web: queries para telas, paginação, filtros e cache",
+      "Redis aplicado a sessões/cache leve quando fizer sentido"
+    ],
+    "devops": [
+      "CI/CD frontend/backend: build, testes, lint, artifacts e deploy automatizado inicial",
+      "Ambientes dev/stage com variáveis separadas"
+    ],
+    "sec": [
+      "Segurança frontend: XSS, CSRF, armazenamento de token, cookies seguros, headers e CSP inicial",
+      "Validação de entrada em duas camadas e proteção de rotas"
+    ],
+    "git": [
+      "Fluxo de PR profissional: template, checklist, revisão, evidências e changelog",
+      "Releases versionadas do DevCore"
+    ],
+    "arquitetura": [
+      "Arquitetura frontend/backend: BFF quando necessário, contratos, NFRs e diagramas de fluxo",
+      "ADRs para auth frontend, estratégia de estado e deploy"
+    ],
+    "frontend": [
+      "JavaScript/TypeScript: tipos, modules, async/await, error handling e boas práticas",
+      "React/Next.js: componentes, hooks, forms, rotas, data fetching, estados, testes básicos, acessibilidade e performance"
+    ],
+    "aws": {
+      "cert": "AWS SAA-C03 — Arquitetura Associate",
+      "exam": "Simulados >75%",
+      "topics": [
+        "Well-Architected, segurança, confiabilidade, performance e custo",
+        "Deploy com S3/CloudFront, ALB, ECS/RDS ou stack equivalente",
+        "Route 53, ACM, logs e monitoramento"
+      ]
+    },
+    "math": [
+      "Matemática para frontend/performance: métricas, percentis, distribuição de latência e interpretação de gráficos",
+      "Probabilidade e estatística aplicadas a bugs e métricas de uso"
+    ],
+    "ia": [
+      "IA assistiva no frontend: geração de conteúdo, busca, resumo e UX com validação",
+      "Preparação para RAG: estrutura de documentos e metadados"
+    ],
+    "fin": [
+      "Portfólio e carreira: posicionamento, LinkedIn/GitHub, cases técnicos e precificação",
+      "Plano de produto digital ou serviço baseado no DevCore"
+    ],
+    "ingles": [
+      "Speaking técnico: explicar arquitetura full stack e decisões de frontend",
+      "Writing: README, guia de deploy e release notes em inglês"
+    ],
+    "treino": [
+      "Treino: consolidar rotina 5–6x/semana com recuperação como requisito"
+    ]
+  },
+  {
+    "id": 5,
+    "l": "Fase 5",
+    "w": "Sem 53–65 · Meses 13–15",
+    "h": 910,
+    "t": "AWS fundamentos + arquitetura cloud inicial",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java cloud-ready: profiles, env vars, health checks, graceful shutdown e configuração por ambiente",
+      "Logs estruturados, correlation ID e métricas básicas para produção"
+    ],
+    "blog": [
+      "DevCore Cloud v1: backend em cloud, banco gerenciado, storage e domínio configurado",
+      "Entregáveis: arquitetura cloud documentada, custos estimados, runbook de deploy e rollback"
+    ],
+    "py": [
+      "Python utilitário para cloud: scripts, boto3 básico, automação e validações",
+      "Geradores de relatórios de custo/logs"
+    ],
+    "db": [
+      "Banco em cloud: RDS, backups, parâmetros, conexões, migrações e segurança de acesso",
+      "Cache e storage: Redis/S3 ou equivalentes com critérios de uso"
+    ],
+    "devops": [
+      "CloudOps: IAM, redes, logs, métricas, alarmes, backup, deploy e troubleshooting",
+      "Docker/ECS ou serviço equivalente para rodar workload real"
+    ],
+    "sec": [
+      "Segurança AWS: IAM mínimo, roles, policies, KMS, secrets, security groups e auditoria",
+      "Threat model simples do ambiente cloud"
+    ],
+    "git": [
+      "GitOps inicial: infraestrutura versionada, PR para mudanças e rastreabilidade",
+      "Secrets scanning e política de branch"
+    ],
+    "arquitetura": [
+      "Arquitetura cloud: VPC, subnets, ALB, compute, storage, banco, observabilidade e custo",
+      "ADRs para decisão de compute, banco, storage e deploy"
+    ],
+    "frontend": [
+      "Frontend cloud: deploy, CDN, variáveis públicas, cache, headers e monitoramento",
+      "Integração com domínio e backend cloud"
+    ],
+    "aws": {
+      "cert": "AWS SAA-C03 — Solutions Architect Associate",
+      "exam": "Prova ao final da fase, se simulados ≥80%",
+      "topics": [
+        "Arquiteturas resilientes, VPC, ALB, Auto Scaling, RDS, S3, CloudFront e Route 53",
+        "Segurança, Well-Architected, custos e disaster recovery",
+        "Labs com workload real do DevCore"
+      ]
+    },
+    "math": [
+      "Métricas de sistemas: média, p95, p99, erro, throughput, disponibilidade e custo",
+      "Noções de otimização: trade-off entre latência, custo e confiabilidade"
+    ],
+    "ia": [
+      "IA em cloud: visão de serviços, custo, limites, segurança de dados e governança inicial",
+      "Preparar dataset de documentos técnicos para futura busca/RAG"
+    ],
+    "fin": [
+      "FinOps pessoal e cloud: custo de laboratório, orçamento, alertas e controle de gastos",
+      "Plano financeiro de certificações e infraestrutura"
+    ],
+    "ingles": [
+      "Inglês para certificação: leitura de enunciados AWS, glossário e revisão de erros",
+      "Explicar oralmente a arquitetura cloud do projeto"
+    ],
+    "treino": [
+      "Treino: manutenção de energia e controle de carga em semanas de certificação"
+    ]
+  },
+  {
+    "id": 6,
+    "l": "Fase 6",
+    "w": "Sem 66–78 · Meses 16–18",
+    "h": 910,
+    "t": "Arquitetura, DDD e sistemas distribuídos",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Clean/Hexagonal Architecture: separação de domínio, aplicação, adapters e infraestrutura",
+      "DDD: bounded contexts, aggregates, value objects, domain services e domain events",
+      "Modular monolith: módulos, dependências internas, contratos e evolução para microsserviços"
+    ],
+    "blog": [
+      "DevCore Modular Monolith: reorganização em módulos, domínio explícito e decisões documentadas",
+      "Entregáveis: 10 ADRs, 3 RFCs, C4 completo e revisão arquitetural"
+    ],
+    "py": [
+      "Python em arquitetura: serviço auxiliar ou worker separado com contrato OpenAPI",
+      "Separação de domínio e adapters em projeto Python pequeno"
+    ],
+    "db": [
+      "Dados por bounded context: ownership, consistência, migrations, cache e transações",
+      "Análise de CQRS, read models e limites entre módulos"
+    ],
+    "devops": [
+      "Operação arquitetural: observabilidade, logs, métricas, tracing e readiness/liveness",
+      "Pipeline com quality gates e validação de arquitetura"
+    ],
+    "sec": [
+      "Security by design: threat modeling, trust boundaries, classificação de dados e controles por contexto",
+      "Autorização por domínio e políticas de acesso"
+    ],
+    "git": [
+      "Git para arquitetura: RFC via PR, revisão assíncrona, histórico de decisões e releases por módulo",
+      "Padrões de branch/release para mudanças estruturais"
+    ],
+    "arquitetura": [
+      "Arquitetura sênior: C4, ADR, RFC, trade-offs, NFRs, requisitos, restrições e defesa técnica",
+      "Comparar monólito modular, microsserviços, eventos e integração síncrona/assíncrona"
+    ],
+    "frontend": [
+      "Arquitetura frontend: feature folders, design system inicial, estado, data fetching e contratos",
+      "BFF vs consumo direto de API com trade-offs"
+    ],
+    "aws": {
+      "cert": "AWS SAA-C03/DVA-C02 — Aplicação em arquitetura",
+      "exam": "Revisão + labs",
+      "topics": [
+        "Aplicar Well-Architected ao DevCore",
+        "Mensageria e integração: SQS/SNS/EventBridge visão prática",
+        "Infra como documentação de arquitetura"
+      ]
+    },
+    "math": [
+      "Grafos e estruturas: nós, arestas, caminhos, busca, dependências e modelagem de domínios",
+      "Complexidade em sistemas distribuídos: custo de chamadas, filas e armazenamento"
+    ],
+    "ia": [
+      "Arquitetura de IA: onde IA entra no produto, limites, dados, privacidade e avaliação",
+      "Mapear futura solução RAG como bounded context"
+    ],
+    "fin": [
+      "Financeiro profissional: precificação de projetos, custo por hora, margem e risco",
+      "Planejamento de carreira para pleno forte"
+    ],
+    "ingles": [
+      "Inglês de arquitetura: ADR, RFC, trade-off, meeting notes e apresentação técnica",
+      "Simulação de design review em inglês"
+    ],
+    "treino": [
+      "Treino: manter consistência com semanas de revisão pesada e não negligenciar recuperação"
+    ]
+  },
+  {
+    "id": 7,
+    "l": "Fase 7",
+    "w": "Sem 79–91 · Meses 19–21",
+    "h": 910,
+    "t": "Kafka, mensageria e integração",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java + Kafka: producers, consumers, consumer groups, offsets, retries, DLQ e idempotência",
+      "Padrões: Outbox, Inbox, Saga, eventos de domínio, contratos e versionamento",
+      "Testes: containers Kafka, testes de integração, contrato e reprocessamento"
+    ],
+    "blog": [
+      "DevCore Events: publicação de eventos, consumer idempotente, DLQ, reprocessamento e AsyncAPI",
+      "Entregáveis: fluxo assíncrono, diagrama, teste de contrato e runbook"
+    ],
+    "py": [
+      "Python worker: consumidor de eventos, processamento assíncrono e integração com backend Java",
+      "FastAPI ou worker para tarefas de integração"
+    ],
+    "db": [
+      "Dados em eventos: consistência eventual, duplicidade, ordering, schema evolution e read models",
+      "CDC conceitual e comparação com outbox"
+    ],
+    "devops": [
+      "Mensageria em operação: métricas de lag, throughput, DLQ, retry, alertas e dashboards",
+      "Infra local/cluster para eventos com observabilidade"
+    ],
+    "sec": [
+      "Segurança em integração: autenticação, autorização, criptografia, secrets, PII em eventos e auditoria",
+      "Validação de payload e proteção contra abuso"
+    ],
+    "git": [
+      "Git em integrações: contratos versionados, AsyncAPI/OpenAPI em PR e changelog de eventos",
+      "Releases compatíveis e migração sem quebra"
+    ],
+    "arquitetura": [
+      "Arquitetura de integração: APIs síncronas, filas, eventos, gRPC, CDC, contratos e governança",
+      "Trade-offs de acoplamento, consistência, latência e resiliência"
+    ],
+    "frontend": [
+      "Frontend reativo a estados assíncronos: status, polling, SSE/websocket quando necessário e UX de processamento",
+      "Integração com notificações/eventos"
+    ],
+    "aws": {
+      "cert": "AWS DVA-C02 — Developer Associate",
+      "exam": "Preparação + simulados",
+      "topics": [
+        "Lambda, API Gateway, SQS, SNS, EventBridge, DynamoDB e CloudWatch",
+        "IAM para aplicações, retries, DLQ e observabilidade",
+        "Labs orientados a integração"
+      ]
+    },
+    "math": [
+      "Probabilidade e filas: throughput, latência, backlog, taxa de chegada e capacidade",
+      "Métricas para eventos: lag, p95, erro, retry e disponibilidade"
+    ],
+    "ia": [
+      "Pipelines para IA: ingestão, processamento, chunking, metadados e eventos",
+      "Preparar ingestão de documentos para RAG"
+    ],
+    "fin": [
+      "Financeiro: custo de mensageria, cloud, observabilidade e estimativa por workload",
+      "Business case simples para arquitetura escolhida"
+    ],
+    "ingles": [
+      "Inglês em incidentes: explicar fila, retry, DLQ, atraso e impacto",
+      "Escrever post técnico sobre arquitetura orientada a eventos"
+    ],
+    "treino": [
+      "Treino: manter base cardiovascular e reduzir volume em semanas de labs intensos"
+    ]
+  },
+  {
+    "id": 8,
+    "l": "Fase 8",
+    "w": "Sem 92–104 · Meses 22–24",
+    "h": 910,
+    "t": "DevOps, CI/CD, Docker e Kubernetes",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java em containers: imagens enxutas, JVM flags, health checks, graceful shutdown e logs",
+      "Deploy readiness: configs externas, secrets, probes e rollback"
+    ],
+    "blog": [
+      "DevCore Production-like: pipeline CI/CD completo, deploy automatizado, rollback e ambientes",
+      "Entregáveis: Docker, Kubernetes, Helm, GitHub Actions, quality gates e documentação"
+    ],
+    "py": [
+      "Python em container: Dockerfile, tests, lint, healthcheck e deployment em ambiente isolado",
+      "Workers ou APIs Python no mesmo pipeline"
+    ],
+    "db": [
+      "Banco em operação: migrations seguras, backup/restore, rollback, locks e monitoramento",
+      "Estratégia de mudança de schema sem downtime"
+    ],
+    "devops": [
+      "DevOps/SRE: Linux, redes, Docker, CI/CD, Kubernetes, Helm, ArgoCD, GitOps, Prometheus, Grafana e OpenTelemetry",
+      "Runbooks, SLO inicial, alertas, troubleshooting e DORA metrics"
+    ],
+    "sec": [
+      "DevSecOps: SAST, DAST, SCA, Trivy, dependency scanning, secrets scanning e políticas de pipeline",
+      "Supply chain: SBOM, assinatura, versões fixas e revisão de imagens"
+    ],
+    "git": [
+      "GitOps: ambientes por branch, PR para infra, revisão de manifests e rastreabilidade",
+      "Monorepo ou multirepo com critérios claros"
+    ],
+    "arquitetura": [
+      "Arquitetura operacional: ambientes, deployment strategy, rollback, observabilidade, resiliência e custo",
+      "ADRs para Kubernetes, CI/CD e estratégia de deploy"
+    ],
+    "frontend": [
+      "Frontend em produção: build, cache, CDN, envs, monitoramento, Web Vitals e rollback",
+      "Pipeline frontend com lint/test/build/deploy"
+    ],
+    "aws": {
+      "cert": "AWS DVA-C02 — Developer Associate",
+      "exam": "Prova ao final da fase, se simulados ≥80%",
+      "topics": [
+        "API Gateway, Lambda, DynamoDB, SQS/SNS/EventBridge, X-Ray/CloudWatch",
+        "CI/CD AWS, deployment strategies e troubleshooting",
+        "Segurança de aplicação e IAM granular"
+      ]
+    },
+    "math": [
+      "SRE quantitativo: disponibilidade, SLO, SLA, error budget, MTTR e taxas de erro",
+      "Análise de capacidade e custo com dados reais"
+    ],
+    "ia": [
+      "LLMOps base: deploy de serviços de IA, métricas, custo, logs e avaliação inicial",
+      "Observabilidade para chamadas de LLM"
+    ],
+    "fin": [
+      "FinOps cloud: orçamento, alertas, otimização, rightsizing e custo por ambiente",
+      "Relatório de custo mensal do DevCore"
+    ],
+    "ingles": [
+      "Inglês DevOps/SRE: runbook, incident report, deployment notes e postmortem simulado",
+      "Explicar pipeline e arquitetura de deploy em inglês"
+    ],
+    "treino": [
+      "Treino: preservar rotina, hidratação, mobilidade e recuperação em semanas de deploy"
+    ]
+  },
+  {
+    "id": 9,
+    "l": "Fase 9",
+    "w": "Sem 105–117 · Meses 25–27",
+    "h": 910,
+    "t": "Segurança Full Stack e DevSecOps",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java/Spring Security avançado: OAuth2/OIDC, authorization server/client, method security, claims e policies",
+      "Hardening de APIs: rate limit, validação, auditoria, logs seguros e tratamento de erro"
+    ],
+    "blog": [
+      "DevCore Secure: threat model, correção de vulnerabilidades, hardening e relatório de segurança",
+      "Entregáveis: OWASP checklist, pipeline com scans, política de secrets e documentação"
+    ],
+    "py": [
+      "Python seguro: validação, auth, secrets, dependências, scans e logging seguro",
+      "Revisão de APIs Python e workers"
+    ],
+    "db": [
+      "Segurança em dados: criptografia, backups, roles, auditoria, masking, retenção e LGPD",
+      "Testes contra injection e abuso de query"
+    ],
+    "devops": [
+      "Segurança operacional: IAM, KMS, WAF, security groups, logs, alertas e resposta",
+      "SIEM/logs centralizados em nível básico/intermediário"
+    ],
+    "sec": [
+      "AppSec/DevSecOps: OWASP Top 10, OWASP API Security, ASVS, SAST, DAST, SCA, threat modeling, supply chain e cloud IAM",
+      "Controle de risco: severidade, prioridade, correção, evidência e aceite"
+    ],
+    "git": [
+      "Governança Git: branch protection, CODEOWNERS, secret scanning, signed commits quando aplicável e dependency review",
+      "Security PR templates e changelog de correção"
+    ],
+    "arquitetura": [
+      "Arquitetura segura: trust boundaries, data flow diagrams, threat modeling e decisões de mitigação",
+      "ADRs de segurança e critérios de aceite"
+    ],
+    "frontend": [
+      "Frontend seguro: XSS, CSRF, token storage, CSP, headers, validação e segurança em dependências",
+      "Testes de segurança em telas críticas"
+    ],
+    "aws": {
+      "cert": "AWS Security/DevOps — Segurança aplicada",
+      "exam": "Labs + planejamento SOA/DOP",
+      "topics": [
+        "IAM avançado, KMS, Secrets Manager, WAF, CloudTrail, GuardDuty e Security Hub",
+        "Least privilege, auditoria e resposta",
+        "Revisão de Well-Architected Security Pillar"
+      ]
+    },
+    "math": [
+      "Risco e probabilidade: impacto, severidade, priorização e matriz de risco",
+      "Métricas de segurança: vulnerabilidades, tempo de correção e reincidência"
+    ],
+    "ia": [
+      "Segurança em IA: prompt injection, data leakage, acesso a documentos, avaliação e guardrails",
+      "Threat model de RAG"
+    ],
+    "fin": [
+      "Financeiro de risco: custo de incidentes, proteção, seguro, reserva e gestão de risco pessoal/profissional",
+      "Precificação com responsabilidade e escopo"
+    ],
+    "ingles": [
+      "Inglês AppSec: security report, vulnerability description, mitigation plan e incident summary",
+      "Simulação de apresentação de risco em inglês"
+    ],
+    "treino": [
+      "Treino: manutenção, foco em recuperação, evitar sobrecarga e priorizar recuperação"
+    ]
+  },
+  {
+    "id": 10,
+    "l": "Fase 10",
+    "w": "Sem 118–130 · Meses 28–30",
+    "h": 910,
+    "t": "Python Backend + IA aplicada",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java integração: contratos entre Java e Python, autenticação, eventos, idempotência e observabilidade",
+      "Gateway ou orquestração entre serviços"
+    ],
+    "blog": [
+      "DevCore AI Service v1: microserviço Python integrado ao backend Java",
+      "Entregáveis: FastAPI, PostgreSQL, mensageria, logs com correlation ID, testes e documentação"
+    ],
+    "py": [
+      "Python profissional: typing, FastAPI, Django/DRF, SQLAlchemy, async, pytest, Docker, logging e estrutura limpa",
+      "Arquitetura testável: domínio separado do framework, adapters, OpenAPI e integração robusta",
+      "Dados e pipelines: ingestão, limpeza, validação, filas e jobs"
+    ],
+    "db": [
+      "Banco para Python/IA: modelos, persistência, pgvector ou busca vetorial, metadados e permissões",
+      "Estratégia de ingestão e atualização de documentos"
+    ],
+    "devops": [
+      "Deploy Python: container, pipeline, healthcheck, autoscaling simples, métricas e logs",
+      "Monitoramento de latência/custo por endpoint"
+    ],
+    "sec": [
+      "Segurança em APIs Python: auth, validação, dependências, secrets e proteção contra abuso",
+      "Isolamento de permissões para dados usados pela IA"
+    ],
+    "git": [
+      "Repos multi-serviço: versionamento, contratos, releases e documentação integrada",
+      "PRs com evidências de testes Java/Python"
+    ],
+    "arquitetura": [
+      "Arquitetura polyglot: quando usar Python, fronteiras, contratos, latência, custo e operação",
+      "ADR para serviço de IA e integração com DevCore"
+    ],
+    "frontend": [
+      "Frontend para IA: UX de busca/resumo, estados assíncronos, transparência, citações e erros",
+      "Tela de consulta e feedback"
+    ],
+    "aws": {
+      "cert": "AWS AI/Developer/DevOps — Aplicação prática",
+      "exam": "Labs orientados a IA",
+      "topics": [
+        "Deploy de serviço Python, storage de documentos, filas e observabilidade",
+        "Custos de inferência, logs e segurança",
+        "Integração com serviços gerenciados quando fizer sentido"
+      ]
+    },
+    "math": [
+      "Matemática para embeddings: vetores, similaridade cosseno, normalização e ranking",
+      "Estatística para avaliação: precisão, recall, F1 e análise de erro"
+    ],
+    "ia": [
+      "RAG inicial: chunking, embeddings, vector store, retrieval, prompt, resposta com citações e avaliação manual",
+      "Agentes básicos com ferramentas controladas"
+    ],
+    "fin": [
+      "Financeiro de produto: estimar custo por consulta, margem, limites de uso e modelo de cobrança",
+      "Análise de viabilidade de microSaaS/serviço"
+    ],
+    "ingles": [
+      "Inglês de IA: explicar RAG, embeddings, evaluation, latency, hallucination e governance",
+      "README e documentação de API em inglês"
+    ],
+    "treino": [
+      "Treino: rotina estável com foco em energia cognitiva e recuperação"
+    ]
+  },
+  {
+    "id": 11,
+    "l": "Fase 11",
+    "w": "Sem 131–143 · Meses 31–33",
+    "h": 910,
+    "t": "Matemática, ML, LLMs, RAG e agentes",
+    "cand": false,
+    "cn": "",
+    "java": [
+      "Java suporte ao produto IA: autorização, auditoria, billing/cotas, APIs para consulta e governança",
+      "Integração resiliente com serviço de IA e fallback"
+    ],
+    "blog": [
+      "DevCore RAG v1: busca semântica, citações, controle de acesso, avaliação e dashboard de custo/latência",
+      "Entregáveis: RAG completo, avaliação BM25 vs embeddings, reranking e documentação LLMOps"
+    ],
+    "py": [
+      "Python IA: embeddings, vector DB, reranking, evaluation, pipelines, jobs e notebooks controlados",
+      "Agentes com ferramentas: limites, permissões, logs e segurança"
+    ],
+    "db": [
+      "Dados para IA: modelagem de documentos, metadados, controle de acesso, versionamento e auditoria",
+      "pgvector/NoSQL/search engine conforme trade-off"
+    ],
+    "devops": [
+      "Operação IA: métricas de latência, custo, erros, qualidade, drift, logs e alertas",
+      "Deploy e rollback de prompts/configurações"
+    ],
+    "sec": [
+      "Segurança IA: prompt injection, data leakage, autorização por documento, guardrails e red teaming básico",
+      "Política de dados e governança"
+    ],
+    "git": [
+      "Versionamento de prompts/configurações: releases, experimentos, avaliação e rollback",
+      "Registro de datasets e decisões"
+    ],
+    "arquitetura": [
+      "Arquitetura de IA: RAG, agentes, fine-tuning quando aplicável, LLMOps, segurança, custo e governança",
+      "ADRs/RFCs para modelo, embeddings, vector store, chunking e avaliação"
+    ],
+    "frontend": [
+      "Frontend IA: interface de busca, fonte/citação, feedback, explicabilidade, loading e tratamento de erro",
+      "UX segura para respostas incertas"
+    ],
+    "aws": {
+      "cert": "AWS Advanced — IA, dados e operação",
+      "exam": "Planejamento DOP/SOA ou especialização",
+      "topics": [
+        "Serviços de IA/dados, segurança, observabilidade e custo",
+        "Arquiteturas orientadas a eventos e pipelines",
+        "Preparação para certificação avançada conforme foco"
+      ]
+    },
+    "math": [
+      "Álgebra linear, estatística, probabilidade, otimização, métricas ML/RAG e leitura de papers",
+      "Ranking: BM25, embeddings, reranking, precision@k, recall@k e MRR"
+    ],
+    "ia": [
+      "LLMs avançado: RAG, agentes, fine-tuning conceitual, avaliação, LLMOps, segurança e governança",
+      "Produto IA pronto para produção com critérios de qualidade"
+    ],
+    "fin": [
+      "Monetização de IA: custo por uso, margem, limite gratuito, plano pago e suporte",
+      "Análise de risco e viabilidade comercial"
+    ],
+    "ingles": [
+      "Inglês para papers e IA: leitura, resumo, apresentação e defesa técnica",
+      "Mock interview sobre IA Engineering"
+    ],
+    "treino": [
+      "Treino: equilíbrio físico para fase de alta complexidade matemática e cognitiva"
+    ]
+  },
+  {
+    "id": 12,
+    "l": "Fase 12",
+    "w": "Sem 144–156 · Meses 34–36",
+    "h": 910,
+    "t": "Senioridade, liderança técnica e portfólio",
+    "cand": true,
+    "cn": "Checkpoint final: portfólio sênior, entrevistas e prontidão profissional",
+    "java": [
+      "System Design: escalabilidade, cache, sharding, replicação, CAP/PACELC, consistência, filas, SLO e incidentes",
+      "Liderança técnica: code review, mentoria, decisões, comunicação e qualidade",
+      "Refatoração final: qualidade, testes, performance, segurança e documentação"
+    ],
+    "blog": [
+      "DevCore Platform v2 completa: Java backend, frontend Next.js, Python/IA service, dados, mensageria, AWS, CI/CD, observabilidade e segurança",
+      "Portfólio público: cases, ADRs, RFCs, postmortems, diagramas, demos e guia de arquitetura"
+    ],
+    "py": [
+      "Python/IA produção: hardening, testes, métricas, custo, documentação e operação",
+      "Preparação para entrevistas e apresentação técnica"
+    ],
+    "db": [
+      "Dados em produção: backup/restore testado, otimização, auditoria, segurança, migração e monitoramento",
+      "Relatório final de arquitetura de dados"
+    ],
+    "devops": [
+      "SRE e produção: SLO, SLA, error budget, incident response, postmortem, runbooks e chaos/testing controlado",
+      "DORA metrics e plano de melhoria contínua"
+    ],
+    "sec": [
+      "Segurança final: revisão AppSec, DevSecOps, cloud, IAM, supply chain, APIs e IA",
+      "Relatório final de riscos, mitigação e evidências"
+    ],
+    "git": [
+      "Git sênior: releases, tags, changelog, PRs exemplares, templates e governança",
+      "Histórico público organizado para portfólio"
+    ],
+    "arquitetura": [
+      "Arquitetura sênior: revisão completa, trade-offs, roadmap, evolução, custos, riscos e apresentação executiva",
+      "20 ADRs, 8 RFCs e 5 postmortems simulados"
+    ],
+    "frontend": [
+      "Frontend final: performance, acessibilidade, testes, design system, observabilidade e UX de produto",
+      "Refino de UI, conteúdo e experiência do portfólio"
+    ],
+    "aws": {
+      "cert": "AWS Professional/Especialização — Consolidação",
+      "exam": "Opcional conforme maturidade",
+      "topics": [
+        "Revisão AWS Professional: arquitetura, operação, segurança, automação e FinOps",
+        "Workload Well-Architected completo",
+        "Plano de continuidade para certificações avançadas"
+      ]
+    },
+    "math": [
+      "Matemática aplicada consolidada: explicar trade-offs, métricas e limitações em ML/RAG",
+      "Leitura e apresentação de papers selecionados"
+    ],
+    "ia": [
+      "IA Engineering sênior: produto operável, avaliação contínua, segurança, governança e custo",
+      "Demonstração pública com documentação técnica"
+    ],
+    "fin": [
+      "Carreira e financeiro: negociação, CLT/PJ, internacional, precificação sênior e plano de renda",
+      "Portfólio monetizável e estratégia de entrevistas"
+    ],
+    "ingles": [
+      "Inglês avançado: entrevistas, system design, incident review, arquitetura, negociação e liderança",
+      "Mock interviews e apresentações gravadas"
+    ],
+    "treino": [
+      "Treino: rotina de manutenção, saúde, recuperação e sustentabilidade para longo prazo"
+    ]
+  }
 ];
 
 /* ═══════════════════════════════════════════════
@@ -1265,62 +2376,318 @@ P.forEach(p=>{p.ingles=englishByPhase[p.id]||[]});
    DAILY SCHEDULE DATA
 ═══════════════════════════════════════════════ */
 const daily=[
-  {time:"05:30–06:00",dur:"30min",block:"Revisão + Obsidian SR + planejamento",k:"n",d:"Spaced repetition no Obsidian: erros de código, vocabulário técnico, SQL, APIs, AWS e decisões arquiteturais. Definir meta do dia."},
-  {time:"06:00–06:30",dur:"30min",block:"Inglês técnico diário",k:"ingles",d:"Commits em inglês, leitura de documentação oficial, 5 termos técnicos novos e 1x/semana mock talk gravado de 5-7min."},
-  {time:"06:30–08:45",dur:"2h15",block:"Estudo core — Java + SW Engineering",k:"java",d:"Java/Spring em produção: linguagem, APIs, JPA, segurança, testes, arquitetura, mensageria, observabilidade, performance e legado. Debug-first 20-30min."},
-  {time:"08:45–10:30",dur:"1h45",block:"DevCore Platform — implementação",k:"blog",d:"Feature da fase: módulos auth, posts, knowledge base, frontend, UI, editorial, projetos, case studies, busca FTS, SEO, newsletter ou IA/RAG. Commit útil, testes mínimos, integração com conteúdo técnico estudado."},
-  {time:"10:30–11:30",dur:"1h",block:"Banco de Dados SQL/NoSQL",k:"db",d:"SQL, PostgreSQL, JPA/Hibernate, query tuning, MongoDB, Redis, DynamoDB, modelagem, índices, transações, consistência, backup e observabilidade."},
-  {time:"11:30–12:30",dur:"1h",block:"Python — backend + IA aplicada",k:"py",d:"Progressão: Python moderno → FastAPI/Django → APIs profissionais → dados/ML → PyTorch → LLMs/RAG/agentes → MLOps/LLMOps. Foco em produto real e integração com Java."},
-  {time:"12:30–13:30",dur:"1h ⏸",block:"Almoço — pausa obrigatória",k:"n",d:"Descanso real. Sem telas. Caminhada. Não negociável."},
-  {time:"13:30–14:30",dur:"1h",block:"Matemática para programação e IA",k:"math",d:"Progressão aplicada: lógica/Big O → grafos → álgebra linear com NumPy → probabilidade/estatística → cálculo/gradiente → otimização → métricas de ML/RAG → attention, embeddings e LLMs. Todo conceito deve virar código, notebook ou explicação técnica."},
-  {time:"14:30–15:45",dur:"1h15",block:"DevOps — estudo dedicado",k:"devops",d:"Linux/redes → Docker → CI/CD + DevSecOps → Kubernetes troubleshooting → Terraform/IaC → observabilidade, SRE, FinOps e platform engineering."},
-  {time:"15:45–17:00",dur:"1h15",block:"AWS Certification",k:"aws",d:"CLF-C02 → SAA-C03 → DVA-C02. Labs no Free Tier, simulados, Well-Architected e conexão direta com DevCore Platform/portfólio."},
-  {time:"17:00–17:45",dur:"45min",block:"DevCore — testes + docs + ADRs",k:"blog",d:"Testes unitários/integração, README, ADR público, Swagger/OpenAPI, PR/branch organizada, decisão técnica documentada e push no GitHub."},
-  {time:"17:45–18:30",dur:"45min",block:"Projeto da fase — Java/arquitetura",k:"java",d:"Projeto obrigatório separado do DevCore: artefato para entrevistas com arquitetura, integração, frontend quando aplicável, case técnico e evidência prática de backend pleno."},
-  {time:"18:30–20:30",dur:"2h ⏸",block:"Treino + refeição — pausa",k:"n",d:"Treino físico + jantar. Recuperação física e mental para sustentar a rotina de longo prazo."},
-  {time:"20:30–22:00",dur:"1,5h",block:"IA Engineering — livros, campos e projetos",k:"ia",d:"9 livros + campos essenciais de IA, com entregáveis progressivos em LLMs, RAG, agentes, avaliação, segurança, LLMOps e produto."},
-  {time:"22:00–23:00",dur:"1h",block:"Trilha Financeira",k:"fin",d:"31 módulos: orçamento, dívidas, investimentos, precificação, produtos digitais, microSaaS e evolução de renda."},
-  {time:"23:00–23:30",dur:"30min",block:"IA no workflow + revisão do dia",k:"ia",d:"Usar IA como par técnico: revisar PR, explicar erro, gerar hipótese de debug, testar prompts/evals, validar segurança e registrar aprendizados."},
-  {time:"23:30–00:00",dur:"30min",block:"Revisão Banco/SQL + flashcards",k:"db",d:"Revisar queries, índices, modelagens, erros de banco, planos de execução e decisões SQL/NoSQL no Obsidian."},
-  {time:"00:00–01:00",dur:"1h",block:"Segurança Full Stack — estudo dedicado",k:"sec",d:"OWASP, AppSec, API Security, Auth/Authz, DevSecOps, hardening, IAM, threat modeling, supply chain e revisão aplicada ao DevCore e aos projetos da fase."}
+  {
+    "time": "00:00–01:00",
+    "dur": "1h",
+    "block": "Madrugada 1 — IA Engineering, RAG e leitura técnica",
+    "k": "ia",
+    "d": "Leitura de papers/notas, conceitos de LLMs, RAG, avaliação, agentes, LLMOps e revisão de erros. Bloco preferencialmente leve/moderado."
+  },
+  {
+    "time": "01:00–01:15",
+    "dur": "15min",
+    "block": "Pausa curta",
+    "k": "n",
+    "d": "Água, alongamento leve, descanso visual e checagem rápida de energia antes de continuar."
+  },
+  {
+    "time": "01:15–02:30",
+    "dur": "1h15",
+    "block": "Madrugada 2 — Python Backend + automações",
+    "k": "py",
+    "d": "Python moderno, FastAPI, pytest, scripts de automação, pipelines, integração com APIs e pequenos labs reproduzíveis."
+  },
+  {
+    "time": "02:30–02:45",
+    "dur": "15min",
+    "block": "Pausa curta",
+    "k": "n",
+    "d": "Intervalo sem tela. Levantar, respirar, hidratar e reduzir fadiga cognitiva."
+  },
+  {
+    "time": "02:45–04:00",
+    "dur": "1h15",
+    "block": "Madrugada 3 — Segurança, DevOps ou troubleshooting",
+    "k": "sec",
+    "d": "OWASP, threat modeling, secrets, SAST/SCA, Docker, logs, Linux, CI/CD, análise de falhas e leitura de runbooks."
+  },
+  {
+    "time": "04:00–04:30",
+    "dur": "30min",
+    "block": "Inglês técnico — reading, listening e vocabulário",
+    "k": "ingles",
+    "d": "Leitura técnica curta, vocabulário, commits/PR descriptions, resumo oral e revisão de frases úteis para reuniões e documentação."
+  },
+  {
+    "time": "04:30–05:00",
+    "dur": "30min",
+    "block": "Preparação / reset operacional",
+    "k": "n",
+    "d": "Água, higiene, organização do ambiente, abertura do backlog e escolha objetiva da próxima tarefa."
+  },
+  {
+    "time": "05:00–06:15",
+    "dur": "1h15",
+    "block": "Git + documentação técnica",
+    "k": "git",
+    "d": "Conventional Commits, revisão de diff, PRs, README, changelog, issues, ADR curto, RFC curto e organização do repositório."
+  },
+  {
+    "time": "06:15–06:30",
+    "dur": "15min",
+    "block": "Pausa curta pós-madrugada",
+    "k": "n",
+    "d": "Alongamento leve, descanso visual e preparação para o primeiro bloco profundo."
+  },
+  {
+    "time": "06:30–08:00",
+    "dur": "1h30",
+    "block": "Bloco profundo 1 — Java/Spring ou Arquitetura",
+    "k": "java",
+    "d": "Java, Spring Boot, DDD, system design, refatoração, leitura de código, testes complexos ou decisões arquiteturais."
+  },
+  {
+    "time": "08:00–08:30",
+    "dur": "30min",
+    "block": "Café da manhã + pausa real",
+    "k": "n",
+    "d": "Alimentação e pausa sem tela. Não transformar este bloco em vídeo-aula."
+  },
+  {
+    "time": "08:30–10:00",
+    "dur": "1h30",
+    "block": "Bloco profundo 2 — Banco, SQL, JPA ou performance",
+    "k": "db",
+    "d": "Consultas, modelagem, JPA, EXPLAIN ANALYZE, transações, cache, otimização, índices e análise de gargalos."
+  },
+  {
+    "time": "10:00–10:15",
+    "dur": "15min",
+    "block": "Pausa curta",
+    "k": "n",
+    "d": "Levantar, caminhar, hidratar e reduzir fadiga cognitiva."
+  },
+  {
+    "time": "10:15–11:45",
+    "dur": "1h30",
+    "block": "Bloco profundo 3 — DevCore Platform",
+    "k": "blog",
+    "d": "Implementação prática do projeto principal: feature, bugfix, integração, testes, deploy local ou documentação técnica."
+  },
+  {
+    "time": "11:45–12:15",
+    "dur": "30min",
+    "block": "Revisão ativa da manhã",
+    "k": "math",
+    "d": "Registrar erros, criar flashcards, revisar commits, consolidar conceitos e anotar dúvidas para o bloco de prática."
+  },
+  {
+    "time": "12:15–13:00",
+    "dur": "45min",
+    "block": "Almoço + pausa real",
+    "k": "n",
+    "d": "Alimentação, descanso visual e recuperação antes do ciclo da tarde."
+  },
+  {
+    "time": "13:00–14:00",
+    "dur": "1h",
+    "block": "Bloco flexível — Frontend, Git ou Arquitetura",
+    "k": "frontend",
+    "d": "TypeScript, React/Next.js, acessibilidade, design system, revisão de PR, diagrama C4, ADR/RFC ou organização do backlog técnico."
+  },
+  {
+    "time": "14:00–15:30",
+    "dur": "1h30",
+    "block": "Bloco técnico 4 — AWS, DevOps ou Segurança",
+    "k": "aws",
+    "d": "Cloud, CI/CD, Docker, Kubernetes, observabilidade, AppSec, IAM, labs e simulações de produção."
+  },
+  {
+    "time": "15:30–15:45",
+    "dur": "15min",
+    "block": "Pausa curta",
+    "k": "n",
+    "d": "Caminhada curta, água e descanso visual."
+  },
+  {
+    "time": "15:45–17:00",
+    "dur": "1h15",
+    "block": "Bloco técnico 5 — Frontend ou Python",
+    "k": "frontend",
+    "d": "Frontend Engineering, TypeScript, React/Next.js, FastAPI, Python backend, workers ou integração com IA."
+  },
+  {
+    "time": "17:00–17:30",
+    "dur": "30min",
+    "block": "Prática guiada",
+    "k": "git",
+    "d": "Katas, labs, bugfix, revisão de PR, comandos Git, pequenos exercícios ou fechamento de pendências."
+  },
+  {
+    "time": "17:30–18:00",
+    "dur": "30min",
+    "block": "Pausa de recuperação / mobilidade",
+    "k": "n",
+    "d": "Mobilidade, respiração, caminhada leve e preparação para o treino."
+  },
+  {
+    "time": "18:00–19:00",
+    "dur": "1h",
+    "block": "Treino",
+    "k": "treino",
+    "d": "Cardio/musculação conforme fase, com foco em consistência, saúde, energia e preservação de massa muscular."
+  },
+  {
+    "time": "19:00–20:00",
+    "dur": "1h",
+    "block": "Banho + jantar + recuperação",
+    "k": "n",
+    "d": "Recuperação física e mental antes do bloco noturno. Evitar telas enquanto come."
+  },
+  {
+    "time": "20:00–21:30",
+    "dur": "1h30",
+    "block": "Bloco projeto — implementação integrada",
+    "k": "blog",
+    "d": "Codar integração real: backend + frontend + banco + cloud + testes. Sempre fechar com commit útil."
+  },
+  {
+    "time": "21:30–21:45",
+    "dur": "15min",
+    "block": "Pausa de descompressão",
+    "k": "n",
+    "d": "Pausa sem tela para preservar qualidade do bloco final."
+  },
+  {
+    "time": "21:45–22:30",
+    "dur": "45min",
+    "block": "IA/Matemática alternadas",
+    "k": "ia",
+    "d": "Álgebra, estatística, embeddings, RAG, agentes, avaliação, métricas ou leitura técnica de IA."
+  },
+  {
+    "time": "22:30–23:15",
+    "dur": "45min",
+    "block": "Documentação técnica — README, ADR, RFC e changelog",
+    "k": "arquitetura",
+    "d": "Registrar decisões, riscos, trade-offs, desenho de solução, changelog e instruções de execução do projeto."
+  },
+  {
+    "time": "23:15–00:00",
+    "dur": "45min",
+    "block": "Fechamento do dia — revisão, financeiro e planejamento",
+    "k": "fin",
+    "d": "Revisar entregas, atualizar backlog, organizar próximas tarefas, registrar métricas de estudo, financeiro pessoal e pendências do dia seguinte."
+  }
 ];
 
 const weekly=[
-  {day:"Segunda",focus:"Novos conceitos + feature nova",d:"Bloco técnico pesado. Doc oficial. Iniciar feature do DevCore Platform."},
-  {day:"Terça",focus:"Implementação profunda",d:"Continuar feature. Zero distrações. Código funcional."},
-  {day:"Quarta",focus:"Testes + code review",d:"Testes unit/integration. Code review reverso em PRs open source."},
-  {day:"Quinta",focus:"Integração + novos tópicos",d:"Conectar módulos. Avançar projeto da fase. Labs AWS."},
-  {day:"Sexta",focus:"Portfólio + ADRs + post",d:"Commits, README, ADR. Rascunho de post técnico para o DevCore."},
-  {day:"Sábado",focus:"Build in public + labs",d:"Publicar progresso. Labs AWS. Simulado parcial."},
-  {day:"Domingo",focus:"Revisão + Obsidian + plan.",d:"Spaced repetition no Obsidian. Revisar travamentos. Planejar semana."}
+  {
+    "day": "Segunda",
+    "focus": "Java/Spring + Banco",
+    "d": "Backend, SQL, JPA, testes, Git e inglês técnico aplicado a commits/PR."
+  },
+  {
+    "day": "Terça",
+    "focus": "AWS + DevOps",
+    "d": "Cloud, Docker, CI/CD, observabilidade, segurança e labs de infraestrutura."
+  },
+  {
+    "day": "Quarta",
+    "focus": "Arquitetura + Mensageria",
+    "d": "DDD, C4, ADR/RFC, Kafka, integração, resiliência e Java avançado."
+  },
+  {
+    "day": "Quinta",
+    "focus": "Frontend + Integração",
+    "d": "TypeScript, React/Next.js, consumo de APIs, testes, acessibilidade e experiência full stack."
+  },
+  {
+    "day": "Sexta",
+    "focus": "Python + IA + Matemática",
+    "d": "FastAPI, pipelines, embeddings, RAG, estatística, avaliação e documentação técnica."
+  },
+  {
+    "day": "Sábado",
+    "focus": "DevCore completo",
+    "d": "Construção integrada, refatoração, deploy, README, ADR, post técnico e revisão semanal."
+  },
+  {
+    "day": "Domingo",
+    "focus": "Simulados + revisão",
+    "d": "Revisão ativa, simulados, leitura, planejamento, organização do backlog e descanso ativo."
+  }
 ];
 
 const rules=[
-  {k:"java",r:"Todo commit em inglês desde o Dia 1. READMEs, Javadocs, comentários e ADRs também. Sem exceção."},
-  {k:"ingles",r:"O estudo de inglês precisa gerar output técnico semanal: resumo de documentação, PR description, bug report, README, explicação oral ou simulação de entrevista técnica."},
-  {k:"blog",r:"Nunca terminar o bloco do DevCore Platform sem pelo menos 1 commit útil. Push no final de cada bloco. Cada feature deve gerar evidência técnica demonstrável: código versionado, teste escrito, ADR ou post técnico publicado."},
-  {k:"git",r:"Todo repositório importante precisa ter README, branches organizadas, PR revisável, commits pequenos, Conventional Commits, tags/releases quando houver versão e proteção contra secrets."},
-  {k:"arquitetura",r:"Toda decisão relevante deve virar ADR ou RFC: contexto, alternativas, decisão, trade-offs, riscos, impacto em custo, segurança, operação, evolução e critérios de reversão."},
-  {k:"frontend",r:"Toda entrega frontend precisa validar responsividade, acessibilidade básica, estados loading/error/empty, segurança de client, performance/Web Vitals e integração real com contrato de API."},
-  {k:"aws",r:"Labs práticos no AWS Free Tier em paralelo ao teórico. Cada questão errada no simulado vira flashcard no Obsidian (plugin Spaced Repetition)."},
-  {k:"py",r:"Todo estudo Python deve gerar artefato prático: script, API, teste, notebook, pipeline, worker, RAG ou agente. Código com type hints, pytest, lint/format e README técnico sempre que virar projeto."},
-  {k:"devops",r:"Toda feature do DevCore Platform deve passar por pipeline com testes, quality gate, security scan, deploy rastreável, rollback definido e registro de métrica DORA. Nada manual em staging/prod."},
-  {k:"sec",r:"Toda feature exposta precisa de checklist mínimo de segurança: validação de entrada, autorização por recurso, headers/cookies seguros, secrets fora do repositório, dependências auditadas e evidência de revisão OWASP aplicável."},
-  {k:"db",r:"Toda feature com persistência precisa ter modelagem explícita, migration versionada, índice justificado, teste de integração, estratégia de transação/cache e observabilidade mínima de query/pool."},
-  {k:"math",r:"Todo conceito matemático deve terminar em uma aplicação prática: implementação em Python/Java/notebook, gráfico, benchmark, métrica, algoritmo, explicação no blog ou conexão direta com embeddings, loss, gradiente, attention, retrieval ou avaliação de IA."},
-  {k:"n",r:"Debug-first learning: 20-30 min tentando resolver sozinho antes de consultar IA ou documentação."},
-  {k:"n",r:"A cada 2 semanas: post técnico público sobre problema resolvido (LinkedIn, dev.to ou DevCore Platform)."},
-  {k:"ingles",r:"1x por semana: mock talk gravado de 5-7 min explicando o conceito principal em inglês."},
-  {k:"n",r:"Candidaturas começam na semana 25. Nunca esperar 'ficar pronto'. Entrevistas são diagnóstico."},
-  {k:"n",r:"Treino físico diário (18:30–20:30) é não negociável. Performance mental depende de saúde física."},
-  {k:"n",r:"Domingo à tarde: descanso real. 64 semanas exigem sustentabilidade, não apenas intensidade."}
+  {
+    "k": "java",
+    "r": "Avance de fase apenas após cumprir pelo menos 80% dos critérios: projeto entregue, testes, deploy/execução reproduzível, README em inglês, revisão semanal, bugs corrigidos, explicação oral, evidência no GitHub e checkpoint técnico."
+  },
+  {
+    "k": "blog",
+    "r": "O DevCore Platform é o eixo integrador. Toda fase precisa gerar uma versão demonstrável do projeto, com código, testes, documentação e decisão técnica rastreável."
+  },
+  {
+    "k": "ingles",
+    "r": "Inglês não é trilha isolada: todo README, PR, issue, ADR, changelog, runbook e apresentação técnica deve ter versão ou resumo em inglês."
+  },
+  {
+    "k": "git",
+    "r": "Todo repositório importante precisa ter commits pequenos, Conventional Commits, branch naming, PR revisável, README, tags/releases quando houver versão e proteção contra secrets."
+  },
+  {
+    "k": "arquitetura",
+    "r": "Toda decisão relevante deve virar ADR ou RFC com contexto, alternativas, trade-offs, riscos, impacto em custo, segurança, operação, evolução e critério de reversão."
+  },
+  {
+    "k": "db",
+    "r": "Mudanças de banco precisam considerar compatibilidade, rollback, backfill, lock, impacto em dados, monitoramento e documentação da migração."
+  },
+  {
+    "k": "devops",
+    "r": "Nenhuma entrega está completa sem forma reproduzível de executar, testar e fazer deploy. Pipeline, Docker, logs e rollback fazem parte do estudo."
+  },
+  {
+    "k": "sec",
+    "r": "Segurança deve entrar desde o design: threat modeling, validação, secrets, permissões, SAST/SCA e checklist OWASP por release relevante."
+  },
+  {
+    "k": "ia",
+    "r": "IA só conta como domínio quando houver avaliação, métricas, custo, segurança, governança, citações/fontes e análise de erro; prompt isolado não é entrega."
+  },
+  {
+    "k": "treino",
+    "r": "Treino, alimentação, pausas e recuperação são parte do cronograma. Sem consistência física, o plano de 36 meses não se sustenta."
+  }
 ];
 
 const awsMilestones=[
-  {w:"Sem 8-9",  c:"CLF-C02 ✓ Cloud Practitioner",              col:PC[0]},
-  {w:"Sem 30-31",c:"SAA-C03 ✓ Solutions Architect Associate",    col:PC[3]},
-  {w:"Sem 46-47",c:"DVA-C02 ✓ Developer Associate",              col:PC[5]},
-  {w:"Sem 57+",  c:"SOA-C03 ou DOP-C02 (planejamento)",          col:PC[6]}
+  {
+    "w": "Mês 6",
+    "c": "CLF-C02 ✓ Cloud Practitioner",
+    "col": "#22d3b0"
+  },
+  {
+    "w": "Mês 15",
+    "c": "SAA-C03 ✓ Solutions Architect Associate",
+    "col": "#38bdf8"
+  },
+  {
+    "w": "Mês 24",
+    "c": "DVA-C02 ✓ Developer Associate",
+    "col": "#a78bfa"
+  },
+  {
+    "w": "Mês 30+",
+    "c": "SOA-C03 / DOP-C02 / Segurança — escolha conforme foco",
+    "col": "#f59e0b"
+  },
+  {
+    "w": "Mês 36",
+    "c": "Workload Well-Architected + portfólio cloud completo",
+    "col": "#f87171"
+  }
 ];
 
 /* ═══════════════════════════════════════════════
@@ -1375,8 +2742,8 @@ function init(){
   // Daily
   document.getElementById('dailySchedule').innerHTML=daily.map(b=>{
     const c=CK[b.k]||CK.n;
-    const isPause=b.block.includes('pausa');
-    return `<div class="daily-block" style="${isPause?'opacity:.55':''}">
+    const isPause=b.block.toLowerCase().includes('pausa') || b.block.toLowerCase().includes('almoço') || b.block.toLowerCase().includes('jantar') || b.block.toLowerCase().includes('recuperação') || b.block.toLowerCase().includes('reset');
+    return `<div class="daily-block" style="${isPause?'opacity:.72':''}">
       <div class="daily-time" style="background:${c.b}">
         <span class="mono small" style="color:${c.t};font-weight:600;font-size:.72rem">${b.time}</span>
         <span style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:${c.t};opacity:.7">${b.dur}</span>
@@ -1638,24 +3005,183 @@ window.filterTrack=function(k){
 };
 
 /* ─── Sync table ─────────────────────────── */
+const syncCycles=[
+  {
+    title:'Ciclo 1 — Base forte de engenharia', period:'Meses 1–6', phases:'Fases 1–2', color:'#4f9ef8',
+    goal:'Consolidar Java, Git, SQL, Spring, testes, inglês técnico e a primeira versão utilizável do DevCore.',
+    tracks:['Java 21','Git/GitHub','SQL/PostgreSQL','Spring Boot','Inglês técnico'],
+    output:'API Java + DevCore API v1 + README em inglês + testes + Docker local.'
+  },
+  {
+    title:'Ciclo 2 — Full stack e cloud inicial', period:'Meses 7–12', phases:'Fases 3–4', color:'#22d3b0',
+    goal:'Amarrar backend, banco, performance, frontend e primeira experiência full stack integrada.',
+    tracks:['JPA/Performance','Frontend Engineering','DevCore Frontend','Redis/MongoDB','Integração API'],
+    output:'DevCore Full Stack v1 com login, CRUD, banco otimizado, testes e deploy inicial.'
+  },
+  {
+    title:'Ciclo 3 — Produção e arquitetura', period:'Meses 13–18', phases:'Fases 5–6', color:'#a78bfa',
+    goal:'Levar o projeto para cloud, documentar decisões, evoluir arquitetura e preparar certificação AWS Associate.',
+    tracks:['AWS','Arquitetura','DDD','C4','ADR/RFC'],
+    output:'Workload AWS inicial + DevCore Modular Monolith + 10 ADRs + revisão arquitetural.'
+  },
+  {
+    title:'Ciclo 4 — Sistemas distribuídos e operação', period:'Meses 19–24', phases:'Fases 7–8', color:'#fb923c',
+    goal:'Introduzir mensageria, integração assíncrona, CI/CD, Kubernetes, GitOps e operação reproduzível.',
+    tracks:['Kafka/RabbitMQ','Outbox/DLQ','DevOps/SRE','Kubernetes','Observabilidade'],
+    output:'Eventos idempotentes + pipeline completo + deploy Kubernetes + rollback + documentação AsyncAPI.'
+  },
+  {
+    title:'Ciclo 5 — Segurança, Python e IA aplicada', period:'Meses 25–30', phases:'Fases 9–10', color:'#38bdf8',
+    goal:'Adicionar AppSec/DevSecOps, Python profissional e serviços auxiliares para dados, automação e IA.',
+    tracks:['OWASP','DevSecOps','FastAPI','Python Backend','Integração IA'],
+    output:'Threat model + pipeline com scans + microserviço Python integrado + logs e testes.'
+  },
+  {
+    title:'Ciclo 6 — IA Engineering e senioridade', period:'Meses 31–36', phases:'Fases 11–12', color:'#f87171',
+    goal:'Consolidar RAG, agentes, LLMOps, system design, liderança técnica, incidentes e portfólio final.',
+    tracks:['RAG','LLMOps','System Design','Incidentes','Portfólio/Entrevistas'],
+    output:'DevCore Platform v2 + serviço IA + 20 ADRs + 8 RFCs + postmortems simulados.'
+  }
+];
+
+const syncDependencies=[
+  {k:'git', title:'Git + Inglês atravessam tudo', text:'Commits, PRs, README, ADRs, changelog, issues e runbooks devem ser usados como evidência técnica em todas as fases.'},
+  {k:'blog', title:'DevCore é o eixo integrador', text:'Cada trilha deve gerar impacto no projeto principal: backend, frontend, banco, cloud, segurança, IA, documentação ou operação.'},
+  {k:'db', title:'Banco vem antes de performance e escala', text:'Modelagem, transações, índices e queries reais precisam estar sólidos antes de Kafka, cache avançado e arquitetura distribuída.'},
+  {k:'arquitetura', title:'Arquitetura amadurece com evidência', text:'C4, ADRs e RFCs devem nascer de decisões reais do projeto, não apenas de teoria isolada.'},
+  {k:'devops', title:'DevOps valida entrega real', text:'Docker, CI/CD, observabilidade e deploy transformam código em sistema operável e auditável.'},
+  {k:'sec', title:'Segurança entra no design', text:'Threat modeling, secrets, SAST/SCA, IAM e OWASP devem acompanhar releases, não aparecer apenas no final.'},
+  {k:'ia', title:'IA exige avaliação e governança', text:'RAG, agentes e LLMOps só contam como domínio quando há métricas, custo, segurança, fontes/citações e análise de erro.'}
+];
+
+const syncCheckpoints=[
+  {k:'java', title:'Checkpoint de fase', text:'Projeto entregue, testes executados, README atualizado, bugs corrigidos, explicação oral e evidência no GitHub.'},
+  {k:'arquitetura', title:'Checkpoint mensal', text:'Revisar backlog, atualizar ADR/RFC, medir dívida técnica, revalidar escopo e ajustar a próxima sprint de estudo.'},
+  {k:'aws', title:'Checkpoint de certificação', text:'Simulado, revisão de erros, lab prático e anotação dos serviços usados no DevCore antes de marcar prova.'},
+  {k:'devops', title:'Checkpoint de produção', text:'Execução local reproduzível, pipeline verde, logs úteis, rollback documentado e ambiente minimamente observável.'},
+  {k:'sec', title:'Checkpoint de segurança', text:'Secrets fora do código, dependências verificadas, permissões revisadas, endpoint validado e checklist OWASP aplicado.'},
+  {k:'ingles', title:'Checkpoint de comunicação', text:'Resumo técnico em inglês, README/PR claro, gravação curta explicando a entrega e vocabulário revisado.'}
+];
+
+function syncShort(text, max=92){
+  const clean=(text||'').replace(/\s+/g,' ').trim();
+  return clean.length>max?clean.slice(0,max-1)+'…':clean;
+}
+function syncFirst(arr, fallback='Revisão e consolidação'){
+  return syncShort((arr&&arr.length?arr[0]:fallback), 88);
+}
+function syncLast(arr, fallback='Entregável prático validado'){
+  return syncShort((arr&&arr.length?arr[arr.length-1]:fallback), 92);
+}
+
 function renderSync(){
+  const totalHours=P.reduce((s,p)=>s+p.h,0);
+  const phases=P.length;
+  const certCount=awsMilestones.length;
+
+  const kpis=[
+    {label:'Estrutura', value:`${phases} fases · 6 ciclos`, text:'Cada ciclo conecta fases complementares e evita estudar trilhas como blocos isolados.'},
+    {label:'Carga prevista', value:`${totalHours.toLocaleString('pt-BR')}h`, text:'Horas distribuídas entre projeto, teoria, revisão, labs, documentação, deploy e checkpoints.'},
+    {label:'Integração', value:'DevCore como eixo', text:'Todo conteúdo deve virar código, documentação, teste, decisão técnica, infraestrutura ou artigo.'},
+    {label:'Validação', value:'80% para avançar', text:'A fase só fecha quando houver entregável, evidência, revisão, correção e explicação técnica.'}
+  ];
+  const kpiEl=document.getElementById('syncKpis');
+  if(kpiEl){
+    kpiEl.innerHTML=kpis.map(k=>`<div class="col-12 col-sm-6 col-lg-3">
+      <div class="sync-kpi-card">
+        <div class="sync-kpi-label">${k.label}</div>
+        <div class="sync-kpi-value">${k.value}</div>
+        <p>${k.text}</p>
+      </div>
+    </div>`).join('');
+  }
+
+  const cycleEl=document.getElementById('syncCycleCards');
+  if(cycleEl){
+    cycleEl.innerHTML=syncCycles.map(c=>`<div class="col-12 col-md-6 col-xl-4">
+      <article class="sync-cycle-card" style="--cycle-color:${c.color}">
+        <div class="cycle-eyebrow">${c.period} · ${c.phases}</div>
+        <h6>${c.title}</h6>
+        <p>${c.goal}</p>
+        <div class="sync-pill-row">${c.tracks.map(t=>`<span class="sync-pill">${t}</span>`).join('')}</div>
+        <p class="mt-2"><strong style="color:${c.color};font-family:'IBM Plex Mono',monospace;font-size:.68rem">Saída:</strong> ${c.output}</p>
+      </article>
+    </div>`).join('');
+  }
+
   const html=`<thead><tr>
-    <th style="color:var(--text2)">Semanas</th>
-    <th style="color:${CK.java.t}">Java + Inglês + Git</th>
-    <th style="color:${CK.blog.t}">DevCore + Frontend + Arquitetura</th>
-    <th style="color:${CK.db.t}">Banco + Python</th>
-    <th style="color:${CK.devops.t}">DevOps + AWS + Segurança</th>
-    <th style="color:${CK.ia.t}">Math + IA + Financeiro</th>
+    <th style="color:var(--text2)">Fase</th>
+    <th style="color:${CK.java.t}">Núcleo técnico</th>
+    <th style="color:${CK.blog.t}">Projeto integrador</th>
+    <th style="color:${CK.aws.t}">Cloud · DevOps · Segurança</th>
+    <th style="color:${CK.ia.t}">IA · Dados · Comunicação</th>
+    <th style="color:${CK.fin.t}">Entrega sincronizada</th>
   </tr></thead><tbody>${P.map((p,i)=>`<tr>
-    <td style="font-family:'IBM Plex Mono',monospace;color:${PC[i]};font-weight:700">${p.w.replace('Sem ','')}</td>
-    <td>${p.java[0].split(':')[0]}…<br><small style="color:${CK.ingles.t}">Inglês: ${p.ingles[0].split(':')[0]}…</small><br><small style="color:${CK.git.t}">Git: ${(p.git[0]||'Versionamento').split(':')[0]}…</small></td>
-    <td style="color:${CK.blog.t}">DevCore: ${p.blog[0].split(':')[0]}…<br><small style="color:${CK.frontend.t}">Frontend: ${(p.frontend[0]||'UI').split(':')[0]}…</small><br><small style="color:${CK.arquitetura.t}">Arquitetura: ${(p.arquitetura[0]||'Design').split(':')[0]}…</small></td>
-    <td style="color:${CK.db.t}">${p.db[0].split(':')[0]}…<br><small style="color:${CK.py.t}">Python: ${p.py[0].split(':')[0]}…</small></td>
-    <td style="color:${CK.devops.t}">DevOps: ${p.devops[0].split(':')[0]}…<br><small style="color:${CK.sec.t}">Security: ${p.sec[0].split(':')[0]}…</small><br><small style="color:${CK.aws.t}">${p.aws.cert.split('—')[0]} ${p.aws.exam?'✓ PROVA':''}</small></td>
-    <td style="color:${CK.math.t}">Math: ${p.math[0].split(':')[0]}…<br><small style="color:${CK.ia.t}">${p.ia[0]?.split('(')[0]||'Revisão'}</small><br><small style="color:${CK.fin.t}">${p.fin[0]?.split(':')[0]}…</small></td>
+    <td>
+      <span class="sync-phase-title" style="color:${PC[i]}">${p.l}</span>
+      <span class="sync-phase-sub">${p.w}</span>
+      <span class="sync-phase-sub">${p.h}h · ${p.t}</span>
+    </td>
+    <td>
+      <span class="sync-cell-title" style="color:${CK.java.t}">Java/Spring</span>
+      <div class="sync-cell-desc">${syncFirst(p.java)}</div>
+      <span class="sync-cell-title mt-2" style="color:${CK.db.t}">Banco</span>
+      <div class="sync-cell-desc">${syncFirst(p.db)}</div>
+    </td>
+    <td>
+      <span class="sync-cell-title" style="color:${CK.blog.t}">DevCore</span>
+      <div class="sync-cell-desc">${syncFirst(p.blog)}</div>
+      <span class="sync-cell-title mt-2" style="color:${CK.frontend.t}">Frontend/Arquitetura</span>
+      <div class="sync-cell-desc">${syncShort(`${syncFirst(p.frontend)} · ${syncFirst(p.arquitetura)}`, 120)}</div>
+    </td>
+    <td>
+      <span class="sync-cell-title" style="color:${CK.aws.t}">${p.aws.cert}</span>
+      <div class="sync-cell-desc">${p.aws.exam?`Marco: ${p.aws.exam}`:'Labs e aplicação progressiva no projeto'}</div>
+      <span class="sync-cell-title mt-2" style="color:${CK.devops.t}">Operação/Security</span>
+      <div class="sync-cell-desc">${syncShort(`${syncFirst(p.devops)} · ${syncFirst(p.sec)}`, 120)}</div>
+    </td>
+    <td>
+      <span class="sync-cell-title" style="color:${CK.py.t}">Python/IA</span>
+      <div class="sync-cell-desc">${syncShort(`${syncFirst(p.py)} · ${syncFirst(p.ia)}`, 120)}</div>
+      <span class="sync-cell-title mt-2" style="color:${CK.ingles.t}">Inglês/Math</span>
+      <div class="sync-cell-desc">${syncShort(`${syncFirst(p.ingles)} · ${syncFirst(p.math)}`, 120)}</div>
+    </td>
+    <td>
+      <span class="sync-cell-title" style="color:${PC[i]}">Checkpoint</span>
+      <div class="sync-cell-desc">${syncLast(p.blog, p.t)}</div>
+      <div class="sync-pill-row mt-2">
+        <span class="sync-pill">GitHub</span>
+        <span class="sync-pill">Testes</span>
+        <span class="sync-pill">README/ADR</span>
+        <span class="sync-pill">Revisão</span>
+      </div>
+    </td>
   </tr>`).join('')}</tbody>`;
   document.getElementById('syncTable').innerHTML=html;
+
+  const depEl=document.getElementById('syncDependencies');
+  if(depEl){
+    depEl.innerHTML=syncDependencies.map(d=>{
+      const c=CK[d.k]||CK.n;
+      return `<div class="sync-board-item">
+        <div class="sync-board-dot" style="--item-color:${c.t}"></div>
+        <div><strong style="color:${c.t}">${d.title}</strong><p>${d.text}</p></div>
+      </div>`;
+    }).join('');
+  }
+
+  const checkEl=document.getElementById('syncCheckpoints');
+  if(checkEl){
+    checkEl.innerHTML=syncCheckpoints.map(d=>{
+      const c=CK[d.k]||CK.n;
+      return `<div class="sync-board-item">
+        <div class="sync-board-dot" style="--item-color:${c.t}"></div>
+        <div><strong style="color:${c.t}">${d.title}</strong><p>${d.text}</p></div>
+      </div>`;
+    }).join('');
+  }
 }
+
 
 document.addEventListener('DOMContentLoaded',init);
 </script>
