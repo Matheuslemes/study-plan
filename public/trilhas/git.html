@@ -1,0 +1,1703 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="Trilha técnica completa de Git, versionamento de código, GitHub, GitLab, Bitbucket, Azure Repos, CI/CD, segurança, governança, code review, monorepo, GitOps e maturidade sênior em engenharia de software." name="description"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/><style>
+
+
+  :root{
+    --bg:#07090f;
+    --surface:#0d1117;
+    --surface2:#141a24;
+    --surface3:rgba(255,255,255,.045);
+    --border:rgba(255,255,255,.09);
+    --border2:rgba(255,255,255,.15);
+
+    --accent:#22c55e;
+    --accent2:#22d3b0;
+    --accent3:#4f9ef8;
+    --accent4:#fb923c;
+    --accent5:#a78bfa;
+    --aws-orange:#22c55e;
+    --aws-yellow:#22d3b0;
+    --aws-blue:#4f9ef8;
+    --aws-green:#22c55e;
+    --aws-purple:#a78bfa;
+    --aws-red:#fb923c;
+    --java:#22c55e;
+
+    --text:#e2e8f0;
+    --muted:#64748b;
+    --muted2:#94a3b8;
+    --code-bg:#060a12;
+
+    --must:#fca5a5;
+    --should:#fcd34d;
+    --nice:#86efac;
+    --future:#93c5fd;
+
+    --doc-bg:var(--bg);
+    --doc-surface:var(--surface);
+    --doc-surface-2:var(--surface2);
+    --doc-border:var(--border);
+    --doc-text:var(--text);
+    --doc-muted:var(--muted2);
+    --doc-code:var(--code-bg);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:15px}
+  body.track-page{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    min-height:100vh;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 10% -5%, rgba(34,197,94,.14) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 30% at 90% 5%, rgba(56,189,248,.08) 0%, transparent 42%),
+      radial-gradient(ellipse 50% 25% at 85% 25%, rgba(167,139,250,.055) 0%, transparent 42%);
+  }
+  ::selection{background:rgba(34,197,94,.28);color:#fff}
+  .container{max-width:1240px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  /* HERO */
+  .track-hero-page{
+    padding:4rem 0 3rem;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,rgba(34,197,94,.12) 0%,rgba(56,189,248,.055) 54%,rgba(167,139,250,.045) 100%);
+  }
+  .hero-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent2);
+    margin-bottom:.8rem;
+  }
+  .track-title{
+    font-family:'Syne',sans-serif;
+    font-size:clamp(2rem,5vw,4rem);
+    font-weight:800;
+    letter-spacing:-.04em;
+    background:linear-gradient(135deg,#fff 38%,var(--accent) 76%,var(--aws-yellow) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    line-height:1.1;
+    margin-bottom:.8rem;
+  }
+  .track-lead{color:var(--muted2);max-width:980px;font-size:1rem;margin-bottom:0}
+  .track-badge-set,.badge-cloud{display:flex;flex-wrap:wrap;gap:.5rem}
+  .track-badge-set{margin-top:1.4rem}
+  .track-badge-set span,.badge-cloud span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:6px;
+    border:1px solid rgba(34,197,94,.32);background:rgba(34,197,94,.08);color:var(--accent)
+  }
+  .track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.085);color:var(--aws-blue)}
+  .track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(167,139,250,.30);background:rgba(167,139,250,.075);color:var(--aws-purple)}
+  .footer-link,.hero-back-link{
+    display:inline-flex;align-items:center;gap:.4rem;
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;
+    color:var(--muted2);text-decoration:none;border:1px solid var(--border);
+    background:rgba(255,255,255,.04);padding:.32rem .75rem;border-radius:6px;transition:all .15s
+  }
+  .footer-link:hover,.hero-back-link:hover{color:#fff;border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.08);text-decoration:none}
+
+  /* SITENAV */
+  .sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+  .sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
+  .sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent2);border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
+  .nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
+  .nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+  .nav-back:hover{color:#fff;border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.08)}
+  .sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+  .search-box,.track-search{background:var(--surface2)!important;border:1px solid var(--border)!important;border-radius:8px;padding:.3rem .7rem;color:#fff!important;font-size:.8rem;outline:none;width:270px;box-shadow:none!important}
+  .search-box::placeholder,.track-search::placeholder{color:var(--muted)!important}
+  .search-box:focus,.track-search:focus{border-color:rgba(34,197,94,.45)!important}
+  .sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
+  .sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(34,197,94,.4) rgba(255,255,255,.04);padding:0 32px}
+  .sitenav-bar-inner::-webkit-scrollbar{height:4px}.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(34,197,94,.4);border-radius:99px}.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(34,197,94,.7)}
+  .sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
+  .sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
+  .sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
+  .nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
+  .nav-scroll-btn:hover{color:#fff;background:rgba(34,197,94,.08)}
+  .nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
+  .nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
+  .nav-group:last-child{border-right:none;padding-right:.8rem}
+  .nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
+  .nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
+  .nav-link:hover{color:#fff;background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.25)}
+  .nav-link.active{color:var(--accent);background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3)}
+
+  /* LAYOUT */
+  .main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
+  .sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+  .sidebar-group{margin-bottom:1.4rem}
+  .sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
+  .sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
+  .sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
+  .sidebar a.active{color:var(--accent);background:rgba(34,197,94,.08)}
+  .content{padding:2rem 0 4rem 2rem}
+  #trackMain{padding-top:0!important;padding-bottom:0!important}
+
+  /* CONTENT */
+  .doc-section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem);box-shadow:none}
+  .doc-section:target{border-color:rgba(34,197,94,.42);box-shadow:0 0 0 1px rgba(34,197,94,.15)}
+  .doc-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+  .doc-section-heading h2,.doc-section h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff;margin:0}
+  .section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
+  .section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(34,211,176,.32);background:rgba(34,211,176,.085);color:var(--accent2)}
+  .doc-section h3,.exam-card h3,.phase-doc-card h3,.callout h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
+  .doc-section h4,.phase-doc-card h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
+  p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}.lead{font-size:1rem;color:#cbd5e1}ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}li{margin-bottom:.3rem;font-size:.88rem}strong{color:#e2e8f0;font-weight:600}em{color:#bbf7d0;font-style:normal;font-weight:700}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(34,197,94,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
+  .doc-hero-card{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr);gap:1rem;align-items:center}
+  .doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid{display:grid;gap:1rem}.doc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.doc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.doc-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.phase-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}.metric-pill{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22);border-radius:12px;padding:1rem;text-align:center}.metric-pill span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}.metric-pill small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+  .mini-card,.exam-card,.phase-doc-card,.callout{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color .15s,background .15s,transform .15s}.mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}.mini-card span,.exam-card p,.phase-doc-card p,.callout p{color:var(--muted2);font-size:.82rem}.mini-card:hover,.exam-card:hover,.phase-doc-card:hover{border-color:rgba(34,197,94,.28);background:#151c27;transform:translateY(-1px)}
+  .exam-card{position:relative;overflow:hidden}.exam-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--aws-blue))}
+  .callout{border-left:3px solid var(--accent);background:rgba(34,197,94,.06);border-radius:0 10px 10px 0}.callout.accent-blue{border-left-color:var(--aws-blue);background:rgba(56,189,248,.06)}.callout.accent-green{border-left-color:var(--aws-green);background:rgba(34,211,176,.06)}.callout.accent-purple{border-left-color:var(--aws-purple);background:rgba(167,139,250,.06)}.callout.accent-red{border-left-color:var(--aws-red);background:rgba(251,113,133,.06)}.callout h3,.callout h4{margin-top:0;color:#fff}.callout p,.callout ul{margin-bottom:0}
+  .doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}.doc-list li{margin-bottom:.35rem}
+  .phase-doc-card{position:relative;overflow:hidden;padding:1.1rem}.phase-doc-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--aws-blue))}.phase-doc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;padding-bottom:.6rem;margin-bottom:.7rem;border-bottom:1px solid var(--border)}.phase-doc-head h3{margin:0;font-size:.92rem;color:#fff}.phase-doc-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}
+  .table-responsive{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0 1rem}.doc-table{border-collapse:collapse;width:100%;min-width:760px;margin-bottom:0!important}.doc-table thead tr,.doc-table th{background:rgba(34,197,94,.10)!important}.doc-table th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem!important;text-align:left;color:#fff!important;border-bottom:1px solid var(--border2)!important;border-color:var(--border)!important;white-space:nowrap}.doc-table td{padding:.65rem 1rem!important;font-size:.82rem;color:#cbd5e1!important;border-bottom:1px solid var(--border)!important;border-color:var(--border)!important;vertical-align:top}.doc-table tr:last-child td{border-bottom:none!important}.doc-table tr:hover td{background:rgba(255,255,255,.025)!important}.dense-table td,.dense-table th{font-size:.78rem!important}.table-dark,.table-dark>:not(caption)>*>*{background:transparent!important;color:var(--text)!important}.table-hover>tbody>tr:hover>*{background:rgba(255,255,255,.025)!important}.table-dark>:not(caption)>*{border-color:var(--border)!important}
+  pre,.code-block{background:var(--code-bg);border:1px solid rgba(34,197,94,.22);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#7dd3fc;max-height:680px;white-space:pre}pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
+  .timeline{position:relative;margin-left:.65rem;padding-left:1.5rem}.timeline::before{content:"";position:absolute;left:0;top:.25rem;bottom:.25rem;width:1px;background:var(--border)}.timeline-item{position:relative;margin-bottom:1rem}.timeline-item::before{content:"";position:absolute;left:-1.77rem;top:.3rem;width:.65rem;height:.65rem;border-radius:999px;background:var(--accent);box-shadow:0 0 0 5px rgba(34,197,94,.14)}.timeline-item strong{color:#fff;display:block}.timeline-item span{color:var(--muted2);font-size:.84rem}
+  .priority{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}.priority.must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}.priority.should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}.priority.nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}.priority.future{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
+  .ref-list a{color:#d8ecff;text-decoration:none}.ref-list a:hover{color:#fff;text-decoration:underline}.mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.is-hidden-by-search{display:none!important}.search-hit{outline:1px solid rgba(34,197,94,.65);background:rgba(34,197,94,.08)!important}
+  .back-to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}.back-to-top.is-visible{display:flex}.back-to-top:hover{background:rgba(34,197,94,.3)}
+  .page-footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}.page-footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px}.footer-pill.orange{border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.06);color:var(--accent)}.footer-pill.yellow{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent2)}.footer-pill.blue{border:1px solid rgba(56,189,248,.25);background:rgba(56,189,248,.06);color:var(--aws-blue)}.footer-pill.purple{border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--aws-purple)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid rgba(34,197,94,.65);outline-offset:2px}
+  @media(max-width:992px){.main{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem 0 3rem}.doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid,.metrics-grid{grid-template-columns:1fr}.sitenav-top{flex-wrap:wrap;gap:.5rem}.sitenav-top-right{width:100%}.search-box,.track-search{width:100%}.nav-ver{display:none}}
+  @media(max-width:576px){.track-hero-page{padding:3rem 0 2rem}.track-title{font-size:clamp(1.8rem,10vw,2.8rem)}.doc-section{border-radius:10px;padding:1rem}.doc-section-heading,.phase-doc-head{flex-direction:column}.sitenav-brand span{display:none}.nav-back{font-size:.65rem;padding:.25rem .5rem}.nav-group-label{display:none}.nav-group{border-right:none;padding:.25rem .25rem}.nav-link{font-size:.66rem;padding:.25rem .48rem}}
+
+
+
+  /* Java-specific color variants over the AWS structural system */
+  .callout.accent-orange{border-left-color:var(--accent4);background:rgba(251,146,60,.06)}
+  .footer-pill.green{border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.06);color:var(--java)}
+  .footer-pill.teal{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent2)}
+  .footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent3)}
+  .footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent4)}
+  .track-badge-set span.tag{display:inline-flex}
+
+</style>
+  <!-- Responsividade refeita: estrutura baseada na Trilha do Blog. O CSS original acima permanece intacto. -->
+
+  <!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta o encaixe texto + métricas. -->
+
+  <style id="java-aws-responsive-refactor">
+
+    /* ─────────────────────────────────────────────────────────────
+       RESPONSIVIDADE REFEITA — Java Track
+       Bloco complementar: não altera o CSS principal nem o conteúdo.
+       Objetivo: padronizar notebook, tablet e mobile com a estrutura
+       usada na Trilha do Blog e reaplicada na Trilha Java.
+       ───────────────────────────────────────────────────────────── */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body.track-page {
+      overflow-x: hidden;
+    }
+
+    .container,
+    .main,
+    .content,
+    .doc-section,
+    .table-responsive,
+    .doc-table,
+    .phase-doc-card,
+    .exam-card,
+    .mini-card,
+    .callout,
+    .metrics-grid,
+    .doc-hero-card {
+      min-width: 0;
+    }
+
+    img,
+    video,
+    canvas,
+    iframe,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .doc-section {
+      scroll-margin-top: 126px;
+    }
+
+    .table-responsive,
+    pre,
+    .code-block {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-inline: contain;
+    }
+
+    .table-responsive .doc-table,
+    .table-responsive table {
+      width: 100%;
+      min-width: max(760px, 100%);
+      table-layout: auto;
+    }
+
+    .doc-table th,
+    .doc-table td,
+    th,
+    td {
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    pre,
+    .code-block {
+      white-space: pre;
+      overflow-y: auto;
+    }
+
+    pre code,
+    .code-block code {
+      white-space: inherit;
+    }
+
+    .track-title,
+    .track-lead,
+    .doc-section-heading h2,
+    .sitenav-brand,
+    p,
+    li,
+    .mini-card span,
+    .exam-card p,
+    .phase-doc-card p,
+    .callout p,
+    .timeline-item span {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    .doc-grid-2 > *,
+    .doc-grid-3 > *,
+    .doc-grid-4 > *,
+    .phase-doc-grid > *,
+    .metrics-grid > * {
+      min-width: 0;
+    }
+
+    .sitenav,
+    .sitenav * {
+      min-width: 0;
+    }
+
+    .sitenav-brand,
+    .nav-back,
+    .nav-ver {
+      flex-shrink: 0;
+    }
+
+    .sitenav-top-right {
+      min-width: 180px;
+    }
+
+    .search-box,
+    .track-search {
+      max-width: 100%;
+    }
+
+    .sitenav-bar-inner {
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+    }
+
+    .nav-link {
+      scroll-snap-align: start;
+    }
+
+    /* Correção do Resumo Executivo: evita texto espremido contra os cards. */
+    #resumo .doc-hero-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    #resumo .metrics-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    #resumo .metric-pill {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Notebook e desktop estreito */
+    @media (max-width: 1180px) {
+      .container,
+      .main {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .main {
+        grid-template-columns: 200px minmax(0, 1fr);
+      }
+
+      .content {
+        padding-left: 1.35rem;
+      }
+
+      .doc-grid-4,
+      #resumo .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .doc-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Tablet: remove sidebar e preserva navegação superior */
+    @media (max-width: 980px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .content {
+        padding: 1.5rem 0 3rem;
+      }
+
+      .doc-section {
+        scroll-margin-top: 148px;
+      }
+
+      .doc-hero-card,
+      .doc-grid-2,
+      .phase-doc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sitenav-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .55rem .75rem;
+      }
+
+      .sitenav-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-ver {
+        display: none;
+      }
+
+      .nav-back {
+        justify-self: end;
+      }
+
+      .sitenav-top-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+      }
+
+      .search-box,
+      .track-search {
+        width: 100% !important;
+        min-height: 38px;
+      }
+    }
+
+    /* Tablet estreito e celulares grandes */
+    @media (max-width: 760px) {
+      html {
+        font-size: 14.5px;
+      }
+
+      .container,
+      .main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .track-hero-page {
+        padding: 2.8rem 0 2rem;
+      }
+
+      .track-title {
+        font-size: clamp(2rem, 9vw, 3.1rem);
+        letter-spacing: -.035em;
+      }
+
+      .track-lead {
+        max-width: 100%;
+      }
+
+      .track-badge-set,
+      .badge-cloud {
+        gap: .42rem;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
+
+      .sitenav-bar-inner {
+        padding-left: 34px;
+        padding-right: 34px;
+      }
+
+      .nav-group {
+        padding: .25rem .3rem;
+      }
+
+      .nav-group-label {
+        font-size: .56rem;
+        padding-right: .4rem;
+        margin-right: .2rem;
+      }
+
+      .nav-link {
+        font-size: .66rem;
+        padding: .3rem .5rem;
+      }
+
+      .doc-section {
+        padding: 1rem;
+        border-radius: 12px;
+        scroll-margin-top: 154px;
+      }
+
+      .doc-section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-badge {
+        white-space: normal;
+      }
+
+      .doc-grid-3,
+      .doc-grid-4,
+      .metrics-grid,
+      #resumo .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-pill span {
+        font-size: 1.75rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 680px;
+      }
+
+      .doc-table th,
+      .doc-table td,
+      th,
+      td {
+        padding: .58rem .72rem !important;
+      }
+
+      pre,
+      .code-block {
+        padding: .9rem;
+        font-size: .72rem;
+        max-height: 520px;
+      }
+
+      .phase-doc-head {
+        align-items: flex-start;
+      }
+    }
+
+    /* Celulares */
+    @media (max-width: 520px) {
+      html {
+        font-size: 14px;
+      }
+
+      .container,
+      .main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+      }
+
+      .track-hero-page {
+        padding: 2.35rem 0 1.7rem;
+      }
+
+      .hero-label {
+        font-size: .66rem;
+      }
+
+      .hero-back-link,
+      .footer-link {
+        max-width: 100%;
+      }
+
+      .sitenav-top {
+        grid-template-columns: 1fr;
+        gap: .45rem;
+      }
+
+      .sitenav-brand {
+        width: 100%;
+        white-space: normal;
+        justify-content: space-between;
+      }
+
+      .sitenav-brand span {
+        flex-shrink: 0;
+      }
+
+      .nav-back {
+        width: 100%;
+        justify-content: center;
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .nav-group-label {
+        display: none;
+      }
+
+      .nav-group {
+        border-right: none;
+        padding: .25rem .18rem;
+      }
+
+      .nav-link {
+        font-size: .64rem;
+        padding: .3rem .46rem;
+      }
+
+      .content {
+        padding-top: 1rem;
+      }
+
+      .doc-section {
+        margin-bottom: 1rem;
+        padding: .9rem;
+        scroll-margin-top: 184px;
+      }
+
+      .doc-section-heading h2,
+      .doc-section h2 {
+        font-size: 1.15rem;
+      }
+
+      .doc-section h3,
+      .exam-card h3,
+      .phase-doc-card h3,
+      .callout h3 {
+        font-size: .96rem;
+      }
+
+      p,
+      li,
+      .doc-table td,
+      td {
+        font-size: .84rem !important;
+      }
+
+      .doc-table th,
+      th {
+        font-size: .66rem !important;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span,
+      .priority,
+      .section-badge {
+        font-size: .64rem;
+      }
+
+      .metric-pill {
+        padding: .85rem;
+        min-height: 96px;
+      }
+
+      .metric-pill span {
+        font-size: 1.62rem;
+      }
+
+      .mini-card,
+      .exam-card,
+      .phase-doc-card {
+        border-radius: 10px;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 640px;
+      }
+
+      .page-footer .footer-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      .page-footer .footer-link {
+        justify-content: center !important;
+      }
+
+      .footer-pills {
+        justify-content: center !important;
+      }
+
+      .back-to-top {
+        right: .85rem;
+        bottom: .85rem;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Celulares muito estreitos */
+    @media (max-width: 380px) {
+      .container,
+      .main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+
+      .track-title {
+        font-size: 1.85rem;
+      }
+
+      .sitenav-brand span {
+        display: none;
+      }
+
+      .doc-section {
+        padding: .78rem;
+      }
+
+      pre,
+      .code-block {
+        font-size: .68rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 600px;
+      }
+    }
+
+    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+    @media (pointer: coarse) {
+      .nav-scroll-btn,
+      .back-to-top,
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back,
+      .sidebar a {
+        touch-action: manipulation;
+      }
+
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back {
+        min-height: 34px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+
+
+    /* Java-specific color variants over the AWS structural system */
+    .callout.accent-orange{border-left-color:var(--accent4);background:rgba(251,146,60,.06)}
+    .footer-pill.green{border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.06);color:var(--java)}
+    .footer-pill.teal{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent2)}
+    .footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent3)}
+    .footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent4)}
+    .track-badge-set span.tag{display:inline-flex}
+
+  </style>
+  <style id="reference-card-style">
+    /* ─────────────────────────────────────────────────────────────
+       REFERÊNCIAS EM CARDS — padrão visual reutilizável
+       Mantém compatibilidade com busca global, navegação e tema dark.
+       ───────────────────────────────────────────────────────────── */
+
+    .ref-grid {
+      display:grid;
+      gap:1rem;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .ref-card {
+      background:var(--surface2);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:1rem;
+      transition:border-color .15s,background .15s,transform .15s;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+      min-width:0;
+    }
+
+    .ref-card::before {
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:3px;
+      background:linear-gradient(180deg,var(--accent),var(--accent2));
+    }
+
+    .ref-card:hover {
+      border-color:rgba(52,211,153,.30);
+      background:#151c27;
+      transform:translateY(-1px);
+    }
+
+    .ref-card strong {
+      display:block;
+      color:#fff;
+      font-family:'Syne',sans-serif;
+      font-size:.95rem;
+      margin-bottom:.35rem;
+      padding-left:.15rem;
+    }
+
+    .ref-card p {
+      color:var(--muted2);
+      font-size:.82rem;
+      margin-bottom:.75rem;
+      padding-left:.15rem;
+    }
+
+    .ref-card a,
+    .ref-list a {
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      max-width:100%;
+      color:#d8ecff;
+      text-decoration:none;
+      font-family:'IBM Plex Mono',monospace;
+      font-size:.72rem;
+      font-weight:600;
+      line-height:1.45;
+      border:1px solid rgba(56,189,248,.18);
+      background:rgba(56,189,248,.055);
+      padding:.28rem .55rem;
+      border-radius:6px;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      transition:all .14s;
+    }
+
+    .ref-card a::after,
+    .ref-list a::after {
+      content:'↗';
+      font-size:.72rem;
+      color:var(--accent2);
+      line-height:1;
+    }
+
+    .ref-card a:hover,
+    .ref-list a:hover {
+      color:#fff;
+      border-color:rgba(52,211,153,.42);
+      background:rgba(52,211,153,.09);
+      text-decoration:none;
+      transform:translateY(-1px);
+    }
+
+    .ref-grid > * {
+      min-width:0;
+    }
+
+    @media(max-width:1180px) {
+      .ref-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:980px) {
+      .ref-grid {
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:520px) {
+      .ref-card {
+        border-radius:10px;
+      }
+
+      .ref-card a,
+      .ref-list a {
+        display:flex;
+        width:100%;
+        justify-content:space-between;
+        align-items:center;
+      }
+    }
+  </style>
+
+  <style id="git-theme-overrides">
+    /* Tema visual da Trilha Git: mantém a estrutura técnica da trilha Java e altera a identidade cromática. */
+    :root{
+      --accent:#f97316;
+      --accent2:#60a5fa;
+      --accent3:#34d399;
+      --accent4:#a78bfa;
+      --accent5:#f43f5e;
+      --aws-orange:#f97316;
+      --aws-yellow:#f59e0b;
+      --aws-blue:#60a5fa;
+      --aws-green:#34d399;
+      --aws-purple:#a78bfa;
+      --aws-red:#f43f5e;
+      --java:#f97316;
+    }
+    body.track-page{
+      background-image:
+        radial-gradient(ellipse 82% 42% at 8% -6%, rgba(249,115,22,.16) 0%, transparent 52%),
+        radial-gradient(ellipse 64% 32% at 88% 3%, rgba(96,165,250,.10) 0%, transparent 44%),
+        radial-gradient(ellipse 50% 26% at 78% 22%, rgba(167,139,250,.075) 0%, transparent 46%);
+    }
+    ::selection{background:rgba(249,115,22,.30);color:#fff}
+    .track-hero-page{background:linear-gradient(135deg,rgba(249,115,22,.14) 0%,rgba(96,165,250,.075) 54%,rgba(167,139,250,.06) 100%)}
+    .track-title{background:linear-gradient(135deg,#fff 28%,var(--accent) 58%,var(--accent2) 82%,var(--accent4) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .track-badge-set span,.badge-cloud span{border-color:rgba(249,115,22,.36);background:rgba(249,115,22,.085);color:var(--accent)}
+    .track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(96,165,250,.34);background:rgba(96,165,250,.08);color:var(--accent2)}
+    .track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(167,139,250,.32);background:rgba(167,139,250,.075);color:var(--accent4)}
+    .metric-pill{background:rgba(249,115,22,.075);border-color:rgba(249,115,22,.24)}
+    .exam-card::before{background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent4))}
+    .phase-doc-card::before{background:linear-gradient(180deg,var(--accent),var(--accent2),var(--accent4))}
+    .footer-pill.green{border-color:rgba(249,115,22,.25);background:rgba(249,115,22,.06);color:var(--accent)}
+    .footer-pill.teal{border-color:rgba(52,211,153,.25);background:rgba(52,211,153,.06);color:var(--accent3)}
+    .footer-pill.blue{border-color:rgba(96,165,250,.25);background:rgba(96,165,250,.06);color:var(--accent2)}
+    .footer-pill.orange{border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--accent4)}
+    .callout.accent-orange{border-left-color:var(--accent);background:rgba(249,115,22,.06)}
+    .callout.accent-emerald{border-left-color:var(--accent3);background:rgba(52,211,153,.06)}
+    .code-block{border-color:rgba(249,115,22,.24)}
+  </style>
+</head>
+<body class="track-page" data-track="git">
+<header class="track-hero-page">
+  <div class="container">
+    <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
+    <div class="hero-label">Trilha técnica · Git · Versionamento · Plataformas</div>
+    <h1 class="track-title">Git, Versionamento de Código e Plataformas</h1>
+    <p class="track-lead">Plano técnico completo para evoluir do básico ao nível sênior em Git, colaboração, Pull Requests, CI/CD, GitHub, GitLab, Bitbucket, Azure Repos, segurança, governança, monorepo, GitOps e estratégia de entrega.</p>
+    <div class="track-badge-set"><span>Git Core</span><span>GitHub</span><span>GitLab</span><span>Azure Repos</span><span>CI/CD</span><span>Governança</span><span>GitOps</span><span>Senioridade</span></div>
+  </div>
+</header>
+<nav class="sitenav">
+  <div class="container sitenav-top">
+    <a class="sitenav-brand" href="#resumo">Git Versioning <span>Senior Track</span></a>
+    <span class="nav-ver">HTML técnico · baseado na trilha Java</span>
+    <a class="nav-back" href="../index.html">← Dashboard</a>
+    <div class="sitenav-top-right"><input aria-label="Buscar na trilha" class="track-search" id="searchInput" placeholder="Buscar: rebase, CI/CD, CODEOWNERS..." type="search"/></div>
+  </div>
+  <div class="sitenav-bar-outer">
+    <button aria-label="Rolar navegação para a esquerda" class="nav-scroll-btn left" id="navScrollLeft" type="button">‹</button>
+    <div class="sitenav-bar-inner" id="navSectionsBar"><div class="nav-group"> <span class="nav-group-label">Base</span> <a class="nav-link" href="#resumo">01 · Resumo</a> <a class="nav-link" href="#objetivo">02 · Objetivo</a> <a class="nav-link" href="#niveis">03 · Níveis</a> </div> <div class="nav-group"> <span class="nav-group-label">Git Core</span> <a class="nav-link" href="#fundamentos">04 · Fundamentos</a> <a class="nav-link" href="#intermediario">05 · Colaboração</a> <a class="nav-link" href="#avancado">06 · Git interno</a> <a class="nav-link" href="#commits">07 · Commits</a> </div> <div class="nav-group"> <span class="nav-group-label">Fluxos</span> <a class="nav-link" href="#branching">08 · Branching</a> <a class="nav-link" href="#plataformas">09 · Plataformas</a> <a class="nav-link" href="#comparativo">10 · Comparativo</a> <a class="nav-link" href="#cicd">11 · CI/CD</a> </div> <div class="nav-group"> <span class="nav-group-label">Governança</span> <a class="nav-link" href="#seguranca">12 · Segurança</a> <a class="nav-link" href="#governanca">13 · Governança</a> <a class="nav-link" href="#review">14 · Review</a> <a class="nav-link" href="#repos">15 · Repositórios</a> </div> <div class="nav-group"> <span class="nav-group-label">Arquitetura</span> <a class="nav-link" href="#contratos">16 · Contratos</a> <a class="nav-link" href="#gitops">17 · GitOps</a> <a class="nav-link" href="#erros">18 · Erros</a> <a class="nav-link" href="#senior">19 · Senioridade</a> </div> <div class="nav-group"> <span class="nav-group-label">Execução</span> <a class="nav-link" href="#plano">20 · Plano</a> <a class="nav-link" href="#projeto">21 · Projeto</a> <a class="nav-link" href="#referencias">22 · Referências</a> <a class="nav-link" href="#resumo-final">23 · Final</a> </div></div>
+    <button aria-label="Rolar navegação para a direita" class="nav-scroll-btn right" id="navScrollRight" type="button">›</button>
+  </div>
+</nav>
+<div class="main" id="trackMain">
+  <aside class="sidebar"><div class="sidebar-group"> <div class="sidebar-label">Base</div> <a href="#resumo">01. Resumo</a> <a href="#objetivo">02. Objetivo</a> <a href="#niveis">03. Níveis</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Git Core</div> <a href="#fundamentos">04. Fundamentos</a> <a href="#intermediario">05. Colaboração</a> <a href="#avancado">06. Git interno</a> <a href="#commits">07. Commits</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Fluxos</div> <a href="#branching">08. Branching</a> <a href="#plataformas">09. Plataformas</a> <a href="#comparativo">10. Comparativo</a> <a href="#cicd">11. CI/CD</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Governança</div> <a href="#seguranca">12. Segurança</a> <a href="#governanca">13. Governança</a> <a href="#review">14. Review</a> <a href="#repos">15. Repositórios</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Arquitetura</div> <a href="#contratos">16. Contratos</a> <a href="#gitops">17. GitOps</a> <a href="#erros">18. Erros</a> <a href="#senior">19. Senioridade</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Execução</div> <a href="#plano">20. Plano</a> <a href="#projeto">21. Projeto</a> <a href="#referencias">22. Referências</a> <a href="#resumo-final">23. Final</a> </div></aside>
+  <div class="content">
+    
+    <section class="doc-section searchable-section" data-search-section="" id="resumo">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Resumo executivo</h2>
+          <p class="section-subtitle">Trilha técnica para dominar Git, versionamento, colaboração, automação, segurança e governança de repositórios até nível sênior.</p>
+        </div>
+        <span class="section-badge">Git Engineering</span>
+      </div>
+      
+  <div class="doc-hero-card">
+    <div>
+      <p class="lead">Esta página transforma a trilha de Git, versionamento de código, GitHub, GitLab e plataformas modernas em um material HTML navegável, seguindo a mesma base técnica e visual da trilha Java.</p>
+      <p>Git não é apenas uma ferramenta para salvar histórico. Em engenharia profissional, ele sustenta colaboração, revisão de código, rastreabilidade, rollback, releases, CI/CD, segurança, auditoria técnica, governança e entrega contínua.</p>
+      <ul class="doc-list"><li>Saída esperada: usar Git com segurança em bases reais, sem destruir histórico ou sobrescrever trabalho do time.</li><li>Foco intermediário: branches, PR/MR, conflitos, rebase, squash, code review e políticas de branch.</li><li>Foco avançado: modelo interno do Git, HEAD, refs, reset, revert, restore, stash, cherry-pick, bisect e hooks.</li><li>Foco sênior: branching strategy, proteção de branches, CODEOWNERS, SemVer, releases, monorepo, GitOps e governança.</li></ul>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-pill"><span>23</span><small>seções técnicas</small></div>
+      <div class="metric-pill"><span>6</span><small>fases de evolução</small></div>
+      <div class="metric-pill"><span>36</span><small>semanas sugeridas</small></div>
+      <div class="metric-pill"><span>1</span><small>projeto final</small></div>
+    </div>
+  </div>
+  <div class="callout accent-orange mt-3"><h3>Ideia central</h3><p>Para o básico, Git é histórico. Para o intermediário, é colaboração. Para o avançado, é automação, qualidade e segurança. Para o sênior, Git é parte da arquitetura de entrega de software.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="objetivo">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Objetivo da trilha</h2>
+          <p class="section-subtitle">Capacidades práticas que diferenciam quem decora comandos de quem governa o fluxo de desenvolvimento.</p>
+        </div>
+        <span class="section-badge">Objetivo</span>
+      </div>
+      
+  <p class="lead">O objetivo não é decorar comandos isolados, mas construir capacidade para operar repositórios reais com segurança, clareza e governança.</p>
+  <div class="doc-grid-3"><article class="exam-card"><h3>Trabalho seguro</h3><p>Trabalhar em bases de código reais sem perder alterações, sobrescrever colegas, quebrar histórico ou publicar segredos.</p></article><article class="exam-card"><h3>Colaboração profissional</h3><p>Usar Pull Requests, Merge Requests, revisão de código, branch policies, issues, templates e evidências de teste.</p></article><article class="exam-card"><h3>Automação e qualidade</h3><p>Automatizar build, testes, lint, análise estática, segurança de dependências, empacotamento e deploy.</p></article><article class="exam-card"><h3>Estratégia de entrega</h3><p>Definir branching, releases, SemVer, tags, changelog, rollback e fluxo adequado ao contexto do produto.</p></article><article class="exam-card"><h3>Governança</h3><p>Administrar permissões, CODEOWNERS, branch protection, auditoria, monorepos, migração e padrões de repositório.</p></article><article class="exam-card"><h3>Senioridade</h3><p>Ensinar o time a versionar, revisar, proteger, integrar, entregar, auditar e recuperar software em produção.</p></article></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="niveis">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Trilha progressiva por nível</h2>
+          <p class="section-subtitle">Evolução do básico ao sênior com resultado esperado em cada fase de maturidade.</p>
+        </div>
+        <span class="section-badge">Senioridade</span>
+      </div>
+      
+  <div class="phase-doc-grid">
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível básico</h3><span>Fundamentos</span></div><p>Entender repositório, commit, branch, remote, clone, push, pull, fetch, add, status, log e diff.</p><ul class="doc-list"><li>Criar branch local.</li><li>Fazer commits pequenos.</li><li>Enviar para remoto.</li><li>Abrir PR/MR simples.</li><li>Evitar commits gigantes e cópias manuais como projeto-final-v2.zip.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível intermediário</h3><span>Time real</span></div><p>Trabalhar com branches, PR/MR, conflitos, merge, rebase, squash, code review e evidência de teste.</p><ul class="doc-list"><li>Resolver conflitos sem apagar regra do colega.</li><li>Atualizar branch com frequência.</li><li>Escrever PRs pequenas e revisáveis.</li><li>Usar templates e relacionar task/issue.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível avançado</h3><span>Git interno</span></div><p>Dominar modelo interno, HEAD, refs, reset, revert, restore, stash, cherry-pick, bisect, hooks e automação.</p><ul class="doc-list"><li>Entender por que rebase muda hashes.</li><li>Usar revert em histórico compartilhado.</li><li>Usar bisect para localizar regressão.</li><li>Automatizar validações em hooks e pipelines.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível sênior</h3><span>Governança</span></div><p>Definir políticas, permissões, branching, releases, CODEOWNERS, monorepo/multirepo, GitOps e auditoria.</p><ul class="doc-list"><li>Escolher fluxo por contexto.</li><li>Configurar branch protection.</li><li>Versionar contratos e infraestrutura.</li><li>Medir saúde do fluxo de desenvolvimento.</li><li>Migrar plataformas com risco controlado.</li></ul></article>
+  </div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="fundamentos">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Fundamentos essenciais do Git</h2>
+          <p class="section-subtitle">Controle de versão, estados principais e comandos obrigatórios para operar com segurança.</p>
+        </div>
+        <span class="section-badge">Git Core</span>
+      </div>
+      
+  <h3>O que é controle de versão</h3>
+  <p>Controle de versão registra mudanças em arquivos ao longo do tempo. Em software, isso permite saber quem alterou, quando alterou, por que alterou e como comparar ou voltar para estados anteriores.</p>
+  <div class="doc-grid-3"><article class="mini-card"><strong>Repositório</strong><span>Local onde o histórico do projeto é armazenado.</span></article><article class="mini-card"><strong>Commit</strong><span>Snapshot versionado com mensagem, autor, data e referência ao estado do projeto.</span></article><article class="mini-card"><strong>Branch</strong><span>Ponteiro leve e móvel para uma linha de desenvolvimento.</span></article><article class="mini-card"><strong>Tag</strong><span>Marcador para versões ou pontos importantes do histórico.</span></article><article class="mini-card"><strong>Remote</strong><span>Repositório remoto usado para colaboração, como origin.</span></article><article class="mini-card"><strong>Fetch/Pull/Push</strong><span>Operações para buscar, integrar e enviar mudanças ao remoto.</span></article></div>
+  <h3>Estados principais do Git</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Área</th><th>Função</th></tr></thead><tbody><tr><td>Working Directory</td><td>Onde você edita arquivos localmente.</td></tr><tr><td>Staging Area / Index</td><td>Área de preparação do próximo commit.</td></tr><tr><td>Repository</td><td>Banco local de commits, branches, tags e objetos Git.</td></tr></tbody></table></div>
+  <h3>Fluxo mental básico</h3>
+  <pre class="code-block"><code class="language-bash"># edita arquivos
+git status
+
+# adiciona mudanças ao staging
+git add arquivo.java
+
+# cria snapshot versionado
+git commit -m &quot;feat: add customer validation&quot;
+
+# envia para o remoto
+git push origin minha-branch</code></pre>
+  <h3>Comandos básicos obrigatórios</h3>
+  <pre class="code-block"><code class="language-bash">git init
+git clone &lt;url&gt;
+git status
+git add .
+git commit -m &quot;mensagem&quot;
+git log
+git diff
+git branch
+git switch -c minha-branch
+git switch main
+git pull
+git push</code></pre>
+  <div class="callout accent-blue"><h3>Erro comum</h3><p>git add não envia arquivo para GitHub, GitLab ou Azure Repos. Ele apenas prepara a mudança no staging para o próximo commit local.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="intermediario">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Nível intermediário - colaboração e fluxo real</h2>
+          <p class="section-subtitle">Branches, merge, rebase, conflitos e Pull/Merge Requests em times profissionais.</p>
+        </div>
+        <span class="section-badge">Colaboração</span>
+      </div>
+      
+  <h3>Branches</h3>
+  <p>Uma branch é um ponteiro leve e móvel para um commit. Ao criar uma branch, o Git cria uma nova referência; conforme commits são feitos, esse ponteiro avança.</p>
+  <pre class="code-block"><code class="language-bash">git switch -c feature/customer-api
+git add .
+git commit -m &quot;feat(customer): create customer endpoint&quot;
+git push origin feature/customer-api</code></pre>
+  <ul class="doc-list"><li>Use nomes claros: feature/, bugfix/, hotfix/ e release/.</li><li>Evite branches longas demais.</li><li>Atualize sua branch com frequência.</li><li>Não trabalhe diretamente na main/master.</li><li>Abra PR/MR pequena e revisável.</li></ul>
+  <h3>Merge vs rebase</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Técnica</th><th>Como funciona</th><th>Quando usar</th><th>Risco</th></tr></thead><tbody><tr><td>Merge</td><td>Preserva a linha histórica original e pode criar commit de merge.</td><td>Quando você quer preservar claramente o histórico de integração.</td><td>Histórico pode ficar mais ruidoso em times com muitas branches.</td></tr><tr><td>Rebase</td><td>Reaplica commits de uma branch sobre outra base.</td><td>Quando você quer atualizar sua branch com a main e manter histórico mais linear.</td><td>Reescreve histórico; não use em commits compartilhados sem alinhamento.</td></tr><tr><td>Squash merge</td><td>Condensa vários commits em um único commit na branch principal.</td><td>Quando a PR tem muitos commits intermediários sem valor histórico.</td><td>Pode perder granularidade se usado sem critério.</td></tr></tbody></table></div>
+  <h3>Fluxos de atualização</h3>
+  <pre class="code-block"><code class="language-bash"># merge
+git switch main
+git pull
+git merge feature/customer-api
+
+# rebase
+git switch feature/customer-api
+git fetch origin
+git rebase origin/main</code></pre>
+  <h3>Conflitos de merge</h3>
+  <pre class="code-block"><code class="language-bash">git status
+# abrir arquivos com conflito
+# resolver manualmente
+git add arquivo-com-conflito.java
+git rebase --continue
+# ou
+git commit</code></pre>
+  <div class="callout accent-red"><h3>Não faça</h3><ul class="doc-list"><li>Aceitar ours/theirs sem entender.</li><li>Resolver conflito apagando regra de negócio do colega.</li><li>Resolver conflito sem rodar testes.</li><li>Fazer merge gigante depois de semanas de branch parada.</li></ul></div>
+  <h3>Modelo de PR/MR</h3>
+  <pre class="code-block"><code class="language-markdown">## Objetivo
+Implementar validação de cliente antes da criação do pedido.
+
+## Alterações
+- Adicionado CustomerValidator
+- Criado teste unitário para documento inválido
+- Ajustado retorno 400 no controller
+
+## Como testar
+1. Rodar `mvn test`
+2. Chamar POST /orders com customerId inválido
+
+## Riscos
+Baixo. Impacta apenas fluxo de criação de pedido.</code></pre>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="avancado">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Nível avançado - Git interno, qualidade e recuperação</h2>
+          <p class="section-subtitle">Modelo interno, HEAD, reset, revert, restore, stash, cherry-pick, bisect e hooks.</p>
+        </div>
+        <span class="section-badge">Git Internals</span>
+      </div>
+      
+  <h3>Modelo interno</h3>
+  <p>Git trabalha com objetos como blobs, trees e commits. Blobs representam conteúdo de arquivos, trees representam diretórios e commits apontam para uma tree com metadados, autor, mensagem e commit pai.</p>
+  <div class="doc-grid-3"><article class="mini-card"><strong>Blob</strong><span>Conteúdo de arquivo versionado.</span></article><article class="mini-card"><strong>Tree</strong><span>Estrutura de diretórios e ponteiros para blobs/trees.</span></article><article class="mini-card"><strong>Commit</strong><span>Objeto que aponta para a tree, pais e metadados.</span></article><article class="mini-card"><strong>Ref</strong><span>Referência nomeada como branch ou tag.</span></article><article class="mini-card"><strong>HEAD</strong><span>Ponteiro para a posição atual no histórico.</span></article><article class="mini-card"><strong>Hash</strong><span>Identificador derivado do conteúdo e metadados do objeto.</span></article></div>
+  <h3>HEAD, refs e detached HEAD</h3>
+  <pre class="code-block"><code class="language-text">HEAD -&gt; feature/customer-api -&gt; commit abc123
+
+# detached HEAD
+HEAD -&gt; commit abc123</code></pre>
+  <p>Detached HEAD é útil para inspeção, mas perigoso para trabalho contínuo se você não criar uma branch antes de continuar.</p>
+  <h3>Reset, revert e restore</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Comando</th><th>Função</th><th>Uso seguro</th></tr></thead><tbody><tr><td>git revert</td><td>Cria um novo commit desfazendo outro commit.</td><td>Use em produção, branches compartilhadas e histórico corporativo.</td></tr><tr><td>git reset</td><td>Move o ponteiro da branch; pode alterar staging e working directory.</td><td>Use com cuidado; reset --hard pode descartar alterações locais.</td></tr><tr><td>git restore</td><td>Restaura arquivos no working directory ou staging.</td><td>Use para desfazer mudanças locais específicas.</td></tr></tbody></table></div>
+  <pre class="code-block"><code class="language-bash">git revert &lt;commit&gt;
+
+git reset --soft HEAD~1
+git reset --mixed HEAD~1
+git reset --hard HEAD~1
+
+git restore arquivo.java
+git restore --staged arquivo.java</code></pre>
+  <h3>Ferramentas avançadas</h3>
+  <div class="doc-grid-3"><article class="exam-card"><h3>Stash</h3><p>Guarda mudanças temporariamente sem commit: git stash, git pull, git stash pop. Não use como lixeira permanente.</p></article><article class="exam-card"><h3>Cherry-pick</h3><p>Aplica commit específico em outra branch. Útil para hotfix, mas pode duplicar mudanças e gerar conflitos futuros.</p></article><article class="exam-card"><h3>Bisect</h3><p>Ajuda a descobrir qual commit introduziu um bug. Muito valorizado em bases grandes.</p></article><article class="exam-card"><h3>Hooks</h3><p>Scripts acionados por eventos do Git, como pre-commit. Bons para lint, testes rápidos, padrões de mensagem e bloqueio de segredos.</p></article><article class="exam-card"><h3>Reflog</h3><p>Histórico local de movimentos de HEAD e refs. Útil para recuperar commits ou estados perdidos localmente.</p></article><article class="exam-card"><h3>Tags</h3><p>Marcam versões/release points, como v1.2.3, e sustentam rastreabilidade de releases.</p></article></div>
+  <pre class="code-block"><code class="language-bash">git stash
+git stash pop
+
+git cherry-pick &lt;commit&gt;
+
+git bisect start
+git bisect bad
+git bisect good &lt;commit-antigo&gt;
+
+git reflog
+git tag v1.0.0</code></pre>
+  <div class="callout accent-blue"><h3>Critério sênior</h3><p>Hooks locais ajudam, mas não substituem validação no servidor ou pipeline, porque hooks locais podem ser ignorados. O controle real deve estar no CI/CD e nas políticas da plataforma.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="commits">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Convenções profissionais de commits</h2>
+          <p class="section-subtitle">Conventional Commits, SemVer, changelog e automação de releases.</p>
+        </div>
+        <span class="section-badge">Commits & SemVer</span>
+      </div>
+      
+  <h3>Conventional Commits</h3>
+  <p>Conventional Commits define uma convenção leve para mensagens de commit com significado humano e automatizável. A estrutura base é tipo, escopo opcional e descrição.</p>
+  <pre class="code-block"><code class="language-text">feat(order): add order creation endpoint
+fix(payment): handle null authorization code
+test(customer): cover invalid document scenario
+refactor(order): extract validation service
+docs(readme): add local setup instructions
+ci(pipeline): add integration test stage
+
+# breaking change no cabeçalho
+feat(api)!: change customer response contract
+
+# breaking change no corpo
+feat(api): change customer response contract
+
+BREAKING CHANGE: field documentNumber was renamed to taxId</code></pre>
+  <h3>SemVer</h3>
+  <p>Semantic Versioning usa o formato MAJOR.MINOR.PATCH. Correções compatíveis incrementam PATCH, funcionalidades compatíveis incrementam MINOR e mudanças incompatíveis incrementam MAJOR.</p>
+  <pre class="code-block"><code class="language-text">1.2.3
+| | +-- patch: correção de bug compatível
+| +---- minor: nova funcionalidade compatível
++------ major: mudança incompatível</code></pre>
+  <div class="doc-grid-4"><article class="mini-card"><strong>Bibliotecas</strong><span>Versionamento claro para dependências Maven, npm e SDKs.</span></article><article class="mini-card"><strong>APIs públicas</strong><span>Controle de breaking changes e contratos consumidos por outros times.</span></article><article class="mini-card"><strong>Releases</strong><span>Tags, changelog e artefatos versionados com rastreabilidade.</span></article><article class="mini-card"><strong>Automação</strong><span>Geração de changelog e release notes a partir de commits padronizados.</span></article></div>
+  <div class="callout accent-orange mt-3"><h3>Regra prática</h3><p>Commit bom explica intenção e impacto. Commits como ajustes, correções diversas ou final não ajudam auditoria, revisão nem rollback.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="branching">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Estratégias de branching</h2>
+          <p class="section-subtitle">GitHub Flow, GitFlow, Trunk-Based Development e release branches por contexto.</p>
+        </div>
+        <span class="section-badge">Branching Strategy</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Estratégia</th><th>Modelo</th><th>Indicado para</th><th>Atenção</th></tr></thead><tbody><tr><td>GitHub Flow</td><td>main + feature/* + pull request + merge na main.</td><td>Times pequenos/médios, deploy contínuo, produto web, branches curtas e CI forte.</td><td>A main precisa estar sempre pronta para deploy.</td></tr><tr><td>GitFlow</td><td>main, develop, feature/*, release/* e hotfix/*.</td><td>Produtos com releases planejadas, homologação formal, ciclos longos e software instalável.</td><td>Pode gerar branches longas, muitos merges e maior custo operacional.</td></tr><tr><td>Trunk-Based Development</td><td>Colaboração em main/trunk com branches muito curtas, feature flags e CI forte.</td><td>Times maduros, SaaS, microserviços, alta frequência de entrega e testes confiáveis.</td><td>Exige testes rápidos, pipeline robusto, rollback/fix-forward e disciplina.</td></tr><tr><td>Release branches</td><td>Branches como release/1.8.x para estabilizar versão enquanto main evolui.</td><td>Mobile, sistemas embarcados, on-premise, APIs com contrato formal e sistemas regulados.</td><td>Exige política clara de cherry-pick, hotfix, tags e fim de vida.</td></tr></tbody></table></div>
+  <h3>Exemplos de estrutura</h3>
+  <pre class="code-block"><code class="language-text"># GitHub Flow
+main
+  └── feature/*
+       └── pull request
+            └── merge na main
+
+# GitFlow
+main
+develop
+feature/*
+release/*
+hotfix/*
+
+# Release branch
+main
+release/1.8.x
+hotfix/1.8.1</code></pre>
+  <div class="callout accent-purple"><h3>Decisão sênior</h3><p>Escolher GitFlow para um time que precisa de deploy contínuo cria atrito. Escolher trunk-based sem testes suficientes cria risco. A estratégia deve refletir maturidade do time, frequência de entrega, compliance, criticidade e automação disponível.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="plataformas">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Plataformas: GitHub, GitLab, Bitbucket, Azure Repos e alternativas</h2>
+          <p class="section-subtitle">Forjas Git modernas não substituem o Git; adicionam colaboração, automação, segurança e governança.</p>
+        </div>
+        <span class="section-badge">Platforms</span>
+      </div>
+      
+  <div class="doc-grid-3"><article class="exam-card"><h3>GitHub</h3><p>Forte em colaboração, open source, Pull Requests, GitHub Actions, Packages, Dependabot, CodeQL, secret scanning, branch protection, environments e releases.</p></article><article class="exam-card"><h3>GitLab</h3><p>Plataforma DevSecOps integrada com Git, Merge Requests, CI/CD, runners, registries, environments, security scanning, protected branches, approvals e self-managed.</p></article><article class="exam-card"><h3>Bitbucket</h3><p>Plataforma Atlassian com integração forte com Jira, Pull Requests, branch permissions e Bitbucket Pipelines.</p></article><article class="exam-card"><h3>Azure Repos</h3><p>Parte do Azure DevOps, com Git repos, PRs, branch policies, permissões, Azure Pipelines, Boards, Artifacts e Test Plans.</p></article><article class="exam-card"><h3>Gitea</h3><p>Solução self-hosted leve para Git hosting, colaboração, code review, package registry e CI/CD.</p></article><article class="exam-card"><h3>Forgejo e SourceHut</h3><p>Forgejo prioriza software livre, privacidade e controle. SourceHut segue fluxo minimalista com patches e mailing lists.</p></article></div>
+  <h3>Quando escolher</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Plataforma</th><th>Melhor contexto</th></tr></thead><tbody><tr><td>GitHub</td><td>Projetos open source, ecossistema amplo, colaboração por PR, Actions e GitHub Enterprise.</td></tr><tr><td>GitLab</td><td>Empresas que querem DevSecOps integrado, self-host, CI/CD centralizado e governança forte.</td></tr><tr><td>Bitbucket</td><td>Empresas que usam Jira intensivamente e querem rastreabilidade issue -&gt; branch -&gt; PR -&gt; deploy.</td></tr><tr><td>Azure Repos</td><td>Times em Azure DevOps, Boards/Pipelines e ambientes Microsoft/Azure.</td></tr><tr><td>Gitea</td><td>Laboratórios internos, times pequenos, baixo custo operacional e self-host simples.</td></tr><tr><td>Forgejo</td><td>Organizações com foco em soberania tecnológica, software livre e controle da infraestrutura.</td></tr><tr><td>SourceHut</td><td>Projetos open source tradicionais, fluxo por patches, listas de e-mail e estilo kernel/Linux.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="comparativo">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Comparação prática das plataformas</h2>
+          <p class="section-subtitle">Critérios objetivos para escolher plataforma por contexto, não por preferência pessoal.</p>
+        </div>
+        <span class="section-badge">Comparativo</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Plataforma</th><th>Melhor para</th><th>Pontos fortes</th><th>Atenção</th></tr></thead><tbody><tr><td>GitHub</td><td>Open source, comunidade e produto moderno.</td><td>PRs, Actions, Security, Copilot, ecossistema e GitHub Enterprise.</td><td>Recursos avançados podem depender de plano pago.</td></tr><tr><td>GitLab</td><td>DevSecOps completo.</td><td>CI/CD nativo, self-host, segurança, governança e monorepo pipelines.</td><td>Administração pode ser mais complexa.</td></tr><tr><td>Bitbucket</td><td>Times Atlassian.</td><td>Jira, Pipelines, PRs e branch permissions.</td><td>Ecossistema menor que GitHub.</td></tr><tr><td>Azure Repos</td><td>Empresas Microsoft/Azure.</td><td>Azure Boards, Azure Pipelines, políticas corporativas e permissões.</td><td>Menos usado em open source.</td></tr><tr><td>Gitea</td><td>Self-host leve.</td><td>Simples, leve, Git hosting e CI/CD.</td><td>Menos recursos enterprise nativos.</td></tr><tr><td>Forgejo</td><td>Software livre e self-host.</td><td>Privacidade, controle e comunidade livre.</td><td>Ecossistema menor.</td></tr><tr><td>SourceHut</td><td>Patches e mailing lists.</td><td>Fluxo simples, textual e open source clássico.</td><td>Curva cultural diferente para quem vem de PRs.</td></tr></tbody></table></div>
+  <div class="callout accent-blue"><h3>Critério de seleção</h3><p>A escolha deve considerar governança, integração com backlog, CI/CD, compliance, segurança, self-host, custo, maturidade do time e capacidade operacional.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="cicd">
+      <div class="doc-section-heading">
+        <div>
+          <h2>CI/CD aplicado ao versionamento</h2>
+          <p class="section-subtitle">Como Git aciona qualidade, testes, build, scan, artefato e deploy controlado.</p>
+        </div>
+        <span class="section-badge">CI/CD</span>
+      </div>
+      
+  <p>Em times maduros, cada push ou PR pode acionar um fluxo: commit -> pipeline -> testes -> build -> scan -> artefato -> deploy.</p>
+  <h3>GitHub Actions - exemplo Java/Spring</h3>
+  <pre class="code-block"><code class="language-yaml">name: Java CI
+
+on:
+  pull_request:
+    branches: [ &quot;main&quot; ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Run tests
+        run: ./mvnw test</code></pre>
+  <h3>GitLab CI/CD - exemplo equivalente</h3>
+  <pre class="code-block"><code class="language-yaml">stages:
+  - test
+  - build
+
+test:
+  stage: test
+  image: eclipse-temurin:21
+  script:
+    - ./mvnw test
+
+build:
+  stage: build
+  image: eclipse-temurin:21
+  script:
+    - ./mvnw package -DskipTests</code></pre>
+  <h3>Pipeline profissional deve validar</h3>
+  <div class="doc-grid-4"><article class="mini-card"><strong>Build</strong><span>Compilação ou empacotamento confiável.</span></article><article class="mini-card"><strong>Testes</strong><span>Unitários, integração, contrato e E2E quando necessário.</span></article><article class="mini-card"><strong>Lint/format</strong><span>Padrões automáticos antes do merge.</span></article><article class="mini-card"><strong>Análise estática</strong><span>Qualidade, bugs e vulnerabilidades.</span></article><article class="mini-card"><strong>Dependências</strong><span>SCA, CVEs e atualização automatizada.</span></article><article class="mini-card"><strong>Imagem Docker</strong><span>Build, scan e publicação em registry.</span></article><article class="mini-card"><strong>Artefatos</strong><span>Publicação rastreável por commit/tag.</span></article><article class="mini-card"><strong>Deploy</strong><span>Ambiente controlado com aprovação, rollback e evidência.</span></article></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="seguranca">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Segurança em versionamento</h2>
+          <p class="section-subtitle">Branch protection, segredos, .gitignore, permissões e recuperação de vazamentos.</p>
+        </div>
+        <span class="section-badge">Security</span>
+      </div>
+      
+  <h3>Proteção de branches</h3>
+  <ul class="doc-list"><li>Bloquear push direto em main/master/develop/release/production.</li><li>Exigir PR/MR.</li><li>Exigir aprovação e aprovação de CODEOWNERS.</li><li>Exigir pipeline verde e branch atualizada.</li><li>Bloquear force push e deleção.</li><li>Exigir commits assinados em contextos sensíveis.</li><li>Exigir scan de segurança antes do merge.</li></ul>
+  <h3>Segredos que nunca devem ser commitados</h3>
+  <div class="doc-grid-3"><article class="mini-card"><strong>Senha</strong><span>Credenciais humanas ou técnicas.</span></article><article class="mini-card"><strong>Token</strong><span>Tokens de API, Git, cloud, CI/CD e serviços externos.</span></article><article class="mini-card"><strong>API key</strong><span>Chaves de provedores e integrações.</span></article><article class="mini-card"><strong>Private key</strong><span>Chaves SSH, certificados e chaves privadas.</span></article><article class="mini-card"><strong>.env real</strong><span>Variáveis de ambiente com segredo.</span></article><article class="mini-card"><strong>Connection string</strong><span>Strings com usuário, senha e host sensível.</span></article></div>
+  <h3>Boas práticas</h3>
+  <ul class="doc-list"><li>Usar .env.example, nunca .env real.</li><li>Usar secrets da plataforma.</li><li>Rotacionar credenciais vazadas.</li><li>Remover segredo do histórico quando necessário.</li><li>Usar .gitignore, secret scanning, pre-commit hooks, vault ou secret manager.</li><li>Separar service accounts de contas humanas e aplicar menor privilégio possível.</li></ul>
+  <h3>.gitignore recomendado</h3>
+  <pre class="code-block"><code class="language-gitignore"># Java/Spring
+target/
+*.class
+*.log
+.env
+.idea/
+.vscode/
+.DS_Store
+*.iml
+
+# Node/Next.js
+node_modules/
+.next/
+dist/
+.env
+.env.local
+coverage/</code></pre>
+  <div class="callout accent-red"><h3>Erro comum</h3><p>Commitar target/, node_modules/, .env, builds e arquivos gerados aumenta risco, ruído, tamanho do repositório e vazamento de informação.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="governanca">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Governança de repositórios em nível sênior</h2>
+          <p class="section-subtitle">Estrutura mínima, CODEOWNERS, permissões, auditoria e políticas de acesso.</p>
+        </div>
+        <span class="section-badge">Governance</span>
+      </div>
+      
+  <h3>Estrutura mínima de um repositório profissional</h3>
+  <pre class="code-block"><code class="language-text">.
+├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── CODEOWNERS
+├── SECURITY.md
+├── LICENSE
+├── .gitignore
+├── .editorconfig
+├── .github/
+│   ├── workflows/
+│   └── pull_request_template.md
+├── docs/
+├── src/
+└── tests/</code></pre>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Arquivo</th><th>Finalidade</th></tr></thead><tbody><tr><td>README.md</td><td>Explica projeto, setup, execução e contexto.</td></tr><tr><td>CONTRIBUTING.md</td><td>Define padrão de contribuição.</td></tr><tr><td>CHANGELOG.md</td><td>Registra mudanças por versão.</td></tr><tr><td>CODEOWNERS</td><td>Define responsáveis por áreas do código.</td></tr><tr><td>SECURITY.md</td><td>Define política de reporte de vulnerabilidades.</td></tr><tr><td>LICENSE</td><td>Define licença de uso.</td></tr><tr><td>Pull Request Template</td><td>Padroniza revisões e evidências.</td></tr></tbody></table></div>
+  <h3>CODEOWNERS</h3>
+  <pre class="code-block"><code class="language-text"># Backend
+/src/main/java/br/com/company/orders/ @backend-team
+
+# Infra
+/.github/workflows/ @devops-team
+/docker/ @devops-team
+
+# Segurança
+/security/ @security-team</code></pre>
+  <p>CODEOWNERS não é burocracia: garante que áreas críticas sejam revisadas por pessoas com contexto técnico.</p>
+  <h3>Estratégia de permissões</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Papel</th><th>Permissão</th></tr></thead><tbody><tr><td>Admin/Owner</td><td>Configura repositório, permissões, políticas e integrações críticas.</td></tr><tr><td>Maintainer</td><td>Aprova mudanças críticas, releases e manutenção do fluxo.</td></tr><tr><td>Developer</td><td>Cria branches, PRs/MRs e contribui no código.</td></tr><tr><td>Reviewer</td><td>Revisa código em áreas específicas.</td></tr><tr><td>Read-only</td><td>Consulta código e documentação.</td></tr></tbody></table></div>
+  <ul class="doc-list"><li>Poucas pessoas com admin.</li><li>Ninguém faz push direto em produção.</li><li>Service accounts separadas de contas humanas.</li><li>Tokens com menor privilégio possível.</li><li>Revisão obrigatória para arquivos críticos.</li><li>Auditoria periódica de acesso.</li></ul>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="review">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Boas práticas de code review</h2>
+          <p class="section-subtitle">Revisão sênior valida qualidade, risco, manutenção, contrato e operação.</p>
+        </div>
+        <span class="section-badge">Code Review</span>
+      </div>
+      
+  <p>Em nível sênior, code review não é procurar espaço em branco. É validar se a solução resolve o problema correto, reduz risco e mantém o sistema sustentável.</p>
+  <div class="doc-grid-2">
+    <article class="callout accent-orange"><h3>Checklist do reviewer</h3><ul class="doc-list"><li>A solução resolve o problema correto?</li><li>Há teste cobrindo regra de negócio?</li><li>O código é legível?</li><li>A alteração quebra contrato de API?</li><li>Há impacto em performance?</li><li>Há impacto em segurança?</li><li>Há risco de concorrência?</li><li>Há alteração de schema?</li><li>Há rollback possível?</li><li>Logs expõem dados sensíveis?</li><li>A PR está pequena o suficiente?</li><li>O pipeline passou?</li></ul></article>
+    <article class="callout accent-blue"><h3>Checklist de quem abre PR/MR</h3><ul class="doc-list"><li>Título claro e Conventional Commit quando possível.</li><li>Contexto do problema.</li><li>Solução aplicada.</li><li>Testes executados.</li><li>Impacto e riscos.</li><li>Prints/logs quando útil.</li><li>Link para issue, task ou história.</li><li>Checklist de breaking changes e rollback.</li></ul></article>
+  </div>
+  <h3>Descrição boa de PR</h3>
+  <pre class="code-block"><code class="language-markdown">## Contexto
+Pedidos estavam sendo criados sem validar documento do cliente.
+
+## Solução
+Adicionado CustomerDocumentValidator antes da criação do pedido.
+
+## Testes
+- CustomerDocumentValidatorTest
+- OrderServiceTest
+- mvn test executado localmente
+
+## Impacto
+Fluxo POST /orders passa a retornar 400 para documento inválido.</code></pre>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="repos">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Monorepo vs multirepo</h2>
+          <p class="section-subtitle">Como escolher estrutura de repositórios considerando autonomia, CI/CD, permissões e acoplamento.</p>
+        </div>
+        <span class="section-badge">Repo Strategy</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <article class="exam-card"><h3>Multirepo</h3><p>Cada serviço/projeto tem seu próprio repositório.</p><h4>Vantagens</h4><ul class="doc-list"><li>Isolamento.</li><li>Permissões por serviço.</li><li>Pipelines menores.</li><li>Release independente.</li><li>Menor complexidade inicial.</li></ul><h4>Desvantagens</h4><ul class="doc-list"><li>Difícil padronizar.</li><li>Duplicação de configuração.</li><li>Mudanças cross-service exigem várias PRs.</li><li>Gestão de dependências mais complexa.</li></ul></article>
+    <article class="exam-card"><h3>Monorepo</h3><p>Vários projetos dentro de um único repositório.</p><h4>Vantagens</h4><ul class="doc-list"><li>Visão única.</li><li>Refatorações transversais.</li><li>Padronização.</li><li>Compartilhamento de libs.</li><li>Histórico centralizado.</li></ul><h4>Desvantagens</h4><ul class="doc-list"><li>Pipelines mais complexos.</li><li>Permissões mais difíceis.</li><li>Build pode ficar pesado.</li><li>Exige tooling forte.</li><li>Exige path filters, owners e cache.</li></ul></article>
+  </div>
+  <h3>Exemplo de monorepo</h3>
+  <pre class="code-block"><code class="language-text">.
+├── apps/
+│   ├── web/
+│   └── admin/
+├── services/
+│   ├── ms-auth/
+│   ├── ms-orders/
+│   └── ms-payments/
+├── packages/
+│   ├── ui/
+│   └── shared/
+└── infra/</code></pre>
+  <div class="callout accent-purple"><h3>Decisão sênior</h3><p>A decisão entre monorepo e multirepo deve considerar autonomia dos times, acoplamento entre serviços, governança, CI/CD, segurança, dependências e frequência de mudança.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="contratos">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Versionamento de APIs e contratos</h2>
+          <p class="section-subtitle">Git como base para governança de código, contratos, infraestrutura e documentação.</p>
+        </div>
+        <span class="section-badge">Contracts</span>
+      </div>
+      
+  <p>Git não versiona apenas código. Em engenharia moderna, ele também versiona contratos, migrations, infraestrutura, documentação e decisões arquiteturais.</p>
+  <div class="doc-grid-4"><article class="mini-card"><strong>Código fonte</strong><span>Aplicações, libs, scripts e automações.</span></article><article class="mini-card"><strong>Migrations</strong><span>Evolução de banco com rastreabilidade.</span></article><article class="mini-card"><strong>OpenAPI/Swagger</strong><span>Contratos de APIs síncronas.</span></article><article class="mini-card"><strong>AsyncAPI</strong><span>Contratos de eventos e mensagens.</span></article><article class="mini-card"><strong>Infraestrutura</strong><span>Dockerfiles, Helm charts, Terraform e manifests.</span></article><article class="mini-card"><strong>Documentação</strong><span>ADRs, runbooks, READMEs e guias de operação.</span></article><article class="mini-card"><strong>Testes de contrato</strong><span>Garantem compatibilidade entre produtores e consumidores.</span></article><article class="mini-card"><strong>Changelog</strong><span>Histórico humano das mudanças por versão.</span></article></div>
+  <h3>Estrutura recomendada</h3>
+  <pre class="code-block"><code class="language-text">docs/
+├── adr/
+│   ├── 0001-use-postgresql.md
+│   └── 0002-use-kafka-for-events.md
+contracts/
+├── openapi.yaml
+└── asyncapi.yaml</code></pre>
+  <div class="callout accent-orange"><h3>Critério de maturidade</h3><p>Se uma mudança quebra contrato, o Git deve deixar evidência: PR, diff, aprovação, versão, changelog, testes de contrato e plano de migração.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="gitops">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Git em arquitetura moderna e GitOps</h2>
+          <p class="section-subtitle">O repositório como fonte de verdade para código, infraestrutura, políticas, workflows e auditoria.</p>
+        </div>
+        <span class="section-badge">GitOps</span>
+      </div>
+      
+  <h3>Git como base para CI/CD</h3>
+  <p>Em times maduros, o repositório vira o ponto de entrada da engenharia: código, infraestrutura, documentação, políticas, workflows, releases e evidências de auditoria.</p>
+  <pre class="code-block"><code class="language-text">commit -&gt; pipeline -&gt; testes -&gt; build -&gt; scan -&gt; artefato -&gt; deploy</code></pre>
+  <h3>GitOps</h3>
+  <p>GitOps usa Git como fonte de verdade para o estado desejado de infraestrutura e aplicações.</p>
+  <pre class="code-block"><code class="language-text">Alteração em manifest Kubernetes
+        ↓
+Pull Request
+        ↓
+Review + pipeline
+        ↓
+Merge na main
+        ↓
+Argo CD / Flux aplica no cluster</code></pre>
+  <ul class="doc-list"><li>Branch protection obrigatória.</li><li>PR obrigatória.</li><li>Auditoria por commit.</li><li>Rollback via commit.</li><li>Separação por ambientes.</li><li>Segredos fora do Git.</li><li>Revisão de infraestrutura como código.</li></ul>
+  <div class="callout accent-blue"><h3>Risco</h3><p>GitOps sem proteção de branch, validação de manifest, revisão de IaC e gestão adequada de segredos transforma Git em ponto único de propagação de erro.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="erros">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Erros comuns por nível</h2>
+          <p class="section-subtitle">Falhas que impedem evolução de maturidade e quebram segurança do fluxo.</p>
+        </div>
+        <span class="section-badge">Anti-patterns</span>
+      </div>
+      
+  <div class="doc-grid-4">
+    <article class="exam-card"><h3>Iniciante</h3><ul class="doc-list"><li>Fazer tudo na main.</li><li>Não usar git status.</li><li>Commits gigantes.</li><li>Mensagens ruins.</li><li>Subir .env.</li><li>Confundir pull com fetch.</li><li>Resolver conflito sem testar.</li></ul></article>
+    <article class="exam-card"><h3>Intermediário</h3><ul class="doc-list"><li>Rebase incorreto em branch compartilhada.</li><li>PR grande demais.</li><li>Force push sem cuidado.</li><li>Não atualizar branch.</li><li>Usar merge sem entender histórico.</li><li>Não usar tags/releases.</li></ul></article>
+    <article class="exam-card"><h3>Avançado</h3><ul class="doc-list"><li>Pipeline lento e sem cache.</li><li>Ausência de branch protection.</li><li>CODEOWNERS mal configurado.</li><li>Falta de política de secrets.</li><li>Monorepo sem estratégia.</li><li>Releases manuais sem rastreabilidade.</li></ul></article>
+    <article class="exam-card"><h3>Sênior</h3><ul class="doc-list"><li>GitFlow onde deploy contínuo seria melhor.</li><li>Trunk-based sem testes suficientes.</li><li>Permissões excessivas.</li><li>Falta de rollback.</li><li>Falta de auditoria.</li><li>Não versionar contratos.</li><li>Não definir breaking changes.</li><li>Não medir saúde do fluxo.</li></ul></article>
+  </div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="senior">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Competências esperadas em nível sênior</h2>
+          <p class="section-subtitle">Checklist objetivo para dominar Git como parte da engenharia de entrega.</p>
+        </div>
+        <span class="section-badge">Senior Checklist</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div><ul class="doc-list"><li>Explicar o modelo interno do Git.</li><li>Escolher entre merge, rebase, squash, cherry-pick e revert.</li><li>Definir estratégia de branches por contexto.</li><li>Configurar branch protection.</li><li>Estruturar Pull Request templates.</li><li>Definir CODEOWNERS.</li><li>Criar padrões de commits.</li><li>Aplicar SemVer.</li><li>Automatizar changelog e release.</li><li>Configurar CI/CD.</li></ul></div>
+    <div><ul class="doc-list"><li>Integrar testes, lint e scans.</li><li>Controlar permissões.</li><li>Tratar vazamento de segredo.</li><li>Migrar repositórios entre plataformas.</li><li>Estruturar monorepo ou multirepo.</li><li>Definir governança de repositórios.</li><li>Melhorar tempo de review e lead time.</li><li>Ensinar o time a usar Git corretamente.</li><li>Versionar contratos, infraestrutura e ADRs.</li><li>Criar política de rollback e auditoria.</li></ul></div>
+  </div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Competência</th><th>Evidência prática</th></tr></thead><tbody><tr><td>Estratégia</td><td>Documento de branching/release adequado ao contexto do time.</td></tr><tr><td>Governança</td><td>Branch protection, CODEOWNERS, permissões e PR template configurados.</td></tr><tr><td>Segurança</td><td>Secret scanning, .gitignore, rotação de credenciais e política de acesso.</td></tr><tr><td>Automação</td><td>Pipeline obrigatório com testes, lint, scan e artefato.</td></tr><tr><td>Arquitetura</td><td>Contratos, ADRs, IaC e GitOps versionados com revisão.</td></tr><tr><td>Liderança</td><td>Mentoria, review de qualidade e melhoria de lead time.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="plano">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Plano de estudo sugerido</h2>
+          <p class="section-subtitle">Roadmap de 36 semanas com entregas práticas por fase para sair do básico e chegar à maturidade sênior.</p>
+        </div>
+        <span class="section-badge">Roadmap 36 semanas</span>
+      </div>
+      
+  <div class="phase-doc-grid">
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 1 - Fundamentos</h3><span>Sem 1-4</span></div><p><strong>Estudar:</strong> Git, repositório local, commit, branch, remote, push, pull, fetch, .gitignore e GitHub básico.</p><p><strong>Praticar:</strong> git init, add, commit, log, branch, switch, merge, remote e push.</p><p><strong>Entrega:</strong> repositório com README, branches e commits organizados.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 2 - Colaboração</h3><span>Sem 5-10</span></div><p><strong>Estudar:</strong> Pull Request, Merge Request, code review, conflitos, rebase, squash merge, templates e issues.</p><p><strong>Praticar:</strong> criar PR, revisar PR, simular conflito, resolver conflito, usar rebase e squash.</p><p><strong>Entrega:</strong> projeto com duas branches, PR documentada e evidência de teste.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 3 - Histórico e recuperação</h3><span>Sem 11-16</span></div><p><strong>Estudar:</strong> reset, revert, restore, stash, reflog, cherry-pick, bisect e tags.</p><p><strong>Praticar:</strong> reverter commit, recuperar alteração, aplicar cherry-pick e localizar bug com bisect.</p><p><strong>Entrega:</strong> simular bug introduzido e encontrar o commit causador com git bisect.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 4 - Automação</h3><span>Sem 17-22</span></div><p><strong>Estudar:</strong> GitHub Actions, GitLab CI/CD, Azure Pipelines/Bitbucket Pipelines, checks obrigatórios, testes, build, deploy, cache e matrix builds.</p><p><strong>Praticar:</strong> pipeline de PR com testes e build.</p><p><strong>Entrega:</strong> pipeline obrigatório rodando testes antes do merge.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 5 - Segurança e governança</h3><span>Sem 23-28</span></div><p><strong>Estudar:</strong> secret scanning, code scanning, Dependabot, branch protection, CODEOWNERS, signed commits, permissões, tokens e .env seguro.</p><p><strong>Praticar:</strong> proteger branch, exigir PR, exigir pipeline e configurar CODEOWNERS.</p><p><strong>Entrega:</strong> repositório com branch protegida, PR obrigatória, pipeline obrigatório, CODEOWNERS e sem segredos.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 6 - Nível sênior</h3><span>Sem 29-36</span></div><p><strong>Estudar:</strong> branching strategy, trunk-based, GitFlow, release management, SemVer, Conventional Commits, monorepo, GitOps, governança, auditoria e migração.</p><p><strong>Praticar:</strong> definir política completa de versionamento para projeto real.</p><p><strong>Entrega:</strong> documento de governança e repositório final com CI/CD, segurança, release e documentação.</p></article>
+  </div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="projeto">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Projeto prático final para consolidar</h2>
+          <p class="section-subtitle">Projeto Java/Spring ou Next.js com repositório profissional, CI/CD, segurança e governança.</p>
+        </div>
+        <span class="section-badge">Projeto final</span>
+      </div>
+      
+  <h3>Estrutura obrigatória</h3>
+  <pre class="code-block"><code class="language-text">.
+├── README.md
+├── CONTRIBUTING.md
+├── CHANGELOG.md
+├── CODEOWNERS
+├── SECURITY.md
+├── .gitignore
+├── .github/workflows/ci.yml
+├── docs/adr/
+└── src/</code></pre>
+  <h3>Requisitos</h3>
+  <div class="doc-grid-2">
+    <article class="callout accent-orange"><h3>Governança</h3><ul class="doc-list"><li>Branch main protegida.</li><li>PR obrigatória.</li><li>Pelo menos 1 aprovação.</li><li>CODEOWNERS ativo.</li><li>Pull request template.</li><li>Commits seguindo Conventional Commits.</li><li>Tag de release e changelog.</li></ul></article>
+    <article class="callout accent-blue"><h3>Qualidade e segurança</h3><ul class="doc-list"><li>Pipeline obrigatório.</li><li>Testes automatizados.</li><li>.env.example no repositório.</li><li>Sem segredos no repositório.</li><li>.gitignore adequado.</li><li>Scan de dependências.</li><li>Documentação de fluxo Git.</li></ul></article>
+  </div>
+  <h3>Critérios de avaliação</h3>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Área</th><th>Critério de aceite</th></tr></thead><tbody><tr><td>Histórico</td><td>Commits pequenos, claros e rastreáveis.</td></tr><tr><td>Colaboração</td><td>PRs com descrição, testes, riscos e link para demanda.</td></tr><tr><td>Pipeline</td><td>Build e testes bloqueiam merge quando falham.</td></tr><tr><td>Segurança</td><td>Sem .env real, tokens ou arquivos sensíveis versionados.</td></tr><tr><td>Release</td><td>Tag SemVer, changelog e artefato gerado.</td></tr><tr><td>Governança</td><td>CODEOWNERS, branch protection e permissões mínimas configuradas.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="referencias">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Referências oficiais e materiais recomendados</h2>
+          <p class="section-subtitle">Fontes para consulta técnica contínua em Git, plataformas, CI/CD, segurança e GitOps.</p>
+        </div>
+        <span class="section-badge">Referências</span>
+      </div>
+      
+  <div class="ref-grid">
+    <article class="ref-card"><strong>Git Documentation</strong><p>Documentação oficial do Git, referência de comandos e guias.</p><a href="https://git-scm.com/doc" rel="noopener" target="_blank">git-scm.com/doc</a></article>
+    <article class="ref-card"><strong>Pro Git Book</strong><p>Livro gratuito e completo sobre fundamentos, internals e fluxos avançados.</p><a href="https://git-scm.com/book/en/v2" rel="noopener" target="_blank">Pro Git</a></article>
+    <article class="ref-card"><strong>GitHub Docs</strong><p>Pull Requests, branch protection, Actions, secret scanning, Dependabot e governança.</p><a href="https://docs.github.com/" rel="noopener" target="_blank">GitHub Docs</a></article>
+    <article class="ref-card"><strong>GitLab Docs</strong><p>Merge Requests, protected branches, CODEOWNERS, CI/CD e DevSecOps.</p><a href="https://docs.gitlab.com/" rel="noopener" target="_blank">GitLab Docs</a></article>
+    <article class="ref-card"><strong>Bitbucket Cloud Docs</strong><p>Pull Requests, branch permissions, pipelines e integração Atlassian.</p><a href="https://support.atlassian.com/bitbucket-cloud/" rel="noopener" target="_blank">Bitbucket Docs</a></article>
+    <article class="ref-card"><strong>Azure Repos Docs</strong><p>PRs, branch policies, permissões e integração com Azure DevOps.</p><a href="https://learn.microsoft.com/en-us/azure/devops/repos/" rel="noopener" target="_blank">Azure Repos</a></article>
+    <article class="ref-card"><strong>Conventional Commits</strong><p>Convenção de commits para automação de changelog e releases.</p><a href="https://www.conventionalcommits.org/" rel="noopener" target="_blank">Conventional Commits</a></article>
+    <article class="ref-card"><strong>Semantic Versioning</strong><p>Especificação MAJOR.MINOR.PATCH para versionamento de releases.</p><a href="https://semver.org/" rel="noopener" target="_blank">SemVer</a></article>
+    <article class="ref-card"><strong>Trunk Based Development</strong><p>Guia sobre colaboração em trunk/main com branches curtas e CI forte.</p><a href="https://trunkbaseddevelopment.com/" rel="noopener" target="_blank">Trunk Based Development</a></article>
+    <article class="ref-card"><strong>OpenGitOps</strong><p>Princípios de GitOps para usar Git como fonte de verdade operacional.</p><a href="https://opengitops.dev/" rel="noopener" target="_blank">OpenGitOps</a></article>
+    <article class="ref-card"><strong>Gitea Docs</strong><p>Documentação para Git hosting self-hosted leve.</p><a href="https://docs.gitea.com/" rel="noopener" target="_blank">Gitea Docs</a></article>
+    <article class="ref-card"><strong>Forgejo Docs</strong><p>Documentação da forge Git self-hosted de software livre.</p><a href="https://forgejo.org/docs/latest/" rel="noopener" target="_blank">Forgejo Docs</a></article>
+  </div>
+  <div class="callout accent-blue mt-3"><h3>Observação</h3><p>Plataformas e recursos de segurança evoluem com frequência. Antes de padronizar políticas corporativas, valide a documentação oficial da ferramenta e do plano/licença usado pela empresa.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="resumo-final">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Resumo final da trilha</h2>
+          <p class="section-subtitle">Síntese prática para fixar a evolução de maturidade em Git e versionamento.</p>
+        </div>
+        <span class="section-badge">Síntese</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div>
+      <h3>Ordem mental de evolução</h3>
+      <ol class="doc-list"><li>Entender controle de versão.</li><li>Dominar working directory, staging e repository.</li><li>Criar commits pequenos e mensagens úteis.</li><li>Trabalhar com branches e remotes.</li><li>Abrir PR/MR com evidência.</li><li>Resolver conflitos com teste.</li><li>Entender merge, rebase e squash.</li><li>Dominar reset, revert, restore, stash, cherry-pick e bisect.</li><li>Padronizar Conventional Commits e SemVer.</li><li>Configurar CI/CD e branch protection.</li><li>Aplicar segurança, CODEOWNERS e permissões.</li><li>Escolher branching strategy por contexto.</li><li>Versionar contratos, infraestrutura e ADRs.</li><li>Evoluir para GitOps e governança de entrega.</li></ol>
+    </div>
+    <div class="callout accent-purple"><h3>Diferença real do sênior</h3><p>O profissional sênior não apenas usa git commit e git push. Ele define como o time versiona, revisa, protege, integra, entrega, audita e recupera software em produção.</p></div>
+  </div>
+  <h3>Resumo em uma frase</h3>
+  <p class="lead">Git em nível sênior é disciplina de engenharia: histórico confiável, colaboração segura, automação, governança, auditoria e entrega de software com risco controlado.</p>
+
+    </section>
+    
+  </div>
+</div>
+<footer class="page-footer"><div class="footer-row"><a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a><div class="footer-pills"><span class="footer-pill green">Git</span><span class="footer-pill teal">CI/CD</span><span class="footer-pill blue">Governança</span><span class="footer-pill orange">GitOps</span></div></div><p><strong style="color:var(--muted2)">Git, Versionamento de Código e Plataformas</strong> · Trilha do Plano Integrado de Estudos · 36 semanas sugeridas</p></footer>
+<button aria-label="Voltar ao topo" class="back-to-top" id="backToTop">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script>
+  (function(){
+    const backToTop = document.getElementById('backToTop');
+    const searchInput = document.getElementById('searchInput');
+    const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
+    const bar = document.getElementById('navSectionsBar');
+    const btnL = document.getElementById('navScrollLeft');
+    const btnR = document.getElementById('navScrollRight');
+    const STEP = 320;
+
+    function normalize(value){
+      return value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+    }
+
+    function updateScrollButtons(){
+      if(!bar || !btnL || !btnR) return;
+      const atStart = bar.scrollLeft <= 4;
+      const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+      btnL.classList.toggle('hidden', atStart);
+      btnR.classList.toggle('hidden', atEnd);
+    }
+
+    if(btnL && btnR && bar){
+      btnL.addEventListener('click',()=>bar.scrollBy({left:-STEP,behavior:'smooth'}));
+      btnR.addEventListener('click',()=>bar.scrollBy({left:STEP,behavior:'smooth'}));
+      bar.addEventListener('scroll',updateScrollButtons,{passive:true});
+      updateScrollButtons();
+      setTimeout(updateScrollButtons,400);
+    }
+
+    if(backToTop){
+      window.addEventListener('scroll',()=>{
+        backToTop.classList.toggle('is-visible',window.scrollY>500);
+      },{passive:true});
+      backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      anchor.addEventListener('click',event=>{
+        const target=document.querySelector(anchor.getAttribute('href'));
+        if(target){
+          event.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+          history.replaceState(null,'',anchor.getAttribute('href'));
+        }
+      });
+    });
+
+    if(searchInput){
+      searchInput.addEventListener('input',()=>{
+        const query=normalize(searchInput.value.trim());
+        sections.forEach(section=>{
+          section.classList.remove('is-hidden-by-search','search-hit');
+          if(!query) return;
+          const match=normalize(section.innerText).includes(query);
+          section.classList.toggle('is-hidden-by-search',!match);
+          section.classList.toggle('search-hit',match);
+        });
+      });
+    }
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id=entry.target.id;
+          navLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+id));
+          sidebarLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+id));
+          const active=bar ? bar.querySelector('.nav-link.active') : null;
+          if(active) active.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'});
+        }
+      });
+    },{threshold:.15,rootMargin:'-100px 0px -55% 0px'});
+
+    sections.forEach(section=>observer.observe(section));
+  })();
+</script></body>
+</html>

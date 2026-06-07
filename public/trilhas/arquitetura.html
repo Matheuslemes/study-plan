@@ -1,0 +1,1624 @@
+<!DOCTYPE html>
+<html data-bs-theme="dark" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="Trilha técnica completa de Arquitetura de Integração e Arquitetura de Solução: APIs, eventos, mensageria, contratos, resiliência, segurança, observabilidade, cloud, governança, ADRs, RFCs e decisões arquiteturais de nível sênior." name="description"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+  <link href="../assets/css/styles.css" rel="stylesheet"/><style>
+
+
+  :root{
+    --bg:#07090f;
+    --surface:#0d1117;
+    --surface2:#141a24;
+    --surface3:rgba(255,255,255,.045);
+    --border:rgba(255,255,255,.09);
+    --border2:rgba(255,255,255,.15);
+
+    --accent:#22c55e;
+    --accent2:#22d3b0;
+    --accent3:#4f9ef8;
+    --accent4:#fb923c;
+    --accent5:#a78bfa;
+    --aws-orange:#22c55e;
+    --aws-yellow:#22d3b0;
+    --aws-blue:#4f9ef8;
+    --aws-green:#22c55e;
+    --aws-purple:#a78bfa;
+    --aws-red:#fb923c;
+    --java:#22c55e;
+
+    --text:#e2e8f0;
+    --muted:#64748b;
+    --muted2:#94a3b8;
+    --code-bg:#060a12;
+
+    --must:#fca5a5;
+    --should:#fcd34d;
+    --nice:#86efac;
+    --future:#93c5fd;
+
+    --doc-bg:var(--bg);
+    --doc-surface:var(--surface);
+    --doc-surface-2:var(--surface2);
+    --doc-border:var(--border);
+    --doc-text:var(--text);
+    --doc-muted:var(--muted2);
+    --doc-code:var(--code-bg);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;font-size:15px}
+  body.track-page{
+    font-family:'Inter',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    min-height:100vh;
+    background-image:
+      radial-gradient(ellipse 80% 40% at 10% -5%, rgba(34,197,94,.14) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 30% at 90% 5%, rgba(56,189,248,.08) 0%, transparent 42%),
+      radial-gradient(ellipse 50% 25% at 85% 25%, rgba(167,139,250,.055) 0%, transparent 42%);
+  }
+  ::selection{background:rgba(34,197,94,.28);color:#fff}
+  .container{max-width:1240px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
+  .mono{font-family:'IBM Plex Mono',monospace}
+
+  /* HERO */
+  .track-hero-page{
+    padding:4rem 0 3rem;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(135deg,rgba(34,197,94,.12) 0%,rgba(56,189,248,.055) 54%,rgba(167,139,250,.045) 100%);
+  }
+  .hero-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent2);
+    margin-bottom:.8rem;
+  }
+  .track-title{
+    font-family:'Syne',sans-serif;
+    font-size:clamp(2rem,5vw,4rem);
+    font-weight:800;
+    letter-spacing:-.04em;
+    background:linear-gradient(135deg,#fff 38%,var(--accent) 76%,var(--aws-yellow) 100%);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    line-height:1.1;
+    margin-bottom:.8rem;
+  }
+  .track-lead{color:var(--muted2);max-width:980px;font-size:1rem;margin-bottom:0}
+  .track-badge-set,.badge-cloud{display:flex;flex-wrap:wrap;gap:.5rem}
+  .track-badge-set{margin-top:1.4rem}
+  .track-badge-set span,.badge-cloud span{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:6px;
+    border:1px solid rgba(34,197,94,.32);background:rgba(34,197,94,.08);color:var(--accent)
+  }
+  .track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(56,189,248,.35);background:rgba(56,189,248,.085);color:var(--aws-blue)}
+  .track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(167,139,250,.30);background:rgba(167,139,250,.075);color:var(--aws-purple)}
+  .footer-link,.hero-back-link{
+    display:inline-flex;align-items:center;gap:.4rem;
+    font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;
+    color:var(--muted2);text-decoration:none;border:1px solid var(--border);
+    background:rgba(255,255,255,.04);padding:.32rem .75rem;border-radius:6px;transition:all .15s
+  }
+  .footer-link:hover,.hero-back-link:hover{color:#fff;border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.08);text-decoration:none}
+
+  /* SITENAV */
+  .sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+  .sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
+  .sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent2);border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
+  .nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
+  .nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
+  .nav-back:hover{color:#fff;border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.08)}
+  .sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
+  .search-box,.track-search{background:var(--surface2)!important;border:1px solid var(--border)!important;border-radius:8px;padding:.3rem .7rem;color:#fff!important;font-size:.8rem;outline:none;width:270px;box-shadow:none!important}
+  .search-box::placeholder,.track-search::placeholder{color:var(--muted)!important}
+  .search-box:focus,.track-search:focus{border-color:rgba(34,197,94,.45)!important}
+  .sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
+  .sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(34,197,94,.4) rgba(255,255,255,.04);padding:0 32px}
+  .sitenav-bar-inner::-webkit-scrollbar{height:4px}.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(34,197,94,.4);border-radius:99px}.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(34,197,94,.7)}
+  .sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
+  .sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
+  .sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
+  .nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
+  .nav-scroll-btn:hover{color:#fff;background:rgba(34,197,94,.08)}
+  .nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
+  .nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
+  .nav-group:last-child{border-right:none;padding-right:.8rem}
+  .nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
+  .nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
+  .nav-link:hover{color:#fff;background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.25)}
+  .nav-link.active{color:var(--accent);background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3)}
+
+  /* LAYOUT */
+  .main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
+  .sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
+  .sidebar-group{margin-bottom:1.4rem}
+  .sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
+  .sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
+  .sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
+  .sidebar a.active{color:var(--accent);background:rgba(34,197,94,.08)}
+  .content{padding:2rem 0 4rem 2rem}
+  #trackMain{padding-top:0!important;padding-bottom:0!important}
+
+  /* CONTENT */
+  .doc-section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem);box-shadow:none}
+  .doc-section:target{border-color:rgba(34,197,94,.42);box-shadow:0 0 0 1px rgba(34,197,94,.15)}
+  .doc-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+  .doc-section-heading h2,.doc-section h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff;margin:0}
+  .section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
+  .section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(34,211,176,.32);background:rgba(34,211,176,.085);color:var(--accent2)}
+  .doc-section h3,.exam-card h3,.phase-doc-card h3,.callout h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
+  .doc-section h4,.phase-doc-card h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
+  p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}.lead{font-size:1rem;color:#cbd5e1}ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}li{margin-bottom:.3rem;font-size:.88rem}strong{color:#e2e8f0;font-weight:600}em{color:#bbf7d0;font-style:normal;font-weight:700}
+  code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(34,197,94,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
+  .doc-hero-card{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr);gap:1rem;align-items:center}
+  .doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid{display:grid;gap:1rem}.doc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}.doc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}.doc-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}.phase-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}.metric-pill{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.22);border-radius:12px;padding:1rem;text-align:center}.metric-pill span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}.metric-pill small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+  .mini-card,.exam-card,.phase-doc-card,.callout{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color .15s,background .15s,transform .15s}.mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}.mini-card span,.exam-card p,.phase-doc-card p,.callout p{color:var(--muted2);font-size:.82rem}.mini-card:hover,.exam-card:hover,.phase-doc-card:hover{border-color:rgba(34,197,94,.28);background:#151c27;transform:translateY(-1px)}
+  .exam-card{position:relative;overflow:hidden}.exam-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--aws-blue))}
+  .callout{border-left:3px solid var(--accent);background:rgba(34,197,94,.06);border-radius:0 10px 10px 0}.callout.accent-blue{border-left-color:var(--aws-blue);background:rgba(56,189,248,.06)}.callout.accent-green{border-left-color:var(--aws-green);background:rgba(34,211,176,.06)}.callout.accent-purple{border-left-color:var(--aws-purple);background:rgba(167,139,250,.06)}.callout.accent-red{border-left-color:var(--aws-red);background:rgba(251,113,133,.06)}.callout h3,.callout h4{margin-top:0;color:#fff}.callout p,.callout ul{margin-bottom:0}
+  .doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}.doc-list li{margin-bottom:.35rem}
+  .phase-doc-card{position:relative;overflow:hidden;padding:1.1rem}.phase-doc-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--aws-blue))}.phase-doc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;padding-bottom:.6rem;margin-bottom:.7rem;border-bottom:1px solid var(--border)}.phase-doc-head h3{margin:0;font-size:.92rem;color:#fff}.phase-doc-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}
+  .table-responsive{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0 1rem}.doc-table{border-collapse:collapse;width:100%;min-width:760px;margin-bottom:0!important}.doc-table thead tr,.doc-table th{background:rgba(34,197,94,.10)!important}.doc-table th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem!important;text-align:left;color:#fff!important;border-bottom:1px solid var(--border2)!important;border-color:var(--border)!important;white-space:nowrap}.doc-table td{padding:.65rem 1rem!important;font-size:.82rem;color:#cbd5e1!important;border-bottom:1px solid var(--border)!important;border-color:var(--border)!important;vertical-align:top}.doc-table tr:last-child td{border-bottom:none!important}.doc-table tr:hover td{background:rgba(255,255,255,.025)!important}.dense-table td,.dense-table th{font-size:.78rem!important}.table-dark,.table-dark>:not(caption)>*>*{background:transparent!important;color:var(--text)!important}.table-hover>tbody>tr:hover>*{background:rgba(255,255,255,.025)!important}.table-dark>:not(caption)>*{border-color:var(--border)!important}
+  pre,.code-block{background:var(--code-bg);border:1px solid rgba(34,197,94,.22);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#7dd3fc;max-height:680px;white-space:pre}pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
+  .timeline{position:relative;margin-left:.65rem;padding-left:1.5rem}.timeline::before{content:"";position:absolute;left:0;top:.25rem;bottom:.25rem;width:1px;background:var(--border)}.timeline-item{position:relative;margin-bottom:1rem}.timeline-item::before{content:"";position:absolute;left:-1.77rem;top:.3rem;width:.65rem;height:.65rem;border-radius:999px;background:var(--accent);box-shadow:0 0 0 5px rgba(34,197,94,.14)}.timeline-item strong{color:#fff;display:block}.timeline-item span{color:var(--muted2);font-size:.84rem}
+  .priority{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}.priority.must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}.priority.should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}.priority.nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}.priority.future{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
+  .ref-list a{color:#d8ecff;text-decoration:none}.ref-list a:hover{color:#fff;text-decoration:underline}.mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}.is-hidden-by-search{display:none!important}.search-hit{outline:1px solid rgba(34,197,94,.65);background:rgba(34,197,94,.08)!important}
+  .back-to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}.back-to-top.is-visible{display:flex}.back-to-top:hover{background:rgba(34,197,94,.3)}
+  .page-footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}.page-footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px}.footer-pill.orange{border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.06);color:var(--accent)}.footer-pill.yellow{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent2)}.footer-pill.blue{border:1px solid rgba(56,189,248,.25);background:rgba(56,189,248,.06);color:var(--aws-blue)}.footer-pill.purple{border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--aws-purple)}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid rgba(34,197,94,.65);outline-offset:2px}
+  @media(max-width:992px){.main{grid-template-columns:1fr}.sidebar{display:none}.content{padding:1.5rem 0 3rem}.doc-hero-card,.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid,.metrics-grid{grid-template-columns:1fr}.sitenav-top{flex-wrap:wrap;gap:.5rem}.sitenav-top-right{width:100%}.search-box,.track-search{width:100%}.nav-ver{display:none}}
+  @media(max-width:576px){.track-hero-page{padding:3rem 0 2rem}.track-title{font-size:clamp(1.8rem,10vw,2.8rem)}.doc-section{border-radius:10px;padding:1rem}.doc-section-heading,.phase-doc-head{flex-direction:column}.sitenav-brand span{display:none}.nav-back{font-size:.65rem;padding:.25rem .5rem}.nav-group-label{display:none}.nav-group{border-right:none;padding:.25rem .25rem}.nav-link{font-size:.66rem;padding:.25rem .48rem}}
+
+
+
+  /* Java-specific color variants over the AWS structural system */
+  .callout.accent-orange{border-left-color:var(--accent4);background:rgba(251,146,60,.06)}
+  .footer-pill.green{border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.06);color:var(--java)}
+  .footer-pill.teal{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent2)}
+  .footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent3)}
+  .footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent4)}
+  .track-badge-set span.tag{display:inline-flex}
+
+</style>
+  <!-- Responsividade refeita: estrutura baseada na Trilha do Blog. O CSS original acima permanece intacto. -->
+
+  <!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta o encaixe texto + métricas. -->
+
+  <style id="java-aws-responsive-refactor">
+
+    /* ─────────────────────────────────────────────────────────────
+       RESPONSIVIDADE REFEITA — Java Track
+       Bloco complementar: não altera o CSS principal nem o conteúdo.
+       Objetivo: padronizar notebook, tablet e mobile com a estrutura
+       usada na Trilha do Blog e reaplicada na Trilha Java.
+       ───────────────────────────────────────────────────────────── */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body.track-page {
+      overflow-x: hidden;
+    }
+
+    .container,
+    .main,
+    .content,
+    .doc-section,
+    .table-responsive,
+    .doc-table,
+    .phase-doc-card,
+    .exam-card,
+    .mini-card,
+    .callout,
+    .metrics-grid,
+    .doc-hero-card {
+      min-width: 0;
+    }
+
+    img,
+    video,
+    canvas,
+    iframe,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .doc-section {
+      scroll-margin-top: 126px;
+    }
+
+    .table-responsive,
+    pre,
+    .code-block {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-inline: contain;
+    }
+
+    .table-responsive .doc-table,
+    .table-responsive table {
+      width: 100%;
+      min-width: max(760px, 100%);
+      table-layout: auto;
+    }
+
+    .doc-table th,
+    .doc-table td,
+    th,
+    td {
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    pre,
+    .code-block {
+      white-space: pre;
+      overflow-y: auto;
+    }
+
+    pre code,
+    .code-block code {
+      white-space: inherit;
+    }
+
+    .track-title,
+    .track-lead,
+    .doc-section-heading h2,
+    .sitenav-brand,
+    p,
+    li,
+    .mini-card span,
+    .exam-card p,
+    .phase-doc-card p,
+    .callout p,
+    .timeline-item span {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    .doc-grid-2 > *,
+    .doc-grid-3 > *,
+    .doc-grid-4 > *,
+    .phase-doc-grid > *,
+    .metrics-grid > * {
+      min-width: 0;
+    }
+
+    .sitenav,
+    .sitenav * {
+      min-width: 0;
+    }
+
+    .sitenav-brand,
+    .nav-back,
+    .nav-ver {
+      flex-shrink: 0;
+    }
+
+    .sitenav-top-right {
+      min-width: 180px;
+    }
+
+    .search-box,
+    .track-search {
+      max-width: 100%;
+    }
+
+    .sitenav-bar-inner {
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+    }
+
+    .nav-link {
+      scroll-snap-align: start;
+    }
+
+    /* Correção do Resumo Executivo: evita texto espremido contra os cards. */
+    #resumo .doc-hero-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    #resumo .metrics-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    #resumo .metric-pill {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Notebook e desktop estreito */
+    @media (max-width: 1180px) {
+      .container,
+      .main {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .main {
+        grid-template-columns: 200px minmax(0, 1fr);
+      }
+
+      .content {
+        padding-left: 1.35rem;
+      }
+
+      .doc-grid-4,
+      #resumo .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .doc-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Tablet: remove sidebar e preserva navegação superior */
+    @media (max-width: 980px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .content {
+        padding: 1.5rem 0 3rem;
+      }
+
+      .doc-section {
+        scroll-margin-top: 148px;
+      }
+
+      .doc-hero-card,
+      .doc-grid-2,
+      .phase-doc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sitenav-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .55rem .75rem;
+      }
+
+      .sitenav-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-ver {
+        display: none;
+      }
+
+      .nav-back {
+        justify-self: end;
+      }
+
+      .sitenav-top-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+      }
+
+      .search-box,
+      .track-search {
+        width: 100% !important;
+        min-height: 38px;
+      }
+    }
+
+    /* Tablet estreito e celulares grandes */
+    @media (max-width: 760px) {
+      html {
+        font-size: 14.5px;
+      }
+
+      .container,
+      .main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .track-hero-page {
+        padding: 2.8rem 0 2rem;
+      }
+
+      .track-title {
+        font-size: clamp(2rem, 9vw, 3.1rem);
+        letter-spacing: -.035em;
+      }
+
+      .track-lead {
+        max-width: 100%;
+      }
+
+      .track-badge-set,
+      .badge-cloud {
+        gap: .42rem;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
+
+      .sitenav-bar-inner {
+        padding-left: 34px;
+        padding-right: 34px;
+      }
+
+      .nav-group {
+        padding: .25rem .3rem;
+      }
+
+      .nav-group-label {
+        font-size: .56rem;
+        padding-right: .4rem;
+        margin-right: .2rem;
+      }
+
+      .nav-link {
+        font-size: .66rem;
+        padding: .3rem .5rem;
+      }
+
+      .doc-section {
+        padding: 1rem;
+        border-radius: 12px;
+        scroll-margin-top: 154px;
+      }
+
+      .doc-section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-badge {
+        white-space: normal;
+      }
+
+      .doc-grid-3,
+      .doc-grid-4,
+      .metrics-grid,
+      #resumo .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-pill span {
+        font-size: 1.75rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 680px;
+      }
+
+      .doc-table th,
+      .doc-table td,
+      th,
+      td {
+        padding: .58rem .72rem !important;
+      }
+
+      pre,
+      .code-block {
+        padding: .9rem;
+        font-size: .72rem;
+        max-height: 520px;
+      }
+
+      .phase-doc-head {
+        align-items: flex-start;
+      }
+    }
+
+    /* Celulares */
+    @media (max-width: 520px) {
+      html {
+        font-size: 14px;
+      }
+
+      .container,
+      .main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+      }
+
+      .track-hero-page {
+        padding: 2.35rem 0 1.7rem;
+      }
+
+      .hero-label {
+        font-size: .66rem;
+      }
+
+      .hero-back-link,
+      .footer-link {
+        max-width: 100%;
+      }
+
+      .sitenav-top {
+        grid-template-columns: 1fr;
+        gap: .45rem;
+      }
+
+      .sitenav-brand {
+        width: 100%;
+        white-space: normal;
+        justify-content: space-between;
+      }
+
+      .sitenav-brand span {
+        flex-shrink: 0;
+      }
+
+      .nav-back {
+        width: 100%;
+        justify-content: center;
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .nav-group-label {
+        display: none;
+      }
+
+      .nav-group {
+        border-right: none;
+        padding: .25rem .18rem;
+      }
+
+      .nav-link {
+        font-size: .64rem;
+        padding: .3rem .46rem;
+      }
+
+      .content {
+        padding-top: 1rem;
+      }
+
+      .doc-section {
+        margin-bottom: 1rem;
+        padding: .9rem;
+        scroll-margin-top: 184px;
+      }
+
+      .doc-section-heading h2,
+      .doc-section h2 {
+        font-size: 1.15rem;
+      }
+
+      .doc-section h3,
+      .exam-card h3,
+      .phase-doc-card h3,
+      .callout h3 {
+        font-size: .96rem;
+      }
+
+      p,
+      li,
+      .doc-table td,
+      td {
+        font-size: .84rem !important;
+      }
+
+      .doc-table th,
+      th {
+        font-size: .66rem !important;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span,
+      .priority,
+      .section-badge {
+        font-size: .64rem;
+      }
+
+      .metric-pill {
+        padding: .85rem;
+        min-height: 96px;
+      }
+
+      .metric-pill span {
+        font-size: 1.62rem;
+      }
+
+      .mini-card,
+      .exam-card,
+      .phase-doc-card {
+        border-radius: 10px;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 640px;
+      }
+
+      .page-footer .footer-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      .page-footer .footer-link {
+        justify-content: center !important;
+      }
+
+      .footer-pills {
+        justify-content: center !important;
+      }
+
+      .back-to-top {
+        right: .85rem;
+        bottom: .85rem;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Celulares muito estreitos */
+    @media (max-width: 380px) {
+      .container,
+      .main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+
+      .track-title {
+        font-size: 1.85rem;
+      }
+
+      .sitenav-brand span {
+        display: none;
+      }
+
+      .doc-section {
+        padding: .78rem;
+      }
+
+      pre,
+      .code-block {
+        font-size: .68rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 600px;
+      }
+    }
+
+    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+    @media (pointer: coarse) {
+      .nav-scroll-btn,
+      .back-to-top,
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back,
+      .sidebar a {
+        touch-action: manipulation;
+      }
+
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back {
+        min-height: 34px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+
+
+    /* Java-specific color variants over the AWS structural system */
+    .callout.accent-orange{border-left-color:var(--accent4);background:rgba(251,146,60,.06)}
+    .footer-pill.green{border:1px solid rgba(34,197,94,.25);background:rgba(34,197,94,.06);color:var(--java)}
+    .footer-pill.teal{border:1px solid rgba(34,211,176,.25);background:rgba(34,211,176,.06);color:var(--accent2)}
+    .footer-pill.blue{border:1px solid rgba(79,158,248,.25);background:rgba(79,158,248,.06);color:var(--accent3)}
+    .footer-pill.orange{border:1px solid rgba(251,146,60,.25);background:rgba(251,146,60,.06);color:var(--accent4)}
+    .track-badge-set span.tag{display:inline-flex}
+
+  </style>
+  <style id="reference-card-style">
+    /* ─────────────────────────────────────────────────────────────
+       REFERÊNCIAS EM CARDS — padrão visual reutilizável
+       Mantém compatibilidade com busca global, navegação e tema dark.
+       ───────────────────────────────────────────────────────────── */
+
+    .ref-grid {
+      display:grid;
+      gap:1rem;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+    }
+
+    .ref-card {
+      background:var(--surface2);
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:1rem;
+      transition:border-color .15s,background .15s,transform .15s;
+      position:relative;
+      overflow:hidden;
+      min-height:100%;
+      min-width:0;
+    }
+
+    .ref-card::before {
+      content:"";
+      position:absolute;
+      inset:0 auto 0 0;
+      width:3px;
+      background:linear-gradient(180deg,var(--accent),var(--accent2));
+    }
+
+    .ref-card:hover {
+      border-color:rgba(52,211,153,.30);
+      background:#151c27;
+      transform:translateY(-1px);
+    }
+
+    .ref-card strong {
+      display:block;
+      color:#fff;
+      font-family:'Syne',sans-serif;
+      font-size:.95rem;
+      margin-bottom:.35rem;
+      padding-left:.15rem;
+    }
+
+    .ref-card p {
+      color:var(--muted2);
+      font-size:.82rem;
+      margin-bottom:.75rem;
+      padding-left:.15rem;
+    }
+
+    .ref-card a,
+    .ref-list a {
+      display:inline-flex;
+      align-items:center;
+      gap:.35rem;
+      max-width:100%;
+      color:#d8ecff;
+      text-decoration:none;
+      font-family:'IBM Plex Mono',monospace;
+      font-size:.72rem;
+      font-weight:600;
+      line-height:1.45;
+      border:1px solid rgba(56,189,248,.18);
+      background:rgba(56,189,248,.055);
+      padding:.28rem .55rem;
+      border-radius:6px;
+      overflow-wrap:anywhere;
+      word-break:break-word;
+      transition:all .14s;
+    }
+
+    .ref-card a::after,
+    .ref-list a::after {
+      content:'↗';
+      font-size:.72rem;
+      color:var(--accent2);
+      line-height:1;
+    }
+
+    .ref-card a:hover,
+    .ref-list a:hover {
+      color:#fff;
+      border-color:rgba(52,211,153,.42);
+      background:rgba(52,211,153,.09);
+      text-decoration:none;
+      transform:translateY(-1px);
+    }
+
+    .ref-grid > * {
+      min-width:0;
+    }
+
+    @media(max-width:1180px) {
+      .ref-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:980px) {
+      .ref-grid {
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:520px) {
+      .ref-card {
+        border-radius:10px;
+      }
+
+      .ref-card a,
+      .ref-list a {
+        display:flex;
+        width:100%;
+        justify-content:space-between;
+        align-items:center;
+      }
+    }
+  </style>
+
+  <style id="architecture-theme-overrides">
+    /* Tema visual da Trilha de Arquitetura: mantém a estrutura técnica da trilha Java e altera a identidade cromática. */
+    :root{
+      --accent:#f59e0b;
+      --accent2:#38bdf8;
+      --accent3:#22d3ee;
+      --accent4:#a78bfa;
+      --accent5:#fb7185;
+      --aws-orange:#f59e0b;
+      --aws-yellow:#fbbf24;
+      --aws-blue:#38bdf8;
+      --aws-green:#34d399;
+      --aws-purple:#a78bfa;
+      --aws-red:#fb7185;
+      --java:#f59e0b;
+    }
+    body.track-page{
+      background-image:
+        radial-gradient(ellipse 82% 42% at 8% -6%, rgba(245,158,11,.15) 0%, transparent 52%),
+        radial-gradient(ellipse 64% 32% at 88% 3%, rgba(56,189,248,.10) 0%, transparent 44%),
+        radial-gradient(ellipse 50% 26% at 78% 22%, rgba(167,139,250,.07) 0%, transparent 46%);
+    }
+    ::selection{background:rgba(245,158,11,.30);color:#fff}
+    .track-hero-page{background:linear-gradient(135deg,rgba(245,158,11,.13) 0%,rgba(56,189,248,.075) 54%,rgba(167,139,250,.06) 100%)}
+    .track-title{background:linear-gradient(135deg,#fff 28%,var(--accent) 58%,var(--accent2) 82%,var(--accent4) 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+    .track-badge-set span,.badge-cloud span{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.085);color:var(--accent)}
+    .track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(56,189,248,.34);background:rgba(56,189,248,.08);color:var(--accent2)}
+    .track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(167,139,250,.32);background:rgba(167,139,250,.075);color:var(--accent4)}
+    .metric-pill{background:rgba(245,158,11,.075);border-color:rgba(245,158,11,.24)}
+    .exam-card::before{background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent4))}
+    .phase-doc-card::before{background:linear-gradient(180deg,var(--accent),var(--accent2),var(--accent4))}
+    .footer-pill.green{border-color:rgba(245,158,11,.25);background:rgba(245,158,11,.06);color:var(--accent)}
+    .footer-pill.teal{border-color:rgba(34,211,238,.25);background:rgba(34,211,238,.06);color:var(--accent3)}
+    .footer-pill.blue{border-color:rgba(56,189,248,.25);background:rgba(56,189,248,.06);color:var(--accent2)}
+    .footer-pill.orange{border-color:rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--accent4)}
+    .callout.accent-amber{border-left-color:var(--accent);background:rgba(245,158,11,.06)}
+  </style>
+</head>
+
+<body class="track-page" data-track="architecture">
+<header class="track-hero-page">
+  <div class="container">
+    <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
+    <div class="hero-label">Trilha técnica · Arquitetura de Integração · Arquitetura de Solução</div>
+    <h1 class="track-title">Arquitetura de Integração e Arquitetura de Solução</h1>
+    <p class="track-lead">Página técnica completa para evoluir do básico ao nível sênior em sistemas distribuídos, integrações corporativas, APIs, eventos, mensageria, governança, segurança, observabilidade, cloud e decisões arquiteturais.</p>
+    <div class="track-badge-set">
+      <span class="tag">Solution Architecture</span>
+      <span class="tag">Integration Architecture</span>
+      <span class="tag">APIs</span>
+      <span class="tag">Eventos</span>
+      <span class="tag">Mensageria</span>
+      <span class="tag">OpenAPI</span>
+      <span class="tag">AsyncAPI</span>
+      <span class="tag">CloudEvents</span>
+      <span class="tag">Resiliência</span>
+      <span class="tag">Observabilidade</span>
+      <span class="tag">Governança</span>
+      <span class="tag">ADRs/RFCs</span>
+    </div>
+  </div>
+</header>
+<nav class="sitenav">
+  <div class="container">
+    <div class="sitenav-top">
+      <a class="sitenav-brand" href="#">Architecture Track <span>64 semanas</span></a>
+      <span class="nav-ver">Plano técnico de estudos</span>
+      <a class="nav-back" href="../index.html">← Dashboard principal</a>
+      <div class="sitenav-top-right">
+        <input aria-label="Buscar na trilha de arquitetura" class="search-box" id="searchInput" placeholder="Buscar na trilha de arquitetura..." type="search"/>
+      </div>
+    </div>
+  </div>
+  <div class="sitenav-bar-outer">
+    <button aria-label="Rolar para esquerda" class="nav-scroll-btn left" id="navScrollLeft">‹</button>
+    <div class="sitenav-bar-inner" id="navSectionsBar"><div class="nav-group"> <span class="nav-group-label">Base</span> <a class="nav-link" href="#resumo">01 · Resumo</a> <a class="nav-link" href="#diferencas">02 · Diferenças</a> <a class="nav-link" href="#niveis">03 · Níveis</a> <a class="nav-link" href="#fundamentos">04 · Fundamentos</a> </div> <div class="nav-group"> <span class="nav-group-label">Papéis</span> <a class="nav-link" href="#arquiteto-solucao">05 · Solução</a> <a class="nav-link" href="#arquiteto-integracao">06 · Integração</a> </div> <div class="nav-group"> <span class="nav-group-label">Integração</span> <a class="nav-link" href="#estilos">07 · Estilos</a> <a class="nav-link" href="#contratos">08 · Contratos</a> <a class="nav-link" href="#eip">09 · EIP</a> <a class="nav-link" href="#distribuida">10 · Distribuída</a> </div> <div class="nav-group"> <span class="nav-group-label">Arquitetura</span> <a class="nav-link" href="#eventos">11 · Eventos</a> <a class="nav-link" href="#apis">12 · APIs</a> <a class="nav-link" href="#dados">13 · Dados</a> </div> <div class="nav-group"> <span class="nav-group-label">Produção</span> <a class="nav-link" href="#seguranca">14 · Segurança</a> <a class="nav-link" href="#observabilidade">15 · Observabilidade</a> <a class="nav-link" href="#resiliencia">16 · Resiliência</a> <a class="nav-link" href="#governanca">17 · Governança</a> </div> <div class="nav-group"> <span class="nav-group-label">Decisão</span> <a class="nav-link" href="#documentacao">18 · Diagramas</a> <a class="nav-link" href="#adr">19 · ADR</a> <a class="nav-link" href="#rfc">20 · RFC</a> <a class="nav-link" href="#cloud">21 · Cloud</a> <a class="nav-link" href="#ferramentas">22 · Ferramentas</a> </div> <div class="nav-group"> <span class="nav-group-label">Execução</span> <a class="nav-link" href="#fases">23 · Fases</a> <a class="nav-link" href="#projeto">24 · Projeto</a> <a class="nav-link" href="#checklist">25 · Checklist</a> <a class="nav-link" href="#erros">26 · Erros</a> <a class="nav-link" href="#referencias">27 · Referências</a> <a class="nav-link" href="#resumo-final">28 · Final</a> </div></div>
+    <button aria-label="Rolar para direita" class="nav-scroll-btn right" id="navScrollRight">›</button>
+  </div>
+</nav>
+<div class="main">
+  <aside class="sidebar"><div class="sidebar-group"> <div class="sidebar-label">Base</div> <a href="#resumo">01. Resumo</a> <a href="#diferencas">02. Diferenças</a> <a href="#niveis">03. Níveis</a> <a href="#fundamentos">04. Fundamentos</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Papéis</div> <a href="#arquiteto-solucao">05. Solução</a> <a href="#arquiteto-integracao">06. Integração</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Integração</div> <a href="#estilos">07. Estilos</a> <a href="#contratos">08. Contratos</a> <a href="#eip">09. EIP</a> <a href="#distribuida">10. Distribuída</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Arquitetura</div> <a href="#eventos">11. Eventos</a> <a href="#apis">12. APIs</a> <a href="#dados">13. Dados</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Produção</div> <a href="#seguranca">14. Segurança</a> <a href="#observabilidade">15. Observabilidade</a> <a href="#resiliencia">16. Resiliência</a> <a href="#governanca">17. Governança</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Decisão</div> <a href="#documentacao">18. Diagramas</a> <a href="#adr">19. ADR</a> <a href="#rfc">20. RFC</a> <a href="#cloud">21. Cloud</a> <a href="#ferramentas">22. Ferramentas</a> </div> <div class="sidebar-group"> <div class="sidebar-label">Execução</div> <a href="#fases">23. Fases</a> <a href="#projeto">24. Projeto</a> <a href="#checklist">25. Checklist</a> <a href="#erros">26. Erros</a> <a href="#referencias">27. Referências</a> <a href="#resumo-final">28. Final</a> </div></aside>
+  <div class="content" id="trackMain">
+    
+    <section class="doc-section searchable-section" data-search-section="" id="resumo">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Resumo executivo</h2>
+          <p class="section-subtitle">Trilha técnica para evoluir de fundamentos arquiteturais até decisão, governança e liderança sênior.</p>
+        </div>
+        <span class="section-badge">Architecture Core</span>
+      </div>
+      
+  <div class="doc-hero-card">
+    <div>
+      <p class="lead">Esta página transforma a trilha de Arquitetura de Integração e Arquitetura de Solução em um material navegável, consultável e aplicável, seguindo a mesma base técnica/visual da trilha Java.</p>
+      <p>O objetivo é formar um profissional capaz de entender requisitos de negócio, desenhar soluções ponta a ponta, integrar sistemas legados, APIs, bancos, filas, eventos, SaaS e cloud, e defender trade-offs com clareza para desenvolvimento, segurança, infraestrutura, produto e liderança.</p>
+      <ul class="doc-list"><li>Saída esperada: desenhar arquiteturas com requisitos funcionais e não funcionais explícitos.</li><li>Foco prático: APIs, eventos, filas, batch, CDC, contratos, resiliência e observabilidade.</li><li>Senioridade: escolher tecnologia por requisito, risco, custo, operação e evolução - não por moda.</li><li>Entrega final: plataforma de pedidos integrada com C4, OpenAPI, AsyncAPI, ADRs, RFC, observabilidade e plano de rollback.</li></ul>
+    </div>
+    <div class="metrics-grid">
+      <div class="metric-pill"><span>28</span><small>seções técnicas</small></div>
+      <div class="metric-pill"><span>8</span><small>fases de estudo</small></div>
+      <div class="metric-pill"><span>64</span><small>semanas sugeridas</small></div>
+      <div class="metric-pill"><span>1</span><small>projeto sênior</small></div>
+    </div>
+  </div>
+  <div class="callout accent-blue mt-3"><h3>Como estudar</h3><p>Estude em sequência, transforme cada padrão em um pequeno laboratório, registre decisões com ADR/RFC e mantenha diagramas vivos. Arquitetura não é apenas desenho: é decisão implementável, operável, segura e mensurável.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="diferencas">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Diferença entre Arquitetura de Solução e Arquitetura de Integração</h2>
+          <p class="section-subtitle">Separação conceitual para tomar decisões sem misturar escopo de solução com mecanismos de troca de dados.</p>
+        </div>
+        <span class="section-badge">Conceitos</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <article class="callout accent-amber"><h3>Arquitetura de Solução</h3><p>Responde qual solução técnica atende ao problema de negócio considerando requisitos funcionais, requisitos não funcionais, restrições, custo, segurança, operação e evolução.</p><ul class="doc-list"><li>Escopo da solução e sistemas envolvidos.</li><li>Componentes, APIs, bancos, infraestrutura e cloud.</li><li>Segurança, observabilidade, deploy, escalabilidade e custos.</li><li>Riscos, roadmap técnico, migração e evolução.</li></ul></article>
+    <article class="callout accent-blue"><h3>Arquitetura de Integração</h3><p>Responde como sistemas diferentes trocam dados, comandos, eventos e estados de forma segura, resiliente, governada e escalável.</p><ul class="doc-list"><li>APIs, eventos, filas, tópicos, batch, streaming, CDC e arquivos.</li><li>Contratos, schemas, transformações, roteamento e versionamento.</li><li>Idempotência, reprocessamento, correlação e rastreabilidade.</li><li>Governança, monitoramento e ciclo de vida das integrações.</li></ul></article>
+  </div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Dimensão</th><th>Arquitetura de Solução</th><th>Arquitetura de Integração</th></tr></thead><tbody><tr><td>Pergunta central</td><td>Qual solução resolve o problema de negócio?</td><td>Como os sistemas trocam informações corretamente?</td></tr><tr><td>Escopo</td><td>Ponta a ponta: negócio, aplicação, dados, segurança, cloud e operação.</td><td>Fluxos entre sistemas, contratos, mensagens, eventos, erros e governança.</td></tr><tr><td>Entregáveis</td><td>Visão de solução, C4, deployment, matriz de riscos, requisitos não funcionais, roadmap.</td><td>OpenAPI, AsyncAPI, schemas, topologia de filas/tópicos, DLQ, reprocessamento, catálogo.</td></tr><tr><td>Risco comum</td><td>Desenhar tecnologia sem requisito ou sem viabilidade operacional.</td><td>Integrar sem contrato, sem versionamento, sem idempotência e sem rastreabilidade.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="niveis">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Níveis de evolução</h2>
+          <p class="section-subtitle">Do entendimento básico de sistemas até liderança técnica e decisão executiva.</p>
+        </div>
+        <span class="section-badge">Básico → Sênior</span>
+      </div>
+      
+  <div class="phase-doc-grid">
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível básico</h3><span>Fundamentos</span></div><p>Entender sistemas, APIs, bancos, integrações simples e diagramas básicos.</p><ul class="doc-list"><li>Arquitetura, API, integração, contrato e legado.</li><li>Fluxo síncrono, assíncrono, fila, evento, webhook, batch e banco compartilhado.</li><li>Acoplamento, coesão, latência, disponibilidade e escalabilidade.</li><li>Resultado: desenhar fluxo simples entre frontend, backend, banco e API externa.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível intermediário</h3><span>Projeto real</span></div><p>Projetar integrações reais com APIs, mensageria, autenticação, tratamento de erros e documentação.</p><ul class="doc-list"><li>REST, OpenAPI, status HTTP, OAuth2/OIDC e API Gateway.</li><li>RabbitMQ, Kafka, SQS, timeout, retry, DLQ e idempotência.</li><li>Logs, métricas, tracing, C4, sequência e ADRs.</li><li>Resultado: microsserviço integrado com contrato, segurança, reprocessamento e observabilidade.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível avançado</h3><span>Escala</span></div><p>Trabalhar com arquiteturas distribuídas, eventos, consistência, governança e cloud.</p><ul class="doc-list"><li>Event-driven architecture, Kafka, EventBridge e Schema Registry.</li><li>Saga, Outbox, Inbox, CDC, CQRS e Event Sourcing.</li><li>API Management, Service Mesh, BFF, ACL, canonical model e data contracts.</li><li>Resultado: arquitetura corporativa com múltiplos sistemas, APIs, eventos e consistência eventual.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Nível sênior</h3><span>Decisão</span></div><p>Liderar estratégia, governança, risco, custo, operação, evolução e comunicação executiva.</p><ul class="doc-list"><li>Trade-offs entre síncrono, assíncrono, batch, streaming e CDC.</li><li>CAP/PACELC, RPO/RTO, FinOps, risk assessment, multi-região e legado.</li><li>Governança de APIs/eventos, ADRs executivos, RFCs técnicos e arquitetura evolutiva.</li><li>Resultado: defender arquitetura ponta a ponta para times técnicos, segurança, produto, negócio e liderança.</li></ul></article>
+  </div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="fundamentos">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Fundamentos obrigatórios</h2>
+          <p class="section-subtitle">Requisitos, restrições e critérios que impedem decisões arquiteturais frágeis.</p>
+        </div>
+        <span class="section-badge">Base técnica</span>
+      </div>
+      
+  <div class="doc-grid-3">
+    <article class="exam-card"><h3>Requisitos funcionais</h3><p>Descrevem o que o sistema precisa fazer: criar pedido, consultar cliente, processar pagamento, emitir nota, enviar notificação, importar arquivo e publicar evento.</p><ul class="doc-list"><li>Converter em casos de uso, serviços, APIs, eventos, dados e regras.</li><li>Criar critérios de aceite e fluxos verificáveis.</li><li>Evitar transformar requisito em tecnologia antes de entender o problema.</li></ul></article>
+    <article class="exam-card"><h3>Requisitos não funcionais</h3><p>Definem como o sistema deve se comportar: disponibilidade, escalabilidade, latência, segurança, privacidade, resiliência, testabilidade, custo, RPO e RTO.</p><ul class="doc-list"><li>Declarar metas mensuráveis, como p95, throughput, SLO e RTO.</li><li>Conectar NFRs aos pilares Well-Architected.</li><li>Nunca desenhar solução séria apenas por funcionalidade.</li></ul></article>
+    <article class="exam-card"><h3>Restrições arquiteturais</h3><p>São limites impostos ao desenho: stack obrigatória, cloud alvo, legado, banco atual, LGPD, prazo, custo, volumetria e compatibilidade.</p><ul class="doc-list"><li>Diferenciar requisito real de preferência técnica.</li><li>Explicitar impacto de cada restrição no desenho.</li><li>Registrar trade-offs quando uma restrição aumenta risco.</li></ul></article>
+  </div>
+  <div class="callout accent-purple mt-3"><h3>Critério sênior</h3><p>Um arquiteto forte não começa pelo diagrama. Começa por objetivos, restrições, riscos, requisitos não funcionais, operação, segurança e capacidade real do time que manterá a solução.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="arquiteto-solucao">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Papel do Arquiteto de Solução</h2>
+          <p class="section-subtitle">Responsabilidades, perguntas e entregáveis de arquitetura ponta a ponta.</p>
+        </div>
+        <span class="section-badge">Solution Architect</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div><div class="doc-grid-2"><article class="mini-card"><strong>Entender negócio</strong><span>Mapear problema, objetivos, stakeholders e critérios de sucesso.</span></article><article class="mini-card"><strong>Definir fronteiras</strong><span>Identificar sistemas envolvidos, componentes, responsabilidades e contratos.</span></article><article class="mini-card"><strong>Escolher padrões</strong><span>Selecionar arquitetura, tecnologias e integração com base em requisitos e trade-offs.</span></article><article class="mini-card"><strong>Validar operação</strong><span>Garantir segurança, observabilidade, custo, deploy, rollback, evolução e suporte.</span></article></div></div>
+    <div class="callout accent-blue"><h3>Entregáveis típicos</h3><ul class="doc-list"><li>Visão de solução, C4 contexto/containers/componentes e diagrama de sequência.</li><li>Diagrama de integração, deployment, dados, matriz de requisitos não funcionais e riscos.</li><li>Contratos de API/eventos, ADRs, RFC, plano de migração e rollback.</li><li>Estratégias de observabilidade, segurança, testes, estimativa técnica e roadmap.</li></ul></div>
+  </div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Pergunta</th><th>O que o arquiteto deve responder</th></tr></thead><tbody><tr><td>Viabilidade</td><td>A solução atende o problema dentro das restrições de prazo, custo, segurança e operação?</td></tr><tr><td>Evolução</td><td>Como a arquitetura suporta crescimento, migração, decomposição e mudança de requisitos?</td></tr><tr><td>Risco</td><td>Quais pontos de falha existem e como serão mitigados, monitorados e revertidos?</td></tr><tr><td>Execução</td><td>Como o time vai implementar sem transformar a arquitetura em documentação desconectada?</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="arquiteto-integracao">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Papel do Arquiteto de Integração</h2>
+          <p class="section-subtitle">Como definir estilos, contratos, protocolos, transformação, erros e governança entre sistemas.</p>
+        </div>
+        <span class="section-badge">Integration Architect</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <article class="callout accent-amber"><h3>Responsabilidades</h3><ul class="doc-list"><li>Mapear produtores e consumidores.</li><li>Definir estilo de integração, contratos, schemas e protocolos.</li><li>Definir autenticação, autorização, roteamento e transformação.</li><li>Definir retry, DLQ, reprocessamento, idempotência e correlação.</li><li>Definir rastreabilidade, versionamento, governança e monitoração.</li></ul></article>
+    <article class="callout accent-blue"><h3>Perguntas obrigatórias</h3><ul class="doc-list"><li>O consumidor precisa de resposta imediata ou pode trabalhar com atraso?</li><li>Qual é a volumetria, latência tolerada e criticidade do fluxo?</li><li>O dado exige consistência forte ou aceita consistência eventual?</li><li>Como evitar duplicidade, tratar falha parcial, auditar e reprocessar?</li><li>Como proteger dados sensíveis e desligar/migrar a integração no futuro?</li></ul></article>
+  </div>
+  <div class="callout accent-purple mt-3"><h3>Resultado esperado</h3><p>Cada integração deve ter dono, contrato, versionamento, segurança, correlação, estratégia de erro, reprocessamento, observabilidade e política de evolução/desativação.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="estilos">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Estilos de integração</h2>
+          <p class="section-subtitle">Comparativo prático entre APIs síncronas, filas, eventos, batch, CDC, banco compartilhado e arquivos.</p>
+        </div>
+        <span class="section-badge">Integration Styles</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Estilo</th><th>Quando usar</th><th>Riscos</th><th>Padrões obrigatórios</th></tr></thead><tbody><tr><td>API síncrona</td><td>Resposta imediata: validar cliente, consultar estoque, autenticar, simular frete.</td><td>Acoplamento temporal, cascata de falhas, timeout, latência e dependência direta.</td><td>Timeout, retry com backoff, circuit breaker, bulkhead, rate limit, fallback, idempotency key, correlation ID.</td></tr><tr><td>Fila assíncrona</td><td>Produtor não precisa esperar: e-mail, imagem, relatório, nota fiscal, ERP e auditoria.</td><td>Consistência eventual, duplicidade, ordem, DLQ mal gerida e falta de rastreabilidade.</td><td>DLQ, retry policy, idempotent consumer, poison message handling, expiration, version, monitoring e backpressure.</td></tr><tr><td>Eventos</td><td>Mudanças de estado para múltiplos consumidores: order.created, payment.approved.</td><td>Governança de eventos, schema evolution, ordem, duplicidade, replay e eventos sem semântica.</td><td>Event naming, schema, versioning, Schema Registry, Outbox, Inbox, lag monitoring, replay e event catalog.</td></tr><tr><td>Batch</td><td>Processamento em janelas: conciliação, arquivos, relatório, DW e rotinas fiscais.</td><td>Latência alta, falha tardia, duplicidade, arquivo corrompido e reprocessamento complexo.</td><td>Checkpoint, job id, controle de lote, validação, quarentena, auditoria e relatório de inconsistências.</td></tr><tr><td>CDC</td><td>Capturar mudanças no banco: PostgreSQL/Debezium/Kafka, binlog e change streams.</td><td>Expor modelo interno, schema fraco, ordem, consistência e complexidade operacional.</td><td>Preferir CDC com Outbox para eventos de domínio/integração, não replicar tabela crua sem governança.</td></tr><tr><td>Banco compartilhado</td><td>Apenas temporário em legado ou transição controlada.</td><td>Altíssimo acoplamento, quebra de encapsulamento, auditoria difícil e contrato acidental.</td><td>Evitar como padrão; aceitar só com plano de migração e contenção de risco.</td></tr><tr><td>Arquivos</td><td>Bancos, ERPs, fiscal, CNAB, EDI, OFX, SFTP e object storage.</td><td>Layout divergente, encoding, duplicidade, arquivo parcial e baixa governança.</td><td>Nome padronizado, layout versionado, checksum, pastas de status, auditoria, idempotência e rejeições.</td></tr></tbody></table></div>
+  <div class="callout accent-red mt-3"><h3>Decisão sênior</h3><p>Não existe estilo universal. O desenho correto depende de latência, consistência, criticidade, volume, capacidade do time, custo operacional, segurança e ciclo de vida do contrato.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="contratos">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Contratos de integração</h2>
+          <p class="section-subtitle">OpenAPI, AsyncAPI, CloudEvents e Schema Registry como base de governança técnica.</p>
+        </div>
+        <span class="section-badge">Contracts</span>
+      </div>
+      
+  <div class="doc-grid-4">
+    <article class="exam-card"><h3>OpenAPI</h3><p>Descreve APIs HTTP com endpoints, parâmetros, requests, responses, autenticação, schemas, exemplos, modelo de erro, versionamento e geração de código.</p></article>
+    <article class="exam-card"><h3>AsyncAPI</h3><p>Descreve APIs assíncronas e mensagens com channels, messages, publishers, subscribers, bindings, schemas, exemplos e versionamento.</p></article>
+    <article class="exam-card"><h3>CloudEvents</h3><p>Padroniza envelopes de eventos com id, source, type, specversion, subject, time, datacontenttype e data.</p></article>
+    <article class="exam-card"><h3>Schema Registry</h3><p>Controla evolução de schemas Avro, JSON Schema ou Protobuf com compatibilidade backward, forward, full e checks no pipeline.</p></article>
+  </div>
+  <div class="callout accent-blue mt-3"><h3>Regras de governança</h3><ul class="doc-list"><li>API sem OpenAPI em ambiente corporativo é dívida de governança.</li><li>Eventos precisam de contrato tanto quanto APIs REST.</li><li>Envelope padronizado facilita roteamento, auditoria, rastreabilidade e integração multiplataforma.</li><li>Evento sem schema versionado vira risco operacional.</li></ul></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="eip">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Padrões de integração essenciais</h2>
+          <p class="section-subtitle">Enterprise Integration Patterns aplicados a filas, tópicos, eventos, rotas e payloads.</p>
+        </div>
+        <span class="section-badge">EIP</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Padrão</th><th>Função</th><th>Uso prático</th></tr></thead><tbody><tr><td>Message Channel</td><td>Canal por onde mensagens trafegam: queue, topic, stream ou event bus.</td><td>Separar produtores e consumidores.</td></tr><tr><td>Message Router</td><td>Roteia mensagens para destinos diferentes.</td><td>Content-based routing, recipient list, dynamic router e routing slip.</td></tr><tr><td>Message Translator</td><td>Transforma formato e linguagem.</td><td>XML para JSON, DTO legado para modelo canônico, ERP payload para domínio interno.</td></tr><tr><td>Content Enricher</td><td>Adiciona dados externos à mensagem.</td><td>Enriquecer pedido com segmento, região ou score do cliente.</td></tr><tr><td>Content Filter</td><td>Remove dados desnecessários ou sensíveis.</td><td>Reduzir payload e evitar vazamento de dados.</td></tr><tr><td>Splitter</td><td>Divide mensagem grande em partes menores.</td><td>Arquivo com 10.000 registros vira 10.000 mensagens.</td></tr><tr><td>Aggregator</td><td>Junta múltiplas mensagens em visão consolidada.</td><td>Pedido + pagamento + nota + entrega em visão final.</td></tr><tr><td>Claim Check</td><td>Guarda payload grande em storage e trafega referência.</td><td>Mensagem carrega documentUrl, não PDF inteiro.</td></tr><tr><td>Idempotent Receiver</td><td>Processa mensagem duplicada sem gerar duplicidade.</td><td>Obrigatório em filas, Kafka, webhooks, pagamentos, pedidos e fiscal.</td></tr><tr><td>Dead Letter Channel</td><td>Canal para mensagens não processadas.</td><td>Guardar erro, tentativas, timestamp, payload original, correlation ID e reprocessamento.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="distribuida">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Padrões de arquitetura distribuída</h2>
+          <p class="section-subtitle">Padrões para borda, resiliência, transações distribuídas, consistência e leitura/escrita.</p>
+        </div>
+        <span class="section-badge">Distributed Patterns</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>API Gateway e BFF</h3><span>Borda</span></div><p>Gateway centraliza entrada, roteamento, autenticação, rate limit, TLS, logging e versões. BFF adapta agregações e payloads para web, mobile, admin ou parceiros.</p><ul class="doc-list"><li>Não colocar regra de negócio pesada no gateway.</li><li>Usar BFF quando canais têm necessidades diferentes.</li><li>Evitar expor backend de domínio diretamente ao frontend quando houver agregação ou composição.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Circuit Breaker, Retry e Bulkhead</h3><span>Resiliência</span></div><p>Circuit breaker evita derrubada por falhas repetidas; retry com backoff e jitter trata falhas transitórias; bulkhead isola recursos críticos.</p><ul class="doc-list"><li>Retry sem limite causa tempestade.</li><li>Retry em operação não idempotente pode duplicar efeito.</li><li>Pools separados evitam que falha em pagamento derrube consulta de cliente.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Saga, Outbox e Inbox</h3><span>Consistência</span></div><p>Saga coordena transações locais com compensações; Outbox salva mudança e evento na mesma transação; Inbox registra mensagens processadas para idempotência.</p><ul class="doc-list"><li>Saga pode ser orquestrada ou coreografada.</li><li>Compensação precisa ser auditável.</li><li>Outbox reduz risco de salvar no banco e perder evento.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>CQRS e Event Sourcing</h3><span>Modelos</span></div><p>CQRS separa leitura e escrita quando necessidades divergem. Event Sourcing armazena eventos como fonte da verdade.</p><ul class="doc-list"><li>Nem todo CRUD precisa de CQRS.</li><li>Event Sourcing exige maturidade em projeções, evolução de eventos e debug.</li><li>Usar quando auditoria e reconstrução de estado são essenciais.</li></ul></article>
+  </div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="eventos">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Arquitetura orientada a eventos</h2>
+          <p class="section-subtitle">Conceitos, semântica, envelope e critérios de qualidade para eventos sênior.</p>
+        </div>
+        <span class="section-badge">Event-Driven</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div><h3>Conceitos centrais</h3><ul class="doc-list"><li>Evento, comando, query, notificação e fato de negócio.</li><li>Event storming, event bus, broker, topic, partition, consumer group e offset.</li><li>Replay, ordering, delivery semantics, at-most-once, at-least-once e exatamente-once conceitual.</li><li>Idempotência, schema evolution e compatibilidade entre produtores/consumidores.</li></ul></div>
+    <div class="callout accent-blue"><h3>Critérios de um evento sênior</h3><ul class="doc-list"><li>Nome semântico, versão, identificador único, origem e timestamp.</li><li>Correlation ID, causation ID, schema e compatibilidade.</li><li>Dono, SLA de publicação, retenção, replay e consumidores conhecidos.</li><li>Classificação de dados sensíveis e política de acesso.</li></ul></div>
+  </div>
+  <h3>Evento ruim</h3>
+  <pre class="code-block"><code class="language-json">{
+  &quot;status&quot;: &quot;OK&quot;,
+  &quot;data&quot;: &quot;123&quot;
+}</code></pre>
+  <h3>Evento bom</h3>
+  <pre class="code-block"><code class="language-json">{
+  &quot;id&quot;: &quot;evt-123&quot;,
+  &quot;type&quot;: &quot;order.payment.approved.v1&quot;,
+  &quot;source&quot;: &quot;payment-service&quot;,
+  &quot;time&quot;: &quot;2026-06-06T12:00:00Z&quot;,
+  &quot;subject&quot;: &quot;order-987&quot;,
+  &quot;correlationId&quot;: &quot;corr-abc&quot;,
+  &quot;causationId&quot;: &quot;evt-order-created-001&quot;,
+  &quot;data&quot;: {
+    &quot;orderId&quot;: &quot;order-987&quot;,
+    &quot;paymentId&quot;: &quot;pay-456&quot;,
+    &quot;amount&quot;: 199.90,
+    &quot;currency&quot;: &quot;BRL&quot;
+  }
+}</code></pre>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="apis">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Arquitetura de APIs</h2>
+          <p class="section-subtitle">REST, GraphQL, gRPC, webhooks e padrões transversais de ciclo de vida.</p>
+        </div>
+        <span class="section-badge">API Architecture</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Abordagem</th><th>Usar quando</th><th>Cuidados sênior</th></tr></thead><tbody><tr><td>REST</td><td>Recursos bem definidos, CRUD/consulta, cache HTTP e ecossistema amplo.</td><td>Versionamento, paginação, filtros, idempotency key, rate limit, auth, modelo de erro e Problem Details.</td></tr><tr><td>GraphQL</td><td>Clientes precisam escolher campos e agregar múltiplas fontes com menos overfetch/underfetch.</td><td>Autorização por campo, complexidade de query, N+1, cache e observabilidade.</td></tr><tr><td>gRPC</td><td>Comunicação interna de baixa latência, contrato forte, streaming, alto volume e polyglot com Protobuf.</td><td>Debug menos simples, browser exige cuidado e APIs públicas tradicionais podem ser menos amigáveis.</td></tr><tr><td>Webhook</td><td>Sistema externo precisa ser notificado: pagamento, antifraude, ERP, SaaS e B2B.</td><td>Assinatura, retry, idempotência, event ID, timestamp, rotação de segredo, logs e reenvio manual.</td></tr><tr><td>WebSocket/SSE</td><td>Fluxos em tempo real, notificações, atualizações contínuas e comunicação persistente.</td><td>Escalabilidade de conexões, backpressure, autenticação, reconexão e observabilidade.</td></tr></tbody></table></div>
+  <div class="callout accent-purple mt-3"><h3>Checklist mínimo de API</h3><ul class="doc-list"><li>OpenAPI válido, modelo de erro padrão, autenticação/autorização documentada.</li><li>Versionamento, deprecation policy, exemplos, contrato testável e API catalog.</li><li>Observabilidade com request ID, trace ID, métricas de latência/erro e logs sem dados sensíveis.</li></ul></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="dados">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Arquitetura de dados em integração</h2>
+          <p class="section-subtitle">Modelos, ownership, contratos de dados, governança, LGPD e lineage.</p>
+        </div>
+        <span class="section-badge">Data Architecture</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <article class="callout accent-amber"><h3>Modelo canônico</h3><p>Útil quando muitos sistemas precisam falar uma linguagem comum, há integração corporativa centralizada e muitos modelos legados divergentes.</p><ul class="doc-list"><li>Pode reduzir transformação repetida entre sistemas.</li><li>Risco: virar modelo gigante e burocrático.</li><li>Risco: criar supercontrato que acopla todos.</li></ul></article>
+    <article class="callout accent-blue"><h3>Modelo por domínio</h3><p>Útil quando a organização trabalha com DDD, cada domínio tem linguagem própria e os eventos publicam semântica do domínio.</p><ul class="doc-list"><li>Preserva autonomia dos domínios.</li><li>Exige tradução em fronteiras de contexto.</li><li>Funciona bem com domain events e data contracts.</li></ul></article>
+  </div>
+  <div class="doc-grid-3"><article class="mini-card"><strong>Data ownership</strong><span>Cada dado precisa ter dono claro, fonte de verdade e política de alteração.</span></article><article class="mini-card"><strong>Data contracts</strong><span>Contratos formais entre produtores e consumidores de dados.</span></article><article class="mini-card"><strong>Data lineage</strong><span>Rastreabilidade da origem, transformação e destino do dado.</span></article><article class="mini-card"><strong>LGPD e retenção</strong><span>Classificação, mascaramento, criptografia, retenção, purge e auditoria.</span></article><article class="mini-card"><strong>Master/reference data</strong><span>Dados mestres e de referência precisam de governança própria.</span></article><article class="mini-card"><strong>Transactional vs analytical</strong><span>Separar modelo transacional de modelo analítico evita acoplamento e consultas destrutivas.</span></article></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="seguranca">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Segurança em arquitetura de solução e integração</h2>
+          <p class="section-subtitle">Segurança desde o desenho: APIs, eventos, identidade, segredo, dados e compliance.</p>
+        </div>
+        <span class="section-badge">Security by Design</span>
+      </div>
+      
+  <div class="doc-grid-3">
+    <article class="exam-card"><h3>Fundamentos</h3><ul class="doc-list"><li>Autenticação, autorização, OAuth2, OIDC, JWT, scopes e claims.</li><li>RBAC, ABAC, mTLS, API keys, secrets, KMS, criptografia em trânsito e repouso.</li><li>Token rotation, least privilege, Zero Trust, threat modeling e LGPD.</li></ul></article>
+    <article class="exam-card"><h3>APIs</h3><ul class="doc-list"><li>API Gateway, WAF, rate limit, CORS correto e validação de input.</li><li>Output encoding, proteção contra mass assignment, BOLA/IDOR e SSRF.</li><li>Logs sem dados sensíveis e mensagens de erro seguras.</li></ul></article>
+    <article class="exam-card"><h3>Eventos</h3><ul class="doc-list"><li>Controle de acesso por tópico, criptografia, mascaramento e auditoria.</li><li>Schema sem dados sensíveis desnecessários.</li><li>Retenção adequada, segregação por domínio, política de consumidores e DLQ protegida.</li></ul></article>
+  </div>
+  <div class="callout accent-red mt-3"><h3>Critério sênior</h3><p>Segurança não pode ser camada final. Ela precisa nascer nos requisitos, contratos, schemas, topologia, observabilidade, governança e revisão de arquitetura.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="observabilidade">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Observabilidade de integração</h2>
+          <p class="section-subtitle">Métricas, logs e tracing para responder onde exatamente o fluxo quebrou.</p>
+        </div>
+        <span class="section-badge">Observability</span>
+      </div>
+      
+  <div class="doc-grid-3">
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Métricas técnicas</h3><span>Operação</span></div><ul class="doc-list"><li>Taxa de erro, latência, throughput e tempo de processamento.</li><li>Lag, tamanho de fila, retries, DLQ e timeouts.</li><li>Circuit breaker open, consumer failures e schema validation failures.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Métricas de negócio</h3><span>Produto</span></div><ul class="doc-list"><li>Pedidos criados, pagamentos aprovados e notas emitidas.</li><li>Integrações pendentes, arquivos processados e registros rejeitados.</li><li>Tempo até conclusão do fluxo e taxa de sucesso ponta a ponta.</li></ul></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Logs e tracing</h3><span>Diagnóstico</span></div><ul class="doc-list"><li>Correlation ID, causation ID, user ID, tenant ID, event ID e request ID.</li><li>System origin, destination, status, error code e business key.</li><li>OpenTelemetry com trace em HTTP e mensagens, span por integração e chamada externa.</li></ul></article>
+  </div>
+  <div class="callout accent-blue mt-3"><h3>Critério sênior</h3><p>Deve ser possível responder “onde exatamente o fluxo quebrou?” sem abrir manualmente dez sistemas, sem depender de print de log e sem perder o vínculo entre evento, request, usuário e chave de negócio.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="resiliencia">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Resiliência</h2>
+          <p class="section-subtitle">Padrões obrigatórios para sobreviver a falhas reais sem degradar todo o sistema.</p>
+        </div>
+        <span class="section-badge">Reliability</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div><h3>Padrões obrigatórios</h3><ul class="doc-list"><li>Timeout, retry, backoff, jitter, circuit breaker, bulkhead e rate limiter.</li><li>Fallback, queue buffering, DLQ, reprocessamento, idempotência e checkpoint.</li><li>Graceful degradation, load shedding, health checks, readiness, liveness, chaos testing e disaster recovery.</li></ul></div>
+    <div class="callout accent-red"><h3>Erros que derrubam produção</h3><ul class="doc-list"><li>Retry infinito e sem jitter.</li><li>Timeout muito alto ou ausência de timeout.</li><li>Fila sem DLQ e DLQ sem processo de reprocessamento.</li><li>Consumidor não idempotente e API sem idempotency key.</li><li>Sem métrica de lag, sem correlação ponta a ponta e sem plano de rollback.</li></ul></div>
+  </div>
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Falha</th><th>Mitigação</th></tr></thead><tbody><tr><td>Parceiro externo lento</td><td>Timeout curto, circuit breaker, fallback e fila para processamento posterior.</td></tr><tr><td>Mensagem duplicada</td><td>Inbox, idempotent consumer, chave de negócio e controle de mensagens processadas.</td></tr><tr><td>Pico de tráfego</td><td>Rate limiter, bulkhead, autoscaling, fila buffer e backpressure.</td></tr><tr><td>Processamento parcial</td><td>Saga, compensação, auditoria e estado da orquestração.</td></tr><tr><td>Broker indisponível</td><td>Outbox, retry controlado, alerta e runbook de recuperação.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="governanca">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Governança de arquitetura</h2>
+          <p class="section-subtitle">Padrões, catálogos, owners, reviews e políticas para evitar decisões locais conflitantes.</p>
+        </div>
+        <span class="section-badge">Governance</span>
+      </div>
+      
+  <div class="doc-grid-3">
+    <article class="exam-card"><h3>Governança de APIs</h3><ul class="doc-list"><li>Padrão de URL, erro, paginação, versionamento, autenticação e rate limit.</li><li>OpenAPI obrigatório, lint de contrato, contract testing e deprecation policy.</li><li>API catalog, owner, SLA, SLO e documentação.</li></ul></article>
+    <article class="exam-card"><h3>Governança de eventos</h3><ul class="doc-list"><li>Naming convention, schema obrigatório, AsyncAPI, CloudEvents e versionamento.</li><li>Compatibilidade, retenção, dono, consumidores, LGPD, replay, DLQ e observabilidade.</li><li>Event catalog para descoberta e controle de uso.</li></ul></article>
+    <article class="exam-card"><h3>Governança de decisões</h3><ul class="doc-list"><li>ADR, RFC, Architecture Review, Security Review e Cost Review.</li><li>Operational Readiness Review, Threat Modeling e Production Readiness Checklist.</li><li>Documentar contexto, alternativas, riscos, consequências e critérios de aceitação.</li></ul></article>
+  </div>
+  <div class="callout accent-purple mt-3"><h3>Critério sênior</h3><p>Arquitetura sem governança vira coleção de decisões locais conflitantes. Governança boa não é burocracia: é padronização mínima para escalar com autonomia.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="documentacao">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Documentação arquitetural</h2>
+          <p class="section-subtitle">Diagramas que tornam a arquitetura comunicável, revisável e implementável.</p>
+        </div>
+        <span class="section-badge">C4 + Diagramas</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Diagrama</th><th>Mostra</th><th>Uso</th></tr></thead><tbody><tr><td>Contexto</td><td>Usuários, sistemas externos, sistema principal e relações de alto nível.</td><td>Alinhar visão de negócio e fronteiras.</td></tr><tr><td>Containers</td><td>Frontend, backend, banco, cache, broker, serviços externos e infra principal.</td><td>Comunicar macrocomponentes e responsabilidades.</td></tr><tr><td>Componentes</td><td>Módulos internos, use cases, adapters, ports, repositories, clients, publishers e consumers.</td><td>Guiar implementação e revisões técnicas.</td></tr><tr><td>Sequência</td><td>Ordem das chamadas, fluxo síncrono, assíncrono, falhas e alternativas.</td><td>Validar comportamento e tratamento de erro.</td></tr><tr><td>Integração</td><td>Sistemas, protocolos, APIs, eventos, filas, transformações, frequência e direção dos dados.</td><td>Controlar integrações corporativas.</td></tr><tr><td>Deployment</td><td>Cloud, VPC/VNet, subnets, load balancer, containers, Kubernetes, bancos, broker, secrets e observabilidade.</td><td>Preparar operação e segurança.</td></tr><tr><td>Dados</td><td>Entidades, ownership, fluxo de dados, classificação, retenção, replicação e CDC.</td><td>Governança e LGPD.</td></tr></tbody></table></div>
+  <h3>Exemplo Mermaid — contexto simplificado</h3>
+  <pre class="code-block"><code class="language-mermaid">flowchart LR
+  Cliente[Cliente] --&gt; Web[Frontend]
+  Web --&gt; Gateway[API Gateway]
+  Gateway --&gt; BFF[BFF Web]
+  BFF --&gt; Order[Order Service]
+  Order --&gt; Postgres[(PostgreSQL)]
+  Order --&gt; Kafka[(Kafka/Event Bus)]
+  Kafka --&gt; Payment[Payment Service]
+  Kafka --&gt; Inventory[Inventory Service]
+  Kafka --&gt; Invoice[Invoice Service]
+  Kafka --&gt; Notification[Notification Service]
+  Order --&gt; OTel[OpenTelemetry]
+  Payment --&gt; OTel
+  Inventory --&gt; OTel</code></pre>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="adr">
+      <div class="doc-section-heading">
+        <div>
+          <h2>ADR — Architecture Decision Record</h2>
+          <p class="section-subtitle">Modelo de decisão arquitetural para registrar contexto, alternativas e consequências.</p>
+        </div>
+        <span class="section-badge">ADR</span>
+      </div>
+      
+  <p>ADR deve ser usado para decisões relevantes que afetam arquitetura, operação, segurança, custo, contratos, dados ou evolução do sistema.</p>
+  <pre class="code-block"><code class="language-markdown"># ADR-001 — Usar Kafka para eventos de pedido
+
+## Status
+Aceito
+
+## Contexto
+O fluxo de pedido precisa notificar pagamento, estoque, nota fiscal e analytics.
+
+## Decisão
+Usaremos Kafka com eventos versionados e Schema Registry.
+
+## Consequências positivas
+- Desacoplamento entre domínios.
+- Replay de eventos.
+- Escala horizontal de consumidores.
+
+## Consequências negativas
+- Maior complexidade operacional.
+- Necessidade de governança de schemas.
+- Consistência eventual.
+
+## Alternativas consideradas
+- REST síncrono.
+- RabbitMQ.
+- EventBridge.
+
+## Critérios de aceitação
+- Eventos documentados em AsyncAPI.
+- Consumidores idempotentes.
+- DLQ configurada.
+- Métricas de lag.</code></pre>
+  <div class="callout accent-blue"><h3>Critério sênior</h3><p>Toda decisão relevante precisa registrar contexto, decisão, alternativas e consequências. Sem contexto, a decisão vira opinião; sem consequências, vira propaganda.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="rfc">
+      <div class="doc-section-heading">
+        <div>
+          <h2>RFC técnico</h2>
+          <p class="section-subtitle">Formato para decisões maiores, mudanças críticas e propostas que exigem consenso entre times.</p>
+        </div>
+        <span class="section-badge">RFC</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div><h3>Quando usar</h3><ul class="doc-list"><li>Nova arquitetura ou integração crítica.</li><li>Migração de sistema ou separação de monólito.</li><li>Mudança de contrato público ou adoção de Kafka/API Gateway.</li><li>Estratégia multi-cloud, novo BFF ou política de autenticação.</li></ul></div>
+    <div><h3>Estrutura recomendada</h3><ul class="doc-list"><li>Resumo, problema, objetivos, não objetivos e contexto atual.</li><li>Proposta, alternativas, trade-offs e impactos em segurança, operação, custo e times.</li><li>Plano de migração, plano de rollback, métricas de sucesso e perguntas em aberto.</li></ul></div>
+  </div>
+  <pre class="code-block"><code class="language-markdown"># RFC — Plataforma de Pedidos Integrada
+
+## Resumo
+Proposta de arquitetura para processamento de pedidos com APIs, eventos, resiliência e observabilidade.
+
+## Problema
+O fluxo atual é síncrono, frágil, pouco rastreável e acoplado a sistemas externos.
+
+## Objetivos
+- Reduzir acoplamento temporal.
+- Garantir publicação confiável de eventos.
+- Padronizar contratos e observabilidade.
+
+## Não objetivos
+- Reescrever todos os sistemas legados neste ciclo.
+
+## Proposta
+API Gateway + BFF + serviços de domínio + Kafka + Outbox/Inbox + OpenTelemetry.
+
+## Alternativas
+REST síncrono entre todos os serviços; RabbitMQ; EventBridge gerenciado.
+
+## Rollback
+Manter rota síncrona anterior por feature flag durante migração gradual.
+
+## Métricas de sucesso
+p95, taxa de erro, lag, DLQ, tempo fim-a-fim e taxa de sucesso por fluxo.</code></pre>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="cloud">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Arquitetura cloud para solução e integração</h2>
+          <p class="section-subtitle">Serviços AWS, Azure e Google Cloud usados em APIs, eventos, dados, segurança e observabilidade.</p>
+        </div>
+        <span class="section-badge">Cloud</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Cloud</th><th>Serviços para dominar</th><th>Critério de escolha</th></tr></thead><tbody><tr><td>AWS</td><td>API Gateway, Lambda, EventBridge, SQS, SNS, Step Functions, ECS, EKS, RDS, DynamoDB, ElastiCache, MSK, CloudWatch, X-Ray, IAM, KMS, Secrets Manager, WAF, CloudFront, Route 53 e Well-Architected.</td><td>Usar por requisito: latência, operação, custo, lock-in, integração com legado, governança e maturidade do time.</td></tr><tr><td>Azure</td><td>API Management, Functions, Logic Apps, Event Grid, Event Hubs, Service Bus, Data Factory, Application Insights, Key Vault, AKS, SQL Database, Cosmos DB e Azure Monitor.</td><td>Boa aderência quando ecossistema Microsoft, governança corporativa e integração com Entra ID/serviços Azure são decisivos.</td></tr><tr><td>Google Cloud</td><td>Apigee, Cloud Run, Cloud Functions, Pub/Sub, Workflows, Dataflow, GKE, Cloud SQL, Firestore, BigQuery, Cloud Monitoring e Secret Manager.</td><td>Forte em dados, analytics, plataforma gerenciada e APIs com Apigee.</td></tr></tbody></table></div>
+  <div class="callout accent-purple mt-3"><h3>Critério sênior</h3><p>Saber escolher serviço por requisito, não por preferência. A pergunta não é “qual cloud é melhor?”, mas “qual serviço atende melhor este fluxo, operação, segurança, custo, latência e governança?”.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="ferramentas">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Ferramentas e tecnologias importantes</h2>
+          <p class="section-subtitle">Mapa de tecnologias por categoria para estudo, laboratório e aplicação em projetos reais.</p>
+        </div>
+        <span class="section-badge">Toolbox</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table"><thead><tr><th>Categoria</th><th>Ferramentas</th></tr></thead><tbody><tr><td>APIs</td><td>OpenAPI, Swagger, Postman, Insomnia, Stoplight, Kong, Apigee, AWS API Gateway, Azure API Management, NGINX e Envoy.</td></tr><tr><td>Mensageria e eventos</td><td>Kafka, RabbitMQ, AWS SQS, AWS SNS, AWS EventBridge, Azure Service Bus, Azure Event Grid, Google Pub/Sub, NATS e Pulsar.</td></tr><tr><td>Integração corporativa</td><td>Apache Camel, Spring Integration, MuleSoft, WSO2, Boomi, Logic Apps e Data Factory.</td></tr><tr><td>Contratos</td><td>OpenAPI, AsyncAPI, JSON Schema, Avro, Protobuf, CloudEvents e Schema Registry.</td></tr><tr><td>Observabilidade</td><td>OpenTelemetry, Prometheus, Grafana, Jaeger, Tempo, Loki, ELK/OpenSearch, Datadog, New Relic e Splunk.</td></tr><tr><td>Documentação</td><td>C4 Model, Mermaid, PlantUML, Structurizr, Draw.io, Lucidchart, ArchiMate e ADR tools.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="fases">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Trilha de estudos por fases</h2>
+          <p class="section-subtitle">Roadmap de 64 semanas em 8 fases, com prática obrigatória em cada etapa.</p>
+        </div>
+        <span class="section-badge">Roadmap 64 semanas</span>
+      </div>
+      
+  <div class="phase-doc-grid">
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 1 — Fundamentos de arquitetura</h3><span>Sem 1–8</span></div><p><strong>Estudar:</strong> arquitetura de software, solução, integração, requisitos, restrições, stakeholders, trade-offs, diagramas básicos, C4 e ADR.</p><p><strong>Prática:</strong> escolher sistema simples e criar contexto, containers, requisitos funcionais, não funcionais e 3 ADRs.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 2 — APIs e integração síncrona</h3><span>Sem 9–16</span></div><p><strong>Estudar:</strong> HTTP, REST, OpenAPI, API Gateway, BFF, OAuth2/OIDC, timeout, retry, circuit breaker, rate limit e idempotência.</p><p><strong>Prática:</strong> API Java/Spring com OpenAPI, client externo, timeout/retry/circuit breaker e diagrama de sequência.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 3 — Mensageria</h3><span>Sem 17–24</span></div><p><strong>Estudar:</strong> queue, topic, pub/sub, DLQ, retry, idempotent consumer, poison message, correlation ID, routing e transformation.</p><p><strong>Prática:</strong> pedido criado → fila → consumidor → falha em DLQ → reprocessamento manual.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 4 — Event-driven architecture</h3><span>Sem 25–32</span></div><p><strong>Estudar:</strong> eventos de domínio/integração, Kafka, EventBridge, AsyncAPI, CloudEvents, Schema Registry, Outbox, Inbox, event catalog e consumer lag.</p><p><strong>Prática:</strong> fluxo order.created.v1, payment.approved.v1, invoice.issued.v1 e order.completed.v1 com AsyncAPI, CloudEvents, Outbox e consumidor idempotente.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 5 — Dados e integração corporativa</h3><span>Sem 33–40</span></div><p><strong>Estudar:</strong> CDC, Debezium, ETL, ELT, batch, arquivos, modelo canônico, data contracts, lineage e governance.</p><p><strong>Prática:</strong> PostgreSQL → Debezium → Kafka → consumidor; batch com controle de lote e relatório de rejeições.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 6 — Solução cloud</h3><span>Sem 41–48</span></div><p><strong>Estudar:</strong> Well-Architected, VPC/VNet, containers, Kubernetes, serverless, API Management, event bus, observabilidade, segurança, FinOps e DR.</p><p><strong>Prática:</strong> desenhar solução AWS ou Azure com frontend, backend, banco, cache, broker, gateway, segurança, observabilidade, CI/CD e rollback.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 7 — Arquitetura avançada</h3><span>Sem 49–56</span></div><p><strong>Estudar:</strong> Saga, CQRS, Event Sourcing, multi-region, resiliência, Service Mesh, Zero Trust, multi-tenancy, migração de legado, Strangler Fig, ACL e governança.</p><p><strong>Prática:</strong> migrar módulo de monólito para arquitetura orientada a eventos com plano incremental, ADRs, RFC e rollback.</p></article>
+    <article class="phase-doc-card"><div class="phase-doc-head"><h3>Fase 8 — Nível sênior</h3><span>Sem 57–64</span></div><p><strong>Estudar/praticar:</strong> architecture review, security review, operational readiness, cost review, design authority, mentoria, workshops, event storming, trade-off analysis, gestão de risco e roadmap.</p><p><strong>Prática:</strong> documento completo de arquitetura para plataforma real e apresentação para diretoria, segurança, DevOps e desenvolvimento.</p></article>
+  </div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="projeto">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Projeto prático principal da trilha</h2>
+          <p class="section-subtitle">Plataforma de pedidos integrada com APIs, eventos, Outbox, Inbox, observabilidade e documentação.</p>
+        </div>
+        <span class="section-badge">Projeto Sênior</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <article class="callout accent-amber"><h3>Componentes obrigatórios</h3><ul class="doc-list"><li>Frontend, API Gateway e BFF.</li><li>Order Service, Payment Service, Inventory Service, Invoice Service e Notification Service.</li><li>PostgreSQL, Redis, Kafka, DLQ, Outbox e Inbox.</li><li>OpenAPI, AsyncAPI, CloudEvents, segurança, CI/CD, Docker, Kubernetes ou ECS.</li><li>Dashboard de métricas, documentação C4 e ADRs.</li></ul></article>
+    <article class="callout accent-blue"><h3>Fluxo principal</h3><ol class="doc-list"><li>Cliente cria pedido.</li><li>Order Service salva pedido.</li><li>Outbox publica order.created.v1.</li><li>Payment Service consome e aprova pagamento.</li><li>Payment Service publica payment.approved.v1.</li><li>Inventory Service reserva estoque.</li><li>Invoice Service emite nota.</li><li>Notification Service envia confirmação.</li><li>Order Service atualiza status final.</li><li>Analytics consome eventos e observabilidade rastreia tudo por correlation ID.</li></ol></article>
+  </div>
+  <h3>Falhas obrigatórias para simular</h3>
+  <div class="doc-grid-3"><article class="mini-card"><strong>Pagamento indisponível</strong><span>Validar timeout, circuit breaker, retry e fallback.</span></article><article class="mini-card"><strong>Estoque insuficiente</strong><span>Validar compensação e estado da saga.</span></article><article class="mini-card"><strong>Nota fiscal falhando</strong><span>Validar DLQ, reprocessamento e auditoria.</span></article><article class="mini-card"><strong>Kafka fora</strong><span>Validar Outbox, alerta e recuperação.</span></article><article class="mini-card"><strong>Mensagem duplicada</strong><span>Validar Inbox/idempotência.</span></article><article class="mini-card"><strong>Evento inválido</strong><span>Validar schema, quarantine e rejeições.</span></article><article class="mini-card"><strong>Schema incompatível</strong><span>Validar compatibility check no pipeline.</span></article><article class="mini-card"><strong>Latência alta</strong><span>Validar métricas, p95/p99 e degradação controlada.</span></article><article class="mini-card"><strong>DLQ acumulando</strong><span>Validar dashboard, runbook e reprocessamento.</span></article><article class="mini-card"><strong>API externa timeout</strong><span>Validar retry limitado e correlação ponta a ponta.</span></article></div>
+  <h3>Entregáveis finais</h3>
+  <ul class="doc-list"><li>Diagrama C4 contexto, containers, componentes, sequência e eventos.</li><li>OpenAPI das APIs e AsyncAPI dos eventos.</li><li>ADRs e RFC da arquitetura.</li><li>Plano de rollback, estratégia de observabilidade, segurança e reprocessamento.</li><li>Checklist de produção e runbook operacional.</li></ul>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="checklist">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Checklist de nível sênior</h2>
+          <p class="section-subtitle">Critérios objetivos para considerar domínio sênior na trilha.</p>
+        </div>
+        <span class="section-badge">Senior Checklist</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div><ul class="doc-list"><li>Explicar diferença entre arquitetura de solução, software, integração, dados, cloud e enterprise.</li><li>Levantar requisitos funcionais e não funcionais.</li><li>Desenhar solução ponta a ponta.</li><li>Escolher integração síncrona, assíncrona, batch, streaming ou CDC com justificativa.</li><li>Documentar APIs com OpenAPI e eventos com AsyncAPI.</li><li>Padronizar eventos com CloudEvents.</li><li>Aplicar Enterprise Integration Patterns.</li><li>Projetar mensageria com DLQ, retry, idempotência e reprocessamento.</li><li>Projetar eventos com schema, versão, replay e governança.</li><li>Aplicar Saga, Outbox, Inbox, CQRS e Event Sourcing quando fizer sentido.</li></ul></div>
+    <div><ul class="doc-list"><li>Evitar overengineering quando CRUD simples resolve.</li><li>Projetar segurança e observabilidade ponta a ponta.</li><li>Definir SLOs, custo e risco.</li><li>Criar ADRs, RFCs e diagramas C4 claros.</li><li>Defender trade-offs para público técnico e não técnico.</li><li>Acompanhar implementação sem virar gargalo.</li><li>Revisar arquitetura de outros times.</li><li>Guiar desenvolvedores júnior/pleno.</li><li>Transformar decisões arquiteturais em implementação verificável.</li><li>Manter visão de evolução, operação e comunicação executiva.</li></ul></div>
+  </div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="erros">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Erros comuns que impedem senioridade</h2>
+          <p class="section-subtitle">Padrões de decisão que parecem avançados, mas criam risco operacional e dívida arquitetural.</p>
+        </div>
+        <span class="section-badge">Anti-patterns</span>
+      </div>
+      
+  <div class="table-responsive"><table class="table table-dark table-hover align-middle doc-table dense-table"><thead><tr><th>Erro</th><th>Por que impede senioridade</th><th>Alternativa madura</th></tr></thead><tbody><tr><td>Escolher Kafka para tudo</td><td>Confunde tecnologia com arquitetura e aumenta operação sem necessidade.</td><td>Decidir por latência, volume, replay, múltiplos consumidores e governança.</td></tr><tr><td>Criar microsserviço sem necessidade</td><td>Multiplica deploy, observabilidade, dados, latência e falhas distribuídas.</td><td>Começar modular e decompor por capacidade real.</td></tr><tr><td>Usar evento sem contrato</td><td>Quebra consumidores silenciosamente e dificulta evolução.</td><td>AsyncAPI, CloudEvents, Schema Registry e compatibilidade no pipeline.</td></tr><tr><td>Criar API sem OpenAPI</td><td>Dívida de governança e dificuldade de integração.</td><td>Contrato versionado, exemplos, lint e contract testing.</td></tr><tr><td>Fila sem DLQ</td><td>Falhas desaparecem ou bloqueiam o fluxo.</td><td>DLQ com motivo, tentativas, payload, correlation ID e reprocessamento.</td></tr><tr><td>Retry infinito</td><td>Gera tempestade e derruba dependências.</td><td>Retry limitado, backoff, jitter, timeout e circuit breaker.</td></tr><tr><td>Consumidor não idempotente</td><td>Duplica pagamento, pedido, nota ou estoque.</td><td>Inbox, chave de idempotência e controle por business key.</td></tr><tr><td>Arquitetura sem observabilidade</td><td>Ninguém sabe onde o fluxo quebrou.</td><td>Tracing distribuído, logs estruturados, métricas técnicas e de negócio.</td></tr><tr><td>Ignorar custo e operação</td><td>Solução funciona no diagrama e falha no orçamento/time real.</td><td>FinOps, readiness review, runbooks e simplicidade intencional.</td></tr></tbody></table></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="referencias">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Livros e referências recomendadas</h2>
+          <p class="section-subtitle">Base de estudo contínuo, documentação oficial e fontes para aprofundamento.</p>
+        </div>
+        <span class="section-badge">Referências</span>
+      </div>
+      
+  <h3>Livros base</h3>
+  <ul class="doc-list"><li>Enterprise Integration Patterns — Gregor Hohpe e Bobby Woolf.</li><li>Software Architecture: The Hard Parts — Neal Ford, Mark Richards, Pramod Sadalage e Zhamak Dehghani.</li><li>Fundamentals of Software Architecture — Mark Richards e Neal Ford.</li><li>Building Microservices — Sam Newman.</li><li>Monolith to Microservices — Sam Newman.</li><li>Designing Data-Intensive Applications — Martin Kleppmann.</li><li>Release It! — Michael Nygard.</li><li>Domain-Driven Design — Eric Evans.</li><li>Implementing Domain-Driven Design — Vaughn Vernon.</li><li>Team Topologies — Matthew Skelton e Manuel Pais.</li></ul>
+  <h3>Referências técnicas oficiais e catálogos</h3>
+  <div class="ref-grid">
+    <article class="ref-card"><strong>Enterprise Integration Patterns</strong><p>Catálogo clássico de padrões de mensageria e integração corporativa.</p><a href="https://www.enterpriseintegrationpatterns.com/" rel="noopener" target="_blank">enterpriseintegrationpatterns.com</a></article>
+    <article class="ref-card"><strong>C4 Model</strong><p>Modelo para comunicar arquitetura em níveis de contexto, containers, componentes e código.</p><a href="https://c4model.com/" rel="noopener" target="_blank">c4model.com</a></article>
+    <article class="ref-card"><strong>OpenAPI Specification</strong><p>Especificação para contratos de APIs HTTP.</p><a href="https://spec.openapis.org/oas/latest.html" rel="noopener" target="_blank">OpenAPI Specification</a></article>
+    <article class="ref-card"><strong>AsyncAPI</strong><p>Especificação para contratos de APIs assíncronas, eventos e mensagens.</p><a href="https://www.asyncapi.com/docs" rel="noopener" target="_blank">AsyncAPI Docs</a></article>
+    <article class="ref-card"><strong>CloudEvents</strong><p>Especificação para envelope interoperável de eventos.</p><a href="https://cloudevents.io/" rel="noopener" target="_blank">cloudevents.io</a></article>
+    <article class="ref-card"><strong>AWS Well-Architected</strong><p>Framework para revisar workloads por excelência operacional, segurança, confiabilidade, performance, custo e sustentabilidade.</p><a href="https://docs.aws.amazon.com/wellarchitected/latest/framework/welcome.html" rel="noopener" target="_blank">AWS Well-Architected</a></article>
+    <article class="ref-card"><strong>Azure Architecture Center</strong><p>Guias e padrões de arquitetura para workloads em Azure.</p><a href="https://learn.microsoft.com/en-us/azure/architecture/" rel="noopener" target="_blank">Azure Architecture Center</a></article>
+    <article class="ref-card"><strong>Google Cloud Architecture Framework</strong><p>Práticas de arquitetura para workloads no Google Cloud.</p><a href="https://cloud.google.com/architecture/framework" rel="noopener" target="_blank">Google Cloud Architecture Framework</a></article>
+    <article class="ref-card"><strong>Apache Kafka Documentation</strong><p>Documentação oficial para producers, consumers, topics, partitions, streams e operação Kafka.</p><a href="https://kafka.apache.org/documentation/" rel="noopener" target="_blank">Kafka Docs</a></article>
+    <article class="ref-card"><strong>Microservices.io</strong><p>Catálogo prático de padrões de microsserviços, Saga, API Gateway e database per service.</p><a href="https://microservices.io/patterns/index.html" rel="noopener" target="_blank">Microservices Patterns</a></article>
+    <article class="ref-card"><strong>OpenTelemetry</strong><p>Instrumentação padrão para traces, métricas, logs e propagação de contexto.</p><a href="https://opentelemetry.io/docs/" rel="noopener" target="_blank">OpenTelemetry Docs</a></article>
+    <article class="ref-card"><strong>OWASP API Security</strong><p>Riscos comuns e práticas de segurança para APIs.</p><a href="https://owasp.org/API-Security/" rel="noopener" target="_blank">OWASP API Security</a></article>
+  </div>
+  <div class="callout accent-blue mt-3"><h3>Observação de versão</h3><p>Serviços cloud, frameworks, brokers, gateways e padrões de segurança evoluem com frequência. Antes de aplicar em produção, valide sempre a documentação oficial e a versão usada no projeto.</p></div>
+
+    </section>
+    
+    <section class="doc-section searchable-section" data-search-section="" id="resumo-final">
+      <div class="doc-section-heading">
+        <div>
+          <h2>Resumo final da trilha</h2>
+          <p class="section-subtitle">Ordem mental para consolidar conhecimento e evoluir do pleno forte ao sênior.</p>
+        </div>
+        <span class="section-badge">Síntese</span>
+      </div>
+      
+  <div class="doc-grid-2">
+    <div>
+      <h3>Ordem ideal de evolução</h3>
+      <ol class="doc-list"><li>Fundamentos de arquitetura.</li><li>Requisitos funcionais e não funcionais.</li><li>Diagramas e documentação.</li><li>APIs e contratos.</li><li>Mensageria.</li><li>Eventos.</li><li>Padrões de integração.</li><li>Resiliência.</li><li>Segurança.</li><li>Observabilidade.</li><li>Dados e CDC.</li><li>Cloud architecture.</li><li>Governança.</li><li>Migração de legados.</li><li>Decisão arquitetural sênior.</li><li>Comunicação e liderança técnica.</li></ol>
+    </div>
+    <div class="callout accent-purple"><h3>Diferença real entre pleno e sênior</h3><p>A diferença não é saber citar Kafka, API Gateway ou Saga. É saber quando usar, quando não usar, quais riscos cria, como operar, como documentar, como proteger, como medir, como evoluir e como explicar para pessoas técnicas e não técnicas.</p></div>
+  </div>
+  <h3>Resumo em uma frase</h3>
+  <p class="lead">Arquitetura sênior é a capacidade de transformar um problema de negócio em um desenho técnico implementável, seguro, observável, resiliente, evolutivo e justificável por trade-offs claros.</p>
+
+    </section>
+    
+  </div>
+</div>
+<footer class="page-footer"><div class="footer-row"><a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a><div class="footer-pills"><span class="footer-pill green">Arquitetura</span><span class="footer-pill teal">Integração</span><span class="footer-pill blue">Eventos/APIs</span><span class="footer-pill orange">Senioridade</span></div></div><p><strong style="color:var(--muted2)">Arquitetura de Integração e Arquitetura de Solução</strong> · Trilha do Plano Integrado de Estudos · 64 semanas sugeridas</p></footer>
+<button aria-label="Voltar ao topo" class="back-to-top" id="backToTop">↑</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script>
+  (function(){
+    const backToTop = document.getElementById('backToTop');
+    const searchInput = document.getElementById('searchInput');
+    const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+    const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+    const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
+    const bar = document.getElementById('navSectionsBar');
+    const btnL = document.getElementById('navScrollLeft');
+    const btnR = document.getElementById('navScrollRight');
+    const STEP = 320;
+
+    function normalize(value){
+      return value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+    }
+
+    function updateScrollButtons(){
+      if(!bar || !btnL || !btnR) return;
+      const atStart = bar.scrollLeft <= 4;
+      const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+      btnL.classList.toggle('hidden', atStart);
+      btnR.classList.toggle('hidden', atEnd);
+    }
+
+    if(btnL && btnR && bar){
+      btnL.addEventListener('click',()=>bar.scrollBy({left:-STEP,behavior:'smooth'}));
+      btnR.addEventListener('click',()=>bar.scrollBy({left:STEP,behavior:'smooth'}));
+      bar.addEventListener('scroll',updateScrollButtons,{passive:true});
+      updateScrollButtons();
+      setTimeout(updateScrollButtons,400);
+    }
+
+    if(backToTop){
+      window.addEventListener('scroll',()=>{
+        backToTop.classList.toggle('is-visible',window.scrollY>500);
+      },{passive:true});
+      backToTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor=>{
+      anchor.addEventListener('click',event=>{
+        const target=document.querySelector(anchor.getAttribute('href'));
+        if(target){
+          event.preventDefault();
+          target.scrollIntoView({behavior:'smooth',block:'start'});
+          history.replaceState(null,'',anchor.getAttribute('href'));
+        }
+      });
+    });
+
+    if(searchInput){
+      searchInput.addEventListener('input',()=>{
+        const query=normalize(searchInput.value.trim());
+        sections.forEach(section=>{
+          section.classList.remove('is-hidden-by-search','search-hit');
+          if(!query) return;
+          const match=normalize(section.innerText).includes(query);
+          section.classList.toggle('is-hidden-by-search',!match);
+          section.classList.toggle('search-hit',match);
+        });
+      });
+    }
+
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          const id=entry.target.id;
+          navLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+id));
+          sidebarLinks.forEach(link=>link.classList.toggle('active',link.getAttribute('href')==='#'+id));
+          const active=bar ? bar.querySelector('.nav-link.active') : null;
+          if(active) active.scrollIntoView({inline:'nearest',block:'nearest',behavior:'smooth'});
+        }
+      });
+    },{threshold:.15,rootMargin:'-100px 0px -55% 0px'});
+
+    sections.forEach(section=>observer.observe(section));
+  })();
+</script></body>
+</html>
