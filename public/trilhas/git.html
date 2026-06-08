@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     content="Trilha técnica completa de Git, versionamento de código, GitHub, GitLab, Bitbucket, Azure Repos, CI/CD, segurança, governança, code review, monorepo, GitOps e maturidade sênior em engenharia de software."
     name="description" />
@@ -1224,7 +1225,7 @@
 
 
 
-    /* Java-specific color variants over the AWS structural system */
+    /* Git-specific compatibility variants over the shared structural system */
     .callout.accent-orange {
       border-left-color: var(--accent4);
       background: rgba(251, 146, 60, .06)
@@ -1262,18 +1263,22 @@
 
   <!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta o encaixe texto + métricas. -->
 
-  <style id="java-aws-responsive-refactor">
+  <style id="git-responsive-refactor">
     /* ─────────────────────────────────────────────────────────────
-       RESPONSIVIDADE REFEITA — Java Track
+       RESPONSIVIDADE REFEITA — Git Track
        Bloco complementar: não altera o CSS principal nem o conteúdo.
        Objetivo: padronizar notebook, tablet e mobile com a estrutura
-       usada na Trilha do Blog e reaplicada na Trilha Java.
+       usada na Trilha do Blog e reaplicada na Trilha Git.
        ───────────────────────────────────────────────────────────── */
 
     html,
     body {
       width: 100%;
       max-width: 100%;
+    }
+
+    body {
+      overflow-x: hidden;
     }
 
     body.track-page {
@@ -1291,7 +1296,11 @@
     .mini-card,
     .callout,
     .metrics-grid,
-    .doc-hero-card {
+    .doc-hero-card,
+    .card,
+    .grid,
+    section,
+    article {
       min-width: 0;
     }
 
@@ -1354,7 +1363,11 @@
     .exam-card p,
     .phase-doc-card p,
     .callout p,
-    .timeline-item span {
+    .timeline-item span,
+    .card,
+    .card p,
+    .card span,
+    .card strong {
       overflow-wrap: break-word;
       word-break: normal;
     }
@@ -1363,7 +1376,9 @@
     .doc-grid-3>*,
     .doc-grid-4>*,
     .phase-doc-grid>*,
-    .metrics-grid>* {
+    .metrics-grid>*,
+    .grid>*,
+    .cards-grid>* {
       min-width: 0;
     }
 

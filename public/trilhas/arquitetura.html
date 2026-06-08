@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
   <meta
     content="Trilha técnica completa de Arquitetura de Integração e Arquitetura de Solução: APIs, eventos, mensageria, contratos, resiliência, segurança, observabilidade, cloud, governança, ADRs, RFCs e decisões arquiteturais de nível sênior."
     name="description" />
@@ -1262,12 +1263,12 @@
 
   <!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta o encaixe texto + métricas. -->
 
-  <style id="java-aws-responsive-refactor">
+  <style id="architecture-responsive-refactor">
     /* ─────────────────────────────────────────────────────────────
-       RESPONSIVIDADE REFEITA — Java Track
+       RESPONSIVIDADE REFEITA — Architecture Track
        Bloco complementar: não altera o CSS principal nem o conteúdo.
        Objetivo: padronizar notebook, tablet e mobile com a estrutura
-       usada na Trilha do Blog e reaplicada na Trilha Java.
+       usada na Trilha do Blog e reaplicada na Trilha de Arquitetura.
        ───────────────────────────────────────────────────────────── */
 
     html,
@@ -1872,6 +1873,10 @@
       overflow: hidden;
       min-height: 100%;
       min-width: 0;
+    }
+
+    .ref-card.ref-card-wide {
+      grid-column: 1 / -1;
     }
 
     .ref-card::before {
@@ -3705,18 +3710,97 @@ p95, taxa de erro, lag, DLQ, tempo fim-a-fim e taxa de sucesso por fluxo.</code>
         </div>
 
         <h3>Livros base</h3>
-        <ul class="doc-list">
-          <li>Enterprise Integration Patterns — Gregor Hohpe e Bobby Woolf.</li>
-          <li>Software Architecture: The Hard Parts — Neal Ford, Mark Richards, Pramod Sadalage e Zhamak Dehghani.</li>
-          <li>Fundamentals of Software Architecture — Mark Richards e Neal Ford.</li>
-          <li>Building Microservices — Sam Newman.</li>
-          <li>Monolith to Microservices — Sam Newman.</li>
-          <li>Designing Data-Intensive Applications — Martin Kleppmann.</li>
-          <li>Release It! — Michael Nygard.</li>
-          <li>Domain-Driven Design — Eric Evans.</li>
-          <li>Implementing Domain-Driven Design — Vaughn Vernon.</li>
-          <li>Team Topologies — Matthew Skelton e Manuel Pais.</li>
-        </ul>
+        <div class="ref-grid">
+          <article class="ref-card ref-card-wide">
+            <strong>Livros recomendados</strong>
+            <p>Biblioteca local em PDF com os títulos citados na trilha como base bibliográfica para arquitetura de
+              integração, arquitetura de solução, microsserviços, sistemas distribuídos, DDD, resiliência, topologias de
+              time e decisões arquiteturais.</p>
+
+            <ul class="doc-list ref-list">
+              <li>
+                <a href="../pdfs/livros-arquitetura/enterprise-integration-patterns.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  Enterprise Integration Patterns, Gregor Hohpe e Bobby Woolf
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/software-architecture-the-hard-parts.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  Software Architecture: The Hard Parts, Neal Ford, Mark Richards, Pramod Sadalage e Zhamak Dehghani
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/fundamentals-of-software-architecture.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  Fundamentals of Software Architecture, Mark Richards e Neal Ford
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/building-microservices.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  Building Microservices, Sam Newman
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/monolith-to-microservices.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  Monolith to Microservices, Sam Newman
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/designing-data-intensive-applications.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  Designing Data-Intensive Applications, Martin Kleppmann
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/system-design-interview-volume-1.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  System Design Interview — An Insider’s Guide, Alex Xu
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/system-design-interview-volume-2.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  System Design Interview — An Insider’s Guide: Volume 2, Alex Xu e Sahn Lam
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/release-it.pdf" rel="noopener noreferrer" target="_blank">
+                  Release It!, Michael Nygard
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/domain-driven-design.pdf" rel="noopener noreferrer" target="_blank">
+                  Domain-Driven Design, Eric Evans
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/implementing-domain-driven-design.pdf" rel="noopener noreferrer"
+                  target="_blank">
+                  Implementing Domain-Driven Design, Vaughn Vernon
+                </a>
+              </li>
+
+              <li>
+                <a href="../pdfs/livros-arquitetura/team-topologies.pdf" rel="noopener noreferrer" target="_blank">
+                  Team Topologies, Matthew Skelton e Manuel Pais
+                </a>
+              </li>
+            </ul>
+          </article>
+        </div>
         <h3>Referências técnicas oficiais e catálogos</h3>
         <div class="ref-grid">
           <article class="ref-card"><strong>Enterprise Integration Patterns</strong>

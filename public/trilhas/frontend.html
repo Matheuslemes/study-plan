@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta
     content="Trilha técnica completa de Frontend Engineering: HTML, CSS, JavaScript, TypeScript, React, Next.js, arquitetura, performance, segurança, acessibilidade, testes, observabilidade e design systems."
     name="description" />
@@ -1258,599 +1259,7 @@
       display: inline-flex
     }
   </style>
-  <!-- Responsividade refeita: estrutura baseada na Trilha do Blog. O CSS original acima permanece intacto. -->
-
-  <!-- Correção visual do resumo executivo: mantém conteúdo e CSS original, apenas ajusta o encaixe texto + métricas. -->
-
-  <style id="java-aws-responsive-refactor">
-    /* ─────────────────────────────────────────────────────────────
-       RESPONSIVIDADE REFEITA — Java Track
-       Bloco complementar: não altera o CSS principal nem o conteúdo.
-       Objetivo: padronizar notebook, tablet e mobile com a estrutura
-       usada na Trilha do Blog e reaplicada na Trilha Java.
-       ───────────────────────────────────────────────────────────── */
-
-    html,
-    body {
-      width: 100%;
-      max-width: 100%;
-    }
-
-    body.track-page {
-      overflow-x: hidden;
-    }
-
-    .container,
-    .main,
-    .content,
-    .doc-section,
-    .table-responsive,
-    .doc-table,
-    .phase-doc-card,
-    .exam-card,
-    .mini-card,
-    .callout,
-    .metrics-grid,
-    .doc-hero-card {
-      min-width: 0;
-    }
-
-    img,
-    video,
-    canvas,
-    iframe,
-    svg {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .doc-section {
-      scroll-margin-top: 126px;
-    }
-
-    .table-responsive,
-    pre,
-    .code-block {
-      max-width: 100%;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      overscroll-behavior-inline: contain;
-    }
-
-    .table-responsive .doc-table,
-    .table-responsive table {
-      width: 100%;
-      min-width: max(760px, 100%);
-      table-layout: auto;
-    }
-
-    .doc-table th,
-    .doc-table td,
-    th,
-    td {
-      white-space: normal;
-      overflow-wrap: break-word;
-      word-break: normal;
-    }
-
-    pre,
-    .code-block {
-      white-space: pre;
-      overflow-y: auto;
-    }
-
-    pre code,
-    .code-block code {
-      white-space: inherit;
-    }
-
-    .track-title,
-    .track-lead,
-    .doc-section-heading h2,
-    .sitenav-brand,
-    p,
-    li,
-    .mini-card span,
-    .exam-card p,
-    .phase-doc-card p,
-    .callout p,
-    .timeline-item span {
-      overflow-wrap: break-word;
-      word-break: normal;
-    }
-
-    .doc-grid-2>*,
-    .doc-grid-3>*,
-    .doc-grid-4>*,
-    .phase-doc-grid>*,
-    .metrics-grid>* {
-      min-width: 0;
-    }
-
-    .sitenav,
-    .sitenav * {
-      min-width: 0;
-    }
-
-    .sitenav-brand,
-    .nav-back,
-    .nav-ver {
-      flex-shrink: 0;
-    }
-
-    .sitenav-top-right {
-      min-width: 180px;
-    }
-
-    .search-box,
-    .track-search {
-      max-width: 100%;
-    }
-
-    .sitenav-bar-inner {
-      -webkit-overflow-scrolling: touch;
-      scroll-snap-type: x proximity;
-    }
-
-    .nav-link {
-      scroll-snap-align: start;
-    }
-
-    /* Correção do Resumo Executivo: evita texto espremido contra os cards. */
-    #resumo .doc-hero-card {
-      grid-template-columns: 1fr;
-      align-items: start;
-      gap: 1rem;
-    }
-
-    #resumo .metrics-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      width: 100%;
-    }
-
-    #resumo .metric-pill {
-      min-height: 112px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* Notebook e desktop estreito */
-    @media (max-width: 1180px) {
-
-      .container,
-      .main {
-        padding-left: 1.25rem;
-        padding-right: 1.25rem;
-      }
-
-      .main {
-        grid-template-columns: 200px minmax(0, 1fr);
-      }
-
-      .content {
-        padding-left: 1.35rem;
-      }
-
-      .doc-grid-4,
-      #resumo .metrics-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .doc-grid-3 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    /* Tablet: remove sidebar e preserva navegação superior */
-    @media (max-width: 980px) {
-      .main {
-        grid-template-columns: 1fr;
-      }
-
-      .sidebar {
-        display: none;
-      }
-
-      .content {
-        padding: 1.5rem 0 3rem;
-      }
-
-      .doc-section {
-        scroll-margin-top: 148px;
-      }
-
-      .doc-hero-card,
-      .doc-grid-2,
-      .phase-doc-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .sitenav-top {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: center;
-        gap: .55rem .75rem;
-      }
-
-      .sitenav-brand {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-
-      .nav-ver {
-        display: none;
-      }
-
-      .nav-back {
-        justify-self: end;
-      }
-
-      .sitenav-top-right {
-        grid-column: 1 / -1;
-        width: 100%;
-        min-width: 0;
-        margin-left: 0;
-      }
-
-      .search-box,
-      .track-search {
-        width: 100% !important;
-        min-height: 38px;
-      }
-    }
-
-    /* Tablet estreito e celulares grandes */
-    @media (max-width: 760px) {
-      html {
-        font-size: 14.5px;
-      }
-
-      .container,
-      .main {
-        padding-left: 1rem;
-        padding-right: 1rem;
-      }
-
-      .track-hero-page {
-        padding: 2.8rem 0 2rem;
-      }
-
-      .track-title {
-        font-size: clamp(2rem, 9vw, 3.1rem);
-        letter-spacing: -.035em;
-      }
-
-      .track-lead {
-        max-width: 100%;
-      }
-
-      .track-badge-set,
-      .badge-cloud {
-        gap: .42rem;
-      }
-
-      .track-badge-set span,
-      .badge-cloud span {
-        max-width: 100%;
-        white-space: normal;
-        line-height: 1.35;
-      }
-
-      .sitenav-bar-inner {
-        padding-left: 34px;
-        padding-right: 34px;
-      }
-
-      .nav-group {
-        padding: .25rem .3rem;
-      }
-
-      .nav-group-label {
-        font-size: .56rem;
-        padding-right: .4rem;
-        margin-right: .2rem;
-      }
-
-      .nav-link {
-        font-size: .66rem;
-        padding: .3rem .5rem;
-      }
-
-      .doc-section {
-        padding: 1rem;
-        border-radius: 12px;
-        scroll-margin-top: 154px;
-      }
-
-      .doc-section-heading {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .section-badge {
-        white-space: normal;
-      }
-
-      .doc-grid-3,
-      .doc-grid-4,
-      .metrics-grid,
-      #resumo .metrics-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .metric-pill span {
-        font-size: 1.75rem;
-      }
-
-      .table-responsive .doc-table,
-      .table-responsive table {
-        min-width: 680px;
-      }
-
-      .doc-table th,
-      .doc-table td,
-      th,
-      td {
-        padding: .58rem .72rem !important;
-      }
-
-      pre,
-      .code-block {
-        padding: .9rem;
-        font-size: .72rem;
-        max-height: 520px;
-      }
-
-      .phase-doc-head {
-        align-items: flex-start;
-      }
-    }
-
-    /* Celulares */
-    @media (max-width: 520px) {
-      html {
-        font-size: 14px;
-      }
-
-      .container,
-      .main {
-        padding-left: .85rem;
-        padding-right: .85rem;
-      }
-
-      .track-hero-page {
-        padding: 2.35rem 0 1.7rem;
-      }
-
-      .hero-label {
-        font-size: .66rem;
-      }
-
-      .hero-back-link,
-      .footer-link {
-        max-width: 100%;
-      }
-
-      .sitenav-top {
-        grid-template-columns: 1fr;
-        gap: .45rem;
-      }
-
-      .sitenav-brand {
-        width: 100%;
-        white-space: normal;
-        justify-content: space-between;
-      }
-
-      .sitenav-brand span {
-        flex-shrink: 0;
-      }
-
-      .nav-back {
-        width: 100%;
-        justify-content: center;
-        justify-self: stretch;
-        text-align: center;
-      }
-
-      .nav-group-label {
-        display: none;
-      }
-
-      .nav-group {
-        border-right: none;
-        padding: .25rem .18rem;
-      }
-
-      .nav-link {
-        font-size: .64rem;
-        padding: .3rem .46rem;
-      }
-
-      .content {
-        padding-top: 1rem;
-      }
-
-      .doc-section {
-        margin-bottom: 1rem;
-        padding: .9rem;
-        scroll-margin-top: 184px;
-      }
-
-      .doc-section-heading h2,
-      .doc-section h2 {
-        font-size: 1.15rem;
-      }
-
-      .doc-section h3,
-      .exam-card h3,
-      .phase-doc-card h3,
-      .callout h3 {
-        font-size: .96rem;
-      }
-
-      p,
-      li,
-      .doc-table td,
-      td {
-        font-size: .84rem !important;
-      }
-
-      .doc-table th,
-      th {
-        font-size: .66rem !important;
-      }
-
-      .track-badge-set span,
-      .badge-cloud span,
-      .priority,
-      .section-badge {
-        font-size: .64rem;
-      }
-
-      .metric-pill {
-        padding: .85rem;
-        min-height: 96px;
-      }
-
-      .metric-pill span {
-        font-size: 1.62rem;
-      }
-
-      .mini-card,
-      .exam-card,
-      .phase-doc-card {
-        border-radius: 10px;
-      }
-
-      .table-responsive .doc-table,
-      .table-responsive table {
-        min-width: 640px;
-      }
-
-      .page-footer .footer-row {
-        flex-direction: column !important;
-        align-items: stretch !important;
-      }
-
-      .page-footer .footer-link {
-        justify-content: center !important;
-      }
-
-      .footer-pills {
-        justify-content: center !important;
-      }
-
-      .back-to-top {
-        right: .85rem;
-        bottom: .85rem;
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    /* Celulares muito estreitos */
-    @media (max-width: 380px) {
-
-      .container,
-      .main {
-        padding-left: .7rem;
-        padding-right: .7rem;
-      }
-
-      .track-title {
-        font-size: 1.85rem;
-      }
-
-      .sitenav-brand span {
-        display: none;
-      }
-
-      .doc-section {
-        padding: .78rem;
-      }
-
-      pre,
-      .code-block {
-        font-size: .68rem;
-      }
-
-      .table-responsive .doc-table,
-      .table-responsive table {
-        min-width: 600px;
-      }
-    }
-
-    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
-    @media (pointer: coarse) {
-
-      .nav-scroll-btn,
-      .back-to-top,
-      .nav-link,
-      .hero-back-link,
-      .footer-link,
-      .nav-back,
-      .sidebar a {
-        touch-action: manipulation;
-      }
-
-      .nav-link,
-      .hero-back-link,
-      .footer-link,
-      .nav-back {
-        min-height: 34px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        transition: none !important;
-      }
-    }
-
-
-    /* Java-specific color variants over the AWS structural system */
-    .callout.accent-orange {
-      border-left-color: var(--accent4);
-      background: rgba(251, 146, 60, .06)
-    }
-
-    .footer-pill.green {
-      border: 1px solid rgba(34, 197, 94, .25);
-      background: rgba(34, 197, 94, .06);
-      color: var(--java)
-    }
-
-    .footer-pill.teal {
-      border: 1px solid rgba(34, 211, 176, .25);
-      background: rgba(34, 211, 176, .06);
-      color: var(--accent2)
-    }
-
-    .footer-pill.blue {
-      border: 1px solid rgba(79, 158, 248, .25);
-      background: rgba(79, 158, 248, .06);
-      color: var(--accent3)
-    }
-
-    .footer-pill.orange {
-      border: 1px solid rgba(251, 146, 60, .25);
-      background: rgba(251, 146, 60, .06);
-      color: var(--accent4)
-    }
-
-    .track-badge-set span.tag {
-      display: inline-flex
-    }
-  </style>
-  <style id="reference-card-style">
+<style id="reference-card-style">
     /* ─────────────────────────────────────────────────────────────
        REFERÊNCIAS EM CARDS — padrão visual reutilizável
        Mantém compatibilidade com busca global, navegação e tema dark.
@@ -2071,6 +1480,605 @@
       color: var(--accent4)
     }
   </style>
+
+  <style id="frontend-responsive-refactor">
+    /* ─────────────────────────────────────────────────────────────
+       RESPONSIVIDADE COMPLEMENTAR — Frontend Track
+       Bloco complementar: preserva CSS, conteúdo e identidade visual.
+       Objetivo: padronizar notebook, tablet, mobile e telas estreitas.
+       ───────────────────────────────────────────────────────────── */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body,
+    body.track-page {
+      overflow-x: hidden;
+    }
+
+    .container,
+    .main,
+    .content,
+    .doc-section,
+    .table-responsive,
+    .doc-table,
+    .phase-doc-card,
+    .exam-card,
+    .mini-card,
+    .callout,
+    .metrics-grid,
+    .doc-hero-card,
+    .card,
+    .grid,
+    section,
+    article,
+    .ref-grid,
+    .ref-card,
+    .cards-grid {
+      min-width: 0;
+    }
+
+    img,
+    video,
+    canvas,
+    iframe,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .doc-section {
+      scroll-margin-top: 126px;
+    }
+
+    .table-responsive,
+    pre,
+    .code-block {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-inline: contain;
+    }
+
+    .table-responsive .doc-table,
+    .table-responsive table {
+      width: 100%;
+      min-width: max(760px, 100%);
+      table-layout: auto;
+    }
+
+    .doc-table th,
+    .doc-table td,
+    th,
+    td {
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    pre,
+    .code-block {
+      white-space: pre;
+      overflow-y: auto;
+    }
+
+    pre code,
+    .code-block code {
+      white-space: inherit;
+    }
+
+    .track-title,
+    .track-lead,
+    .doc-section-heading h2,
+    .sitenav-brand,
+    p,
+    li,
+    .mini-card span,
+    .exam-card p,
+    .phase-doc-card p,
+    .callout p,
+    .timeline-item span,
+    .card,
+    .card p,
+    .card span,
+    .card strong,
+    .ref-card,
+    .ref-card p,
+    .ref-card strong,
+    .ref-list a {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    .doc-grid-2 > *,
+    .doc-grid-3 > *,
+    .doc-grid-4 > *,
+    .phase-doc-grid > *,
+    .metrics-grid > *,
+    .grid > *,
+    .cards-grid > *,
+    .ref-grid > * {
+      min-width: 0;
+    }
+
+    .sitenav,
+    .sitenav * {
+      min-width: 0;
+    }
+
+    .sitenav-brand,
+    .nav-back,
+    .nav-ver {
+      flex-shrink: 0;
+    }
+
+    .sitenav-top-right {
+      min-width: 180px;
+    }
+
+    .search-box,
+    .track-search {
+      max-width: 100%;
+    }
+
+    .sitenav-bar-inner {
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+    }
+
+    .nav-link {
+      scroll-snap-align: start;
+    }
+
+    /* Resumo executivo: evita texto espremido contra os cards de métricas. */
+    #resumo .doc-hero-card,
+    #overview .doc-hero-card,
+    #intro .doc-hero-card,
+    #summary .doc-hero-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 1rem;
+    }
+
+    #resumo .metrics-grid,
+    #overview .metrics-grid,
+    #intro .metrics-grid,
+    #summary .metrics-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+    }
+
+    #resumo .metric-pill,
+    #overview .metric-pill,
+    #intro .metric-pill,
+    #summary .metric-pill {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Notebook e desktop estreito */
+    @media (max-width: 1180px) {
+
+      .container,
+      .main {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .main {
+        grid-template-columns: 200px minmax(0, 1fr);
+      }
+
+      .content {
+        padding-left: 1.35rem;
+      }
+
+      .doc-grid-4,
+      #resumo .metrics-grid,
+      #overview .metrics-grid,
+      #intro .metrics-grid,
+      #summary .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .doc-grid-3,
+      .ref-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Tablet: remove sidebar e preserva navegação superior */
+    @media (max-width: 980px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .content {
+        padding: 1.5rem 0 3rem;
+      }
+
+      .doc-section {
+        scroll-margin-top: 148px;
+      }
+
+      .doc-hero-card,
+      .doc-grid-2,
+      .phase-doc-grid,
+      .ref-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sitenav-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .55rem .75rem;
+      }
+
+      .sitenav-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-ver {
+        display: none;
+      }
+
+      .nav-back {
+        justify-self: end;
+      }
+
+      .sitenav-top-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+      }
+
+      .search-box,
+      .track-search {
+        width: 100% !important;
+        min-height: 38px;
+      }
+    }
+
+    /* Tablet estreito e celulares grandes */
+    @media (max-width: 760px) {
+      html {
+        font-size: 14.5px;
+      }
+
+      .container,
+      .main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .track-hero-page {
+        padding: 2.8rem 0 2rem;
+      }
+
+      .track-title {
+        font-size: clamp(2rem, 9vw, 3.1rem);
+        letter-spacing: -.035em;
+      }
+
+      .track-lead {
+        max-width: 100%;
+      }
+
+      .track-badge-set,
+      .badge-cloud {
+        gap: .42rem;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
+
+      .sitenav-bar-inner {
+        padding-left: 34px;
+        padding-right: 34px;
+      }
+
+      .nav-group {
+        padding: .25rem .3rem;
+      }
+
+      .nav-group-label {
+        font-size: .56rem;
+        padding-right: .4rem;
+        margin-right: .2rem;
+      }
+
+      .nav-link {
+        font-size: .66rem;
+        padding: .3rem .5rem;
+      }
+
+      .doc-section {
+        padding: 1rem;
+        border-radius: 12px;
+        scroll-margin-top: 154px;
+      }
+
+      .doc-section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-badge {
+        white-space: normal;
+      }
+
+      .doc-grid-3,
+      .doc-grid-4,
+      .metrics-grid,
+      #resumo .metrics-grid,
+      #overview .metrics-grid,
+      #intro .metrics-grid,
+      #summary .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-pill span {
+        font-size: 1.75rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 680px;
+      }
+
+      .doc-table th,
+      .doc-table td,
+      th,
+      td {
+        padding: .58rem .72rem !important;
+      }
+
+      pre,
+      .code-block {
+        padding: .9rem;
+        font-size: .72rem;
+        max-height: 520px;
+      }
+
+      .phase-doc-head {
+        align-items: flex-start;
+      }
+    }
+
+    /* Celulares */
+    @media (max-width: 520px) {
+      html {
+        font-size: 14px;
+      }
+
+      .container,
+      .main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+      }
+
+      .track-hero-page {
+        padding: 2.35rem 0 1.7rem;
+      }
+
+      .hero-label {
+        font-size: .66rem;
+      }
+
+      .hero-back-link,
+      .footer-link {
+        max-width: 100%;
+      }
+
+      .sitenav-top {
+        grid-template-columns: 1fr;
+        gap: .45rem;
+      }
+
+      .sitenav-brand {
+        width: 100%;
+        white-space: normal;
+        justify-content: space-between;
+      }
+
+      .sitenav-brand span {
+        flex-shrink: 0;
+      }
+
+      .nav-back {
+        width: 100%;
+        justify-content: center;
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .nav-group-label {
+        display: none;
+      }
+
+      .nav-group {
+        border-right: none;
+        padding: .25rem .18rem;
+      }
+
+      .nav-link {
+        font-size: .64rem;
+        padding: .3rem .46rem;
+      }
+
+      .content {
+        padding-top: 1rem;
+      }
+
+      .doc-section {
+        margin-bottom: 1rem;
+        padding: .9rem;
+        scroll-margin-top: 184px;
+      }
+
+      .doc-section-heading h2,
+      .doc-section h2 {
+        font-size: 1.15rem;
+      }
+
+      .doc-section h3,
+      .exam-card h3,
+      .phase-doc-card h3,
+      .callout h3 {
+        font-size: .96rem;
+      }
+
+      p,
+      li,
+      .doc-table td,
+      td {
+        font-size: .84rem !important;
+      }
+
+      .doc-table th,
+      th {
+        font-size: .66rem !important;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span,
+      .priority,
+      .section-badge {
+        font-size: .64rem;
+      }
+
+      .metric-pill {
+        padding: .85rem;
+        min-height: 96px;
+      }
+
+      .metric-pill span {
+        font-size: 1.62rem;
+      }
+
+      .mini-card,
+      .exam-card,
+      .phase-doc-card,
+      .ref-card {
+        border-radius: 10px;
+      }
+
+      .ref-card a,
+      .ref-list a {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 640px;
+      }
+
+      .page-footer .footer-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      .page-footer .footer-link {
+        justify-content: center !important;
+      }
+
+      .footer-pills {
+        justify-content: center !important;
+      }
+
+      .back-to-top {
+        right: .85rem;
+        bottom: .85rem;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Celulares muito estreitos */
+    @media (max-width: 380px) {
+
+      .container,
+      .main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+
+      .track-title {
+        font-size: 1.85rem;
+      }
+
+      .sitenav-brand span {
+        display: none;
+      }
+
+      .doc-section {
+        padding: .78rem;
+      }
+
+      pre,
+      .code-block {
+        font-size: .68rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 600px;
+      }
+    }
+
+    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+    @media (pointer: coarse) {
+
+      .nav-scroll-btn,
+      .back-to-top,
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back,
+      .sidebar a {
+        touch-action: manipulation;
+      }
+
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back {
+        min-height: 34px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+
 </head>
 
 <body class="track-page" data-track="frontend">
