@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Python Backend, Automação e Inteligência Artificial — Plano Integrado de Estudos</title>
-  <meta name="description" content="Trilha completa de Python para desenvolvimento backend, automação, dados, machine learning, LLMs, RAG, agentes, MLOps e integração com Java/Spring.">
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="description"
+    content="Trilha completa de Python para desenvolvimento backend, automação, dados, machine learning, LLMs, RAG, agentes, MLOps e integração com Java/Spring.">
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
   <style>
-
     :root {
       --bg: #07090f;
       --surface: #0d1117;
       --surface2: #141a24;
-      --surface3: rgba(255,255,255,.045);
-      --border: rgba(255,255,255,.09);
-      --border2: rgba(255,255,255,.15);
+      --surface3: rgba(255, 255, 255, .045);
+      --border: rgba(255, 255, 255, .09);
+      --border2: rgba(255, 255, 255, .15);
       --accent: #4f9ef8;
       --accent2: #22d3b0;
       --accent3: #a78bfa;
       --accent4: #fb923c;
-      --python-yellow:#FFD43B;
+      --python-yellow: #FFD43B;
       --text: #e2e8f0;
       --muted: #64748b;
       --muted2: #94a3b8;
@@ -29,204 +32,943 @@
       --nice: #86efac;
       --future: #93c5fd;
     }
-    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;font-size:15px}
-    body{
-      font-family:'Inter',sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.7;
-      background-image:
-        radial-gradient(ellipse 80% 40% at 10% -5%, rgba(79,158,248,.12) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 30% at 90% 5%, rgba(255,212,59,.08) 0%, transparent 42%),
-        radial-gradient(ellipse 50% 25% at 85% 25%, rgba(34,211,176,.06) 0%, transparent 42%);
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
     }
-    .container{max-width:1240px;margin:0 auto;padding:0 1.5rem}
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 15px
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      background-image:
+        radial-gradient(ellipse 80% 40% at 10% -5%, rgba(79, 158, 248, .12) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 30% at 90% 5%, rgba(255, 212, 59, .08) 0%, transparent 42%),
+        radial-gradient(ellipse 50% 25% at 85% 25%, rgba(34, 211, 176, .06) 0%, transparent 42%);
+    }
+
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem
+    }
 
     /* ─── HERO ─── */
-    .hero{
-      padding:4rem 0 3rem;
-      border-bottom:1px solid var(--border);
-      background:linear-gradient(135deg,rgba(79,158,248,.11) 0%,rgba(255,212,59,.045) 48%,rgba(34,211,176,.05) 100%);
+    .hero {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(79, 158, 248, .11) 0%, rgba(255, 212, 59, .045) 48%, rgba(34, 211, 176, .05) 100%);
     }
-    .hero-label{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
-      color:var(--accent2);margin-bottom:.8rem;
+
+    .hero-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: .8rem;
     }
-    .hero h1{
-      font-family:'Syne',sans-serif;
-      font-size:clamp(2rem,5vw,4rem);
-      font-weight:800;letter-spacing:-.04em;
-      background:linear-gradient(135deg,#fff 38%,var(--accent) 78%,var(--python-yellow) 100%);
-      -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-      background-clip:text;line-height:1.1;margin-bottom:.8rem;
+
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      background: linear-gradient(135deg, #fff 38%, var(--accent) 78%, var(--python-yellow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: .8rem;
     }
-    .hero-sub{color:var(--muted2);max-width:860px;font-size:1rem}
-    .hero-back-link{
-      display:inline-flex;align-items:center;gap:.4rem;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;font-weight:500;
-      color:var(--muted2);text-decoration:none;
-      border:1px solid var(--border);
-      background:rgba(255,255,255,.04);
-      padding:.32rem .75rem;border-radius:6px;
-      margin-bottom:1.2rem;transition:all .15s;
+
+    .hero-sub {
+      color: var(--muted2);
+      max-width: 860px;
+      font-size: 1rem
     }
-    .hero-back-link:hover{color:#fff;border-color:rgba(79,158,248,.35);background:rgba(79,158,248,.08)}
-    .hero-meta{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.4rem}
-    .tag{
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;font-weight:600;
-      padding:.3rem .7rem;border-radius:6px;
-      border:1px solid rgba(79,158,248,.3);
-      background:rgba(79,158,248,.08);
-      color:var(--accent);
+
+    .hero-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--muted2);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+      padding: .32rem .75rem;
+      border-radius: 6px;
+      margin-bottom: 1.2rem;
+      transition: all .15s;
     }
-    .tag.g{border-color:rgba(34,211,176,.3);background:rgba(34,211,176,.08);color:var(--accent2)}
-    .tag.p{border-color:rgba(167,139,250,.3);background:rgba(167,139,250,.08);color:var(--accent3)}
-    .tag.o{border-color:rgba(251,146,60,.3);background:rgba(251,146,60,.08);color:var(--accent4)}
-    .tag.y{border-color:rgba(255,212,59,.35);background:rgba(255,212,59,.09);color:var(--python-yellow)}
+
+    .hero-back-link:hover {
+      color: #fff;
+      border-color: rgba(79, 158, 248, .35);
+      background: rgba(79, 158, 248, .08)
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1.4rem
+    }
+
+    .tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .3rem .7rem;
+      border-radius: 6px;
+      border: 1px solid rgba(79, 158, 248, .3);
+      background: rgba(79, 158, 248, .08);
+      color: var(--accent);
+    }
+
+    .tag.g {
+      border-color: rgba(34, 211, 176, .3);
+      background: rgba(34, 211, 176, .08);
+      color: var(--accent2)
+    }
+
+    .tag.p {
+      border-color: rgba(167, 139, 250, .3);
+      background: rgba(167, 139, 250, .08);
+      color: var(--accent3)
+    }
+
+    .tag.o {
+      border-color: rgba(251, 146, 60, .3);
+      background: rgba(251, 146, 60, .08);
+      color: var(--accent4)
+    }
+
+    .tag.y {
+      border-color: rgba(255, 212, 59, .35);
+      background: rgba(255, 212, 59, .09);
+      color: var(--python-yellow)
+    }
 
     /* ─── NAV ─── */
-    .sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-    .sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
-    .sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
-    .sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent2);border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
-    .nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
-    .nav-back:hover{color:#fff;border-color:rgba(79,158,248,.3);background:rgba(79,158,248,.08)}
-    .nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
-    .sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
-    .search-box{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:.3rem .7rem;color:#fff;font-size:.8rem;outline:none;width:250px}
-    .search-box::placeholder{color:var(--muted)}
-    .search-box:focus{border-color:rgba(79,158,248,.4)}
-    .sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
-    .sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(79,158,248,.4) rgba(255,255,255,.04);padding:0 32px}
-    .sitenav-bar-inner::-webkit-scrollbar{height:4px}
-    .sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}
-    .sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(79,158,248,.4);border-radius:99px}
-    .sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(79,158,248,.7)}
-    .sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
-    .sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
-    .sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
-    .nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
-    .nav-scroll-btn:hover{color:#fff;background:rgba(79,158,248,.08)}
-    .nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
-    .nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
-    .nav-group:last-child{border-right:none;padding-right:.8rem}
-    .nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
-    .nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
-    .nav-link:hover{color:#fff;background:rgba(79,158,248,.1);border-color:rgba(79,158,248,.25)}
-    .nav-link.active{color:var(--accent);background:rgba(79,158,248,.1);border-color:rgba(79,158,248,.3)}
+    .sitenav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 9, 15, .95);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .sitenav-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .sitenav-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: .9rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -.03em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .45rem
+    }
+
+    .sitenav-brand span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      font-weight: 500;
+      color: var(--accent2);
+      border: 1px solid rgba(34, 211, 176, .3);
+      background: rgba(34, 211, 176, .08);
+      padding: .15rem .45rem;
+      border-radius: 4px;
+      letter-spacing: .04em
+    }
+
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+      padding: .3rem .65rem;
+      border-radius: 6px;
+      transition: all .15s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .35rem
+    }
+
+    .nav-back:hover {
+      color: #fff;
+      border-color: rgba(79, 158, 248, .3);
+      background: rgba(79, 158, 248, .08)
+    }
+
+    .nav-ver {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding: .2rem 0
+    }
+
+    .sitenav-top-right {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-left: auto
+    }
+
+    .search-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .3rem .7rem;
+      color: #fff;
+      font-size: .8rem;
+      outline: none;
+      width: 250px
+    }
+
+    .search-box::placeholder {
+      color: var(--muted)
+    }
+
+    .search-box:focus {
+      border-color: rgba(79, 158, 248, .4)
+    }
+
+    .sitenav-bar-outer {
+      position: relative;
+      background: inherit;
+      border-top: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .sitenav-bar-inner {
+      display: flex;
+      align-items: stretch;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(79, 158, 248, .4) rgba(255, 255, 255, .04);
+      padding: 0 32px
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar {
+      height: 4px
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar-thumb {
+      background: rgba(79, 158, 248, .4);
+      border-radius: 99px
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar-thumb:hover {
+      background: rgba(79, 158, 248, .7)
+    }
+
+    .sitenav-bar-outer::before,
+    .sitenav-bar-outer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 4px;
+      width: 56px;
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity .2s
+    }
+
+    .sitenav-bar-outer::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(7, 9, 15, 1) 0%, transparent 100%)
+    }
+
+    .sitenav-bar-outer::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(7, 9, 15, 1) 0%, transparent 100%)
+    }
+
+    .nav-scroll-btn {
+      position: absolute;
+      top: 0;
+      bottom: 4px;
+      width: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--muted2);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      z-index: 3;
+      transition: color .15s, background .15s;
+      border-radius: 0
+    }
+
+    .nav-scroll-btn:hover {
+      color: #fff;
+      background: rgba(79, 158, 248, .08)
+    }
+
+    .nav-scroll-btn.left {
+      left: 0
+    }
+
+    .nav-scroll-btn.right {
+      right: 0
+    }
+
+    .nav-scroll-btn.hidden {
+      opacity: 0;
+      pointer-events: none
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255, 255, 255, .05);
+      padding: .3rem .4rem
+    }
+
+    .nav-group:last-child {
+      border-right: none;
+      padding-right: .8rem
+    }
+
+    .nav-group-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: .3rem .5rem .3rem .2rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+      margin-right: .3rem;
+      flex-shrink: 0
+    }
+
+    .nav-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      font-weight: 500;
+      white-space: nowrap;
+      padding: .28rem .55rem;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      color: var(--muted2);
+      text-decoration: none;
+      transition: all .13s;
+      display: flex;
+      align-items: center
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      background: rgba(79, 158, 248, .1);
+      border-color: rgba(79, 158, 248, .25)
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+      background: rgba(79, 158, 248, .1);
+      border-color: rgba(79, 158, 248, .3)
+    }
 
     /* ─── LAYOUT ─── */
-    .main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
-    .sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-    .sidebar-group{margin-bottom:1.4rem}
-    .sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
-    .sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
-    .sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
-    .sidebar a.active{color:var(--accent);background:rgba(79,158,248,.08)}
+    .main {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 88px;
+      height: calc(100vh - 88px);
+      overflow-y: auto;
+      padding: 1.5rem 1rem 1.5rem 0;
+      border-right: 1px solid var(--border);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent
+    }
+
+    .sidebar-group {
+      margin-bottom: 1.4rem
+    }
+
+    .sidebar-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem;
+      padding-left: .5rem
+    }
+
+    .sidebar a {
+      display: block;
+      font-size: .78rem;
+      padding: .3rem .5rem;
+      border-radius: 5px;
+      color: var(--muted2);
+      text-decoration: none;
+      transition: all .12s;
+      line-height: 1.4
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .sidebar a.active {
+      color: var(--accent);
+      background: rgba(79, 158, 248, .08)
+    }
 
     /* ─── CONTENT ─── */
-    .content{padding:2rem 0 4rem 2rem}
-    .section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem)}
-    .section:target{border-color:rgba(79,158,248,.4);box-shadow:0 0 0 1px rgba(79,158,248,.15)}
-    .section-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-    .section-header h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff}
-    .section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(34,211,176,.3);background:rgba(34,211,176,.08);color:var(--accent2)}
-    h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
-    h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
-    p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}
-    .lead{font-size:.98rem;color:#cbd5e1}
-    ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}
-    li{margin-bottom:.3rem;font-size:.88rem}
-    strong{color:#e2e8f0;font-weight:600}
-    code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(79,158,248,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
+    .content {
+      padding: 2rem 0 4rem 2rem
+    }
+
+    .section {
+      margin-bottom: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(1.2rem, 2vw, 1.8rem)
+    }
+
+    .section:target {
+      border-color: rgba(79, 158, 248, .4);
+      box-shadow: 0 0 0 1px rgba(79, 158, 248, .15)
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .section-header h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: #fff
+    }
+
+    .section-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .3rem .65rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border: 1px solid rgba(34, 211, 176, .3);
+      background: rgba(34, 211, 176, .08);
+      color: var(--accent2)
+    }
+
+    h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin: 1.4rem 0 .6rem
+    }
+
+    h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin: .9rem 0 .4rem
+    }
+
+    p {
+      color: var(--muted2);
+      margin-bottom: .75rem;
+      font-size: .88rem
+    }
+
+    .lead {
+      font-size: .98rem;
+      color: #cbd5e1
+    }
+
+    ul,
+    ol {
+      color: var(--muted2);
+      padding-left: 1.3rem;
+      margin-bottom: .8rem
+    }
+
+    li {
+      margin-bottom: .3rem;
+      font-size: .88rem
+    }
+
+    strong {
+      color: #e2e8f0;
+      font-weight: 600
+    }
+
+    code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .8em;
+      background: rgba(79, 158, 248, .1);
+      color: var(--accent);
+      padding: .1em .35em;
+      border-radius: 4px
+    }
 
     /* ─── TABLES ─── */
-    .table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0}
-    table{border-collapse:collapse;width:100%;min-width:560px}
-    thead tr{background:rgba(79,158,248,.1)}
-    th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem;text-align:left;color:#fff;border-bottom:1px solid var(--border2)}
-    td{padding:.6rem 1rem;font-size:.82rem;color:#cbd5e1;border-bottom:1px solid var(--border);vertical-align:top}
-    tr:last-child td{border-bottom:none}
-    tr:hover td{background:rgba(255,255,255,.02)}
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: .8rem 0
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 560px
+    }
+
+    thead tr {
+      background: rgba(79, 158, 248, .1)
+    }
+
+    th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: .7rem 1rem;
+      text-align: left;
+      color: #fff;
+      border-bottom: 1px solid var(--border2)
+    }
+
+    td {
+      padding: .6rem 1rem;
+      font-size: .82rem;
+      color: #cbd5e1;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top
+    }
+
+    tr:last-child td {
+      border-bottom: none
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, .02)
+    }
 
     /* ─── CODE BLOCK ─── */
-    pre{background:var(--code-bg);border:1px solid rgba(79,158,248,.2);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#7dd3fc;max-height:600px;white-space:pre}
-    pre code{background:none;color:inherit;padding:0;font-size:inherit}
+    pre {
+      background: var(--code-bg);
+      border: 1px solid rgba(79, 158, 248, .2);
+      border-radius: 12px;
+      padding: 1.1rem;
+      overflow: auto;
+      margin: .8rem 0 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .78rem;
+      line-height: 1.6;
+      color: #7dd3fc;
+      max-height: 600px;
+      white-space: pre
+    }
+
+    pre code {
+      background: none;
+      color: inherit;
+      padding: 0;
+      font-size: inherit
+    }
 
     /* ─── CALLOUTS ─── */
-    .callout{border-left:3px solid var(--accent2);background:rgba(34,211,176,.06);border-radius:0 10px 10px 0;padding:.9rem 1.1rem;margin:.8rem 0}
-    .callout.blue{border-color:var(--accent);background:rgba(79,158,248,.06)}
-    .callout.purple{border-color:var(--accent3);background:rgba(167,139,250,.06)}
-    .callout.orange{border-color:var(--accent4);background:rgba(251,146,60,.06)}
-    .callout.green{border-color:#4ade80;background:rgba(74,222,128,.06)}
-    .callout h3,.callout h4{margin-top:0;color:#fff}
-    .callout p{margin-bottom:0}
-    .callout ul{margin-bottom:0}
+    .callout {
+      border-left: 3px solid var(--accent2);
+      background: rgba(34, 211, 176, .06);
+      border-radius: 0 10px 10px 0;
+      padding: .9rem 1.1rem;
+      margin: .8rem 0
+    }
+
+    .callout.blue {
+      border-color: var(--accent);
+      background: rgba(79, 158, 248, .06)
+    }
+
+    .callout.purple {
+      border-color: var(--accent3);
+      background: rgba(167, 139, 250, .06)
+    }
+
+    .callout.orange {
+      border-color: var(--accent4);
+      background: rgba(251, 146, 60, .06)
+    }
+
+    .callout.green {
+      border-color: #4ade80;
+      background: rgba(74, 222, 128, .06)
+    }
+
+    .callout h3,
+    .callout h4 {
+      margin-top: 0;
+      color: #fff
+    }
+
+    .callout p {
+      margin-bottom: 0
+    }
+
+    .callout ul {
+      margin-bottom: 0
+    }
 
     /* ─── GRID ─── */
-    .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
-    .grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
-    .hero-content-grid{align-items:center;margin-bottom:1rem}
-    .mini-card{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:1rem}
-    .mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}
-    .mini-card span{color:var(--muted2);font-size:.78rem}
+    .grid2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem
+    }
+
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .8rem
+    }
+
+    .hero-content-grid {
+      align-items: center;
+      margin-bottom: 1rem
+    }
+
+    .mini-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem
+    }
+
+    .mini-card strong {
+      display: block;
+      color: #fff;
+      font-size: .82rem;
+      margin-bottom: .25rem
+    }
+
+    .mini-card span {
+      color: var(--muted2);
+      font-size: .78rem
+    }
 
     /* ─── METRIC PILLS ─── */
-    .metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin:.8rem 0}
-    .metric{background:rgba(79,158,248,.08);border:1px solid rgba(79,158,248,.2);border-radius:12px;padding:1rem;text-align:center}
-    .metric span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}
-    .metric small{font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: .7rem;
+      margin: .8rem 0
+    }
+
+    .metric {
+      background: rgba(79, 158, 248, .08);
+      border: 1px solid rgba(79, 158, 248, .2);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center
+    }
+
+    .metric span {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: .25rem
+    }
+
+    .metric small {
+      font-size: .7rem;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: .05em
+    }
 
     /* ─── PRIORITY BADGES ─── */
-    .pri{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}
-    .pri-must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}
-    .pri-should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}
-    .pri-nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}
-    .pri-low{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
+    .pri {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      white-space: nowrap
+    }
+
+    .pri-must {
+      color: var(--must);
+      background: rgba(252, 165, 165, .12);
+      border: 1px solid rgba(252, 165, 165, .25)
+    }
+
+    .pri-should {
+      color: var(--should);
+      background: rgba(252, 211, 77, .1);
+      border: 1px solid rgba(252, 211, 77, .25)
+    }
+
+    .pri-nice {
+      color: var(--nice);
+      background: rgba(134, 239, 172, .1);
+      border: 1px solid rgba(134, 239, 172, .25)
+    }
+
+    .pri-low {
+      color: var(--future);
+      background: rgba(147, 197, 253, .1);
+      border: 1px solid rgba(147, 197, 253, .25)
+    }
 
     /* ─── PHASE CARDS ─── */
-    .phase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
-    .phase-card{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1.1rem}
-    .phase-head{display:flex;justify-content:space-between;border-bottom:1px solid var(--border);padding-bottom:.6rem;margin-bottom:.8rem;gap:.5rem;flex-wrap:wrap}
-    .phase-head h3,.phase-head h4{margin:0;font-size:.88rem;color:#fff}
-    .phase-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}
-    .phase-card ul{margin-bottom:.6rem}
-    .phase-card p:last-child{margin-bottom:0}
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem
+    }
+
+    .phase-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem
+    }
+
+    .phase-head {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .6rem;
+      margin-bottom: .8rem;
+      gap: .5rem;
+      flex-wrap: wrap
+    }
+
+    .phase-head h3,
+    .phase-head h4 {
+      margin: 0;
+      font-size: .88rem;
+      color: #fff
+    }
+
+    .phase-head span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      color: var(--accent2);
+      white-space: nowrap
+    }
+
+    .phase-card ul {
+      margin-bottom: .6rem
+    }
+
+    .phase-card p:last-child {
+      margin-bottom: 0
+    }
 
     /* ─── UTILITIES / SEARCH ─── */
-    .search-hit{outline:1px solid rgba(255,212,59,.55);background:rgba(255,212,59,.05)!important}
-    .is-hidden-by-search{display:none!important}
-    .footer-link{color:#d8ecff;text-decoration:none}
+    .search-hit {
+      outline: 1px solid rgba(255, 212, 59, .55);
+      background: rgba(255, 212, 59, .05) !important
+    }
 
-    #btt{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(79,158,248,.15);border:1px solid rgba(79,158,248,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}
-    #btt.show{display:flex}
-    #btt:hover{background:rgba(79,158,248,.3)}
-    footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}
-    .footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
-    footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}
+    .is-hidden-by-search {
+      display: none !important
+    }
+
+    .footer-link {
+      color: #d8ecff;
+      text-decoration: none
+    }
+
+    #btt {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(79, 158, 248, .15);
+      border: 1px solid rgba(79, 158, 248, .3);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      transition: all .2s;
+      align-items: center;
+      justify-content: center
+    }
+
+    #btt.show {
+      display: flex
+    }
+
+    #btt:hover {
+      background: rgba(79, 158, 248, .3)
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      background: rgba(7, 9, 15, .6);
+      padding: 2.5rem 1.5rem;
+      text-align: center
+    }
+
+    .footer-row {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem
+    }
+
+    footer p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted);
+      margin: 0
+    }
 
     /* ─── RESPONSIVE ─── */
-    @media(max-width:900px){
-      .main{grid-template-columns:1fr}
-      .sidebar{display:none}
-      .content{padding:1.5rem 0 3rem}
-      .grid2,.grid3,.grid4,.metrics,.phase-grid{grid-template-columns:1fr}
-      .sitenav-top{flex-wrap:wrap;gap:.5rem}
-      .sitenav-top-right{width:100%}
-      .search-box{width:100%}
-      .nav-ver{display:none}
+    @media(max-width:900px) {
+      .main {
+        grid-template-columns: 1fr
+      }
+
+      .sidebar {
+        display: none
+      }
+
+      .content {
+        padding: 1.5rem 0 3rem
+      }
+
+      .grid2,
+      .grid3,
+      .grid4,
+      .metrics,
+      .phase-grid {
+        grid-template-columns: 1fr
+      }
+
+      .sitenav-top {
+        flex-wrap: wrap;
+        gap: .5rem
+      }
+
+      .sitenav-top-right {
+        width: 100%
+      }
+
+      .search-box {
+        width: 100%
+      }
+
+      .nav-ver {
+        display: none
+      }
     }
-    @media(max-width:580px){
-      .section{border-radius:10px;padding:1rem}
-      .section-header{flex-direction:column}
-      .sitenav-brand span{display:none}
-      .nav-back{font-size:.65rem;padding:.25rem .5rem}
-      .hero{padding:3rem 0 2rem}
+
+    @media(max-width:580px) {
+      .section {
+        border-radius: 10px;
+        padding: 1rem
+      }
+
+      .section-header {
+        flex-direction: column
+      }
+
+      .sitenav-brand span {
+        display: none
+      }
+
+      .nav-back {
+        font-size: .65rem;
+        padding: .25rem .5rem
+      }
+
+      .hero {
+        padding: 3rem 0 2rem
+      }
     }
 
 
@@ -325,11 +1067,11 @@
       word-break: normal;
     }
 
-    .grid2 > *,
-    .grid3 > *,
-    .grid4 > *,
-    .metrics > *,
-    .phase-grid > * {
+    .grid2>*,
+    .grid3>*,
+    .grid4>*,
+    .metrics>*,
+    .phase-grid>* {
       min-width: 0;
     }
 
@@ -363,7 +1105,7 @@
       gap: 1rem;
     }
 
-    #resumo .hero-content-grid > div:first-child {
+    #resumo .hero-content-grid>div:first-child {
       max-width: 100%;
     }
 
@@ -384,6 +1126,7 @@
 
     /* Notebook e desktop estreito */
     @media (max-width: 1180px) {
+
       .container,
       .main {
         padding-left: 1.25rem;
@@ -681,7 +1424,7 @@
         min-width: 640px;
       }
 
-      footer > div > div,
+      footer>div>div,
       .footer-row {
         flex-direction: column !important;
         align-items: stretch !important;
@@ -708,6 +1451,7 @@
 
     /* Celulares muito estreitos */
     @media (max-width: 380px) {
+
       .container,
       .main {
         padding-left: .7rem;
@@ -738,6 +1482,7 @@
 
     /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
     @media (pointer: coarse) {
+
       .nav-scroll-btn,
       #btt,
       .nav-link,
@@ -753,346 +1498,463 @@
         min-height: 34px;
       }
     }
+
     /* ─── REFERENCE CARDS ─── */
-    .doc-section-heading{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:1rem;
-      margin-bottom:1.2rem;
-      padding-bottom:1rem;
-      border-bottom:1px solid var(--border);
+    .doc-section-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
     }
 
-    .doc-section-heading h2{
-      font-family:'Syne',sans-serif;
-      font-size:1.35rem;
-      font-weight:800;
-      letter-spacing:-.03em;
-      color:#fff;
+    .doc-section-heading h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: #fff;
     }
 
-    .ref-grid{
-      display:grid;
-      gap:1rem;
-      grid-template-columns:repeat(2,minmax(0,1fr));
+    .ref-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .ref-card{
-      background:var(--surface2);
-      border:1px solid var(--border);
-      border-radius:12px;
-      padding:1rem;
-      transition:border-color .15s,background .15s,transform .15s;
-      position:relative;
-      overflow:hidden;
-      min-height:100%;
-      min-width:0;
+    .ref-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      transition: border-color .15s, background .15s, transform .15s;
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      min-width: 0;
     }
 
-    .ref-card::before{
-      content:"";
-      position:absolute;
-      inset:0 auto 0 0;
-      width:3px;
-      background:linear-gradient(180deg,var(--accent),var(--accent2));
+    .ref-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
     }
 
-    .ref-card:hover{
-      border-color:rgba(79,158,248,.34);
-      background:#151c27;
-      transform:translateY(-1px);
+    .ref-card:hover {
+      border-color: rgba(79, 158, 248, .34);
+      background: #151c27;
+      transform: translateY(-1px);
     }
 
-    .ref-card strong{
-      display:block;
-      color:#fff;
-      font-family:'Syne',sans-serif;
-      font-size:.95rem;
-      margin-bottom:.35rem;
-      padding-left:.35rem;
+    .ref-card strong {
+      display: block;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: .95rem;
+      margin-bottom: .35rem;
+      padding-left: .35rem;
     }
 
-    .ref-card p{
-      color:var(--muted2);
-      font-size:.82rem;
-      margin-bottom:.75rem;
-      padding-left:.35rem;
+    .ref-card p {
+      color: var(--muted2);
+      font-size: .82rem;
+      margin-bottom: .75rem;
+      padding-left: .35rem;
     }
 
     .ref-card a,
-    .ref-list a{
-      display:inline-flex;
-      align-items:center;
-      gap:.35rem;
-      max-width:100%;
-      color:#d8ecff;
-      text-decoration:none;
-      font-family:'IBM Plex Mono',monospace;
-      font-size:.72rem;
-      font-weight:600;
-      line-height:1.45;
-      border:1px solid rgba(79,158,248,.22);
-      background:rgba(79,158,248,.065);
-      padding:.28rem .55rem;
-      border-radius:6px;
-      overflow-wrap:anywhere;
-      word-break:break-word;
-      transition:all .14s;
-      margin-left:.35rem;
+    .ref-list a {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      max-width: 100%;
+      color: #d8ecff;
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 600;
+      line-height: 1.45;
+      border: 1px solid rgba(79, 158, 248, .22);
+      background: rgba(79, 158, 248, .065);
+      padding: .28rem .55rem;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      transition: all .14s;
+      margin-left: .35rem;
     }
 
     .ref-card a::after,
-    .ref-list a::after{
-      content:'↗';
-      font-size:.72rem;
-      color:var(--accent2);
-      line-height:1;
-      flex-shrink:0;
+    .ref-list a::after {
+      content: '↗';
+      font-size: .72rem;
+      color: var(--accent2);
+      line-height: 1;
+      flex-shrink: 0;
     }
 
     .ref-card a:hover,
-    .ref-list a:hover{
-      color:#fff;
-      border-color:rgba(34,211,176,.42);
-      background:rgba(34,211,176,.09);
-      text-decoration:none;
-      transform:translateY(-1px);
+    .ref-list a:hover {
+      color: #fff;
+      border-color: rgba(34, 211, 176, .42);
+      background: rgba(34, 211, 176, .09);
+      text-decoration: none;
+      transform: translateY(-1px);
     }
 
-    .ref-grid>*{
-      min-width:0;
+    .ref-grid>* {
+      min-width: 0;
     }
 
-    .mt-3{
-      margin-top:1rem!important;
+    .mt-3 {
+      margin-top: 1rem !important;
     }
 
-    .footer-link:hover{
-      color:#fff;
-      text-decoration:underline;
+    .footer-link:hover {
+      color: #fff;
+      text-decoration: underline;
     }
 
-    @media(max-width:1180px){
-      .ref-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+    @media(max-width:1180px) {
+      .ref-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media(max-width:980px){
-      .ref-grid{
-        grid-template-columns:1fr;
+    @media(max-width:980px) {
+      .ref-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media(max-width:520px){
-      .ref-card{
-        border-radius:10px;
+    @media(max-width:520px) {
+      .ref-card {
+        border-radius: 10px;
       }
 
       .ref-card a,
-      .ref-list a{
-        display:flex;
-        width:calc(100% - .35rem);
-        justify-content:space-between;
-        align-items:center;
+      .ref-list a {
+        display: flex;
+        width: calc(100% - .35rem);
+        justify-content: space-between;
+        align-items: center;
       }
     }
-
   </style>
 </head>
+
 <body>
 
-<header class="hero">
-  <div class="container">
-    <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
-    <div class="hero-label">Trilha técnica · Python Backend · IA aplicada</div>
-    <h1>Python Backend, Automação e Inteligência Artificial</h1>
-    <p class="hero-sub">Trilha completa para usar Python como segunda linguagem estratégica: desenvolvimento backend com FastAPI/Django, automações, dados, machine learning, LLMs, RAG, agentes, MLOps/LLMOps e integração com Java/Spring em sistemas reais.</p>
-    <div class="hero-meta">
-      <span class="tag">Python 3.12+</span>
-      <span class="tag g">FastAPI</span>
-      <span class="tag g">Django/DRF</span>
-      <span class="tag p">SQLAlchemy</span>
-      <span class="tag p">pytest</span>
-      <span class="tag y">Pandas · NumPy</span>
-      <span class="tag y">PyTorch</span>
-      <span class="tag o">RAG · Agentes</span>
-      <span class="tag o">MLOps/LLMOps</span>
+  <header class="hero">
+    <div class="container">
+      <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
+      <div class="hero-label">Trilha técnica · Python Backend · IA aplicada</div>
+      <h1>Python Backend, Automação e Inteligência Artificial</h1>
+      <p class="hero-sub">Trilha completa para usar Python como segunda linguagem estratégica: desenvolvimento backend
+        com FastAPI/Django, automações, dados, machine learning, LLMs, RAG, agentes, MLOps/LLMOps e integração com
+        Java/Spring em sistemas reais.</p>
+      <div class="hero-meta">
+        <span class="tag">Python 3.12+</span>
+        <span class="tag g">FastAPI</span>
+        <span class="tag g">Django/DRF</span>
+        <span class="tag p">SQLAlchemy</span>
+        <span class="tag p">pytest</span>
+        <span class="tag y">Pandas · NumPy</span>
+        <span class="tag y">PyTorch</span>
+        <span class="tag o">RAG · Agentes</span>
+        <span class="tag o">MLOps/LLMOps</span>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-<nav class="sitenav">
-  <div class="container">
-    <div class="sitenav-top">
-      <a class="sitenav-brand" href="#">Python Track <span>64 semanas</span></a>
-      <span class="nav-ver">Plano Integrado de Estudos</span>
-      <a class="nav-back" href="../index.html">← Dashboard principal</a>
-      <div class="sitenav-top-right">
-        <input class="search-box" type="search" placeholder="Buscar na trilha Python..." id="searchInput">
+  <nav class="sitenav">
+    <div class="container">
+      <div class="sitenav-top">
+        <a class="sitenav-brand" href="#">Python Track <span>64 semanas</span></a>
+        <span class="nav-ver">Plano Integrado de Estudos</span>
+        <a class="nav-back" href="../index.html">← Dashboard principal</a>
+        <div class="sitenav-top-right">
+          <input class="search-box" type="search" placeholder="Buscar na trilha Python..." id="searchInput">
+        </div>
       </div>
     </div>
-  </div>
-  <div class="sitenav-bar-outer">
-    <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">&#8249;</button>
-    <div class="sitenav-bar-inner" id="navSectionsBar">
-      <div class="nav-group">
-        <span class="nav-group-label">Base</span>
-        <a class="nav-link" href="#resumo">01 · Resumo</a>
-        <a class="nav-link" href="#perfil">02 · Perfil pleno</a>
-        <a class="nav-link" href="#conteudos">03 · Conteúdos</a>
+    <div class="sitenav-bar-outer">
+      <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">&#8249;</button>
+      <div class="sitenav-bar-inner" id="navSectionsBar">
+        <div class="nav-group">
+          <span class="nav-group-label">Base</span>
+          <a class="nav-link" href="#resumo">01 · Resumo</a>
+          <a class="nav-link" href="#perfil">02 · Perfil pleno</a>
+          <a class="nav-link" href="#conteudos">03 · Conteúdos</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Backend</span>
+          <a class="nav-link" href="#backend">04 · Backend</a>
+          <a class="nav-link" href="#ia">05 · IA aplicada</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Execução</span>
+          <a class="nav-link" href="#roadmap">06 · Roadmap</a>
+          <a class="nav-link" href="#checklist">07 · Checklist</a>
+          <a class="nav-link" href="#projetos">08 · Projetos</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Revisão</span>
+          <a class="nav-link" href="#consulta">09 · Consulta</a>
+          <a class="nav-link" href="#snippets">10 · Snippets</a>
+          <a class="nav-link" href="#referencias">11 · Referências</a>
+        </div>
       </div>
-      <div class="nav-group">
-        <span class="nav-group-label">Backend</span>
-        <a class="nav-link" href="#backend">04 · Backend</a>
-        <a class="nav-link" href="#ia">05 · IA aplicada</a>
-      </div>
-      <div class="nav-group">
-        <span class="nav-group-label">Execução</span>
-        <a class="nav-link" href="#roadmap">06 · Roadmap</a>
-        <a class="nav-link" href="#checklist">07 · Checklist</a>
-        <a class="nav-link" href="#projetos">08 · Projetos</a>
-      </div>
-      <div class="nav-group">
-        <span class="nav-group-label">Revisão</span>
-        <a class="nav-link" href="#consulta">09 · Consulta</a>
-        <a class="nav-link" href="#snippets">10 · Snippets</a>
-        <a class="nav-link" href="#referencias">11 · Referências</a>
-      </div>
+      <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
     </div>
-    <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
-  </div>
-</nav>
+  </nav>
 
-<div class="main">
-  <aside class="sidebar">
-    <div class="sidebar-group">
-      <div class="sidebar-label">Base Python</div>
-      <a href="#resumo">1. Resumo executivo</a>
-      <a href="#perfil">2. Perfil pleno</a>
-      <a href="#conteudos">3. Mapa de conteúdos</a>
-    </div>
-    <div class="sidebar-group">
-      <div class="sidebar-label">Backend</div>
-      <a href="#backend">4. Backend Python</a>
-      <a href="#ia">5. IA aplicada</a>
-    </div>
-    <div class="sidebar-group">
-      <div class="sidebar-label">Execução</div>
-      <a href="#roadmap">6. Roadmap em 8 fases</a>
-      <a href="#checklist">7. Checklists</a>
-      <a href="#projetos">8. Projetos práticos</a>
-    </div>
-    <div class="sidebar-group">
-      <div class="sidebar-label">Revisão</div>
-      <a href="#consulta">9. Consulta rápida</a>
-      <a href="#snippets">10. Snippets úteis</a>
-      <a href="#referencias">11. Referências técnicas</a>
-    </div>
-  </aside>
-  <div class="content" id="mainContent">
-    <section class="section" data-search-section="" id="resumo">
-      <div class="section-header">
-        <div>
-          <h2>Resumo executivo</h2>
-          <p class="section-subtitle">Objetivo da trilha: formar um Python pleno forte para backend, automação e IA aplicada em produção.</p>
+  <div class="main">
+    <aside class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-label">Base Python</div>
+        <a href="#resumo">1. Resumo executivo</a>
+        <a href="#perfil">2. Perfil pleno</a>
+        <a href="#conteudos">3. Mapa de conteúdos</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-label">Backend</div>
+        <a href="#backend">4. Backend Python</a>
+        <a href="#ia">5. IA aplicada</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-label">Execução</div>
+        <a href="#roadmap">6. Roadmap em 8 fases</a>
+        <a href="#checklist">7. Checklists</a>
+        <a href="#projetos">8. Projetos práticos</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-label">Revisão</div>
+        <a href="#consulta">9. Consulta rápida</a>
+        <a href="#snippets">10. Snippets úteis</a>
+        <a href="#referencias">11. Referências técnicas</a>
+      </div>
+    </aside>
+    <div class="content" id="mainContent">
+      <section class="section" data-search-section="" id="resumo">
+        <div class="section-header">
+          <div>
+            <h2>Resumo executivo</h2>
+            <p class="section-subtitle">Objetivo da trilha: formar um Python pleno forte para backend, automação e IA
+              aplicada em produção.</p>
+          </div>
+          <span class="section-badge">Visão geral</span>
         </div>
-        <span class="section-badge">Visão geral</span>
-      </div>
-      <div class="grid2 hero-content-grid">
-        <div>
-          <p class="lead">Python nesta trilha não é tratado como linguagem auxiliar simples. Ele é uma competência de engenharia para construir APIs, workers, pipelines de dados, integrações, produtos com IA, RAG, agentes, automações e microsserviços complementares ao ecossistema Java/Spring.</p>
-          <p>O foco final é posicionar você como <strong>backend Java com capacidade real de entregar soluções de IA em produção usando Python</strong>: FastAPI para serviços de IA, Django/DRF quando houver necessidade de produtividade e admin, pandas/scikit-learn/PyTorch para dados e ML, e LangChain/LangGraph/LlamaIndex para RAG e agentes controláveis.</p>
+        <div class="grid2 hero-content-grid">
+          <div>
+            <p class="lead">Python nesta trilha não é tratado como linguagem auxiliar simples. Ele é uma competência de
+              engenharia para construir APIs, workers, pipelines de dados, integrações, produtos com IA, RAG, agentes,
+              automações e microsserviços complementares ao ecossistema Java/Spring.</p>
+            <p>O foco final é posicionar você como <strong>backend Java com capacidade real de entregar soluções de IA
+                em produção usando Python</strong>: FastAPI para serviços de IA, Django/DRF quando houver necessidade de
+              produtividade e admin, pandas/scikit-learn/PyTorch para dados e ML, e LangChain/LangGraph/LlamaIndex para
+              RAG e agentes controláveis.</p>
+          </div>
+          <div class="metrics">
+            <div class="metric"><span>8</span><small>Fases</small></div>
+            <div class="metric"><span>64</span><small>Semanas</small></div>
+            <div class="metric"><span>1h/dia</span><small>Bloco diário</small></div>
+            <div class="metric"><span>5+</span><small>Projetos práticos</small></div>
+          </div>
         </div>
-        <div class="metrics">
-          <div class="metric"><span>8</span><small>Fases</small></div>
-          <div class="metric"><span>64</span><small>Semanas</small></div>
-          <div class="metric"><span>1h/dia</span><small>Bloco diário</small></div>
-          <div class="metric"><span>5+</span><small>Projetos práticos</small></div>
+        <div class="grid4">
+          <div class="mini-card"><strong>Desenvolvimento</strong><span>FastAPI, Django/DRF, SQLAlchemy, Alembic, pytest,
+              workers, APIs REST e segurança.</span></div>
+          <div class="mini-card"><strong>Dados</strong><span>NumPy, Pandas, Polars, visualização, limpeza, EDA e feature
+              engineering.</span></div>
+          <div class="mini-card"><strong>IA</strong><span>scikit-learn, PyTorch, Hugging Face, LLMs, embeddings, RAG e
+              agentes.</span></div>
+          <div class="mini-card"><strong>Produção</strong><span>Docker, CI/CD, observabilidade, MLOps, LLMOps, custo,
+              latência, segurança e avaliação.</span></div>
         </div>
-      </div>
-      <div class="grid4">
-        <div class="mini-card"><strong>Desenvolvimento</strong><span>FastAPI, Django/DRF, SQLAlchemy, Alembic, pytest, workers, APIs REST e segurança.</span></div>
-        <div class="mini-card"><strong>Dados</strong><span>NumPy, Pandas, Polars, visualização, limpeza, EDA e feature engineering.</span></div>
-        <div class="mini-card"><strong>IA</strong><span>scikit-learn, PyTorch, Hugging Face, LLMs, embeddings, RAG e agentes.</span></div>
-        <div class="mini-card"><strong>Produção</strong><span>Docker, CI/CD, observabilidade, MLOps, LLMOps, custo, latência, segurança e avaliação.</span></div>
-      </div>
-    </section><section class="section" data-search-section="" id="perfil">
-    <div class="section-header">
-      <div>
-        <h2>Perfil de mercado: Python pleno forte</h2>
-        <p class="section-subtitle">O que precisa ser demonstrável em entrevistas, portfólio e projetos reais.</p>
-      </div>
-      <span class="section-badge">Senioridade</span>
-    </div>
-    <div class="table-wrap">
-      <table class="">
-        <thead><tr><th>Dimensão</th><th>Exigência para pleno forte</th><th>Evidência prática esperada</th></tr></thead>
-        <tbody>
-        <tr><td>Linguagem</td><td>Python moderno, idiomático, tipado, organizado em pacotes e com tratamento correto de erros.</td><td>Projeto com typing, Ruff, mypy/pyright, pre-commit, logging e estrutura limpa.</td></tr>
-        <tr><td>Backend</td><td>FastAPI/Django, APIs REST, auth, banco, cache, workers, filas e contratos.</td><td>API com autenticação, testes, migrations, OpenAPI e deploy em container.</td></tr>
-        <tr><td>Testes</td><td>pytest, fixtures, mocks, testes de API, integração, banco real e cobertura orientada por risco.</td><td>Pipeline rodando testes e gerando cobertura com falhas bloqueando merge.</td></tr>
-        <tr><td>Dados</td><td>Pandas, NumPy, Polars, SQL, limpeza, EDA, feature engineering e pipelines simples.</td><td>Notebook/script reprodutível com dataset limpo, análise e exportação.</td></tr>
-        <tr><td>ML</td><td>scikit-learn, métricas, validação, pipelines, overfitting, seleção de modelo e MLflow básico.</td><td>Modelo treinado, avaliado, versionado e exposto via API.</td></tr>
-        <tr><td>LLMs</td><td>Embeddings, RAG, vector DB, agentes, tool calling, avaliação e segurança contra vazamento.</td><td>RAG com fontes, ACL por documento, avaliação e logs auditáveis.</td></tr>
-        <tr><td>Produção</td><td>Docker, CI/CD, observabilidade, health checks, métricas, custo, latência e fallback.</td><td>Serviço monitorado, com logs estruturados, métricas e runbook.</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="grid2">
-      <div class="callout"><h3>Perfil 1 — Python Backend Developer</h3><p>Constrói APIs, integrações, workers, pipelines internos, automações, serviços assíncronos e backend de produtos. Deve dominar FastAPI/Django, banco, testes, Docker, CI/CD, segurança e observabilidade.</p></div>
-      <div class="callout orange"><h3>Perfil 2 — Python AI Application Developer</h3><p>Transforma IA em produto: RAG, agentes, APIs de modelos, automações inteligentes, avaliação, controle de acesso, custos, latência, logs e integração com sistemas existentes.</p></div>
-    </div>
-  </section><section class="section" data-search-section="" id="conteudos">
-    <div class="section-header">
-      <div>
-        <h2>Mapa completo de conteúdos</h2>
-        <p class="section-subtitle">Conteúdo necessário para desenvolvimento Python e IA aplicada.</p>
-      </div>
-      <span class="section-badge">Mapa técnico</span>
-    </div>
-    <div class="table-wrap">
-      <table class="">
-        <thead><tr><th>Macroárea</th><th>Conteúdos</th><th>Prioridade</th></tr></thead>
-        <tbody>
-        <tr><td>Python Core</td><td>Tipos, collections, funções, OOP, dataclasses, decorators, generators, context managers, exceptions, logging, pathlib, datetime, módulos e pacotes.</td><td><span class="pri pri-must">Obrigatório</span></td></tr>
-        <tr><td>Typing e qualidade</td><td>type hints, Optional, Union, Literal, TypedDict, Protocol, Generic, Annotated, mypy, pyright, Ruff, Black, isort, pre-commit.</td><td><span class="pri pri-must">Obrigatório</span></td></tr>
-        <tr><td>Backend</td><td>FastAPI, Django, DRF, Flask legado, Pydantic, SQLAlchemy, Alembic, Django ORM, PostgreSQL, Redis, MongoDB, OpenAPI e auth.</td><td><span class="pri pri-must">Obrigatório</span></td></tr>
-        <tr><td>Async e workers</td><td>async/await, asyncio, httpx, aiohttp, Celery, RQ, Dramatiq, Arq, Kafka, RabbitMQ, SQS, retries, DLQ e idempotência.</td><td><span class="pri pri-should">Forte diferencial</span></td></tr>
-        <tr><td>Dados</td><td>NumPy, Pandas, Polars, visualização, limpeza, EDA, feature engineering, CSV, JSON, Parquet e pipelines.</td><td><span class="pri pri-must">Obrigatório para IA</span></td></tr>
-        <tr><td>Machine Learning</td><td>scikit-learn, pipelines, preprocessing, métricas, cross-validation, regressão, classificação, clustering, PCA e MLflow.</td><td><span class="pri pri-should">Obrigatório para IA aplicada</span></td></tr>
-        <tr><td>Deep Learning</td><td>PyTorch, tensors, autograd, datasets, dataloaders, nn.Module, training loop, validation, checkpoints, embeddings e transformers.</td><td><span class="pri pri-should">Intermediário forte</span></td></tr>
-        <tr><td>LLMs</td><td>tokens, embeddings, context window, structured output, tool calling, function calling, streaming, hallucination, grounding e prompt injection.</td><td><span class="pri pri-must">Obrigatório para IA aplicada</span></td></tr>
-        <tr><td>RAG e agentes</td><td>chunking, vector DB, retrieval, hybrid search, reranking, citations, ACL, LangChain, LangGraph, LlamaIndex, memória, tools e guardrails.</td><td><span class="pri pri-must">Obrigatório para IA aplicada</span></td></tr>
-        <tr><td>MLOps/LLMOps</td><td>MLflow, experiment tracking, model registry, prompt versioning, eval, drift, monitoring, cost tracking, latency, fallback e A/B tests.</td><td><span class="pri pri-should">Forte diferencial</span></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section><section class="section" data-search-section="" id="backend">
-    <div class="section-header">
-      <div>
-        <h2>Python para desenvolvimento/backend</h2>
-        <p class="section-subtitle">Trilha para construir software real, não apenas scripts isolados.</p>
-      </div>
-      <span class="section-badge">Backend</span>
-    </div>
-    <div class="grid3">
-      <div class="mini-card"><strong>FastAPI</strong><span>Rotas, Pydantic, DI, middleware, exception handlers, OpenAPI, auth, background tasks, async endpoints e testes.</span></div>
-      <div class="mini-card"><strong>Django/DRF</strong><span>Models, migrations, admin, auth, serializers, viewsets, routers, permissions, throttling e pagination.</span></div>
-      <div class="mini-card"><strong>SQLAlchemy/Alembic</strong><span>ORM, sessions, relationships, migrations, transactions, repositories, Unit of Work e async database access.</span></div>
-    </div>
-    <h3>Backend profissional exige</h3>
-    <ul class="doc-list">
-      <li>API REST com versionamento, paginação, filtros, ordenação, status codes e padrão de erro consistente.</li>
-      <li>Autenticação e autorização com JWT/OAuth2, permissões por recurso e validação de escopo.</li>
-      <li>Banco relacional com migrations, transações, índices e testes de integração.</li>
-      <li>Redis para cache, rate limit, locks, sessões temporárias ou fila leve.</li>
-      <li>Workers para tarefas demoradas, retries, DLQ, idempotência e monitoramento.</li>
-      <li>Docker, pipeline CI/CD, logs estruturados, health check, métricas e deploy rastreável.</li>
-    </ul>
-    <h3>Estrutura recomendada para FastAPI</h3>
-    <pre class="code-block"><code class="text">python-service/
+      </section>
+      <section class="section" data-search-section="" id="perfil">
+        <div class="section-header">
+          <div>
+            <h2>Perfil de mercado: Python pleno forte</h2>
+            <p class="section-subtitle">O que precisa ser demonstrável em entrevistas, portfólio e projetos reais.</p>
+          </div>
+          <span class="section-badge">Senioridade</span>
+        </div>
+        <div class="table-wrap">
+          <table class="">
+            <thead>
+              <tr>
+                <th>Dimensão</th>
+                <th>Exigência para pleno forte</th>
+                <th>Evidência prática esperada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Linguagem</td>
+                <td>Python moderno, idiomático, tipado, organizado em pacotes e com tratamento correto de erros.</td>
+                <td>Projeto com typing, Ruff, mypy/pyright, pre-commit, logging e estrutura limpa.</td>
+              </tr>
+              <tr>
+                <td>Backend</td>
+                <td>FastAPI/Django, APIs REST, auth, banco, cache, workers, filas e contratos.</td>
+                <td>API com autenticação, testes, migrations, OpenAPI e deploy em container.</td>
+              </tr>
+              <tr>
+                <td>Testes</td>
+                <td>pytest, fixtures, mocks, testes de API, integração, banco real e cobertura orientada por risco.</td>
+                <td>Pipeline rodando testes e gerando cobertura com falhas bloqueando merge.</td>
+              </tr>
+              <tr>
+                <td>Dados</td>
+                <td>Pandas, NumPy, Polars, SQL, limpeza, EDA, feature engineering e pipelines simples.</td>
+                <td>Notebook/script reprodutível com dataset limpo, análise e exportação.</td>
+              </tr>
+              <tr>
+                <td>ML</td>
+                <td>scikit-learn, métricas, validação, pipelines, overfitting, seleção de modelo e MLflow básico.</td>
+                <td>Modelo treinado, avaliado, versionado e exposto via API.</td>
+              </tr>
+              <tr>
+                <td>LLMs</td>
+                <td>Embeddings, RAG, vector DB, agentes, tool calling, avaliação e segurança contra vazamento.</td>
+                <td>RAG com fontes, ACL por documento, avaliação e logs auditáveis.</td>
+              </tr>
+              <tr>
+                <td>Produção</td>
+                <td>Docker, CI/CD, observabilidade, health checks, métricas, custo, latência e fallback.</td>
+                <td>Serviço monitorado, com logs estruturados, métricas e runbook.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="grid2">
+          <div class="callout">
+            <h3>Perfil 1 — Python Backend Developer</h3>
+            <p>Constrói APIs, integrações, workers, pipelines internos, automações, serviços assíncronos e backend de
+              produtos. Deve dominar FastAPI/Django, banco, testes, Docker, CI/CD, segurança e observabilidade.</p>
+          </div>
+          <div class="callout orange">
+            <h3>Perfil 2 — Python AI Application Developer</h3>
+            <p>Transforma IA em produto: RAG, agentes, APIs de modelos, automações inteligentes, avaliação, controle de
+              acesso, custos, latência, logs e integração com sistemas existentes.</p>
+          </div>
+        </div>
+      </section>
+      <section class="section" data-search-section="" id="conteudos">
+        <div class="section-header">
+          <div>
+            <h2>Mapa completo de conteúdos</h2>
+            <p class="section-subtitle">Conteúdo necessário para desenvolvimento Python e IA aplicada.</p>
+          </div>
+          <span class="section-badge">Mapa técnico</span>
+        </div>
+        <div class="table-wrap">
+          <table class="">
+            <thead>
+              <tr>
+                <th>Macroárea</th>
+                <th>Conteúdos</th>
+                <th>Prioridade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Python Core</td>
+                <td>Tipos, collections, funções, OOP, dataclasses, decorators, generators, context managers, exceptions,
+                  logging, pathlib, datetime, módulos e pacotes.</td>
+                <td><span class="pri pri-must">Obrigatório</span></td>
+              </tr>
+              <tr>
+                <td>Typing e qualidade</td>
+                <td>type hints, Optional, Union, Literal, TypedDict, Protocol, Generic, Annotated, mypy, pyright, Ruff,
+                  Black, isort, pre-commit.</td>
+                <td><span class="pri pri-must">Obrigatório</span></td>
+              </tr>
+              <tr>
+                <td>Backend</td>
+                <td>FastAPI, Django, DRF, Flask legado, Pydantic, SQLAlchemy, Alembic, Django ORM, PostgreSQL, Redis,
+                  MongoDB, OpenAPI e auth.</td>
+                <td><span class="pri pri-must">Obrigatório</span></td>
+              </tr>
+              <tr>
+                <td>Async e workers</td>
+                <td>async/await, asyncio, httpx, aiohttp, Celery, RQ, Dramatiq, Arq, Kafka, RabbitMQ, SQS, retries, DLQ
+                  e idempotência.</td>
+                <td><span class="pri pri-should">Forte diferencial</span></td>
+              </tr>
+              <tr>
+                <td>Dados</td>
+                <td>NumPy, Pandas, Polars, visualização, limpeza, EDA, feature engineering, CSV, JSON, Parquet e
+                  pipelines.</td>
+                <td><span class="pri pri-must">Obrigatório para IA</span></td>
+              </tr>
+              <tr>
+                <td>Machine Learning</td>
+                <td>scikit-learn, pipelines, preprocessing, métricas, cross-validation, regressão, classificação,
+                  clustering, PCA e MLflow.</td>
+                <td><span class="pri pri-should">Obrigatório para IA aplicada</span></td>
+              </tr>
+              <tr>
+                <td>Deep Learning</td>
+                <td>PyTorch, tensors, autograd, datasets, dataloaders, nn.Module, training loop, validation,
+                  checkpoints, embeddings e transformers.</td>
+                <td><span class="pri pri-should">Intermediário forte</span></td>
+              </tr>
+              <tr>
+                <td>LLMs</td>
+                <td>tokens, embeddings, context window, structured output, tool calling, function calling, streaming,
+                  hallucination, grounding e prompt injection.</td>
+                <td><span class="pri pri-must">Obrigatório para IA aplicada</span></td>
+              </tr>
+              <tr>
+                <td>RAG e agentes</td>
+                <td>chunking, vector DB, retrieval, hybrid search, reranking, citations, ACL, LangChain, LangGraph,
+                  LlamaIndex, memória, tools e guardrails.</td>
+                <td><span class="pri pri-must">Obrigatório para IA aplicada</span></td>
+              </tr>
+              <tr>
+                <td>MLOps/LLMOps</td>
+                <td>MLflow, experiment tracking, model registry, prompt versioning, eval, drift, monitoring, cost
+                  tracking, latency, fallback e A/B tests.</td>
+                <td><span class="pri pri-should">Forte diferencial</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="section" data-search-section="" id="backend">
+        <div class="section-header">
+          <div>
+            <h2>Python para desenvolvimento/backend</h2>
+            <p class="section-subtitle">Trilha para construir software real, não apenas scripts isolados.</p>
+          </div>
+          <span class="section-badge">Backend</span>
+        </div>
+        <div class="grid3">
+          <div class="mini-card"><strong>FastAPI</strong><span>Rotas, Pydantic, DI, middleware, exception handlers,
+              OpenAPI, auth, background tasks, async endpoints e testes.</span></div>
+          <div class="mini-card"><strong>Django/DRF</strong><span>Models, migrations, admin, auth, serializers,
+              viewsets, routers, permissions, throttling e pagination.</span></div>
+          <div class="mini-card"><strong>SQLAlchemy/Alembic</strong><span>ORM, sessions, relationships, migrations,
+              transactions, repositories, Unit of Work e async database access.</span></div>
+        </div>
+        <h3>Backend profissional exige</h3>
+        <ul class="doc-list">
+          <li>API REST com versionamento, paginação, filtros, ordenação, status codes e padrão de erro consistente.</li>
+          <li>Autenticação e autorização com JWT/OAuth2, permissões por recurso e validação de escopo.</li>
+          <li>Banco relacional com migrations, transações, índices e testes de integração.</li>
+          <li>Redis para cache, rate limit, locks, sessões temporárias ou fila leve.</li>
+          <li>Workers para tarefas demoradas, retries, DLQ, idempotência e monitoramento.</li>
+          <li>Docker, pipeline CI/CD, logs estruturados, health check, métricas e deploy rastreável.</li>
+        </ul>
+        <h3>Estrutura recomendada para FastAPI</h3>
+        <pre class="code-block"><code class="text">python-service/
 ├── app/
 │   ├── main.py
 │   ├── api/
@@ -1122,157 +1984,384 @@
 ├── pyproject.toml
 ├── Dockerfile
 └── README.md</code></pre>
-  </section><section class="section" data-search-section="" id="ia">
-    <div class="section-header">
-      <div>
-        <h2>Python para inteligência artificial aplicada</h2>
-        <p class="section-subtitle">Do notebook ao produto: dados, ML, LLMs, RAG, agentes e operação.</p>
-      </div>
-      <span class="section-badge">IA aplicada</span>
-    </div>
-    <div class="grid2">
-      <div class="callout"><h3>AI Application Developer</h3><p>Constrói aplicações que usam modelos existentes: RAG, agentes, tool calling, automações, APIs de IA, classificação, sumarização, busca semântica e integração com sistemas.</p></div>
-      <div class="callout green"><h3>Machine Learning Engineer base</h3><p>Treina, avalia, versiona e serve modelos quando necessário: scikit-learn, PyTorch, MLflow, métricas, datasets, pipelines e monitoramento de qualidade.</p></div>
-    </div>
-    <h3>RAG em produção precisa conter</h3>
-    <ul class="doc-list">
-      <li>ingestão de documentos, parsing, limpeza e chunking controlado;</li>
-      <li>embeddings, vector store, metadata filters e ACL por documento;</li>
-      <li>retrieval com similaridade, busca híbrida e reranking quando necessário;</li>
-      <li>resposta com fontes/citações, grounding e controle de alucinação;</li>
-      <li>avaliação com métricas de faithfulness, context relevance e answer relevance;</li>
-      <li>logs auditáveis, custo por requisição, latência p95, fallback e rate limit;</li>
-      <li>proteção contra prompt injection, vazamento de dados e uso indevido de ferramentas.</li>
-    </ul>
-    <h3>Matriz IA por nível</h3>
-    <div class="table-wrap">
-      <table class="">
-        <thead><tr><th>Nível</th><th>Conteúdo</th><th>Resultado esperado</th></tr></thead>
-        <tbody>
-        <tr><td>Base</td><td>NumPy, Pandas, visualização, EDA, limpeza, feature engineering.</td><td>Preparar dados confiáveis e explicar padrões.</td></tr>
-        <tr><td>ML clássico</td><td>scikit-learn, pipelines, métricas, validação, overfitting e tuning.</td><td>Treinar e avaliar modelo tabular simples.</td></tr>
-        <tr><td>Deep Learning</td><td>PyTorch, tensors, autograd, training loop, embeddings e transformers.</td><td>Entender fine-tuning e inferência sem tratar modelo como caixa mágica.</td></tr>
-        <tr><td>LLM/RAG</td><td>LangChain/LangGraph/LlamaIndex, vector DB, retrieval, agents e eval.</td><td>Construir aplicação de IA útil, segura e testável.</td></tr>
-        <tr><td>Operação</td><td>MLflow, LLMOps, monitoramento, custo, latência, drift, rollback e A/B testing.</td><td>Colocar IA em produção com controle técnico.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section><section class="section" data-search-section="" id="roadmap">
-    <div class="section-header">
-      <div>
-        <h2>Roadmap em 8 fases</h2>
-        <p class="section-subtitle">Progressão alinhada ao index do plano integrado: Python como backend + IA aplicada.</p>
-      </div>
-      <span class="section-badge">64 semanas</span>
-    </div>
-    <div class="phase-grid">
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 1 — Python Core profissional</h3><span>Sem 1–8</span></div>
-        <ul class="doc-list"><li>Sintaxe, tipos, controle de fluxo, funções, comprehensions, OOP e módulos.</li><li>Dataclasses, enums, exceptions, context managers, generators, decorators e logging.</li><li>Typing inicial: list[str], dict[str, Any], Optional, Union, Literal e TypedDict.</li><li>Ambiente: venv, pip, uv, pyproject.toml, Ruff, Black, isort e pre-commit.</li><li>Scripts úteis para arquivos, JSON, CSV, logs e automações do projeto Java/blog.</li></ul>
-        <p><strong>Entregável:</strong> pacote Python utilitário com CLI simples, testes, lint, type check e README.</p>
-      </article>
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 2 — Backend Python base</h3><span>Sem 9–16</span></div>
-        <ul class="doc-list"><li>Requests/httpx, consumo de APIs, auth, headers, pagination e tratamento de erro.</li><li>FastAPI, Pydantic v2, rotas, validação, middleware, exception handlers e OpenAPI.</li><li>SQLAlchemy + Alembic, PostgreSQL, models, migrations, repositories e sessions.</li><li>pytest, fixtures, parametrize, mocking, coverage, TestClient/httpx e testes de API.</li><li>AsyncIO, async/await, aiohttp/httpx async, timeouts e concorrência de IO.</li></ul>
-        <p><strong>Entregável:</strong> API FastAPI com CRUD, PostgreSQL, Alembic, testes e Docker Compose.</p>
-      </article>
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 3 — APIs profissionais e automação</h3><span>Sem 17–24</span></div>
-        <ul class="doc-list"><li>FastAPI avançado: DI, lifespan, settings, background tasks, auth e estrutura por camadas.</li><li>Pydantic v2: validators, serializers, Field, Annotated, response models e strict validation.</li><li>Workers: Celery, RQ, Dramatiq ou Arq, retries, DLQ, idempotência e scheduled jobs.</li><li>Integração com Kafka/RabbitMQ/SQS, mensagens, poison messages e observabilidade de jobs.</li><li>CLIs com Typer/Click, automação de deploy, análise de logs e geração de relatórios.</li></ul>
-        <p><strong>Entregável:</strong> worker assíncrono com fila, retry, DLQ, logs estruturados e dashboard simples.</p>
-      </article>
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 4 — Dados, EDA e ML clássico</h3><span>Sem 25–32</span></div>
-        <ul class="doc-list"><li>NumPy: arrays, broadcasting, slicing, vetorização e operações matemáticas.</li><li>Pandas: DataFrames, groupby, merge, pivot, datas, missing values, limpeza e export.</li><li>Polars: lazy evaluation, arquivos grandes, expressões e performance.</li><li>Visualização: Matplotlib, Seaborn, Plotly, distribuições, correlação e séries temporais.</li><li>scikit-learn: preprocessing, train/test, cross-validation, pipelines, regressão, árvores e métricas.</li></ul>
-        <p><strong>Entregável:</strong> pipeline ML clássico com dataset limpo, métricas, relatório e endpoint de inferência inicial.</p>
-      </article>
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 5 — PyTorch, NLP e embeddings</h3><span>Sem 33–40</span></div>
-        <ul class="doc-list"><li>PyTorch: tensors, autograd, nn.Module, optimizers, losses e training loop.</li><li>Datasets/DataLoaders, batching, transforms, checkpointing e inferência.</li><li>Embeddings: Word2Vec, sentence embeddings, modelos pré-treinados e similaridade.</li><li>Hugging Face: tokenizers, pipeline, transformers, inference e fine-tuning leve com LoRA/PEFT.</li><li>Integração com APIs Python e Java para servir inferência.</li></ul>
-        <p><strong>Entregável:</strong> classificador ou buscador semântico com embeddings, avaliação e API de inferência.</p>
-      </article>
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 6 — LLMs, RAG e agentes</h3><span>Sem 41–48</span></div>
-        <ul class="doc-list"><li>LangChain, LangGraph e LlamaIndex: chains, retrievers, agents, tools e memória.</li><li>RAG: ingest, chunk, embed, retrieve, rerank, generate, cite e evaluate.</li><li>Vector stores: pgvector, Chroma, Qdrant, Pinecone, Weaviate e FAISS.</li><li>Agentes: ReAct, graph workflows, planner/executor, human-in-the-loop e validação de saída.</li><li>APIs de modelos: OpenAI SDK, Anthropic SDK, streaming, function calling e structured output.</li></ul>
-        <p><strong>Entregável:</strong> RAG com documentos privados, ACL, fontes, avaliação, logs e proteção contra vazamento.</p>
-      </article>
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 7 — MLOps/LLMOps e produção</h3><span>Sem 49–56</span></div>
-        <ul class="doc-list"><li>MLflow: experiment tracking, model registry, artifacts, serving e comparação de execuções.</li><li>LLMOps: prompt versioning, eval, custo, latência, logs de contexto, fallback e A/B testing.</li><li>Data pipelines: Airflow basics, DAGs, operators, scheduling e retries.</li><li>Observabilidade: OpenTelemetry, Sentry, Prometheus, métricas de inferência e dashboards.</li><li>Segurança em IA: prompt injection, PII masking, LGPD, ACL por documento, rate limit e sandbox de tools.</li></ul>
-        <p><strong>Entregável:</strong> serviço de IA em produção com monitoramento de custo, latência, qualidade e fallback.</p>
-      </article>
-      <article class="phase-card">
-        <div class="phase-head"><h3>Fase 8 — Portfólio Python pleno forte</h3><span>Sem 57–64</span></div>
-        <ul class="doc-list"><li>Python system design: FastAPI vs Django, Python vs Java, arquitetura híbrida e trade-offs.</li><li>Projeto final: FastAPI + RAG + agente + PostgreSQL/pgvector + Redis + observabilidade.</li><li>Integração Java-Python: contratos REST/gRPC, auth, timeouts, retries, tracing e documentação.</li><li>Contribuição open source ou PR técnico em projeto Python.</li><li>Mock interviews: backend Python, ML/RAG, system design e debugging.</li></ul>
-        <p><strong>Entregável:</strong> case study público de produto Python + IA em produção integrado ao portfólio Java.</p>
-      </article>
-    </div>
-  </section><section class="section" data-search-section="" id="checklist">
-    <div class="section-header">
-      <div><h2>Checklists de execução</h2><p class="section-subtitle">Critérios práticos para não estudar de forma superficial.</p></div>
-      <span class="section-badge">Checklist</span>
-    </div>
-    <div class="grid3">
-      <div class="callout"><h3>Checklist semanal</h3><ul class="doc-list"><li>1 commit Python útil.</li><li>1 teste novo ou melhoria de teste.</li><li>1 conceito documentado em README/Obsidian.</li><li>1 integração real com Java, banco, API, worker ou IA.</li><li>1 revisão de typing/lint.</li></ul></div>
-      <div class="callout orange"><h3>Checklist de PR Python</h3><ul class="doc-list"><li>Ruff/Black/isort OK.</li><li>mypy/pyright sem erro relevante.</li><li>pytest passando.</li><li>Logs sem dados sensíveis.</li><li>Tratamento de exceção e status HTTP coerente.</li><li>OpenAPI atualizado se houver API.</li></ul></div>
-      <div class="callout green"><h3>Checklist IA em produção</h3><ul class="doc-list"><li>Fonte/citação quando usar RAG.</li><li>ACL por documento.</li><li>Métrica de qualidade.</li><li>Custo e latência medidos.</li><li>Fallback definido.</li><li>Prompt/model versionado.</li><li>Proteção contra prompt injection.</li></ul></div>
-    </div>
-    <h3>Checklist de prontidão para pleno forte</h3>
-    <div class="table-wrap">
-      <table class="">
-        <thead><tr><th>Item</th><th>Critério de aprovação</th></tr></thead>
-        <tbody>
-        <tr><td>API backend</td><td>Cria API FastAPI com auth, banco, migrations, cache, testes, Docker e OpenAPI.</td></tr>
-        <tr><td>Projeto Django</td><td>Entende quando usar Django/DRF para produtividade, admin, ORM e painéis.</td></tr>
-        <tr><td>Qualidade</td><td>Usa typing, Pydantic, pytest, Ruff, mypy/pyright, pre-commit e CI.</td></tr>
-        <tr><td>Dados</td><td>Manipula dados com Pandas/NumPy/Polars e gera análises reprodutíveis.</td></tr>
-        <tr><td>ML</td><td>Treina e avalia modelo com scikit-learn e sabe explicar métricas.</td></tr>
-        <tr><td>Deep Learning</td><td>Entende PyTorch o suficiente para inferência, embeddings e fine-tuning leve.</td></tr>
-        <tr><td>RAG</td><td>Constrói RAG com chunking, vector DB, fontes, eval, ACL e logs.</td></tr>
-        <tr><td>Agentes</td><td>Cria agente com tools limitadas, validação de saída, memória e auditoria.</td></tr>
-        <tr><td>Produção</td><td>Monitora custo, latência, erro, drift/qualidade e tem fallback.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section><section class="section" data-search-section="" id="projetos">
-    <div class="section-header">
-      <div><h2>Projetos práticos obrigatórios</h2><p class="section-subtitle">Projetos que demonstram domínio real para mercado e entrevistas.</p></div>
-      <span class="section-badge">Portfólio</span>
-    </div>
-    <div class="grid2">
-      <div class="mini-card"><strong>1. API Python profissional</strong><span>FastAPI, PostgreSQL, SQLAlchemy, Alembic, Redis, JWT/OAuth2, pytest, Docker, GitHub Actions, OpenAPI e logs estruturados.</span></div>
-      <div class="mini-card"><strong>2. Worker assíncrono</strong><span>Celery/RQ/Arq, Redis/RabbitMQ/SQS, retry, DLQ, idempotência, monitoramento, scheduled jobs e documentação de falhas.</span></div>
-      <div class="mini-card"><strong>3. Pipeline ML clássico</strong><span>Pandas, scikit-learn, MLflow, métricas, model registry simples, endpoint de inferência e relatório técnico.</span></div>
-      <div class="mini-card"><strong>4. RAG com documentos privados</strong><span>FastAPI, LangChain/LlamaIndex, pgvector/Qdrant/Chroma, embeddings, reranking, citations, auth, ACL e avaliação.</span></div>
-      <div class="mini-card"><strong>5. Agente com ferramentas</strong><span>LangGraph, ferramentas internas, validação Pydantic, human-in-the-loop, logs auditáveis, escopo limitado e fallback.</span></div>
-      <div class="mini-card"><strong>6. Integração Java + Python</strong><span>Spring Boot chamando serviço FastAPI via REST/gRPC, contratos, retries, timeouts, tracing e documentação de arquitetura.</span></div>
-    </div>
-  </section><section class="section" data-search-section="" id="consulta">
-    <div class="section-header">
-      <div><h2>Consulta rápida</h2><p class="section-subtitle">Resumo objetivo para revisão e entrevistas.</p></div>
-      <span class="section-badge">Revisão</span>
-    </div>
-    <div class="table-wrap">
-      <table class="">
-        <thead><tr><th>Pergunta</th><th>Resposta curta esperada</th></tr></thead>
-        <tbody>
-        <tr><td>FastAPI ou Django?</td><td>FastAPI para APIs modernas, microsserviços e IA; Django para produto web, admin, ORM integrado e produtividade full-stack.</td></tr>
-        <tr><td>Async sempre melhora performance?</td><td>Não. Ajuda em I/O concorrente; para CPU-bound use multiprocessing, workers, otimização ou serviço separado.</td></tr>
-        <tr><td>Por que typing importa?</td><td>Melhora contrato, documentação, refatoração, validação com Pydantic e reduz erro em projetos grandes.</td></tr>
-        <tr><td>Quando usar worker?</td><td>Para tarefas demoradas, instáveis ou reprocessáveis: e-mail, parsing, IA, relatórios, ingestão e integrações externas.</td></tr>
-        <tr><td>O que torna um RAG bom?</td><td>Boa ingestão, chunking correto, retrieval relevante, citações, avaliação, ACL, logs e controle de alucinação.</td></tr>
-        <tr><td>O que medir em LLMOps?</td><td>Custo, latência, erro, qualidade, faithfulness, contexto usado, taxa de fallback e versão do prompt/modelo.</td></tr>
-        <tr><td>O que é prompt injection?</td><td>Tentativa de manipular o modelo para ignorar regras, revelar dados ou usar ferramentas de forma indevida.</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </section><section class="section" data-search-section="" id="snippets">
-    <div class="section-header">
-      <div><h2>Snippets úteis</h2><p class="section-subtitle">Exemplos mínimos para consulta rápida.</p></div>
-      <span class="section-badge">Código</span>
-    </div>
-    <h3>FastAPI com health check e exception handler</h3>
-    <pre class="code-block"><code class="python">from fastapi import FastAPI, Request
+      </section>
+      <section class="section" data-search-section="" id="ia">
+        <div class="section-header">
+          <div>
+            <h2>Python para inteligência artificial aplicada</h2>
+            <p class="section-subtitle">Do notebook ao produto: dados, ML, LLMs, RAG, agentes e operação.</p>
+          </div>
+          <span class="section-badge">IA aplicada</span>
+        </div>
+        <div class="grid2">
+          <div class="callout">
+            <h3>AI Application Developer</h3>
+            <p>Constrói aplicações que usam modelos existentes: RAG, agentes, tool calling, automações, APIs de IA,
+              classificação, sumarização, busca semântica e integração com sistemas.</p>
+          </div>
+          <div class="callout green">
+            <h3>Machine Learning Engineer base</h3>
+            <p>Treina, avalia, versiona e serve modelos quando necessário: scikit-learn, PyTorch, MLflow, métricas,
+              datasets, pipelines e monitoramento de qualidade.</p>
+          </div>
+        </div>
+        <h3>RAG em produção precisa conter</h3>
+        <ul class="doc-list">
+          <li>ingestão de documentos, parsing, limpeza e chunking controlado;</li>
+          <li>embeddings, vector store, metadata filters e ACL por documento;</li>
+          <li>retrieval com similaridade, busca híbrida e reranking quando necessário;</li>
+          <li>resposta com fontes/citações, grounding e controle de alucinação;</li>
+          <li>avaliação com métricas de faithfulness, context relevance e answer relevance;</li>
+          <li>logs auditáveis, custo por requisição, latência p95, fallback e rate limit;</li>
+          <li>proteção contra prompt injection, vazamento de dados e uso indevido de ferramentas.</li>
+        </ul>
+        <h3>Matriz IA por nível</h3>
+        <div class="table-wrap">
+          <table class="">
+            <thead>
+              <tr>
+                <th>Nível</th>
+                <th>Conteúdo</th>
+                <th>Resultado esperado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Base</td>
+                <td>NumPy, Pandas, visualização, EDA, limpeza, feature engineering.</td>
+                <td>Preparar dados confiáveis e explicar padrões.</td>
+              </tr>
+              <tr>
+                <td>ML clássico</td>
+                <td>scikit-learn, pipelines, métricas, validação, overfitting e tuning.</td>
+                <td>Treinar e avaliar modelo tabular simples.</td>
+              </tr>
+              <tr>
+                <td>Deep Learning</td>
+                <td>PyTorch, tensors, autograd, training loop, embeddings e transformers.</td>
+                <td>Entender fine-tuning e inferência sem tratar modelo como caixa mágica.</td>
+              </tr>
+              <tr>
+                <td>LLM/RAG</td>
+                <td>LangChain/LangGraph/LlamaIndex, vector DB, retrieval, agents e eval.</td>
+                <td>Construir aplicação de IA útil, segura e testável.</td>
+              </tr>
+              <tr>
+                <td>Operação</td>
+                <td>MLflow, LLMOps, monitoramento, custo, latência, drift, rollback e A/B testing.</td>
+                <td>Colocar IA em produção com controle técnico.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="section" data-search-section="" id="roadmap">
+        <div class="section-header">
+          <div>
+            <h2>Roadmap em 8 fases</h2>
+            <p class="section-subtitle">Progressão alinhada ao index do plano integrado: Python como backend + IA
+              aplicada.</p>
+          </div>
+          <span class="section-badge">64 semanas</span>
+        </div>
+        <div class="phase-grid">
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 1 — Python Core profissional</h3><span>Sem 1–8</span>
+            </div>
+            <ul class="doc-list">
+              <li>Sintaxe, tipos, controle de fluxo, funções, comprehensions, OOP e módulos.</li>
+              <li>Dataclasses, enums, exceptions, context managers, generators, decorators e logging.</li>
+              <li>Typing inicial: list[str], dict[str, Any], Optional, Union, Literal e TypedDict.</li>
+              <li>Ambiente: venv, pip, uv, pyproject.toml, Ruff, Black, isort e pre-commit.</li>
+              <li>Scripts úteis para arquivos, JSON, CSV, logs e automações do projeto Java/blog.</li>
+            </ul>
+            <p><strong>Entregável:</strong> pacote Python utilitário com CLI simples, testes, lint, type check e README.
+            </p>
+          </article>
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 2 — Backend Python base</h3><span>Sem 9–16</span>
+            </div>
+            <ul class="doc-list">
+              <li>Requests/httpx, consumo de APIs, auth, headers, pagination e tratamento de erro.</li>
+              <li>FastAPI, Pydantic v2, rotas, validação, middleware, exception handlers e OpenAPI.</li>
+              <li>SQLAlchemy + Alembic, PostgreSQL, models, migrations, repositories e sessions.</li>
+              <li>pytest, fixtures, parametrize, mocking, coverage, TestClient/httpx e testes de API.</li>
+              <li>AsyncIO, async/await, aiohttp/httpx async, timeouts e concorrência de IO.</li>
+            </ul>
+            <p><strong>Entregável:</strong> API FastAPI com CRUD, PostgreSQL, Alembic, testes e Docker Compose.</p>
+          </article>
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 3 — APIs profissionais e automação</h3><span>Sem 17–24</span>
+            </div>
+            <ul class="doc-list">
+              <li>FastAPI avançado: DI, lifespan, settings, background tasks, auth e estrutura por camadas.</li>
+              <li>Pydantic v2: validators, serializers, Field, Annotated, response models e strict validation.</li>
+              <li>Workers: Celery, RQ, Dramatiq ou Arq, retries, DLQ, idempotência e scheduled jobs.</li>
+              <li>Integração com Kafka/RabbitMQ/SQS, mensagens, poison messages e observabilidade de jobs.</li>
+              <li>CLIs com Typer/Click, automação de deploy, análise de logs e geração de relatórios.</li>
+            </ul>
+            <p><strong>Entregável:</strong> worker assíncrono com fila, retry, DLQ, logs estruturados e dashboard
+              simples.</p>
+          </article>
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 4 — Dados, EDA e ML clássico</h3><span>Sem 25–32</span>
+            </div>
+            <ul class="doc-list">
+              <li>NumPy: arrays, broadcasting, slicing, vetorização e operações matemáticas.</li>
+              <li>Pandas: DataFrames, groupby, merge, pivot, datas, missing values, limpeza e export.</li>
+              <li>Polars: lazy evaluation, arquivos grandes, expressões e performance.</li>
+              <li>Visualização: Matplotlib, Seaborn, Plotly, distribuições, correlação e séries temporais.</li>
+              <li>scikit-learn: preprocessing, train/test, cross-validation, pipelines, regressão, árvores e métricas.
+              </li>
+            </ul>
+            <p><strong>Entregável:</strong> pipeline ML clássico com dataset limpo, métricas, relatório e endpoint de
+              inferência inicial.</p>
+          </article>
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 5 — PyTorch, NLP e embeddings</h3><span>Sem 33–40</span>
+            </div>
+            <ul class="doc-list">
+              <li>PyTorch: tensors, autograd, nn.Module, optimizers, losses e training loop.</li>
+              <li>Datasets/DataLoaders, batching, transforms, checkpointing e inferência.</li>
+              <li>Embeddings: Word2Vec, sentence embeddings, modelos pré-treinados e similaridade.</li>
+              <li>Hugging Face: tokenizers, pipeline, transformers, inference e fine-tuning leve com LoRA/PEFT.</li>
+              <li>Integração com APIs Python e Java para servir inferência.</li>
+            </ul>
+            <p><strong>Entregável:</strong> classificador ou buscador semântico com embeddings, avaliação e API de
+              inferência.</p>
+          </article>
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 6 — LLMs, RAG e agentes</h3><span>Sem 41–48</span>
+            </div>
+            <ul class="doc-list">
+              <li>LangChain, LangGraph e LlamaIndex: chains, retrievers, agents, tools e memória.</li>
+              <li>RAG: ingest, chunk, embed, retrieve, rerank, generate, cite e evaluate.</li>
+              <li>Vector stores: pgvector, Chroma, Qdrant, Pinecone, Weaviate e FAISS.</li>
+              <li>Agentes: ReAct, graph workflows, planner/executor, human-in-the-loop e validação de saída.</li>
+              <li>APIs de modelos: OpenAI SDK, Anthropic SDK, streaming, function calling e structured output.</li>
+            </ul>
+            <p><strong>Entregável:</strong> RAG com documentos privados, ACL, fontes, avaliação, logs e proteção contra
+              vazamento.</p>
+          </article>
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 7 — MLOps/LLMOps e produção</h3><span>Sem 49–56</span>
+            </div>
+            <ul class="doc-list">
+              <li>MLflow: experiment tracking, model registry, artifacts, serving e comparação de execuções.</li>
+              <li>LLMOps: prompt versioning, eval, custo, latência, logs de contexto, fallback e A/B testing.</li>
+              <li>Data pipelines: Airflow basics, DAGs, operators, scheduling e retries.</li>
+              <li>Observabilidade: OpenTelemetry, Sentry, Prometheus, métricas de inferência e dashboards.</li>
+              <li>Segurança em IA: prompt injection, PII masking, LGPD, ACL por documento, rate limit e sandbox de
+                tools.</li>
+            </ul>
+            <p><strong>Entregável:</strong> serviço de IA em produção com monitoramento de custo, latência, qualidade e
+              fallback.</p>
+          </article>
+          <article class="phase-card">
+            <div class="phase-head">
+              <h3>Fase 8 — Portfólio Python pleno forte</h3><span>Sem 57–64</span>
+            </div>
+            <ul class="doc-list">
+              <li>Python system design: FastAPI vs Django, Python vs Java, arquitetura híbrida e trade-offs.</li>
+              <li>Projeto final: FastAPI + RAG + agente + PostgreSQL/pgvector + Redis + observabilidade.</li>
+              <li>Integração Java-Python: contratos REST/gRPC, auth, timeouts, retries, tracing e documentação.</li>
+              <li>Contribuição open source ou PR técnico em projeto Python.</li>
+              <li>Mock interviews: backend Python, ML/RAG, system design e debugging.</li>
+            </ul>
+            <p><strong>Entregável:</strong> case study público de produto Python + IA em produção integrado ao portfólio
+              Java.</p>
+          </article>
+        </div>
+      </section>
+      <section class="section" data-search-section="" id="checklist">
+        <div class="section-header">
+          <div>
+            <h2>Checklists de execução</h2>
+            <p class="section-subtitle">Critérios práticos para não estudar de forma superficial.</p>
+          </div>
+          <span class="section-badge">Checklist</span>
+        </div>
+        <div class="grid3">
+          <div class="callout">
+            <h3>Checklist semanal</h3>
+            <ul class="doc-list">
+              <li>1 commit Python útil.</li>
+              <li>1 teste novo ou melhoria de teste.</li>
+              <li>1 conceito documentado em README/Obsidian.</li>
+              <li>1 integração real com Java, banco, API, worker ou IA.</li>
+              <li>1 revisão de typing/lint.</li>
+            </ul>
+          </div>
+          <div class="callout orange">
+            <h3>Checklist de PR Python</h3>
+            <ul class="doc-list">
+              <li>Ruff/Black/isort OK.</li>
+              <li>mypy/pyright sem erro relevante.</li>
+              <li>pytest passando.</li>
+              <li>Logs sem dados sensíveis.</li>
+              <li>Tratamento de exceção e status HTTP coerente.</li>
+              <li>OpenAPI atualizado se houver API.</li>
+            </ul>
+          </div>
+          <div class="callout green">
+            <h3>Checklist IA em produção</h3>
+            <ul class="doc-list">
+              <li>Fonte/citação quando usar RAG.</li>
+              <li>ACL por documento.</li>
+              <li>Métrica de qualidade.</li>
+              <li>Custo e latência medidos.</li>
+              <li>Fallback definido.</li>
+              <li>Prompt/model versionado.</li>
+              <li>Proteção contra prompt injection.</li>
+            </ul>
+          </div>
+        </div>
+        <h3>Checklist de prontidão para pleno forte</h3>
+        <div class="table-wrap">
+          <table class="">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Critério de aprovação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>API backend</td>
+                <td>Cria API FastAPI com auth, banco, migrations, cache, testes, Docker e OpenAPI.</td>
+              </tr>
+              <tr>
+                <td>Projeto Django</td>
+                <td>Entende quando usar Django/DRF para produtividade, admin, ORM e painéis.</td>
+              </tr>
+              <tr>
+                <td>Qualidade</td>
+                <td>Usa typing, Pydantic, pytest, Ruff, mypy/pyright, pre-commit e CI.</td>
+              </tr>
+              <tr>
+                <td>Dados</td>
+                <td>Manipula dados com Pandas/NumPy/Polars e gera análises reprodutíveis.</td>
+              </tr>
+              <tr>
+                <td>ML</td>
+                <td>Treina e avalia modelo com scikit-learn e sabe explicar métricas.</td>
+              </tr>
+              <tr>
+                <td>Deep Learning</td>
+                <td>Entende PyTorch o suficiente para inferência, embeddings e fine-tuning leve.</td>
+              </tr>
+              <tr>
+                <td>RAG</td>
+                <td>Constrói RAG com chunking, vector DB, fontes, eval, ACL e logs.</td>
+              </tr>
+              <tr>
+                <td>Agentes</td>
+                <td>Cria agente com tools limitadas, validação de saída, memória e auditoria.</td>
+              </tr>
+              <tr>
+                <td>Produção</td>
+                <td>Monitora custo, latência, erro, drift/qualidade e tem fallback.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="section" data-search-section="" id="projetos">
+        <div class="section-header">
+          <div>
+            <h2>Projetos práticos obrigatórios</h2>
+            <p class="section-subtitle">Projetos que demonstram domínio real para mercado e entrevistas.</p>
+          </div>
+          <span class="section-badge">Portfólio</span>
+        </div>
+        <div class="grid2">
+          <div class="mini-card"><strong>1. API Python profissional</strong><span>FastAPI, PostgreSQL, SQLAlchemy,
+              Alembic, Redis, JWT/OAuth2, pytest, Docker, GitHub Actions, OpenAPI e logs estruturados.</span></div>
+          <div class="mini-card"><strong>2. Worker assíncrono</strong><span>Celery/RQ/Arq, Redis/RabbitMQ/SQS, retry,
+              DLQ, idempotência, monitoramento, scheduled jobs e documentação de falhas.</span></div>
+          <div class="mini-card"><strong>3. Pipeline ML clássico</strong><span>Pandas, scikit-learn, MLflow, métricas,
+              model registry simples, endpoint de inferência e relatório técnico.</span></div>
+          <div class="mini-card"><strong>4. RAG com documentos privados</strong><span>FastAPI, LangChain/LlamaIndex,
+              pgvector/Qdrant/Chroma, embeddings, reranking, citations, auth, ACL e avaliação.</span></div>
+          <div class="mini-card"><strong>5. Agente com ferramentas</strong><span>LangGraph, ferramentas internas,
+              validação Pydantic, human-in-the-loop, logs auditáveis, escopo limitado e fallback.</span></div>
+          <div class="mini-card"><strong>6. Integração Java + Python</strong><span>Spring Boot chamando serviço FastAPI
+              via REST/gRPC, contratos, retries, timeouts, tracing e documentação de arquitetura.</span></div>
+        </div>
+      </section>
+      <section class="section" data-search-section="" id="consulta">
+        <div class="section-header">
+          <div>
+            <h2>Consulta rápida</h2>
+            <p class="section-subtitle">Resumo objetivo para revisão e entrevistas.</p>
+          </div>
+          <span class="section-badge">Revisão</span>
+        </div>
+        <div class="table-wrap">
+          <table class="">
+            <thead>
+              <tr>
+                <th>Pergunta</th>
+                <th>Resposta curta esperada</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>FastAPI ou Django?</td>
+                <td>FastAPI para APIs modernas, microsserviços e IA; Django para produto web, admin, ORM integrado e
+                  produtividade full-stack.</td>
+              </tr>
+              <tr>
+                <td>Async sempre melhora performance?</td>
+                <td>Não. Ajuda em I/O concorrente; para CPU-bound use multiprocessing, workers, otimização ou serviço
+                  separado.</td>
+              </tr>
+              <tr>
+                <td>Por que typing importa?</td>
+                <td>Melhora contrato, documentação, refatoração, validação com Pydantic e reduz erro em projetos
+                  grandes.</td>
+              </tr>
+              <tr>
+                <td>Quando usar worker?</td>
+                <td>Para tarefas demoradas, instáveis ou reprocessáveis: e-mail, parsing, IA, relatórios, ingestão e
+                  integrações externas.</td>
+              </tr>
+              <tr>
+                <td>O que torna um RAG bom?</td>
+                <td>Boa ingestão, chunking correto, retrieval relevante, citações, avaliação, ACL, logs e controle de
+                  alucinação.</td>
+              </tr>
+              <tr>
+                <td>O que medir em LLMOps?</td>
+                <td>Custo, latência, erro, qualidade, faithfulness, contexto usado, taxa de fallback e versão do
+                  prompt/modelo.</td>
+              </tr>
+              <tr>
+                <td>O que é prompt injection?</td>
+                <td>Tentativa de manipular o modelo para ignorar regras, revelar dados ou usar ferramentas de forma
+                  indevida.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="section" data-search-section="" id="snippets">
+        <div class="section-header">
+          <div>
+            <h2>Snippets úteis</h2>
+            <p class="section-subtitle">Exemplos mínimos para consulta rápida.</p>
+          </div>
+          <span class="section-badge">Código</span>
+        </div>
+        <h3>FastAPI com health check e exception handler</h3>
+        <pre class="code-block"><code class="python">from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
@@ -1299,8 +2388,8 @@ async def api_error_handler(request: Request, exc: ApiError):
 @app.get("/health")
 async def health():
     return {"status": "UP"}</code></pre>
-    <h3>pyproject.toml base</h3>
-    <pre class="code-block"><code class="toml">[project]
+        <h3>pyproject.toml base</h3>
+        <pre class="code-block"><code class="toml">[project]
 name = "python-ai-service"
 version = "0.1.0"
 requires-python = "&gt;=3.12"
@@ -1319,8 +2408,8 @@ line-length = 100
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 python_files = ["test_*.py"]</code></pre>
-    <h3>Comandos essenciais</h3>
-    <pre class="code-block"><code class="bash"># ambiente e dependências
+        <h3>Comandos essenciais</h3>
+        <pre class="code-block"><code class="bash"># ambiente e dependências
 python -m venv .venv
 source .venv/bin/activate
 pip install -U pip
@@ -1337,248 +2426,272 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 # Alembic
 alembic revision --autogenerate -m "create_initial_tables"
 alembic upgrade head</code></pre>
-  </section><section class="section doc-section searchable-section" data-search-section="" id="referencias">
-    <div class="section-header doc-section-heading">
-      <div>
-        <h2>Referências técnicas</h2>
-        <p class="section-subtitle">Fontes oficiais e guias confiáveis para aprofundamento em Python, backend, dados, IA aplicada, RAG, agentes e produção.</p>
+      </section>
+      <section class="section doc-section searchable-section" data-search-section="" id="referencias">
+        <div class="section-header doc-section-heading">
+          <div>
+            <h2>Referências técnicas</h2>
+            <p class="section-subtitle">Fontes oficiais e guias confiáveis para aprofundamento em Python, backend,
+              dados, IA aplicada, RAG, agentes e produção.</p>
+          </div>
+          <span class="section-badge">Referências</span>
+        </div>
+
+        <div class="ref-grid">
+          <article class="ref-card">
+            <strong>Python Documentation</strong>
+            <p>Documentação oficial da linguagem, biblioteca padrão, typing, asyncio, logging, packaging e recursos
+              centrais.</p>
+            <a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">docs.python.org/3</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Python Typing</strong>
+            <p>Referência oficial para type hints, Protocol, TypedDict, generics, overloads e recursos modernos de
+              tipagem.</p>
+            <a href="https://docs.python.org/3/library/typing.html" target="_blank"
+              rel="noopener noreferrer">docs.python.org/typing</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>FastAPI Documentation</strong>
+            <p>APIs modernas com Pydantic, dependency injection, async endpoints, OpenAPI, security e testes.</p>
+            <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">fastapi.tiangolo.com</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Pydantic Documentation</strong>
+            <p>Validação, serialização, modelos tipados, settings, validators e schemas usados em APIs Python
+              profissionais.</p>
+            <a href="https://docs.pydantic.dev/" target="_blank" rel="noopener noreferrer">docs.pydantic.dev</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Django Documentation</strong>
+            <p>Framework web completo com ORM, migrations, auth, admin, segurança, templates e arquitetura produtiva.
+            </p>
+            <a href="https://docs.djangoproject.com/" target="_blank"
+              rel="noopener noreferrer">docs.djangoproject.com</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Django REST Framework</strong>
+            <p>Serializers, viewsets, routers, permissions, throttling, pagination e construção de APIs REST com Django.
+            </p>
+            <a href="https://www.django-rest-framework.org/" target="_blank"
+              rel="noopener noreferrer">django-rest-framework.org</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>SQLAlchemy Documentation</strong>
+            <p>ORM, Core, sessions, async database access, transações, relacionamentos e modelagem relacional.</p>
+            <a href="https://docs.sqlalchemy.org/" target="_blank" rel="noopener noreferrer">docs.sqlalchemy.org</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Alembic Documentation</strong>
+            <p>Migrations versionadas para projetos com SQLAlchemy, controle de schema e evolução segura de banco.</p>
+            <a href="https://alembic.sqlalchemy.org/" target="_blank"
+              rel="noopener noreferrer">alembic.sqlalchemy.org</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>pytest Documentation</strong>
+            <p>Testes unitários e de integração com fixtures, parametrização, plugins, coverage e estrutura
+              profissional.</p>
+            <a href="https://docs.pytest.org/" target="_blank" rel="noopener noreferrer">docs.pytest.org</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Ruff Documentation</strong>
+            <p>Linting e formatação rápida para projetos Python, com regras modernas e integração com pipelines.</p>
+            <a href="https://docs.astral.sh/ruff/" target="_blank" rel="noopener noreferrer">docs.astral.sh/ruff</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>NumPy Documentation</strong>
+            <p>Arrays, vetorização, broadcasting, operações matemáticas e base numérica para dados e machine learning.
+            </p>
+            <a href="https://numpy.org/doc/" target="_blank" rel="noopener noreferrer">numpy.org/doc</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Pandas Documentation</strong>
+            <p>DataFrames, limpeza, transformação, agrupamentos, joins, séries temporais e análise exploratória de
+              dados.</p>
+            <a href="https://pandas.pydata.org/docs/" target="_blank"
+              rel="noopener noreferrer">pandas.pydata.org/docs</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Polars Documentation</strong>
+            <p>Processamento eficiente de dados com lazy evaluation, expressões, arquivos grandes e performance.</p>
+            <a href="https://docs.pola.rs/" target="_blank" rel="noopener noreferrer">docs.pola.rs</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>scikit-learn User Guide</strong>
+            <p>Machine learning clássico, pipelines, preprocessing, validação, métricas, regressão, classificação e
+              clustering.</p>
+            <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank"
+              rel="noopener noreferrer">scikit-learn.org/user_guide</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>PyTorch Tutorials</strong>
+            <p>Tensors, autograd, datasets, dataloaders, training loop, inferência e deep learning aplicado.</p>
+            <a href="https://pytorch.org/tutorials/" target="_blank" rel="noopener noreferrer">pytorch.org/tutorials</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Hugging Face Documentation</strong>
+            <p>Transformers, tokenizers, datasets, inference, modelos pré-treinados e ecossistema de NLP/LLMs.</p>
+            <a href="https://huggingface.co/docs" target="_blank" rel="noopener noreferrer">huggingface.co/docs</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>LangChain Documentation</strong>
+            <p>Chains, retrievers, tools, structured output, integrações e construção de aplicações com LLMs.</p>
+            <a href="https://python.langchain.com/docs/" target="_blank"
+              rel="noopener noreferrer">python.langchain.com/docs</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>LangGraph Documentation</strong>
+            <p>Workflows com grafos, agentes controláveis, estados, loops, human-in-the-loop e orquestração robusta.</p>
+            <a href="https://langchain-ai.github.io/langgraph/" target="_blank"
+              rel="noopener noreferrer">langchain-ai.github.io/langgraph</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>LlamaIndex Documentation</strong>
+            <p>Ingestão, índices, RAG, conectores, retrievers, query engines e aplicações com dados privados.</p>
+            <a href="https://docs.llamaindex.ai/" target="_blank" rel="noopener noreferrer">docs.llamaindex.ai</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>MLflow Documentation</strong>
+            <p>Experiment tracking, model registry, artifacts, serving, comparação de execuções e MLOps básico.</p>
+            <a href="https://mlflow.org/docs/latest/index.html" target="_blank"
+              rel="noopener noreferrer">mlflow.org/docs</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>OpenTelemetry Documentation</strong>
+            <p>Logs, métricas, traces, propagação de contexto e observabilidade para serviços em produção.</p>
+            <a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener noreferrer">opentelemetry.io/docs</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Prometheus Documentation</strong>
+            <p>Métricas, coleta, PromQL, alertas e monitoramento de aplicações e infraestrutura.</p>
+            <a href="https://prometheus.io/docs/introduction/overview/" target="_blank"
+              rel="noopener noreferrer">prometheus.io/docs</a>
+          </article>
+        </div>
+
+        <div class="callout blue mt-3">
+          <h3>Observação de versão</h3>
+          <p>Python, frameworks, bibliotecas de IA, SDKs e ferramentas de produção evoluem rapidamente. Antes de aplicar
+            em produção, valide a versão atual na documentação oficial e revise compatibilidade, segurança, licenças e
+            limitações operacionais.</p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-row">
+      <a class="hero-back-link" href="../index.html" style="margin-bottom:0">← Voltar ao dashboard principal</a>
+      <div class="hero-meta" style="margin-top:0;justify-content:center">
+        <span class="tag">Python</span>
+        <span class="tag g">Backend</span>
+        <span class="tag y">Dados</span>
+        <span class="tag o">IA aplicada</span>
       </div>
-      <span class="section-badge">Referências</span>
     </div>
+    <p><strong>Python Backend, Automação e Inteligência Artificial</strong> · Trilha do Plano Integrado de Estudos</p>
+  </footer>
 
-    <div class="ref-grid">
-      <article class="ref-card">
-        <strong>Python Documentation</strong>
-        <p>Documentação oficial da linguagem, biblioteca padrão, typing, asyncio, logging, packaging e recursos centrais.</p>
-        <a href="https://docs.python.org/3/" target="_blank" rel="noopener noreferrer">docs.python.org/3</a>
-      </article>
+  <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <script>
 
-      <article class="ref-card">
-        <strong>Python Typing</strong>
-        <p>Referência oficial para type hints, Protocol, TypedDict, generics, overloads e recursos modernos de tipagem.</p>
-        <a href="https://docs.python.org/3/library/typing.html" target="_blank" rel="noopener noreferrer">docs.python.org/typing</a>
-      </article>
+    // ── Nav bar scroll arrows ──────────────────────────
+    (function () {
+      const bar = document.getElementById('navSectionsBar');
+      const btnL = document.getElementById('navScrollLeft');
+      const btnR = document.getElementById('navScrollRight');
+      const STEP = 320;
+      if (!bar || !btnL || !btnR) return;
+      function update() {
+        const atStart = bar.scrollLeft <= 4;
+        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+        btnL.classList.toggle('hidden', atStart);
+        btnR.classList.toggle('hidden', atEnd);
+      }
+      btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
+      btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
+      bar.addEventListener('scroll', update, { passive: true });
+      function scrollActiveIntoView() {
+        const active = bar.querySelector('.nav-link.active');
+        if (active) { active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' }); }
+      }
+      update();
+      setTimeout(update, 600);
+      window._navScrollActiveIntoView = scrollActiveIntoView;
+    })();
 
-      <article class="ref-card">
-        <strong>FastAPI Documentation</strong>
-        <p>APIs modernas com Pydantic, dependency injection, async endpoints, OpenAPI, security e testes.</p>
-        <a href="https://fastapi.tiangolo.com/" target="_blank" rel="noopener noreferrer">fastapi.tiangolo.com</a>
-      </article>
+    // Back to top
+    window.addEventListener('scroll', () => {
+      document.getElementById('btt').classList.toggle('show', window.scrollY > 400);
+    });
 
-      <article class="ref-card">
-        <strong>Pydantic Documentation</strong>
-        <p>Validação, serialização, modelos tipados, settings, validators e schemas usados em APIs Python profissionais.</p>
-        <a href="https://docs.pydantic.dev/" target="_blank" rel="noopener noreferrer">docs.pydantic.dev</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Django Documentation</strong>
-        <p>Framework web completo com ORM, migrations, auth, admin, segurança, templates e arquitetura produtiva.</p>
-        <a href="https://docs.djangoproject.com/" target="_blank" rel="noopener noreferrer">docs.djangoproject.com</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Django REST Framework</strong>
-        <p>Serializers, viewsets, routers, permissions, throttling, pagination e construção de APIs REST com Django.</p>
-        <a href="https://www.django-rest-framework.org/" target="_blank" rel="noopener noreferrer">django-rest-framework.org</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>SQLAlchemy Documentation</strong>
-        <p>ORM, Core, sessions, async database access, transações, relacionamentos e modelagem relacional.</p>
-        <a href="https://docs.sqlalchemy.org/" target="_blank" rel="noopener noreferrer">docs.sqlalchemy.org</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Alembic Documentation</strong>
-        <p>Migrations versionadas para projetos com SQLAlchemy, controle de schema e evolução segura de banco.</p>
-        <a href="https://alembic.sqlalchemy.org/" target="_blank" rel="noopener noreferrer">alembic.sqlalchemy.org</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>pytest Documentation</strong>
-        <p>Testes unitários e de integração com fixtures, parametrização, plugins, coverage e estrutura profissional.</p>
-        <a href="https://docs.pytest.org/" target="_blank" rel="noopener noreferrer">docs.pytest.org</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Ruff Documentation</strong>
-        <p>Linting e formatação rápida para projetos Python, com regras modernas e integração com pipelines.</p>
-        <a href="https://docs.astral.sh/ruff/" target="_blank" rel="noopener noreferrer">docs.astral.sh/ruff</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>NumPy Documentation</strong>
-        <p>Arrays, vetorização, broadcasting, operações matemáticas e base numérica para dados e machine learning.</p>
-        <a href="https://numpy.org/doc/" target="_blank" rel="noopener noreferrer">numpy.org/doc</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Pandas Documentation</strong>
-        <p>DataFrames, limpeza, transformação, agrupamentos, joins, séries temporais e análise exploratória de dados.</p>
-        <a href="https://pandas.pydata.org/docs/" target="_blank" rel="noopener noreferrer">pandas.pydata.org/docs</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Polars Documentation</strong>
-        <p>Processamento eficiente de dados com lazy evaluation, expressões, arquivos grandes e performance.</p>
-        <a href="https://docs.pola.rs/" target="_blank" rel="noopener noreferrer">docs.pola.rs</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>scikit-learn User Guide</strong>
-        <p>Machine learning clássico, pipelines, preprocessing, validação, métricas, regressão, classificação e clustering.</p>
-        <a href="https://scikit-learn.org/stable/user_guide.html" target="_blank" rel="noopener noreferrer">scikit-learn.org/user_guide</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>PyTorch Tutorials</strong>
-        <p>Tensors, autograd, datasets, dataloaders, training loop, inferência e deep learning aplicado.</p>
-        <a href="https://pytorch.org/tutorials/" target="_blank" rel="noopener noreferrer">pytorch.org/tutorials</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Hugging Face Documentation</strong>
-        <p>Transformers, tokenizers, datasets, inference, modelos pré-treinados e ecossistema de NLP/LLMs.</p>
-        <a href="https://huggingface.co/docs" target="_blank" rel="noopener noreferrer">huggingface.co/docs</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>LangChain Documentation</strong>
-        <p>Chains, retrievers, tools, structured output, integrações e construção de aplicações com LLMs.</p>
-        <a href="https://python.langchain.com/docs/" target="_blank" rel="noopener noreferrer">python.langchain.com/docs</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>LangGraph Documentation</strong>
-        <p>Workflows com grafos, agentes controláveis, estados, loops, human-in-the-loop e orquestração robusta.</p>
-        <a href="https://langchain-ai.github.io/langgraph/" target="_blank" rel="noopener noreferrer">langchain-ai.github.io/langgraph</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>LlamaIndex Documentation</strong>
-        <p>Ingestão, índices, RAG, conectores, retrievers, query engines e aplicações com dados privados.</p>
-        <a href="https://docs.llamaindex.ai/" target="_blank" rel="noopener noreferrer">docs.llamaindex.ai</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>MLflow Documentation</strong>
-        <p>Experiment tracking, model registry, artifacts, serving, comparação de execuções e MLOps básico.</p>
-        <a href="https://mlflow.org/docs/latest/index.html" target="_blank" rel="noopener noreferrer">mlflow.org/docs</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>OpenTelemetry Documentation</strong>
-        <p>Logs, métricas, traces, propagação de contexto e observabilidade para serviços em produção.</p>
-        <a href="https://opentelemetry.io/docs/" target="_blank" rel="noopener noreferrer">opentelemetry.io/docs</a>
-      </article>
-
-      <article class="ref-card">
-        <strong>Prometheus Documentation</strong>
-        <p>Métricas, coleta, PromQL, alertas e monitoramento de aplicações e infraestrutura.</p>
-        <a href="https://prometheus.io/docs/introduction/overview/" target="_blank" rel="noopener noreferrer">prometheus.io/docs</a>
-      </article>
-    </div>
-
-    <div class="callout blue mt-3">
-      <h3>Observação de versão</h3>
-      <p>Python, frameworks, bibliotecas de IA, SDKs e ferramentas de produção evoluem rapidamente. Antes de aplicar em produção, valide a versão atual na documentação oficial e revise compatibilidade, segurança, licenças e limitações operacionais.</p>
-    </div>
-  </section>
-  </div>
-</div>
-
-<footer>
-  <div class="footer-row">
-    <a class="hero-back-link" href="../index.html" style="margin-bottom:0">← Voltar ao dashboard principal</a>
-    <div class="hero-meta" style="margin-top:0;justify-content:center">
-      <span class="tag">Python</span>
-      <span class="tag g">Backend</span>
-      <span class="tag y">Dados</span>
-      <span class="tag o">IA aplicada</span>
-    </div>
-  </div>
-  <p><strong>Python Backend, Automação e Inteligência Artificial</strong> · Trilha do Plano Integrado de Estudos</p>
-</footer>
-
-<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<script>
-
-  // ── Nav bar scroll arrows ──────────────────────────
-  (function(){
-    const bar = document.getElementById('navSectionsBar');
-    const btnL = document.getElementById('navScrollLeft');
-    const btnR = document.getElementById('navScrollRight');
-    const STEP = 320;
-    if(!bar || !btnL || !btnR) return;
-    function update(){
-      const atStart = bar.scrollLeft <= 4;
-      const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-      btnL.classList.toggle('hidden', atStart);
-      btnR.classList.toggle('hidden', atEnd);
+    // Search
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      function normalize(value) { return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+      searchInput.addEventListener('input', function () {
+        const q = normalize(this.value.trim());
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(sec => {
+          sec.classList.remove('is-hidden-by-search', 'search-hit');
+          if (!q) return;
+          const match = normalize(sec.innerText).includes(q);
+          sec.classList.toggle('is-hidden-by-search', !match);
+          sec.classList.toggle('search-hit', match);
+        });
+      });
     }
-    btnL.addEventListener('click', () => bar.scrollBy({left:-STEP, behavior:'smooth'}));
-    btnR.addEventListener('click', () => bar.scrollBy({left: STEP, behavior:'smooth'}));
-    bar.addEventListener('scroll', update, {passive:true});
-    function scrollActiveIntoView(){
-      const active = bar.querySelector('.nav-link.active');
-      if(active){active.scrollIntoView({inline:'nearest', block:'nearest', behavior:'smooth'});}
-    }
-    update();
-    setTimeout(update, 600);
-    window._navScrollActiveIntoView = scrollActiveIntoView;
-  })();
 
-  // Back to top
-  window.addEventListener('scroll', () => {
-    document.getElementById('btt').classList.toggle('show', window.scrollY > 400);
-  });
-
-  // Search
-  const searchInput = document.getElementById('searchInput');
-  if(searchInput){
-    function normalize(value){return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');}
-    searchInput.addEventListener('input', function(){
-      const q = normalize(this.value.trim());
-      const sections = document.querySelectorAll('.section');
-      sections.forEach(sec => {
-        sec.classList.remove('is-hidden-by-search','search-hit');
-        if(!q) return;
-        const match = normalize(sec.innerText).includes(q);
-        sec.classList.toggle('is-hidden-by-search', !match);
-        sec.classList.toggle('search-hit', match);
+    // Smooth anchors
+    Array.from(document.querySelectorAll('a[href^="#"]')).forEach(anchor => {
+      anchor.addEventListener('click', event => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          event.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.replaceState(null, '', anchor.getAttribute('href'));
+        }
       });
     });
-  }
 
-  // Smooth anchors
-  Array.from(document.querySelectorAll('a[href^="#"]')).forEach(anchor => {
-    anchor.addEventListener('click', event => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if(target){
-        event.preventDefault();
-        target.scrollIntoView({behavior:'smooth', block:'start'});
-        history.replaceState(null, '', anchor.getAttribute('href'));
-      }
-    });
-  });
+    // Active nav link on scroll
+    const observedSections = document.querySelectorAll('.section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sidebarLinks = document.querySelectorAll('.sidebar a');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+          sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+          if (window._navScrollActiveIntoView) window._navScrollActiveIntoView();
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
+    observedSections.forEach(s => observer.observe(s));
 
-  // Active nav link on scroll
-  const observedSections = document.querySelectorAll('.section[id]');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sidebarLinks = document.querySelectorAll('.sidebar a');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const id = entry.target.id;
-        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-        sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-        if(window._navScrollActiveIntoView) window._navScrollActiveIntoView();
-      }
-    });
-  }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
-  observedSections.forEach(s => observer.observe(s));
-
-</script>
+  </script>
 </body>
+
 </html>

@@ -1,1271 +1,2556 @@
 <!DOCTYPE html>
 <html lang="pt-BR" data-bs-theme="dark">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inglês Técnico para Programação — Plano Integrado de Estudos</title>
-<meta name="description" content="Trilha completa de inglês técnico para programação: fluência funcional, leitura de documentação, debugging, commits, PRs, README, speaking técnico, entrevistas, revisão ativa e rotina de estudo.">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link href="../assets/css/styles.css" rel="stylesheet">
-<style>
-:root{
-  --bg:#07090f;
-  --surface:#0d1117;
-  --surface2:#141a24;
-  --surface3:rgba(255,255,255,.045);
-  --border:rgba(255,255,255,.09);
-  --border2:rgba(255,255,255,.15);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Inglês Técnico para Programação — Plano Integrado de Estudos</title>
+  <meta name="description"
+    content="Trilha completa de inglês técnico para programação: fluência funcional, leitura de documentação, debugging, commits, PRs, README, speaking técnico, entrevistas, revisão ativa e rotina de estudo.">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet">
+  <link href="../assets/css/styles.css" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07090f;
+      --surface: #0d1117;
+      --surface2: #141a24;
+      --surface3: rgba(255, 255, 255, .045);
+      --border: rgba(255, 255, 255, .09);
+      --border2: rgba(255, 255, 255, .15);
 
-  /* English Technical Track Palette */
-  --accent:#14b8a6;
-  --accent2:#facc15;
-  --accent3:#38bdf8;
-  --accent4:#a78bfa;
-  --accent5:#fb7185;
-  --eng-teal:#14b8a6;
-  --eng-yellow:#facc15;
-  --eng-blue:#38bdf8;
-  --eng-purple:#a78bfa;
-  --eng-pink:#fb7185;
-  --eng-green:#22c55e;
+      /* English Technical Track Palette */
+      --accent: #14b8a6;
+      --accent2: #facc15;
+      --accent3: #38bdf8;
+      --accent4: #a78bfa;
+      --accent5: #fb7185;
+      --eng-teal: #14b8a6;
+      --eng-yellow: #facc15;
+      --eng-blue: #38bdf8;
+      --eng-purple: #a78bfa;
+      --eng-pink: #fb7185;
+      --eng-green: #22c55e;
 
-  --text:#e2e8f0;
-  --muted:#64748b;
-  --muted2:#94a3b8;
-  --code-bg:#060a12;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --muted2: #94a3b8;
+      --code-bg: #060a12;
 
-  --must:#fca5a5;
-  --should:#fcd34d;
-  --nice:#86efac;
-  --future:#93c5fd;
+      --must: #fca5a5;
+      --should: #fcd34d;
+      --nice: #86efac;
+      --future: #93c5fd;
 
-  --doc-bg:var(--bg);
-  --doc-surface:var(--surface);
-  --doc-surface-2:var(--surface2);
-  --doc-border:var(--border);
-  --doc-text:var(--text);
-  --doc-muted:var(--muted2);
-  --doc-code:var(--code-bg);
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:15px}
-body.track-page{
-  font-family:'Inter',sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  line-height:1.7;
-  min-height:100vh;
-  background-image:
-    radial-gradient(ellipse 80% 40% at 10% -5%, rgba(20,184,166,.14) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 30% at 90% 5%, rgba(250,204,21,.08) 0%, transparent 42%),
-    radial-gradient(ellipse 50% 25% at 85% 25%, rgba(56,189,248,.065) 0%, transparent 42%);
-}
-::selection{background:rgba(20,184,166,.28);color:#fff}
-.container{max-width:1240px;margin:0 auto;padding-left:1.5rem;padding-right:1.5rem}
-.mono{font-family:'IBM Plex Mono',monospace}
+      --doc-bg: var(--bg);
+      --doc-surface: var(--surface);
+      --doc-surface-2: var(--surface2);
+      --doc-border: var(--border);
+      --doc-text: var(--text);
+      --doc-muted: var(--muted2);
+      --doc-code: var(--code-bg);
+    }
 
-/* HERO */
-.track-hero-page{
-  padding:4rem 0 3rem;
-  border-bottom:1px solid var(--border);
-  background:linear-gradient(135deg,rgba(20,184,166,.13) 0%,rgba(56,189,248,.06) 54%,rgba(250,204,21,.045) 100%);
-}
-.hero-label{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:.72rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--accent2);
-  margin-bottom:.8rem;
-}
-.track-title{
-  font-family:'Syne',sans-serif;
-  font-size:clamp(2rem,5vw,4rem);
-  font-weight:800;
-  letter-spacing:-.04em;
-  background:linear-gradient(135deg,#fff 34%,var(--accent) 68%,var(--eng-yellow) 100%);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
-  line-height:1.1;
-  margin-bottom:.8rem;
-}
-.track-lead{color:var(--muted2);max-width:980px;font-size:1rem;margin-bottom:0}
-.track-badge-set,.badge-cloud{display:flex;flex-wrap:wrap;gap:.5rem}
-.track-badge-set{margin-top:1.4rem}
-.track-badge-set span,.badge-cloud span{
-  font-family:'IBM Plex Mono',monospace;
-  font-size:.72rem;font-weight:600;padding:.3rem .7rem;border-radius:6px;
-  border:1px solid rgba(20,184,166,.34);background:rgba(20,184,166,.085);color:var(--accent)
-}
-.track-badge-set span:nth-child(3n+2),.badge-cloud span:nth-child(3n+2){border-color:rgba(250,204,21,.35);background:rgba(250,204,21,.08);color:var(--eng-yellow)}
-.track-badge-set span:nth-child(3n),.badge-cloud span:nth-child(3n){border-color:rgba(56,189,248,.32);background:rgba(56,189,248,.08);color:var(--eng-blue)}
-.footer-link,.hero-back-link{
-  display:inline-flex;align-items:center;gap:.4rem;
-  font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:500;
-  color:var(--muted2);text-decoration:none;border:1px solid var(--border);
-  background:rgba(255,255,255,.04);padding:.32rem .75rem;border-radius:6px;transition:all .15s
-}
-.footer-link:hover,.hero-back-link:hover{color:#fff;border-color:rgba(20,184,166,.38);background:rgba(20,184,166,.09);text-decoration:none}
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* SITENAV */
-.sitenav{position:sticky;top:0;z-index:1000;background:rgba(7,9,15,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
-.sitenav-top{display:flex;align-items:center;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(255,255,255,.05)}
-.sitenav-brand{font-family:'Syne',sans-serif;font-size:.9rem;font-weight:800;color:#fff;text-decoration:none;letter-spacing:-.03em;white-space:nowrap;display:flex;align-items:center;gap:.45rem}
-.sitenav-brand span{font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:500;color:var(--accent2);border:1px solid rgba(250,204,21,.32);background:rgba(250,204,21,.08);padding:.15rem .45rem;border-radius:4px;letter-spacing:.04em}
-.nav-ver{font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:var(--muted);white-space:nowrap;padding:.2rem 0}
-.nav-back{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;color:var(--muted);text-decoration:none;border:1px solid var(--border);background:rgba(255,255,255,.03);padding:.3rem .65rem;border-radius:6px;transition:all .15s;white-space:nowrap;display:flex;align-items:center;gap:.35rem}
-.nav-back:hover{color:#fff;border-color:rgba(20,184,166,.35);background:rgba(20,184,166,.08)}
-.sitenav-top-right{display:flex;align-items:center;gap:.8rem;margin-left:auto}
-.search-box,.track-search{background:var(--surface2)!important;border:1px solid var(--border)!important;border-radius:8px;padding:.3rem .7rem;color:#fff!important;font-size:.8rem;outline:none;width:270px;box-shadow:none!important}
-.search-box::placeholder,.track-search::placeholder{color:var(--muted)!important}
-.search-box:focus,.track-search:focus{border-color:rgba(20,184,166,.48)!important}
-.sitenav-bar-outer{position:relative;background:inherit;border-top:1px solid rgba(255,255,255,.05)}
-.sitenav-bar-inner{display:flex;align-items:stretch;overflow-x:auto;scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:rgba(20,184,166,.5) rgba(255,255,255,.04);padding:0 32px}
-.sitenav-bar-inner::-webkit-scrollbar{height:4px}.sitenav-bar-inner::-webkit-scrollbar-track{background:rgba(255,255,255,.03)}.sitenav-bar-inner::-webkit-scrollbar-thumb{background:rgba(20,184,166,.5);border-radius:99px}.sitenav-bar-inner::-webkit-scrollbar-thumb:hover{background:rgba(20,184,166,.8)}
-.sitenav-bar-outer::before,.sitenav-bar-outer::after{content:'';position:absolute;top:0;bottom:4px;width:56px;pointer-events:none;z-index:2;transition:opacity .2s}
-.sitenav-bar-outer::before{left:0;background:linear-gradient(to right,rgba(7,9,15,1) 0%,transparent 100%)}
-.sitenav-bar-outer::after{right:0;background:linear-gradient(to left,rgba(7,9,15,1) 0%,transparent 100%)}
-.nav-scroll-btn{position:absolute;top:0;bottom:4px;width:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:none;color:var(--muted2);cursor:pointer;font-size:1rem;font-weight:700;z-index:3;transition:color .15s,background .15s;border-radius:0}
-.nav-scroll-btn:hover{color:#fff;background:rgba(20,184,166,.08)}
-.nav-scroll-btn.left{left:0}.nav-scroll-btn.right{right:0}.nav-scroll-btn.hidden{opacity:0;pointer-events:none}
-.nav-group{display:flex;align-items:stretch;gap:0;flex-shrink:0;border-right:1px solid rgba(255,255,255,.05);padding:.3rem .4rem}
-.nav-group:last-child{border-right:none;padding-right:.8rem}
-.nav-group-label{font-family:'IBM Plex Mono',monospace;font-size:.6rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:.3rem .5rem .3rem .2rem;white-space:nowrap;display:flex;align-items:center;border-right:1px solid rgba(255,255,255,.06);margin-right:.3rem;flex-shrink:0}
-.nav-link{font-family:'IBM Plex Mono',monospace;font-size:.7rem;font-weight:500;white-space:nowrap;padding:.28rem .55rem;border-radius:5px;border:1px solid transparent;color:var(--muted2);text-decoration:none;transition:all .13s;display:flex;align-items:center}
-.nav-link:hover{color:#fff;background:rgba(20,184,166,.1);border-color:rgba(20,184,166,.25)}
-.nav-link.active{color:var(--accent);background:rgba(20,184,166,.1);border-color:rgba(20,184,166,.3)}
+    html {
+      scroll-behavior: smooth;
+      font-size: 15px
+    }
 
-/* LAYOUT */
-.main{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1240px;margin:0 auto;padding:0 1.5rem}
-.sidebar{position:sticky;top:88px;height:calc(100vh - 88px);overflow-y:auto;padding:1.5rem 1rem 1.5rem 0;border-right:1px solid var(--border);scrollbar-width:thin;scrollbar-color:var(--border) transparent}
-.sidebar-group{margin-bottom:1.4rem}
-.sidebar-label{font-family:'IBM Plex Mono',monospace;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;padding-left:.5rem}
-.sidebar a{display:block;font-size:.78rem;padding:.3rem .5rem;border-radius:5px;color:var(--muted2);text-decoration:none;transition:all .12s;line-height:1.4}
-.sidebar a:hover{color:#fff;background:rgba(255,255,255,.05)}
-.sidebar a.active{color:var(--accent);background:rgba(20,184,166,.08)}
-.content{padding:2rem 0 4rem 2rem}
-#trackMain{padding-top:0!important;padding-bottom:0!important}
+    body.track-page {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      min-height: 100vh;
+      background-image:
+        radial-gradient(ellipse 80% 40% at 10% -5%, rgba(20, 184, 166, .14) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 30% at 90% 5%, rgba(250, 204, 21, .08) 0%, transparent 42%),
+        radial-gradient(ellipse 50% 25% at 85% 25%, rgba(56, 189, 248, .065) 0%, transparent 42%);
+    }
 
-/* CONTENT */
-.doc-section{margin-bottom:2rem;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:clamp(1.2rem,2vw,1.8rem);box-shadow:none}
-.doc-section:target{border-color:rgba(20,184,166,.42);box-shadow:0 0 0 1px rgba(20,184,166,.15)}
-.doc-section-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:1rem;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
-.doc-section-heading h2,.doc-section h2{font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.03em;color:#fff;margin:0}
-.section-subtitle{color:var(--muted2);font-size:.82rem;margin:.25rem 0 0}
-.section-badge{font-family:'IBM Plex Mono',monospace;font-size:.68rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .65rem;border-radius:6px;white-space:nowrap;flex-shrink:0;border:1px solid rgba(250,204,21,.32);background:rgba(250,204,21,.085);color:var(--accent2)}
-.doc-section h3,.exam-card h3,.phase-doc-card h3,.callout h3{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#e2e8f0;margin:1.4rem 0 .6rem}
-.doc-section h4,.phase-doc-card h4{font-size:.9rem;font-weight:700;color:#cbd5e1;margin:.9rem 0 .4rem}
-p{color:var(--muted2);margin-bottom:.75rem;font-size:.88rem}
-.lead{font-size:1rem;color:#cbd5e1}
-ul,ol{color:var(--muted2);padding-left:1.3rem;margin-bottom:.8rem}
-li{margin-bottom:.3rem;font-size:.88rem}
-strong{color:#e2e8f0;font-weight:600}
-em{color:#fde68a;font-style:normal;font-weight:700}
-code{font-family:'IBM Plex Mono',monospace;font-size:.8em;background:rgba(20,184,166,.1);color:var(--accent);padding:.1em .35em;border-radius:4px}
+    ::selection {
+      background: rgba(20, 184, 166, .28);
+      color: #fff
+    }
 
-.doc-hero-card{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(260px,.75fr);gap:1rem;align-items:center}
-.doc-grid-2,.doc-grid-3,.doc-grid-4,.phase-doc-grid{display:grid;gap:1rem}
-.doc-grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.doc-grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.doc-grid-4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.phase-doc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-.metrics-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem;margin:.8rem 0}
-.metric-pill{background:rgba(20,184,166,.08);border:1px solid rgba(20,184,166,.22);border-radius:12px;padding:1rem;text-align:center}
-.metric-pill span{display:block;font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#fff;line-height:1;margin-bottom:.25rem}
-.metric-pill small{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.05em}
-.mini-card,.exam-card,.phase-doc-card,.callout{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:1rem;transition:border-color .15s,background .15s,transform .15s}
-.mini-card strong{display:block;color:#fff;font-size:.82rem;margin-bottom:.25rem}
-.mini-card span,.exam-card p,.phase-doc-card p,.callout p{color:var(--muted2);font-size:.82rem}
-.mini-card:hover,.exam-card:hover,.phase-doc-card:hover{border-color:rgba(20,184,166,.28);background:#151c27;transform:translateY(-1px)}
-.exam-card{position:relative;overflow:hidden}
-.exam-card::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--eng-yellow),var(--eng-blue))}
-.callout{border-left:3px solid var(--accent);background:rgba(20,184,166,.06);border-radius:0 10px 10px 0}
-.callout.accent-blue{border-left-color:var(--eng-blue);background:rgba(56,189,248,.06)}
-.callout.accent-yellow{border-left-color:var(--eng-yellow);background:rgba(250,204,21,.06)}
-.callout.accent-purple{border-left-color:var(--eng-purple);background:rgba(167,139,250,.06)}
-.callout.accent-red{border-left-color:var(--eng-pink);background:rgba(251,113,133,.06)}
-.callout h3,.callout h4{margin-top:0;color:#fff}
-.callout p,.callout ul{margin-bottom:0}
-.doc-list{color:var(--muted2);padding-left:1.3rem;margin:.5rem 0 1rem}
-.doc-list li{margin-bottom:.35rem}
-.phase-doc-card{position:relative;overflow:hidden;padding:1.1rem}
-.phase-doc-card::before{content:'';position:absolute;inset:0 auto 0 0;width:4px;background:linear-gradient(180deg,var(--accent),var(--eng-yellow),var(--eng-blue))}
-.phase-doc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:.75rem;flex-wrap:wrap;padding-bottom:.6rem;margin-bottom:.7rem;border-bottom:1px solid var(--border)}
-.phase-doc-head h3{margin:0;font-size:.92rem;color:#fff}
-.phase-doc-head span{font-family:'IBM Plex Mono',monospace;font-size:.7rem;color:var(--accent2);white-space:nowrap}
-.table-responsive{overflow-x:auto;border:1px solid var(--border);border-radius:12px;margin:.8rem 0 1rem}
-.doc-table{border-collapse:collapse;width:100%;min-width:760px;margin-bottom:0!important}
-.doc-table thead tr,.doc-table th{background:rgba(20,184,166,.10)!important}
-.doc-table th{font-family:'IBM Plex Mono',monospace;font-size:.72rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.7rem 1rem!important;text-align:left;color:#fff!important;border-bottom:1px solid var(--border2)!important;border-color:var(--border)!important;white-space:nowrap}
-.doc-table td{padding:.65rem 1rem!important;font-size:.82rem;color:#cbd5e1!important;border-bottom:1px solid var(--border)!important;border-color:var(--border)!important;vertical-align:top}
-.doc-table tr:last-child td{border-bottom:none!important}
-.doc-table tr:hover td{background:rgba(255,255,255,.025)!important}
-.dense-table td,.dense-table th{font-size:.78rem!important}
-.table-dark,.table-dark>:not(caption)>*>*{background:transparent!important;color:var(--text)!important}
-.table-hover>tbody>tr:hover>*{background:rgba(255,255,255,.025)!important}
-.table-dark>:not(caption)>*{border-color:var(--border)!important}
-pre,.code-block{background:var(--code-bg);border:1px solid rgba(20,184,166,.22);border-radius:12px;padding:1.1rem;overflow:auto;margin:.8rem 0 1rem;font-family:'IBM Plex Mono',monospace;font-size:.78rem;line-height:1.6;color:#99f6e4;max-height:680px;white-space:pre}
-pre code,.code-block code{background:none;color:inherit;padding:0;font-size:inherit}
-.timeline{position:relative;margin-left:.65rem;padding-left:1.5rem}
-.timeline::before{content:"";position:absolute;left:0;top:.25rem;bottom:.25rem;width:1px;background:var(--border)}
-.timeline-item{position:relative;margin-bottom:1rem}
-.timeline-item::before{content:"";position:absolute;left:-1.77rem;top:.3rem;width:.65rem;height:.65rem;border-radius:999px;background:var(--accent);box-shadow:0 0 0 5px rgba(20,184,166,.14)}
-.timeline-item strong{color:#fff;display:block}
-.timeline-item span{color:var(--muted2);font-size:.84rem}
-.priority{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:.65rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;white-space:nowrap}
-.priority.must{color:var(--must);background:rgba(252,165,165,.12);border:1px solid rgba(252,165,165,.25)}
-.priority.should{color:var(--should);background:rgba(252,211,77,.1);border:1px solid rgba(252,211,77,.25)}
-.priority.nice{color:var(--nice);background:rgba(134,239,172,.1);border:1px solid rgba(134,239,172,.25)}
-.priority.future{color:var(--future);background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.25)}
-.ref-list a,.source-link{color:#ccfbf1;text-decoration:none}
-.ref-list a:hover,.source-link:hover{color:#fff;text-decoration:underline}
-.mt-3{margin-top:1rem!important}.mb-2{margin-bottom:.5rem!important}.mb-3{margin-bottom:1rem!important}.small{font-size:.78rem!important}.text-muted{color:var(--muted2)!important}.text-center{text-align:center!important}.py-4{padding-top:1.5rem!important;padding-bottom:1.5rem!important}
-.is-hidden-by-search{display:none!important}
-.search-hit{outline:1px solid rgba(20,184,166,.65);background:rgba(20,184,166,.08)!important}
-.back-to-top{position:fixed;right:1.2rem;bottom:1.2rem;width:42px;height:42px;border-radius:10px;background:rgba(20,184,166,.15);border:1px solid rgba(20,184,166,.3);color:#fff;font-size:1.1rem;cursor:pointer;display:none;z-index:999;transition:all .2s;align-items:center;justify-content:center}
-.back-to-top.is-visible{display:flex}
-.back-to-top:hover{background:rgba(20,184,166,.3)}
-.page-footer{border-top:1px solid var(--border);background:rgba(7,9,15,.6);padding:2.5rem 1.5rem;text-align:center}
-.footer-row{max-width:1240px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.2rem}
-.page-footer p{font-family:'IBM Plex Mono',monospace;font-size:.72rem;color:var(--muted);margin:0}
-.footer-pills{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center}
-.footer-pill{font-family:'IBM Plex Mono',monospace;font-size:.65rem;padding:.25rem .6rem;border-radius:5px}
-.footer-pill.teal{border:1px solid rgba(20,184,166,.25);background:rgba(20,184,166,.06);color:var(--accent)}
-.footer-pill.yellow{border:1px solid rgba(250,204,21,.25);background:rgba(250,204,21,.06);color:var(--accent2)}
-.footer-pill.blue{border:1px solid rgba(56,189,248,.25);background:rgba(56,189,248,.06);color:var(--eng-blue)}
-.footer-pill.purple{border:1px solid rgba(167,139,250,.25);background:rgba(167,139,250,.06);color:var(--eng-purple)}
-a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid rgba(20,184,166,.65);outline-offset:2px}
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem
+    }
 
-/* Summary visual fix */
-#resumo .doc-hero-card{grid-template-columns:1fr;align-items:start;gap:1rem}
-#resumo .metrics-grid{grid-template-columns:repeat(4,minmax(0,1fr));width:100%}
-#resumo .metric-pill{min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .mono {
+      font-family: 'IBM Plex Mono', monospace
+    }
 
-@media(max-width:1180px){
-  .container,.main{padding-left:1.25rem;padding-right:1.25rem}
-  .main{grid-template-columns:200px minmax(0,1fr)}
-  .content{padding-left:1.35rem}
-  .doc-grid-4,#resumo .metrics-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .doc-grid-3{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:980px){
-  .main{grid-template-columns:1fr}
-  .sidebar{display:none}
-  .content{padding:1.5rem 0 3rem}
-  .doc-section{scroll-margin-top:148px}
-  .doc-hero-card,.doc-grid-2,.phase-doc-grid{grid-template-columns:1fr}
-  .sitenav-top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:.55rem .75rem}
-  .sitenav-brand{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .nav-ver{display:none}
-  .nav-back{justify-self:end}
-  .sitenav-top-right{grid-column:1 / -1;width:100%;min-width:0;margin-left:0}
-  .search-box,.track-search{width:100%!important;min-height:38px}
-}
-@media(max-width:760px){
-  html{font-size:14.5px}
-  .container,.main{padding-left:1rem;padding-right:1rem}
-  .track-hero-page{padding:2.8rem 0 2rem}
-  .track-title{font-size:clamp(2rem,9vw,3.1rem);letter-spacing:-.035em}
-  .track-lead{max-width:100%}
-  .track-badge-set,.badge-cloud{gap:.42rem}
-  .track-badge-set span,.badge-cloud span{max-width:100%;white-space:normal;line-height:1.35}
-  .sitenav-bar-inner{padding-left:34px;padding-right:34px}
-  .nav-group{padding:.25rem .3rem}
-  .nav-group-label{font-size:.56rem;padding-right:.4rem;margin-right:.2rem}
-  .nav-link{font-size:.66rem;padding:.3rem .5rem}
-  .doc-section{padding:1rem;border-radius:12px;scroll-margin-top:154px}
-  .doc-section-heading{flex-direction:column;align-items:flex-start}
-  .section-badge{white-space:normal}
-  .doc-grid-3,.doc-grid-4,.metrics-grid,#resumo .metrics-grid{grid-template-columns:1fr}
-  .metric-pill span{font-size:1.75rem}
-  .table-responsive .doc-table,.table-responsive table{min-width:680px}
-  .doc-table th,.doc-table td,th,td{padding:.58rem .72rem!important}
-  pre,.code-block{padding:.9rem;font-size:.72rem;max-height:520px}
-  .phase-doc-head{align-items:flex-start}
-}
-@media(max-width:520px){
-  html{font-size:14px}
-  .container,.main{padding-left:.85rem;padding-right:.85rem}
-  .track-hero-page{padding:2.35rem 0 1.7rem}
-  .hero-label{font-size:.66rem}
-  .hero-back-link,.footer-link{max-width:100%}
-  .sitenav-top{grid-template-columns:1fr;gap:.45rem}
-  .sitenav-brand{width:100%;white-space:normal;justify-content:space-between}
-  .sitenav-brand span{flex-shrink:0}
-  .nav-back{width:100%;justify-content:center;justify-self:stretch;text-align:center}
-  .nav-group-label{display:none}
-  .nav-group{border-right:none;padding:.25rem .18rem}
-  .nav-link{font-size:.64rem;padding:.3rem .46rem}
-  .content{padding-top:1rem}
-  .doc-section{margin-bottom:1rem;padding:.9rem;scroll-margin-top:184px}
-  .doc-section-heading h2,.doc-section h2{font-size:1.15rem}
-  .doc-section h3,.exam-card h3,.phase-doc-card h3,.callout h3{font-size:.96rem}
-  p,li,.doc-table td,td{font-size:.84rem!important}
-  .doc-table th,th{font-size:.66rem!important}
-  .track-badge-set span,.badge-cloud span,.priority,.section-badge{font-size:.64rem}
-  .metric-pill{padding:.85rem;min-height:96px}
-  .metric-pill span{font-size:1.62rem}
-  .mini-card,.exam-card,.phase-doc-card{border-radius:10px}
-  .table-responsive .doc-table,.table-responsive table{min-width:640px}
-  .page-footer .footer-row{flex-direction:column!important;align-items:stretch!important}
-  .page-footer .footer-link{justify-content:center!important}
-  .footer-pills{justify-content:center!important}
-  .back-to-top{right:.85rem;bottom:.85rem;width:40px;height:40px}
-}
-@media(max-width:380px){
-  .container,.main{padding-left:.7rem;padding-right:.7rem}
-  .track-title{font-size:1.85rem}
-  .sitenav-brand span{display:none}
-  .doc-section{padding:.78rem}
-  pre,.code-block{font-size:.68rem}
-  .table-responsive .doc-table,.table-responsive table{min-width:600px}
-}
-@media(pointer:coarse){
-  .nav-scroll-btn,.back-to-top,.nav-link,.hero-back-link,.footer-link,.nav-back,.sidebar a{touch-action:manipulation}
-  .nav-link,.hero-back-link,.footer-link,.nav-back{min-height:34px}
-}
-@media(prefers-reduced-motion:reduce){
-  *,*::before,*::after{scroll-behavior:auto!important;transition:none!important}
-}
-</style>
+    /* HERO */
+    .track-hero-page {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(135deg, rgba(20, 184, 166, .13) 0%, rgba(56, 189, 248, .06) 54%, rgba(250, 204, 21, .045) 100%);
+    }
 
-<style id="english-responsive-refactor-v2">
-/* ─────────────────────────────────────────────────────────────
+    .hero-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: .8rem;
+    }
+
+    .track-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -.04em;
+      background: linear-gradient(135deg, #fff 34%, var(--accent) 68%, var(--eng-yellow) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      margin-bottom: .8rem;
+    }
+
+    .track-lead {
+      color: var(--muted2);
+      max-width: 980px;
+      font-size: 1rem;
+      margin-bottom: 0
+    }
+
+    .track-badge-set,
+    .badge-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem
+    }
+
+    .track-badge-set {
+      margin-top: 1.4rem
+    }
+
+    .track-badge-set span,
+    .badge-cloud span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: .3rem .7rem;
+      border-radius: 6px;
+      border: 1px solid rgba(20, 184, 166, .34);
+      background: rgba(20, 184, 166, .085);
+      color: var(--accent)
+    }
+
+    .track-badge-set span:nth-child(3n+2),
+    .badge-cloud span:nth-child(3n+2) {
+      border-color: rgba(250, 204, 21, .35);
+      background: rgba(250, 204, 21, .08);
+      color: var(--eng-yellow)
+    }
+
+    .track-badge-set span:nth-child(3n),
+    .badge-cloud span:nth-child(3n) {
+      border-color: rgba(56, 189, 248, .32);
+      background: rgba(56, 189, 248, .08);
+      color: var(--eng-blue)
+    }
+
+    .footer-link,
+    .hero-back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 500;
+      color: var(--muted2);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .04);
+      padding: .32rem .75rem;
+      border-radius: 6px;
+      transition: all .15s
+    }
+
+    .footer-link:hover,
+    .hero-back-link:hover {
+      color: #fff;
+      border-color: rgba(20, 184, 166, .38);
+      background: rgba(20, 184, 166, .09);
+      text-decoration: none
+    }
+
+    /* SITENAV */
+    .sitenav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 9, 15, .95);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border)
+    }
+
+    .sitenav-top {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: .5rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .sitenav-brand {
+      font-family: 'Syne', sans-serif;
+      font-size: .9rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: -.03em;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .45rem
+    }
+
+    .sitenav-brand span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      font-weight: 500;
+      color: var(--accent2);
+      border: 1px solid rgba(250, 204, 21, .32);
+      background: rgba(250, 204, 21, .08);
+      padding: .15rem .45rem;
+      border-radius: 4px;
+      letter-spacing: .04em
+    }
+
+    .nav-ver {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      white-space: nowrap;
+      padding: .2rem 0
+    }
+
+    .nav-back {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, .03);
+      padding: .3rem .65rem;
+      border-radius: 6px;
+      transition: all .15s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: .35rem
+    }
+
+    .nav-back:hover {
+      color: #fff;
+      border-color: rgba(20, 184, 166, .35);
+      background: rgba(20, 184, 166, .08)
+    }
+
+    .sitenav-top-right {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      margin-left: auto
+    }
+
+    .search-box,
+    .track-search {
+      background: var(--surface2) !important;
+      border: 1px solid var(--border) !important;
+      border-radius: 8px;
+      padding: .3rem .7rem;
+      color: #fff !important;
+      font-size: .8rem;
+      outline: none;
+      width: 270px;
+      box-shadow: none !important
+    }
+
+    .search-box::placeholder,
+    .track-search::placeholder {
+      color: var(--muted) !important
+    }
+
+    .search-box:focus,
+    .track-search:focus {
+      border-color: rgba(20, 184, 166, .48) !important
+    }
+
+    .sitenav-bar-outer {
+      position: relative;
+      background: inherit;
+      border-top: 1px solid rgba(255, 255, 255, .05)
+    }
+
+    .sitenav-bar-inner {
+      display: flex;
+      align-items: stretch;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(20, 184, 166, .5) rgba(255, 255, 255, .04);
+      padding: 0 32px
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar {
+      height: 4px
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, .03)
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar-thumb {
+      background: rgba(20, 184, 166, .5);
+      border-radius: 99px
+    }
+
+    .sitenav-bar-inner::-webkit-scrollbar-thumb:hover {
+      background: rgba(20, 184, 166, .8)
+    }
+
+    .sitenav-bar-outer::before,
+    .sitenav-bar-outer::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 4px;
+      width: 56px;
+      pointer-events: none;
+      z-index: 2;
+      transition: opacity .2s
+    }
+
+    .sitenav-bar-outer::before {
+      left: 0;
+      background: linear-gradient(to right, rgba(7, 9, 15, 1) 0%, transparent 100%)
+    }
+
+    .sitenav-bar-outer::after {
+      right: 0;
+      background: linear-gradient(to left, rgba(7, 9, 15, 1) 0%, transparent 100%)
+    }
+
+    .nav-scroll-btn {
+      position: absolute;
+      top: 0;
+      bottom: 4px;
+      width: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: none;
+      color: var(--muted2);
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 700;
+      z-index: 3;
+      transition: color .15s, background .15s;
+      border-radius: 0
+    }
+
+    .nav-scroll-btn:hover {
+      color: #fff;
+      background: rgba(20, 184, 166, .08)
+    }
+
+    .nav-scroll-btn.left {
+      left: 0
+    }
+
+    .nav-scroll-btn.right {
+      right: 0
+    }
+
+    .nav-scroll-btn.hidden {
+      opacity: 0;
+      pointer-events: none
+    }
+
+    .nav-group {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255, 255, 255, .05);
+      padding: .3rem .4rem
+    }
+
+    .nav-group:last-child {
+      border-right: none;
+      padding-right: .8rem
+    }
+
+    .nav-group-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: .3rem .5rem .3rem .2rem;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      border-right: 1px solid rgba(255, 255, 255, .06);
+      margin-right: .3rem;
+      flex-shrink: 0
+    }
+
+    .nav-link {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      font-weight: 500;
+      white-space: nowrap;
+      padding: .28rem .55rem;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      color: var(--muted2);
+      text-decoration: none;
+      transition: all .13s;
+      display: flex;
+      align-items: center
+    }
+
+    .nav-link:hover {
+      color: #fff;
+      background: rgba(20, 184, 166, .1);
+      border-color: rgba(20, 184, 166, .25)
+    }
+
+    .nav-link.active {
+      color: var(--accent);
+      background: rgba(20, 184, 166, .1);
+      border-color: rgba(20, 184, 166, .3)
+    }
+
+    /* LAYOUT */
+    .main {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 1.5rem
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 88px;
+      height: calc(100vh - 88px);
+      overflow-y: auto;
+      padding: 1.5rem 1rem 1.5rem 0;
+      border-right: 1px solid var(--border);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent
+    }
+
+    .sidebar-group {
+      margin-bottom: 1.4rem
+    }
+
+    .sidebar-label {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .5rem;
+      padding-left: .5rem
+    }
+
+    .sidebar a {
+      display: block;
+      font-size: .78rem;
+      padding: .3rem .5rem;
+      border-radius: 5px;
+      color: var(--muted2);
+      text-decoration: none;
+      transition: all .12s;
+      line-height: 1.4
+    }
+
+    .sidebar a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, .05)
+    }
+
+    .sidebar a.active {
+      color: var(--accent);
+      background: rgba(20, 184, 166, .08)
+    }
+
+    .content {
+      padding: 2rem 0 4rem 2rem
+    }
+
+    #trackMain {
+      padding-top: 0 !important;
+      padding-bottom: 0 !important
+    }
+
+    /* CONTENT */
+    .doc-section {
+      margin-bottom: 2rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: clamp(1.2rem, 2vw, 1.8rem);
+      box-shadow: none
+    }
+
+    .doc-section:target {
+      border-color: rgba(20, 184, 166, .42);
+      box-shadow: 0 0 0 1px rgba(20, 184, 166, .15)
+    }
+
+    .doc-section-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .doc-section-heading h2,
+    .doc-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: -.03em;
+      color: #fff;
+      margin: 0
+    }
+
+    .section-subtitle {
+      color: var(--muted2);
+      font-size: .82rem;
+      margin: .25rem 0 0
+    }
+
+    .section-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .68rem;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .3rem .65rem;
+      border-radius: 6px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      border: 1px solid rgba(250, 204, 21, .32);
+      background: rgba(250, 204, 21, .085);
+      color: var(--accent2)
+    }
+
+    .doc-section h3,
+    .exam-card h3,
+    .phase-doc-card h3,
+    .callout h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #e2e8f0;
+      margin: 1.4rem 0 .6rem
+    }
+
+    .doc-section h4,
+    .phase-doc-card h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #cbd5e1;
+      margin: .9rem 0 .4rem
+    }
+
+    p {
+      color: var(--muted2);
+      margin-bottom: .75rem;
+      font-size: .88rem
+    }
+
+    .lead {
+      font-size: 1rem;
+      color: #cbd5e1
+    }
+
+    ul,
+    ol {
+      color: var(--muted2);
+      padding-left: 1.3rem;
+      margin-bottom: .8rem
+    }
+
+    li {
+      margin-bottom: .3rem;
+      font-size: .88rem
+    }
+
+    strong {
+      color: #e2e8f0;
+      font-weight: 600
+    }
+
+    em {
+      color: #fde68a;
+      font-style: normal;
+      font-weight: 700
+    }
+
+    code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .8em;
+      background: rgba(20, 184, 166, .1);
+      color: var(--accent);
+      padding: .1em .35em;
+      border-radius: 4px
+    }
+
+    .doc-hero-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(260px, .75fr);
+      gap: 1rem;
+      align-items: center
+    }
+
+    .doc-grid-2,
+    .doc-grid-3,
+    .doc-grid-4,
+    .phase-doc-grid {
+      display: grid;
+      gap: 1rem
+    }
+
+    .doc-grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .doc-grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr))
+    }
+
+    .doc-grid-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr))
+    }
+
+    .phase-doc-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: .7rem;
+      margin: .8rem 0
+    }
+
+    .metric-pill {
+      background: rgba(20, 184, 166, .08);
+      border: 1px solid rgba(20, 184, 166, .22);
+      border-radius: 12px;
+      padding: 1rem;
+      text-align: center
+    }
+
+    .metric-pill span {
+      display: block;
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: .25rem
+    }
+
+    .metric-pill small {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      color: var(--muted2);
+      text-transform: uppercase;
+      letter-spacing: .05em
+    }
+
+    .mini-card,
+    .exam-card,
+    .phase-doc-card,
+    .callout {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      transition: border-color .15s, background .15s, transform .15s
+    }
+
+    .mini-card strong {
+      display: block;
+      color: #fff;
+      font-size: .82rem;
+      margin-bottom: .25rem
+    }
+
+    .mini-card span,
+    .exam-card p,
+    .phase-doc-card p,
+    .callout p {
+      color: var(--muted2);
+      font-size: .82rem
+    }
+
+    .mini-card:hover,
+    .exam-card:hover,
+    .phase-doc-card:hover {
+      border-color: rgba(20, 184, 166, .28);
+      background: #151c27;
+      transform: translateY(-1px)
+    }
+
+    .exam-card {
+      position: relative;
+      overflow: hidden
+    }
+
+    .exam-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--eng-yellow), var(--eng-blue))
+    }
+
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: rgba(20, 184, 166, .06);
+      border-radius: 0 10px 10px 0
+    }
+
+    .callout.accent-blue {
+      border-left-color: var(--eng-blue);
+      background: rgba(56, 189, 248, .06)
+    }
+
+    .callout.accent-yellow {
+      border-left-color: var(--eng-yellow);
+      background: rgba(250, 204, 21, .06)
+    }
+
+    .callout.accent-purple {
+      border-left-color: var(--eng-purple);
+      background: rgba(167, 139, 250, .06)
+    }
+
+    .callout.accent-red {
+      border-left-color: var(--eng-pink);
+      background: rgba(251, 113, 133, .06)
+    }
+
+    .callout h3,
+    .callout h4 {
+      margin-top: 0;
+      color: #fff
+    }
+
+    .callout p,
+    .callout ul {
+      margin-bottom: 0
+    }
+
+    .doc-list {
+      color: var(--muted2);
+      padding-left: 1.3rem;
+      margin: .5rem 0 1rem
+    }
+
+    .doc-list li {
+      margin-bottom: .35rem
+    }
+
+    .phase-doc-card {
+      position: relative;
+      overflow: hidden;
+      padding: 1.1rem
+    }
+
+    .phase-doc-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(180deg, var(--accent), var(--eng-yellow), var(--eng-blue))
+    }
+
+    .phase-doc-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: .75rem;
+      flex-wrap: wrap;
+      padding-bottom: .6rem;
+      margin-bottom: .7rem;
+      border-bottom: 1px solid var(--border)
+    }
+
+    .phase-doc-head h3 {
+      margin: 0;
+      font-size: .92rem;
+      color: #fff
+    }
+
+    .phase-doc-head span {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .7rem;
+      color: var(--accent2);
+      white-space: nowrap
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin: .8rem 0 1rem
+    }
+
+    .doc-table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 760px;
+      margin-bottom: 0 !important
+    }
+
+    .doc-table thead tr,
+    .doc-table th {
+      background: rgba(20, 184, 166, .10) !important
+    }
+
+    .doc-table th {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: .7rem 1rem !important;
+      text-align: left;
+      color: #fff !important;
+      border-bottom: 1px solid var(--border2) !important;
+      border-color: var(--border) !important;
+      white-space: nowrap
+    }
+
+    .doc-table td {
+      padding: .65rem 1rem !important;
+      font-size: .82rem;
+      color: #cbd5e1 !important;
+      border-bottom: 1px solid var(--border) !important;
+      border-color: var(--border) !important;
+      vertical-align: top
+    }
+
+    .doc-table tr:last-child td {
+      border-bottom: none !important
+    }
+
+    .doc-table tr:hover td {
+      background: rgba(255, 255, 255, .025) !important
+    }
+
+    .dense-table td,
+    .dense-table th {
+      font-size: .78rem !important
+    }
+
+    .table-dark,
+    .table-dark>:not(caption)>*>* {
+      background: transparent !important;
+      color: var(--text) !important
+    }
+
+    .table-hover>tbody>tr:hover>* {
+      background: rgba(255, 255, 255, .025) !important
+    }
+
+    .table-dark>:not(caption)>* {
+      border-color: var(--border) !important
+    }
+
+    pre,
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid rgba(20, 184, 166, .22);
+      border-radius: 12px;
+      padding: 1.1rem;
+      overflow: auto;
+      margin: .8rem 0 1rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .78rem;
+      line-height: 1.6;
+      color: #99f6e4;
+      max-height: 680px;
+      white-space: pre
+    }
+
+    pre code,
+    .code-block code {
+      background: none;
+      color: inherit;
+      padding: 0;
+      font-size: inherit
+    }
+
+    .timeline {
+      position: relative;
+      margin-left: .65rem;
+      padding-left: 1.5rem
+    }
+
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .25rem;
+      bottom: .25rem;
+      width: 1px;
+      background: var(--border)
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1rem
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -1.77rem;
+      top: .3rem;
+      width: .65rem;
+      height: .65rem;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(20, 184, 166, .14)
+    }
+
+    .timeline-item strong {
+      color: #fff;
+      display: block
+    }
+
+    .timeline-item span {
+      color: var(--muted2);
+      font-size: .84rem
+    }
+
+    .priority {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      font-weight: 700;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      white-space: nowrap
+    }
+
+    .priority.must {
+      color: var(--must);
+      background: rgba(252, 165, 165, .12);
+      border: 1px solid rgba(252, 165, 165, .25)
+    }
+
+    .priority.should {
+      color: var(--should);
+      background: rgba(252, 211, 77, .1);
+      border: 1px solid rgba(252, 211, 77, .25)
+    }
+
+    .priority.nice {
+      color: var(--nice);
+      background: rgba(134, 239, 172, .1);
+      border: 1px solid rgba(134, 239, 172, .25)
+    }
+
+    .priority.future {
+      color: var(--future);
+      background: rgba(147, 197, 253, .1);
+      border: 1px solid rgba(147, 197, 253, .25)
+    }
+
+    .ref-list a,
+    .source-link {
+      color: #ccfbf1;
+      text-decoration: none
+    }
+
+    .ref-list a:hover,
+    .source-link:hover {
+      color: #fff;
+      text-decoration: underline
+    }
+
+    .mt-3 {
+      margin-top: 1rem !important
+    }
+
+    .mb-2 {
+      margin-bottom: .5rem !important
+    }
+
+    .mb-3 {
+      margin-bottom: 1rem !important
+    }
+
+    .small {
+      font-size: .78rem !important
+    }
+
+    .text-muted {
+      color: var(--muted2) !important
+    }
+
+    .text-center {
+      text-align: center !important
+    }
+
+    .py-4 {
+      padding-top: 1.5rem !important;
+      padding-bottom: 1.5rem !important
+    }
+
+    .is-hidden-by-search {
+      display: none !important
+    }
+
+    .search-hit {
+      outline: 1px solid rgba(20, 184, 166, .65);
+      background: rgba(20, 184, 166, .08) !important
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 1.2rem;
+      bottom: 1.2rem;
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: rgba(20, 184, 166, .15);
+      border: 1px solid rgba(20, 184, 166, .3);
+      color: #fff;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: none;
+      z-index: 999;
+      transition: all .2s;
+      align-items: center;
+      justify-content: center
+    }
+
+    .back-to-top.is-visible {
+      display: flex
+    }
+
+    .back-to-top:hover {
+      background: rgba(20, 184, 166, .3)
+    }
+
+    .page-footer {
+      border-top: 1px solid var(--border);
+      background: rgba(7, 9, 15, .6);
+      padding: 2.5rem 1.5rem;
+      text-align: center
+    }
+
+    .footer-row {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.2rem
+    }
+
+    .page-footer p {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--muted);
+      margin: 0
+    }
+
+    .footer-pills {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      justify-content: center
+    }
+
+    .footer-pill {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .65rem;
+      padding: .25rem .6rem;
+      border-radius: 5px
+    }
+
+    .footer-pill.teal {
+      border: 1px solid rgba(20, 184, 166, .25);
+      background: rgba(20, 184, 166, .06);
+      color: var(--accent)
+    }
+
+    .footer-pill.yellow {
+      border: 1px solid rgba(250, 204, 21, .25);
+      background: rgba(250, 204, 21, .06);
+      color: var(--accent2)
+    }
+
+    .footer-pill.blue {
+      border: 1px solid rgba(56, 189, 248, .25);
+      background: rgba(56, 189, 248, .06);
+      color: var(--eng-blue)
+    }
+
+    .footer-pill.purple {
+      border: 1px solid rgba(167, 139, 250, .25);
+      background: rgba(167, 139, 250, .06);
+      color: var(--eng-purple)
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible {
+      outline: 2px solid rgba(20, 184, 166, .65);
+      outline-offset: 2px
+    }
+
+    /* Summary visual fix */
+    #resumo .doc-hero-card {
+      grid-template-columns: 1fr;
+      align-items: start;
+      gap: 1rem
+    }
+
+    #resumo .metrics-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%
+    }
+
+    #resumo .metric-pill {
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center
+    }
+
+    @media(max-width:1180px) {
+
+      .container,
+      .main {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem
+      }
+
+      .main {
+        grid-template-columns: 200px minmax(0, 1fr)
+      }
+
+      .content {
+        padding-left: 1.35rem
+      }
+
+      .doc-grid-4,
+      #resumo .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+
+      .doc-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+      }
+    }
+
+    @media(max-width:980px) {
+      .main {
+        grid-template-columns: 1fr
+      }
+
+      .sidebar {
+        display: none
+      }
+
+      .content {
+        padding: 1.5rem 0 3rem
+      }
+
+      .doc-section {
+        scroll-margin-top: 148px
+      }
+
+      .doc-hero-card,
+      .doc-grid-2,
+      .phase-doc-grid {
+        grid-template-columns: 1fr
+      }
+
+      .sitenav-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .55rem .75rem
+      }
+
+      .sitenav-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis
+      }
+
+      .nav-ver {
+        display: none
+      }
+
+      .nav-back {
+        justify-self: end
+      }
+
+      .sitenav-top-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0
+      }
+
+      .search-box,
+      .track-search {
+        width: 100% !important;
+        min-height: 38px
+      }
+    }
+
+    @media(max-width:760px) {
+      html {
+        font-size: 14.5px
+      }
+
+      .container,
+      .main {
+        padding-left: 1rem;
+        padding-right: 1rem
+      }
+
+      .track-hero-page {
+        padding: 2.8rem 0 2rem
+      }
+
+      .track-title {
+        font-size: clamp(2rem, 9vw, 3.1rem);
+        letter-spacing: -.035em
+      }
+
+      .track-lead {
+        max-width: 100%
+      }
+
+      .track-badge-set,
+      .badge-cloud {
+        gap: .42rem
+      }
+
+      .track-badge-set span,
+      .badge-cloud span {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35
+      }
+
+      .sitenav-bar-inner {
+        padding-left: 34px;
+        padding-right: 34px
+      }
+
+      .nav-group {
+        padding: .25rem .3rem
+      }
+
+      .nav-group-label {
+        font-size: .56rem;
+        padding-right: .4rem;
+        margin-right: .2rem
+      }
+
+      .nav-link {
+        font-size: .66rem;
+        padding: .3rem .5rem
+      }
+
+      .doc-section {
+        padding: 1rem;
+        border-radius: 12px;
+        scroll-margin-top: 154px
+      }
+
+      .doc-section-heading {
+        flex-direction: column;
+        align-items: flex-start
+      }
+
+      .section-badge {
+        white-space: normal
+      }
+
+      .doc-grid-3,
+      .doc-grid-4,
+      .metrics-grid,
+      #resumo .metrics-grid {
+        grid-template-columns: 1fr
+      }
+
+      .metric-pill span {
+        font-size: 1.75rem
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 680px
+      }
+
+      .doc-table th,
+      .doc-table td,
+      th,
+      td {
+        padding: .58rem .72rem !important
+      }
+
+      pre,
+      .code-block {
+        padding: .9rem;
+        font-size: .72rem;
+        max-height: 520px
+      }
+
+      .phase-doc-head {
+        align-items: flex-start
+      }
+    }
+
+    @media(max-width:520px) {
+      html {
+        font-size: 14px
+      }
+
+      .container,
+      .main {
+        padding-left: .85rem;
+        padding-right: .85rem
+      }
+
+      .track-hero-page {
+        padding: 2.35rem 0 1.7rem
+      }
+
+      .hero-label {
+        font-size: .66rem
+      }
+
+      .hero-back-link,
+      .footer-link {
+        max-width: 100%
+      }
+
+      .sitenav-top {
+        grid-template-columns: 1fr;
+        gap: .45rem
+      }
+
+      .sitenav-brand {
+        width: 100%;
+        white-space: normal;
+        justify-content: space-between
+      }
+
+      .sitenav-brand span {
+        flex-shrink: 0
+      }
+
+      .nav-back {
+        width: 100%;
+        justify-content: center;
+        justify-self: stretch;
+        text-align: center
+      }
+
+      .nav-group-label {
+        display: none
+      }
+
+      .nav-group {
+        border-right: none;
+        padding: .25rem .18rem
+      }
+
+      .nav-link {
+        font-size: .64rem;
+        padding: .3rem .46rem
+      }
+
+      .content {
+        padding-top: 1rem
+      }
+
+      .doc-section {
+        margin-bottom: 1rem;
+        padding: .9rem;
+        scroll-margin-top: 184px
+      }
+
+      .doc-section-heading h2,
+      .doc-section h2 {
+        font-size: 1.15rem
+      }
+
+      .doc-section h3,
+      .exam-card h3,
+      .phase-doc-card h3,
+      .callout h3 {
+        font-size: .96rem
+      }
+
+      p,
+      li,
+      .doc-table td,
+      td {
+        font-size: .84rem !important
+      }
+
+      .doc-table th,
+      th {
+        font-size: .66rem !important
+      }
+
+      .track-badge-set span,
+      .badge-cloud span,
+      .priority,
+      .section-badge {
+        font-size: .64rem
+      }
+
+      .metric-pill {
+        padding: .85rem;
+        min-height: 96px
+      }
+
+      .metric-pill span {
+        font-size: 1.62rem
+      }
+
+      .mini-card,
+      .exam-card,
+      .phase-doc-card {
+        border-radius: 10px
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 640px
+      }
+
+      .page-footer .footer-row {
+        flex-direction: column !important;
+        align-items: stretch !important
+      }
+
+      .page-footer .footer-link {
+        justify-content: center !important
+      }
+
+      .footer-pills {
+        justify-content: center !important
+      }
+
+      .back-to-top {
+        right: .85rem;
+        bottom: .85rem;
+        width: 40px;
+        height: 40px
+      }
+    }
+
+    @media(max-width:380px) {
+
+      .container,
+      .main {
+        padding-left: .7rem;
+        padding-right: .7rem
+      }
+
+      .track-title {
+        font-size: 1.85rem
+      }
+
+      .sitenav-brand span {
+        display: none
+      }
+
+      .doc-section {
+        padding: .78rem
+      }
+
+      pre,
+      .code-block {
+        font-size: .68rem
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 600px
+      }
+    }
+
+    @media(pointer:coarse) {
+
+      .nav-scroll-btn,
+      .back-to-top,
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back,
+      .sidebar a {
+        touch-action: manipulation
+      }
+
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back {
+        min-height: 34px
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important
+      }
+    }
+  </style>
+
+  <style id="english-responsive-refactor-v2">
+    /* ─────────────────────────────────────────────────────────────
    RESPONSIVIDADE OTIMIZADA — English Technical Track
    Base visual e estrutural: DevCore Platform / Blog Project Track.
    Bloco complementar: preserva conteúdo e CSS original; apenas reforça
    comportamento responsivo em notebook, tablet, celulares e telas estreitas.
    ───────────────────────────────────────────────────────────── */
 
-html,
-body {
-  width: 100%;
-  max-width: 100%;
-}
-
-body.track-page {
-  overflow-x: hidden;
-}
-
-.container,
-.main,
-.sidebar,
-.content,
-#trackMain,
-.doc-section,
-.doc-section-heading,
-.doc-hero-card,
-.doc-grid-2,
-.doc-grid-3,
-.doc-grid-4,
-.phase-doc-grid,
-.metrics-grid,
-.table-responsive,
-.doc-table,
-.phase-doc-card,
-.exam-card,
-.mini-card,
-.callout,
-.timeline,
-.footer-row,
-.footer-pills {
-  min-width: 0;
-}
-
-img,
-video,
-canvas,
-iframe,
-svg {
-  max-width: 100%;
-  height: auto;
-}
-
-.doc-section {
-  scroll-margin-top: 126px;
-}
-
-.table-responsive,
-pre,
-.code-block {
-  max-width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-inline: contain;
-}
-
-.table-responsive .doc-table,
-.table-responsive table {
-  width: 100%;
-  min-width: max(760px, 100%);
-  table-layout: auto;
-}
-
-.doc-table th,
-.doc-table td,
-th,
-td {
-  white-space: normal;
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-pre,
-.code-block {
-  white-space: pre;
-  overflow-y: auto;
-}
-
-pre code,
-.code-block code {
-  white-space: inherit;
-}
-
-.track-title,
-.track-lead,
-.doc-section-heading h2,
-.sitenav-brand,
-p,
-li,
-.mini-card span,
-.exam-card p,
-.phase-doc-card p,
-.callout p,
-.timeline-item span,
-.metric-pill small {
-  overflow-wrap: break-word;
-  word-break: normal;
-}
-
-.doc-grid-2 > *,
-.doc-grid-3 > *,
-.doc-grid-4 > *,
-.phase-doc-grid > *,
-.metrics-grid > *,
-.doc-hero-card > * {
-  min-width: 0;
-}
-
-.sitenav,
-.sitenav * {
-  min-width: 0;
-}
-
-.sitenav-top {
-  min-width: 0;
-}
-
-.sitenav-brand,
-.nav-back,
-.nav-ver {
-  flex-shrink: 0;
-}
-
-.sitenav-top-right {
-  min-width: 180px;
-}
-
-.search-box,
-.track-search {
-  max-width: 100%;
-}
-
-.sitenav-bar-inner {
-  -webkit-overflow-scrolling: touch;
-  scroll-snap-type: x proximity;
-}
-
-.nav-link {
-  scroll-snap-align: start;
-}
-
-/* Resumo executivo: mantém o comportamento de leitura confortável do Blog Track. */
-#resumo .doc-hero-card {
-  grid-template-columns: 1fr !important;
-  align-items: start !important;
-  gap: 1rem !important;
-}
-
-#resumo .doc-hero-card > div:first-child {
-  max-width: 100%;
-  min-width: 0;
-}
-
-#resumo .track-lead,
-#resumo .lead {
-  max-width: 980px;
-}
-
-#resumo .metrics-grid {
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
-  width: 100%;
-  max-width: 100%;
-  align-items: stretch;
-}
-
-#resumo .metric-pill {
-  min-width: 0;
-  min-height: 112px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Notebook e desktop estreito */
-@media (max-width: 1180px) {
-  .container,
-  .main {
-    padding-left: 1.25rem;
-    padding-right: 1.25rem;
-  }
-
-  .main {
-    grid-template-columns: 200px minmax(0, 1fr);
-  }
-
-  .content,
-  #trackMain {
-    padding-left: 1.35rem;
-  }
-
-  .doc-grid-4,
-  #resumo .metrics-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-
-  .doc-grid-3 {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-/* Tablet: remove sidebar e preserva navegação superior com busca em linha própria. */
-@media (max-width: 980px) {
-  .main {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    display: none;
-  }
-
-  .content,
-  #trackMain {
-    padding: 1.5rem 0 3rem;
-  }
-
-  .doc-section {
-    scroll-margin-top: 148px;
-  }
-
-  .doc-hero-card,
-  .doc-grid-2,
-  .phase-doc-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .sitenav-top {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: center;
-    gap: .55rem .75rem;
-  }
-
-  .sitenav-brand {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .nav-ver {
-    display: none;
-  }
-
-  .nav-back {
-    justify-self: end;
-  }
-
-  .sitenav-top-right {
-    grid-column: 1 / -1;
-    width: 100%;
-    min-width: 0;
-    margin-left: 0;
-  }
-
-  .search-box,
-  .track-search {
-    width: 100% !important;
-    min-height: 38px;
-  }
-}
-
-/* Tablet estreito e celulares grandes */
-@media (max-width: 760px) {
-  html {
-    font-size: 14.5px;
-  }
-
-  .container,
-  .main {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .track-hero-page {
-    padding: 2.8rem 0 2rem;
-  }
-
-  .track-title {
-    font-size: clamp(2rem, 9vw, 3.1rem);
-    letter-spacing: -.035em;
-  }
-
-  .track-lead {
-    max-width: 100%;
-  }
-
-  .track-badge-set,
-  .badge-cloud {
-    gap: .42rem;
-  }
-
-  .track-badge-set span,
-  .badge-cloud span {
-    max-width: 100%;
-    white-space: normal;
-    line-height: 1.35;
-  }
-
-  .sitenav-bar-inner {
-    padding-left: 34px;
-    padding-right: 34px;
-  }
-
-  .nav-group {
-    padding: .25rem .3rem;
-  }
-
-  .nav-group-label {
-    font-size: .56rem;
-    padding-right: .4rem;
-    margin-right: .2rem;
-  }
-
-  .nav-link {
-    font-size: .66rem;
-    padding: .3rem .5rem;
-  }
-
-  .doc-section {
-    padding: 1rem;
-    border-radius: 12px;
-    scroll-margin-top: 154px;
-  }
-
-  .doc-section-heading,
-  .phase-doc-head {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .section-badge {
-    white-space: normal;
-  }
-
-  .doc-grid-3,
-  .doc-grid-4,
-  .metrics-grid,
-  #resumo .metrics-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .metric-pill {
-    min-height: auto;
-  }
-
-  .metric-pill span {
-    font-size: 1.75rem;
-  }
-
-  .table-responsive .doc-table,
-  .table-responsive table {
-    min-width: 680px;
-  }
-
-  .doc-table th,
-  .doc-table td,
-  th,
-  td {
-    padding: .58rem .72rem !important;
-  }
-
-  pre,
-  .code-block {
-    padding: .9rem;
-    font-size: .72rem;
-    max-height: 520px;
-  }
-
-  .timeline {
-    margin-left: .45rem;
-    padding-left: 1.25rem;
-  }
-}
-
-/* Celulares */
-@media (max-width: 520px) {
-  html {
-    font-size: 14px;
-  }
-
-  .container,
-  .main {
-    padding-left: .85rem;
-    padding-right: .85rem;
-  }
-
-  .track-hero-page {
-    padding: 2.35rem 0 1.7rem;
-  }
-
-  .hero-label {
-    font-size: .66rem;
-  }
-
-  .hero-back-link,
-  .footer-link {
-    max-width: 100%;
-  }
-
-  .sitenav-top {
-    grid-template-columns: 1fr;
-    gap: .45rem;
-  }
-
-  .sitenav-brand {
-    width: 100%;
-    white-space: normal;
-    justify-content: space-between;
-    gap: .5rem;
-  }
-
-  .sitenav-brand span {
-    flex-shrink: 0;
-  }
-
-  .nav-back {
-    width: 100%;
-    justify-content: center;
-    justify-self: stretch;
-    text-align: center;
-  }
-
-  .nav-group-label {
-    display: none;
-  }
-
-  .nav-group {
-    border-right: none;
-    padding: .25rem .18rem;
-  }
-
-  .nav-link {
-    font-size: .64rem;
-    padding: .3rem .46rem;
-  }
-
-  .content,
-  #trackMain {
-    padding-top: 1rem;
-  }
-
-  .doc-section {
-    margin-bottom: 1rem;
-    padding: .9rem;
-    border-radius: 10px;
-    scroll-margin-top: 184px;
-  }
-
-  .doc-section-heading h2,
-  .doc-section h2 {
-    font-size: 1.15rem;
-  }
-
-  .doc-section h3,
-  .exam-card h3,
-  .phase-doc-card h3,
-  .callout h3 {
-    font-size: .96rem;
-  }
-
-  p,
-  li,
-  .doc-table td,
-  td {
-    font-size: .84rem !important;
-  }
-
-  .doc-table th,
-  th {
-    font-size: .66rem !important;
-  }
-
-  .track-badge-set span,
-  .badge-cloud span,
-  .priority,
-  .section-badge {
-    font-size: .64rem;
-  }
-
-  .metric-pill {
-    padding: .85rem;
-    min-height: 92px;
-  }
-
-  .metric-pill span {
-    font-size: 1.62rem;
-  }
-
-  .mini-card,
-  .exam-card,
-  .phase-doc-card,
-  .callout {
-    border-radius: 10px;
-  }
-
-  .table-responsive .doc-table,
-  .table-responsive table {
-    min-width: 640px;
-  }
-
-  .page-footer .footer-row {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-
-  .page-footer .footer-link {
-    justify-content: center !important;
-  }
-
-  .footer-pills {
-    justify-content: center !important;
-  }
-
-  .back-to-top {
-    right: .85rem;
-    bottom: .85rem;
-    width: 40px;
-    height: 40px;
-  }
-}
-
-/* Celulares muito estreitos */
-@media (max-width: 380px) {
-  .container,
-  .main {
-    padding-left: .7rem;
-    padding-right: .7rem;
-  }
-
-  .track-title {
-    font-size: 1.85rem;
-  }
-
-  .sitenav-brand span {
-    display: none;
-  }
-
-  .doc-section {
-    padding: .78rem;
-  }
-
-  pre,
-  .code-block {
-    font-size: .68rem;
-  }
-
-  .table-responsive .doc-table,
-  .table-responsive table {
-    min-width: 600px;
-  }
-}
-
-/* Dispositivos de toque: melhora área clicável sem mudar estrutura */
-@media (pointer: coarse) {
-  .nav-scroll-btn,
-  .back-to-top,
-  .nav-link,
-  .hero-back-link,
-  .footer-link,
-  .nav-back,
-  .sidebar a {
-    touch-action: manipulation;
-  }
-
-  .nav-link,
-  .hero-back-link,
-  .footer-link,
-  .nav-back {
-    min-height: 34px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    scroll-behavior: auto !important;
-    transition: none !important;
-  }
-}
-</style>
-
-
-<style id="reference-card-style">
-/* ─────────────────────────────────────────────────────────────
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    body.track-page {
+      overflow-x: hidden;
+    }
+
+    .container,
+    .main,
+    .sidebar,
+    .content,
+    #trackMain,
+    .doc-section,
+    .doc-section-heading,
+    .doc-hero-card,
+    .doc-grid-2,
+    .doc-grid-3,
+    .doc-grid-4,
+    .phase-doc-grid,
+    .metrics-grid,
+    .table-responsive,
+    .doc-table,
+    .phase-doc-card,
+    .exam-card,
+    .mini-card,
+    .callout,
+    .timeline,
+    .footer-row,
+    .footer-pills {
+      min-width: 0;
+    }
+
+    img,
+    video,
+    canvas,
+    iframe,
+    svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .doc-section {
+      scroll-margin-top: 126px;
+    }
+
+    .table-responsive,
+    pre,
+    .code-block {
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-inline: contain;
+    }
+
+    .table-responsive .doc-table,
+    .table-responsive table {
+      width: 100%;
+      min-width: max(760px, 100%);
+      table-layout: auto;
+    }
+
+    .doc-table th,
+    .doc-table td,
+    th,
+    td {
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    pre,
+    .code-block {
+      white-space: pre;
+      overflow-y: auto;
+    }
+
+    pre code,
+    .code-block code {
+      white-space: inherit;
+    }
+
+    .track-title,
+    .track-lead,
+    .doc-section-heading h2,
+    .sitenav-brand,
+    p,
+    li,
+    .mini-card span,
+    .exam-card p,
+    .phase-doc-card p,
+    .callout p,
+    .timeline-item span,
+    .metric-pill small {
+      overflow-wrap: break-word;
+      word-break: normal;
+    }
+
+    .doc-grid-2>*,
+    .doc-grid-3>*,
+    .doc-grid-4>*,
+    .phase-doc-grid>*,
+    .metrics-grid>*,
+    .doc-hero-card>* {
+      min-width: 0;
+    }
+
+    .sitenav,
+    .sitenav * {
+      min-width: 0;
+    }
+
+    .sitenav-top {
+      min-width: 0;
+    }
+
+    .sitenav-brand,
+    .nav-back,
+    .nav-ver {
+      flex-shrink: 0;
+    }
+
+    .sitenav-top-right {
+      min-width: 180px;
+    }
+
+    .search-box,
+    .track-search {
+      max-width: 100%;
+    }
+
+    .sitenav-bar-inner {
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: x proximity;
+    }
+
+    .nav-link {
+      scroll-snap-align: start;
+    }
+
+    /* Resumo executivo: mantém o comportamento de leitura confortável do Blog Track. */
+    #resumo .doc-hero-card {
+      grid-template-columns: 1fr !important;
+      align-items: start !important;
+      gap: 1rem !important;
+    }
+
+    #resumo .doc-hero-card>div:first-child {
+      max-width: 100%;
+      min-width: 0;
+    }
+
+    #resumo .track-lead,
+    #resumo .lead {
+      max-width: 980px;
+    }
+
+    #resumo .metrics-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+      width: 100%;
+      max-width: 100%;
+      align-items: stretch;
+    }
+
+    #resumo .metric-pill {
+      min-width: 0;
+      min-height: 112px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Notebook e desktop estreito */
+    @media (max-width: 1180px) {
+
+      .container,
+      .main {
+        padding-left: 1.25rem;
+        padding-right: 1.25rem;
+      }
+
+      .main {
+        grid-template-columns: 200px minmax(0, 1fr);
+      }
+
+      .content,
+      #trackMain {
+        padding-left: 1.35rem;
+      }
+
+      .doc-grid-4,
+      #resumo .metrics-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+
+      .doc-grid-3 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* Tablet: remove sidebar e preserva navegação superior com busca em linha própria. */
+    @media (max-width: 980px) {
+      .main {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .content,
+      #trackMain {
+        padding: 1.5rem 0 3rem;
+      }
+
+      .doc-section {
+        scroll-margin-top: 148px;
+      }
+
+      .doc-hero-card,
+      .doc-grid-2,
+      .phase-doc-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sitenav-top {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .55rem .75rem;
+      }
+
+      .sitenav-brand {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .nav-ver {
+        display: none;
+      }
+
+      .nav-back {
+        justify-self: end;
+      }
+
+      .sitenav-top-right {
+        grid-column: 1 / -1;
+        width: 100%;
+        min-width: 0;
+        margin-left: 0;
+      }
+
+      .search-box,
+      .track-search {
+        width: 100% !important;
+        min-height: 38px;
+      }
+    }
+
+    /* Tablet estreito e celulares grandes */
+    @media (max-width: 760px) {
+      html {
+        font-size: 14.5px;
+      }
+
+      .container,
+      .main {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .track-hero-page {
+        padding: 2.8rem 0 2rem;
+      }
+
+      .track-title {
+        font-size: clamp(2rem, 9vw, 3.1rem);
+        letter-spacing: -.035em;
+      }
+
+      .track-lead {
+        max-width: 100%;
+      }
+
+      .track-badge-set,
+      .badge-cloud {
+        gap: .42rem;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span {
+        max-width: 100%;
+        white-space: normal;
+        line-height: 1.35;
+      }
+
+      .sitenav-bar-inner {
+        padding-left: 34px;
+        padding-right: 34px;
+      }
+
+      .nav-group {
+        padding: .25rem .3rem;
+      }
+
+      .nav-group-label {
+        font-size: .56rem;
+        padding-right: .4rem;
+        margin-right: .2rem;
+      }
+
+      .nav-link {
+        font-size: .66rem;
+        padding: .3rem .5rem;
+      }
+
+      .doc-section {
+        padding: 1rem;
+        border-radius: 12px;
+        scroll-margin-top: 154px;
+      }
+
+      .doc-section-heading,
+      .phase-doc-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .section-badge {
+        white-space: normal;
+      }
+
+      .doc-grid-3,
+      .doc-grid-4,
+      .metrics-grid,
+      #resumo .metrics-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+      .metric-pill {
+        min-height: auto;
+      }
+
+      .metric-pill span {
+        font-size: 1.75rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 680px;
+      }
+
+      .doc-table th,
+      .doc-table td,
+      th,
+      td {
+        padding: .58rem .72rem !important;
+      }
+
+      pre,
+      .code-block {
+        padding: .9rem;
+        font-size: .72rem;
+        max-height: 520px;
+      }
+
+      .timeline {
+        margin-left: .45rem;
+        padding-left: 1.25rem;
+      }
+    }
+
+    /* Celulares */
+    @media (max-width: 520px) {
+      html {
+        font-size: 14px;
+      }
+
+      .container,
+      .main {
+        padding-left: .85rem;
+        padding-right: .85rem;
+      }
+
+      .track-hero-page {
+        padding: 2.35rem 0 1.7rem;
+      }
+
+      .hero-label {
+        font-size: .66rem;
+      }
+
+      .hero-back-link,
+      .footer-link {
+        max-width: 100%;
+      }
+
+      .sitenav-top {
+        grid-template-columns: 1fr;
+        gap: .45rem;
+      }
+
+      .sitenav-brand {
+        width: 100%;
+        white-space: normal;
+        justify-content: space-between;
+        gap: .5rem;
+      }
+
+      .sitenav-brand span {
+        flex-shrink: 0;
+      }
+
+      .nav-back {
+        width: 100%;
+        justify-content: center;
+        justify-self: stretch;
+        text-align: center;
+      }
+
+      .nav-group-label {
+        display: none;
+      }
+
+      .nav-group {
+        border-right: none;
+        padding: .25rem .18rem;
+      }
+
+      .nav-link {
+        font-size: .64rem;
+        padding: .3rem .46rem;
+      }
+
+      .content,
+      #trackMain {
+        padding-top: 1rem;
+      }
+
+      .doc-section {
+        margin-bottom: 1rem;
+        padding: .9rem;
+        border-radius: 10px;
+        scroll-margin-top: 184px;
+      }
+
+      .doc-section-heading h2,
+      .doc-section h2 {
+        font-size: 1.15rem;
+      }
+
+      .doc-section h3,
+      .exam-card h3,
+      .phase-doc-card h3,
+      .callout h3 {
+        font-size: .96rem;
+      }
+
+      p,
+      li,
+      .doc-table td,
+      td {
+        font-size: .84rem !important;
+      }
+
+      .doc-table th,
+      th {
+        font-size: .66rem !important;
+      }
+
+      .track-badge-set span,
+      .badge-cloud span,
+      .priority,
+      .section-badge {
+        font-size: .64rem;
+      }
+
+      .metric-pill {
+        padding: .85rem;
+        min-height: 92px;
+      }
+
+      .metric-pill span {
+        font-size: 1.62rem;
+      }
+
+      .mini-card,
+      .exam-card,
+      .phase-doc-card,
+      .callout {
+        border-radius: 10px;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 640px;
+      }
+
+      .page-footer .footer-row {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+      .page-footer .footer-link {
+        justify-content: center !important;
+      }
+
+      .footer-pills {
+        justify-content: center !important;
+      }
+
+      .back-to-top {
+        right: .85rem;
+        bottom: .85rem;
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Celulares muito estreitos */
+    @media (max-width: 380px) {
+
+      .container,
+      .main {
+        padding-left: .7rem;
+        padding-right: .7rem;
+      }
+
+      .track-title {
+        font-size: 1.85rem;
+      }
+
+      .sitenav-brand span {
+        display: none;
+      }
+
+      .doc-section {
+        padding: .78rem;
+      }
+
+      pre,
+      .code-block {
+        font-size: .68rem;
+      }
+
+      .table-responsive .doc-table,
+      .table-responsive table {
+        min-width: 600px;
+      }
+    }
+
+    /* Dispositivos de toque: melhora área clicável sem mudar estrutura */
+    @media (pointer: coarse) {
+
+      .nav-scroll-btn,
+      .back-to-top,
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back,
+      .sidebar a {
+        touch-action: manipulation;
+      }
+
+      .nav-link,
+      .hero-back-link,
+      .footer-link,
+      .nav-back {
+        min-height: 34px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+
+
+  <style id="reference-card-style">
+    /* ─────────────────────────────────────────────────────────────
    REFERÊNCIAS EM CARDS — padrão visual reutilizável
    Mantém o tema dark, links em estilo pill técnico e responsividade.
    ───────────────────────────────────────────────────────────── */
 
-.ref-grid {
-  display:grid;
-  gap:1rem;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-}
+    .ref-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
-.ref-card {
-  background:var(--surface2);
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:1rem;
-  transition:border-color .15s,background .15s,transform .15s;
-  position:relative;
-  overflow:hidden;
-  min-height:100%;
-  min-width:0;
-}
+    .ref-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem;
+      transition: border-color .15s, background .15s, transform .15s;
+      position: relative;
+      overflow: hidden;
+      min-height: 100%;
+      min-width: 0;
+    }
 
-.ref-card::before {
-  content:"";
-  position:absolute;
-  inset:0 auto 0 0;
-  width:3px;
-  background:linear-gradient(180deg,var(--accent),var(--accent2));
-}
+    .ref-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--accent), var(--accent2));
+    }
 
-.ref-card:hover {
-  border-color:rgba(52,211,153,.30);
-  background:#151c27;
-  transform:translateY(-1px);
-}
+    .ref-card:hover {
+      border-color: rgba(52, 211, 153, .30);
+      background: #151c27;
+      transform: translateY(-1px);
+    }
 
-.ref-card strong {
-  display:block;
-  color:#fff;
-  font-family:'Syne',sans-serif;
-  font-size:.95rem;
-  margin-bottom:.35rem;
-}
+    .ref-card strong {
+      display: block;
+      color: #fff;
+      font-family: 'Syne', sans-serif;
+      font-size: .95rem;
+      margin-bottom: .35rem;
+    }
 
-.ref-card p {
-  color:var(--muted2);
-  font-size:.82rem;
-  margin-bottom:.75rem;
-}
+    .ref-card p {
+      color: var(--muted2);
+      font-size: .82rem;
+      margin-bottom: .75rem;
+    }
 
-.ref-card a,
-.ref-list a {
-  display:inline-flex;
-  align-items:center;
-  gap:.35rem;
-  max-width:100%;
-  color:#d8ecff;
-  text-decoration:none;
-  font-family:'IBM Plex Mono',monospace;
-  font-size:.72rem;
-  font-weight:600;
-  line-height:1.45;
-  border:1px solid rgba(56,189,248,.18);
-  background:rgba(56,189,248,.055);
-  padding:.28rem .55rem;
-  border-radius:6px;
-  overflow-wrap:anywhere;
-  word-break:break-word;
-  transition:all .14s;
-}
+    .ref-card a,
+    .ref-list a {
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      max-width: 100%;
+      color: #d8ecff;
+      text-decoration: none;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 600;
+      line-height: 1.45;
+      border: 1px solid rgba(56, 189, 248, .18);
+      background: rgba(56, 189, 248, .055);
+      padding: .28rem .55rem;
+      border-radius: 6px;
+      overflow-wrap: anywhere;
+      word-break: break-word;
+      transition: all .14s;
+    }
 
-.ref-card a::after,
-.ref-list a::after {
-  content:'↗';
-  font-size:.72rem;
-  color:var(--accent2);
-  line-height:1;
-}
+    .ref-card a::after,
+    .ref-list a::after {
+      content: '↗';
+      font-size: .72rem;
+      color: var(--accent2);
+      line-height: 1;
+    }
 
-.ref-card a:hover,
-.ref-list a:hover {
-  color:#fff;
-  border-color:rgba(52,211,153,.42);
-  background:rgba(52,211,153,.09);
-  text-decoration:none;
-  transform:translateY(-1px);
-}
+    .ref-card a:hover,
+    .ref-list a:hover {
+      color: #fff;
+      border-color: rgba(52, 211, 153, .42);
+      background: rgba(52, 211, 153, .09);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
 
-.ref-grid > * {
-  min-width:0;
-}
+    .ref-grid>* {
+      min-width: 0;
+    }
 
-@media(max-width:1180px) {
-  .ref-grid {
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
+    @media(max-width:1180px) {
+      .ref-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
-@media(max-width:980px) {
-  .ref-grid {
-    grid-template-columns:1fr;
-  }
-}
+    @media(max-width:980px) {
+      .ref-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
-@media(max-width:520px) {
-  .ref-card {
-    border-radius:10px;
-  }
+    @media(max-width:520px) {
+      .ref-card {
+        border-radius: 10px;
+      }
 
-  .ref-card a,
-  .ref-list a {
-    display:flex;
-    width:100%;
-    justify-content:space-between;
-    align-items:center;
-  }
-}
-</style>
+      .ref-card a,
+      .ref-list a {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+  </style>
 
 </head>
+
 <body class="track-page" data-track="english">
 
-<header class="track-hero-page">
-  <div class="container">
-    <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
-    <div class="hero-label">Trilha técnica · Inglês para programação · Fluência funcional</div>
-    <h1 class="track-title">Inglês Técnico para Programação</h1>
-    <p class="track-lead">Página técnica completa para transformar o inglês em ferramenta diária de trabalho: leitura de documentação, debugging, logs, issues, commits, pull requests, README, explicação de arquitetura, entrevistas técnicas, reuniões e comunicação profissional em times internacionais.</p>
-    <div class="track-badge-set">
-      <span>B1+/B2 técnico</span><span>Documentação oficial</span><span>Debugging em inglês</span><span>Commits e PRs</span><span>Speaking técnico</span><span>Entrevistas</span><span>Fluência funcional</span><span>Portfólio global</span>
-    </div>
-  </div>
-</header>
-
-<nav class="sitenav">
-  <div class="container">
-    <div class="sitenav-top">
-      <a class="sitenav-brand" href="#">English Tech Track <span>64 semanas</span></a>
-      <span class="nav-ver">Plano Integrado de Estudos</span>
-      <a class="nav-back" href="../index.html">← Dashboard principal</a>
-      <div class="sitenav-top-right">
-        <input class="search-box" type="search" placeholder="Buscar na trilha de inglês..." id="searchInput" aria-label="Buscar na trilha de inglês técnico">
+  <header class="track-hero-page">
+    <div class="container">
+      <a class="footer-link small d-inline-block mb-3" href="../index.html">← Voltar ao dashboard principal</a>
+      <div class="hero-label">Trilha técnica · Inglês para programação · Fluência funcional</div>
+      <h1 class="track-title">Inglês Técnico para Programação</h1>
+      <p class="track-lead">Página técnica completa para transformar o inglês em ferramenta diária de trabalho: leitura
+        de documentação, debugging, logs, issues, commits, pull requests, README, explicação de arquitetura, entrevistas
+        técnicas, reuniões e comunicação profissional em times internacionais.</p>
+      <div class="track-badge-set">
+        <span>B1+/B2 técnico</span><span>Documentação oficial</span><span>Debugging em inglês</span><span>Commits e
+          PRs</span><span>Speaking técnico</span><span>Entrevistas</span><span>Fluência funcional</span><span>Portfólio
+          global</span>
       </div>
     </div>
-  </div>
-  <div class="sitenav-bar-outer">
-    <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">&#8249;</button>
-    <div class="sitenav-bar-inner" id="navSectionsBar">
-      <div class="nav-group">
-        <span class="nav-group-label">Base</span>
-        <a class="nav-link" href="#resumo">01 · Resumo</a>
-        <a class="nav-link" href="#objetivos">02 · Objetivos</a>
-        <a class="nav-link" href="#metodo">03 · Método</a>
-      </div>
-      <div class="nav-group">
-        <span class="nav-group-label">Rotina</span>
-        <a class="nav-link" href="#rotina-diaria">04 · Rotina diária</a>
-        <a class="nav-link" href="#plano-semanal">05 · Semana</a>
-        <a class="nav-link" href="#plano-6-meses">06 · 6 meses</a>
-      </div>
-      <div class="nav-group">
-        <span class="nav-group-label">Técnico</span>
-        <a class="nav-link" href="#vocabulario">07 · Vocabulário</a>
-        <a class="nav-link" href="#escrita">08 · Escrita</a>
-        <a class="nav-link" href="#fala">09 · Fala</a>
-        <a class="nav-link" href="#mineracao">10 · Mineração</a>
-      </div>
-      <div class="nav-group">
-        <span class="nav-group-label">Execução</span>
-        <a class="nav-link" href="#evitar">11 · Evitar</a>
-        <a class="nav-link" href="#referencias">12 · Referências</a>
-        <a class="nav-link" href="#checklist">13 · Checklist</a>
+  </header>
+
+  <nav class="sitenav">
+    <div class="container">
+      <div class="sitenav-top">
+        <a class="sitenav-brand" href="#">English Tech Track <span>64 semanas</span></a>
+        <span class="nav-ver">Plano Integrado de Estudos</span>
+        <a class="nav-back" href="../index.html">← Dashboard principal</a>
+        <div class="sitenav-top-right">
+          <input class="search-box" type="search" placeholder="Buscar na trilha de inglês..." id="searchInput"
+            aria-label="Buscar na trilha de inglês técnico">
+        </div>
       </div>
     </div>
-    <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
-  </div>
-</nav>
+    <div class="sitenav-bar-outer">
+      <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">&#8249;</button>
+      <div class="sitenav-bar-inner" id="navSectionsBar">
+        <div class="nav-group">
+          <span class="nav-group-label">Base</span>
+          <a class="nav-link" href="#resumo">01 · Resumo</a>
+          <a class="nav-link" href="#objetivos">02 · Objetivos</a>
+          <a class="nav-link" href="#metodo">03 · Método</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Rotina</span>
+          <a class="nav-link" href="#rotina-diaria">04 · Rotina diária</a>
+          <a class="nav-link" href="#plano-semanal">05 · Semana</a>
+          <a class="nav-link" href="#plano-6-meses">06 · 6 meses</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Técnico</span>
+          <a class="nav-link" href="#vocabulario">07 · Vocabulário</a>
+          <a class="nav-link" href="#escrita">08 · Escrita</a>
+          <a class="nav-link" href="#fala">09 · Fala</a>
+          <a class="nav-link" href="#mineracao">10 · Mineração</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Execução</span>
+          <a class="nav-link" href="#evitar">11 · Evitar</a>
+          <a class="nav-link" href="#referencias">12 · Referências</a>
+          <a class="nav-link" href="#checklist">13 · Checklist</a>
+        </div>
+      </div>
+      <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
+    </div>
+  </nav>
 
-<div class="main">
-  <aside class="sidebar">
-    <div class="sidebar-group">
-      <div class="sidebar-label">Base</div>
-      <a href="#resumo">1. Resumo executivo</a>
-      <a href="#objetivos">2. Objetivos de competência</a>
-      <a href="#metodo">3. Método de estudo</a>
-    </div>
-    <div class="sidebar-group">
-      <div class="sidebar-label">Rotina</div>
-      <a href="#rotina-diaria">4. Rotina diária</a>
-      <a href="#plano-semanal">5. Plano semanal</a>
-      <a href="#plano-6-meses">6. Plano de 6 meses</a>
-    </div>
-    <div class="sidebar-group">
-      <div class="sidebar-label">Técnico</div>
-      <a href="#vocabulario">7. Vocabulário técnico</a>
-      <a href="#escrita">8. Escrita técnica</a>
-      <a href="#fala">9. Speaking técnico</a>
-      <a href="#mineracao">10. Mineração de frases</a>
-    </div>
-    <div class="sidebar-group">
-      <div class="sidebar-label">Execução</div>
-      <a href="#evitar">11. O que evitar</a>
-      <a href="#referencias">12. Referências técnicas</a>
-      <a href="#checklist">13. Checklist e entregáveis</a>
-    </div>
-  </aside>
+  <div class="main">
+    <aside class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-label">Base</div>
+        <a href="#resumo">1. Resumo executivo</a>
+        <a href="#objetivos">2. Objetivos de competência</a>
+        <a href="#metodo">3. Método de estudo</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-label">Rotina</div>
+        <a href="#rotina-diaria">4. Rotina diária</a>
+        <a href="#plano-semanal">5. Plano semanal</a>
+        <a href="#plano-6-meses">6. Plano de 6 meses</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-label">Técnico</div>
+        <a href="#vocabulario">7. Vocabulário técnico</a>
+        <a href="#escrita">8. Escrita técnica</a>
+        <a href="#fala">9. Speaking técnico</a>
+        <a href="#mineracao">10. Mineração de frases</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-label">Execução</div>
+        <a href="#evitar">11. O que evitar</a>
+        <a href="#referencias">12. Referências técnicas</a>
+        <a href="#checklist">13. Checklist e entregáveis</a>
+      </div>
+    </aside>
 
-  <div class="content" id="trackMain">
+    <div class="content" id="trackMain">
 
-<section id="resumo" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Resumo executivo</h2>
-      <p class="section-subtitle">Inglês como ferramenta prática de desenvolvimento, não como matéria isolada.</p>
-    </div>
-    <span class="section-badge">English Tech</span>
-  </div>
-  <div class="doc-hero-card">
-    <div>
-      <p class="lead">A forma mais eficiente de estudar inglês para programação é <strong>não separar inglês geral de inglês técnico</strong>. Para um desenvolvedor backend com foco em Java, Spring, cloud, arquitetura, logs, GitHub e entrevistas, o inglês precisa virar ferramenta diária de trabalho: ler documentação, entender erros, escrever commits, abrir PRs, explicar decisões técnicas e acompanhar vídeos ou reuniões.</p>
-      <p>O alvo estratégico não é apenas “falar bonito”. O alvo é desenvolver <strong>fluência funcional + inglês técnico de produção</strong>: conseguir operar em documentação oficial, tickets, pull requests, issues, README, discussões de arquitetura e entrevistas técnicas com autonomia crescente.</p>
-    </div>
-    <div class="metrics-grid">
-      <div class="metric-pill"><span>B1+</span><small>mínimo funcional</small></div>
-      <div class="metric-pill"><span>B2</span><small>alvo técnico forte</small></div>
-      <div class="metric-pill"><span>30–45m</span><small>rotina diária base</small></div>
-      <div class="metric-pill"><span>6</span><small>meses de progressão</small></div>
-    </div>
-  </div>
-  <div class="doc-grid-4 mt-3">
-    <div class="mini-card"><strong>Leitura</strong><span>Documentação oficial, logs, stack traces, issues e artigos técnicos sem depender de tradução.</span></div>
-    <div class="mini-card"><strong>Escrita</strong><span>Commits, PRs, READMEs, comentários técnicos, tickets e resumos de implementação.</span></div>
-    <div class="mini-card"><strong>Fala</strong><span>Explicação de código, arquitetura, decisões técnicas, trade-offs, bugs e entrevistas.</span></div>
-    <div class="mini-card"><strong>Escuta</strong><span>Vídeos, aulas, talks, reuniões, dailies e discussões técnicas com legenda em inglês.</span></div>
-  </div>
-</section>
+      <section id="resumo" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Resumo executivo</h2>
+            <p class="section-subtitle">Inglês como ferramenta prática de desenvolvimento, não como matéria isolada.</p>
+          </div>
+          <span class="section-badge">English Tech</span>
+        </div>
+        <div class="doc-hero-card">
+          <div>
+            <p class="lead">A forma mais eficiente de estudar inglês para programação é <strong>não separar inglês geral
+                de inglês técnico</strong>. Para um desenvolvedor backend com foco em Java, Spring, cloud, arquitetura,
+              logs, GitHub e entrevistas, o inglês precisa virar ferramenta diária de trabalho: ler documentação,
+              entender erros, escrever commits, abrir PRs, explicar decisões técnicas e acompanhar vídeos ou reuniões.
+            </p>
+            <p>O alvo estratégico não é apenas “falar bonito”. O alvo é desenvolver <strong>fluência funcional + inglês
+                técnico de produção</strong>: conseguir operar em documentação oficial, tickets, pull requests, issues,
+              README, discussões de arquitetura e entrevistas técnicas com autonomia crescente.</p>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric-pill"><span>B1+</span><small>mínimo funcional</small></div>
+            <div class="metric-pill"><span>B2</span><small>alvo técnico forte</small></div>
+            <div class="metric-pill"><span>30–45m</span><small>rotina diária base</small></div>
+            <div class="metric-pill"><span>6</span><small>meses de progressão</small></div>
+          </div>
+        </div>
+        <div class="doc-grid-4 mt-3">
+          <div class="mini-card"><strong>Leitura</strong><span>Documentação oficial, logs, stack traces, issues e
+              artigos técnicos sem depender de tradução.</span></div>
+          <div class="mini-card"><strong>Escrita</strong><span>Commits, PRs, READMEs, comentários técnicos, tickets e
+              resumos de implementação.</span></div>
+          <div class="mini-card"><strong>Fala</strong><span>Explicação de código, arquitetura, decisões técnicas,
+              trade-offs, bugs e entrevistas.</span></div>
+          <div class="mini-card"><strong>Escuta</strong><span>Vídeos, aulas, talks, reuniões, dailies e discussões
+              técnicas com legenda em inglês.</span></div>
+        </div>
+      </section>
 
-<section id="objetivos" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Objetivos de competência</h2>
-      <p class="section-subtitle">O que significa ser eficiente em inglês técnico para programação.</p>
-    </div>
-    <span class="section-badge">Competências</span>
-  </div>
-  <p>Para programação, o inglês deve ser medido por capacidade de execução. O objetivo é conseguir usar o idioma dentro do fluxo real de desenvolvimento, especialmente em backend, cloud, APIs, segurança, testes, mensageria e arquitetura.</p>
-  <div class="doc-grid-2">
-    <div class="callout">
-      <h3>Fluência funcional</h3>
-      <ul class="doc-list">
-        <li>Ler documentação oficial sem depender de tradução.</li>
-        <li>Entender mensagens de erro, logs, issues e stack traces.</li>
-        <li>Acompanhar vídeos técnicos com legenda em inglês.</li>
-        <li>Escrever mensagens profissionais de forma clara e direta.</li>
-      </ul>
-    </div>
-    <div class="callout accent-blue">
-      <h3>Inglês técnico de produção</h3>
-      <ul class="doc-list">
-        <li>Descrever endpoints, classes, serviços, componentes e fluxos.</li>
-        <li>Explicar causa raiz, solução, impacto, trade-off e risco técnico.</li>
-        <li>Escrever commits, PR descriptions, README, bug reports e documentação.</li>
-        <li>Responder perguntas de entrevista técnica e comportamental.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="table-responsive">
-    <table class="doc-table">
-      <thead><tr><th>Nível-alvo</th><th>Utilidade para programação</th><th>Resultado esperado</th></tr></thead>
-      <tbody>
-        <tr><td><strong>B1 técnico</strong></td><td>Entender documentação simples, commits, tickets curtos e vídeos com apoio.</td><td>Já consegue estudar tecnologia em inglês com alguma autonomia.</td></tr>
-        <tr><td><strong>B1+/B2 técnico</strong></td><td>Operar em documentação, issues, PRs, README, entrevista básica e explicação de projetos.</td><td>Alvo estratégico inicial para mercado e portfólio.</td></tr>
-        <tr><td><strong>B2+ técnico</strong></td><td>Argumentar trade-offs, discutir arquitetura, entender reuniões e escrever documentação robusta.</td><td>Perfil competitivo para times remotos/internacionais.</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
+      <section id="objetivos" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Objetivos de competência</h2>
+            <p class="section-subtitle">O que significa ser eficiente em inglês técnico para programação.</p>
+          </div>
+          <span class="section-badge">Competências</span>
+        </div>
+        <p>Para programação, o inglês deve ser medido por capacidade de execução. O objetivo é conseguir usar o idioma
+          dentro do fluxo real de desenvolvimento, especialmente em backend, cloud, APIs, segurança, testes, mensageria
+          e arquitetura.</p>
+        <div class="doc-grid-2">
+          <div class="callout">
+            <h3>Fluência funcional</h3>
+            <ul class="doc-list">
+              <li>Ler documentação oficial sem depender de tradução.</li>
+              <li>Entender mensagens de erro, logs, issues e stack traces.</li>
+              <li>Acompanhar vídeos técnicos com legenda em inglês.</li>
+              <li>Escrever mensagens profissionais de forma clara e direta.</li>
+            </ul>
+          </div>
+          <div class="callout accent-blue">
+            <h3>Inglês técnico de produção</h3>
+            <ul class="doc-list">
+              <li>Descrever endpoints, classes, serviços, componentes e fluxos.</li>
+              <li>Explicar causa raiz, solução, impacto, trade-off e risco técnico.</li>
+              <li>Escrever commits, PR descriptions, README, bug reports e documentação.</li>
+              <li>Responder perguntas de entrevista técnica e comportamental.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Nível-alvo</th>
+                <th>Utilidade para programação</th>
+                <th>Resultado esperado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>B1 técnico</strong></td>
+                <td>Entender documentação simples, commits, tickets curtos e vídeos com apoio.</td>
+                <td>Já consegue estudar tecnologia em inglês com alguma autonomia.</td>
+              </tr>
+              <tr>
+                <td><strong>B1+/B2 técnico</strong></td>
+                <td>Operar em documentação, issues, PRs, README, entrevista básica e explicação de projetos.</td>
+                <td>Alvo estratégico inicial para mercado e portfólio.</td>
+              </tr>
+              <tr>
+                <td><strong>B2+ técnico</strong></td>
+                <td>Argumentar trade-offs, discutir arquitetura, entender reuniões e escrever documentação robusta.</td>
+                <td>Perfil competitivo para times remotos/internacionais.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-<section id="metodo" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Método central: Input → Extração → Revisão → Output</h2>
-      <p class="section-subtitle">Ciclo de estudo para transformar consumo técnico em fluência operacional.</p>
-    </div>
-    <span class="section-badge">Método</span>
-  </div>
-  <p>O erro comum é estudar inglês como matéria isolada: listas de verbos, gramática solta e frases genéricas. Para desenvolvedores, a eficiência aumenta quando o conteúdo vem de fontes reais: Spring Docs, AWS Docs, MDN, GitHub, mensagens de erro, artigos técnicos, pull requests e vídeos de programação.</p>
-  <div class="phase-doc-grid">
-    <div class="phase-doc-card">
-      <div class="phase-doc-head"><h3>1. Input técnico diário</h3><span>leitura/escuta</span></div>
-      <p>Leia ou escute algo técnico em inglês todos os dias: uma página da documentação do Spring Boot, trecho da AWS Docs, issue/PR no GitHub, artigo técnico curto ou vídeo de 5 a 10 minutos sobre Java, Spring, Docker, Kafka, AWS, APIs ou arquitetura.</p>
-    </div>
-    <div class="phase-doc-card">
-      <div class="phase-doc-head"><h3>2. Extração de frases</h3><span>chunks</span></div>
-      <p>Não salve apenas palavras soltas como <code>retry</code>, <code>failure</code> ou <code>request</code>. Salve blocos reutilizáveis: <code>The request failed because...</code>, <code>This method is responsible for...</code>, <code>The issue was caused by...</code>.</p>
-    </div>
-    <div class="phase-doc-card">
-      <div class="phase-doc-head"><h3>3. Revisão ativa</h3><span>retrieval</span></div>
-      <p>Use recuperação ativa em vez de só reler. Faça cartões perguntando como dizer uma ideia técnica em inglês. Exemplo: “Como dizer que a aplicação falhou ao iniciar por causa da configuração do banco?” → <code>The application failed to start due to the database configuration.</code></p>
-    </div>
-    <div class="phase-doc-card">
-      <div class="phase-doc-head"><h3>4. Output obrigatório</h3><span>produção</span></div>
-      <p>Produza inglês diariamente: resumo de documentação, explicação de erro, commit message, descrição de PR, comentário de code review, README ou mini explicação oral de uma classe, endpoint ou decisão arquitetural.</p>
-    </div>
-  </div>
-  <div class="callout accent-yellow mt-3">
-    <h3>Regra prática</h3>
-    <p>O melhor uso de IA/tradutor é como <strong>revisor</strong>, não como muleta. Primeiro escreva em inglês, depois peça correção, compare o padrão corrigido e salve as frases melhores.</p>
-  </div>
-</section>
+      <section id="metodo" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Método central: Input → Extração → Revisão → Output</h2>
+            <p class="section-subtitle">Ciclo de estudo para transformar consumo técnico em fluência operacional.</p>
+          </div>
+          <span class="section-badge">Método</span>
+        </div>
+        <p>O erro comum é estudar inglês como matéria isolada: listas de verbos, gramática solta e frases genéricas.
+          Para desenvolvedores, a eficiência aumenta quando o conteúdo vem de fontes reais: Spring Docs, AWS Docs, MDN,
+          GitHub, mensagens de erro, artigos técnicos, pull requests e vídeos de programação.</p>
+        <div class="phase-doc-grid">
+          <div class="phase-doc-card">
+            <div class="phase-doc-head">
+              <h3>1. Input técnico diário</h3><span>leitura/escuta</span>
+            </div>
+            <p>Leia ou escute algo técnico em inglês todos os dias: uma página da documentação do Spring Boot, trecho da
+              AWS Docs, issue/PR no GitHub, artigo técnico curto ou vídeo de 5 a 10 minutos sobre Java, Spring, Docker,
+              Kafka, AWS, APIs ou arquitetura.</p>
+          </div>
+          <div class="phase-doc-card">
+            <div class="phase-doc-head">
+              <h3>2. Extração de frases</h3><span>chunks</span>
+            </div>
+            <p>Não salve apenas palavras soltas como <code>retry</code>, <code>failure</code> ou <code>request</code>.
+              Salve blocos reutilizáveis: <code>The request failed because...</code>,
+              <code>This method is responsible for...</code>, <code>The issue was caused by...</code>.</p>
+          </div>
+          <div class="phase-doc-card">
+            <div class="phase-doc-head">
+              <h3>3. Revisão ativa</h3><span>retrieval</span>
+            </div>
+            <p>Use recuperação ativa em vez de só reler. Faça cartões perguntando como dizer uma ideia técnica em
+              inglês. Exemplo: “Como dizer que a aplicação falhou ao iniciar por causa da configuração do banco?” →
+              <code>The application failed to start due to the database configuration.</code></p>
+          </div>
+          <div class="phase-doc-card">
+            <div class="phase-doc-head">
+              <h3>4. Output obrigatório</h3><span>produção</span>
+            </div>
+            <p>Produza inglês diariamente: resumo de documentação, explicação de erro, commit message, descrição de PR,
+              comentário de code review, README ou mini explicação oral de uma classe, endpoint ou decisão arquitetural.
+            </p>
+          </div>
+        </div>
+        <div class="callout accent-yellow mt-3">
+          <h3>Regra prática</h3>
+          <p>O melhor uso de IA/tradutor é como <strong>revisor</strong>, não como muleta. Primeiro escreva em inglês,
+            depois peça correção, compare o padrão corrigido e salve as frases melhores.</p>
+        </div>
+      </section>
 
-<section id="rotina-diaria" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Rotina diária ideal</h2>
-      <p class="section-subtitle">Blocos de 30, 45 ou 60 minutos para encaixar no plano principal.</p>
-    </div>
-    <span class="section-badge">Rotina</span>
-  </div>
-  <div class="doc-grid-2">
-    <div class="exam-card">
-      <h3>Bloco diário de 30 minutos</h3>
-      <ol class="doc-list">
-        <li><strong>5 min:</strong> revisão ativa de 10 a 20 frases técnicas no Anki, RemNote ou Notion.</li>
-        <li><strong>10 min:</strong> leitura técnica real em Spring Docs, AWS Docs, GitHub Docs, MDN ou artigo técnico.</li>
-        <li><strong>10 min:</strong> extração e reescrita de 3 frases úteis com contexto próprio.</li>
-        <li><strong>5 min:</strong> fala ou escrita: explique o que aprendeu em uma frase ou parágrafo curto.</li>
-      </ol>
-    </div>
-    <div class="exam-card">
-      <h3>Bloco forte de 60 minutos</h3>
-      <ol class="doc-list">
-        <li><strong>10 min:</strong> revisão espaçada de frases, conectores, phrasal verbs técnicos e vocabulário.</li>
-        <li><strong>20 min:</strong> documentação oficial: Spring, AWS, Java, GitHub ou MDN.</li>
-        <li><strong>15 min:</strong> listening/shadowing com vídeo técnico curto e repetição de frases.</li>
-        <li><strong>15 min:</strong> output técnico: README, issue, PR description, bug report ou resumo.</li>
-      </ol>
-    </div>
-  </div>
-  <h3>Exemplo de reescrita técnica</h3>
-  <pre><code>Original:
+      <section id="rotina-diaria" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Rotina diária ideal</h2>
+            <p class="section-subtitle">Blocos de 30, 45 ou 60 minutos para encaixar no plano principal.</p>
+          </div>
+          <span class="section-badge">Rotina</span>
+        </div>
+        <div class="doc-grid-2">
+          <div class="exam-card">
+            <h3>Bloco diário de 30 minutos</h3>
+            <ol class="doc-list">
+              <li><strong>5 min:</strong> revisão ativa de 10 a 20 frases técnicas no Anki, RemNote ou Notion.</li>
+              <li><strong>10 min:</strong> leitura técnica real em Spring Docs, AWS Docs, GitHub Docs, MDN ou artigo
+                técnico.</li>
+              <li><strong>10 min:</strong> extração e reescrita de 3 frases úteis com contexto próprio.</li>
+              <li><strong>5 min:</strong> fala ou escrita: explique o que aprendeu em uma frase ou parágrafo curto.</li>
+            </ol>
+          </div>
+          <div class="exam-card">
+            <h3>Bloco forte de 60 minutos</h3>
+            <ol class="doc-list">
+              <li><strong>10 min:</strong> revisão espaçada de frases, conectores, phrasal verbs técnicos e vocabulário.
+              </li>
+              <li><strong>20 min:</strong> documentação oficial: Spring, AWS, Java, GitHub ou MDN.</li>
+              <li><strong>15 min:</strong> listening/shadowing com vídeo técnico curto e repetição de frases.</li>
+              <li><strong>15 min:</strong> output técnico: README, issue, PR description, bug report ou resumo.</li>
+            </ol>
+          </div>
+        </div>
+        <h3>Exemplo de reescrita técnica</h3>
+        <pre><code>Original:
 Spring Boot helps you create stand-alone, production-grade applications.
 
 Sua versão:
@@ -1273,61 +2558,83 @@ This project uses Spring Boot to create a production-grade REST API for financia
 
 Micro-output diário:
 Today I learned how Spring Boot simplifies application configuration.</code></pre>
-</section>
+      </section>
 
-<section id="plano-semanal" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Plano semanal ideal</h2>
-      <p class="section-subtitle">Distribuição semanal para cobrir leitura, escuta, escrita, fala e revisão.</p>
-    </div>
-    <span class="section-badge">Semana</span>
-  </div>
-  <div class="doc-grid-3">
-    <div class="mini-card"><strong>Segunda</strong><span>Documentação Spring + frases técnicas. Foque em controllers, services, configuration, security, data access e tests.</span></div>
-    <div class="mini-card"><strong>Terça</strong><span>Vídeo técnico + shadowing. Use legenda em inglês, repita frases úteis e salve padrões.</span></div>
-    <div class="mini-card"><strong>Quarta</strong><span>README, PR ou commit em inglês. Transforme alguma alteração real em comunicação técnica.</span></div>
-    <div class="mini-card"><strong>Quinta</strong><span>AWS Docs ou artigo cloud. Extraia vocabulário de arquitetura, segurança, storage, queues e observabilidade.</span></div>
-    <div class="mini-card"><strong>Sexta</strong><span>Revisão de flashcards + resumo técnico. Faça retrieval practice em vez de releitura passiva.</span></div>
-    <div class="mini-card"><strong>Sábado</strong><span>Gravação explicando projeto. Explique problema, solução, trade-off e resultado.</span></div>
-    <div class="mini-card"><strong>Domingo</strong><span>Revisão leve + planejamento. Escolha documentação, vídeos e outputs da próxima semana.</span></div>
-  </div>
-  <div class="callout mt-3">
-    <h3>Resultado esperado</h3>
-    <p>Em vez de “estudar inglês” de forma genérica, você passa a construir um inglês conectado a backend, arquitetura, debugging, documentação e mercado internacional.</p>
-  </div>
-</section>
+      <section id="plano-semanal" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Plano semanal ideal</h2>
+            <p class="section-subtitle">Distribuição semanal para cobrir leitura, escuta, escrita, fala e revisão.</p>
+          </div>
+          <span class="section-badge">Semana</span>
+        </div>
+        <div class="doc-grid-3">
+          <div class="mini-card"><strong>Segunda</strong><span>Documentação Spring + frases técnicas. Foque em
+              controllers, services, configuration, security, data access e tests.</span></div>
+          <div class="mini-card"><strong>Terça</strong><span>Vídeo técnico + shadowing. Use legenda em inglês, repita
+              frases úteis e salve padrões.</span></div>
+          <div class="mini-card"><strong>Quarta</strong><span>README, PR ou commit em inglês. Transforme alguma
+              alteração real em comunicação técnica.</span></div>
+          <div class="mini-card"><strong>Quinta</strong><span>AWS Docs ou artigo cloud. Extraia vocabulário de
+              arquitetura, segurança, storage, queues e observabilidade.</span></div>
+          <div class="mini-card"><strong>Sexta</strong><span>Revisão de flashcards + resumo técnico. Faça retrieval
+              practice em vez de releitura passiva.</span></div>
+          <div class="mini-card"><strong>Sábado</strong><span>Gravação explicando projeto. Explique problema, solução,
+              trade-off e resultado.</span></div>
+          <div class="mini-card"><strong>Domingo</strong><span>Revisão leve + planejamento. Escolha documentação, vídeos
+              e outputs da próxima semana.</span></div>
+        </div>
+        <div class="callout mt-3">
+          <h3>Resultado esperado</h3>
+          <p>Em vez de “estudar inglês” de forma genérica, você passa a construir um inglês conectado a backend,
+            arquitetura, debugging, documentação e mercado internacional.</p>
+        </div>
+      </section>
 
-<section id="plano-6-meses" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Plano de evolução em 6 meses</h2>
-      <p class="section-subtitle">Progressão realista para sair de consumo passivo e chegar em portfólio técnico em inglês.</p>
-    </div>
-    <span class="section-badge">Roadmap</span>
-  </div>
-  <div class="timeline">
-    <div class="timeline-item"><strong>Mês 1 — Base técnica de leitura</strong><span>Foco em documentação, mensagens de erro, vocabulário backend, 10 frases técnicas por dia, flashcards e commits simples em inglês. Meta: entender textos curtos e explicar classes, endpoints e erros simples.</span></div>
-    <div class="timeline-item"><strong>Mês 2 — Escrita técnica básica</strong><span>Todos os projetos pessoais com README em inglês, commits em inglês, 2 descrições de PR por semana e 1 resumo técnico semanal. Meta: escrever documentação simples sem tradutor.</span></div>
-    <div class="timeline-item"><strong>Mês 3 — Listening técnico</strong><span>Vídeos curtos sobre Java, Spring, AWS, Docker e arquitetura com legenda em inglês, shadowing de 5 minutos e resumo do vídeo em 5 linhas. Meta: entender aulas técnicas com apoio de legenda em inglês.</span></div>
-    <div class="timeline-item"><strong>Mês 4 — Fala técnica</strong><span>3 gravações por semana explicando endpoint, decisão arquitetural e bug. Simule daily com: <code>Yesterday I worked on...</code>, <code>Today I will...</code>, <code>I am blocked by...</code>. Meta: falar sobre projeto sem travar tanto.</span></div>
-    <div class="timeline-item"><strong>Mês 5 — Inglês de entrevista</strong><span>Responder perguntas sobre Java, Spring, SQL, Kafka e arquitetura. Usar estrutura STAR para experiências. Meta: responder perguntas de entrevista com clareza.</span></div>
-    <div class="timeline-item"><strong>Mês 6 — Portfólio em inglês</strong><span>README completo em inglês para cada projeto, artigos técnicos curtos, posts sobre arquitetura e descrições de projetos no LinkedIn/GitHub. Meta: GitHub com comunicação técnica profissional.</span></div>
-  </div>
-</section>
+      <section id="plano-6-meses" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Plano de evolução em 6 meses</h2>
+            <p class="section-subtitle">Progressão realista para sair de consumo passivo e chegar em portfólio técnico
+              em inglês.</p>
+          </div>
+          <span class="section-badge">Roadmap</span>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item"><strong>Mês 1 — Base técnica de leitura</strong><span>Foco em documentação,
+              mensagens de erro, vocabulário backend, 10 frases técnicas por dia, flashcards e commits simples em
+              inglês. Meta: entender textos curtos e explicar classes, endpoints e erros simples.</span></div>
+          <div class="timeline-item"><strong>Mês 2 — Escrita técnica básica</strong><span>Todos os projetos pessoais com
+              README em inglês, commits em inglês, 2 descrições de PR por semana e 1 resumo técnico semanal. Meta:
+              escrever documentação simples sem tradutor.</span></div>
+          <div class="timeline-item"><strong>Mês 3 — Listening técnico</strong><span>Vídeos curtos sobre Java, Spring,
+              AWS, Docker e arquitetura com legenda em inglês, shadowing de 5 minutos e resumo do vídeo em 5 linhas.
+              Meta: entender aulas técnicas com apoio de legenda em inglês.</span></div>
+          <div class="timeline-item"><strong>Mês 4 — Fala técnica</strong><span>3 gravações por semana explicando
+              endpoint, decisão arquitetural e bug. Simule daily com: <code>Yesterday I worked on...</code>,
+              <code>Today I will...</code>, <code>I am blocked by...</code>. Meta: falar sobre projeto sem travar
+              tanto.</span></div>
+          <div class="timeline-item"><strong>Mês 5 — Inglês de entrevista</strong><span>Responder perguntas sobre Java,
+              Spring, SQL, Kafka e arquitetura. Usar estrutura STAR para experiências. Meta: responder perguntas de
+              entrevista com clareza.</span></div>
+          <div class="timeline-item"><strong>Mês 6 — Portfólio em inglês</strong><span>README completo em inglês para
+              cada projeto, artigos técnicos curtos, posts sobre arquitetura e descrições de projetos no
+              LinkedIn/GitHub. Meta: GitHub com comunicação técnica profissional.</span></div>
+        </div>
+      </section>
 
-<section id="vocabulario" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Vocabulário técnico essencial</h2>
-      <p class="section-subtitle">Vocabulário por contexto real de backend, debugging, APIs e arquitetura.</p>
-    </div>
-    <span class="section-badge">Vocabulário</span>
-  </div>
-  <div class="doc-grid-2">
-    <div>
-      <h3>Debugging e troubleshooting</h3>
-      <pre><code>The application crashes when...
+      <section id="vocabulario" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Vocabulário técnico essencial</h2>
+            <p class="section-subtitle">Vocabulário por contexto real de backend, debugging, APIs e arquitetura.</p>
+          </div>
+          <span class="section-badge">Vocabulário</span>
+        </div>
+        <div class="doc-grid-2">
+          <div>
+            <h3>Debugging e troubleshooting</h3>
+            <pre><code>The application crashes when...
 The endpoint returns 500 when...
 The issue happens only when...
 The root cause seems to be...
@@ -1337,10 +2644,10 @@ The request payload is invalid.
 The service is unavailable.
 The database connection timed out.
 The message was not consumed by Kafka.</code></pre>
-    </div>
-    <div>
-      <h3>Backend e APIs</h3>
-      <pre><code>request
+          </div>
+          <div>
+            <h3>Backend e APIs</h3>
+            <pre><code>request
 response
 payload
 header
@@ -1363,29 +2670,79 @@ fallback
 timeout
 throughput
 latency</code></pre>
-    </div>
-  </div>
-  <h3>Arquitetura e engenharia</h3>
-  <div class="table-responsive">
-    <table class="doc-table dense-table">
-      <thead><tr><th>Termo</th><th>Uso técnico</th><th>Exemplo de frase</th></tr></thead>
-      <tbody>
-        <tr><td>trade-off</td><td>Escolha técnica com ganho e custo.</td><td><code>The main trade-off is increased complexity.</code></td></tr>
-        <tr><td>coupling</td><td>Grau de dependência entre componentes.</td><td><code>This design reduces coupling between services.</code></td></tr>
-        <tr><td>cohesion</td><td>Consistência de responsabilidade interna.</td><td><code>The service has high cohesion.</code></td></tr>
-        <tr><td>boundary</td><td>Limite entre contextos, módulos ou domínios.</td><td><code>This boundary protects the domain model.</code></td></tr>
-        <tr><td>adapter / port</td><td>Camadas de integração em arquitetura hexagonal.</td><td><code>The adapter implements the output port.</code></td></tr>
-        <tr><td>aggregate</td><td>Unidade de consistência em DDD.</td><td><code>The aggregate enforces business rules.</code></td></tr>
-        <tr><td>event-driven architecture</td><td>Arquitetura baseada em eventos.</td><td><code>The service publishes an event after the transaction is completed.</code></td></tr>
-        <tr><td>eventual consistency</td><td>Consistência assíncrona em sistemas distribuídos.</td><td><code>The read model is eventually consistent.</code></td></tr>
-        <tr><td>scalability</td><td>Capacidade de crescer com carga.</td><td><code>The architecture improves scalability.</code></td></tr>
-        <tr><td>resilience</td><td>Capacidade de resistir a falhas.</td><td><code>Retries and fallbacks improve resilience.</code></td></tr>
-        <tr><td>observability</td><td>Logs, métricas e traces para entender o sistema.</td><td><code>Observability helps diagnose production issues.</code></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <h3>Frases para explicar decisões técnicas</h3>
-  <pre><code>I chose this approach because...
+          </div>
+        </div>
+        <h3>Arquitetura e engenharia</h3>
+        <div class="table-responsive">
+          <table class="doc-table dense-table">
+            <thead>
+              <tr>
+                <th>Termo</th>
+                <th>Uso técnico</th>
+                <th>Exemplo de frase</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>trade-off</td>
+                <td>Escolha técnica com ganho e custo.</td>
+                <td><code>The main trade-off is increased complexity.</code></td>
+              </tr>
+              <tr>
+                <td>coupling</td>
+                <td>Grau de dependência entre componentes.</td>
+                <td><code>This design reduces coupling between services.</code></td>
+              </tr>
+              <tr>
+                <td>cohesion</td>
+                <td>Consistência de responsabilidade interna.</td>
+                <td><code>The service has high cohesion.</code></td>
+              </tr>
+              <tr>
+                <td>boundary</td>
+                <td>Limite entre contextos, módulos ou domínios.</td>
+                <td><code>This boundary protects the domain model.</code></td>
+              </tr>
+              <tr>
+                <td>adapter / port</td>
+                <td>Camadas de integração em arquitetura hexagonal.</td>
+                <td><code>The adapter implements the output port.</code></td>
+              </tr>
+              <tr>
+                <td>aggregate</td>
+                <td>Unidade de consistência em DDD.</td>
+                <td><code>The aggregate enforces business rules.</code></td>
+              </tr>
+              <tr>
+                <td>event-driven architecture</td>
+                <td>Arquitetura baseada em eventos.</td>
+                <td><code>The service publishes an event after the transaction is completed.</code></td>
+              </tr>
+              <tr>
+                <td>eventual consistency</td>
+                <td>Consistência assíncrona em sistemas distribuídos.</td>
+                <td><code>The read model is eventually consistent.</code></td>
+              </tr>
+              <tr>
+                <td>scalability</td>
+                <td>Capacidade de crescer com carga.</td>
+                <td><code>The architecture improves scalability.</code></td>
+              </tr>
+              <tr>
+                <td>resilience</td>
+                <td>Capacidade de resistir a falhas.</td>
+                <td><code>Retries and fallbacks improve resilience.</code></td>
+              </tr>
+              <tr>
+                <td>observability</td>
+                <td>Logs, métricas e traces para entender o sistema.</td>
+                <td><code>Observability helps diagnose production issues.</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Frases para explicar decisões técnicas</h3>
+        <pre><code>I chose this approach because...
 The main trade-off is...
 This design reduces coupling between...
 This layer is responsible for...
@@ -1395,22 +2752,24 @@ This implementation follows...
 The benefit of this approach is...
 The downside is...
 A better alternative would be...</code></pre>
-</section>
+      </section>
 
-<section id="escrita" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Escrita técnica: commits, PRs, README e documentação</h2>
-      <p class="section-subtitle">A escrita deve ser curta, explícita, rastreável e profissional.</p>
-    </div>
-    <span class="section-badge">Writing</span>
-  </div>
-  <p>Para portfólio e mercado, a escrita técnica em inglês vale muito. Ela mostra maturidade profissional, organização, clareza de raciocínio e capacidade de colaboração assíncrona.</p>
-  <div class="doc-grid-2">
-    <div>
-      <h3>Commit messages</h3>
-      <p>Use inglês direto, curto e no imperativo. O formato Conventional Commits ajuda a manter histórico explícito e semântico.</p>
-      <pre><code>Add sidebar numbering to track navigation
+      <section id="escrita" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Escrita técnica: commits, PRs, README e documentação</h2>
+            <p class="section-subtitle">A escrita deve ser curta, explícita, rastreável e profissional.</p>
+          </div>
+          <span class="section-badge">Writing</span>
+        </div>
+        <p>Para portfólio e mercado, a escrita técnica em inglês vale muito. Ela mostra maturidade profissional,
+          organização, clareza de raciocínio e capacidade de colaboração assíncrona.</p>
+        <div class="doc-grid-2">
+          <div>
+            <h3>Commit messages</h3>
+            <p>Use inglês direto, curto e no imperativo. O formato Conventional Commits ajuda a manter histórico
+              explícito e semântico.</p>
+            <pre><code>Add sidebar numbering to track navigation
 Fix Kafka consumer retry handling
 Update README with setup instructions
 Refactor order mapping logic
@@ -1421,10 +2780,10 @@ fix(order): handle null product category
 docs(readme): update local setup instructions
 test(mapper): add coverage for nested products
 refactor(api): simplify error response mapping</code></pre>
-    </div>
-    <div>
-      <h3>Pull request description</h3>
-      <pre><code>## What changed
+          </div>
+          <div>
+            <h3>Pull request description</h3>
+            <pre><code>## What changed
 This PR adds sidebar numbering to the desktop navigation menu.
 
 ## Why
@@ -1434,10 +2793,10 @@ The Java, Python and AI tracks should follow the same navigation pattern used in
 - Checked sidebar labels on desktop
 - Verified anchor links
 - Confirmed that the existing design was preserved</code></pre>
-    </div>
-  </div>
-  <h3>README em inglês</h3>
-  <pre><code># Project Name
+          </div>
+        </div>
+        <h3>README em inglês</h3>
+        <pre><code># Project Name
 
 ## Overview
 Brief description of the project.
@@ -1458,350 +2817,379 @@ Instructions to run the project.
 
 ## Tests
 Instructions to execute unit and integration tests.</code></pre>
-</section>
+      </section>
 
-<section id="fala" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Speaking técnico e entrevistas</h2>
-      <p class="section-subtitle">Treine falar sobre o que você realmente constrói.</p>
-    </div>
-    <span class="section-badge">Speaking</span>
-  </div>
-  <p>Você precisa conseguir explicar projetos, decisões, bugs, componentes e trade-offs. O treino mais eficiente é usar seu projeto real como base, gravar respostas e melhorar gradualmente.</p>
-  <div class="doc-grid-2">
-    <div class="callout">
-      <h3>Perguntas para praticar</h3>
-      <ul class="doc-list">
-        <li><code>Can you explain this project?</code></li>
-        <li><code>What problem does this service solve?</code></li>
-        <li><code>Why did you choose Spring Boot?</code></li>
-        <li><code>How does authentication work?</code></li>
-        <li><code>How do you handle errors?</code></li>
-        <li><code>How do you test this feature?</code></li>
-        <li><code>What are the main trade-offs of this architecture?</code></li>
-        <li><code>How would you improve this system?</code></li>
-      </ul>
-    </div>
-    <div class="callout accent-blue">
-      <h3>Fórmula de resposta</h3>
-      <p><code>Context → Problem → Solution → Trade-off → Result</code></p>
-      <pre><code>This project is a backend API built with Java and Spring Boot.
+      <section id="fala" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Speaking técnico e entrevistas</h2>
+            <p class="section-subtitle">Treine falar sobre o que você realmente constrói.</p>
+          </div>
+          <span class="section-badge">Speaking</span>
+        </div>
+        <p>Você precisa conseguir explicar projetos, decisões, bugs, componentes e trade-offs. O treino mais eficiente é
+          usar seu projeto real como base, gravar respostas e melhorar gradualmente.</p>
+        <div class="doc-grid-2">
+          <div class="callout">
+            <h3>Perguntas para praticar</h3>
+            <ul class="doc-list">
+              <li><code>Can you explain this project?</code></li>
+              <li><code>What problem does this service solve?</code></li>
+              <li><code>Why did you choose Spring Boot?</code></li>
+              <li><code>How does authentication work?</code></li>
+              <li><code>How do you handle errors?</code></li>
+              <li><code>How do you test this feature?</code></li>
+              <li><code>What are the main trade-offs of this architecture?</code></li>
+              <li><code>How would you improve this system?</code></li>
+            </ul>
+          </div>
+          <div class="callout accent-blue">
+            <h3>Fórmula de resposta</h3>
+            <p><code>Context → Problem → Solution → Trade-off → Result</code></p>
+            <pre><code>This project is a backend API built with Java and Spring Boot.
 The main problem was handling user transactions in a reliable way.
 I used a layered architecture with controllers, services and repositories.
 The main trade-off is that this structure requires more initial organization, but it makes the system easier to test and maintain.
 As a result, the codebase became more scalable and easier to evolve.</code></pre>
-    </div>
-  </div>
-</section>
+          </div>
+        </div>
+      </section>
 
-<section id="mineracao" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Técnica de mineração de frases</h2>
-      <p class="section-subtitle">Como transformar documentação oficial em padrões reutilizáveis.</p>
-    </div>
-    <span class="section-badge">Sentence Mining</span>
-  </div>
-  <p>A cada documentação lida, extraia frases úteis. Em seguida, transforme o trecho em frases aplicáveis ao seu contexto de projeto.</p>
-  <div class="doc-grid-2">
-    <div>
-      <h3>Exemplo com Spring Boot</h3>
-      <pre><code>Spring Boot helps create production-grade applications.
+      <section id="mineracao" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Técnica de mineração de frases</h2>
+            <p class="section-subtitle">Como transformar documentação oficial em padrões reutilizáveis.</p>
+          </div>
+          <span class="section-badge">Sentence Mining</span>
+        </div>
+        <p>A cada documentação lida, extraia frases úteis. Em seguida, transforme o trecho em frases aplicáveis ao seu
+          contexto de projeto.</p>
+        <div class="doc-grid-2">
+          <div>
+            <h3>Exemplo com Spring Boot</h3>
+            <pre><code>Spring Boot helps create production-grade applications.
 This API was built as a stand-alone Spring Boot application.
 The service can be started with java -jar.
 Most configuration is handled by Spring Boot conventions.</code></pre>
-    </div>
-    <div>
-      <h3>Variações reutilizáveis</h3>
-      <pre><code>This service handles user authentication.
+          </div>
+          <div>
+            <h3>Variações reutilizáveis</h3>
+            <pre><code>This service handles user authentication.
 This controller exposes transaction endpoints.
 This repository manages database access.
 This configuration enables JWT validation.
 This test verifies the expected behavior.</code></pre>
+          </div>
+        </div>
+        <div class="callout accent-yellow">
+          <h3>Como revisar</h3>
+          <p>Transforme frases em cartões de recuperação ativa: português na frente, inglês no verso. Exemplo: “Como
+            dizer que este controller expõe endpoints de transação?” →
+            <code>This controller exposes transaction endpoints.</code></p>
+        </div>
+      </section>
+
+      <section id="evitar" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>O que evitar</h2>
+            <p class="section-subtitle">Práticas que geram sensação de estudo, mas pouco resultado técnico.</p>
+          </div>
+          <span class="section-badge">Anti-padrões</span>
+        </div>
+        <div class="doc-grid-2">
+          <div class="callout accent-red">
+            <h3>Evite</h3>
+            <ul class="doc-list">
+              <li>Decorar listas gigantes sem contexto.</li>
+              <li>Assistir vídeos com legenda em português.</li>
+              <li>Traduzir toda documentação antes de tentar entender.</li>
+              <li>Estudar só gramática por meses.</li>
+              <li>Consumir conteúdo sem escrever ou falar.</li>
+              <li>Usar IA/tradutor sem revisar os padrões das frases.</li>
+              <li>Deixar commits, README e PRs em português nos projetos de portfólio.</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <h3>Faça no lugar</h3>
+            <ul class="doc-list">
+              <li>Estude inglês dentro de Java, Spring, AWS, GitHub e arquitetura.</li>
+              <li>Salve frases inteiras, não apenas palavras.</li>
+              <li>Revise com recuperação ativa e revisão espaçada.</li>
+              <li>Produza output técnico diariamente.</li>
+              <li>Grave explicações curtas sobre projetos reais.</li>
+              <li>Reescreva READMEs, commits e PRs em inglês.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="doc-section searchable-section" data-search-section id="referencias">
+        <div class="doc-section-heading">
+          <div>
+            <h2>Referências técnicas</h2>
+            <p class="section-subtitle">Fontes oficiais e confiáveis para inglês geral, inglês técnico, documentação,
+              escrita profissional, commits e aprendizagem ativa.</p>
+          </div>
+          <span class="section-badge">Referências</span>
+        </div>
+
+        <div class="ref-grid">
+          <article class="ref-card">
+            <strong>CEFR — Level descriptions</strong>
+            <p>Referência para entender níveis A1–C2 e mirar B1+/B2 técnico com critérios mais objetivos.</p>
+            <a href="https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions"
+              target="_blank" rel="noopener">coe.int/cefr-levels</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>British Council LearnEnglish</strong>
+            <p>Base confiável para reading, listening, speaking, pronunciation e vocabulário geral aplicado.</p>
+            <a href="https://learnenglish.britishcouncil.org/" target="_blank"
+              rel="noopener">learnenglish.britishcouncil.org</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Cambridge English Learning English</strong>
+            <p>Atividades estruturadas de leitura, escrita, escuta, fala, gramática e vocabulário por nível.</p>
+            <a href="https://www.cambridgeenglish.org/learning-english/" target="_blank"
+              rel="noopener">cambridgeenglish.org/learning-english</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Spring Framework Documentation</strong>
+            <p>Fonte real para vocabulário técnico de IoC, testing, data access, web, architecture e Spring ecosystem.
+            </p>
+            <a href="https://docs.spring.io/spring-framework/reference/index.html" target="_blank"
+              rel="noopener">docs.spring.io/spring-framework</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Spring Boot Documentation</strong>
+            <p>Leitura técnica para expressões como production-grade applications, configuration, starters e deployment.
+            </p>
+            <a href="https://docs.spring.io/spring-boot/index.html" target="_blank"
+              rel="noopener">docs.spring.io/spring-boot</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>AWS Documentation</strong>
+            <p>Vocabulário de cloud, security, storage, queues, networking, observability, IAM e arquitetura
+              operacional.</p>
+            <a href="https://docs.aws.amazon.com/" target="_blank" rel="noopener">docs.aws.amazon.com</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>MDN Web Docs</strong>
+            <p>Documentação clara para fundamentos web, HTTP, JavaScript, frontend, browser APIs e segurança web.</p>
+            <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank"
+              rel="noopener">developer.mozilla.org/learn</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>GitHub Docs — Pull Requests</strong>
+            <p>Vocabulário de colaboração assíncrona: proposing changes, review, merge, conflicts e code discussion.</p>
+            <a href="https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests"
+              target="_blank" rel="noopener">docs.github.com/pull-requests</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>GitHub Docs — README</strong>
+            <p>Estrutura de README para apresentar projetos, instalação, uso, arquitetura, testes e contribuição.</p>
+            <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+              target="_blank" rel="noopener">docs.github.com/about-readmes</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Google Developer Documentation Style Guide</strong>
+            <p>Guia para escrita técnica clara, direta, consistente e orientada a documentação de software.</p>
+            <a href="https://developers.google.com/style" target="_blank" rel="noopener">developers.google.com/style</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Microsoft Writing Style Guide</strong>
+            <p>Referência para comunicação objetiva sobre tecnologia, produtos, instruções e documentação profissional.
+            </p>
+            <a href="https://learn.microsoft.com/en-us/style-guide/welcome/" target="_blank"
+              rel="noopener">learn.microsoft.com/style-guide</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Conventional Commits</strong>
+            <p>Formato para escrever commits semânticos em inglês com escopo, tipo de mudança e histórico legível.</p>
+            <a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank"
+              rel="noopener">conventionalcommits.org</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Retrieval Practice — Karpicke & Roediger</strong>
+            <p>Base científica para revisar inglês técnico por recuperação ativa em vez de releitura passiva.</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/18276894/" target="_blank"
+              rel="noopener">pubmed.ncbi.nlm.nih.gov/18276894</a>
+          </article>
+
+          <article class="ref-card">
+            <strong>Distributed Practice — Cepeda et al.</strong>
+            <p>Base científica para revisão espaçada, evitando estudo concentrado e esquecimento rápido.</p>
+            <a href="https://pubmed.ncbi.nlm.nih.gov/16719566/" target="_blank"
+              rel="noopener">pubmed.ncbi.nlm.nih.gov/16719566</a>
+          </article>
+        </div>
+
+        <div class="callout accent-blue mt-3">
+          <h3>Observação de uso</h3>
+          <p>Antes de usar qualquer conteúdo em produção, aula, artigo ou portfólio, valide versões, links, guias de
+            estilo, documentação técnica e padrões oficiais diretamente nas fontes originais.</p>
+        </div>
+      </section>
+
+      <section id="checklist" class="doc-section searchable-section" data-search-section>
+        <div class="doc-section-heading">
+          <div>
+            <h2>Checklist e entregáveis</h2>
+            <p class="section-subtitle">Como transformar a trilha em resultado verificável no portfólio.</p>
+          </div>
+          <span class="section-badge">Execução</span>
+        </div>
+        <div class="doc-grid-2">
+          <div class="exam-card">
+            <h3>Checklist diário</h3>
+            <ul class="doc-list">
+              <li><span class="priority must">MUST</span> Revisar frases técnicas por recuperação ativa.</li>
+              <li><span class="priority must">MUST</span> Ler ou ouvir uma fonte técnica real em inglês.</li>
+              <li><span class="priority should">SHOULD</span> Extrair 3 frases reutilizáveis.</li>
+              <li><span class="priority should">SHOULD</span> Produzir 1 output: commit, resumo, explicação ou
+                comentário técnico.</li>
+              <li><span class="priority nice">NICE</span> Gravar áudio de 1 a 3 minutos explicando uma parte do projeto.
+              </li>
+            </ul>
+          </div>
+          <div class="exam-card">
+            <h3>Entregáveis de portfólio</h3>
+            <ul class="doc-list">
+              <li>Commits em inglês usando imperativo e padrão semântico.</li>
+              <li>README em inglês para cada projeto principal.</li>
+              <li>Pull request descriptions com <code>What changed</code>, <code>Why</code> e
+                <code>How it was tested</code>.</li>
+              <li>Glossário pessoal de backend, cloud, arquitetura e debugging.</li>
+              <li>Gravações curtas explicando projetos e trade-offs.</li>
+              <li>Artigos técnicos curtos em inglês após o mês 6.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="callout accent-blue mt-3">
+          <h3>Critério de evolução</h3>
+          <p>Você está evoluindo quando começa a consultar documentação em inglês primeiro, escrever commits
+            naturalmente em inglês, explicar bugs sem traduzir mentalmente palavra por palavra e transformar seus
+            projetos em material profissional para GitHub, LinkedIn e entrevistas.</p>
+        </div>
+      </section>
+
+    </div><!-- /content -->
+  </div><!-- /main -->
+
+  <footer class="page-footer">
+    <div class="footer-row">
+      <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
+      <div class="footer-pills">
+        <span class="footer-pill teal">Fluência funcional</span>
+        <span class="footer-pill yellow">B1+/B2 técnico</span>
+        <span class="footer-pill blue">Docs oficiais</span>
+        <span class="footer-pill purple">Portfólio global</span>
+      </div>
     </div>
-  </div>
-  <div class="callout accent-yellow">
-    <h3>Como revisar</h3>
-    <p>Transforme frases em cartões de recuperação ativa: português na frente, inglês no verso. Exemplo: “Como dizer que este controller expõe endpoints de transação?” → <code>This controller exposes transaction endpoints.</code></p>
-  </div>
-</section>
+    <p><strong style="color:var(--muted2)">Inglês Técnico para Programação</strong> · Plano Integrado de Estudos · 64
+      semanas</p>
+  </footer>
 
-<section id="evitar" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>O que evitar</h2>
-      <p class="section-subtitle">Práticas que geram sensação de estudo, mas pouco resultado técnico.</p>
-    </div>
-    <span class="section-badge">Anti-padrões</span>
-  </div>
-  <div class="doc-grid-2">
-    <div class="callout accent-red">
-      <h3>Evite</h3>
-      <ul class="doc-list">
-        <li>Decorar listas gigantes sem contexto.</li>
-        <li>Assistir vídeos com legenda em português.</li>
-        <li>Traduzir toda documentação antes de tentar entender.</li>
-        <li>Estudar só gramática por meses.</li>
-        <li>Consumir conteúdo sem escrever ou falar.</li>
-        <li>Usar IA/tradutor sem revisar os padrões das frases.</li>
-        <li>Deixar commits, README e PRs em português nos projetos de portfólio.</li>
-      </ul>
-    </div>
-    <div class="callout">
-      <h3>Faça no lugar</h3>
-      <ul class="doc-list">
-        <li>Estude inglês dentro de Java, Spring, AWS, GitHub e arquitetura.</li>
-        <li>Salve frases inteiras, não apenas palavras.</li>
-        <li>Revise com recuperação ativa e revisão espaçada.</li>
-        <li>Produza output técnico diariamente.</li>
-        <li>Grave explicações curtas sobre projetos reais.</li>
-        <li>Reescreva READMEs, commits e PRs em inglês.</li>
-      </ul>
-    </div>
-  </div>
-</section>
+  <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
 
-<section class="doc-section searchable-section" data-search-section id="referencias">
-  <div class="doc-section-heading">
-    <div>
-      <h2>Referências técnicas</h2>
-      <p class="section-subtitle">Fontes oficiais e confiáveis para inglês geral, inglês técnico, documentação, escrita profissional, commits e aprendizagem ativa.</p>
-    </div>
-    <span class="section-badge">Referências</span>
-  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    (function () {
+      const backToTop = document.getElementById('backToTop');
+      const searchInput = document.getElementById('searchInput');
+      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
+      const bar = document.getElementById('navSectionsBar');
+      const btnL = document.getElementById('navScrollLeft');
+      const btnR = document.getElementById('navScrollRight');
+      const STEP = 320;
 
-  <div class="ref-grid">
-    <article class="ref-card">
-      <strong>CEFR — Level descriptions</strong>
-      <p>Referência para entender níveis A1–C2 e mirar B1+/B2 técnico com critérios mais objetivos.</p>
-      <a href="https://www.coe.int/en/web/common-european-framework-reference-languages/level-descriptions" target="_blank" rel="noopener">coe.int/cefr-levels</a>
-    </article>
+      function normalize(value) {
+        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      }
 
-    <article class="ref-card">
-      <strong>British Council LearnEnglish</strong>
-      <p>Base confiável para reading, listening, speaking, pronunciation e vocabulário geral aplicado.</p>
-      <a href="https://learnenglish.britishcouncil.org/" target="_blank" rel="noopener">learnenglish.britishcouncil.org</a>
-    </article>
+      function updateScrollButtons() {
+        if (!bar || !btnL || !btnR) return;
+        const atStart = bar.scrollLeft <= 4;
+        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
+        btnL.classList.toggle('hidden', atStart);
+        btnR.classList.toggle('hidden', atEnd);
+      }
 
-    <article class="ref-card">
-      <strong>Cambridge English Learning English</strong>
-      <p>Atividades estruturadas de leitura, escrita, escuta, fala, gramática e vocabulário por nível.</p>
-      <a href="https://www.cambridgeenglish.org/learning-english/" target="_blank" rel="noopener">cambridgeenglish.org/learning-english</a>
-    </article>
+      function setActiveLink() {
+        const fromTop = window.scrollY + 135;
+        let current = sections[0]?.id || '';
+        for (const section of sections) {
+          if (section.offsetTop <= fromTop) current = section.id;
+        }
+        [...navLinks, ...sidebarLinks].forEach(link => {
+          const href = link.getAttribute('href') || '';
+          link.classList.toggle('active', href === '#' + current);
+        });
+      }
 
-    <article class="ref-card">
-      <strong>Spring Framework Documentation</strong>
-      <p>Fonte real para vocabulário técnico de IoC, testing, data access, web, architecture e Spring ecosystem.</p>
-      <a href="https://docs.spring.io/spring-framework/reference/index.html" target="_blank" rel="noopener">docs.spring.io/spring-framework</a>
-    </article>
+      function handleSearch() {
+        const q = normalize(searchInput.value.trim());
+        let firstHit = null;
 
-    <article class="ref-card">
-      <strong>Spring Boot Documentation</strong>
-      <p>Leitura técnica para expressões como production-grade applications, configuration, starters e deployment.</p>
-      <a href="https://docs.spring.io/spring-boot/index.html" target="_blank" rel="noopener">docs.spring.io/spring-boot</a>
-    </article>
+        sections.forEach(section => {
+          section.classList.remove('search-hit');
+          section.classList.remove('is-hidden-by-search');
+          if (!q) return;
 
-    <article class="ref-card">
-      <strong>AWS Documentation</strong>
-      <p>Vocabulário de cloud, security, storage, queues, networking, observability, IAM e arquitetura operacional.</p>
-      <a href="https://docs.aws.amazon.com/" target="_blank" rel="noopener">docs.aws.amazon.com</a>
-    </article>
+          const text = normalize(section.textContent || '');
+          const hit = text.includes(q);
+          section.classList.toggle('is-hidden-by-search', !hit);
+          if (hit && !firstHit) firstHit = section;
+        });
 
-    <article class="ref-card">
-      <strong>MDN Web Docs</strong>
-      <p>Documentação clara para fundamentos web, HTTP, JavaScript, frontend, browser APIs e segurança web.</p>
-      <a href="https://developer.mozilla.org/en-US/docs/Learn_web_development" target="_blank" rel="noopener">developer.mozilla.org/learn</a>
-    </article>
+        if (q && firstHit) {
+          firstHit.classList.add('search-hit');
+        }
+      }
 
-    <article class="ref-card">
-      <strong>GitHub Docs — Pull Requests</strong>
-      <p>Vocabulário de colaboração assíncrona: proposing changes, review, merge, conflicts e code discussion.</p>
-      <a href="https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests" target="_blank" rel="noopener">docs.github.com/pull-requests</a>
-    </article>
+      if (btnL && bar) {
+        btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
+      }
+      if (btnR && bar) {
+        btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
+      }
+      if (bar) {
+        bar.addEventListener('scroll', updateScrollButtons, { passive: true });
+        updateScrollButtons();
+      }
 
-    <article class="ref-card">
-      <strong>GitHub Docs — README</strong>
-      <p>Estrutura de README para apresentar projetos, instalação, uso, arquitetura, testes e contribuição.</p>
-      <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes" target="_blank" rel="noopener">docs.github.com/about-readmes</a>
-    </article>
+      window.addEventListener('scroll', () => {
+        if (backToTop) {
+          backToTop.classList.toggle('is-visible', window.scrollY > 520);
+        }
+        setActiveLink();
+      }, { passive: true });
 
-    <article class="ref-card">
-      <strong>Google Developer Documentation Style Guide</strong>
-      <p>Guia para escrita técnica clara, direta, consistente e orientada a documentação de software.</p>
-      <a href="https://developers.google.com/style" target="_blank" rel="noopener">developers.google.com/style</a>
-    </article>
+      if (backToTop) {
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      }
+      if (searchInput) {
+        searchInput.addEventListener('input', handleSearch);
+      }
 
-    <article class="ref-card">
-      <strong>Microsoft Writing Style Guide</strong>
-      <p>Referência para comunicação objetiva sobre tecnologia, produtos, instruções e documentação profissional.</p>
-      <a href="https://learn.microsoft.com/en-us/style-guide/welcome/" target="_blank" rel="noopener">learn.microsoft.com/style-guide</a>
-    </article>
-
-    <article class="ref-card">
-      <strong>Conventional Commits</strong>
-      <p>Formato para escrever commits semânticos em inglês com escopo, tipo de mudança e histórico legível.</p>
-      <a href="https://www.conventionalcommits.org/en/v1.0.0/" target="_blank" rel="noopener">conventionalcommits.org</a>
-    </article>
-
-    <article class="ref-card">
-      <strong>Retrieval Practice — Karpicke & Roediger</strong>
-      <p>Base científica para revisar inglês técnico por recuperação ativa em vez de releitura passiva.</p>
-      <a href="https://pubmed.ncbi.nlm.nih.gov/18276894/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/18276894</a>
-    </article>
-
-    <article class="ref-card">
-      <strong>Distributed Practice — Cepeda et al.</strong>
-      <p>Base científica para revisão espaçada, evitando estudo concentrado e esquecimento rápido.</p>
-      <a href="https://pubmed.ncbi.nlm.nih.gov/16719566/" target="_blank" rel="noopener">pubmed.ncbi.nlm.nih.gov/16719566</a>
-    </article>
-  </div>
-
-  <div class="callout accent-blue mt-3">
-    <h3>Observação de uso</h3>
-    <p>Antes de usar qualquer conteúdo em produção, aula, artigo ou portfólio, valide versões, links, guias de estilo, documentação técnica e padrões oficiais diretamente nas fontes originais.</p>
-  </div>
-</section>
-
-<section id="checklist" class="doc-section searchable-section" data-search-section>
-  <div class="doc-section-heading">
-    <div>
-      <h2>Checklist e entregáveis</h2>
-      <p class="section-subtitle">Como transformar a trilha em resultado verificável no portfólio.</p>
-    </div>
-    <span class="section-badge">Execução</span>
-  </div>
-  <div class="doc-grid-2">
-    <div class="exam-card">
-      <h3>Checklist diário</h3>
-      <ul class="doc-list">
-        <li><span class="priority must">MUST</span> Revisar frases técnicas por recuperação ativa.</li>
-        <li><span class="priority must">MUST</span> Ler ou ouvir uma fonte técnica real em inglês.</li>
-        <li><span class="priority should">SHOULD</span> Extrair 3 frases reutilizáveis.</li>
-        <li><span class="priority should">SHOULD</span> Produzir 1 output: commit, resumo, explicação ou comentário técnico.</li>
-        <li><span class="priority nice">NICE</span> Gravar áudio de 1 a 3 minutos explicando uma parte do projeto.</li>
-      </ul>
-    </div>
-    <div class="exam-card">
-      <h3>Entregáveis de portfólio</h3>
-      <ul class="doc-list">
-        <li>Commits em inglês usando imperativo e padrão semântico.</li>
-        <li>README em inglês para cada projeto principal.</li>
-        <li>Pull request descriptions com <code>What changed</code>, <code>Why</code> e <code>How it was tested</code>.</li>
-        <li>Glossário pessoal de backend, cloud, arquitetura e debugging.</li>
-        <li>Gravações curtas explicando projetos e trade-offs.</li>
-        <li>Artigos técnicos curtos em inglês após o mês 6.</li>
-      </ul>
-    </div>
-  </div>
-  <div class="callout accent-blue mt-3">
-    <h3>Critério de evolução</h3>
-    <p>Você está evoluindo quando começa a consultar documentação em inglês primeiro, escrever commits naturalmente em inglês, explicar bugs sem traduzir mentalmente palavra por palavra e transformar seus projetos em material profissional para GitHub, LinkedIn e entrevistas.</p>
-  </div>
-</section>
-
-  </div><!-- /content -->
-</div><!-- /main -->
-
-<footer class="page-footer">
-  <div class="footer-row">
-    <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
-    <div class="footer-pills">
-      <span class="footer-pill teal">Fluência funcional</span>
-      <span class="footer-pill yellow">B1+/B2 técnico</span>
-      <span class="footer-pill blue">Docs oficiais</span>
-      <span class="footer-pill purple">Portfólio global</span>
-    </div>
-  </div>
-  <p><strong style="color:var(--muted2)">Inglês Técnico para Programação</strong> · Plano Integrado de Estudos · 64 semanas</p>
-</footer>
-
-<button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-(function(){
-  const backToTop = document.getElementById('backToTop');
-  const searchInput = document.getElementById('searchInput');
-  const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-  const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-  const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-  const bar = document.getElementById('navSectionsBar');
-  const btnL = document.getElementById('navScrollLeft');
-  const btnR = document.getElementById('navScrollRight');
-  const STEP = 320;
-
-  function normalize(value){
-    return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
-  }
-
-  function updateScrollButtons(){
-    if(!bar || !btnL || !btnR) return;
-    const atStart = bar.scrollLeft <= 4;
-    const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-    btnL.classList.toggle('hidden', atStart);
-    btnR.classList.toggle('hidden', atEnd);
-  }
-
-  function setActiveLink(){
-    const fromTop = window.scrollY + 135;
-    let current = sections[0]?.id || '';
-    for(const section of sections){
-      if(section.offsetTop <= fromTop) current = section.id;
-    }
-    [...navLinks, ...sidebarLinks].forEach(link=>{
-      const href = link.getAttribute('href') || '';
-      link.classList.toggle('active', href === '#' + current);
-    });
-  }
-
-  function handleSearch(){
-    const q = normalize(searchInput.value.trim());
-    let firstHit = null;
-
-    sections.forEach(section=>{
-      section.classList.remove('search-hit');
-      section.classList.remove('is-hidden-by-search');
-      if(!q) return;
-
-      const text = normalize(section.textContent || '');
-      const hit = text.includes(q);
-      section.classList.toggle('is-hidden-by-search', !hit);
-      if(hit && !firstHit) firstHit = section;
-    });
-
-    if(q && firstHit){
-      firstHit.classList.add('search-hit');
-    }
-  }
-
-  if(btnL && bar){
-    btnL.addEventListener('click', ()=>bar.scrollBy({left:-STEP, behavior:'smooth'}));
-  }
-  if(btnR && bar){
-    btnR.addEventListener('click', ()=>bar.scrollBy({left:STEP, behavior:'smooth'}));
-  }
-  if(bar){
-    bar.addEventListener('scroll', updateScrollButtons, {passive:true});
-    updateScrollButtons();
-  }
-
-  window.addEventListener('scroll', ()=>{
-    if(backToTop){
-      backToTop.classList.toggle('is-visible', window.scrollY > 520);
-    }
-    setActiveLink();
-  }, {passive:true});
-
-  if(backToTop){
-    backToTop.addEventListener('click', ()=>window.scrollTo({top:0, behavior:'smooth'}));
-  }
-  if(searchInput){
-    searchInput.addEventListener('input', handleSearch);
-  }
-
-  setActiveLink();
-})();
-</script>
+      setActiveLink();
+    })();
+  </script>
 </body>
+
 </html>
