@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description"
-    content="Dashboard do Plano Integrado de Estudos — 36 meses, 156 semanas, 12 fases, rotina diária 24h flexível com estudo na madrugada, pausas e 14 trilhas + treino.">
+    content="Dashboard do Plano Integrado de Estudos — 36 meses, 156 semanas, 12 fases, rotina semanal baseada em prioridade de mercado para Desenvolvedor Full Stack Pleno, com Backend Java/Spring como âncora, Frontend React/TypeScript e Python/FastAPI com peso real, IA aplicada e Matemática como eixo técnico, SQL/Postgres, testes, Docker, CI/CD, cloud básica e inglês técnico.">
   <title>Plano Integrado de Estudos — 36 meses · 156 semanas</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link
@@ -447,6 +447,195 @@
       margin: 0
     }
 
+    .daily-block {
+      position: relative;
+    }
+
+    .daily-block::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: var(--daily-kind-color, var(--accent));
+      opacity: .9;
+    }
+
+    .daily-kind {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .58rem;
+      font-weight: 800;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      border: 1px solid color-mix(in srgb, var(--daily-kind-color, var(--accent)) 42%, transparent);
+      color: var(--daily-kind-color, var(--accent));
+      background: color-mix(in srgb, var(--daily-kind-color, var(--accent)) 10%, transparent);
+      border-radius: 4px;
+      padding: .12rem .45rem;
+      margin-bottom: .32rem;
+    }
+
+    .daily-block-sleep {
+      background: linear-gradient(90deg, rgba(167, 139, 250, .07), transparent 55%);
+    }
+
+    .daily-block-cardio {
+      background: linear-gradient(90deg, rgba(239, 68, 68, .055), transparent 55%);
+    }
+
+    .daily-block-study {
+      background: linear-gradient(90deg, rgba(34, 197, 94, .04), transparent 55%);
+    }
+
+    .daily-block-project {
+      background: linear-gradient(90deg, rgba(124, 106, 232, .055), transparent 55%);
+    }
+
+    .daily-block-break {
+      background: rgba(255, 255, 255, .012);
+    }
+
+    .daily-block-review {
+      background: linear-gradient(90deg, rgba(34, 211, 176, .045), transparent 55%);
+    }
+
+    .daily-block-english {
+      background: linear-gradient(90deg, rgba(20, 184, 166, .045), transparent 55%);
+    }
+
+    .daily-block-specialization {
+      background: linear-gradient(90deg, rgba(167, 139, 250, .05), transparent 55%);
+    }
+
+    .daily-block-deep-work {
+      background: linear-gradient(90deg, rgba(34, 197, 94, .052), transparent 55%);
+    }
+
+    .daily-block-strength {
+      background: linear-gradient(90deg, rgba(239, 68, 68, .062), transparent 55%);
+    }
+
+    .daily-block-dinner {
+      background: linear-gradient(90deg, rgba(251, 146, 60, .052), transparent 55%);
+    }
+
+    .daily-block-database {
+      background: linear-gradient(90deg, rgba(56, 189, 248, .052), transparent 55%);
+    }
+
+    .daily-block-testing {
+      background: linear-gradient(90deg, rgba(34, 211, 176, .052), transparent 55%);
+    }
+
+    .daily-block-cloud {
+      background: linear-gradient(90deg, rgba(245, 158, 11, .055), transparent 55%);
+    }
+
+    .daily-block-security {
+      background: linear-gradient(90deg, rgba(45, 212, 191, .052), transparent 55%);
+    }
+
+    .daily-block-architecture {
+      background: linear-gradient(90deg, rgba(250, 204, 21, .05), transparent 55%);
+    }
+
+    .daily-block-frontend {
+      background: linear-gradient(90deg, rgba(6, 182, 212, .05), transparent 55%);
+    }
+
+    .daily-block-ai {
+      background: linear-gradient(90deg, rgba(167, 139, 250, .052), transparent 55%);
+    }
+
+    .daily-block-math {
+      background: linear-gradient(90deg, rgba(52, 211, 153, .052), transparent 55%);
+    }
+
+    .daily-priority {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .56rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border: 1px solid color-mix(in srgb, var(--daily-kind-color, var(--accent)) 38%, transparent);
+      color: var(--daily-kind-color, var(--accent));
+      background: rgba(255, 255, 255, .035);
+      border-radius: 4px;
+      padding: .1rem .4rem;
+      margin-left: .35rem;
+      vertical-align: middle;
+    }
+
+    .daily-day-tabs-wrap {
+      background: rgba(255, 255, 255, .025);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .55rem;
+      overflow: hidden;
+    }
+
+    .daily-day-tabs-scroll {
+      overflow-x: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(34, 211, 176, .45) rgba(255, 255, 255, .03);
+    }
+
+    .daily-day-tabs-scroll::-webkit-scrollbar { height: 4px; }
+    .daily-day-tabs-scroll::-webkit-scrollbar-track { background: rgba(255,255,255,.03); }
+    .daily-day-tabs-scroll::-webkit-scrollbar-thumb { background: rgba(34,211,176,.45); border-radius: 999px; }
+
+    .daily-day-tabs-scroll .nav {
+      min-width: max-content;
+    }
+
+    .daily-day-btn {
+      min-width: 108px;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .daily-track-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .32rem;
+      margin: .48rem 0 .38rem;
+      min-width: 0;
+    }
+
+    .daily-track-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .58rem;
+      font-weight: 700;
+      padding: .14rem .42rem;
+      border-radius: 4px;
+      border: 1px solid color-mix(in srgb, var(--daily-kind-color, var(--accent)) 35%, transparent);
+      color: var(--daily-kind-color, var(--accent));
+      background: color-mix(in srgb, var(--daily-kind-color, var(--accent)) 8%, transparent);
+    }
+
+    .daily-deliverable {
+      margin-top: .5rem;
+      padding-top: .5rem;
+      border-top: 1px solid rgba(255, 255, 255, .07);
+      font-size: .73rem;
+      color: var(--text2);
+      line-height: 1.45;
+    }
+
+    .daily-deliverable strong {
+      color: var(--daily-kind-color, var(--accent));
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .62rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      margin-right: .2rem;
+    }
+
     /* ── detail sections ────────────────── */
     .section-head {
       font-family: 'IBM Plex Mono', monospace;
@@ -742,6 +931,47 @@
       font-size: .75rem;
       color: var(--text2);
       margin: 0
+    }
+
+    .weekly-card .weekly-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem;
+      margin: .45rem 0 .65rem;
+    }
+
+    .weekly-card .weekly-tag {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .58rem;
+      font-weight: 700;
+      padding: .16rem .44rem;
+      border-radius: 4px;
+      color: var(--weekly-color, var(--accent));
+      border: 1px solid color-mix(in srgb, var(--weekly-color, var(--accent)) 38%, transparent);
+      background: color-mix(in srgb, var(--weekly-color, var(--accent)) 9%, transparent);
+    }
+
+    .weekly-card .weekly-detail {
+      border-top: 1px solid var(--border);
+      padding-top: .55rem;
+      margin-top: .55rem;
+    }
+
+    .weekly-card .weekly-detail strong {
+      display: block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .61rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--weekly-color, var(--accent));
+      margin-bottom: .12rem;
+    }
+
+    .weekly-card .weekly-detail span {
+      display: block;
+      font-size: .72rem;
+      color: var(--text2);
+      line-height: 1.48;
     }
 
     /* ── callout note ───────────────────── */
@@ -1239,7 +1469,29 @@
 
     @media(max-width:768px) {
       .daily-block {
-        grid-template-columns: 100px 1fr
+        grid-template-columns: 96px 1fr
+      }
+
+      .daily-time,
+      .daily-content {
+        padding: .65rem .7rem;
+      }
+
+
+      .daily-day-tabs-wrap {
+        padding: .45rem;
+        margin-left: -.1rem;
+        margin-right: -.1rem;
+      }
+
+      .daily-day-btn {
+        min-width: 92px;
+        padding-left: .65rem !important;
+        padding-right: .65rem !important;
+      }
+
+      .daily-track-row {
+        gap: .25rem;
       }
 
       .hero h1 {
@@ -1262,10 +1514,7 @@
       <span class="hero-eyebrow fade-up">Plano integrado de estudos · 14 trilhas + treino · 36 meses · 156
         semanas</span>
       <h1 class="fade-up fade-up-d1">Plano Integrado de Estudos</h1>
-      <p class="hero-sub fade-up fade-up-d2">Rotina 24h flexível com estudo na madrugada · 65–75h/semana · 12 fases · 36
-        meses · 156 semanas · Java + Spring Boot · Git e Versionamento · Arquitetura de Solução/Integração · Frontend
-        Engineering · Inglês Técnico · DevCore Platform · AWS Certifications · Python · DevOps · Segurança Full Stack ·
-        Banco de Dados SQL/NoSQL · Matemática · IA · Financeiro · Treino Híbrido</p>
+      <p class="hero-sub fade-up fade-up-d2">Rotina semanal baseada em prioridade de mercado para Desenvolvedor Full Stack Pleno · Backend Java/Spring como âncora · Frontend React/TypeScript e Python/FastAPI com peso real · IA aplicada e Matemática como eixo técnico · SQL/Postgres · testes back e front · Docker, CI/CD, cloud básica e inglês técnico · arquitetura como apoio · 36 meses · 156 semanas · 14 trilhas + treino</p>
       <div class="hero-tags fade-up fade-up-d3" id="heroTags"></div>
       <div class="fade-up fade-up-d4" id="trackBadges"></div>
     </div>
@@ -1279,7 +1528,7 @@
           style="scrollbar-width:none">
           <li class="nav-item"><a class="nav-link active" data-bs-toggle="pill" href="#tabFases">Visão Geral</a></li>
           <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabQuick">Consulta rápida</a></li>
-          <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabDaily">Rotina 24h</a></li>
+          <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabDaily">Rotina diária</a></li>
           <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabDetail">Fases (detalhe)</a></li>
           <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabTracks">Trilhas</a></li>
           <li class="nav-item"><a class="nav-link" data-bs-toggle="pill" href="#tabPdfs">PDF'S</a></li>
@@ -1307,9 +1556,9 @@
           e validação técnica.</p>
         <div class="hours-margin-note mb-3">
           <strong>Nota sobre margem de erro das horas:</strong>
-          As cargas horárias (<span class="mono">rotina 24h flexível por trilhas</span>, <span
-            class="mono">65–75h/semana</span>, <span class="mono">~910h/fase</span> e <span class="mono">~10.920h
-            totais</span>) refletem uma grade de estudo flexível com alocação por horário. Considere margem prática de
+          As cargas horárias (<span class="mono">rotina diária estruturada</span>, <span
+            class="mono">65–75h/semana de foco efetivo</span>, <span class="mono">~910h/fase</span> e <span class="mono">~10.920h
+            totais</span>) refletem blocos de foco, prática, revisão, projeto, pausas e saúde física. Considere margem prática de
           <span class="mono">±10% a ±15%</span>, pois revisões, bugs, simulados, entrevistas, refatorações, deploys e
           incidentes simulados alteram o tempo necessário. A estrutura correta passa a ser <span class="mono">36 meses ·
             156 semanas · 12 fases</span>, com checkpoints mensais e critério mínimo de 80% para avançar.
@@ -1335,9 +1584,8 @@
             <div class="col-12 col-lg-4">
               <div class="metric-card h-100">
                 <span class="val">65–75h/sem</span>
-                <span class="lbl">carga intensiva sustentável</span>
-                <p class="text-muted small mt-2 mb-0">A grade diária cobre 24h com conteúdos das trilhas; o descanso é
-                  organizado fora do cronograma conforme sua janela real do dia.</p>
+                <span class="lbl">foco efetivo planejado</span>
+                <p class="text-muted small mt-2 mb-0">A rotina prioriza P0: Java/Spring, SQL, testes, Git e projeto prático; P1 entra como maturidade de produção; P2 fica controlado como diferencial.</p>
               </div>
             </div>
           </div>
@@ -1422,19 +1670,24 @@
 
       <!-- TAB DAILY -->
       <div class="tab-pane fade" id="tabDaily">
-        <h4 class="mb-1">Rotina Diária 24h — grade de estudo sem blocos de sono</h4>
-        <p class="text-muted small mb-3">Cronograma completo de 00:00 a 00:00 com todos os horários cobertos por blocos
-          de estudo, prática, revisão, projeto, treino, alimentação ou pausa. O descanso fica fora desta grade e deve
-          ser organizado separadamente conforme o dia: manhã, tarde, noite ou madrugada.</p>
+        <h4 class="mb-1">Rotina semanal priorizada — Full Stack Pleno por fatia vertical</h4>
+        <p class="text-muted small mb-3">Rotina semanal estruturada com base nas prioridades de mercado para Desenvolvedor Full Stack Pleno: Backend Java/Spring continua como âncora, Frontend React/TypeScript e Python/FastAPI ganham peso real, e IA aplicada com Matemática passam a ocupar um eixo técnico próprio dentro da rotina semanal.</p>
         <div class="hours-margin-note mb-3">
-          <strong>Uso correto desta grade:</strong>
-          este cronograma é um mapa de alocação de conteúdos por horário, não uma obrigação de estudar 24h seguidas.
-          Quando você estiver acordado, use o bloco correspondente; quando for descansar, ignore os blocos daquele
-          período e retome pelo próximo horário útil.
+          <strong>Prioridade da rotina:</strong>
+          <span class="mono">Backend Java/Spring</span> ocupa cerca de 22% do foco técnico; <span class="mono">Frontend React/TypeScript</span> e <span class="mono">Python/FastAPI</span> ficam no mesmo nível, com cerca de 18% cada; <span class="mono">IA aplicada + Matemática</span> assume cerca de 18% como eixo técnico; <span class="mono">SQL/Postgres</span>, testes, Docker, CI/CD, cloud básica, Git e inglês completam o núcleo.
+        </div>
+        <div class="hours-margin-note mb-3">
+          <strong>Sequência da semana:</strong>
+          a semana começa com Backend Java/Spring na segunda, segue com Frontend React/TypeScript na terça, Banco de Dados e SQL na quarta, IA aplicada e Matemática na quinta, Cloud/DevOps na sexta, Python/FastAPI com IA prática no sábado e revisão, inglês e consolidação no domingo.
+        </div>
+        <div class="daily-day-tabs-wrap mb-3" aria-label="Navegação interna da rotina por dia da semana">
+          <div class="daily-day-tabs-scroll">
+            <ul class="nav nav-pills flex-nowrap gap-1" id="dailyDayTabs" role="tablist" aria-label="Dias da semana da rotina"></ul>
+          </div>
         </div>
         <div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden"
           class="mb-4" id="dailySchedule"></div>
-        <h5 class="mb-2">Foco por dia da semana</h5>
+        <h5 class="mb-2">Resumo fullstack do dia selecionado</h5>
         <div class="row g-2 mb-4" id="weeklyFocus"></div>
       </div>
 
@@ -1549,13 +1802,13 @@
   <footer class="text-center py-4">
     <div class="container">
       <div class="d-flex flex-wrap justify-content-center gap-2 mb-2">
-        <span class="htag htag-b">Java Backend Pleno 2026</span>
+        <span class="htag htag-b">Full Stack Pleno 2026</span>
         <span class="htag htag-p">DevCore Platform v2.0</span>
         <span class="htag htag-g">AWS Certifications</span>
-        <span class="htag htag-o">Python · IA · Inglês · DevOps · Segurança · Git · Frontend · Arquitetura</span>
+        <span class="htag htag-o">Python/FastAPI · IA aplicada · Inglês · DevOps · Segurança · Git · Frontend · Arquitetura</span>
       </div>
       <p class="mb-0">Banco de Dados SQL/NoSQL · Segurança Full Stack · Git e Versionamento · Arquitetura · Frontend
-        Engineering · Inglês Técnico · Matemática · IA Engineering · Trilha Financeira · Treino Híbrido · 14 trilhas +
+        Engineering · Python/FastAPI · Inglês Técnico · Matemática · IA Engineering · Trilha Financeira · Treino Híbrido · 14 trilhas +
         rotina física · 36 meses · 156 semanas</p>
     </div>
   </footer>
@@ -1610,6 +1863,22 @@
       ia: { t: "#a78bfa", b: "#1a1735" },
       fin: { t: "#fb923c", b: "#2e1a10" },
       treino: { t: "#ef4444", b: "#2f1115" },
+      sleep: { t: "#a78bfa", b: "#1a1735" },
+      cardio: { t: "#ef4444", b: "#2f1115" },
+      strength: { t: "#ef4444", b: "#2f1115" },
+      dinner: { t: "#fb923c", b: "#2e1a10" },
+      database: { t: "#38bdf8", b: "#0e2538" },
+      testing: { t: "#22d3b0", b: "#0d2e28" },
+      cloud: { t: "#f59e0b", b: "#2e2010" },
+      security: { t: "#2dd4bf", b: "#0c2623" },
+      architecture: { t: "#facc15", b: "#2e2608" },
+      ai: { t: "#a78bfa", b: "#1a1735" },
+      frontendBlock: { t: "#06b6d4", b: "#092a33" },
+      specialization: { t: "#a78bfa", b: "#1a1735" },
+      break: { t: "#94a3b8", b: "#141a24" },
+      review: { t: "#22d3b0", b: "#0d2e28" },
+      project: { t: "#7c6ae8", b: "#1e1a3a" },
+      study: { t: "#22c55e", b: "#0d2e1a" },
       n: { t: "#94a3b8", b: "#141a24" }
     };
 
@@ -1630,23 +1899,43 @@
         "cls": "htag-g"
       },
       {
-        "label": "12–13 semanas/fase",
+        "label": "rotina fullstack por feature",
+        "cls": "htag-p"
+      },
+      {
+        "label": "Backend Java/Spring 22%",
         "cls": "htag-g"
       },
       {
-        "label": "grade 24h flexível",
+        "label": "Frontend React/TS 18%",
+        "cls": "htag-b"
+      },
+      {
+        "label": "Python/FastAPI 18%",
+        "cls": "htag-b"
+      },
+      {
+        "label": "IA + Matemática 18%",
         "cls": "htag-p"
       },
       {
-        "label": "65–75h/semana",
-        "cls": "htag-p"
+        "label": "DB/SQL 10%",
+        "cls": "htag-b"
       },
       {
-        "label": "14 trilhas + treino",
+        "label": "Testes back+front 9%",
+        "cls": "htag-g"
+      },
+      {
+        "label": "Cloud/DevOps 10%",
         "cls": "htag-o"
       },
       {
-        "label": "domínio real progressivo",
+        "label": "Inglês técnico 5%",
+        "cls": "htag-p"
+      },
+      {
+        "label": "IA aplicada ao produto",
         "cls": "htag-o"
       }
     ];
@@ -3027,251 +3316,539 @@
 
 
     /* ═══════════════════════════════════════════════
-       DAILY SCHEDULE DATA
+       DAILY SCHEDULE DATA — WEEKLY DYNAMIC NAV
     ═══════════════════════════════════════════════ */
-    const daily = [
-      {
-        "time": "00:00–01:00",
-        "dur": "1h",
-        "block": "Madrugada 1 — IA Engineering, estudo e avaliação",
-        "k": "ia",
-        "d": "Estudo progressivo da nova trilha de IA: fundamentos, ML, Deep Learning, NLP, LLMs, RAG, agentes, MLOps, segurança e governança. Priorizar leitura ativa, notas e critérios de domínio."
-      },
-      {
-        "time": "01:00–01:15",
-        "dur": "15min",
-        "block": "Pausa curta",
-        "k": "n",
-        "d": "Água, alongamento leve, descanso visual e checagem rápida de energia antes de continuar."
-      },
-      {
-        "time": "01:15–02:30",
-        "dur": "1h15",
-        "block": "Madrugada 2 — Python Backend + automações",
-        "k": "py",
-        "d": "Python moderno, FastAPI, pytest, scripts de automação, pipelines, integração com APIs e pequenos labs reproduzíveis."
-      },
-      {
-        "time": "02:30–02:45",
-        "dur": "15min",
-        "block": "Pausa curta",
-        "k": "n",
-        "d": "Intervalo sem tela. Levantar, respirar, hidratar e reduzir fadiga cognitiva."
-      },
-      {
-        "time": "02:45–04:00",
-        "dur": "1h15",
-        "block": "Madrugada 3 — Segurança, DevOps ou troubleshooting",
-        "k": "sec",
-        "d": "OWASP, threat modeling, secrets, SAST/SCA, Docker, logs, Linux, CI/CD, análise de falhas e leitura de runbooks."
-      },
-      {
-        "time": "04:00–04:30",
-        "dur": "30min",
-        "block": "Inglês técnico — reading, listening e vocabulário",
-        "k": "ingles",
-        "d": "Leitura técnica curta, vocabulário, commits/PR descriptions, resumo oral e revisão de frases úteis para reuniões e documentação."
-      },
-      {
-        "time": "04:30–05:00",
-        "dur": "30min",
-        "block": "Preparação / reset operacional",
-        "k": "n",
-        "d": "Água, higiene, organização do ambiente, abertura do backlog e escolha objetiva da próxima tarefa."
-      },
-      {
-        "time": "05:00–06:15",
-        "dur": "1h15",
-        "block": "Git + documentação técnica",
-        "k": "git",
-        "d": "Conventional Commits, revisão de diff, PRs, README, changelog, issues, ADR curto, RFC curto e organização do repositório."
-      },
-      {
-        "time": "06:15–06:30",
-        "dur": "15min",
-        "block": "Pausa curta pós-madrugada",
-        "k": "n",
-        "d": "Alongamento leve, descanso visual e preparação para o primeiro bloco profundo."
-      },
-      {
-        "time": "06:30–08:00",
-        "dur": "1h30",
-        "block": "Bloco profundo 1 — Java/Spring ou Arquitetura",
-        "k": "java",
-        "d": "Java, Spring Boot, DDD, system design, refatoração, leitura de código, testes complexos ou decisões arquiteturais."
-      },
-      {
-        "time": "08:00–08:30",
-        "dur": "30min",
-        "block": "Café da manhã + pausa real",
-        "k": "n",
-        "d": "Alimentação e pausa sem tela. Não transformar este bloco em vídeo-aula."
-      },
-      {
-        "time": "08:30–10:00",
-        "dur": "1h30",
-        "block": "Bloco profundo 2 — Banco, SQL, JPA ou performance",
-        "k": "db",
-        "d": "Consultas, modelagem, JPA, EXPLAIN ANALYZE, transações, cache, otimização, índices e análise de gargalos."
-      },
-      {
-        "time": "10:00–10:15",
-        "dur": "15min",
-        "block": "Pausa curta",
-        "k": "n",
-        "d": "Levantar, caminhar, hidratar e reduzir fadiga cognitiva."
-      },
-      {
-        "time": "10:15–11:45",
-        "dur": "1h30",
-        "block": "Bloco profundo 3 — DevCore Platform",
-        "k": "blog",
-        "d": "Implementação prática do projeto principal: feature, bugfix, integração, testes, deploy local ou documentação técnica."
-      },
-      {
-        "time": "11:45–12:15",
-        "dur": "30min",
-        "block": "Revisão ativa da manhã",
-        "k": "math",
-        "d": "Registrar erros, criar flashcards, revisar commits, consolidar conceitos e anotar dúvidas para o bloco de prática."
-      },
-      {
-        "time": "12:15–13:00",
-        "dur": "45min",
-        "block": "Almoço + pausa real",
-        "k": "n",
-        "d": "Alimentação, descanso visual e recuperação antes do ciclo da tarde."
-      },
-      {
-        "time": "13:00–14:00",
-        "dur": "1h",
-        "block": "Bloco flexível — Frontend, Git ou Arquitetura",
-        "k": "frontend",
-        "d": "TypeScript, React/Next.js, acessibilidade, design system, revisão de PR, diagrama C4, ADR/RFC ou organização do backlog técnico."
-      },
-      {
-        "time": "14:00–15:30",
-        "dur": "1h30",
-        "block": "Bloco técnico 4 — AWS, DevOps ou Segurança",
-        "k": "aws",
-        "d": "Cloud, CI/CD, Docker, Kubernetes, observabilidade, AppSec, IAM, labs e simulações de produção."
-      },
-      {
-        "time": "15:30–15:45",
-        "dur": "15min",
-        "block": "Pausa curta",
-        "k": "n",
-        "d": "Caminhada curta, água e descanso visual."
-      },
-      {
-        "time": "15:45–17:00",
-        "dur": "1h15",
-        "block": "Bloco técnico 5 — Frontend ou Python",
-        "k": "frontend",
-        "d": "Frontend Engineering, TypeScript, React/Next.js, FastAPI, Python backend, workers, API de IA, RAG, citações e integração com serviços inteligentes."
-      },
-      {
-        "time": "17:00–17:30",
-        "dur": "30min",
-        "block": "Prática guiada",
-        "k": "git",
-        "d": "Katas, labs, bugfix, revisão de PR, comandos Git, pequenos exercícios ou fechamento de pendências."
-      },
-      {
-        "time": "17:30–18:00",
-        "dur": "30min",
-        "block": "Pausa de recuperação / mobilidade",
-        "k": "n",
-        "d": "Mobilidade, respiração, caminhada leve e preparação para o treino."
-      },
-      {
-        "time": "18:00–19:00",
-        "dur": "1h",
-        "block": "Treino",
-        "k": "treino",
-        "d": "Cardio/musculação conforme fase, com foco em consistência, saúde, energia e preservação de massa muscular."
-      },
-      {
-        "time": "19:00–20:00",
-        "dur": "1h",
-        "block": "Banho + jantar + recuperação",
-        "k": "n",
-        "d": "Recuperação física e mental antes do bloco noturno. Evitar telas enquanto come."
-      },
-      {
-        "time": "20:00–21:30",
-        "dur": "1h30",
-        "block": "Bloco projeto — implementação integrada",
-        "k": "blog",
-        "d": "Codar integração real: backend + frontend + banco + cloud + testes. Sempre fechar com commit útil."
-      },
-      {
-        "time": "21:30–21:45",
-        "dur": "15min",
-        "block": "Pausa de descompressão",
-        "k": "n",
-        "d": "Pausa sem tela para preservar qualidade do bloco final."
-      },
-      {
-        "time": "21:45–22:30",
-        "dur": "45min",
-        "block": "IA/Matemática alternadas",
-        "k": "ia",
-        "d": "Alternar base matemática com prática de IA: embeddings, RAG, avaliação, guardrails, custo, latência, métricas de recuperação, segurança e documentação de decisões."
-      },
-      {
-        "time": "22:30–23:15",
-        "dur": "45min",
-        "block": "Documentação técnica — README, ADR, RFC e changelog",
-        "k": "arquitetura",
-        "d": "Registrar decisões, riscos, trade-offs, desenho de solução, changelog e instruções de execução do projeto."
-      },
-      {
-        "time": "23:15–00:00",
-        "dur": "45min",
-        "block": "Fechamento do dia — revisão, financeiro e planejamento",
-        "k": "fin",
-        "d": "Revisar entregas, atualizar backlog, organizar próximas tarefas, registrar métricas de estudo, financeiro pessoal e pendências do dia seguinte."
-      }
+    const weekDays = [
+      { key: "segunda", label: "Segunda", short: "SEG" },
+      { key: "terca", label: "Terça", short: "TER" },
+      { key: "quarta", label: "Quarta", short: "QUA" },
+      { key: "quinta", label: "Quinta", short: "QUI" },
+      { key: "sexta", label: "Sexta", short: "SEX" },
+      { key: "sabado", label: "Sábado", short: "SÁB" },
+      { key: "domingo", label: "Domingo", short: "DOM" }
     ];
 
-    const weekly = [
-      {
-        "day": "Segunda",
-        "focus": "Java/Spring + Banco",
-        "d": "Backend, SQL, JPA, testes, Git e inglês técnico aplicado a commits/PR."
+    const weeklyFocusByDay = {
+      segunda: {
+        day: "Segunda-feira",
+        focus: "Backend Java/Spring — âncora fullstack",
+        priority: "22% — backend core",
+        k: "java",
+        tracks: ["Java 17/21", "Spring Boot", "REST", "JPA", "Testes", "Git"],
+        practice: "Criar uma entrega backend isolada e reproduzível: endpoint, service, DTO, validação, regra de negócio e teste unitário.",
+        review: "Validar contrato REST, status HTTP, DTOs, naming, teste unitário, logs básicos, commit semântico e checklist técnico.",
+        connection: "A segunda ancora a semana em backend real, mantendo Java/Spring como base principal de empregabilidade fullstack.",
+        strategy: "Backend continua sendo sua raiz técnica. A rotina agora usa entregas independentes, exercícios aplicados e documentação, com entregas independentes, exercícios aplicados e documentação objetiva."
       },
-      {
-        "day": "Terça",
-        "focus": "AWS + DevOps",
-        "d": "Cloud, Docker, CI/CD, observabilidade, segurança e labs de infraestrutura."
+      terca: {
+        day: "Terça-feira",
+        focus: "Frontend React/TypeScript — competência real fullstack",
+        priority: "18% — frontend de mercado",
+        k: "frontend",
+        tracks: ["React", "TypeScript", "Next.js", "Formulários", "Estado", "API", "UX básica"],
+        practice: "Construir uma tela funcional consumindo contrato REST, mock de API ou endpoint local: componente, formulário, estado, loading, empty/error states e contrato tipado.",
+        review: "Checar tipagem, contrato API, tratamento de erro, estado sincronizado, responsividade básica, acessibilidade mínima e clareza visual.",
+        connection: "Transforma conhecimento backend em produto visível e treina a fronteira front-back sem atrelar o estudo a um projeto específico.",
+        strategy: "Para Full Stack Pleno, React/TypeScript precisa virar entrega funcional. O foco segue em produto e integração, não em design system profundo."
       },
-      {
-        "day": "Quarta",
-        "focus": "Arquitetura + Mensageria",
-        "d": "DDD, C4, ADR/RFC, Kafka, integração, resiliência e Java avançado."
+      quarta: {
+        day: "Quarta-feira",
+        focus: "Banco de Dados, SQL e base matemática de dados",
+        priority: "10% DB + matemática aplicada",
+        k: "db",
+        tracks: ["PostgreSQL", "SQL", "Modelagem", "JPA", "Migrations", "EXPLAIN", "Estatística básica"],
+        practice: "Modelar dados, criar migrations, escrever queries e conectar a análise com fundamentos matemáticos: conjuntos, cardinalidade, distribuição, média, variância e leitura de métricas.",
+        review: "Validar schema, rollback, integridade, N+1, lazy/eager loading, transações, paginação, filtros, custo de queries e interpretação de métricas.",
+        connection: "Banco e matemática sustentam decisões técnicas: modelagem, performance, estatística de dados e leitura objetiva de resultados.",
+        strategy: "DB segue como base de pleno. Matemática entra de forma aplicada, ligada a dados e IA, sem virar estudo abstrato desconectado da stack."
       },
-      {
-        "day": "Quinta",
-        "focus": "Frontend + Integração",
-        "d": "TypeScript, React/Next.js, consumo de APIs, testes, acessibilidade e experiência full stack."
+      quinta: {
+        day: "Quinta-feira",
+        focus: "IA aplicada e Matemática — eixo técnico da semana",
+        priority: "18% — IA + matemática",
+        k: "ia",
+        tracks: ["LLMs", "RAG", "Embeddings", "Álgebra linear", "Probabilidade", "Estatística", "Avaliação"],
+        practice: "Estudar IA aplicada com base matemática suficiente: vetores, similaridade, embeddings, probabilidade, métricas de avaliação, recuperação de contexto e limitações de modelos.",
+        review: "Validar se o conceito foi explicado sem consulta, se há exemplo prático, métrica objetiva, limitações conhecidas e documentação curta.",
+        connection: "Substitui o antigo eixo de projeto por domínio conceitual e prático de IA, conectado a Python, dados, backend e produto.",
+        strategy: "IA entra como diferencial competitivo real apenas quando combinada com matemática, avaliação, dados e implementação prática."
       },
-      {
-        "day": "Sexta",
-        "focus": "Python + IA + Matemática",
-        "d": "Python, dados, estatística, ML, embeddings, RAG, LLMs, avaliação, guardrails, custo, latência e documentação técnica."
+      sexta: {
+        day: "Sexta-feira",
+        focus: "Cloud, Docker, CI/CD, segurança e operação",
+        priority: "10% — produção e operação",
+        k: "devops",
+        tracks: ["Docker", "Docker Compose", "CI/CD", "GitHub Actions", "Azure DevOps", "Deploy", "Logs"],
+        practice: "Containerizar, automatizar build/testes, ajustar pipeline, validar variáveis, secrets, logs, health check, deploy ou simulação de ambiente reproduzível.",
+        review: "Checar execução limpa, variáveis de ambiente, secrets, health check, logs, rollback, pipeline verde e documentação de execução.",
+        connection: "Cloud/DevOps transforma estudo em capacidade operacional: rodar, testar, diagnosticar e publicar sistemas.",
+        strategy: "Maturidade de pleno vem de saber operar software. O foco é produção reproduzível, segurança básica e troubleshooting."
       },
-      {
-        "day": "Sábado",
-        "focus": "DevCore completo",
-        "d": "Construção integrada, refatoração, deploy, README, ADR, post técnico e revisão semanal."
+      sabado: {
+        day: "Sábado",
+        focus: "Python/FastAPI + IA aplicada — prioridade paralela ao frontend",
+        priority: "18% — Python de mercado",
+        k: "py",
+        tracks: ["Python 3.12+", "FastAPI", "Pydantic", "pytest", "Automação", "APIs", "IA aplicada", "Dados"],
+        practice: "Criar entrega Python independente: API FastAPI, script de automação, worker, notebook, integração com dados, experimento de IA ou teste com pytest.",
+        review: "Validar typing, estrutura do projeto Python, contrato HTTP, testes com pytest, logs, variáveis, qualidade dos dados e utilidade prática.",
+        connection: "Python mantém o mesmo peso do Frontend e vira ponte entre backend, dados, automações e IA aplicada.",
+        strategy: "O foco é Python aplicável ao mercado: FastAPI, automações, dados e IA prática. Matemática entra como suporte para entender e avaliar modelos."
       },
-      {
-        "day": "Domingo",
-        "focus": "Simulados + revisão",
-        "d": "Revisão ativa, checklist de IA, leitura técnica, avaliação de projetos, planejamento, organização do backlog e descanso ativo."
+      domingo: {
+        day: "Domingo",
+        focus: "Revisão, inglês, matemática e consolidação",
+        priority: "5% inglês + revisão/portfólio",
+        k: "ingles",
+        tracks: ["Inglês técnico", "Revisão", "Matemática", "IA", "GitHub", "Flashcards", "Planejamento"],
+        practice: "Consolidar a semana: revisar backend, frontend, banco, Python, IA e matemática; escrever resumo em inglês e planejar a próxima semana.",
+        review: "Checar commits, testes, anotações, lacunas, flashcards, conceitos reproduzidos sem consulta e narrativa profissional.",
+        connection: "Domingo transforma estudo disperso em retenção: revisão ativa, inglês, matemática e planejamento mantêm a rotina sustentável e mensurável.",
+        strategy: "Menos conteúdo novo, mais consolidação. O objetivo é provar domínio por recuperação, explicação e evidência organizada."
       }
-    ];
+    };
+
+    const dailyPlansByDay = {
+      segunda: buildDailyPlan({
+        dayKey: "segunda",
+        early1: {
+          block: "Java/Spring — active recall e desenho de endpoint",
+          k: "java",
+          type: "deep-work",
+          priority: "22%",
+          tracks: ["Java", "Spring Boot", "REST", "Active Recall", "Contrato"],
+          d: "Reproduzir de memória o fluxo controller → service → DTO → validação e desenhar um endpoint independente com contrato claro."
+        },
+        early2: {
+          block: "Matemática discreta aplicada a backend",
+          k: "math",
+          type: "math",
+          priority: "IA+Math",
+          tracks: ["Lógica", "Conjuntos", "Predicados", "Complexidade", "Regras"],
+          d: "Estudar lógica proposicional, conjuntos, predicados e complexidade simples para melhorar modelagem de regras e leitura de algoritmos."
+        },
+        deep1: {
+          block: "Backend Java/Spring — endpoint ou caso de uso",
+          k: "java",
+          type: "deep-work",
+          priority: "22%",
+          tracks: ["Java 17/21", "Spring Boot", "REST", "DTOs", "Bean Validation", "Services"],
+          d: "Implementar endpoint, controller, service, DTOs, validação, regra de negócio e contrato inicial em exercício ou repositório de estudo."
+        },
+        deep2: {
+          block: "Spring Boot — regra de negócio e arquitetura de camada",
+          k: "java",
+          type: "deep-work",
+          priority: "22%",
+          tracks: ["Controller", "Service", "Mapper", "Exceptions", "Clean Code"],
+          d: "Aplicar regra de negócio, separação de camadas, tratamento de erro, mapeamento de DTOs e clareza de responsabilidade."
+        },
+        complement: {
+          block: "Teste unitário do comportamento principal",
+          k: "java",
+          type: "testing",
+          priority: "9%",
+          tracks: ["JUnit", "Mockito", "Asserts", "Cenário crítico", "Regressão"],
+          d: "Criar teste unitário para comportamento central, evitando cobertura decorativa e priorizando regressão real."
+        },
+        integration: {
+          block: "IA como apoio a revisão de código backend",
+          k: "ia",
+          type: "ai",
+          priority: "IA aplicada",
+          tracks: ["LLM", "Code Review", "Refatoração", "Prompt técnico", "Checklist"],
+          d: "Usar IA para revisar nomes, riscos, casos de teste, exceções e documentação, validando manualmente cada sugestão."
+        },
+        night: {
+          block: "Revisão ativa, Git e preparação do próximo estudo",
+          k: "review",
+          type: "review",
+          priority: "Recall",
+          tracks: ["Active Recall", "Git", "Backlog", "Anki"],
+          d: "Reproduzir mentalmente o fluxo backend, revisar erros, registrar flashcards e preparar a próxima etapa frontend."
+        }
+      }),
+      terca: buildDailyPlan({
+        dayKey: "terca",
+        early1: {
+          block: "React/TypeScript — fundamentos da tela",
+          k: "frontend",
+          type: "frontend",
+          priority: "18%",
+          tracks: ["React", "TypeScript", "Componentes", "Props", "Estado"],
+          d: "Revisar componente, props, estado, tipagem e estrutura mínima de tela que consome contrato REST ou mock de API."
+        },
+        early2: {
+          block: "Matemática para UI e dados no frontend",
+          k: "math",
+          type: "math",
+          priority: "IA+Math",
+          tracks: ["Porcentagem", "Escalas", "Médias", "Distribuição", "Métricas"],
+          d: "Estudar cálculos práticos para dashboards, filtros, métricas, paginação, gráficos e interpretação de dados na interface."
+        },
+        deep1: {
+          block: "Frontend React/TypeScript — tela funcional",
+          k: "frontend",
+          type: "frontend",
+          priority: "18%",
+          tracks: ["React", "TypeScript", "Next.js", "Componentes", "Forms", "Estado"],
+          d: "Criar tela, componente ou fluxo com tipagem, estado, formulário, renderização condicional e estrutura de UI funcional."
+        },
+        deep2: {
+          block: "Consumo de API, mocks e estados de UI",
+          k: "frontend",
+          type: "frontend",
+          priority: "18%",
+          tracks: ["API Client", "Fetch", "TanStack Query", "Loading", "Error State", "Empty State"],
+          d: "Conectar tela a endpoint local, mock ou contrato tipado, tratando carregamento, sucesso, vazio, erro de validação e erro técnico."
+        },
+        complement: {
+          block: "Formulários, validação e UX funcional",
+          k: "frontend",
+          type: "frontend",
+          priority: "18%",
+          tracks: ["React Hook Form", "Zod", "Validação", "Acessibilidade", "Responsividade"],
+          d: "Ajustar formulário, validação, feedback visual, responsividade e acessibilidade mínima sem entrar em design system profundo."
+        },
+        integration: {
+          block: "IA aplicada a componentes e UX",
+          k: "ia",
+          type: "ai",
+          priority: "IA aplicada",
+          tracks: ["LLM", "UX Writing", "Acessibilidade", "Testes", "Prompt"],
+          d: "Usar IA para sugerir estados de erro, textos de interface, casos de teste e melhorias de acessibilidade, sempre revisando tecnicamente."
+        },
+        night: {
+          block: "Bug visual, ajuste responsivo e documentação",
+          k: "frontend",
+          type: "review",
+          priority: "Qualidade UI",
+          tracks: ["Bugfix", "Responsivo", "README", "Preview", "Checklist"],
+          d: "Revisar layout, corrigir bugs visuais, testar fluxo manualmente e registrar evidência da tela ou componente."
+        }
+      }),
+      quarta: buildDailyPlan({
+        dayKey: "quarta",
+        early1: {
+          block: "SQL — modelagem e consultas",
+          k: "db",
+          type: "database",
+          priority: "10%",
+          tracks: ["SQL", "PostgreSQL", "Modelagem", "Constraints", "Transações"],
+          d: "Desenhar tabelas, relacionamentos, constraints e consultas necessárias para sustentar um fluxo fullstack."
+        },
+        early2: {
+          block: "Estatística aplicada a banco e produto",
+          k: "math",
+          type: "math",
+          priority: "IA+Math",
+          tracks: ["Média", "Mediana", "Variância", "Distribuição", "Amostragem"],
+          d: "Estudar estatística básica para interpretar métricas, volume de dados, comportamento de usuários, logs e resultados de IA."
+        },
+        deep1: {
+          block: "DB/SQL — modelagem relacional",
+          k: "db",
+          type: "database",
+          priority: "10%",
+          tracks: ["PostgreSQL", "SQL", "Modelagem", "Normalização", "Constraints", "Transações"],
+          d: "Criar ou revisar tabela, coluna, constraint, relacionamento, regra transacional ou ajuste de modelagem."
+        },
+        deep2: {
+          block: "JPA/Hibernate e migrations",
+          k: "db",
+          type: "database",
+          priority: "10%",
+          tracks: ["JPA", "Hibernate", "Flyway/Liquibase", "Repository", "Paginação", "Filtros"],
+          d: "Aplicar migration, entity, repository, relacionamento, filtro ou paginação necessários para persistência correta."
+        },
+        complement: {
+          block: "Performance de query e EXPLAIN",
+          k: "db",
+          type: "database",
+          priority: "10%",
+          tracks: ["EXPLAIN", "Índices", "N+1", "Fetch Join", "Query Plan"],
+          d: "Analisar pelo menos uma query, verificar plano de execução e corrigir N+1, índice ausente ou paginação ruim."
+        },
+        integration: {
+          block: "Matemática de similaridade e busca",
+          k: "math",
+          type: "math",
+          priority: "IA+Math",
+          tracks: ["Vetores", "Similaridade", "Distância", "Ranking", "Busca"],
+          d: "Conectar banco, busca e IA: entender similaridade, ranking, distância vetorial e impacto em busca semântica/RAG."
+        },
+        night: {
+          block: "Documentar schema, queries e métricas",
+          k: "db",
+          type: "review",
+          priority: "Docs",
+          tracks: ["Schema", "README", "Query", "Métricas", "Checklist"],
+          d: "Registrar decisões de modelagem, comandos relevantes, queries otimizadas e riscos de evolução do schema."
+        }
+      }),
+      quinta: buildDailyPlan({
+        dayKey: "quinta",
+        early1: {
+          block: "Álgebra linear para IA — vetores e matrizes",
+          k: "math",
+          type: "math",
+          priority: "18%",
+          tracks: ["Vetores", "Matrizes", "Produto escalar", "Norma", "Similaridade"],
+          d: "Estudar vetores, matrizes, produto escalar, norma e similaridade cosseno como base para embeddings e busca semântica."
+        },
+        early2: {
+          block: "Probabilidade e estatística para avaliação de IA",
+          k: "math",
+          type: "math",
+          priority: "18%",
+          tracks: ["Probabilidade", "Precisão", "Recall", "F1", "Amostragem"],
+          d: "Estudar probabilidade, amostragem, precisão, recall, F1 e noções de erro para avaliar sistemas com IA."
+        },
+        deep1: {
+          block: "IA aplicada — LLMs, embeddings e RAG",
+          k: "ia",
+          type: "ai",
+          priority: "18%",
+          tracks: ["LLMs", "Embeddings", "RAG", "Chunking", "Prompt Engineering", "Avaliação"],
+          d: "Estudar arquitetura de aplicações com LLM, embeddings, chunking, recuperação de contexto, citações e avaliação objetiva."
+        },
+        deep2: {
+          block: "Matemática aplicada à IA",
+          k: "math",
+          type: "math",
+          priority: "18%",
+          tracks: ["Álgebra linear", "Estatística", "Vetores", "Distribuições", "Métricas"],
+          d: "Resolver exercícios curtos e conectá-los a casos práticos: similaridade vetorial, ranking, avaliação e erro de modelo."
+        },
+        complement: {
+          block: "Avaliação e segurança de respostas de IA",
+          k: "ia",
+          type: "ai",
+          priority: "IA aplicada",
+          tracks: ["Hallucination", "Grounding", "Citações", "Métricas", "Riscos"],
+          d: "Definir critérios para avaliar resposta de IA: precisão, fonte, citação, consistência, segurança, custo e limitação."
+        },
+        integration: {
+          block: "Notebook ou experimento de IA",
+          k: "py",
+          type: "ai",
+          priority: "Prática IA",
+          tracks: ["Python", "Notebook", "Embeddings", "RAG", "Avaliação"],
+          d: "Criar experimento pequeno com Python: embeddings, busca semântica, avaliação de respostas ou comparação de prompts."
+        },
+        night: {
+          block: "Resumo técnico de IA e matemática",
+          k: "ia",
+          type: "review",
+          priority: "Recall",
+          tracks: ["Resumo", "Flashcards", "Feynman", "Exercícios", "Checklist"],
+          d: "Explicar em voz alta o conceito estudado, criar flashcards e registrar uma nota curta com exemplo matemático e aplicação em IA."
+        }
+      }),
+      sexta: buildDailyPlan({
+        dayKey: "sexta",
+        early1: {
+          block: "Docker e ambiente reproduzível",
+          k: "devops",
+          type: "cloud",
+          priority: "10%",
+          tracks: ["Docker", "Compose", "Env Vars", "Postgres", "Redis"],
+          d: "Preparar checklist de ambiente local reproduzível, dependências, variáveis, containers e comandos de execução."
+        },
+        early2: {
+          block: "Segurança para aplicações com IA",
+          k: "sec",
+          type: "security",
+          priority: "Segurança",
+          tracks: ["Secrets", "Prompt Injection", "PII", "Rate Limit", "Logs"],
+          d: "Estudar riscos de IA aplicada: prompt injection, vazamento de dados, logs sensíveis, rate limit, secrets e validação de entrada."
+        },
+        deep1: {
+          block: "Docker — ambiente reproduzível",
+          k: "devops",
+          type: "cloud",
+          priority: "10%",
+          tracks: ["Docker", "Docker Compose", "Postgres", "Redis", "Env Vars"],
+          d: "Garantir que backend, banco, Python/FastAPI e dependências rodem de forma reproduzível com Docker/Docker Compose."
+        },
+        deep2: {
+          block: "CI/CD — build, testes e validação",
+          k: "devops",
+          type: "cloud",
+          priority: "10%",
+          tracks: ["GitHub Actions", "Azure DevOps", "Build", "Testes", "Artifacts", "PR"],
+          d: "Ajustar pipeline para rodar build, testes, lint/checks e feedback automático em aplicações Java, frontend e Python."
+        },
+        complement: {
+          block: "Cloud básica e deploy controlado",
+          k: "aws",
+          type: "cloud",
+          priority: "Cloud básica",
+          tracks: ["AWS", "RDS", "S3", "EC2", "CloudWatch", "Deploy"],
+          d: "Estudar ou aplicar o mínimo de cloud necessário para publicar, monitorar ou simular ambiente próximo de produção."
+        },
+        integration: {
+          block: "Observabilidade para IA e serviços",
+          k: "devops",
+          type: "cloud",
+          priority: "Produção",
+          tracks: ["Logs", "Tracing", "Métricas", "Custo", "Runbook"],
+          d: "Validar logs, tracing, métricas de latência/custo e runbook para diagnosticar backend, frontend, Python e IA."
+        },
+        night: {
+          block: "Deploy, release notes e checklist",
+          k: "devops",
+          type: "review",
+          priority: "Entrega",
+          tracks: ["Deploy", "Release Notes", "Rollback", "Checklist", "README"],
+          d: "Fechar deploy ou simulação de deploy, documentar rollback, passos de execução e resultado da entrega."
+        }
+      }),
+      sabado: buildDailyPlan({
+        dayKey: "sabado",
+        early1: {
+          block: "Python moderno — fundamentos produtivos",
+          k: "py",
+          type: "ai",
+          priority: "18%",
+          tracks: ["Python 3.12+", "Typing", "Poetry", "Pydantic", "pytest"],
+          d: "Estudar Python moderno com foco em typing, estrutura de projeto, ambiente, testes e organização para backend/IA."
+        },
+        early2: {
+          block: "Matemática para Python e dados",
+          k: "math",
+          type: "math",
+          priority: "IA+Math",
+          tracks: ["NumPy", "Vetores", "Estatística", "Distribuição", "Métricas"],
+          d: "Resolver exemplos simples com vetores, estatística e métricas usando Python/NumPy ou notebook."
+        },
+        deep1: {
+          block: "Python/FastAPI — serviço ou automação",
+          k: "py",
+          type: "ai",
+          priority: "18%",
+          tracks: ["FastAPI", "Pydantic", "pytest", "HTTP", "Logging"],
+          d: "Criar serviço FastAPI, script de automação, worker ou utilitário com contrato HTTP, validação e teste."
+        },
+        deep2: {
+          block: "IA aplicada com Python",
+          k: "ia",
+          type: "ai",
+          priority: "18%",
+          tracks: ["LLM API", "Embeddings", "RAG", "Evaluation", "Prompt"],
+          d: "Construir protótipo pequeno com IA: chamada a LLM, embeddings, busca semântica, análise de texto ou avaliação de resposta."
+        },
+        complement: {
+          block: "pytest, avaliação e análise de erro",
+          k: "py",
+          type: "testing",
+          priority: "9%",
+          tracks: ["pytest", "Fixtures", "Mocks", "Eval", "Casos críticos"],
+          d: "Criar testes para serviço Python ou experimento de IA, incluindo entradas inválidas, análise de erro e critérios objetivos de avaliação."
+        },
+        integration: {
+          block: "Documentação de experimento IA/Math",
+          k: "ia",
+          type: "review",
+          priority: "Docs",
+          tracks: ["Notebook", "README", "Métricas", "Limitações", "Próximos passos"],
+          d: "Documentar hipótese, dados usados, método, resultado, limitações, custo e próximos passos do experimento."
+        },
+        night: {
+          block: "Refatoração Python e revisão conceitual",
+          k: "py",
+          type: "review",
+          priority: "Qualidade",
+          tracks: ["Typing", "Lint", "Refatoração", "Flashcards", "Resumo"],
+          d: "Melhorar estrutura, nomes, typing, logs, testes e registrar flashcards de Python, IA e matemática."
+        }
+      }),
+      domingo: buildDailyPlan({
+        dayKey: "domingo",
+        early1: {
+          block: "Revisão semanal ativa fullstack + IA",
+          k: "review",
+          type: "review",
+          priority: "Consolidação",
+          tracks: ["Active Recall", "Java", "Frontend", "Python", "IA", "Matemática"],
+          d: "Reproduzir sem consulta os principais conceitos da semana: backend, frontend, banco, Python, IA e matemática."
+        },
+        early2: {
+          block: "Inglês técnico, matemática e backlog da próxima semana",
+          k: "ingles",
+          type: "english",
+          priority: "5%",
+          tracks: ["Technical Writing", "Docs", "Math Notes", "Backlog", "Flashcards"],
+          d: "Escrever resumo técnico em inglês, revisar notas matemáticas, organizar flashcards e preparar backlog da próxima semana."
+        },
+        deep1: {
+          block: "Retrospectiva técnica da semana",
+          k: "review",
+          type: "review",
+          priority: "Consolidação",
+          tracks: ["Retrospectiva", "Commits", "Testes", "IA", "Bugs"],
+          d: "Revisar o que foi entregue e o que foi aprendido em backend, frontend, banco, Python, IA, matemática e deploy."
+        },
+        deep2: {
+          block: "Inglês técnico e explicação oral",
+          k: "ingles",
+          type: "english",
+          priority: "5%",
+          tracks: ["README", "Technical Writing", "Speaking", "Docs", "Vocabulário"],
+          d: "Escrever resumo em inglês, explicar decisões técnicas em voz alta e registrar vocabulário útil."
+        },
+        complement: {
+          block: "Revisão matemática e flashcards",
+          k: "math",
+          type: "math",
+          priority: "IA+Math",
+          tracks: ["Álgebra", "Estatística", "Probabilidade", "Vetores", "Flashcards"],
+          d: "Revisar exercícios matemáticos, criar flashcards e conectar conceitos a IA, dados e programação."
+        },
+        integration: {
+          block: "Planejamento da próxima semana",
+          k: "review",
+          type: "review",
+          priority: "Próxima semana",
+          tracks: ["Backlog", "Prioridades", "Escopo", "Riscos", "Checklist"],
+          d: "Escolher os tópicos da próxima semana com equilíbrio entre Java/Spring, Frontend, Python, IA, Matemática, DB e Cloud."
+        },
+        night: {
+          block: "Revisão espaçada e fechamento leve",
+          k: "ingles",
+          type: "review",
+          priority: "Recall",
+          tracks: ["Flashcards", "Active Recall", "Checklist", "Planejamento"],
+          d: "Revisar conceitos da semana, zerar flashcards prioritários e deixar o plano de segunda pronto."
+        }
+      })
+    };
+
+    function buildDailyPlan(cfg) {
+      const day = weeklyFocusByDay[cfg.dayKey];
+      return [
+        { time: "00:00 – 01:00", dur: "1h", block: "Fechamento do ciclo anterior e preparação dos blocos da madrugada", k: "review", type: "review", priority: "FIXO", kind: "fechamento", tracks: ["Backlog", "Notas", "Planejamento"], d: "Revisão leve, backlog, anotações, organização do próximo bloco e definição objetiva do que será estudado entre 01h e 05h." },
+        { time: "01:00 – 03:00", dur: "2h", kind: "estudo madrugada", intensity: "média", ...cfg.early1 },
+        { time: "03:00 – 05:00", dur: "2h", kind: "estudo madrugada", intensity: "média", ...cfg.early2 },
+        { time: "05:00 – 06:00", dur: "1h", block: "Cardio matinal", k: "cardio", type: "cardio", priority: "FIXO", kind: "cardio", tracks: ["Cardio", "Saúde", "Energia"], d: "Cardio em intensidade controlada, hidratação e ativação física para sustentar a rotina intensiva do dia." },
+        { time: "06:00 – 06:30", dur: "30min", block: "Mobilidade, banho e higiene", k: "treino", type: "cardio", priority: "FIXO", kind: "preparação", tracks: ["Mobilidade", "Higiene", "Transição"], d: "Mobilidade leve, banho, higiene, organização do ambiente e transição física para o início dos estudos." },
+        { time: "06:30 – 07:00", dur: "30min", block: "Café da manhã, hidratação e planejamento rápido", k: "break", type: "break", priority: "FIXO", kind: "alimentação", tracks: ["Café", "Planejamento", "Energia"], d: "Café da manhã leve, hidratação, revisão do foco do dia e definição da prioridade técnica antes do início oficial dos estudos." },
+        { time: "07:00 – 09:00", dur: "2h", kind: "foco profundo", intensity: "alta", ...cfg.deep1 },
+        { time: "09:00 – 09:30", dur: "30min", block: "Pausa curta, alimentação e alongamento", k: "break", type: "break", priority: "FIXO", kind: "pausa", tracks: ["Pausa", "Alongamento", "Recuperação"], d: "Pausa sem tela, alimentação leve, água, alongamento e revisão rápida do que foi concluído no primeiro bloco." },
+        { time: "09:30 – 11:30", dur: "2h", kind: "projeto", intensity: "alta", ...cfg.deep2 },
+        { time: "11:30 – 12:30", dur: "1h", block: "Almoço e pausa real", k: "break", type: "break", priority: "FIXO", kind: "pausa real", tracks: ["Almoço", "Descanso", "Sem tela"], d: "Alimentação, descanso visual e recuperação. Evitar transformar este bloco em vídeo-aula ou revisão pesada." },
+        { time: "12:30 – 14:00", dur: "1h30", kind: "técnico", intensity: "média", ...cfg.complement },
+        { time: "14:00 – 14:30", dur: "30min", block: "Pausa, descanso visual e organização", k: "break", type: "break", priority: "FIXO", kind: "pausa", tracks: ["Descanso visual", "Água", "Organização"], d: "Descanso visual, água, caminhada curta e preparação objetiva do próximo bloco." },
+        { time: "14:30 – 16:00", dur: "1h30", kind: "integração", intensity: "média", ...cfg.integration },
+        { time: "16:00 – 17:00", dur: "1h", block: "Inglês técnico", k: "ingles", type: "english", priority: "5%", kind: "inglês", tracks: ["Docs", "Speaking", "README", "Commits", "Vocabulário"], d: "Documentação oficial, speaking, escrita de README, commits em inglês, vocabulário técnico, revisão ativa e explicação oral do que foi estudado." },
+        { time: "17:00 – 18:00", dur: "1h", block: "Pausa, alimentação, caminhada leve ou descanso", k: "break", type: "break", priority: "FIXO", kind: "recuperação", tracks: ["Pausa", "Alimentação", "Caminhada"], d: "Alimentação, caminhada leve, descanso e transição para o bloco fixo de musculação e jantar." },
+        { time: "18:00 – 19:30", dur: "1h30", block: "Musculação", k: "treino", type: "strength", priority: "FIXO", kind: "musculação", tracks: ["Treino", "Força", "Saúde"], d: "Treino de musculação preservado como bloco fixo do dia para saúde, composição corporal, energia e sustentabilidade da rotina." },
+        { time: "19:30 – 20:15", dur: "45min", block: "Banho, recuperação e pausa", k: "strength", type: "strength", priority: "FIXO", kind: "recuperação", tracks: ["Banho", "Recuperação", "Pausa"], d: "Banho, deslocamento, hidratação, recuperação e pausa real depois da musculação." },
+        { time: "20:15 – 21:00", dur: "45min", block: "Jantar e descanso", k: "dinner", type: "dinner", priority: "FIXO", kind: "jantar", tracks: ["Jantar", "Descanso", "Energia"], d: "Jantar, descanso e descompressão. Este período não deve ser substituído por estudo pesado." },
+        { time: "21:00 – 23:00", dur: "2h", kind: "noturno", intensity: "média", ...cfg.night },
+        { time: "23:00 – 00:00", dur: "1h", block: "Checklist, GitHub, Obsidian/Notion e planejamento", k: "review", type: "review", priority: "FIXO", kind: "fechamento", tracks: ["Checklist", "GitHub", "Obsidian/Notion", "Flashcards"], d: "Checklist, atualização do GitHub, Obsidian/Notion, flashcards, planejamento do dia seguinte e revisão leve do conteúdo do dia." }
+      ];
+    }
 
     const rules = [
       {
@@ -3347,6 +3924,98 @@
     /* ═══════════════════════════════════════════════
        RENDER FUNCTIONS
     ═══════════════════════════════════════════════ */
+    function getDailyColor(block) {
+      return CK[block.k] || CK[block.type] || CK.n;
+    }
+
+    function renderDailyDayTabs() {
+      const el = document.getElementById('dailyDayTabs');
+      if (!el) return;
+      el.innerHTML = weekDays.map((d, index) => `
+        <li class="nav-item" role="presentation">
+          <button type="button" class="nav-link daily-day-btn${index === 0 ? ' active' : ''}" data-day-key="${d.key}" role="tab" aria-selected="${index === 0 ? 'true' : 'false'}" aria-controls="dailySchedule">
+            <span class="d-none d-sm-inline">${d.label}</span><span class="d-sm-none">${d.short}</span>
+          </button>
+        </li>`).join('');
+      el.querySelectorAll('[data-day-key]').forEach(btn => {
+        btn.addEventListener('click', () => setActiveDay(btn.dataset.dayKey));
+      });
+    }
+
+    function setActiveDay(dayKey) {
+      const selected = dailyPlansByDay[dayKey] ? dayKey : 'segunda';
+      document.querySelectorAll('#dailyDayTabs [data-day-key]').forEach(btn => {
+        const isActive = btn.dataset.dayKey === selected;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', String(isActive));
+      });
+      renderDailySchedule(selected);
+      renderWeeklyFocus(selected);
+    }
+
+    function renderDailySchedule(dayKey) {
+      const scheduleEl = document.getElementById('dailySchedule');
+      if (!scheduleEl) return;
+      const blocks = dailyPlansByDay[dayKey] || dailyPlansByDay.segunda;
+      scheduleEl.innerHTML = blocks.map(b => {
+        const c = getDailyColor(b);
+        const type = b.type || 'study';
+        const isBreak = type === 'break';
+        const tracks = Array.isArray(b.tracks) && b.tracks.length
+          ? `<div class="daily-track-row">${b.tracks.map(t => `<span class="daily-track-tag">${t}</span>`).join('')}</div>`
+          : '';
+        const priority = b.priority ? `<span class="daily-priority">${b.priority}</span>` : '';
+        return `<article class="daily-block daily-block-${type}" style="--daily-kind-color:${c.t};--daily-kind-bg:${c.b};${isBreak ? 'opacity:.88' : ''}">
+      <div class="daily-time" style="background:${c.b}">
+        <span class="mono small" style="color:${c.t};font-weight:600;font-size:.72rem">${b.time}</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:${c.t};opacity:.75">${b.dur || ''}</span>
+      </div>
+      <div class="daily-content">
+        <span class="daily-kind">${b.kind || type}</span>${priority}
+        <h6 style="color:${c.t}">${b.block}</h6>
+        <p>${b.d}</p>
+        ${tracks}
+      </div>
+    </article>`;
+      }).join('');
+    }
+
+    function renderWeeklyFocus(dayKey) {
+      const el = document.getElementById('weeklyFocus');
+      if (!el) return;
+      const d = weeklyFocusByDay[dayKey] || weeklyFocusByDay.segunda;
+      const c = CK[d.k] || CK.n;
+      el.innerHTML = `
+    <div class="col-12 col-xl-4">
+      <div class="weekly-card h-100" style="--weekly-color:${c.t};border-color:color-mix(in srgb, ${c.t} 32%, var(--border));">
+        <div class="day">${d.day}</div>
+        <h6>${d.focus}</h6>
+        <div class="weekly-tag-row">
+          <span class="weekly-tag">${d.priority}</span>
+          ${(d.tracks || []).map(t => `<span class="weekly-tag">${t}</span>`).join('')}
+        </div>
+        <p>${d.connection}</p>
+        <div class="weekly-detail"><strong>Estratégia de mercado</strong><span>${d.strategy}</span></div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="weekly-card h-100" style="--weekly-color:${c.t}">
+        <div class="day">Prática recomendada</div>
+        <h6>Como executar</h6>
+        <p>${d.practice}</p>
+        <div class="weekly-detail"><strong>Revisão obrigatória</strong><span>${d.review}</span></div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="weekly-card h-100" style="--weekly-color:${c.t}">
+        <div class="day">Conteúdos do dia</div>
+        <h6>Trilhas em foco</h6>
+        <p>${(d.tracks || []).join(' · ')}</p>
+        <div class="weekly-detail"><strong>Eixo de estudos</strong><span>Organização do dia por prioridade técnica, revisão ativa, prática orientada, aprofundamento conceitual e continuidade da rotina.</span></div>
+      </div>
+    </div>`;
+    }
+
     function init() {
       // Hero tags
       document.getElementById('heroTags').innerHTML =
@@ -3393,31 +4062,9 @@
       setupNavbarTrackSearch();
       setupPdfSearch();
 
-      // Daily
-      document.getElementById('dailySchedule').innerHTML = daily.map(b => {
-        const c = CK[b.k] || CK.n;
-        const isPause = b.block.toLowerCase().includes('pausa') || b.block.toLowerCase().includes('almoço') || b.block.toLowerCase().includes('jantar') || b.block.toLowerCase().includes('recuperação') || b.block.toLowerCase().includes('reset');
-        return `<div class="daily-block" style="${isPause ? 'opacity:.72' : ''}">
-      <div class="daily-time" style="background:${c.b}">
-        <span class="mono small" style="color:${c.t};font-weight:600;font-size:.72rem">${b.time}</span>
-        <span style="font-family:'IBM Plex Mono',monospace;font-size:.65rem;color:${c.t};opacity:.7">${b.dur}</span>
-      </div>
-      <div class="daily-content">
-        <h6 style="color:${c.t}">${b.block}</h6>
-        <p>${b.d}</p>
-      </div>
-    </div>`;
-      }).join('');
-
-      // Weekly
-      document.getElementById('weeklyFocus').innerHTML = weekly.map(d => `
-    <div class="col-6 col-md-4 col-lg">
-      <div class="weekly-card">
-        <div class="day">${d.day}</div>
-        <h6>${d.focus}</h6>
-        <p>${d.d}</p>
-      </div>
-    </div>`).join('');
+      // Daily weekly navigation
+      renderDailyDayTabs();
+      setActiveDay('segunda');
 
       // Phase filter buttons
       document.getElementById('phaseFilterBtns').innerHTML =
