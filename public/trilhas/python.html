@@ -7,17 +7,13 @@
   <title>Python Backend, Automação e Inteligência Artificial — Plano Integrado de Estudos</title>
   <meta name="description"
     content="Trilha completa de Python para desenvolvimento backend, automação, dados, machine learning, LLMs, RAG, agentes, MLOps e integração com Java/Spring.">
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
       --accent: #4f9ef8;
       --accent2: #22d3b0;
       --accent3: #a78bfa;
@@ -1645,9 +1641,120 @@
       }
     }
   </style>
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/python">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/python">
+  <meta property="og:title" content="Python Backend, Automação e Inteligência Artificial — Plano Integrado de Estudos">
+  <meta property="og:description" content="Trilha completa de Python para desenvolvimento backend, automação, dados, machine learning, LLMs, RAG, agentes, MLOps e integração com Java/Spring.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Python Backend, Automação e Inteligência Artificial — Plano Integrado de Estudos">
+  <meta name="twitter:description" content="Trilha completa de Python para desenvolvimento backend, automação, dados, machine learning, LLMs, RAG, agentes, MLOps e integração com Java/Spring.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
-<body>
+<body data-track="py">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="hero">
     <div class="container">
@@ -1674,7 +1781,7 @@
   <nav class="sitenav">
     <div class="container">
       <div class="sitenav-top">
-        <a class="sitenav-brand" href="#">Python Track <span>64 semanas</span></a>
+        <a class="sitenav-brand" href="#">Python Track <span>156 semanas</span></a>
         <span class="nav-ver">Plano Integrado de Estudos</span>
         <a class="nav-back" href="../index.html">← Dashboard principal</a>
         <div class="sitenav-top-right">
@@ -1713,6 +1820,8 @@
     </div>
   </nav>
 
+  <main id="conteudo" tabindex="-1">
+
   <div class="main">
     <aside class="sidebar">
       <div class="sidebar-group">
@@ -1728,7 +1837,7 @@
       </div>
       <div class="sidebar-group">
         <div class="sidebar-label">Execução</div>
-        <a href="#roadmap">6. Roadmap em 8 fases</a>
+        <a href="#roadmap">6. Roadmap em 12 fases</a>
         <a href="#checklist">7. Checklists</a>
         <a href="#projetos">8. Projetos práticos</a>
       </div>
@@ -2056,129 +2165,13 @@
         </div>
       </section>
       <section class="section" data-search-section="" id="roadmap">
-        <div class="section-header">
+        <div class="doc-section-heading">
           <div>
-            <h2>Roadmap em 8 fases</h2>
-            <p class="section-subtitle">Progressão alinhada ao index do plano integrado: Python como backend + IA
-              aplicada.</p>
-          </div>
-          <span class="section-badge">64 semanas</span>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
+          </div><span class="section-badge">Roadmap</span>
         </div>
-        <div class="phase-grid">
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 1 — Python Core profissional</h3><span>Sem 1–8</span>
-            </div>
-            <ul class="doc-list">
-              <li>Sintaxe, tipos, controle de fluxo, funções, comprehensions, OOP e módulos.</li>
-              <li>Dataclasses, enums, exceptions, context managers, generators, decorators e logging.</li>
-              <li>Typing inicial: list[str], dict[str, Any], Optional, Union, Literal e TypedDict.</li>
-              <li>Ambiente: venv, pip, uv, pyproject.toml, Ruff, Black, isort e pre-commit.</li>
-              <li>Scripts úteis para arquivos, JSON, CSV, logs e automações do projeto Java/blog.</li>
-            </ul>
-            <p><strong>Entregável:</strong> pacote Python utilitário com CLI simples, testes, lint, type check e README.
-            </p>
-          </article>
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 2 — Backend Python base</h3><span>Sem 9–16</span>
-            </div>
-            <ul class="doc-list">
-              <li>Requests/httpx, consumo de APIs, auth, headers, pagination e tratamento de erro.</li>
-              <li>FastAPI, Pydantic v2, rotas, validação, middleware, exception handlers e OpenAPI.</li>
-              <li>SQLAlchemy + Alembic, PostgreSQL, models, migrations, repositories e sessions.</li>
-              <li>pytest, fixtures, parametrize, mocking, coverage, TestClient/httpx e testes de API.</li>
-              <li>AsyncIO, async/await, aiohttp/httpx async, timeouts e concorrência de IO.</li>
-            </ul>
-            <p><strong>Entregável:</strong> API FastAPI com CRUD, PostgreSQL, Alembic, testes e Docker Compose.</p>
-          </article>
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 3 — APIs profissionais e automação</h3><span>Sem 17–24</span>
-            </div>
-            <ul class="doc-list">
-              <li>FastAPI avançado: DI, lifespan, settings, background tasks, auth e estrutura por camadas.</li>
-              <li>Pydantic v2: validators, serializers, Field, Annotated, response models e strict validation.</li>
-              <li>Workers: Celery, RQ, Dramatiq ou Arq, retries, DLQ, idempotência e scheduled jobs.</li>
-              <li>Integração com Kafka/RabbitMQ/SQS, mensagens, poison messages e observabilidade de jobs.</li>
-              <li>CLIs com Typer/Click, automação de deploy, análise de logs e geração de relatórios.</li>
-            </ul>
-            <p><strong>Entregável:</strong> worker assíncrono com fila, retry, DLQ, logs estruturados e dashboard
-              simples.</p>
-          </article>
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 4 — Dados, EDA e ML clássico</h3><span>Sem 25–32</span>
-            </div>
-            <ul class="doc-list">
-              <li>NumPy: arrays, broadcasting, slicing, vetorização e operações matemáticas.</li>
-              <li>Pandas: DataFrames, groupby, merge, pivot, datas, missing values, limpeza e export.</li>
-              <li>Polars: lazy evaluation, arquivos grandes, expressões e performance.</li>
-              <li>Visualização: Matplotlib, Seaborn, Plotly, distribuições, correlação e séries temporais.</li>
-              <li>scikit-learn: preprocessing, train/test, cross-validation, pipelines, regressão, árvores e métricas.
-              </li>
-            </ul>
-            <p><strong>Entregável:</strong> pipeline ML clássico com dataset limpo, métricas, relatório e endpoint de
-              inferência inicial.</p>
-          </article>
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 5 — PyTorch, NLP e embeddings</h3><span>Sem 33–40</span>
-            </div>
-            <ul class="doc-list">
-              <li>PyTorch: tensors, autograd, nn.Module, optimizers, losses e training loop.</li>
-              <li>Datasets/DataLoaders, batching, transforms, checkpointing e inferência.</li>
-              <li>Embeddings: Word2Vec, sentence embeddings, modelos pré-treinados e similaridade.</li>
-              <li>Hugging Face: tokenizers, pipeline, transformers, inference e fine-tuning leve com LoRA/PEFT.</li>
-              <li>Integração com APIs Python e Java para servir inferência.</li>
-            </ul>
-            <p><strong>Entregável:</strong> classificador ou buscador semântico com embeddings, avaliação e API de
-              inferência.</p>
-          </article>
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 6 — LLMs, RAG e agentes</h3><span>Sem 41–48</span>
-            </div>
-            <ul class="doc-list">
-              <li>LangChain, LangGraph e LlamaIndex: chains, retrievers, agents, tools e memória.</li>
-              <li>RAG: ingest, chunk, embed, retrieve, rerank, generate, cite e evaluate.</li>
-              <li>Vector stores: pgvector, Chroma, Qdrant, Pinecone, Weaviate e FAISS.</li>
-              <li>Agentes: ReAct, graph workflows, planner/executor, human-in-the-loop e validação de saída.</li>
-              <li>APIs de modelos: OpenAI SDK, Anthropic SDK, streaming, function calling e structured output.</li>
-            </ul>
-            <p><strong>Entregável:</strong> RAG com documentos privados, ACL, fontes, avaliação, logs e proteção contra
-              vazamento.</p>
-          </article>
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 7 — MLOps/LLMOps e produção</h3><span>Sem 49–56</span>
-            </div>
-            <ul class="doc-list">
-              <li>MLflow: experiment tracking, model registry, artifacts, serving e comparação de execuções.</li>
-              <li>LLMOps: prompt versioning, eval, custo, latência, logs de contexto, fallback e A/B testing.</li>
-              <li>Data pipelines: Airflow basics, DAGs, operators, scheduling e retries.</li>
-              <li>Observabilidade: OpenTelemetry, Sentry, Prometheus, métricas de inferência e dashboards.</li>
-              <li>Segurança em IA: prompt injection, PII masking, LGPD, ACL por documento, rate limit e sandbox de
-                tools.</li>
-            </ul>
-            <p><strong>Entregável:</strong> serviço de IA em produção com monitoramento de custo, latência, qualidade e
-              fallback.</p>
-          </article>
-          <article class="phase-card">
-            <div class="phase-head">
-              <h3>Fase 8 — Portfólio Python pleno forte</h3><span>Sem 57–64</span>
-            </div>
-            <ul class="doc-list">
-              <li>Python system design: FastAPI vs Django, Python vs Java, arquitetura híbrida e trade-offs.</li>
-              <li>Projeto final: FastAPI + RAG + agente + PostgreSQL/pgvector + Redis + observabilidade.</li>
-              <li>Integração Java-Python: contratos REST/gRPC, auth, timeouts, retries, tracing e documentação.</li>
-              <li>Contribuição open source ou PR técnico em projeto Python.</li>
-              <li>Mock interviews: backend Python, ML/RAG, system design e debugging.</li>
-            </ul>
-            <p><strong>Entregável:</strong> case study público de produto Python + IA em produção integrado ao portfólio
-              Java.</p>
-          </article>
-        </div>
+        <div id="phaseRoadmap" data-track-roadmap="py"></div>
       </section>
       <section class="section" data-search-section="" id="checklist">
         <div class="section-header">
@@ -2600,6 +2593,8 @@ alembic upgrade head</code></pre>
     </div>
   </div>
 
+  </main>
+
   <footer>
     <div class="footer-row">
       <a class="hero-back-link" href="../index.html" style="margin-bottom:0">← Voltar ao dashboard principal</a>
@@ -2613,85 +2608,8 @@ alembic upgrade head</code></pre>
     <p><strong>Python Backend, Automação e Inteligência Artificial</strong> · Trilha do Plano Integrado de Estudos</p>
   </footer>
 
-  <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-  <script>
-
-    // ── Nav bar scroll arrows ──────────────────────────
-    (function () {
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-      if (!bar || !btnL || !btnR) return;
-      function update() {
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-      btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-      btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-      bar.addEventListener('scroll', update, { passive: true });
-      function scrollActiveIntoView() {
-        const active = bar.querySelector('.nav-link.active');
-        if (active) { active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' }); }
-      }
-      update();
-      setTimeout(update, 600);
-      window._navScrollActiveIntoView = scrollActiveIntoView;
-    })();
-
-    // Back to top
-    window.addEventListener('scroll', () => {
-      document.getElementById('btt').classList.toggle('show', window.scrollY > 400);
-    });
-
-    // Search
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-      function normalize(value) { return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
-      searchInput.addEventListener('input', function () {
-        const q = normalize(this.value.trim());
-        const sections = document.querySelectorAll('.section');
-        sections.forEach(sec => {
-          sec.classList.remove('is-hidden-by-search', 'search-hit');
-          if (!q) return;
-          const match = normalize(sec.innerText).includes(q);
-          sec.classList.toggle('is-hidden-by-search', !match);
-          sec.classList.toggle('search-hit', match);
-        });
-      });
-    }
-
-    // Smooth anchors
-    Array.from(document.querySelectorAll('a[href^="#"]')).forEach(anchor => {
-      anchor.addEventListener('click', event => {
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (target) {
-          event.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          history.replaceState(null, '', anchor.getAttribute('href'));
-        }
-      });
-    });
-
-    // Active nav link on scroll
-    const observedSections = document.querySelectorAll('.section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-          sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-          if (window._navScrollActiveIntoView) window._navScrollActiveIntoView();
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
-    observedSections.forEach(s => observer.observe(s));
-
-  </script>
+  <button id="btt">↑</button>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

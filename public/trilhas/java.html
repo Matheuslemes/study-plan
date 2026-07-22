@@ -8,20 +8,14 @@
   <meta
     content="Página técnica completa da trilha Java, Spring Boot e Engenharia de Software para evoluir para dev backend pleno forte com arquitetura, testes, observabilidade, cloud, mensageria e system design."
     name="description" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
-    rel="stylesheet" />
-  <link href="../assets/css/styles.css" rel="stylesheet" />
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
-
       --accent: #22c55e;
       --accent2: #22d3b0;
       --accent3: #4f9ef8;
@@ -33,18 +27,14 @@
       --aws-green: #22c55e;
       --aws-purple: #a78bfa;
       --aws-red: #fb923c;
-      --java: #22c55e;
-
       --text: #e2e8f0;
       --muted: #64748b;
       --muted2: #94a3b8;
       --code-bg: #060a12;
-
       --must: #fca5a5;
       --should: #fcd34d;
       --nice: #86efac;
       --future: #93c5fd;
-
       --doc-bg: var(--bg);
       --doc-surface: var(--surface);
       --doc-surface-2: var(--surface2);
@@ -1974,9 +1964,120 @@
       }
     }
   </style>
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/java">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/java">
+  <meta property="og:title" content="Java, Spring Boot e Engenharia de Software — Plano Integrado de Estudos">
+  <meta property="og:description" content="Página técnica completa da trilha Java, Spring Boot e Engenharia de Software para evoluir para dev backend pleno forte com arquitetura, testes, observabilidade, cloud, mensageria e system design.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Java, Spring Boot e Engenharia de Software — Plano Integrado de Estudos">
+  <meta name="twitter:description" content="Página técnica completa da trilha Java, Spring Boot e Engenharia de Software para evoluir para dev backend pleno forte com arquitetura, testes, observabilidade, cloud, mensageria e system design.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
 <body class="track-page" data-track="java">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="track-hero-page">
     <div class="container">
       <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
@@ -2001,7 +2102,7 @@
   <nav class="sitenav">
     <div class="container">
       <div class="sitenav-top">
-        <a class="sitenav-brand" href="#">Java Track <span>64 semanas</span></a>
+        <a class="sitenav-brand" href="#">Java Track <span>156 semanas</span></a>
         <span class="nav-ver">Plano Integrado de Estudos</span>
         <a class="nav-back" href="../index.html">← Dashboard principal</a>
         <div class="sitenav-top-right">
@@ -2036,7 +2137,8 @@
         </div>
         <div class="nav-group">
           <span class="nav-group-label">Produção</span>
-          <a class="nav-link" href="#performance">13 · Performance</a>
+          <a class="nav-link" href="#concorrencia">13 · Concorrência</a>
+          <a class="nav-link" href="#performance">14 · Performance</a>
           <a class="nav-link" href="#legado">14 · Legado</a>
           <a class="nav-link" href="#roadmap">15 · Roadmap</a>
         </div>
@@ -2051,6 +2153,8 @@
       <button aria-label="Rolar para direita" class="nav-scroll-btn right" id="navScrollRight">›</button>
     </div>
   </nav>
+
+  <main id="conteudo" tabindex="-1">
   <div class="main">
     <aside class="sidebar">
       <div class="sidebar-group">
@@ -2078,7 +2182,7 @@
         <div class="sidebar-label">Produção</div>
         <a href="#performance">13. Performance/JVM</a>
         <a href="#legado">14. Legado</a>
-        <a href="#roadmap">15. Roadmap 8 fases</a>
+        <a href="#roadmap">15. Roadmap 12 fases</a>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-label">Execução</div>
@@ -2966,6 +3070,83 @@ class PostRepositoryIT {
     tracing:
       endpoint: http://otel-collector:4318/v1/traces</code></pre>
       </section>
+      <section class="doc-section searchable-section" data-search-section="" id="concorrencia">
+        <div class="doc-section-heading">
+          <div>
+            <h2>Concorrência e paralelismo em Java</h2>
+            <p class="section-subtitle">Lacuna identificada no diagnóstico: o tema aparecia disperso, sem seção própria. É assunto recorrente em entrevista sênior e causa raiz frequente de incidente em produção.</p>
+          </div><span class="section-badge">Concorrência</span>
+        </div>
+        <div class="doc-grid-2">
+          <div>
+            <h3>Fundamentos e modelo de memória</h3>
+            <ul class="doc-list">
+              <li><strong>Thread</strong> e <strong>Runnable</strong>: ciclo de vida, estados e por que criar thread manualmente quase nunca é a resposta.</li>
+              <li><strong>Java Memory Model</strong>: visibilidade, reordenação, <code>happens-before</code> e o que <code>volatile</code> garante — e o que não garante.</li>
+              <li><strong>Race condition</strong> × <strong>deadlock</strong> × <strong>livelock</strong> × <strong>starvation</strong>: reconhecer cada um pelo sintoma.</li>
+              <li>Imutabilidade como estratégia primária: o objeto que não muda não precisa de sincronização.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>synchronized, locks e atômicos</h3>
+            <ul class="doc-list">
+              <li><code>synchronized</code>: bloco × método, monitor object e granularidade do lock.</li>
+              <li><code>ReentrantLock</code>: <code>tryLock</code> com timeout, fairness e por que ele resolve o que <code>synchronized</code> não resolve.</li>
+              <li><code>ReadWriteLock</code> e <code>StampedLock</code> para carga predominante de leitura.</li>
+              <li><code>AtomicInteger</code>, <code>AtomicReference</code>, CAS e <code>LongAdder</code> sob alta contenção.</li>
+              <li>Coleções concorrentes: <code>ConcurrentHashMap</code>, <code>CopyOnWriteArrayList</code>, <code>BlockingQueue</code>.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="doc-grid-2">
+          <div>
+            <h3>Thread pools e ExecutorService</h3>
+            <ul class="doc-list">
+              <li><code>ExecutorService</code>, <code>ThreadPoolExecutor</code> e o significado real de core size, max size e queue.</li>
+              <li>Dimensionamento: pool para tarefa CPU-bound × IO-bound e por que copiar número mágico da internet gera saturação.</li>
+              <li><code>RejectedExecutionHandler</code>: o que acontece quando a fila enche — e por que fila ilimitada é uma armadilha.</li>
+              <li><code>ScheduledExecutorService</code> e shutdown correto (<code>shutdown</code> × <code>shutdownNow</code> × <code>awaitTermination</code>).</li>
+              <li>Thread pool em Spring: <code>@Async</code>, <code>TaskExecutor</code> e o pool do servidor web como recurso finito.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>CompletableFuture e composição assíncrona</h3>
+            <ul class="doc-list">
+              <li><code>supplyAsync</code>, <code>thenApply</code>, <code>thenCompose</code> e <code>thenCombine</code>: encadear sem bloquear.</li>
+              <li><code>allOf</code> e <code>anyOf</code> para paralelizar chamadas independentes a serviços externos.</li>
+              <li>Tratamento de falha: <code>exceptionally</code>, <code>handle</code>, <code>whenComplete</code> e timeout com <code>orTimeout</code>.</li>
+              <li>A armadilha do <code>join()</code>/<code>get()</code> prematuro, que transforma código assíncrono em bloqueante.</li>
+              <li>Executor explícito: nunca deixar tarefa de IO no <code>ForkJoinPool.commonPool</code> por engano.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="doc-grid-2">
+          <div>
+            <h3>Virtual Threads (Java 21)</h3>
+            <ul class="doc-list">
+              <li>Platform thread × virtual thread: custo de criação, escalonamento e por que "uma thread por requisição" volta a ser viável.</li>
+              <li><code>Executors.newVirtualThreadPerTaskExecutor()</code> e integração com Spring Boot 3.2+.</li>
+              <li><strong>Pinning</strong>: quando <code>synchronized</code> prende a virtual thread ao carrier e como diagnosticar.</li>
+              <li>Structured Concurrency (preview): <code>StructuredTaskScope</code> para tarefas com ciclo de vida comum.</li>
+              <li>Quando virtual thread <em>não</em> ajuda: carga CPU-bound continua limitada pelo número de núcleos.</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Prática e critério de domínio</h3>
+            <ul class="doc-list">
+              <li>Reproduzir uma race condition de propósito, observar o defeito e corrigi-lo de três formas diferentes.</li>
+              <li>Provocar um deadlock, capturar o thread dump e identificar o ciclo de espera.</li>
+              <li>Paralelizar três chamadas externas com <code>CompletableFuture</code> e medir o ganho real de latência.</li>
+              <li>Comparar o mesmo endpoint com platform threads e virtual threads sob carga.</li>
+              <li><strong>Critério:</strong> explicar em voz alta por que uma solução é thread-safe, sem consultar.</li>
+            </ul>
+          </div>
+        </div>
+        <p class="section-note"><strong>Onde entra no plano:</strong> fundamentos e thread pools na Fase 2 (Java avançado);
+          <code>CompletableFuture</code> aplicado a integrações na Fase 5 (performance); virtual threads e diagnóstico de
+          contenção na Fase 6 (observabilidade e troubleshooting).</p>
+      </section>
+
       <section class="doc-section searchable-section" data-search-section="" id="performance">
         <div class="doc-section-heading">
           <div>
@@ -3058,124 +3239,11 @@ class PostRepositoryIT {
       <section class="doc-section searchable-section" data-search-section="" id="roadmap">
         <div class="doc-section-heading">
           <div>
-            <h2>Roadmap Java integrado às 8 fases</h2>
-            <p class="section-subtitle">Evolução coerente com o index e com o cronograma de 64 semanas.</p>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
           </div><span class="section-badge">Roadmap</span>
         </div>
-        <div class="phase-doc-grid">
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 1 — Base técnica + fundamentos</h3><span>Sem 1–8</span>
-            </div>
-            <p><strong>Foco:</strong> Java 21, OOP, estruturas de dados, SQL, Spring Boot inicial e testes.</p>
-            <ul class="doc-list">
-              <li>Java 21 Core: tipos, OOP, interfaces, generics, records e sealed classes.</li>
-              <li>Collections, Big O, arrays, listas, hashing, árvores, heaps e trade-offs.</li>
-              <li>SQL/PostgreSQL: JOINs, CTEs, transações, índices e modelagem relacional.</li>
-              <li>Spring Boot: primeiros endpoints REST, DTOs, validação, JPA/Hibernate e Flyway.</li>
-              <li>JUnit 5, Mockito, AssertJ e cobertura de regra de negócio.</li>
-              <li>Entregável: API CRUD de posts com testes e migrations.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 2 — Desenvolvimento profissional</h3><span>Sem 9–16</span>
-            </div>
-            <p><strong>Foco:</strong> Spring Boot avançado, segurança, integrações, cache e testes de integração.</p>
-            <ul class="doc-list">
-              <li>Spring Security com JWT, OAuth2, OIDC, roles, scopes e Resource Server.</li>
-              <li>Feign/WebClient com timeout, retry, circuit breaker e fallback.</li>
-              <li>Redis para cache, TTL, rate limiting, idempotência e invalidation.</li>
-              <li>Testcontainers com PostgreSQL, Redis e MockMvc/RestAssured.</li>
-              <li>SonarQube, JaCoCo e quality gates.</li>
-              <li>Entregável: API segura com cache, integração externa mockada e testes de integração.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 3 — Engenharia de software real</h3><span>Sem 17–24</span>
-            </div>
-            <p><strong>Foco:</strong> Kafka, arquitetura hexagonal, DDD, microsserviços e performance inicial.</p>
-            <ul class="doc-list">
-              <li>Kafka producers/consumers, DLQ, retry, schemas e consumer groups.</li>
-              <li>Hexagonal: domain, ports, adapters e isolamento de infraestrutura.</li>
-              <li>DDD: entities, value objects, aggregates e domain events.</li>
-              <li>Microsserviços: decomposição, contratos e trade-offs.</li>
-              <li>Performance: N+1, EntityGraph, batch insert, profiling básico.</li>
-              <li>Entregável: evento PostPublished com consumer idempotente.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 4 — Arquitetura + candidaturas</h3><span>Sem 25–32</span>
-            </div>
-            <p><strong>Foco:</strong> padrões distribuídos, resiliência, versionamento e observabilidade inicial.</p>
-            <ul class="doc-list">
-              <li>Saga, Outbox, CQRS, idempotência e consistency patterns.</li>
-              <li>Resilience4j: circuit breaker, retry, bulkhead, rate limiter e timeout.</li>
-              <li>Cache aside, write-through e invalidation por evento.</li>
-              <li>OpenAPI Generator e contratos client/server.</li>
-              <li>Virtual Threads e CompletableFuture com uso consciente.</li>
-              <li>Entregável: outbox + worker + métricas de processamento.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 5 — Cloud + sistemas distribuídos</h3><span>Sem 33–40</span>
-            </div>
-            <p><strong>Foco:</strong> AWS aplicada, sistemas distribuídos, Redis/Kafka avançados e SRE.</p>
-            <ul class="doc-list">
-              <li>EKS, RDS, ElastiCache, S3, CloudFront, SQS/SNS integrados ao backend.</li>
-              <li>CAP, consistência eventual, relógios lógicos e trade-offs.</li>
-              <li>Kafka Streams, particionamento, exactly-once e monitoramento de lag.</li>
-              <li>Redis Lua, pub/sub, Streams, geospatial e locks.</li>
-              <li>gRPC e Protocol Buffers.</li>
-              <li>Entregável: sistema distribuído com observabilidade ponta a ponta.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 6 — IA aplicada + RAG + agentes</h3><span>Sem 41–48</span>
-            </div>
-            <p><strong>Foco:</strong> Java integrado a IA, RAG, pgvector, LLMOps e API Gateway patterns.</p>
-            <ul class="doc-list">
-              <li>Embeddings e pgvector com indexação HNSW e cosine similarity.</li>
-              <li>RAG: chunking, retrieval, reranking, citação e controle de acesso.</li>
-              <li>Integração Java ↔ Python via REST/gRPC.</li>
-              <li>LLMOps: custo, latência p95, versionamento de prompts e avaliação.</li>
-              <li>API Gateway patterns: BFF, composition, rate limiting.</li>
-              <li>Entregável: agente RAG do blog com logging, métricas e testes de avaliação.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 7 — Produto + frontend + escala</h3><span>Sem 49–56</span>
-            </div>
-            <p><strong>Foco:</strong> produto completo, multi-tenancy, webhooks, batch, versionamento e carga.</p>
-            <ul class="doc-list">
-              <li>Arquitetura end-to-end com diagramas C4.</li>
-              <li>Multi-tenancy: schema per tenant, row-level security e isolamento.</li>
-              <li>Webhooks com retry, idempotência e signature verification.</li>
-              <li>Quartz, Spring Batch e jobs de processamento.</li>
-              <li>API versioning, deprecation e migration.</li>
-              <li>Entregável: carga com k6/Gatling, profiling e tuning documentado.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 8 — Portfólio final + negociação</h3><span>Sem 57–64</span>
-            </div>
-            <p><strong>Foco:</strong> system design, entrevistas, legado, revisão e case study final.</p>
-            <ul class="doc-list">
-              <li>System design: sharding, replication, caching, CDN e queues.</li>
-              <li>Coding interviews: HashMap, BFS/DFS, DP e sliding window.</li>
-              <li>Revisão: Kafka, Redis, Spring Security, K8s, AWS e testes.</li>
-              <li>Legado: migração Java/Spring, javax→jakarta, refatoração segura.</li>
-              <li>Behavioral: STAR, trade-offs, conflitos e comunicação técnica.</li>
-              <li>Entregável: case study de backend Java pleno forte com arquitetura e incidentes simulados.</li>
-            </ul>
-          </article>
-        </div>
+        <div id="phaseRoadmap" data-track-roadmap="java"></div>
       </section>
       <section class="doc-section searchable-section" data-search-section="" id="checklist">
         <div class="doc-section-heading">
@@ -3547,7 +3615,7 @@ jcmd &lt;PID&gt; GC.heap_dump /tmp/app.hprof</code></pre>
 
           <article class="ref-card">
             <strong>Referência interna — Plano Integrado</strong>
-            <p>Index do Plano Integrado de Estudos com a trilha Java + Engenharia de Software em 8 fases.</p>
+            <p>Index do Plano Integrado de Estudos com a trilha Java + Engenharia de Software em 12 fases.</p>
             <a href="../index.html" rel="noopener">Abrir dashboard principal</a>
           </article>
         </div>
@@ -3561,6 +3629,8 @@ jcmd &lt;PID&gt; GC.heap_dump /tmp/app.hprof</code></pre>
       </section>
     </div>
   </div>
+  </main>
+
   <footer class="page-footer">
     <div class="footer-row"><a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
       <div class="footer-pills"><span class="footer-pill green">Java</span><span class="footer-pill teal">Spring
@@ -3568,92 +3638,12 @@ jcmd &lt;PID&gt; GC.heap_dump /tmp/app.hprof</code></pre>
       </div>
     </div>
     <p><strong style="color:var(--muted2)">Java, Spring Boot e Engenharia de Software</strong> · Trilha do Plano
-      Integrado de Estudos · 64 semanas</p>
+      Integrado de Estudos · 156 semanas</p>
   </footer>
   <button aria-label="Voltar ao topo" class="back-to-top" id="backToTop">↑</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-
-    (function () {
-      const backToTop = document.getElementById('backToTop');
-      const searchInput = document.getElementById('searchInput');
-      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-
-      function normalize(value) {
-        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      }
-
-      function updateScrollButtons() {
-        if (!bar || !btnL || !btnR) return;
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-
-      if (btnL && btnR && bar) {
-        btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-        btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-        bar.addEventListener('scroll', updateScrollButtons, { passive: true });
-        updateScrollButtons();
-        setTimeout(updateScrollButtons, 400);
-      }
-
-      if (backToTop) {
-        window.addEventListener('scroll', () => {
-          backToTop.classList.toggle('is-visible', window.scrollY > 500);
-        }, { passive: true });
-
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', event => {
-          const target = document.querySelector(anchor.getAttribute('href'));
-          if (target) {
-            event.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            history.replaceState(null, '', anchor.getAttribute('href'));
-          }
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const query = normalize(searchInput.value.trim());
-          sections.forEach(section => {
-            section.classList.remove('is-hidden-by-search', 'search-hit');
-            if (!query) return;
-            const match = normalize(section.innerText).includes(query);
-            section.classList.toggle('is-hidden-by-search', !match);
-            section.classList.toggle('search-hit', match);
-          });
-        });
-      }
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            sidebarLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            const active = bar ? bar.querySelector('.nav-link.active') : null;
-            if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
-          }
-        });
-      }, { threshold: .15, rootMargin: '-100px 0px -55% 0px' });
-
-      sections.forEach(section => observer.observe(section));
-    })();
-
-  </script>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

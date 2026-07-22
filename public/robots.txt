@@ -1,0 +1,8 @@
+# Plano Integrado de Estudos
+# Se preferir manter o plano fora dos buscadores (é um documento de carreira
+# pessoal), troque as duas linhas abaixo por:  User-agent: *  /  Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://study-plan.vercel.app/sitemap.xml

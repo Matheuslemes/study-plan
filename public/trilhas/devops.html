@@ -7,24 +7,18 @@
   <title>DevOps, Cloud e Operação — Plano Integrado de Estudos</title>
   <meta name="description"
     content="Página técnica completa da trilha DevOps: Linux, Git, Docker, CI/CD, Kubernetes, Terraform, observabilidade, SRE, segurança, FinOps e Platform Engineering.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
-  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
     /* ═══════════════════════════════════════════════════
-   DESIGN SYSTEM — DevCore Platform / DevOps Track
+   DESIGN SYSTEM — DevOps Track
    Estrutura alinhada às trilhas Blog, Financeira, Matemática, AWS e Bancos
 ═══════════════════════════════════════════════════ */
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
-
       --accent: #D47FAC;
       --accent2: #38bdf8;
       --accent3: #a78bfa;
@@ -38,18 +32,14 @@
       --devops-orange: #fb923c;
       --devops-red: #fb7185;
       --devops-purple: #a78bfa;
-
       --text: #e2e8f0;
       --muted: #64748b;
       --muted2: #94a3b8;
       --code-bg: #060a12;
-
       --must: #fca5a5;
       --should: #fcd34d;
       --nice: #86efac;
       --future: #93c5fd;
-
-      /* aliases para compatibilidade com o HTML original */
       --doc-bg: var(--bg);
       --doc-surface: var(--surface);
       --doc-surface-2: var(--surface2);
@@ -1970,9 +1960,120 @@
     }
   </style>
 
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/devops">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/devops">
+  <meta property="og:title" content="DevOps, Cloud e Operação — Plano Integrado de Estudos">
+  <meta property="og:description" content="Página técnica completa da trilha DevOps: Linux, Git, Docker, CI/CD, Kubernetes, Terraform, observabilidade, SRE, segurança, FinOps e Platform Engineering.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="DevOps, Cloud e Operação — Plano Integrado de Estudos">
+  <meta name="twitter:description" content="Página técnica completa da trilha DevOps: Linux, Git, Docker, CI/CD, Kubernetes, Terraform, observabilidade, SRE, segurança, FinOps e Platform Engineering.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
 <body class="track-page" data-track="devops">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="track-hero-page">
     <div class="container">
@@ -1993,7 +2094,7 @@
   <nav class="sitenav">
     <div class="container">
       <div class="sitenav-top">
-        <a class="sitenav-brand" href="#">DevOps Track <span>64 semanas</span></a>
+        <a class="sitenav-brand" href="#">DevOps Track <span>156 semanas</span></a>
         <span class="nav-ver">1,5h/dia · Operação · Cloud · SRE</span>
         <a class="nav-back" href="../index.html">← Dashboard principal</a>
         <div class="sitenav-top-right">
@@ -2042,6 +2143,8 @@
       <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
     </div>
   </nav>
+
+  <main id="conteudo" tabindex="-1">
   <div class="main">
     <aside class="sidebar">
       <div class="sidebar-group">
@@ -2879,109 +2982,11 @@ kubectl rollout undo deploy/blog-api -n blog</code></pre>
       <section id="roadmap" class="doc-section searchable-section" data-search-section>
         <div class="doc-section-heading">
           <div>
-            <h2>Roadmap DevOps integrado às 8 fases</h2>
-            <p class="section-subtitle">Cronograma coeso com o plano anterior de 64 semanas.</p>
-          </div>
-          <span class="section-badge">64 semanas</span>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
+          </div><span class="section-badge">Roadmap</span>
         </div>
-        <div class="phase-doc-grid">
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 1 — Fundamentos operacionais</h3><span>Sem 1–8</span>
-            </div>
-            <p><strong>Foco:</strong> Linux, Git, shell, processos, filesystem, SSH e networking inicial.</p>
-            <ul class="doc-list">
-              <li>Terminal, permissões, systemd, journalctl, cron e logs.</li>
-              <li>TCP/IP, DNS, HTTP/S, TLS, portas e firewall básico.</li>
-              <li>Git: branching, PR, merge, rebase, tags e commits convencionais.</li>
-              <li>Runbooks iniciais de Linux e rede.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 2 — Docker e ambiente local</h3><span>Sem 9–16</span>
-            </div>
-            <p><strong>Foco:</strong> containers, Dockerfile, Compose, registry e segurança básica.</p>
-            <ul class="doc-list">
-              <li>Docker multi-stage para Java/Next.js.</li>
-              <li>Compose com Postgres, Redis e API.</li>
-              <li>Networks, volumes, health checks e logs.</li>
-              <li>Scan de imagens e hardening inicial.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 3 — CI/CD e qualidade automatizada</h3><span>Sem 17–24</span>
-            </div>
-            <p><strong>Foco:</strong> GitHub Actions/Jenkins, quality gates, security scans e deploy inicial.</p>
-            <ul class="doc-list">
-              <li>Pipeline build → test → lint → coverage → Sonar → Trivy.</li>
-              <li>Artifacts, cache, matrix, secrets e reusable workflows.</li>
-              <li>Staging automático e smoke tests.</li>
-              <li>DORA Metrics registradas desde o primeiro deploy.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 4 — Kubernetes operacional</h3><span>Sem 25–32</span>
-            </div>
-            <p><strong>Foco:</strong> Kubernetes, probes, ingress, config, secrets e troubleshooting.</p>
-            <ul class="doc-list">
-              <li>Pods, deployments, services, ingress, configmaps, secrets e resources.</li>
-              <li>Liveness, readiness e startup probes com Actuator.</li>
-              <li>Rolling update, blue/green, canary e rollback.</li>
-              <li>Laboratórios de CrashLoopBackOff, ImagePullBackOff, OOMKilled e ingress 502.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 5 — Terraform, observabilidade e cloud</h3><span>Sem 33–40</span>
-            </div>
-            <p><strong>Foco:</strong> IaC, Helm, autoscaling, Prometheus, Grafana e OpenTelemetry.</p>
-            <ul class="doc-list">
-              <li>Terraform: modules, state, backend, workspaces e environments.</li>
-              <li>Helm charts e values por ambiente.</li>
-              <li>Prometheus + Grafana + Alertmanager.</li>
-              <li>OpenTelemetry, Jaeger, logs e correlation IDs.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 6 — SRE, DevSecOps e chaos</h3><span>Sem 41–48</span>
-            </div>
-            <p><strong>Foco:</strong> SLO, error budget, incident response, IaC testing e segurança.</p>
-            <ul class="doc-list">
-              <li>Terratest, Checkov, tfsec e policy-as-code.</li>
-              <li>DevSecOps: CodeQL, Trivy, Gitleaks, SBOM e ZAP.</li>
-              <li>SLO-based alerting, golden signals e postmortem.</li>
-              <li>Chaos engineering: game days e blast radius controlado.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 7 — GitOps, produção e platform</h3><span>Sem 49–56</span>
-            </div>
-            <p><strong>Foco:</strong> ArgoCD, produção Kubernetes, logging, APM, security e platform engineering.</p>
-            <ul class="doc-list">
-              <li>GitOps com ArgoCD, sync policies, auto-sync e rollback.</li>
-              <li>K8s production: PDB, topology spread, affinity e NetworkPolicies.</li>
-              <li>EFK/Loki, Elastic APM/Datadog e infrastructure monitoring.</li>
-              <li>Golden paths, self-service, templates e DX.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 8 — Portfólio DevOps final</h3><span>Sem 57–64</span>
-            </div>
-            <p><strong>Foco:</strong> auditoria final, DR, runbooks, FinOps, performance e apresentação técnica.</p>
-            <ul class="doc-list">
-              <li>Infrastructure review completo.</li>
-              <li>DR drill com backup, restore, RTO/RPO e relatório.</li>
-              <li>Load testing final, capacity planning e FinOps report.</li>
-              <li>Case study: do commit ao deploy com incidente simulado e postmortem.</li>
-            </ul>
-          </article>
-        </div>
+        <div id="phaseRoadmap" data-track-roadmap="devops"></div>
       </section>
 
       <section id="checklist" class="doc-section searchable-section" data-search-section>
@@ -3468,11 +3473,13 @@ terraform destroy -target=module.dev_example</code></pre>
 
     </div><!-- /content -->
   </div><!-- /main -->
+  </main>
+
   <footer class="page-footer">
     <div class="footer-row">
       <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
       <div class="footer-pills">
-        <span class="footer-pill pink">8 Fases</span>
+        <span class="footer-pill pink">12 fases</span>
         <span class="footer-pill blue">CI/CD</span>
         <span class="footer-pill purple">Kubernetes</span>
         <span class="footer-pill green">SRE</span>
@@ -3480,86 +3487,12 @@ terraform destroy -target=module.dev_example</code></pre>
       </div>
     </div>
     <p><strong style="color:var(--muted2)">DevOps, Cloud e Operação</strong> · Plano Integrado de Estudos · Padrão
-      visual DevCore/Blog</p>
+      visual padronizado das trilhas</p>
   </footer>
   <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-
-    (function () {
-      const backToTop = document.getElementById('backToTop');
-      const searchInput = document.getElementById('searchInput');
-      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-
-      function normalize(value) {
-        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      }
-
-      function updateScrollButtons() {
-        if (!bar || !btnL || !btnR) return;
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-
-      if (btnL && btnR && bar) {
-        btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-        btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-        bar.addEventListener('scroll', updateScrollButtons, { passive: true });
-        updateScrollButtons();
-        setTimeout(updateScrollButtons, 400);
-      }
-
-      window.addEventListener('scroll', () => {
-        backToTop.classList.toggle('is-visible', window.scrollY > 500);
-      });
-
-      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', event => {
-          const target = document.querySelector(anchor.getAttribute('href'));
-          if (target) {
-            event.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-
-      searchInput.addEventListener('input', () => {
-        const query = normalize(searchInput.value.trim());
-        sections.forEach(section => {
-          section.classList.remove('is-hidden-by-search', 'search-hit');
-          if (!query) return;
-          const match = normalize(section.innerText).includes(query);
-          section.classList.toggle('is-hidden-by-search', !match);
-          section.classList.toggle('search-hit', match);
-        });
-      });
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            sidebarLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            const active = bar ? bar.querySelector('.nav-link.active') : null;
-            if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
-          }
-        });
-      }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
-      sections.forEach(section => observer.observe(section));
-    })();
-
-  </script>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

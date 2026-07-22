@@ -7,19 +7,14 @@
   <title>Trilha Financeira Completa — Plano Integrado de Estudos</title>
   <meta name="description"
     content="Página de referência da Trilha Financeira Completa: orçamento, dívidas, reserva, renda, investimentos, negócios digitais, IA aplicada e proteção patrimonial.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
-  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
       --accent: #fb923c;
       --accent2: #f59e0b;
       --accent3: #22d3b0;
@@ -190,7 +185,7 @@
       color: var(--accent4)
     }
 
-    /* ─── NAV — corrigida para o padrão DevCore/trilha blog ─── */
+    /* ─── NAV — padrão comum das páginas de trilha ─── */
     .sitenav {
       position: sticky;
       top: 0;
@@ -1932,9 +1927,120 @@
     }
   </style>
 
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/financeiro">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/financeiro">
+  <meta property="og:title" content="Trilha Financeira Completa — Plano Integrado de Estudos">
+  <meta property="og:description" content="Página de referência da Trilha Financeira Completa: orçamento, dívidas, reserva, renda, investimentos, negócios digitais, IA aplicada e proteção patrimonial.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Trilha Financeira Completa — Plano Integrado de Estudos">
+  <meta name="twitter:description" content="Página de referência da Trilha Financeira Completa: orçamento, dívidas, reserva, renda, investimentos, negócios digitais, IA aplicada e proteção patrimonial.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
-<body class="track-page" data-track="financeiro">
+<body class="track-page" data-track="fin">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="hero">
     <div class="container">
       <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
@@ -1946,7 +2052,7 @@
       <div class="hero-meta">
         <span class="tag">31 módulos</span>
         <span class="tag p">5 macroáreas</span>
-        <span class="tag g">8 fases / 64 semanas</span>
+        <span class="tag g">12 fases / 156 semanas</span>
         <span class="tag">1h/dia</span>
         <span class="tag p">70/20/10</span>
         <span class="tag g">Orçamento</span>
@@ -1999,6 +2105,8 @@
       <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
     </div>
   </nav>
+
+  <main id="conteudo" tabindex="-1">
 
   <div class="main">
     <aside class="sidebar">
@@ -2068,9 +2176,9 @@
         <div class="doc-section-heading">
           <div>
             <h2>Cronograma dentro do Plano Integrado</h2>
-            <p class="section-subtitle">A trilha financeira ocupa o bloco diário 22:00-23:00 e se conecta às 8 fases do
+            <p class="section-subtitle">A trilha financeira ocupa o bloco diário 22:00-23:00 e se conecta às 12 fases do
               index.</p>
-          </div><span class="section-badge">64 semanas</span>
+          </div><span class="section-badge">156 semanas</span>
         </div>
         <div class="callout accent-orange">
           <h3>Bloco diário oficial</h3>
@@ -3329,41 +3437,11 @@
       <section id="roadmap" class="section doc-section searchable-section" data-search-section>
         <div class="doc-section-heading">
           <div>
-            <h2>Roadmap consolidado de estudo</h2>
-            <p class="section-subtitle">Ordem final recomendada, da base ao avançado.</p>
-          </div><span class="section-badge">29 passos</span>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
+          </div><span class="section-badge">Roadmap</span>
         </div>
-        <ol class="roadmap-list">
-          <li><span>01</span>Mentalidade financeira</li>
-          <li><span>02</span>Orçamento e controle de gastos</li>
-          <li><span>03</span>Diagnóstico financeiro e patrimônio líquido</li>
-          <li><span>04</span>Fluxo de caixa pessoal</li>
-          <li><span>05</span>Dívidas, juros e crédito</li>
-          <li><span>06</span>Estratégias de quitação</li>
-          <li><span>07</span>Reserva de emergência</li>
-          <li><span>08</span>Matemática financeira</li>
-          <li><span>09</span>Sistema financeiro brasileiro</li>
-          <li><span>10</span>Renda fixa básica</li>
-          <li><span>11</span>Renda fixa avançada</li>
-          <li><span>12</span>Aumento de renda e carreira</li>
-          <li><span>13</span>Precificação de serviços</li>
-          <li><span>14</span>Fundos de investimento</li>
-          <li><span>15</span>Renda variável e ações</li>
-          <li><span>16</span>FIIs</li>
-          <li><span>17</span>ETFs, BDRs e exterior</li>
-          <li><span>18</span>Criptoativos</li>
-          <li><span>19</span>Gestão de risco</li>
-          <li><span>20</span>Alocação de ativos</li>
-          <li><span>21</span>Impostos e declaração</li>
-          <li><span>22</span>Planejamento financeiro de vida</li>
-          <li><span>23</span>Contabilidade básica</li>
-          <li><span>24</span>Economia aplicada</li>
-          <li><span>25</span>Empreendedorismo e negócios</li>
-          <li><span>26</span>Produtos digitais</li>
-          <li><span>27</span>IA aplicada a ganhos financeiros</li>
-          <li><span>28</span>Finanças avançadas</li>
-          <li><span>29</span>Proteção patrimonial e segurança</li>
-        </ol>
+        <div id="phaseRoadmap" data-track-roadmap="fin"></div>
       </section>
       <section id="checklist" class="section doc-section searchable-section" data-search-section>
         <div class="doc-section-heading">
@@ -3569,13 +3647,15 @@
     </div><!-- /content -->
   </div><!-- /main -->
 
+  </main>
+
   <footer class="page-footer">
     <div class="footer-row">
       <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
       <div class="footer-pills">
         <span class="footer-pill orange">31 Módulos</span>
         <span class="footer-pill yellow">5 Macroáreas</span>
-        <span class="footer-pill green">64 Semanas</span>
+        <span class="footer-pill green">156 semanas</span>
         <span class="footer-pill blue">1h/dia</span>
       </div>
     </div>
@@ -3583,85 +3663,8 @@
     </p>
   </footer>
   <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    (function () {
-      const backToTop = document.getElementById('backToTop');
-      const searchInput = document.getElementById('searchInput');
-      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-
-      function normalize(value) {
-        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      }
-
-      function updateScrollButtons() {
-        if (!bar || !btnL || !btnR) return;
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-
-      if (bar && btnL && btnR) {
-        btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-        btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-        bar.addEventListener('scroll', updateScrollButtons, { passive: true });
-        window.addEventListener('resize', updateScrollButtons);
-        setTimeout(updateScrollButtons, 300);
-      }
-
-      window.addEventListener('scroll', () => {
-        if (backToTop) backToTop.classList.toggle('is-visible', window.scrollY > 500);
-      });
-      if (backToTop) {
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', event => {
-          const href = anchor.getAttribute('href');
-          if (!href || href === '#') return;
-          const target = document.querySelector(href);
-          if (target) {
-            event.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const query = normalize(searchInput.value.trim());
-          sections.forEach(section => {
-            section.classList.remove('is-hidden-by-search', 'search-hit');
-            if (!query) return;
-            const match = normalize(section.innerText).includes(query);
-            section.classList.toggle('is-hidden-by-search', !match);
-            section.classList.toggle('search-hit', match);
-          });
-        });
-      }
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            sidebarLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            const active = bar ? bar.querySelector('.nav-link.active') : null;
-            if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
-          }
-        });
-      }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
-      sections.forEach(section => observer.observe(section));
-    })();
-  </script>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

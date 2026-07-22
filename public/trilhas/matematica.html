@@ -7,35 +7,26 @@
   <meta name="description"
     content="Trilha completa de matemática aplicada à programação, algoritmos, machine learning, deep learning, LLMs, RAG e avaliação de IA, alinhada ao cronograma do Plano Integrado de Estudos.">
   <title>Matemática para Programação e IA — Plano Integrado de Estudos</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
     /* ═══════════════════════════════════════════════════
-   DESIGN SYSTEM — DevCore Platform / Track Pages
+   DESIGN SYSTEM — Track Pages
 ═══════════════════════════════════════════════════ */
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
       --surface4: rgba(255, 255, 255, .025);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
       --shadow: 0 18px 48px rgba(0, 0, 0, .32);
       --shadow-soft: 0 10px 28px rgba(0, 0, 0, .24);
       --text: #e2e8f0;
-      --text1: #e2e8f0;
-      --text2: #94a3b8;
-      --text3: #64748b;
       --muted: #64748b;
       --muted2: #94a3b8;
       --accent: #34d399;
       --accent2: #4f9ef8;
       --accent3: #a78bfa;
       --accent4: #fb923c;
-      --math: #34d399;
-      --math-bg: #0d2e20;
       --code-bg: #060a12;
       --must: #fca5a5;
       --should: #fcd34d;
@@ -1889,20 +1880,131 @@
     }
   </style>
 
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/matematica">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/matematica">
+  <meta property="og:title" content="Matemática para Programação e IA — Plano Integrado de Estudos">
+  <meta property="og:description" content="Trilha completa de matemática aplicada à programação, algoritmos, machine learning, deep learning, LLMs, RAG e avaliação de IA, alinhada ao cronograma do Plano Integrado de Estudos.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Matemática para Programação e IA — Plano Integrado de Estudos">
+  <meta name="twitter:description" content="Trilha completa de matemática aplicada à programação, algoritmos, machine learning, deep learning, LLMs, RAG e avaliação de IA, alinhada ao cronograma do Plano Integrado de Estudos.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
-<body>
+<body data-track="math">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="hero">
     <div class="container">
       <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
       <div class="hero-label">Trilha técnica de estudos · Matemática aplicada</div>
       <h1>Matemática para Programação e IA</h1>
-      <p class="hero-sub">Trilha de 64 semanas para transformar matemática em ferramenta prática de desenvolvimento:
+      <p class="hero-sub">Trilha de 156 semanas para transformar matemática em ferramenta prática de desenvolvimento:
         lógica, Big O, grafos, álgebra linear, probabilidade, estatística, cálculo, otimização, deep learning, LLMs,
         embeddings, RAG, retrieval e avaliação de modelos.</p>
       <div class="hero-meta">
-        <span class="tag">1h/dia</span><span class="tag g">64 semanas</span><span class="tag p">8 fases</span><span
+        <span class="tag">1h/dia</span><span class="tag g">156 semanas</span><span class="tag p">12 fases</span><span
           class="tag o">Programação</span><span class="tag">Algoritmos</span><span class="tag g">Machine
           Learning</span><span class="tag p">Deep Learning</span><span class="tag o">LLMs</span><span
           class="tag">RAG</span><span class="tag g">Retrieval</span><span class="tag p">Métricas</span><span
@@ -1914,8 +2016,8 @@
   <nav class="sitenav">
     <div class="container">
       <div class="sitenav-top">
-        <a class="sitenav-brand" href="#">Math Track <span>64 semanas</span></a>
-        <span class="nav-ver">Plano Integrado · 1h/dia · 8 fases</span>
+        <a class="sitenav-brand" href="#">Math Track <span>156 semanas</span></a>
+        <span class="nav-ver">Plano Integrado · 1h/dia · 12 fases</span>
         <a class="nav-back" href="../index.html">← Dashboard principal</a>
         <div class="sitenav-top-right">
           <input class="search-box" type="search" placeholder="Buscar nesta trilha..." id="searchInput">
@@ -1952,6 +2054,8 @@
     </div>
   </nav>
 
+  <main id="conteudo" tabindex="-1">
+
   <div class="main">
     <aside class="sidebar">
       <div class="sidebar-group">
@@ -1963,7 +2067,7 @@
       <div class="sidebar-group">
         <div class="sidebar-label">Aplicação</div>
         <a href="#aplicacoes">4. Aplicações diretas em programação e IA</a>
-        <a href="#roadmap">5. Roadmap em 8 fases</a>
+        <a href="#roadmap">5. Roadmap em 12 fases</a>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-label">Execução</div>
@@ -1985,7 +2089,7 @@
         <div class="section-header">
           <div>
             <h2>Resumo executivo</h2>
-            <p class="section-subtitle">Base da trilha de Matemática do index: 13:30–14:30, 1h por dia, 8 fases e 64
+            <p class="section-subtitle">Base da trilha de Matemática do index: 13:30–14:30, 1h por dia, 12 fases e 64
               semanas.</p>
           </div>
           <span class="section-badge">Visão geral</span>
@@ -2178,191 +2282,13 @@
 
       <!-- ═══ 05 · ROADMAP ═══ -->
       <section class="section" id="roadmap">
-        <div class="section-header">
+        <div class="doc-section-heading">
           <div>
-            <h2>Roadmap em 8 fases</h2>
-            <p class="section-subtitle">Cronograma alinhado ao index do Plano Integrado: 1h/dia, 64 semanas.</p>
-          </div>
-          <span class="section-badge">64 semanas</span>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
+          </div><span class="section-badge">Roadmap</span>
         </div>
-        <div class="phase-grid">
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 1 — Base lógica, discreta e complexidade inicial</h3><span>Semanas 1–8</span>
-            </div>
-            <p><strong>Foco:</strong> Programação, lógica de código, Big O, recursão e corretude básica.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Lógica booleana aplicada a código: AND, OR, NOT, XOR, curto-circuito, expressões condicionais e
-                validação de regras</li>
-              <li>Lógica proposicional: conectivos, tabelas-verdade, equivalências, De Morgan e implementação em Python
-              </li>
-              <li>Teoria de conjuntos aplicada: união, interseção, diferença, cardinalidade, Venn, conjuntos em
-                Java/Python</li>
-              <li>Álgebra básica para programação: equações, funções lineares/quadráticas, gráficos e crescimento</li>
-              <li>Sistemas numéricos: binário, octal, hexadecimal, conversões, bits, bytes, máscaras e flags</li>
-              <li>Combinatória: princípio da contagem, permutações, combinações, busca exaustiva e explosão combinatória
-              </li>
-              <li>Notação Big O: tempo, espaço, comparação de complexidades, benchmark real e análise assintótica</li>
-              <li>Indução matemática e corretude: provas simples para algoritmos recursivos e invariantes de loop</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>Notebook/script comparando O(1), O(log n), O(n), O(n log n), O(n²) com gráficos e README.</p>
-            </div>
-          </article>
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 2 — Funções, grafos, relações e algoritmos</h3><span>Semanas 9–16</span>
-            </div>
-            <p><strong>Foco:</strong> Grafos, dependências, workflows, rotas, hashing, recorrências e entrevistas
-              técnicas.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Funções aplicadas: domínio, imagem, composição, inversa, monotonicidade e transformação de dados</li>
-              <li>Grafos I: representação por lista/matriz de adjacência, grau, conectividade, BFS, DFS e complexidade
-              </li>
-              <li>Grafos II: Dijkstra, topological sort, Union-Find, árvores, DAGs, heaps e aplicações</li>
-              <li>Relações: equivalência, ordem parcial, fecho transitivo e modelagem de dependências</li>
-              <li>Aritmética modular: congruência, hashing, checksums, colisões e distribuição de chaves</li>
-              <li>Teoria dos números: MDC, MMC, algoritmo de Euclides, primalidade básica e hashing</li>
-              <li>Complexidade avançada: análise amortizada, recorrências, Teorema Mestre e divide-and-conquer</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>Implementação de BFS, DFS, Dijkstra e topological sort com testes e análise de Big O.</p>
-            </div>
-          </article>
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 3 — Álgebra linear, geometria vetorial e probabilidade</h3><span>Semanas 17–24</span>
-            </div>
-            <p><strong>Foco:</strong> Embeddings, similaridade, vetores, matrizes, incerteza e fundamentos de ML.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Álgebra linear I: vetores, escalares, operações, norma L1/L2, produto interno e ortogonalidade</li>
-              <li>Geometria vetorial aplicada: distância euclidiana, Manhattan, Mahalanobis, projeção e mudança de base
-              </li>
-              <li>Matrizes: tipos, transposta, determinante, inversa, sistemas lineares e multiplicação matricial</li>
-              <li>Embeddings: vetores em alta dimensão, normalização, curse of dimensionality, cosine similarity e busca
-              </li>
-              <li>Probabilidade I: axiomas, eventos, probabilidade condicional, independência e Bayes</li>
-              <li>Variáveis aleatórias: esperança, variância, desvio padrão, covariância e distribuições</li>
-              <li>Aplicação em IA: matrizes em transformers, embeddings, similaridade semântica e clustering</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>Notebook NumPy implementando norma, dot product, cosine similarity, projeção e busca por similaridade
-                entre textos.</p>
-            </div>
-          </article>
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 4 — PCA, SVD, cálculo, gradiente e otimização</h3><span>Semanas 25–32</span>
-            </div>
-            <p><strong>Foco:</strong> Redução de dimensionalidade, gradient descent, MLE/MAP e otimização aplicada.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Álgebra linear II: autovalores, autovetores, decomposição espectral e diagonalização</li>
-              <li>PCA: centralização, matriz de covariância, componentes principais e variância explicada</li>
-              <li>SVD: decomposição, compressão, recomendação, latent factors e comparação com PCA</li>
-              <li>Cálculo I: limites, derivadas, derivadas parciais e interpretação geométrica do gradiente</li>
-              <li>Gradiente: vetor gradiente, gradiente descendente, função de custo e convergência</li>
-              <li>Probabilidade aplicada: likelihood, log-likelihood, MLE, MAP, prior, posterior e calibration</li>
-              <li>Otimização: pontos críticos, convexidade, Lagrange, saddle points e gradient checking</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>PCA/SVD manual com NumPy + comparação com scikit-learn + gradient descent manual.</p>
-            </div>
-          </article>
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 5 — Estatística, experimentação e métricas de ML</h3><span>Semanas 33–40</span>
-            </div>
-            <p><strong>Foco:</strong> A/B testing, inferência, regressão, métricas, regularização e validação de
-              modelos.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Estatística I: estimadores, viés, variância, intervalo de confiança e erro padrão</li>
-              <li>Estatística II: teste de hipótese, p-value, erro tipo I/II, poder estatístico e significância</li>
-              <li>Produto e experimentação: A/B testing, uplift, análise de coorte, correlação vs causalidade</li>
-              <li>Regressão e correlação: regressão linear, regressão logística, ANOVA e interpretação</li>
-              <li>Entropia e informação: entropia, entropia cruzada, divergência KL, perplexidade e LLMs</li>
-              <li>Regularização: L1, L2, dropout, early stopping, overfitting e bias-variance tradeoff</li>
-              <li>Métricas ML: accuracy, precision, recall, F1, ROC-AUC, PR-AUC, MAE, RMSE e threshold tuning</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>Experimento estatístico com regressão/classificação, teste de hipótese, métricas e relatório
-                interpretativo.</p>
-            </div>
-          </article>
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 6 — Deep Learning, attention, losses e métricas RAG/LLM</h3><span>Semanas 41–48</span>
-            </div>
-            <p><strong>Foco:</strong> Transformers, self-attention, backpropagation, losses, normalização e avaliação de
-              IA.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Álgebra linear para deep learning: batch matrix multiplication, broadcasting, tensores e shapes</li>
-              <li>Attention: Q·K^T/√d, softmax, multiplicação por V, masked attention e cross-attention</li>
-              <li>Backpropagation: regra da cadeia, computational graph, autograd e fluxo de gradiente</li>
-              <li>Loss functions: MSE, cross-entropy, focal loss, contrastive loss e objetivos de treinamento</li>
-              <li>Normalização: batch norm, layer norm, RMSNorm, estabilização e transformers</li>
-              <li>Métricas RAG/LLM: faithfulness, answer relevance, context precision, context recall e hallucination
-                rate</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>Self-attention simplificado em PyTorch + notebook explicando shapes, softmax e gradientes.</p>
-            </div>
-          </article>
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 7 — Informação, ranking, retrieval, séries e métodos numéricos</h3><span>Semanas 49–56</span>
-            </div>
-            <p><strong>Foco:</strong> BM25, TF-IDF, dense/hybrid retrieval, MRR, MAP, NDCG, PageRank e ranking.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Teoria da informação: entropia de Shannon, informação mútua, compressão e incerteza</li>
-              <li>Grafos e redes: PageRank, community detection, centralidade, ranking e busca/recomendação</li>
-              <li>Retrieval e ranking: TF-IDF, BM25, dense retrieval, sparse retrieval, hybrid search e reranking</li>
-              <li>Métricas de busca/RAG: precision@k, recall@k, hit rate, MRR, MAP, NDCG e threshold tuning</li>
-              <li>Métodos numéricos: floating point, overflow/underflow, estabilidade numérica e arredondamento</li>
-              <li>Séries temporais: autocorrelação, tendência, sazonalidade e validação temporal</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>Comparação BM25 vs embeddings em dataset próprio, avaliando MRR/NDCG e documentando decisão técnica.
-              </p>
-            </div>
-          </article>
-          <article class="phase-doc-card searchable-section" data-search-section="">
-            <div class="phase-doc-head">
-              <h3>Fase 8 — Consolidação, entrevistas e portfólio Math for AI Engineering</h3><span>Semanas 57–64</span>
-            </div>
-            <p><strong>Foco:</strong> Revisão integral, aplicação em IA, entrevistas, artigos técnicos e caderno
-              público.</p>
-            <h4>Conteúdos obrigatórios</h4>
-            <ul class="doc-list">
-              <li>Revisão integral: lógica, Big O, grafos, álgebra linear, cálculo, probabilidade, estatística e
-                métricas</li>
-              <li>Problemas de entrevista: puzzles, estimativas Fermi, análise de complexidade e programação dinâmica
-              </li>
-              <li>Matemática de LLMs: attention, softmax, temperature, cross-entropy, perplexidade e embeddings</li>
-              <li>Matemática de avaliação: intervalos de confiança, significância, A/B testing e métricas de RAG</li>
-              <li>Portfólio: caderno público 'Matemática para AI Engineering' com notebooks, gráficos e código</li>
-              <li>Artigos técnicos: cosine similarity, attention matematicamente, avaliação de RAG e gradient descent do
-                zero</li>
-            </ul>
-            <div class="callout success">
-              <h4>Entregável da fase</h4>
-              <p>Página/blog post consolidando cada conceito matemático com aplicação real em programação ou IA.</p>
-            </div>
-          </article>
-        </div>
+        <div id="phaseRoadmap" data-track-roadmap="math"></div>
       </section>
 
       <!-- ═══ 06 · CHECKLIST ═══ -->
@@ -2746,89 +2672,25 @@ print(mrr)</code></pre>
     </div><!-- /content -->
   </div><!-- /main -->
 
+  </main>
+
   <footer class="page-footer">
     <div class="footer-row">
       <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
       <div class="footer-pills">
         <span class="footer-pill green">1h/dia</span>
-        <span class="footer-pill blue">64 semanas</span>
-        <span class="footer-pill purple">8 fases</span>
+        <span class="footer-pill blue">156 semanas</span>
+        <span class="footer-pill purple">12 fases</span>
         <span class="footer-pill orange">8+ projetos</span>
       </div>
     </div>
     <p><strong style="color:var(--muted2)">Matemática para Programação e IA</strong> · Plano Integrado de Estudos ·
-      Padrão visual DevCore/Blog</p>
+      Padrão visual comum das trilhas</p>
   </footer>
 
-  <button id="btt" aria-label="Voltar ao topo" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+  <button id="btt" aria-label="Voltar ao topo">↑</button>
 
-  <script>
-    (function () {
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-      if (!bar || !btnL || !btnR) return;
-      function updateArrows() {
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-      btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-      btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-      bar.addEventListener('scroll', updateArrows, { passive: true });
-      updateArrows();
-      setTimeout(updateArrows, 400);
-      window._navScrollActiveIntoView = function () {
-        const active = bar.querySelector('.nav-link.active');
-        if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
-      };
-    })();
-
-    const btt = document.getElementById('btt');
-    window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 400));
-
-    function normalizeText(value) {
-      return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    }
-
-    document.getElementById('searchInput').addEventListener('input', function () {
-      const q = normalizeText(this.value.trim());
-      document.querySelectorAll('.section').forEach(sec => {
-        sec.classList.remove('search-hit', 'is-hidden-by-search');
-        if (!q) return;
-        const match = normalizeText(sec.innerText).includes(q);
-        sec.classList.toggle('is-hidden-by-search', !match);
-        sec.classList.toggle('search-hit', match);
-      });
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', event => {
-        const target = document.querySelector(anchor.getAttribute('href'));
-        if (target) {
-          event.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    const sections = document.querySelectorAll('.section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sidebarLinks = document.querySelectorAll('.sidebar a');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-          sidebarLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-          if (window._navScrollActiveIntoView) window._navScrollActiveIntoView();
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
-    sections.forEach(s => observer.observe(s));
-  </script>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

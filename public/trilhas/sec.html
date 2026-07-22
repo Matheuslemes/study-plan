@@ -8,21 +8,18 @@
   <meta
     content="Trilha técnica aprofundada de segurança para desenvolvedores full stack: frontend, backend, APIs, autenticação, autorização, banco de dados, cloud, DevSecOps, containers, threat modeling e OWASP."
     name="description" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
-    rel="stylesheet" />
-  <link href="../assets/css/styles.css" rel="stylesheet" />
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
       --bg: #06080d;
       --surface: #0b1117;
       --surface2: #111923;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
-
       --accent: #34d399;
       --accent2: #38bdf8;
       --accent3: #f43f5e;
@@ -33,17 +30,14 @@
       --security-red: #f43f5e;
       --security-amber: #f59e0b;
       --security-purple: #a78bfa;
-
       --text: #e2e8f0;
       --muted: #64748b;
       --muted2: #94a3b8;
       --code-bg: #050911;
-
       --must: #fca5a5;
       --should: #fcd34d;
       --nice: #86efac;
       --future: #93c5fd;
-
       --doc-bg: var(--bg);
       --doc-surface: var(--surface);
       --doc-surface-2: var(--surface2);
@@ -1813,9 +1807,120 @@
       }
     }
   </style>
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/sec">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/sec">
+  <meta property="og:title" content="Segurança Full Stack — Plano Integrado de Estudos">
+  <meta property="og:description" content="Trilha técnica aprofundada de segurança para desenvolvedores full stack: frontend, backend, APIs, autenticação, autorização, banco de dados, cloud, DevSecOps, containers, threat modeling e OWASP.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Segurança Full Stack — Plano Integrado de Estudos">
+  <meta name="twitter:description" content="Trilha técnica aprofundada de segurança para desenvolvedores full stack: frontend, backend, APIs, autenticação, autorização, banco de dados, cloud, DevSecOps, containers, threat modeling e OWASP.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
-<body class="track-page" data-track="seguranca">
+<body class="track-page" data-track="sec">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="track-hero-page">
     <div class="container">
       <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
@@ -1898,7 +2003,7 @@
       </div>
     </aside>
 
-    <main class="content" id="trackMain">
+    <main class="content" id="conteudo" tabindex="-1">
       <section class="doc-section searchable-section" data-search-section id="resumo">
         <div class="doc-section-heading">
           <div>
@@ -3221,107 +3326,11 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]</code></pre>
       <section class="doc-section searchable-section" data-search-section id="roadmap">
         <div class="doc-section-heading">
           <div>
-            <h2>Plano de estudo progressivo</h2>
-            <p class="section-subtitle">Sequência prática para sair do básico e chegar ao avançado.</p>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
           </div><span class="section-badge">Roadmap</span>
         </div>
-        <div class="phase-doc-grid">
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 1 — Fundamentos</h3><span>Sem 1–4</span>
-            </div>
-            <ul class="doc-list">
-              <li>CIA, authn/authz, HTTPS/TLS.</li>
-              <li>Hash de senha, validação, sanitização e erros seguros.</li>
-              <li>OWASP Top 10 e LGPD básica.</li>
-              <li>Projeto: sistema de login seguro.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 2 — Web/API</h3><span>Sem 5–10</span>
-            </div>
-            <ul class="doc-list">
-              <li>JWT, sessões, cookies, OAuth2/OIDC.</li>
-              <li>CORS, CSRF, XSS, SQL/NoSQL Injection.</li>
-              <li>RBAC, ABAC, scopes e IDOR.</li>
-              <li>Projeto: API REST com JWT e roles.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 3 — Segurança aplicada</h3><span>Sem 11–16</span>
-            </div>
-            <ul class="doc-list">
-              <li>Upload seguro, rate limit, idempotência e logs.</li>
-              <li>Secrets, dependências, SCA e auditoria.</li>
-              <li>Testes de autorização e abuso.</li>
-              <li>Projeto: dashboard com permissões e logs de auditoria.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 4 — DevSecOps</h3><span>Sem 17–22</span>
-            </div>
-            <ul class="doc-list">
-              <li>SAST, DAST, SCA, secrets scanning.</li>
-              <li>Container scanning, IaC scanning e SBOM.</li>
-              <li>Branch protection e quality/security gates.</li>
-              <li>Projeto: pipeline CI/CD seguro.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 5 — Cloud e arquitetura</h3><span>Sem 23–30</span>
-            </div>
-            <ul class="doc-list">
-              <li>IAM mínimo, KMS, Secret Manager e storage privado.</li>
-              <li>Threat modeling, Zero Trust e defesa em profundidade.</li>
-              <li>Gateway, mTLS e comunicação interna.</li>
-              <li>Projeto: microsserviços protegidos por gateway.</li>
-            </ul>
-          </article>
-          <article class="phase-doc-card">
-            <div class="phase-doc-head">
-              <h3>Fase 6 — Operação</h3><span>Contínuo</span>
-            </div>
-            <ul class="doc-list">
-              <li>Logs, SIEM, anomalias e resposta a incidentes.</li>
-              <li>Runbooks, postmortem e rotação de credenciais.</li>
-              <li>Hardening contínuo e melhoria de controles.</li>
-              <li>Projeto: observabilidade de segurança e simulação de incidente.</li>
-            </ul>
-          </article>
-        </div>
-        <h3>Critérios de evolução</h3>
-        <div class="table-responsive">
-          <table class="table table-dark table-hover align-middle doc-table">
-            <thead>
-              <tr>
-                <th>Transição</th>
-                <th>Prova prática</th>
-                <th>Resultado</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Básico → Médio</td>
-                <td>Projeto com login seguro, endpoints protegidos, validação backend e erros seguros.</td>
-                <td>Você evita falhas elementares e entende controles básicos.</td>
-              </tr>
-              <tr>
-                <td>Médio → Avançado</td>
-                <td>Projeto com auth robusta, autorização por recurso, logs, rate limit, secrets e pipeline.</td>
-                <td>Você aplica segurança em produto real.</td>
-              </tr>
-              <tr>
-                <td>Avançado → Profissional</td>
-                <td>Threat model, arquitetura segura, IAM mínimo, DevSecOps, observabilidade e runbook.</td>
-                <td>Você projeta, opera e defende sistemas seguros.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+        <div id="phaseRoadmap" data-track-roadmap="sec"></div>
       </section>
 
       <section class="doc-section searchable-section" data-search-section id="projetos">
@@ -3509,8 +3518,9 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]</code></pre>
   </footer>
   <button aria-label="Voltar ao topo" class="back-to-top" id="backToTop">↑</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
   <script>
+    // Configuração do Mermaid — específica desta página, não é navegação.
     mermaid.initialize({
       startOnLoad: true,
       theme: 'dark',
@@ -3533,84 +3543,8 @@ ENTRYPOINT ["java", "-jar", "/app/app.jar"]</code></pre>
       },
       flowchart: { htmlLabels: true, curve: 'basis', padding: 15 }
     });
-
-    (function () {
-      const backToTop = document.getElementById('backToTop');
-      const searchInput = document.getElementById('searchInput');
-      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-
-      function normalize(value) {
-        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      }
-
-      function updateScrollButtons() {
-        if (!bar || !btnL || !btnR) return;
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-
-      if (btnL && btnR && bar) {
-        btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-        btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-        bar.addEventListener('scroll', updateScrollButtons, { passive: true });
-        updateScrollButtons();
-        setTimeout(updateScrollButtons, 400);
-      }
-
-      if (backToTop) {
-        window.addEventListener('scroll', () => {
-          backToTop.classList.toggle('is-visible', window.scrollY > 500);
-        }, { passive: true });
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', event => {
-          const target = document.querySelector(anchor.getAttribute('href'));
-          if (target) {
-            event.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            history.replaceState(null, '', anchor.getAttribute('href'));
-          }
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const query = normalize(searchInput.value.trim());
-          sections.forEach(section => {
-            section.classList.remove('is-hidden-by-search', 'search-hit');
-            if (!query) return;
-            const match = normalize(section.innerText).includes(query);
-            section.classList.toggle('is-hidden-by-search', !match);
-            section.classList.toggle('search-hit', match);
-          });
-        });
-      }
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            sidebarLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            const active = bar ? bar.querySelector('.nav-link.active') : null;
-            if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
-          }
-        });
-      }, { threshold: .15, rootMargin: '-100px 0px -55% 0px' });
-
-      sections.forEach(section => observer.observe(section));
-    })();
   </script>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

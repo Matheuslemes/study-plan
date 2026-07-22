@@ -1,0 +1,215 @@
+/* ═══════════════════════════════════════════════
+   BASE — reset, tipografia e fundo da página
+
+   box-sizing, scroll suave, body com as fontes do plano e o
+   gradiente de fundo, utilitário .mono.
+
+   Fonte única — importado por index.html e pelas páginas
+   de trilha via <link>. Não duplicar inline.
+═══════════════════════════════════════════════ */
+
+/* ── reset ───────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box
+}
+
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text1);
+  line-height: 1.7;
+  margin: 0;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 10% -4%, rgba(34, 211, 176, .09) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 35% at 92% 6%, rgba(79, 158, 248, .07) 0%, transparent 42%);
+}
+
+.mono {
+  font-family: 'IBM Plex Mono', monospace
+}
+
+/* ═══════════════════════════════════════════════
+   Progresso nas páginas de trilha (Etapa 8)
+   base.css é carregado por index.html E pelas trilhas, então
+   estes estilos valem no roadmap de cada página de trilha.
+═══════════════════════════════════════════════ */
+
+.roadmap-progress {
+  background: var(--surface2, #141a24);
+  border: 1px solid var(--border, rgba(255, 255, 255, .09));
+  border-radius: 12px;
+  padding: .9rem 1.1rem;
+  margin-bottom: 1.2rem;
+}
+
+.roadmap-progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: .5rem;
+  font-size: .86rem;
+  color: var(--text1, #e2e8f0);
+}
+
+.roadmap-progress-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 700;
+  font-size: .82rem;
+}
+
+.roadmap-progress-hint {
+  font-size: .76rem;
+  color: var(--text3, #64748b);
+  margin: .5rem 0 0;
+}
+
+.prog-track {
+  height: 8px;
+  background: var(--surface3, rgba(255, 255, 255, .04));
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.prog-fill {
+  height: 100%;
+  border-radius: 20px;
+  transition: width .35s ease;
+}
+
+.prog-frac { color: var(--text3, #64748b); font-weight: 400; font-size: .72rem; }
+
+/* checkbox de tópico no roadmap */
+.roadmap-check { list-style: none; padding-left: 0; }
+
+.roadmap-check li { margin-bottom: .4rem; }
+
+.topic-check {
+  display: flex;
+  align-items: flex-start;
+  gap: .5rem;
+  cursor: pointer;
+}
+
+.topic-check input {
+  margin-top: .25rem;
+  accent-color: var(--accent, #22d3b0);
+  flex-shrink: 0;
+}
+
+.topic-check span {
+  font-size: .8rem;
+  line-height: 1.55;
+  color: var(--text2, #94a3b8);
+  transition: color .14s, opacity .14s;
+}
+
+.roadmap-check li.is-done .topic-check span {
+  text-decoration: line-through;
+  opacity: .5;
+}
+
+/* checkboxes persistidos de financeiro.html */
+.check-item.is-checked span { opacity: .6; text-decoration: line-through; }
+
+/* ═══════════════════════════════════════════════
+   Acessibilidade (Etapa 9)
+═══════════════════════════════════════════════ */
+
+/* STUDY-062: skip-link — primeiro elemento focável, fora da tela até receber foco */
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  z-index: 2000;
+  background: var(--accent, #22d3b0);
+  color: #05070c;
+  font-weight: 700;
+  padding: .6rem 1rem;
+  border-radius: 0 0 8px 0;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* STUDY-063: foco visível consistente em tudo que é interativo */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+.nav-link:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent, #22d3b0);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* remove o outline só de quem usa mouse; mantém para teclado */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* STUDY-065: respeita quem pediu menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Trilhas relacionadas (STUDY-057) — nas páginas de trilha ── */
+.related-tracks {
+  margin-top: 1.6rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border, rgba(255, 255, 255, .09));
+}
+
+.related-label {
+  display: block;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: .68rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3, #8592a6);
+  margin-bottom: .6rem;
+}
+
+.related-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.related-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  font-size: .82rem;
+  font-weight: 600;
+  color: var(--rel-color, var(--accent, #22d3b0));
+  border: 1px solid var(--rel-color, var(--accent, #22d3b0));
+  background: color-mix(in srgb, var(--rel-color, #22d3b0) 10%, transparent);
+  border-radius: 8px;
+  padding: .35rem .7rem;
+  text-decoration: none;
+  transition: background .14s;
+}
+
+.related-chip:hover {
+  background: color-mix(in srgb, var(--rel-color, #22d3b0) 22%, transparent);
+}
+
+.related-arrow { opacity: .7; }

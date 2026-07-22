@@ -9,17 +9,13 @@
   <meta
     content="Plano de treino híbrido com musculação 5x/semana organizada em peito, pernas completas, costas, ombros e braços completos, com abdômen e panturrilha distribuídos, cardio integrado, progressão controlada e foco em saúde cardiovascular."
     name="description" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
-    rel="stylesheet" />
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
       --accent: #f43f5e;
       --accent2: #22d3ee;
       --accent3: #84cc16;
@@ -1612,9 +1608,23 @@
       }
     }
   </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/treino">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/treino">
+  <meta property="og:title" content="Plano de Treino Híbrido 5x — Split Peito, Pernas, Costas, Ombros e Braços">
+  <meta property="og:description" content="Plano de treino híbrido com musculação 5x/semana organizada em peito, pernas completas, costas, ombros e braços completos, com abdômen e panturrilha distribuídos, cardio integrado, progressão controlada e foco em saúde cardiovascular.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Plano de Treino Híbrido 5x — Split Peito, Pernas, Costas, Ombros e Braços">
+  <meta name="twitter:description" content="Plano de treino híbrido com musculação 5x/semana organizada em peito, pernas completas, costas, ombros e braços completos, com abdômen e panturrilha distribuídos, cardio integrado, progressão controlada e foco em saúde cardiovascular.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
 <body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="hero">
     <div class="container">
       <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
@@ -1645,41 +1655,32 @@
       <div class="sitenav-bar-inner" id="navSectionsBar">
         <div class="nav-group"><span class="nav-group-label">Base</span><a class="nav-link" href="#resumo">01 ·
             Resumo</a><a class="nav-link" href="#contexto">02 · Contexto</a><a class="nav-link" href="#principios">03 ·
-            Princípios</a><a class="nav-link" href="#analise">04 · Remodelagem</a></div>
         <div class="nav-group"><span class="nav-group-label">Plano</span><a class="nav-link" href="#fases">05 ·
-            Fases</a><a class="nav-link" href="#semana">06 · Semana 5x</a><a class="nav-link" href="#musculacao">07 ·
-            Musculação</a><a class="nav-link" href="#cardio">08 · Cardio</a></div>
-        <div class="nav-group"><span class="nav-group-label">Execução</span><a class="nav-link" href="#aquecimento">09 ·
-            Aquecimento</a><a class="nav-link" href="#progressao">10 · Progressão</a><a class="nav-link"
             href="#adaptacao">11 · Adaptação</a><a class="nav-link" href="#sobrecarga">12 · Sobrecarga</a></div>
         <div class="nav-group"><span class="nav-group-label">Fechamento</span><a class="nav-link"
             href="#recomendacoes">13 · Recomendações</a><a class="nav-link" href="#final">14 · Resumo</a><a
-            class="nav-link" href="#referencias">15 · Referências</a><a class="nav-link" href="#transcricao">16 ·
             Apêndice</a></div>
       </div>
       <button aria-label="Rolar para direita" class="nav-scroll-btn right" id="navScrollRight">›</button>
     </div>
   </nav>
+
+  <main id="conteudo" tabindex="-1">
   <div class="main">
     <aside class="sidebar">
       <div class="sidebar-group">
         <div class="sidebar-label">Base</div><a href="#resumo">1. Resumo executivo</a><a href="#contexto">2. Contexto e
-          objetivos</a><a href="#principios">3. Princípios híbridos</a><a href="#analise">4. Critérios de
           remodelagem</a>
       </div>
       <div class="sidebar-group">
-        <div class="sidebar-label">Plano</div><a href="#fases">5. Fases progressivas</a><a href="#semana">6. Divisão
-          semanal 5x</a><a href="#musculacao">7. Treinos de musculação</a><a href="#cardio">8. Cardio e zonas</a>
       </div>
       <div class="sidebar-group">
-        <div class="sidebar-label">Execução</div><a href="#aquecimento">9. Aquecimento</a><a href="#progressao">10.
           Progressão semanal</a><a href="#adaptacao">11. Semanas difíceis</a><a href="#sobrecarga">12. Sinais de
           sobrecarga</a>
       </div>
       <div class="sidebar-group">
         <div class="sidebar-label">Fechamento</div><a href="#recomendacoes">13. Recomendações gerais</a><a
           href="#final">14. Resumo final</a><a href="#referencias">15. Referências técnicas</a><a
-          href="#transcricao">16. Apêndice técnico</a>
       </div>
     </aside>
     <div class="content" id="mainContent">
@@ -1820,69 +1821,6 @@
         <p>Fadiga excessiva reduz qualidade técnica, aumenta risco de lesão e piora produtividade. Em semanas de prova,
           entrega ou sono ruim, o plano deve ser reduzido para a versão mínima viável sem culpa: menos cardio, menos
           séries acessórias e foco nos exercícios principais.</p>
-      </section>
-      <section class="section" data-search-section="" id="analise">
-        <div class="section-header">
-          <div>
-            <h2>Critérios de remodelagem do treino</h2>
-            <p class="section-subtitle">Como a rotina foi reorganizada para o split: peito, pernas, costas, ombros e
-              braços.</p>
-          </div><span class="section-badge">Diagnóstico</span>
-        </div>
-        <p>A rotina foi remodelada para uma divisão mais direta por grupos musculares. O objetivo é facilitar a execução
-          semanal, reduzir confusão na consulta do plano e manter cada sessão curta, objetiva e compatível com trabalho,
-          estudos e recuperação.</p>
-        <div class="grid2">
-          <div class="callout green">
-            <h3>O que deve ser preservado</h3>
-            <ul class="doc-list">
-              <li>Exercícios compostos como base do programa</li>
-              <li>Progressão mensurável por repetições, carga e qualidade técnica</li>
-              <li>Cardio frequente para saúde cardiovascular e gasto energético</li>
-              <li>Controle de intensidade por RPE e percepção de esforço</li>
-              <li>Registro de treino para acompanhar evolução real</li>
-              <li>Recuperação como parte obrigatória da estratégia</li>
-            </ul>
-          </div>
-          <div class="callout rose">
-            <h3>O que deve ser evitado</h3>
-            <ul class="doc-list">
-              <li>Volume excessivo em dias isolados, principalmente braços e ombros</li>
-              <li>Falha muscular em todos os exercícios</li>
-              <li>Cardio intenso após treino completo de pernas</li>
-              <li>Treinos acima de 90 minutos como padrão</li>
-              <li>Aumentar carga, volume e cardio na mesma semana</li>
-              <li>Ignorar sinais de queda de sono, foco e desempenho</li>
-            </ul>
-          </div>
-          <div class="callout orange">
-            <h3>Ajustes aplicados</h3>
-            <ul class="doc-list">
-              <li>Segunda: peito + abdômen + cardio curto</li>
-              <li>Terça: pernas completas + panturrilha + cardio leve</li>
-              <li>Quarta: costas + abdômen + cardio moderado</li>
-              <li>Quinta: ombros + panturrilha + intervalado controlado</li>
-              <li>Sexta: braço completo + abdômen + cardio contínuo</li>
-              <li>Sábado: cardio Zona 2 opcional ou caminhada longa</li>
-            </ul>
-          </div>
-          <div class="callout">
-            <h3>Critério de sucesso</h3>
-            <ul class="doc-list">
-              <li>Conseguir repetir a semana por 4 a 6 semanas sem esgotamento</li>
-              <li>Manter ou melhorar cargas nos exercícios principais</li>
-              <li>Aumentar tolerância ao cardio sem prejudicar a musculação</li>
-              <li>Preservar técnica e amplitude nos movimentos</li>
-              <li>Sentir melhora de disposição sem piora do sono</li>
-            </ul>
-          </div>
-        </div>
-        <div class="callout green">
-          <h3>Distribuição de abdômen e panturrilha</h3>
-          <p>Abdômen foi colocado em segunda, quarta e sexta para criar frequência de 3 estímulos semanais sem
-            sobrecarregar a lombar. Panturrilha foi colocada em terça e quinta: um estímulo junto ao treino completo de
-            pernas e outro separado no dia de ombros, evitando concentrar todo o volume em uma única sessão.</p>
-        </div>
       </section>
       <section class="section" data-search-section="" id="fases">
         <div class="section-header">
@@ -2058,596 +1996,6 @@
               relevante de sono, foco, cargas ou disposição. Não avance por ansiedade: estabilize primeiro, depois
               aumente.</p>
           </div>
-        </div>
-      </section>
-      <section class="section" data-search-section="" id="semana">
-        <div class="section-header">
-          <div>
-            <h2>Divisão semanal completa - Fase 3</h2>
-            <p class="section-subtitle">Rotina ideal com 5 dias de musculação por grupos, cardio integrado e
-              distribuição de abdômen/panturrilha.</p>
-          </div><span class="section-badge">Semana 7+</span>
-        </div>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Dia</th>
-                <th>Tipo</th>
-                <th>Grupos / foco</th>
-                <th>Abdômen/Panturrilha</th>
-                <th>Cardio</th>
-                <th>Duração</th>
-                <th>Intensidade</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Segunda</td>
-                <td>Musculação + Cardio curto</td>
-                <td>Peito</td>
-                <td>Abdômen técnico</td>
-                <td>10-15 min Zona 2</td>
-                <td>55-70 min</td>
-                <td>RPE 7-8</td>
-              </tr>
-              <tr>
-                <td>Terça</td>
-                <td>Musculação + Cardio leve</td>
-                <td>Pernas completas</td>
-                <td>Panturrilha em pé/leg press</td>
-                <td>10-15 min Zona 1-2</td>
-                <td>65-80 min</td>
-                <td>RPE 7-8</td>
-              </tr>
-              <tr>
-                <td>Quarta</td>
-                <td>Musculação + Cardio moderado</td>
-                <td>Costas</td>
-                <td>Abdômen anti-extensão/lateral</td>
-                <td>20-25 min Zona 2</td>
-                <td>60-75 min</td>
-                <td>RPE 7-8</td>
-              </tr>
-              <tr>
-                <td>Quinta</td>
-                <td>Musculação + Intervalado controlado</td>
-                <td>Ombros</td>
-                <td>Panturrilha sentado</td>
-                <td>12-18 min intervalado moderado</td>
-                <td>55-70 min</td>
-                <td>RPE 6-8</td>
-              </tr>
-              <tr>
-                <td>Sexta</td>
-                <td>Musculação + Cardio contínuo</td>
-                <td>Braço completo</td>
-                <td>Abdômen inferior/anti-rotação</td>
-                <td>20-30 min Zona 2</td>
-                <td>60-75 min</td>
-                <td>RPE 7-8</td>
-              </tr>
-              <tr>
-                <td>Sábado</td>
-                <td>Cardio complementar</td>
-                <td>Sem musculação obrigatória</td>
-                <td>-</td>
-                <td>35-50 min Zona 2 ou caminhada</td>
-                <td>35-50 min</td>
-                <td>Leve/moderada</td>
-              </tr>
-              <tr>
-                <td>Domingo</td>
-                <td>Descanso</td>
-                <td>Recuperação física e mental</td>
-                <td>-</td>
-                <td>-</td>
-                <td>-</td>
-                <td>Descanso total</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="callout">
-          <h3>Observação complementar da Fase 3</h3>
-          <p>A semana usa musculação de segunda a sexta para facilitar previsibilidade. Abdômen aparece em três
-            estímulos curtos e panturrilha em dois estímulos bem distribuídos. O sábado é flexível: entra como cardio
-            Zona 2 quando a recuperação estiver boa ou descanso/caminhada leve quando houver fadiga acumulada.</p>
-        </div>
-      </section>
-      <section class="section" data-search-section="" id="musculacao">
-        <div class="section-header">
-          <div>
-            <h2>Treinos de musculação detalhados</h2>
-            <p class="section-subtitle">5 sessões enxutas por grupos: peito, pernas completas, costas, ombros e braço
-              completo.</p>
-          </div><span class="section-badge">Força</span>
-        </div>
-        <h3>Dia 1 - Peito + abdômen + cardio curto</h3>
-        <div class="callout orange">
-          <h4>Segunda | 5-6 exercícios • 55-70 min</h4>
-          <p><strong>Aquecimento:</strong> 5 min de caminhada leve, bicicleta ou elíptico + mobilidade de
-            ombros/escápulas + 1-2 séries de aproximação no primeiro supino.</p>
-        </div>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Exercício</th>
-                <th>Séries × Reps</th>
-                <th>Descanso</th>
-                <th>Intensidade / observações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Supino inclinado com halteres</td>
-                <td>3 x 8-10</td>
-                <td>90 s</td>
-                <td>RPE 7-8 • descida controlada • não buscar falha</td>
-              </tr>
-              <tr>
-                <td>Supino reto máquina ou halteres</td>
-                <td>3 x 8-10</td>
-                <td>90 s</td>
-                <td>Escápulas estáveis • amplitude segura • punhos alinhados</td>
-              </tr>
-              <tr>
-                <td>Crucifixo máquina ou crossover</td>
-                <td>2 x 12-15</td>
-                <td>60 s</td>
-                <td>Alongar com controle • evitar carga que force ombro</td>
-              </tr>
-              <tr>
-                <td>Crossover alto ou peck deck</td>
-                <td>2 x 12-15</td>
-                <td>45-60 s</td>
-                <td>Finalização técnica, sem roubar movimento</td>
-              </tr>
-              <tr>
-                <td>Prancha frontal</td>
-                <td>2 x 40-60 s</td>
-                <td>45 s</td>
-                <td>Respiração contínua • quadril alinhado</td>
-              </tr>
-              <tr>
-                <td>Crunch máquina ou abdominal no solo</td>
-                <td>2 x 12-15</td>
-                <td>45 s</td>
-                <td>Controle, sem puxar pescoço</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p><strong>Cardio pós-treino:</strong> 10-15 min em Zona 2. Use esteira inclinada leve, bicicleta ou elíptico. O
-          objetivo é aumentar gasto calórico sem prejudicar recuperação.</p>
-        <h3>Dia 2 - Pernas completas + panturrilha + cardio leve</h3>
-        <div class="callout orange">
-          <h4>Terça | 5-6 exercícios • 65-80 min</h4>
-          <p><strong>Aquecimento:</strong> 5 min bicicleta leve + mobilidade de quadril/tornozelo + séries de
-            aproximação no agachamento, hack squat ou leg press.</p>
-        </div>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Exercício</th>
-                <th>Séries × Reps</th>
-                <th>Descanso</th>
-                <th>Intensidade / observações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Agachamento livre ou hack squat</td>
-                <td>3 x 6-10</td>
-                <td>90-120 s</td>
-                <td>RPE 7-8 • técnica acima da carga • amplitude segura</td>
-              </tr>
-              <tr>
-                <td>Leg press</td>
-                <td>3 x 10-12</td>
-                <td>90 s</td>
-                <td>Não travar joelhos no topo • controlar descida</td>
-              </tr>
-              <tr>
-                <td>Stiff / levantamento romeno</td>
-                <td>3 x 8-10</td>
-                <td>90 s</td>
-                <td>Coluna neutra • sentir posterior, sem arredondar lombar</td>
-              </tr>
-              <tr>
-                <td>Mesa flexora</td>
-                <td>2 x 12-15</td>
-                <td>60 s</td>
-                <td>Pausa curta na contração • sem impulso</td>
-              </tr>
-              <tr>
-                <td>Cadeira extensora ou passada</td>
-                <td>2 x 10-12</td>
-                <td>60-75 s</td>
-                <td>Complemento de quadríceps • retire se a sessão passar de 80 min</td>
-              </tr>
-              <tr>
-                <td>Panturrilha em pé ou no leg press</td>
-                <td>3 x 12-20</td>
-                <td>45-60 s</td>
-                <td>Amplitude completa • pausa no alongamento e no topo</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p><strong>Cardio pós-treino:</strong> 10-15 min Zona 1-2, preferencialmente bicicleta ou elíptico. Após pernas,
-          o cardio serve para circulação e condicionamento leve, não para intensidade máxima.</p>
-        <h3>Dia 3 - Costas + abdômen + cardio moderado</h3>
-        <div class="callout">
-          <h4>Quarta | 5-6 exercícios • 60-75 min</h4>
-          <p><strong>Aquecimento:</strong> 5 min leve + mobilidade torácica/escapular + 1-2 séries de aproximação na
-            puxada ou remada principal.</p>
-        </div>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Exercício</th>
-                <th>Séries × Reps</th>
-                <th>Descanso</th>
-                <th>Intensidade / observações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Puxada aberta ou neutra</td>
-                <td>3 x 8-12</td>
-                <td>75-90 s</td>
-                <td>RPE 7-8 • puxar com cotovelos, não com braços</td>
-              </tr>
-              <tr>
-                <td>Remada baixa no cabo</td>
-                <td>3 x 8-12</td>
-                <td>75 s</td>
-                <td>Tronco estável • pausa curta na contração</td>
-              </tr>
-              <tr>
-                <td>Remada unilateral halter ou máquina</td>
-                <td>2 x 10-12</td>
-                <td>60-75 s</td>
-                <td>Corrigir assimetrias sem roubar movimento</td>
-              </tr>
-              <tr>
-                <td>Pulldown braço reto ou face pull</td>
-                <td>2 x 12-15</td>
-                <td>45-60 s</td>
-                <td>Controle escapular • movimento limpo</td>
-              </tr>
-              <tr>
-                <td>Dead bug</td>
-                <td>2 x 8-12/lado</td>
-                <td>45 s</td>
-                <td>Core anti-extensão • lombar estável</td>
-              </tr>
-              <tr>
-                <td>Prancha lateral</td>
-                <td>2 x 30-45 s/lado</td>
-                <td>45 s</td>
-                <td>Quadril alinhado • sem prender respiração</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p><strong>Cardio pós-treino:</strong> 20-25 min Zona 2. Como não há fadiga pesada de pernas, este é um dos
-          melhores dias para cardio moderado e contínuo.</p>
-        <h3>Dia 4 - Ombros + panturrilha + intervalado controlado</h3>
-        <div class="callout">
-          <h4>Quinta | 5-6 exercícios • 55-70 min</h4>
-          <p><strong>Aquecimento:</strong> 5 min leve + mobilidade de ombros, manguito rotador e escápulas + uma série
-            leve antes do desenvolvimento.</p>
-        </div>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Exercício</th>
-                <th>Séries × Reps</th>
-                <th>Descanso</th>
-                <th>Intensidade / observações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Desenvolvimento máquina ou halteres</td>
-                <td>3 x 8-10</td>
-                <td>75-90 s</td>
-                <td>RPE 7-8 • evitar hiperextensão lombar</td>
-              </tr>
-              <tr>
-                <td>Elevação lateral com halteres</td>
-                <td>3 x 12-15</td>
-                <td>45-60 s</td>
-                <td>Controle total • sem impulso</td>
-              </tr>
-              <tr>
-                <td>Elevação lateral no cabo ou máquina</td>
-                <td>2 x 12-15</td>
-                <td>45-60 s</td>
-                <td>Volume complementar para deltoide medial</td>
-              </tr>
-              <tr>
-                <td>Crucifixo inverso ou face pull</td>
-                <td>3 x 12-15</td>
-                <td>45-60 s</td>
-                <td>Deltoide posterior e saúde escapular</td>
-              </tr>
-              <tr>
-                <td>Encolhimento de ombros</td>
-                <td>2 x 10-12</td>
-                <td>60 s</td>
-                <td>Trapézio com pausa curta no topo</td>
-              </tr>
-              <tr>
-                <td>Panturrilha sentado</td>
-                <td>3 x 15-20</td>
-                <td>45-60 s</td>
-                <td>Amplitude completa • controle no alongamento</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p><strong>Cardio intervalado controlado:</strong> 5 min leve + 6 a 8 blocos de 30s moderado-forte (RPE 8) com
-          90s leve + 3 min leve. Não é sprint máximo; é condicionamento com controle.</p>
-        <h3>Dia 5 - Braço completo + abdômen + cardio contínuo</h3>
-        <div class="callout green">
-          <h4>Sexta | 5-6 exercícios • 60-75 min</h4>
-          <p><strong>Aquecimento:</strong> 5 min leve + mobilidade de cotovelos, punhos e ombros + uma série leve de
-            rosca e uma de tríceps antes das séries válidas.</p>
-        </div>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Exercício</th>
-                <th>Séries × Reps</th>
-                <th>Descanso</th>
-                <th>Intensidade / observações</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Rosca direta barra EZ</td>
-                <td>3 x 8-12</td>
-                <td>60-75 s</td>
-                <td>RPE 7-8 • cotovelos estáveis • sem balanço</td>
-              </tr>
-              <tr>
-                <td>Tríceps testa, barra V ou paralela assistida</td>
-                <td>3 x 8-12</td>
-                <td>60-75 s</td>
-                <td>Escolha variação sem dor no cotovelo</td>
-              </tr>
-              <tr>
-                <td>Rosca martelo</td>
-                <td>2 x 10-12</td>
-                <td>45-60 s</td>
-                <td>Braquial e antebraço • controle na descida</td>
-              </tr>
-              <tr>
-                <td>Tríceps corda</td>
-                <td>2 x 12-15</td>
-                <td>45-60 s</td>
-                <td>Extensão completa sem travar agressivamente</td>
-              </tr>
-              <tr>
-                <td>Rosca inversa ou flexão de punho</td>
-                <td>2 x 12-15</td>
-                <td>45 s</td>
-                <td>Antebraço com carga moderada</td>
-              </tr>
-              <tr>
-                <td>Elevação de pernas ou Pallof press</td>
-                <td>2-3 x 10-15</td>
-                <td>45 s</td>
-                <td>Abdômen inferior/anti-rotação • controle total</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <p><strong>Cardio pós-treino:</strong> 20-30 min Zona 2, preferencialmente bicicleta, elíptico ou caminhada
-          inclinada leve. Mantenha o ritmo conversacional.</p>
-        <div class="callout rose">
-          <h3>Regra de segurança para todos os dias</h3>
-          <p>Interrompa ou reduza o treino se houver dor articular aguda, tontura, falta de ar incomum, perda de técnica
-            ou queda brusca de performance. O plano deve ser adaptado com orientação profissional se houver condição
-            médica, lesão ou uso de medicação que afete frequência cardíaca.</p>
-        </div>
-      </section>
-      <section class="section" data-search-section="" id="cardio">
-        <div class="section-header">
-          <div>
-            <h2>Cardio: zonas, intensidade e progressão</h2>
-            <p class="section-subtitle">Como usar cardio leve, moderado e intervalado sem prejudicar o split de
-              musculação.</p>
-          </div><span class="section-badge">Cardio</span>
-        </div>
-        <p>O cardio do plano não é um bloco aleatório no final do treino. Cada sessão tem função: melhorar base
-          aeróbica, aumentar gasto energético, acelerar recuperação leve ou desenvolver tolerância a intensidades
-          moderadas.</p>
-        <div class="grid3">
-          <div class="mini-card"><strong>Leve / Zona 1</strong><span>RPE 2-3. Usado para aquecer, desaquecimento,
-              recuperação ativa ou após pernas completas.</span></div>
-          <div class="mini-card"><strong>Moderado / Zona 2</strong><span>RPE 4-6. Ritmo sustentável, conversacional e
-              prioritário para saúde cardiovascular e consistência semanal.</span></div>
-          <div class="mini-card"><strong>Intervalado controlado</strong><span>Blocos curtos em RPE 7-8, sempre com
-              recuperação. Não deve virar sprint máximo nem competir com a musculação.</span></div>
-        </div>
-        <h3>Distribuição recomendada</h3>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Dia</th>
-                <th>Cardio</th>
-                <th>Objetivo</th>
-                <th>Equipamentos recomendados</th>
-                <th>Observação</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Segunda - Peito</td>
-                <td>10-15 min Zona 2</td>
-                <td>Gasto energético leve após treino de peito</td>
-                <td>Esteira inclinada, bike, elíptico</td>
-                <td>Curto para não alongar demais a sessão</td>
-              </tr>
-              <tr>
-                <td>Terça - Pernas completas</td>
-                <td>10-15 min Zona 1-2</td>
-                <td>Recuperação circulatória e base leve</td>
-                <td>Bike ou elíptico</td>
-                <td>Evitar impacto excessivo após pernas</td>
-              </tr>
-              <tr>
-                <td>Quarta - Costas</td>
-                <td>20-25 min Zona 2</td>
-                <td>Base aeróbica principal da semana</td>
-                <td>Esteira, bike, elíptico</td>
-                <td>Ritmo conversacional</td>
-              </tr>
-              <tr>
-                <td>Quinta - Ombros</td>
-                <td>12-18 min intervalado controlado</td>
-                <td>Condicionamento sem HIIT extremo</td>
-                <td>Bike, remo, elíptico</td>
-                <td>RPE 8 no máximo nos blocos fortes</td>
-              </tr>
-              <tr>
-                <td>Sexta - Braços</td>
-                <td>20-30 min Zona 2</td>
-                <td>Volume cardiovascular contínuo</td>
-                <td>Bike, elíptico, esteira inclinada</td>
-                <td>Bom dia para cardio maior por menor fadiga sistêmica</td>
-              </tr>
-              <tr>
-                <td>Sábado</td>
-                <td>35-50 min opcional</td>
-                <td>Base aeróbica extra ou caminhada</td>
-                <td>Caminhada, bike, trilha leve</td>
-                <td>Remover se a semana foi pesada</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="callout green">
-          <h3>Teste da fala</h3>
-          <p>Na Zona 2, você consegue conversar em frases curtas, mas não consegue cantar. Se precisar interromper a
-            fala para respirar a todo momento, reduza a velocidade, inclinação ou resistência.</p>
-        </div>
-        <div class="callout orange">
-          <h3>Progressão do cardio</h3>
-          <p>Aumente primeiro a consistência, depois o tempo. Exemplo: mantenha 15 min por 2 semanas; depois suba para
-            18-20 min. Evite aumentar simultaneamente tempo, intensidade e frequência.</p>
-        </div>
-      </section>
-      <section class="section" data-search-section="" id="aquecimento">
-        <div class="section-header">
-          <div>
-            <h2>Aquecimento, mobilidade e desaquecimento</h2>
-            <p class="section-subtitle">Preparação mínima eficiente para reduzir risco e melhorar execução.</p>
-          </div><span class="section-badge">Execução</span>
-        </div>
-        <div class="grid2">
-          <div class="callout">
-            <h3>Aquecimento geral</h3>
-            <p>Use 5 minutos de caminhada, bike ou elíptico em intensidade leve. O objetivo é elevar temperatura
-              corporal e preparar respiração, não gastar energia antes da musculação.</p>
-          </div>
-          <div class="callout green">
-            <h3>Séries de aproximação</h3>
-            <p>No primeiro exercício composto do dia, faça 1-3 séries leves antes das séries válidas. Exemplo:
-              barra/carga leve, carga média e então carga de trabalho.</p>
-          </div>
-          <div class="callout orange">
-            <h3>Mobilidade específica</h3>
-            <p>Ombros antes de push/pull; quadril e tornozelo antes de pernas; torácica antes de remadas. Use movimentos
-              curtos, sem alongamento estático prolongado antes da força.</p>
-          </div>
-          <div class="callout rose">
-            <h3>Desaquecimento</h3>
-            <p>Finalize com 2-5 minutos leves ou alongamentos simples quando necessário. Não force amplitude agressiva
-              após treino pesado.</p>
-          </div>
-        </div>
-        <h3>Checklist antes da primeira série válida</h3>
-        <ul class="doc-list">
-          <li>Respiração controlada e sem tontura</li>
-          <li>Articulações preparadas para o movimento</li>
-          <li>Carga escolhida compatível com a técnica</li>
-          <li>Amplitude segura e repetível</li>
-          <li>RPE planejado para o exercício</li>
-        </ul>
-      </section>
-      <section class="section" data-search-section="" id="progressao">
-        <div class="section-header">
-          <div>
-            <h2>Progressão semanal</h2>
-            <p class="section-subtitle">Como evoluir sem aumentar tudo ao mesmo tempo.</p>
-          </div><span class="section-badge">Progressão</span>
-        </div>
-        <p>A progressão do plano deve ser simples e mensurável. O objetivo não é bater recorde todo treino, mas acumular
-          melhora gradual em técnica, força, condicionamento e tolerância ao volume semanal.</p>
-        <div class="table-wrap">
-          <table class="doc-table">
-            <thead>
-              <tr>
-                <th>Elemento</th>
-                <th>Como progredir</th>
-                <th>Quando progredir</th>
-                <th>Limite de segurança</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Carga</td>
-                <td>Aumentar 2-5% nos compostos</td>
-                <td>Ao bater o topo das reps com técnica limpa</td>
-                <td>Não subir se o RPE passar de 9</td>
-              </tr>
-              <tr>
-                <td>Repetições</td>
-                <td>Buscar +1 rep por série antes de subir carga</td>
-                <td>Quando a execução estiver estável</td>
-                <td>Não sacrificar amplitude</td>
-              </tr>
-              <tr>
-                <td>Cardio</td>
-                <td>Adicionar 3-5 min por sessão</td>
-                <td>Após 1-2 semanas confortáveis</td>
-                <td>Não aumentar intensidade junto</td>
-              </tr>
-              <tr>
-                <td>Densidade</td>
-                <td>Reduzir descanso levemente</td>
-                <td>Somente em acessórios</td>
-                <td>Não reduzir em agachamento, supino pesado ou stiff</td>
-              </tr>
-              <tr>
-                <td>Deload</td>
-                <td>Reduzir 30-40% do volume</td>
-                <td>A cada 4-6 semanas ou quando houver fadiga</td>
-                <td>Manter movimento, reduzir cobrança</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="callout green">
-          <h3>Modelo simples de dupla progressão</h3>
-          <p>Escolha uma faixa, por exemplo 8-10 reps. Quando fizer 10 reps em todas as séries com técnica limpa e RPE
-            adequado, aumente levemente a carga e volte para 8 reps.</p>
-        </div>
-        <div class="callout">
-          <h3>Registro obrigatório</h3>
-          <p>Anote exercício, carga, reps, RPE, tempo de cardio, sono e observação de fadiga. Sem registro, a progressão
-            vira percepção vaga.</p>
         </div>
       </section>
       <section class="section" data-search-section="" id="adaptacao">
@@ -2844,119 +2192,10 @@
           </div>
         </div>
       </section>
-      <section class="section" data-search-section="" id="transcricao">
-        <div class="section-header">
-          <div>
-            <h2>Apêndice técnico consolidado</h2>
-            <p class="section-subtitle">Resumo operacional do plano para consulta, revisão e manutenção futura do
-              conteúdo.</p>
-          </div><span class="section-badge">Apêndice</span>
-        </div>
-        <p>Este apêndice consolida a lógica do plano para facilitar futuras revisões do HTML: manter musculação
-          5x/semana, split por grupos, cardio inteligente, progressão simples, adaptação em semanas difíceis e foco em
-          saúde sem excesso de volume.</p>
-        <details class="page-transcript" open="">
-          <summary>Plano semanal consolidado</summary>
-          <pre>SEGUNDA
-- Peito + abdômen
-- 5 a 6 exercícios
-- RPE 7-8
-- Cardio curto: 10-15 min Zona 2
-
-TERÇA
-- Pernas completas + panturrilha
-- 5 a 6 exercícios
-- RPE 7-8
-- Cardio leve: 10-15 min Zona 1-2
-
-QUARTA
-- Costas + abdômen
-- 5 a 6 exercícios
-- RPE 7-8
-- Cardio moderado: 20-25 min Zona 2
-
-QUINTA
-- Ombros + panturrilha
-- 5 a 6 exercícios
-- RPE 6-8
-- Cardio intervalado controlado: 12-18 min
-
-SEXTA
-- Braço completo + abdômen
-- 5 a 6 exercícios
-- RPE 7-8
-- Cardio contínuo: 20-30 min Zona 2
-
-SÁBADO
-- Cardio complementar opcional
-- 35-50 min Zona 2 ou caminhada leve
-- Remover se houver fadiga acumulada
-
-DOMINGO
-- Descanso total</pre>
-        </details>
-        <details class="page-transcript">
-          <summary>Distribuição de abdômen e panturrilha</summary>
-          <pre>ABDÔMEN
-- Segunda: prancha frontal + crunch ou abdominal no solo
-- Quarta: dead bug + prancha lateral
-- Sexta: elevação de pernas ou Pallof press
-
-PANTURRILHA
-- Terça: panturrilha em pé ou no leg press
-- Quinta: panturrilha sentado
-
-Critério:
-- Mantém frequência sem alongar sessões.
-- Evita sobrecarregar lombar ou tornozelos em um único dia.
-- Permite progressão simples por reps, carga ou controle de amplitude.</pre>
-        </details>
-        <details class="page-transcript">
-          <summary>Regras de progressão</summary>
-          <pre>1. Não aumentar carga, volume e cardio na mesma semana.
-2. Progredir primeiro em repetições; depois em carga.
-3. Manter RPE 7-8 na maior parte das séries.
-4. Evitar falha muscular como regra padrão.
-5. Aumentar cardio em blocos pequenos de 3-5 minutos.
-6. Usar deload quando houver queda de performance, sono ruim ou fadiga persistente.
-7. Registrar carga, reps, RPE, duração do cardio e recuperação.</pre>
-        </details>
-        <details class="page-transcript">
-          <summary>Modo reduzido para semanas difíceis</summary>
-          <pre>VERSÃO REDUZIDA
-- Manter 5 dias se possível.
-- Fazer apenas 3-4 exercícios por sessão.
-- Cortar acessórios opcionais.
-- Reduzir cardio pela metade.
-- Manter técnica e RPE 6-7.
-
-VERSÃO MÍNIMA
-- 3 treinos full body de 30-40 min.
-- 3 exercícios principais por treino.
-- Caminhadas leves quando possível.
-- Retomar plano completo na semana seguinte.</pre>
-        </details>
-        <details class="page-transcript">
-          <summary>Alertas de execução segura</summary>
-          <pre>REDUZIR OU PARAR SE HOUVER:
-- Dor articular aguda
-- Tontura
-- Falta de ar incomum
-- Perda clara de técnica
-- Queda de performance por vários treinos
-- Sono ruim persistente
-- Fadiga que atrapalha estudo, trabalho ou rotina diária
-
-Ajuste principal:
-- Menos volume
-- Menos intervalado
-- Mais Zona 2 leve
-- Mais recuperação
-- Avaliação profissional quando necessário</pre>
-        </details>
-      </section>
-    </div>
+      </div>
   </div>
+  </main>
+
   <footer>
     <div class="footer-row">
       <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
@@ -2967,26 +2206,8 @@ Ajuste principal:
     <p><strong style="color:var(--muted2)">Plano de Treino Híbrido 5x</strong> · Split peito, pernas, costas, ombros e
       braços com abdômen/panturrilha distribuídos</p>
   </footer>
-  <button aria-label="Voltar ao topo" id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-  <script>
-    (function () {
-      const btt = document.getElementById('btt');
-      const search = document.getElementById('searchInput');
-      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const sideLinks = Array.from(document.querySelectorAll('.sidebar a'));
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      function norm(v) { return v.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
-      function upd() { if (!bar) return; btnL.classList.toggle('hidden', bar.scrollLeft <= 4); btnR.classList.toggle('hidden', bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4); }
-      if (bar) { btnL.addEventListener('click', () => bar.scrollBy({ left: -320, behavior: 'smooth' })); btnR.addEventListener('click', () => bar.scrollBy({ left: 320, behavior: 'smooth' })); bar.addEventListener('scroll', upd, { passive: true }); upd(); }
-      window.addEventListener('scroll', () => btt.classList.toggle('show', window.scrollY > 420));
-      document.querySelectorAll('a[href^="#"]').forEach(a => a.addEventListener('click', e => { const href = a.getAttribute('href'); if (!href || href === '#') return; const t = document.querySelector(href); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); } }));
-      search.addEventListener('input', () => { const q = norm(search.value.trim()); sections.forEach(s => { s.classList.remove('is-hidden-by-search', 'search-hit'); if (!q) return; const m = norm(s.innerText).includes(q); s.classList.toggle('is-hidden-by-search', !m); s.classList.toggle('search-hit', m); }); });
-      const obs = new IntersectionObserver(entries => { entries.forEach(en => { if (en.isIntersecting) { const id = en.target.id; navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id)); sideLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id)); const active = bar ? bar.querySelector('.nav-link.active') : null; if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' }); } }); }, { threshold: .15, rootMargin: '-100px 0px -55% 0px' }); sections.forEach(s => obs.observe(s));
-    })();
-  </script>
+  <button aria-label="Voltar ao topo" id="btt">↑</button>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

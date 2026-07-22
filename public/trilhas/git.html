@@ -7,20 +7,15 @@
   <meta
     content="Trilha técnica completa de Git, versionamento de código, GitHub, GitLab, Bitbucket, Azure Repos, CI/CD, segurança, governança, code review, monorepo, GitOps e maturidade sênior em engenharia de software."
     name="description" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=Syne:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap"
-    rel="stylesheet" />
-  <link href="../assets/css/styles.css" rel="stylesheet" />
+  <title>Git, Versionamento e Plataformas — Trilha Técnica</title>
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
-
       --accent: #22c55e;
       --accent2: #22d3b0;
       --accent3: #4f9ef8;
@@ -32,18 +27,14 @@
       --aws-green: #22c55e;
       --aws-purple: #a78bfa;
       --aws-red: #fb923c;
-      --java: #22c55e;
-
       --text: #e2e8f0;
       --muted: #64748b;
       --muted2: #94a3b8;
       --code-bg: #060a12;
-
       --must: #fca5a5;
       --should: #fcd34d;
       --nice: #86efac;
       --future: #93c5fd;
-
       --doc-bg: var(--bg);
       --doc-surface: var(--surface);
       --doc-surface-2: var(--surface2);
@@ -2100,9 +2091,120 @@
       border-color: rgba(249, 115, 22, .24)
     }
   </style>
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/git">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/git">
+  <meta property="og:title" content="Git, Versionamento e Plataformas — Trilha Técnica">
+  <meta property="og:description" content="Trilha técnica completa de Git, versionamento de código, GitHub, GitLab, Bitbucket, Azure Repos, CI/CD, segurança, governança, code review, monorepo, GitOps e maturidade sênior em engenharia de software.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Git, Versionamento e Plataformas — Trilha Técnica">
+  <meta name="twitter:description" content="Trilha técnica completa de Git, versionamento de código, GitHub, GitLab, Bitbucket, Azure Repos, CI/CD, segurança, governança, code review, monorepo, GitOps e maturidade sênior em engenharia de software.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
 <body class="track-page" data-track="git">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
   <header class="track-hero-page">
     <div class="container">
       <a class="hero-back-link" href="../index.html">← Voltar ao dashboard principal</a>
@@ -2150,6 +2252,8 @@
         type="button">›</button>
     </div>
   </nav>
+
+  <main id="conteudo" tabindex="-1">
   <div class="main" id="trackMain">
     <aside class="sidebar">
       <div class="sidebar-group">
@@ -3705,6 +3809,16 @@ Argo CD / Flux aplica no cluster</code></pre>
 
       </section>
 
+      <section class="doc-section searchable-section" data-search-section="" id="roadmap">
+        <div class="doc-section-heading">
+          <div>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
+          </div><span class="section-badge">Roadmap</span>
+        </div>
+        <div id="phaseRoadmap" data-track-roadmap="git"></div>
+      </section>
+
       <section class="doc-section searchable-section" data-search-section="" id="referencias">
         <div class="doc-section-heading">
           <div>
@@ -3817,6 +3931,8 @@ Argo CD / Flux aplica no cluster</code></pre>
 
     </div>
   </div>
+  </main>
+
   <footer class="page-footer">
     <div class="footer-row"><a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
       <div class="footer-pills"><span class="footer-pill green">Git</span><span
@@ -3828,85 +3944,8 @@ Argo CD / Flux aplica no cluster</code></pre>
   </footer>
   <button aria-label="Voltar ao topo" class="back-to-top" id="backToTop">↑</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    (function () {
-      const backToTop = document.getElementById('backToTop');
-      const searchInput = document.getElementById('searchInput');
-      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-
-      function normalize(value) {
-        return value.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-      }
-
-      function updateScrollButtons() {
-        if (!bar || !btnL || !btnR) return;
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-
-      if (btnL && btnR && bar) {
-        btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-        btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-        bar.addEventListener('scroll', updateScrollButtons, { passive: true });
-        updateScrollButtons();
-        setTimeout(updateScrollButtons, 400);
-      }
-
-      if (backToTop) {
-        window.addEventListener('scroll', () => {
-          backToTop.classList.toggle('is-visible', window.scrollY > 500);
-        }, { passive: true });
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', event => {
-          const target = document.querySelector(anchor.getAttribute('href'));
-          if (target) {
-            event.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            history.replaceState(null, '', anchor.getAttribute('href'));
-          }
-        });
-      });
-
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const query = normalize(searchInput.value.trim());
-          sections.forEach(section => {
-            section.classList.remove('is-hidden-by-search', 'search-hit');
-            if (!query) return;
-            const match = normalize(section.innerText).includes(query);
-            section.classList.toggle('is-hidden-by-search', !match);
-            section.classList.toggle('search-hit', match);
-          });
-        });
-      }
-
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            sidebarLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
-            const active = bar ? bar.querySelector('.nav-link.active') : null;
-            if (active) active.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
-          }
-        });
-      }, { threshold: .15, rootMargin: '-100px 0px -55% 0px' });
-
-      sections.forEach(section => observer.observe(section));
-    })();
-  </script>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

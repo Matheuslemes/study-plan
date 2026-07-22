@@ -7,21 +7,14 @@
   <title>Inglês Técnico para Programação — Plano Integrado de Estudos</title>
   <meta name="description"
     content="Trilha completa de inglês técnico para programação: fluência funcional, leitura de documentação, debugging, commits, PRs, README, speaking técnico, entrevistas, revisão ativa e rotina de estudo.">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link
-    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap"
-    rel="stylesheet">
-  <link href="../assets/css/styles.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css" rel="stylesheet" />
+  <link href="../assets/css/base.css" rel="stylesheet" />
   <style>
+    /* Overrides desta trilha — o resto vem de tokens.css */
     :root {
-      --bg: #07090f;
-      --surface: #0d1117;
-      --surface2: #141a24;
       --surface3: rgba(255, 255, 255, .045);
-      --border: rgba(255, 255, 255, .09);
-      --border2: rgba(255, 255, 255, .15);
-
-      /* English Technical Track Palette */
       --accent: #14b8a6;
       --accent2: #facc15;
       --accent3: #38bdf8;
@@ -33,17 +26,14 @@
       --eng-purple: #a78bfa;
       --eng-pink: #fb7185;
       --eng-green: #22c55e;
-
       --text: #e2e8f0;
       --muted: #64748b;
       --muted2: #94a3b8;
       --code-bg: #060a12;
-
       --must: #fca5a5;
       --should: #fcd34d;
       --nice: #86efac;
       --future: #93c5fd;
-
       --doc-bg: var(--bg);
       --doc-surface: var(--surface);
       --doc-surface-2: var(--surface2);
@@ -1558,7 +1548,7 @@
   <style id="english-responsive-refactor-v2">
     /* ─────────────────────────────────────────────────────────────
    RESPONSIVIDADE OTIMIZADA — English Technical Track
-   Base visual e estrutural: DevCore Platform / Blog Project Track.
+   Base visual e estrutural: padrão comum das páginas de trilha.
    Bloco complementar: preserva conteúdo e CSS original; apenas reforça
    comportamento responsivo em notebook, tablet, celulares e telas estreitas.
    ───────────────────────────────────────────────────────────── */
@@ -2272,9 +2262,120 @@
     }
   </style>
 
+
+  <style id="roadmap-12-fases">
+    /* Roadmap renderizado por assets/js/features/track-roadmap.js */
+    .roadmap-intro {
+      font-size: .88rem;
+      line-height: 1.7;
+      color: var(--text2, #94a3b8);
+      margin-bottom: 1.2rem;
+    }
+
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr));
+      gap: 1rem;
+    }
+
+    .roadmap-card {
+      background: var(--surface2, #141a24);
+      border: 1px solid var(--border, rgba(255, 255, 255, .09));
+      border-top: 3px solid var(--roadmap-color, #22d3b0);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+    }
+
+    .roadmap-card.is-off {
+      opacity: .58;
+    }
+
+    .roadmap-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: .6rem;
+      margin-bottom: .4rem;
+    }
+
+    .roadmap-phase {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      font-weight: 700;
+      color: var(--roadmap-color, #22d3b0);
+    }
+
+    .roadmap-weeks {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      color: var(--text3, #64748b);
+      margin-left: .45rem;
+    }
+
+    .roadmap-hours {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .72rem;
+      color: var(--roadmap-color, #22d3b0);
+      opacity: .8;
+    }
+
+    .roadmap-title {
+      font-size: .95rem;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0 0 .6rem;
+      color: var(--text1, #e2e8f0);
+    }
+
+    .roadmap-cert {
+      display: inline-block;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: .66rem;
+      padding: .2rem .5rem;
+      border-radius: 5px;
+      background: rgba(245, 158, 11, .12);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, .3);
+      margin-bottom: .55rem;
+    }
+
+    .roadmap-list {
+      margin: 0;
+      padding-left: 1.05rem;
+    }
+
+    .roadmap-list li {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text2, #94a3b8);
+      margin-bottom: .35rem;
+    }
+
+    .roadmap-off {
+      font-size: .8rem;
+      line-height: 1.6;
+      color: var(--text3, #64748b);
+      font-style: italic;
+      margin: 0;
+    }
+  </style>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/ingles">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/ingles">
+  <meta property="og:title" content="Inglês Técnico para Programação — Plano Integrado de Estudos">
+  <meta property="og:description" content="Trilha completa de inglês técnico para programação: fluência funcional, leitura de documentação, debugging, commits, PRs, README, speaking técnico, entrevistas, revisão ativa e rotina de estudo.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Inglês Técnico para Programação — Plano Integrado de Estudos">
+  <meta name="twitter:description" content="Trilha completa de inglês técnico para programação: fluência funcional, leitura de documentação, debugging, commits, PRs, README, speaking técnico, entrevistas, revisão ativa e rotina de estudo.">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
 </head>
 
-<body class="track-page" data-track="english">
+<body class="track-page" data-track="ingles">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="track-hero-page">
     <div class="container">
@@ -2295,7 +2396,7 @@
   <nav class="sitenav">
     <div class="container">
       <div class="sitenav-top">
-        <a class="sitenav-brand" href="#">English Tech Track <span>64 semanas</span></a>
+        <a class="sitenav-brand" href="#">English Tech Track <span>156 semanas</span></a>
         <span class="nav-ver">Plano Integrado de Estudos</span>
         <a class="nav-back" href="../index.html">← Dashboard principal</a>
         <div class="sitenav-top-right">
@@ -2336,6 +2437,8 @@
       <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">&#8250;</button>
     </div>
   </nav>
+
+  <main id="conteudo" tabindex="-1">
 
   <div class="main">
     <aside class="sidebar">
@@ -3089,6 +3192,18 @@ This test verifies the expected behavior.</code></pre>
     </div><!-- /content -->
   </div><!-- /main -->
 
+
+      <section class="doc-section searchable-section" data-search-section="" id="roadmap">
+        <div class="doc-section-heading">
+          <div>
+            <h2>Roadmap integrado às 12 fases</h2>
+            <p class="section-subtitle">Renderizado a partir de <code>data/phases.js</code> — a mesma fonte do dashboard. 36 meses · 156 semanas · ~6.000h.</p>
+          </div><span class="section-badge">Roadmap</span>
+        </div>
+        <div id="phaseRoadmap" data-track-roadmap="ingles"></div>
+      </section>
+  </main>
+
   <footer class="page-footer">
     <div class="footer-row">
       <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
@@ -3105,91 +3220,8 @@ This test verifies the expected behavior.</code></pre>
 
   <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    (function () {
-      const backToTop = document.getElementById('backToTop');
-      const searchInput = document.getElementById('searchInput');
-      const sections = Array.from(document.querySelectorAll('[data-search-section]'));
-      const navLinks = Array.from(document.querySelectorAll('.nav-link'));
-      const sidebarLinks = Array.from(document.querySelectorAll('.sidebar a'));
-      const bar = document.getElementById('navSectionsBar');
-      const btnL = document.getElementById('navScrollLeft');
-      const btnR = document.getElementById('navScrollRight');
-      const STEP = 320;
-
-      function normalize(value) {
-        return value.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-      }
-
-      function updateScrollButtons() {
-        if (!bar || !btnL || !btnR) return;
-        const atStart = bar.scrollLeft <= 4;
-        const atEnd = bar.scrollLeft + bar.clientWidth >= bar.scrollWidth - 4;
-        btnL.classList.toggle('hidden', atStart);
-        btnR.classList.toggle('hidden', atEnd);
-      }
-
-      function setActiveLink() {
-        const fromTop = window.scrollY + 135;
-        let current = sections[0]?.id || '';
-        for (const section of sections) {
-          if (section.offsetTop <= fromTop) current = section.id;
-        }
-        [...navLinks, ...sidebarLinks].forEach(link => {
-          const href = link.getAttribute('href') || '';
-          link.classList.toggle('active', href === '#' + current);
-        });
-      }
-
-      function handleSearch() {
-        const q = normalize(searchInput.value.trim());
-        let firstHit = null;
-
-        sections.forEach(section => {
-          section.classList.remove('search-hit');
-          section.classList.remove('is-hidden-by-search');
-          if (!q) return;
-
-          const text = normalize(section.textContent || '');
-          const hit = text.includes(q);
-          section.classList.toggle('is-hidden-by-search', !hit);
-          if (hit && !firstHit) firstHit = section;
-        });
-
-        if (q && firstHit) {
-          firstHit.classList.add('search-hit');
-        }
-      }
-
-      if (btnL && bar) {
-        btnL.addEventListener('click', () => bar.scrollBy({ left: -STEP, behavior: 'smooth' }));
-      }
-      if (btnR && bar) {
-        btnR.addEventListener('click', () => bar.scrollBy({ left: STEP, behavior: 'smooth' }));
-      }
-      if (bar) {
-        bar.addEventListener('scroll', updateScrollButtons, { passive: true });
-        updateScrollButtons();
-      }
-
-      window.addEventListener('scroll', () => {
-        if (backToTop) {
-          backToTop.classList.toggle('is-visible', window.scrollY > 520);
-        }
-        setActiveLink();
-      }, { passive: true });
-
-      if (backToTop) {
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-      }
-      if (searchInput) {
-        searchInput.addEventListener('input', handleSearch);
-      }
-
-      setActiveLink();
-    })();
-  </script>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js"></script>
 </body>
 
 </html>

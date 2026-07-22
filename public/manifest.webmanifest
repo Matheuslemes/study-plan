@@ -1,0 +1,21 @@
+{
+  "name": "Plano Integrado de Estudos — Backend Java",
+  "short_name": "Plano de Estudos",
+  "description": "Plano sequencial de 36 meses para Desenvolvedor Backend Java sênior: 12 fases, rotina diária, progresso e revisão espaçada.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#07090f",
+  "theme_color": "#0d1117",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
