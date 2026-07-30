@@ -1,62 +1,100 @@
-/* ═══════════════════════════════════════════════
-   SERVICE WORKER — suporte offline (STUDY-069)
+/*
+ * Service worker do sistema de estudos.
+ * HTML usa network-first; assets versionados usam cache-first com revalidação.
+ */
 
-   Só é viável porque o Bootstrap e as fontes passaram a ser
-   autohospedados (STUDY-067): não há mais nada externo a
-   cachear, exceto o Mermaid (usado só em sec.html).
-
-   Estratégia deliberadamente conservadora:
-   · navegação (HTML) → network-first: online você SEMPRE vê a
-     versão nova; offline cai para o cache. Isso evita o
-     problema clássico de service worker servindo página velha.
-   · assets (css/js/fontes/svg) → cache-first: são estáveis e
-     o ganho de velocidade é real.
-   · caches de versões antigas são apagados na ativação.
-
-   Para publicar uma mudança, suba VERSAO.
-═══════════════════════════════════════════════ */
-
-const VERSAO = 'v2';
+const VERSAO = 'v79-sequential-design-audit';
 const CACHE = `plano-estudos-${VERSAO}`;
 
-// Todos os módulos ES precisam estar aqui: um import que falha
-// derruba o módulo inteiro, e offline não há rede para buscá-lo.
+const PARTES_ACADEMIA = {
+  arquitetura: ['avaliacao', 'distribuidos', 'estrategico', 'evolucao', 'fundamentos'],
+  aws: ['arquitetura', 'avaliacao', 'confiabilidade', 'fundamentos', 'plataforma'],
+  bancos: ['avaliacao', 'distribuidos', 'fundamentos', 'integracao', 'postgresql'],
+  devops: ['avaliacao', 'confiabilidade', 'fundamentos', 'operacao', 'plataforma'],
+  financeiro: ['avaliacao', 'carreira', 'controle', 'investimentos', 'planejamento'],
+  frontend: ['aplicacoes', 'avaliacao', 'fundamentos', 'producao', 'sistemas'],
+  git: ['avaliacao', 'colaboracao', 'fundamentos', 'governanca', 'plataformas'],
+  ia: ['dados-ml', 'deep-learning', 'engenharia', 'fundamentos', 'generativa', 'pratica'],
+  ingles: ['avaliacao', 'escrita', 'fala', 'fundamentos', 'producao'],
+  java: ['avaliacao', 'fundamentos', 'producao', 'runtime'],
+  matematica: ['avaliacao', 'discreta', 'linear', 'otimizacao', 'probabilidade'],
+  python: ['avaliacao', 'fundamentos', 'performance', 'producao', 'qualidade'],
+  sec: ['avaliacao', 'controles', 'modelagem', 'operacao', 'verificacao']
+};
+
+const IDS_TRILHA = [
+  'arquitetura', 'aws', 'bancos', 'devops', 'financeiro', 'frontend', 'git',
+  'ia', 'ingles', 'java', 'matematica', 'python', 'sec', 'treino'
+];
+
+const PAGINAS_TRILHAS = [
+  ...IDS_TRILHA.map((id) => `./trilhas/${id}.html`),
+  ...Object.entries(PARTES_ACADEMIA).flatMap(([id, partes]) =>
+    partes.map((parte) => `./trilhas/${id}/${parte}.html`))
+];
+
 const ESSENCIAIS = [
   './',
   './index.html',
+  ...PAGINAS_TRILHAS,
   './manifest.webmanifest',
   './favicon.svg',
 
-  // estilos
+  // Camada visual única
   './assets/css/tokens.css',
+  './assets/css/tracks-palette.css',
   './assets/css/base.css',
-  './assets/css/components.css',
+  './assets/css/system.css',
+  './assets/css/hub.css',
+  './assets/css/academy.css',
   './assets/vendor/bootstrap.min.css',
   './assets/vendor/bootstrap.bundle.min.js',
   './assets/vendor/fonts/fonts.css',
 
-  // dados (fonte única)
+  // Dados
   './data/config.js',
   './data/tracks.js',
   './data/phases.js',
   './data/routine.js',
   './data/pdfs.js',
   './data/milestones.js',
+  './data/track-guides.js',
+  './data/track-exercises.js',
+  './data/learning-path.js',
+  './data/interviews.js',
+  './data/academy-data-factory.js',
+  './data/arquitetura-advanced.js',
+  './data/aws-advanced.js',
+  './data/bancos-advanced.js',
+  './data/devops-advanced.js',
+  './data/financeiro-advanced.js',
+  './data/frontend-advanced.js',
+  './data/git-advanced.js',
+  './data/ia-advanced.js',
+  './data/ingles-advanced.js',
+  './data/java-advanced.js',
+  './data/matematica-advanced.js',
+  './data/python-advanced.js',
+  './data/sec-advanced.js',
 
-  // core
+  // Núcleo
   './assets/js/core/render.js',
   './assets/js/core/search.js',
   './assets/js/core/nav.js',
   './assets/js/core/storage.js',
   './assets/js/core/pwa.js',
+  './assets/js/core/public-url.js',
+  './assets/js/core/system-header.js',
 
-  // features
+  // Funcionalidades do Sistema
   './assets/js/features/routine.js',
   './assets/js/features/tracks.js',
   './assets/js/features/phases.js',
   './assets/js/features/sync.js',
   './assets/js/features/active-phase.js',
   './assets/js/features/track-roadmap.js',
+  './assets/js/features/track-guide.js',
+  './assets/js/features/track-exercises.js',
   './assets/js/features/progress.js',
   './assets/js/features/review.js',
   './assets/js/features/history.js',
@@ -66,63 +104,85 @@ const ESSENCIAIS = [
   './assets/js/features/checklist.js',
   './assets/js/features/today.js',
   './assets/js/features/global-search.js',
+  './assets/js/features/recovery.js',
+  './assets/js/features/dependency-map.js',
+  './assets/js/features/interviews.js',
 
-  // páginas
+  // Renderers compartilhados
   './assets/js/pages/dashboard.js',
-  './assets/js/pages/trilha.js'
+  './assets/js/pages/trilha.js',
+  './assets/js/pages/hub.js',
+  './assets/js/pages/academy.js'
 ];
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
+self.addEventListener('install', (event) => {
+  event.waitUntil(
     caches.open(CACHE)
-      // addAll falha inteiro se um item falhar: adiciona um a um e ignora faltas
-      .then((c) => Promise.allSettled(ESSENCIAIS.map((u) => c.add(u))))
+      .then((cache) => Promise.allSettled(ESSENCIAIS.map((url) => cache.add(url))))
       .then(() => self.skipWaiting())
   );
 });
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
     caches.keys()
-      .then((nomes) => Promise.all(nomes.filter((n) => n !== CACHE).map((n) => caches.delete(n))))
+      .then((names) => Promise.all(names.filter((name) => name !== CACHE).map((name) => caches.delete(name))))
       .then(() => self.clients.claim())
   );
 });
 
-self.addEventListener('fetch', (e) => {
-  const req = e.request;
-  if (req.method !== 'GET') return;
+self.addEventListener('fetch', (event) => {
+  const request = event.request;
+  if (request.method !== 'GET') return;
 
-  const url = new URL(req.url);
-  if (url.origin !== self.location.origin) return; // não intercepta CDN externo (mermaid)
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
 
-  // HTML → network-first
-  if (req.mode === 'navigate' || req.destination === 'document') {
-    e.respondWith(
-      fetch(req)
-        .then((resp) => {
-          const copia = resp.clone();
-          caches.open(CACHE).then((c) => c.put(req, copia));
-          return resp;
+  if (request.mode === 'navigate' || request.destination === 'document') {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          const copy = response.clone();
+          caches.open(CACHE).then((cache) => cache.put(request, copy));
+          return response;
         })
-        .catch(() => caches.match(req).then((r) => r || caches.match('./index.html')))
+        .catch(() => caches.match(request).then((response) => response || caches.match('./index.html')))
     );
     return;
   }
 
-  // assets → cache-first, com atualização em segundo plano
-  e.respondWith(
-    caches.match(req).then((cacheado) => {
-      const rede = fetch(req)
-        .then((resp) => {
-          if (resp && resp.status === 200) {
-            const copia = resp.clone();
-            caches.open(CACHE).then((c) => c.put(req, copia));
+  const precisaCoerencia =
+    request.destination === 'script'
+    || request.destination === 'style'
+    || url.pathname.includes('/data/');
+
+  if (precisaCoerencia) {
+    event.respondWith(
+      fetch(request)
+        .then((response) => {
+          if (response?.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE).then((cache) => cache.put(request, copy));
           }
-          return resp;
+          return response;
         })
-        .catch(() => cacheado);
-      return cacheado || rede;
+        .catch(() => caches.match(request))
+    );
+    return;
+  }
+
+  event.respondWith(
+    caches.match(request).then((cached) => {
+      const network = fetch(request)
+        .then((response) => {
+          if (response?.status === 200) {
+            const copy = response.clone();
+            caches.open(CACHE).then((cache) => cache.put(request, copy));
+          }
+          return response;
+        })
+        .catch(() => cached);
+      return cached || network;
     })
   );
 });

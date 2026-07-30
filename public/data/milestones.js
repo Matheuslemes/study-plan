@@ -34,7 +34,7 @@ export const rules = [
   },
   {
     "k": "pratica",
-    "r": "Nenhum tópico conta como dominado até ter sido aplicado em um exercício resolvido sem consulta ou em um lab que roda do zero em outra máquina. Ler e assistir não é prática; reproduzir é. Cada fase tem sua própria lista de exercícios e labs, independentes entre si."
+    "r": "Nenhum tópico conta como dominado até ter sido aplicado em um exercício resolvido sem consulta ou em um lab que roda do zero em outra máquina. Ler e assistir não é prática; reproduzir é. Os 12 labs evoluem o mesmo DevCore: cada fase parte da release e das decisões da fase anterior."
   },
   {
     "k": "sec",
@@ -82,17 +82,17 @@ export const awsMilestones = [
   {
     "w": "Fase 3 · Mês 8",
     "c": "CLF-C02 ✓ Cloud Practitioner",
-    "col": "#22d3b0"
+    "col": "var(--ui-teal)"
   },
   {
     "w": "Fase 9 · Mês 26",
     "c": "SAA-C03 ✓ Solutions Architect Associate",
-    "col": "#38bdf8"
+    "col": "var(--ui-sky)"
   },
   {
     "w": "Fase 12 · Mês 36",
     "c": "Well-Architected Review do lab de cloud — sem nova prova",
-    "col": "#a78bfa"
+    "col": "var(--track-ia)"
   },
   {
     "w": "Removidas do plano",

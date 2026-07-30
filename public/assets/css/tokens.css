@@ -1,65 +1,136 @@
-/* ═══════════════════════════════════════════════
-   TOKENS — fonte única de cores e design tokens (STUDY-037)
-
-   Substitui as cópias de :root que viviam em cada página e o
-   :root divergente do antigo styles.css. As páginas de trilha
-   só sobrescrevem --accent (a cor-tema de cada uma).
-
-   Fonte única — importado por index.html e pelas páginas
-   de trilha via <link>. Não duplicar inline.
-═══════════════════════════════════════════════ */
+/*
+ * Sistema visual compartilhado.
+ * Somente tokens neutros e semânticos vivem aqui. Identidade de trilha pertence
+ * exclusivamente a tracks-palette.css.
+ */
 
 :root {
-  /* backgrounds */
+  color-scheme: dark;
+
+  /* Tipografia */
+  --font-display: "Syne", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --step--1: clamp(.78rem, .75rem + .12vw, .86rem);
+  --step-0: clamp(.94rem, .9rem + .18vw, 1.04rem);
+  --step-1: clamp(1.08rem, 1rem + .34vw, 1.25rem);
+  --step-2: clamp(1.28rem, 1.12rem + .65vw, 1.58rem);
+  --step-3: clamp(1.55rem, 1.27rem + 1.15vw, 2.12rem);
+  --step-4: clamp(2rem, 1.45rem + 2.2vw, 3.2rem);
+  --step-5: clamp(2.6rem, 1.62rem + 4vw, 5.15rem);
+  --display-hero: clamp(2.65rem, 2rem + 2.2vw, 3.5rem);
+  --display-academy: clamp(2.35rem, 1.85rem + 2.55vw, 3.75rem);
+  --leading-tight: 1.02;
+  --leading-title: 1.08;
+  --leading-body: 1.65;
+  --tracking-eyebrow: .12em;
+
+  /* Ritmo */
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --section-gap: clamp(1rem, 2.3vw, 1.8rem);
+  --page-gutter: clamp(.85rem, 3vw, 2rem);
+
+  /* Forma */
+  --radius-xs: .35rem;
+  --radius-sm: .55rem;
+  --radius: .8rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.35rem;
+  --radius-pill: 999px;
+
+  /* Superfícies neutras */
   --bg: #07090f;
+  --bg-deep: #04060b;
   --surface: #0d1117;
-  --surface2: #141a24;
-  --surface3: rgba(255, 255, 255, .04);
-  /* borders */
-  --border: rgba(255, 255, 255, .09);
-  --border2: rgba(255, 255, 255, .15);
-  /* text */
-  --text1: #e2e8f0;
-  --text2: #94a3b8;
-  --text3: #8592a6;
-  /* STUDY-064: era #64748b (3.98:1 sobre surface, falhava WCAG AA);
-     #8592a6 dá 6.0:1 e mantém a hierarquia abaixo de --text2. */
-  /* system accents */
-  --accent: #22d3b0;
-  --accent-blue: #4f9ef8;
-  --accent-purple: #a78bfa;
-  --accent-orange: #fb923c;
-  /* track palette */
-  --java: #22c55e;
-  --java-bg: #0d2e1a;
-  --pratica: #7c6ae8;
-  --pratica-bg: #1e1a3a;
-  --aws: #f59e0b;
-  --aws-bg: #2e2010;
-  --py: #60a5fa;
-  --py-bg: #0d1e35;
-  --devops: #f472b6;
-  --devops-bg: #2e1025;
-  --math: #34d399;
-  --math-bg: #0d2e20;
-  --ia: #a78bfa;
-  --ia-bg: #1a1735;
-  --fin: #fb923c;
-  --fin-bg: #2e1a10;
-  --treino: #ef4444;
-  --treino-bg: #2f1115;
-  --db: #38bdf8;
-  --db-bg: #0e2538;
-  --ingles: #14b8a6;
-  --ingles-bg: #0c2f2b;
-  --sec: #2dd4bf;
-  --sec-bg: #0c2623;
-  --git: #f97316;
-  --git-bg: #2e170c;
-  --arquitetura: #facc15;
-  --arquitetura-bg: #2e2608;
-  --frontend: #06b6d4;
-  --frontend-bg: #092a33;
-  --dsa: #fb7185;
-  --dsa-bg: #2e1119;
+  --surface-2: #121925;
+  --surface-3: #172131;
+  --surface-glass: rgba(13, 17, 23, .88);
+  --surface-soft: rgba(255, 255, 255, .035);
+  --surface-hover: rgba(255, 255, 255, .065);
+  --panel: rgba(15, 22, 35, .9);
+  --panel-strong: rgba(10, 15, 24, .97);
+
+  /* Texto */
+  --text-1: #edf3fb;
+  --text-2: #aebbd0;
+  --text-3: #8e9bb0;
+  --text-inverse: #05070b;
+  --text1: var(--text-1);
+  --text2: var(--text-2);
+  --text3: var(--text-3);
+
+  /* Linhas e profundidade */
+  --border: rgba(226, 232, 240, .11);
+  --border-strong: rgba(226, 232, 240, .2);
+  --panel-line: var(--border);
+  --shadow-sm: 0 .45rem 1.4rem rgba(0, 0, 0, .2);
+  --shadow: 0 1.1rem 3.2rem rgba(0, 0, 0, .28);
+  --shadow-xl: 0 2rem 6rem rgba(0, 0, 0, .38);
+
+  /* Estados semânticos */
+  --state-success: #54d889;
+  --state-warning: #f5b942;
+  --state-danger: #ff746c;
+  --state-info: #67e8f9;
+  --state-validated: var(--track-ia);
+  --state-recovery: var(--track-devops);
+  --review-concept: var(--track-ia);
+  --review-code: #22d3ee;
+  --review-architecture: var(--track-aws);
+
+  /* Identidade: valores reais vêm de tracks-palette.css */
+  --accent: var(--text-2);
+  --accent-2: var(--state-info);
+  --accent-ink: var(--bg-deep);
+  --accent-line: color-mix(in srgb, var(--accent) 32%, transparent);
+  --accent-soft: color-mix(in srgb, var(--accent) 9%, transparent);
+  --accent-glow: color-mix(in srgb, var(--accent) 17%, transparent);
+  --accent-strong: color-mix(in srgb, var(--accent) 78%, white);
+
+  /* Larguras */
+  --content-sm: 48rem;
+  --content-md: 72rem;
+  --content-lg: 90rem;
+  --content-max: 86rem;
+  --sidebar-width: 16.5rem;
+  --measure: 72ch;
+
+  /* Movimento */
+  --duration-fast: 140ms;
+  --duration: 220ms;
+  --duration-slow: 420ms;
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-standard: cubic-bezier(.2, .7, .2, 1);
+  --transition-interactive:
+    color var(--duration-fast) var(--ease-standard),
+    border-color var(--duration-fast) var(--ease-standard),
+    background-color var(--duration-fast) var(--ease-standard),
+    box-shadow var(--duration) var(--ease-out),
+    transform var(--duration) var(--ease-out);
+
+  /* Foco e camadas */
+  --focus-color: color-mix(in srgb, var(--accent) 82%, white);
+  --focus-ring: 0 0 0 3px color-mix(in srgb, var(--focus-color) 32%, transparent);
+  --z-sticky: 40;
+  --z-overlay: 80;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
 }

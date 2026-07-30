@@ -21,19 +21,21 @@ export const CONFIG = {
   criterioAvanco: 0.8
 };
 
+// Paleta das 12 fases. As cores vivem em tracks-palette.css (--phase-*);
+// aqui só referenciamos, para não duplicar hex de marca fora da tabela central.
 export const PC = [
-  "#4f9ef8",
-  "#22d3b0",
-  "#a78bfa",
-  "#fb923c",
-  "#38bdf8",
-  "#f472b6",
-  "#34d399",
-  "#f59e0b",
-  "#2dd4bf",
-  "#60a5fa",
-  "#c084fc",
-  "#f87171"
+  "var(--phase-1)",
+  "var(--phase-2)",
+  "var(--phase-3)",
+  "var(--phase-4)",
+  "var(--phase-5)",
+  "var(--phase-6)",
+  "var(--phase-7)",
+  "var(--phase-8)",
+  "var(--phase-9)",
+  "var(--phase-10)",
+  "var(--phase-11)",
+  "var(--phase-12)"
 ];
 export const PBG = [
   "#0d1a2e",
@@ -52,40 +54,40 @@ export const PBG = [
 
 export const syncCycles = [
   {
-    title: 'Ciclo 1 — Base de engenharia', period: 'Meses 1–6', phases: 'Fases 1–2', color: '#4f9ef8',
+    title: 'Ciclo 1 — Base de engenharia', period: 'Meses 1–6', phases: 'Fases 1–2', color: 'var(--ui-blue)',
     goal: 'Consolidar Java, SQL, Git, Spring Boot, REST e JPA. Nenhuma tecnologia complementar compete por espaço nesta base.',
     tracks: ['Java 21', 'SQL/PostgreSQL', 'Spring Boot', 'JPA', 'Git', 'DSA', 'Inglês'],
     output: 'API REST autenticada e documentada + 50 exercícios de Java e 30 de SQL resolvidos.'
   },
   {
-    title: 'Ciclo 2 — Qualidade e entrega', period: 'Meses 7–12', phases: 'Fases 3–4', color: '#22d3b0',
+    title: 'Ciclo 2 — Qualidade e entrega', period: 'Meses 7–12', phases: 'Fases 3–4', color: 'var(--ui-teal)',
     goal: 'Testes profissionais, Docker, CI/CD (antecipado do mês 22) e módulo forte de segurança. É aqui que o código vira entrega confiável.',
     tracks: ['JUnit/Testcontainers', 'Docker', 'GitHub Actions', 'OWASP', 'OAuth2', 'CLF-C02'],
     output: 'Lab de Docker e CI com pipeline verde, suíte de testes escrita do zero, checklist OWASP aplicado e CLF-C02 no mês 8.'
   },
   {
-    title: 'Ciclo 3 — Produção e operação', period: 'Meses 13–18', phases: 'Fases 5–6', color: '#a78bfa',
+    title: 'Ciclo 3 — Produção e operação', period: 'Meses 13–18', phases: 'Fases 5–6', color: 'var(--track-ia)',
     goal: 'Performance medida, cache com Redis e observabilidade completa. Aprender a operar o próprio software antes de distribuí-lo.',
     tracks: ['EXPLAIN/Índices', 'Redis', 'OpenTelemetry', 'Prometheus/Grafana', 'SLO', 'Resiliência'],
     output: 'Relatório de performance antes/depois, lab de cache com Redis e lab de observabilidade com dashboard e runbook.'
   },
   {
-    title: 'Ciclo 4 — Arquitetura e sistemas distribuídos', period: 'Meses 19–24', phases: 'Fases 7–8', color: '#fb923c',
+    title: 'Ciclo 4 — Arquitetura e sistemas distribuídos', period: 'Meses 19–24', phases: 'Fases 7–8', color: 'var(--track-git)',
     goal: 'Arquitetura hexagonal, DDD e, em seguida, mensageria integrada à arquitetura distribuída — Kafka como meio, nunca como fase isolada.',
     tracks: ['Hexagonal', 'DDD', 'C4', 'ADR/RFC', 'Kafka', 'Outbox/Saga', 'CQRS'],
     output: 'Exercício de refatoração para hexagonal, lab de Kafka com outbox e DLQ, e 5 ADRs completos.'
   },
   {
-    title: 'Ciclo 5 — Cloud e escala', period: 'Meses 25–30', phases: 'Fases 9–10', color: '#38bdf8',
+    title: 'Ciclo 5 — Cloud e escala', period: 'Meses 25–30', phases: 'Fases 9–10', color: 'var(--ui-sky)',
     goal: 'Deploy real em AWS com Terraform e Kubernetes, SAA-C03 no mês 26, e System Design praticado semanalmente.',
     tracks: ['AWS', 'Terraform', 'Kubernetes', 'Well-Architected', 'System Design', 'SAA-C03'],
     output: 'Ambiente cloud provisionado por Terraform com custo medido, lab de Kubernetes e 12 documentos de system design.'
   },
   {
-    title: 'Ciclo 6 — Complementares e senioridade', period: 'Meses 31–36', phases: 'Fases 11–12', color: '#f87171',
+    title: 'Ciclo 6 — Complementares e senioridade', period: 'Meses 31–36', phases: 'Fases 11–12', color: 'var(--track-sec)',
     goal: 'Só agora entram Frontend, Python e IA aplicada — sobre uma base backend consolidada. Depois, portfólio e entrevistas.',
     tracks: ['React/TypeScript', 'Python/FastAPI', 'LLMs/RAG', 'Matemática aplicada', 'Portfólio', 'Entrevistas'],
-    output: 'Três labs independentes (React, FastAPI e RAG avaliado), portfólio publicado e prontidão para entrevista sênior.'
+    output: 'DevCore ampliado com React, FastAPI e RAG avaliado no mesmo produto, portfólio publicado e prontidão para entrevista sênior.'
   }
 ];
 

@@ -109,9 +109,24 @@ function ligarScrollspy(cfg, barra) {
 
       // mantém o item ativo visível na barra horizontal
       const ativo = barra?.querySelector('.nav-link.active');
-      if (ativo) ativo.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+      if (ativo) {
+        const area = barra.getBoundingClientRect();
+        const item = ativo.getBoundingClientRect();
+        const margem = 48;
+        let deslocamento = 0;
+
+        if (item.left < area.left + margem) {
+          deslocamento = item.left - area.left - margem;
+        } else if (item.right > area.right - margem) {
+          deslocamento = item.right - area.right + margem;
+        }
+
+        if (deslocamento) barra.scrollBy({ left: deslocamento, behavior: 'smooth' });
+      }
     });
-  }, { threshold: 0.15, rootMargin: '-100px 0px -55% 0px' });
+  // Um limiar baixo também ativa seções longas, comuns nas trilhas densas.
+  // Com 15%, uma seção maior que a viewport podia nunca se tornar ativa.
+  }, { threshold: 0.01, rootMargin: '-100px 0px -55% 0px' });
 
   secoes.forEach((s) => observador.observe(s));
 }

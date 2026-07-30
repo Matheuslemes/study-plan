@@ -105,12 +105,12 @@ export function renderHoje(containerId) {
 
     <div class="today-footer">
       <a class="today-stat" href="#tabProgress" data-bs-toggle="pill">
-        <span class="today-stat-num" style="color:${revisoes ? 'var(--accent-orange)' : 'var(--accent)'}">${revisoes}</span>
+        <span class="today-stat-num" style="color:${revisoes ? 'var(--state-warning)' : 'var(--accent)'}">${revisoes}</span>
         <span class="today-stat-label">revisão(ões) para hoje</span>
       </a>
       <a class="today-stat" href="#tabProgress" data-bs-toggle="pill">
         <span class="today-stat-num">${g.pct}%</span>
-        <span class="today-stat-label">progresso geral · ${g.feitos}/${g.total} tópicos</span>
+        <span class="today-stat-label">domínio ponderado · ${g.dominados}/${g.total} dominados</span>
       </a>
       <a class="today-stat" href="#tabDaily" data-bs-toggle="pill">
         <span class="today-stat-num">▸</span>

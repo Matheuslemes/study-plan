@@ -1,10 +1,9 @@
 /* ═══════════════════════════════════════════════
    CORE / RENDER — helpers de template
 
-   O escaping vem de assets/js/trilha.js (versão
-   anterior da arquitetura modular): o código inline
-   montava HTML com template string sem nenhuma
-   proteção. Mantido aqui como utilitário comum.
+   Helpers compartilhados pelos módulos de render.
+   Todo texto de dados deve passar por escapeHtml antes
+   de ser interpolado em uma template string.
 ═══════════════════════════════════════════════ */
 
 /** Escapa texto antes de interpolar em HTML. */

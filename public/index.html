@@ -10,8 +10,9 @@
   <link href="./assets/vendor/bootstrap.min.css" rel="stylesheet">
   <link href="./assets/vendor/fonts/fonts.css" rel="stylesheet">
   <link href="./assets/css/tokens.css" rel="stylesheet">
+  <link href="./assets/css/tracks-palette.css" rel="stylesheet">
   <link href="./assets/css/base.css" rel="stylesheet">
-  <link href="./assets/css/components.css" rel="stylesheet">
+  <link href="./assets/css/system.css" rel="stylesheet">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://study-plan.vercel.app/">
   <meta property="og:type" content="website">
@@ -27,54 +28,59 @@
   <meta name="theme-color" content="#0d1117">
 </head>
 
-<body>
+<body class="is-system-view" data-track="java">
   <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
 
-  <!-- HERO -->
-  <div class="hero">
-    <div class="container">
-      <span class="hero-eyebrow fade-up">Plano integrado de estudos · 12 fases sequenciais · 36 meses · 156
-        semanas · ~6.000h</span>
-      <h1 class="fade-up fade-up-d1">Plano Integrado de Estudos</h1>
-      <p class="hero-sub fade-up fade-up-d2">Plano sequencial para Desenvolvedor Backend Java sênior. <strong>A fase define o conteúdo ativo; o conteúdo ativo define a rotina</strong> — nunca o contrário. Java/Spring é a âncora com 45% do foco; SQL, testes, Docker, CI/CD, segurança, performance, observabilidade, arquitetura, Kafka, AWS e System Design entram na ordem em que se sustentam. Algoritmos, Git e inglês são transversais aos 36 meses. Frontend, Python e IA entram na Fase 11, sobre base consolidada. Rotina de <strong>36–40h/semana</strong>, com 7h30 de sono fixo e domingo de descanso real.</p>
-      <div class="hero-tags fade-up fade-up-d3" id="heroTags"></div>
-      <div class="fade-up fade-up-d4" id="trackBadges"></div>
-    </div>
-  </div>
+  <!-- COMMAND CENTER SHELL -->
+  <div class="cc-shell">
 
-  <!-- NAV -->
-  <div class="site-sticky">
-    <div class="container py-2">
-      <div class="d-flex align-items-center gap-2 flex-wrap">
-        <ul class="nav nav-pills flex-nowrap overflow-auto gap-1 flex-grow-1" id="mainTabs" role="tablist"
-          style="scrollbar-width:none">
-          <li class="nav-item" role="presentation"><a class="nav-link active" id="btn-tabHoje" data-bs-toggle="pill" href="#tabHoje" role="tab" aria-controls="tabHoje" aria-selected="true">Hoje</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabFases" data-bs-toggle="pill" href="#tabFases" role="tab" aria-controls="tabFases" aria-selected="false">Visão Geral</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabSync" data-bs-toggle="pill" href="#tabSync" role="tab" aria-controls="tabSync" aria-selected="false">Sincronização</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabDaily" data-bs-toggle="pill" href="#tabDaily" role="tab" aria-controls="tabDaily" aria-selected="false">Rotina diária</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabProgress" data-bs-toggle="pill" href="#tabProgress" role="tab" aria-controls="tabProgress" aria-selected="false">Progresso</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabQuick" data-bs-toggle="pill" href="#tabQuick" role="tab" aria-controls="tabQuick" aria-selected="false">Consulta rápida</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabDetail" data-bs-toggle="pill" href="#tabDetail" role="tab" aria-controls="tabDetail" aria-selected="false">Fases (detalhe)</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabTracks" data-bs-toggle="pill" href="#tabTracks" role="tab" aria-controls="tabTracks" aria-selected="false">Trilhas</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabPdfs" data-bs-toggle="pill" href="#tabPdfs" role="tab" aria-controls="tabPdfs" aria-selected="false">PDF'S</a></li>
-          <li class="nav-item" role="presentation"><a class="nav-link" id="btn-tabRules" data-bs-toggle="pill" href="#tabRules" role="tab" aria-controls="tabRules" aria-selected="false">Regras</a></li>
-        </ul>
-        <div class="navbar-track-search">
-          <input type="search" id="trackSearchInput" placeholder="Buscar trilhas, PDFs e tópicos…  ( / )"
-            aria-label="Busca global: trilhas, PDFs e tópicos" autocomplete="off">
+    <!-- LEFT RAIL (navegação por seções) -->
+    <nav class="cc-rail" aria-label="Seções do dashboard">
+      <ul id="mainTabs" class="cc-rail-list" role="tablist">
+        <li class="cc-rail-label" role="presentation">Foco</li>
+        <li class="cc-rail-item"><a class="cc-rail-link active" id="btn-tabHoje" data-bs-toggle="pill" href="#tabHoje" role="tab" aria-controls="tabHoje" aria-selected="true"><span class="cc-i" aria-hidden="true">◆</span>Hoje</a></li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabDaily" data-bs-toggle="pill" href="#tabDaily" role="tab" aria-controls="tabDaily" aria-selected="false"><span class="cc-i" aria-hidden="true">◷</span>Rotina diária</a></li>
+        <li class="cc-rail-label" role="presentation">Plano</li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabFases" data-bs-toggle="pill" href="#tabFases" role="tab" aria-controls="tabFases" aria-selected="false"><span class="cc-i" aria-hidden="true">▤</span>Visão Geral</a></li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabDetail" data-bs-toggle="pill" href="#tabDetail" role="tab" aria-controls="tabDetail" aria-selected="false"><span class="cc-i" aria-hidden="true">▦</span>Fases (detalhe)</a></li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabSync" data-bs-toggle="pill" href="#tabSync" role="tab" aria-controls="tabSync" aria-selected="false"><span class="cc-i" aria-hidden="true">⇄</span>Sincronização</a></li>
+        <li class="cc-rail-label" role="presentation">Progresso</li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabProgress" data-bs-toggle="pill" href="#tabProgress" role="tab" aria-controls="tabProgress" aria-selected="false"><span class="cc-i" aria-hidden="true">▰</span>Progresso</a></li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabTracks" data-bs-toggle="pill" href="#tabTracks" role="tab" aria-controls="tabTracks" aria-selected="false"><span class="cc-i" aria-hidden="true">◈</span>Trilhas</a></li>
+        <li class="cc-rail-label" role="presentation">Recursos</li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabQuick" data-bs-toggle="pill" href="#tabQuick" role="tab" aria-controls="tabQuick" aria-selected="false"><span class="cc-i" aria-hidden="true">⚡</span>Consulta rápida</a></li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabPdfs" data-bs-toggle="pill" href="#tabPdfs" role="tab" aria-controls="tabPdfs" aria-selected="false"><span class="cc-i" aria-hidden="true">▥</span>Biblioteca</a></li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabRules" data-bs-toggle="pill" href="#tabRules" role="tab" aria-controls="tabRules" aria-selected="false"><span class="cc-i" aria-hidden="true">§</span>Regras</a></li>
+      </ul>
+    </nav>
+
+    <!-- MAIN COLUMN -->
+    <div class="cc-main">
+
+      <!-- COMMAND BAR -->
+      <div class="cc-cbar">
+        <span class="cc-phase" id="phaseStatusPill" hidden></span>
+        <div class="navbar-track-search cc-search">
+          <input type="search" id="trackSearchInput" placeholder="Buscar trilhas, PDFs e objetivos…  ( / )"
+            aria-label="Busca global: trilhas, PDFs e objetivos" autocomplete="off">
           <div id="globalSearchResults" class="global-search-results" role="listbox" aria-label="Resultados da busca" hidden></div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- CONTENT -->
-  <main id="conteudo" tabindex="-1">
-  <div class="container py-4">
-    <div class="tab-content">
+      <!-- CONTENT -->
+      <main id="conteudo" tabindex="-1">
+        <div class="tab-content">
 
-      <!-- TAB HOJE -->
+      <!-- TAB HOJE (landing: apresentação do plano + panorama do dia) -->
       <div class="tab-pane fade show active" id="tabHoje" role="tabpanel" aria-labelledby="btn-tabHoje">
+        <!-- HERO — apresentação do plano; aparece apenas nesta aba -->
+        <header class="cc-hero">
+          <span class="hero-eyebrow">12 fases sequenciais · 36 meses · 156 semanas · ~6.000h</span>
+          <h1>Plano Integrado de Estudos</h1>
+          <p class="hero-sub">Plano sequencial para Desenvolvedor Backend Java sênior. <strong>A fase define o conteúdo ativo; o conteúdo ativo define a rotina</strong> — nunca o contrário. Java/Spring é a âncora com 45% do foco; SQL, testes, Docker, CI/CD, segurança, performance, observabilidade, arquitetura, Kafka, AWS e System Design entram na ordem em que se sustentam. Algoritmos, Git e inglês são transversais aos 36 meses. Frontend, Python e IA entram na Fase 11, sobre base consolidada. Rotina de <strong>36–40h/semana</strong>, com 7h30 de sono fixo e domingo de descanso real.</p>
+          <div class="hero-tags" id="heroTags"></div>
+          <div id="trackBadges"></div>
+        </header>
         <div id="todayView"></div>
       </div>
 
@@ -228,6 +234,7 @@
           Construir e testar em dias consecutivos no mesmo domínio consolida mais que alternar assuntos.
         </div>
         <div id="faseAtualPicker" class="mb-3"></div>
+        <div id="routineModes" class="mb-4"></div>
 
         <div class="daily-day-tabs-wrap mb-3" aria-label="Navegação interna da rotina por dia da semana">
           <div class="daily-day-tabs-scroll">
@@ -257,15 +264,15 @@
       <!-- TAB PROGRESS -->
       <div class="tab-pane fade" id="tabProgress" role="tabpanel" aria-labelledby="btn-tabProgress">
         <h4 class="mb-1">Progresso e revisão</h4>
-        <p class="text-muted small mb-3">Responde "quanto avancei?" e "o que preciso revisar?". Marque tópicos como
-          concluídos nas páginas de trilha: eles alimentam este painel e entram na fila de revisão D1/D7/D30. Tudo fica
-          salvo apenas neste navegador.</p>
+        <p class="text-muted small mb-3">Responde "quanto avancei?" e "o que preciso revisar?". Cada objetivo percorre
+          Não iniciado → Em estudo → Praticado → Validado → Dominado. Validado exige uma URL de evidência; Dominado
+          também exige a revisão D30. Tudo fica salvo apenas neste navegador.</p>
 
         <div id="globalProgress" class="mb-4"></div>
 
         <div class="row g-4">
           <div class="col-12 col-lg-7">
-            <h5 class="mb-2">Progresso por trilha</h5>
+            <h5 class="mb-2">Domínio por trilha</h5>
             <div id="trackProgressBars"></div>
           </div>
           <div class="col-12 col-lg-5">
@@ -274,9 +281,14 @@
           </div>
         </div>
 
+        <h5 class="mt-4 mb-2">Simulados de entrevista</h5>
+        <p class="text-muted small mb-3">Do primeiro diagnóstico de Java/SQL à defesa completa do DevCore em inglês.
+          Um simulado só conta como realizado com nota e URL de gravação, feedback ou relatório.</p>
+        <div id="interviewPanel" class="mb-4"></div>
+
         <h5 class="mt-4 mb-2">Evolução</h5>
         <p class="text-muted small mb-3">Histórico do que você realmente fez, dia a dia. Só aparece depois do
-          primeiro tópico concluído — não há dados de exemplo.</p>
+          primeiro objetivo praticado — não há dados de exemplo.</p>
         <div id="evolucaoChart" class="mb-4"></div>
 
         <h5 class="mt-4 mb-2">Backup</h5>
@@ -293,6 +305,7 @@
         <h4 class="mb-1">Detalhamento por Fase</h4>
         <p class="text-muted small mb-3">Todas as trilhas organizadas nas 12 fases sequenciais, com foco, tópicos de
           domínio e entregáveis por fase. Trilhas marcadas como <em>inativas</em> em uma fase não ocupam blocos da rotina.</p>
+        <div id="dependencyMap" class="mb-4"></div>
         <div class="d-flex flex-wrap gap-1 mb-3" id="phaseFilterBtns"></div>
         <div id="phaseDetails"></div>
       </div>
@@ -307,32 +320,28 @@
       </div>
 
 
-      <!-- TAB PDFS -->
+      <!-- TAB BIBLIOTECA -->
       <div class="tab-pane fade" id="tabPdfs" role="tabpanel" aria-labelledby="btn-tabPdfs">
         <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-2">
           <div>
-            <h4 class="mb-1">PDF'S</h4>
-            <p class="text-muted small mb-3">Biblioteca central dos materiais completos em PDF. Cada documento abre em
-              uma nova guia para leitura, revisão e consulta técnica.</p>
+            <h4 class="mb-1">Biblioteca</h4>
+            <p class="text-muted small mb-3">Todos os livros de referência do plano, organizados por
+              <strong>tema</strong>, <strong>fase</strong> e <strong>importância</strong>. Os PDFs são obras
+              comerciais e não são hospedados aqui — esta é a referência bibliográfica.</p>
           </div>
-          <span class="pdf-counter" id="pdfCounter">12 PDFs disponíveis</span>
+          <span class="pdf-counter" id="pdfCounter"></span>
         </div>
 
         <div class="pdf-toolbar">
           <div class="pdf-search-box">
             <input type="search" id="pdfSearchInput"
-              placeholder="Pesquisar PDF por tema: Java, AWS, Git, Frontend, IA..."
-              aria-label="Pesquisar PDFs por tema">
+              placeholder="Buscar livro por título, autor ou tema..."
+              aria-label="Buscar na biblioteca">
           </div>
         </div>
 
-        <div class="row g-3" id="pdfCards"></div>
-        <div id="pdfSearchEmpty" class="track-search-empty mt-3" style="display:none">Nenhum PDF encontrado para essa
-          busca.</div>
-
-        <h5 class="mt-5 mb-1">Bibliografia — livros de referência</h5>
-        <p class="text-muted small mb-3">21 livros que apoiam o plano, organizados por área e pela fase em que entram.
-          Os arquivos foram retirados do repositório: aqui fica apenas a referência.</p>
+        <div id="pdfSearchEmpty" class="track-search-empty mt-3" style="display:none">Nenhum livro encontrado
+          para essa busca.</div>
         <div id="bibliografiaList"></div>
       </div>
 
@@ -351,7 +360,7 @@
         <div class="hours-margin-note mb-3">
           <strong>Como ler a sincronização:</strong>
           cada fase possui um núcleo dominante, mas nenhuma trilha evolui isolada. Cada fase se prova por
-          <span class="mono">exercícios e labs próprios</span>, independentes entre si; <span class="mono">Git</span>,
+          <span class="mono">exercícios próprios e 12 labs encadeados no DevCore</span>; <span class="mono">Git</span>,
           <span class="mono">Inglês</span> e <span class="mono">DSA</span> atravessam todas as 12 fases;
           <span class="mono">AWS</span>, <span class="mono">DevOps</span> e <span class="mono">Segurança</span> entram
           na ordem em que se sustentam tecnicamente.
@@ -398,17 +407,17 @@
         <div id="rulesList"></div>
       </div>
 
-    </div><!-- /tab-content -->
-  </div><!-- /container -->
-
-  </main>
+        </div><!-- /tab-content -->
+      </main>
+    </div><!-- /cc-main -->
+  </div><!-- /cc-shell -->
 
   <footer class="text-center py-4">
     <div class="container">
       <div class="d-flex flex-wrap justify-content-center gap-2 mb-2">
         <span class="htag htag-b">Backend Java Sênior · 2026–2029</span>
         <span class="htag htag-p">Exercícios e labs por fase</span>
-        <span class="htag htag-g">AWS Certifications</span>
+        <span class="htag htag-g">AWS Academy · arquitetura e operação</span>
         <span class="htag htag-o">Python/FastAPI · IA aplicada · Inglês · DevOps · Segurança · Git · Frontend · Arquitetura</span>
       </div>
       <p class="mb-0">Java/Spring · Banco SQL/NoSQL · Algoritmos e Estruturas de Dados · Testes · Docker e CI/CD ·
@@ -421,7 +430,7 @@
   <!-- Arquitetura modular (STUDY-025..031): dados em /data, comportamento em /assets/js.
        ES Modules exigem servir por HTTP — abrir o arquivo direto (file://) não funciona.
        Use `npx http-server public` ou o deploy da Vercel. -->
-  <script type="module" src="./assets/js/pages/dashboard.js"></script>
+  <script type="module" src="./assets/js/pages/dashboard.js?redesign-34"></script>
 </body>
 
 </html>

@@ -19,6 +19,36 @@ export const weekDays = [
   { key: "domingo", label: "Domingo", short: "DOM" }
 ];
 
+/*
+ * Protocolo de carga (DIDATIC-022).
+ *
+ * O modo altera a expectativa da semana, não remove sono, treino ou descanso.
+ * Mínima e Recuperação proíbem conteúdo novo: a meta é preservar continuidade.
+ */
+export const MODOS_ROTINA = {
+  ideal: {
+    nome: 'Ideal',
+    carga: '38h',
+    quando: 'Semana normal',
+    regra: 'Executar a rotina completa, o lab encadeado e as revisões.',
+    blocos: ['Java e domínio da fase', 'DSA', 'Trilhas complementares', 'Lab DevCore', 'D1/D7/D30']
+  },
+  minima: {
+    nome: 'Mínima',
+    carga: '12h',
+    quando: 'Trabalho pesado, prova ou viagem',
+    regra: 'Sem conteúdo novo. Preservar Java, DSA e apenas revisões vencidas.',
+    blocos: ['Java 2×2h', 'DSA 3×40min', 'D1/D7', 'Fechamento e sono']
+  },
+  recuperacao: {
+    nome: 'Recuperação',
+    carga: '5h',
+    quando: 'Doença, burnout ou atraso acumulado',
+    regra: 'Zero cobrança de avanço. Limpar a fila e concluir um lab pequeno.',
+    blocos: ['Revisões vencidas', '1 lab pequeno', 'Planejamento leve', 'Recuperação física']
+  }
+};
+
 export const weeklyFocusByDay = {
   segunda: {
     day: "Segunda-feira",
@@ -83,7 +113,7 @@ export const weeklyFocusByDay = {
     tracks: ["Exercícios", "Labs", "System Design", "Git"],
     practice: "4h contínuas resolvendo os exercícios e labs da fase corrente. Cada fase tem sua lista própria: exercícios de Java na Fase 1, lab de Docker e CI na Fase 3, lab de Terraform na Fase 9.",
     review: "O exercício foi resolvido sem consultar solução pronta? O lab roda do zero em outra máquina?",
-    connection: "Sem projeto contínuo, a prova de domínio é o exercício resolvido e o lab reproduzível — cada um independente do anterior.",
+    connection: "O exercício prova a habilidade da semana; o lab evolui a mesma release do DevCore iniciada na fase anterior.",
     strategy: "Um bloco longo e contínuo produz mais que quatro blocos picados. Sábado é o dia de aplicar sem interrupção o que foi estudado na semana."
   },
   domingo: {

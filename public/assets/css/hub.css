@@ -1,0 +1,1114 @@
+/*
+ * Hub compartilhado das 14 trilhas.
+ * Identidade vem de tracks-palette.css; estrutura e componentes são únicos.
+ */
+
+body.track-page.is-hub {
+  min-width: 0;
+  overflow-x: clip;
+  color: var(--text-1);
+  background:
+    radial-gradient(circle at 8% 2%, var(--accent-glow), transparent 31rem),
+    radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--accent-2) 9%, transparent), transparent 27rem),
+    var(--bg);
+  font: var(--step-0)/var(--leading-body) var(--font-body);
+}
+
+body.is-hub *,
+body.is-hub *::before,
+body.is-hub *::after {
+  box-sizing: border-box;
+}
+
+body.is-hub .container,
+body.is-hub .main,
+body.is-hub .footer-row {
+  width: min(100%, var(--content-max));
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+body.is-hub .ac-hub-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(29rem, 58vh, 35rem);
+  display: grid;
+  align-items: center;
+  border-bottom: 1px solid var(--accent-line);
+  background:
+    linear-gradient(112deg, color-mix(in srgb, var(--accent) 9%, var(--bg-deep)) 0%,
+      var(--bg) 55%, color-mix(in srgb, var(--accent-2) 6%, var(--bg-deep)) 100%);
+}
+
+body.is-hub .ac-hub-hero::before,
+body.is-hub .ac-hub-hero::after {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  pointer-events: none;
+}
+
+body.is-hub .ac-hub-hero::before {
+  inset: 0;
+  background:
+    radial-gradient(circle at 14% 6%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 33rem),
+    radial-gradient(circle at 84% 16%, color-mix(in srgb, var(--accent-2) 12%, transparent), transparent 29rem);
+}
+
+body.is-hub .ac-hub-hero::after {
+  width: clamp(17rem, 34vw, 34rem);
+  aspect-ratio: 1;
+  top: clamp(-11rem, -7vw, -4rem);
+  right: clamp(-8rem, -3vw, -1rem);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 4rem color-mix(in srgb, var(--accent) 3%, transparent),
+    0 0 0 9rem color-mix(in srgb, var(--accent-2) 2%, transparent);
+}
+
+body.is-hub .ac-hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 23rem);
+  align-items: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+body.is-hub .ac-hub-hero > .container {
+  padding-block: clamp(2.7rem, 5vw, 4.35rem);
+}
+
+body.is-hub .ac-hub-hero > .container > :where(.footer-link, .hero-back-link) {
+  display: none;
+}
+
+body.is-hub .hero-back-link,
+body.is-hub .hero-back {
+  display: inline-flex;
+  width: fit-content;
+  margin-bottom: var(--space-4);
+  padding: .5rem .72rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-2);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  font: 600 var(--step--1)/1 var(--font-mono);
+  text-decoration: none;
+  transition: var(--transition-interactive);
+}
+
+body.is-hub .hero-back-link:hover,
+body.is-hub .hero-back:hover {
+  border-color: var(--accent-line);
+  color: var(--text-1);
+  transform: translateY(-1px);
+}
+
+body.is-hub :where(.hero-label, .ac-eyebrow) {
+  margin: 0 0 var(--space-3);
+  color: var(--accent);
+  font: 700 var(--step--1)/1.5 var(--font-mono);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+body.is-hub .track-title,
+body.is-hub .ac-hub-hero h1 {
+  min-width: 0;
+  width: 100%;
+  max-width: 20ch;
+  margin: 0;
+  color: var(--text-1);
+  background: linear-gradient(100deg, var(--text-1) 0 26%, var(--accent) 58%, var(--accent-2) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  font: 800 var(--display-hero)/var(--leading-tight) var(--font-display);
+  letter-spacing: -.055em;
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-wrap: wrap;
+  -webkit-text-fill-color: transparent;
+}
+
+body.is-hub .track-lead {
+  max-width: 74ch;
+  margin: var(--space-5) 0 0;
+  color: var(--text-2);
+  font-size: var(--step-0);
+  line-height: var(--leading-body);
+}
+
+body.is-hub .track-badge-set {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-5);
+}
+
+body.is-hub .track-badge-set > * {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  padding: .42rem .66rem;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-sm);
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  font: 700 .7rem/1.25 var(--font-mono);
+}
+
+body.is-hub .ac-route-map {
+  min-width: 0;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid var(--accent-line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--accent) 6%, var(--panel-strong)), var(--panel-strong));
+  box-shadow: var(--shadow);
+}
+
+body.is-hub .ac-route-map__header {
+  display: grid;
+  gap: var(--space-1);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border);
+}
+
+body.is-hub .ac-route-map__header span {
+  color: var(--accent);
+  font: 700 .68rem/1.4 var(--font-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+body.is-hub .ac-route-map__header strong {
+  color: var(--text-1);
+  font: 700 1rem/1.25 var(--font-display);
+}
+
+body.is-hub .ac-route-map__flow {
+  display: grid;
+  gap: 0;
+  margin: var(--space-4) 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.is-hub .ac-route-map__flow li {
+  position: relative;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 2.1rem minmax(0, 1fr);
+  gap: var(--space-3);
+  padding-bottom: var(--space-3);
+}
+
+body.is-hub .ac-route-map__flow li:not(:last-child)::after {
+  position: absolute;
+  width: 1px;
+  top: 1.7rem;
+  bottom: 0;
+  left: 1rem;
+  background: var(--accent-line);
+  content: "";
+}
+
+body.is-hub .ac-route-map__flow li > span {
+  z-index: 1;
+  width: 2rem;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--accent-line);
+  border-radius: 50%;
+  color: var(--accent);
+  background: var(--panel-strong);
+  font: 700 .66rem/1 var(--font-mono);
+}
+
+body.is-hub .ac-route-map__flow li strong {
+  display: block;
+  color: var(--text-1);
+  font-size: .84rem;
+}
+
+body.is-hub .ac-route-map__flow li small {
+  display: block;
+  color: var(--text-3);
+  font-size: .72rem;
+  line-height: 1.45;
+}
+
+body.is-hub .ac-route-map > p {
+  margin: 0;
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--border);
+  color: var(--text-3);
+  font: .7rem/1.5 var(--font-mono);
+}
+
+body.is-hub .ac-route-map > p strong {
+  color: var(--accent);
+}
+
+body.is-hub .sitenav {
+  position: sticky;
+  z-index: var(--z-sticky);
+  top: 0;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--bg-deep) 93%, transparent);
+  backdrop-filter: blur(16px);
+}
+
+body.is-hub .sitenav-top {
+  min-height: 4.1rem;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+body.is-hub .sitenav-brand {
+  color: var(--text-1);
+  font: 800 1rem/1 var(--font-display);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.is-hub .sitenav-brand span {
+  margin-left: var(--space-2);
+  color: var(--accent);
+  font: 700 .68rem/1 var(--font-mono);
+}
+
+/* Subtítulo do topo ("Plano Integrado de Estudos"): descritor discreto,
+   separado do brand por um divisor. */
+body.is-hub .nav-ver {
+  padding-left: var(--space-4);
+  border-left: 1px solid var(--border);
+  color: var(--text-3);
+  font: 500 .74rem/1.2 var(--font-body);
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+
+body.is-hub .sitenav-top-right {
+  width: min(22rem, 100%);
+  margin-left: auto;
+}
+
+body.is-hub .search-box {
+  width: 100%;
+  min-height: 2.55rem;
+  padding: .65rem .85rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  background: var(--surface-2);
+}
+
+body.is-hub .sitenav-bar-outer {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  border-top: 1px solid var(--border);
+}
+
+body.is-hub .sitenav-bar-inner {
+  min-width: 0;
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-line) transparent;
+}
+
+body.is-hub .nav-group {
+  width: max-content;
+  min-width: max-content;
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+}
+
+/* Rótulo de grupo do nav (Base, Backend, …): eyebrow de categoria,
+   distinto dos links e com divisor entre grupos. */
+body.is-hub .nav-group-label {
+  display: inline-flex;
+  align-items: center;
+  align-self: stretch;
+  padding-inline: var(--space-4) var(--space-3);
+  color: var(--accent);
+  font: 700 .58rem/1 var(--font-mono);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+body.is-hub .nav-group + .nav-group .nav-group-label {
+  border-left: 1px solid var(--border);
+}
+
+body.is-hub .nav-link,
+body.is-hub .nav-scroll-btn {
+  min-height: 2.75rem;
+  border: 0;
+  color: var(--text-3);
+  background: transparent;
+  font: 600 .72rem/1.2 var(--font-mono);
+}
+
+body.is-hub .nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding-inline: var(--space-4);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+body.is-hub .nav-link:hover,
+body.is-hub .nav-link.active,
+body.is-hub .nav-link[aria-current="page"] {
+  color: var(--accent);
+}
+
+body.is-hub .nav-scroll-btn {
+  width: 2.5rem;
+}
+
+body.is-hub .main {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1rem, 2.6vw, 2rem);
+  padding-block: var(--section-gap) var(--space-16);
+}
+
+body.is-hub .sidebar {
+  position: sticky;
+  top: 7.5rem;
+  max-height: calc(100dvh - 9rem);
+  overflow-y: auto;
+  padding: var(--space-3);
+  border-right: 1px solid var(--border);
+}
+
+body.is-hub .sidebar-group {
+  display: grid;
+  gap: .15rem;
+}
+
+body.is-hub .sidebar-label {
+  margin: var(--space-3) var(--space-2) var(--space-2);
+  color: var(--accent);
+  font: 700 .68rem/1.3 var(--font-mono);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+body.is-hub .sidebar a {
+  display: block;
+  padding: .45rem .56rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-3);
+  font-size: .78rem;
+  line-height: 1.45;
+  text-decoration: none;
+}
+
+body.is-hub .sidebar a:hover,
+body.is-hub .sidebar a.active {
+  color: var(--text-1);
+  background: var(--accent-soft);
+}
+
+body.is-hub .content {
+  min-width: 0;
+  display: grid;
+  gap: var(--section-gap);
+  overflow: clip;
+}
+
+body.is-hub .doc-section {
+  min-width: 0;
+  padding: clamp(1rem, 2.4vw, 1.8rem);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(150deg, color-mix(in srgb, var(--accent) 3%, var(--panel)), var(--panel));
+  box-shadow: var(--shadow-sm);
+  scroll-margin-top: 9rem;
+}
+
+body.is-hub .doc-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+body.is-hub .doc-section-heading > * {
+  min-width: 0;
+}
+
+body.is-hub .doc-section h2 {
+  margin: 0;
+  color: var(--text-1);
+  font: 750 var(--step-3)/var(--leading-title) var(--font-display);
+  letter-spacing: -.035em;
+  overflow-wrap: break-word;
+  text-wrap: balance;
+  word-break: normal;
+}
+
+body.is-hub .doc-section h3 {
+  margin: var(--space-5) 0 var(--space-3);
+  color: var(--text-1);
+  font: 700 var(--step-1)/1.25 var(--font-display);
+  letter-spacing: -.02em;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+body.is-hub .doc-section h4 {
+  color: var(--text-1);
+}
+
+body.is-hub :where(.ac-contract, .ac-practice) {
+  padding: 0;
+  overflow: hidden;
+}
+
+body.is-hub :where(.ac-contract__header, .ac-practice__header) {
+  display: grid;
+  grid-template-columns: minmax(0, .9fr) minmax(18rem, 1.1fr);
+  gap: clamp(1rem, 3vw, 2.5rem);
+  align-items: end;
+  padding: clamp(1rem, 2.4vw, 1.8rem);
+  border-bottom: 1px solid var(--border);
+}
+
+body.is-hub :where(.ac-contract__header, .ac-practice__header) h2 {
+  margin-top: var(--space-2);
+}
+
+body.is-hub :where(.ac-contract__header, .ac-practice__header) > p {
+  max-width: 58ch;
+  margin: 0;
+}
+
+body.is-hub .ac-eyebrow {
+  color: var(--accent);
+  font: 700 .68rem/1.4 var(--font-mono);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+body.is-hub .ac-book-copy .ac-eyebrow,
+body.is-hub .ac-book-copy > strong {
+  display: block;
+}
+
+body.is-hub .ac-book-copy .ac-eyebrow {
+  margin-bottom: var(--space-2);
+}
+
+body.is-hub .ac-navigation {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  margin-top: var(--space-4);
+}
+
+body.is-hub .ac-navigation a {
+  display: inline-flex;
+  min-width: 0;
+  color: var(--accent);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+  text-underline-offset: .24em;
+}
+
+body.is-hub .ac-contract__flow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body.is-hub .doc-section .ac-contract__stage {
+  min-width: 0;
+  margin: 0;
+  padding: clamp(1rem, 2.2vw, 1.6rem);
+  border: 0;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--panel-strong) 90%, transparent);
+}
+
+body.is-hub .doc-section .ac-contract__stage + .ac-contract__stage {
+  border-left: 1px solid var(--border);
+}
+
+body.is-hub .doc-section .ac-contract__stage--outcome {
+  background: color-mix(in srgb, var(--accent) 6%, var(--panel-strong));
+}
+
+body.is-hub .ac-contract__step,
+body.is-hub .ac-practice__type,
+body.is-hub .ac-practice__proof > span {
+  color: var(--accent);
+  font: 700 .65rem/1.35 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+body.is-hub .ac-contract__stage h3 {
+  margin: var(--space-2) 0 var(--space-3);
+}
+
+body.is-hub .ac-contract__stage ul {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.is-hub .ac-contract__stage li {
+  position: relative;
+  padding-left: 1.25rem;
+}
+
+body.is-hub .ac-contract__stage li > span {
+  position: absolute;
+  width: .44rem;
+  height: .44rem;
+  top: .68em;
+  left: 0;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+}
+
+body.is-hub .ac-contract__stage--exit li > span {
+  border-radius: var(--radius-xs);
+  background: var(--accent);
+  box-shadow: 0 0 .75rem var(--accent-glow);
+}
+
+body.is-hub .ac-practice__list {
+  display: grid;
+}
+
+body.is-hub .doc-section .ac-practice__item {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) minmax(16rem, 22rem);
+  gap: var(--space-4);
+  align-items: center;
+  margin: 0;
+  padding: var(--space-4) clamp(1rem, 2.4vw, 1.8rem);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body.is-hub .doc-section .ac-practice__item + .ac-practice__item {
+  border-top: 1px solid var(--border);
+}
+
+body.is-hub .ac-practice__index {
+  color: var(--accent);
+  font: 700 1rem/1 var(--font-mono);
+}
+
+body.is-hub .ac-practice__body h3 {
+  margin: var(--space-1) 0 var(--space-1);
+  font-size: 1rem;
+}
+
+body.is-hub :where(.ac-practice__body, .ac-practice__proof) p {
+  margin: 0;
+  font-size: var(--step--1);
+}
+
+body.is-hub .ac-practice__proof {
+  min-width: 0;
+  padding: var(--space-3);
+  border: 1px dashed var(--accent-line);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+
+body.is-hub .section-subtitle,
+body.is-hub .doc-section p,
+body.is-hub .doc-section li,
+body.is-hub .doc-section dd {
+  color: var(--text-2);
+  line-height: var(--leading-body);
+}
+
+body.is-hub .section-subtitle {
+  max-width: var(--measure);
+  margin: var(--space-2) 0 0;
+}
+
+body.is-hub .section-badge,
+body.is-hub .tag,
+body.is-hub .metric-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: .42rem .66rem;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-sm);
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  font: 700 .7rem/1.3 var(--font-mono);
+}
+
+body.is-hub .metric-strip,
+body.is-hub .ac-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+body.is-hub .metric-pill {
+  min-height: 5.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+body.is-hub .metric-pill span,
+body.is-hub .metric-pill strong {
+  max-width: 100%;
+  color: var(--accent);
+  font: 800 clamp(1rem, 1.4vw, var(--step-2))/1.1 var(--font-display);
+  overflow-wrap: anywhere;
+}
+
+body.is-hub .metric-pill small {
+  color: var(--text-3);
+}
+
+body.is-hub .ac-part-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+body.is-hub .ac-part-card {
+  min-width: 0;
+  min-height: 12rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--space-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-2);
+  background: var(--surface-soft);
+  text-decoration: none;
+  transition: var(--transition-interactive);
+}
+
+body.is-hub .ac-part-card:hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+body.is-hub .ac-part-card > span {
+  margin-bottom: var(--space-3);
+  color: var(--accent);
+  font: 700 .68rem/1.35 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+body.is-hub .ac-part-card > strong {
+  color: var(--text-1);
+  font: 700 var(--step-1)/1.25 var(--font-display);
+}
+
+body.is-hub .ac-part-card p {
+  margin: var(--space-2) 0 var(--space-4);
+}
+
+body.is-hub .ac-part-card b {
+  margin-top: auto;
+  color: var(--accent);
+  font: 700 .74rem/1.2 var(--font-mono);
+}
+
+body.is-hub .doc-section :where(
+  [class$="-grid"],
+  [class*="-grid "],
+  .grid,
+  .doc-grid-2,
+  .doc-grid-3,
+  .doc-grid-4
+) {
+  min-width: 0;
+}
+
+body.is-hub :where(
+  .doc-grid-2,
+  .doc-grid-3,
+  .doc-grid-4,
+  .doc-hero-card,
+  .hero-content-grid,
+  .phase-doc-grid,
+  .module-grid,
+  .phase-grid,
+  .project-grid,
+  .roadmap-grid,
+  .metrics-grid,
+  .check-grid,
+  .ref-grid,
+  .ref-grid-books
+) {
+  min-width: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+body.is-hub :where(.doc-grid-2, .doc-hero-card, .hero-content-grid, .module-grid, .phase-grid, .check-grid) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.is-hub :where(.doc-grid-3, .project-grid, .ref-grid, .ref-grid-books) {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+body.is-hub :where(.doc-grid-4, .metrics-grid) {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+body.is-hub :where(.phase-doc-grid, .roadmap-grid) {
+  grid-template-columns: repeat(auto-fit, minmax(min(19rem, 100%), 1fr));
+}
+
+body.is-hub .doc-section :where(
+  article,
+  .card,
+  .panel,
+  .callout,
+  .mini-card,
+  .phase-card,
+  .module-card,
+  .project-card,
+  .exam-card,
+  .ref-card,
+  .domain-card,
+  .phase-doc-card
+) {
+  min-width: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-soft);
+  overflow-wrap: break-word;
+}
+
+body.is-hub .doc-section .mini-card > strong:first-child,
+body.is-hub .doc-section .mini-card > span {
+  display: block;
+}
+
+body.is-hub .doc-section .mini-card > strong:first-child {
+  margin-bottom: var(--space-1);
+}
+
+body.is-hub .doc-section :where(.module-card, .ref-card, .phase-doc-card) {
+  position: relative;
+  overflow: hidden;
+}
+
+body.is-hub .doc-section :where(.module-card, .ref-card, .phase-doc-card)::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), var(--accent-2));
+  content: "";
+}
+
+body.is-hub .doc-section :where(.mini-card, .phase-card, .module-card, .project-card, .ref-card, .phase-doc-card) {
+  transition: var(--transition-interactive);
+}
+
+body.is-hub .doc-section :where(.mini-card, .phase-card, .module-card, .project-card, .ref-card, .phase-doc-card):hover {
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  transform: translateY(-1px);
+}
+
+body.is-hub .doc-section :where(.eyebrow, [class*="kicker"]) {
+  color: var(--accent);
+  font: 700 .68rem/1.4 var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+body.is-hub .doc-section :where(pre, .code-block) {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-deep);
+  color: var(--text-1);
+  font: .78rem/1.65 var(--font-mono);
+}
+
+body.is-hub .doc-section :where(a) {
+  color: var(--accent-strong);
+  text-underline-offset: .18em;
+}
+
+body.is-hub .doc-section :where(a):hover {
+  color: var(--text-1);
+}
+
+body.is-hub .callout,
+body.is-hub [class*="callout"] {
+  padding: var(--space-4);
+  border: 1px solid var(--accent-line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  background: var(--accent-soft);
+}
+
+body.is-hub .table-responsive,
+body.is-hub .table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  -webkit-overflow-scrolling: touch;
+}
+
+body.is-hub .table-wrap > table {
+  min-width: 44rem;
+}
+
+body.is-hub .doc-table {
+  width: 100%;
+  min-width: 50rem;
+  border-collapse: collapse;
+}
+
+body.is-hub .doc-table th,
+body.is-hub .doc-table td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-2);
+  font-size: .8rem;
+  line-height: 1.5;
+  text-align: left;
+  vertical-align: top;
+}
+
+body.is-hub .doc-table th {
+  color: var(--accent);
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+body.is-hub .page-footer {
+  padding-block: var(--space-8);
+  border-top: 1px solid var(--border);
+  background: var(--bg-deep);
+}
+
+body.is-hub .footer-row {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+body.is-hub .back-to-top {
+  position: fixed;
+  z-index: var(--z-sticky);
+  right: var(--space-4);
+  bottom: var(--space-4);
+  width: 2.75rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-sm);
+  color: var(--accent);
+  background: var(--panel-strong);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(.5rem);
+  transition: var(--transition-interactive);
+}
+
+body.is-hub .back-to-top:is(.is-visible, .show) {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+body.is-hub :where(a, button, input, summary):focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 3px;
+  box-shadow: var(--focus-ring);
+}
+
+@media (max-width: 72rem) {
+  body.is-hub .sitenav-top {
+    flex-wrap: wrap;
+    padding-block: var(--space-3);
+  }
+
+}
+
+@media (max-width: 64rem) {
+  body.is-hub .main {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.is-hub .sidebar {
+    display: none;
+  }
+
+  body.is-hub :where(.doc-grid-3, .doc-grid-4, .metrics-grid, .project-grid, .ref-grid, .ref-grid-books) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.is-hub .doc-section .ac-practice__item {
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+  }
+
+  body.is-hub .ac-practice__proof {
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 64rem) {
+  body.is-hub .ac-hero-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 48rem) {
+  body.is-hub .ac-hub-hero {
+    min-height: 0;
+  }
+
+  body.is-hub .ac-hub-hero > .container {
+    padding-block: var(--space-10);
+  }
+
+  body.is-hub .sitenav {
+    position: relative;
+  }
+
+  body.is-hub .sitenav-top-right {
+    width: 100%;
+    margin-left: 0;
+    overflow-x: auto;
+  }
+
+  body.is-hub .sitenav-top :where(.nav-ver, .nav-back) {
+    display: none;
+  }
+
+  body.is-hub .doc-section-heading {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body.is-hub .doc-section-heading .section-badge {
+    align-self: flex-start;
+  }
+
+  body.is-hub .doc-section {
+    scroll-margin-top: 1rem;
+  }
+
+  body.is-hub :where(.ac-contract__header, .ac-practice__header),
+  body.is-hub .ac-contract__flow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.is-hub .doc-section .ac-contract__stage + .ac-contract__stage {
+    border-top: 1px solid var(--border);
+    border-left: 0;
+  }
+
+  body.is-hub :where(
+    .doc-grid-2,
+    .doc-grid-3,
+    .doc-grid-4,
+    .doc-hero-card,
+    .hero-content-grid,
+    .phase-doc-grid,
+    .module-grid,
+    .phase-grid,
+    .project-grid,
+    .roadmap-grid,
+    .metrics-grid,
+    .check-grid,
+    .ref-grid,
+    .ref-grid-books
+  ),
+  body.is-hub .ac-part-grid,
+  body.is-hub .metric-strip,
+  body.is-hub .ac-stat-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.is-hub .footer-row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 30rem) {
+  body.is-hub .track-title .ac-title-nowrap {
+    display: inline-block;
+    max-width: 100%;
+    font-size: .94em;
+    white-space: nowrap;
+  }
+
+  body.is-hub .track-title .ac-title-tail {
+    display: inline-block;
+    max-width: 100%;
+    font-size: .86em;
+    white-space: nowrap;
+  }
+
+  body.is-hub .ac-navigation {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  body.is-hub .track-title,
+  body.is-hub .ac-hub-hero h1 {
+    max-width: 100%;
+    font-size: clamp(2rem, 9vw, 2.75rem);
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+
+  body.is-hub .ac-route-map {
+    padding: .9rem;
+  }
+
+  body.is-hub .doc-section {
+    padding: .9rem;
+  }
+
+  body.is-hub .sitenav-brand {
+    white-space: normal;
+  }
+}

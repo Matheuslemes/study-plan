@@ -13,33 +13,53 @@ public/
 │
 ├── data/                       ⭐ FONTE ÚNICA DE VERDADE
 │   ├── config.js               CONFIG global, paleta de fases, ciclos, ciclo mensal
-│   ├── tracks.js               trilhas, cores (CK), badges e cards de navegação
+│   ├── tracks.js               registro canônico, aliases temporários e cards de navegação
 │   ├── phases.js               as 12 fases (P), inglês por fase e helpers de fase ativa
 │   ├── routine.js              dias da semana, foco diário e grades (seg–dom)
 │   ├── pdfs.js                 PDFs próprios + bibliografia (21 livros, só referência)
-│   └── milestones.js           regras, certificações AWS e sincronização
+│   ├── milestones.js           regras, certificações AWS e sincronização
+│   ├── track-guides.js         pré-requisitos, objetivos e critérios das trilhas
+│   ├── track-exercises.js      exercícios e evidências esperadas por trilha
+│   ├── learning-path.js        mapa explícito de dependências
+│   ├── interviews.js           12 simulados progressivos
+│   ├── academy-data-factory.js schema compartilhado das Academias novas
+│   └── *-advanced.js           conteúdo, módulos, casos, rubricas, projetos e livros
 │
 ├── assets/
 │   ├── css/
-│   │   ├── tokens.css          ⭐ fonte única de cores e design tokens (:root)
-│   │   ├── base.css            reset, tipografia, fundo da página
-│   │   └── components.css      componentes do dashboard (extraído do inline)
+│   │   ├── tokens.css          ⭐ tokens neutros e semânticos
+│   │   ├── tracks-palette.css  ⭐ identidade cromática das 14 trilhas
+│   │   ├── base.css            reset, tipografia e progresso
+│   │   ├── system.css          componentes da vista “O Sistema”
+│   │   ├── hub.css             Hub compartilhado das 14 trilhas
+│   │   └── academy.css         Academia compartilhada
 │   └── js/
 │       ├── core/               render · search · nav · storage · pwa
-│       ├── features/           routine · tracks · phases · sync · active-phase · track-roadmap ·
+│       ├── features/           routine · tracks · phases · sync · active-phase · track-roadmap · track-guide · track-exercises ·
 │       │                       progress · review · history · charts · backup ·
-│       │                       certifications · checklist · today · global-search
-│       ├── pages/              dashboard.js (index) · trilha.js (páginas de trilha)
-│       └── data.js, index.js, trilha.js   ⚠️ legado — ver abaixo
+│       │                       certifications · checklist · today · global-search · recovery ·
+│       │                       dependency-map · interviews
+│       └── pages/              dashboard.js · trilha.js · hub.js · academy.js
 │   └── vendor/                 Bootstrap e fontes autohospedados (STUDY-067)
 │
-├── trilhas/                    14 páginas de consulta por área
+├── trilhas/                    14 Hubs + 65 shells de Academia; Treino permanece registro
+├── examples/java21-senior/     exemplos Java 21 compiláveis e smoke test
 └── pdfs/                       12 PDFs próprios + BIBLIOGRAFIA.md
+
+scripts/
+├── serve.mjs                   servidor estático local sem dependências
+└── validate-content.mjs        valida os critérios DIDATIC P0–P3
 ```
 
 ### Sobre a contagem de trilhas
 
-São **14 páginas de trilha**, não 15. A página `blog.html` (DevCore Platform) foi removida quando o projeto foi descontinuado — o plano não tem mais um projeto integrador contínuo, e cada fase se prova por exercícios e labs independentes.
+São **14 páginas de trilha**, não 15. A página `blog.html` foi removida; o produto integrador agora é o **DevCore**, evoluído diretamente pelos 12 labs descritos em `data/phases.js`, sem duplicar uma página de conteúdo.
+
+`ia.html` é a visão geral da trilha. A Academia de IA usa uma fonte única (`data/ia-advanced.js`) e seis partes em `trilhas/ia/`: fundamentos matemáticos/Python, dados/ML, deep learning/visão/NLP, LLMs/generativa, produção/governança e prática expert/avaliação. São 30 módulos, 7 projetos encadeados e um único cronograma integrado ao plano.
+
+`java.html` continua como visão geral e ganhou a Academia Java 21+: 20 módulos renderizados a partir de
+`data/java-advanced.js` em quatro páginas (`fundamentos`, `runtime`, `producao` e `avaliacao`). O percurso inclui
+60 exercícios, 40 perguntas, cinco casos e dois capstones encadeados.
 
 Em `data/phases.js` existem 15 chaves de conteúdo por fase (`java`, `dsa`, `db`, `git`, `arquitetura`, `devops`, `sec`, `pratica`, `frontend`, `py`, `ia`, `math`, `fin`, `ingles`, `aws`). Nem toda chave tem página própria: `dsa` e `pratica` aparecem apenas no dashboard e na rotina.
 
@@ -48,9 +68,7 @@ Em `data/phases.js` existem 15 chaves de conteúdo por fase (`java`, `dsa`, `db`
 **É obrigatório servir por HTTP.** O dashboard usa ES Modules, e abrir `index.html` direto pelo `file://` falha por política de CORS do navegador.
 
 ```bash
-cd public
-npx http-server -p 5599 -c-1
-# ou: python -m http.server 5599
+node scripts/serve.mjs 5599
 ```
 
 Depois acesse `http://localhost:5599`.
@@ -85,9 +103,9 @@ O seletor de fase fica no topo da aba **Rotina diária**. Trocar de fase muda o 
 
 Helpers disponíveis em `data/phases.js`: `faseporId`, `conteudoDaFase`, `trilhaAtiva`, `trilhasAtivas`, `faseDeEntrada` e `chaveTrilha`.
 
-### Roadmap das páginas de trilha
+### Contrato e roadmap das páginas de trilha
 
-Cada página declara sua identidade em `<body data-track="...">`. O módulo `pages/trilha.js` lê essa chave e injeta em `#phaseRoadmap` o roadmap das 12 fases daquela trilha, vindo de `data/phases.js`.
+Cada página declara sua identidade em `<body data-track="...">`. O módulo `pages/trilha.js` lê essa chave e injeta no topo o contrato da trilha — pré-requisitos, objetivos e critérios observáveis de conclusão — vindo de `data/track-guides.js`. Em `#phaseRoadmap`, injeta também o roadmap das 12 fases vindo de `data/phases.js`.
 
 Antes disso, o roadmap era escrito à mão em cada página, no modelo antigo de 8 fases — e por isso nenhuma delas jamais foi atualizada. Agora não há como dessincronizar: mudar uma fase muda as 14 páginas.
 
@@ -109,13 +127,15 @@ Wrapper obrigatório sobre `localStorage` — nunca acesse a API direto, pois em
 
 ### Progresso, revisão e certificações (aba "Progresso")
 
-Tudo salvo em `localStorage`, só neste navegador. Chaves: `topicosConcluidos`, `filaRevisao`, `certificacoes`, `faseAtual`, `checklist:financeiro`.
+Tudo salvo em `localStorage`, só neste navegador. Além de progresso, revisão, certificações e fase atual, o backup inclui o modo da rotina, o histórico semanal desse modo e os resultados dos simulados.
 
-- **Progresso** (`features/progress.js`) — cada item de conteúdo de fase é um tópico com id `trilha:fase:índice`. Marcar um tópico no roadmap de uma trilha persiste o id e alimenta as barras por trilha e o anel de progresso global. São 286 tópicos contáveis no plano.
-- **Revisão D0/D1/D7/D30** (`features/review.js`) — concluir um tópico registra o D0 e agenda D1; a view "Revisões de hoje" lista o que vence hoje ou está atrasado; marcar como revisado avança D1→D7→D30 e, depois do D30, consolida (sai da fila). Quatro datas fixas, sem SM-2.
+- **Objetivos observáveis** (`data/phases.js`) — os 298 tópicos contáveis são convertidos na fonte única para verbo de ação + critério observável, de modo que roadmap, busca, rotina e revisão sempre exibam o mesmo objetivo. O conjunto inclui os nove padrões DSA antes ausentes.
+- **Domínio** (`features/progress.js`) — cada objetivo tem id `trilha:fase:índice` e percorre `Não iniciado → Em estudo → Praticado → Validado → Dominado`. O progresso é ponderado pelos cinco níveis. `Validado` exige URL de evidência; `Dominado` exige evidência e D30. Cada troca de URL preserva o histórico das evidências anteriores.
+- **Revisão D0/D1/D7/D30** (`features/review.js`) — praticar um objetivo registra o D0 e agenda D1; a view "Revisões de hoje" diferencia exercícios de **conceito**, **código** e **arquitetura**, com uma ação própria para cada marco. Marcar como revisado avança D1→D7→D30. A conclusão de D30 fica registrada no objetivo e, se ele já estiver validado, promove para `Dominado`.
 - **Certificações** (`features/certifications.js`) — só CLF-C02 e SAA-C03, com status, data-alvo e passos de preparo persistidos.
 - **Checklist** (`features/checklist.js`) — os 28 checkboxes de autoavaliação de `financeiro.html` agora persistem por posição.
 - **Fase atual** — o card da fase corrente ganha o selo "▸ FASE ATUAL" no dashboard, e trocar de fase no seletor (aba Rotina) move o destaque e atualiza o progresso global.
+- **Simulados** (`features/interviews.js`) — 12 entrevistas progressivas, uma por fase. “Realizado” exige nota e URL de gravação, feedback ou relatório.
 
 O evento `progress:change`/`review:change` mantém dashboard e páginas de trilha em sincronia sem recarregar.
 
@@ -138,16 +158,22 @@ Refatoração…       Arquitetura…        Inglês técnico…
 
 Trocar a fase no seletor muda o conteúdo dos cards. No domingo, a view vira um aviso de descanso em vez de blocos de estudo.
 
+### Continuidade e dependências
+
+- **Três modos de rotina** (`features/recovery.js`) — Ideal (38h), Mínima (12h) e Recuperação (5h). O modo vale para a semana corrente; duas semanas mínimas consecutivas disparam revisão obrigatória do escopo da fase.
+- **Mapa de dependências** (`features/dependency-map.js`) — mostra a cadeia Base → Backend → Entrega → Segurança → Operação → Arquitetura → Escala → Produto, além das cinco trilhas transversais.
+- **Exercícios nas páginas** (`features/track-exercises.js`) — cada trilha apresenta três tarefas práticas e a evidência esperada logo após seu contrato didático.
+
 ### Busca global e navegação
 
-- **Busca global** (`features/global-search.js`) — o campo do topo indexa trilhas, PDFs e os 286 tópicos de conteúdo, agrupando os resultados. A tecla <kbd>/</kbd> foca o campo de qualquer lugar.
+- **Busca global** (`features/global-search.js`) — o campo do topo indexa trilhas, PDFs e objetivos observáveis, agrupando os resultados. A tecla <kbd>/</kbd> foca o campo de qualquer lugar.
 - **Trilhas relacionadas** — cada página de trilha termina com links para as trilhas vizinhas no plano (Java → Banco → Arquitetura → Segurança), definidas em `trilhasRelacionadas` (`data/tracks.js`).
 - **Ordem das abas** — "Hoje" é a aba inicial e "Sincronização" subiu da 8ª para a 3ª posição.
 
 ### Histórico, evolução e backup
 
-- **Histórico diário** (`features/history.js`) — registra tópicos concluídos e revisões por dia. Alimenta o gráfico e a contagem de dias seguidos.
-- **Evolução** (`features/charts.js`) — SVG gerado à mão, sem biblioteca: barras de tópicos por semana (8 semanas) e heatmap de atividade (30 dias). Aparece só quando há dados reais — não há valores de exemplo.
+- **Histórico diário** (`features/history.js`) — registra objetivos que chegaram a `Praticado` e revisões por dia. Alimenta o gráfico e a contagem de dias seguidos.
+- **Evolução** (`features/charts.js`) — SVG gerado à mão, sem biblioteca: barras de objetivos praticados por semana (8 semanas) e heatmap de atividade (30 dias). Aparece só quando há dados reais — não há valores de exemplo.
 - **Backup** (`features/backup.js`) — exporta todo o `localStorage` do plano em JSON e restaura em outra máquina. Como o estado vive só no navegador, esse é o único caminho de saída.
 
 ### Sem dependências externas
@@ -171,48 +197,50 @@ Estratégia deliberadamente conservadora:
 
 ### SEO
 
-`sitemap.xml` (15 URLs), `robots.txt`, mais Open Graph e `canonical` em todas as páginas. A URL base (`https://study-plan.vercel.app`) está no topo de `sitemap.xml` e no `robots.txt` — **troque nos dois se o domínio publicado for outro**.
+`sitemap.xml` (22 URLs), `robots.txt`, mais Open Graph e `canonical` nas páginas. A URL base (`https://study-plan.vercel.app`) está no topo de `sitemap.xml` e no `robots.txt` — **troque nos dois se o domínio publicado for outro**.
 
 Se preferir manter o plano fora dos buscadores (é um documento de carreira pessoal), o `robots.txt` traz a linha alternativa comentada.
 
 ### Acessibilidade
 
-- `<main id="conteudo">` e skip-link ("Pular para o conteúdo") nas 15 páginas.
+- `<main id="conteudo">` e skip-link ("Pular para o conteúdo") nas 22 páginas.
 - Foco visível consistente via `:focus-visible`, sem penalizar quem usa mouse.
 - `--text3` corrigido de `#64748b` (3.98:1, falhava WCAG AA) para `#8592a6` (6.0:1).
 - `@media (prefers-reduced-motion: reduce)` desliga animações e o scroll suave.
 - Tabs com `role="tab"`/`role="tabpanel"`, `aria-controls` e `aria-selected` mantido em sincronia.
+- Modos de rotina usam grupo de botões com `aria-pressed`; formulários de entrevista e evidência expõem erros em regiões `role="alert"`.
 - Favicon SVG próprio (`favicon.svg`).
-
-### Sobre os arquivos legados em `assets/js/`
-
-`data.js`, `index.js` e `trilha.js` (1.413 linhas) **não são carregados por nenhuma página**. São uma tentativa anterior de chegar a esta mesma arquitetura modular, e foram usados como referência:
-
-- o padrão de separar dados de render veio deles;
-- o helper `escapeHtml` em `core/render.js` é uma adaptação do `htmlEscape` de `trilha.js` — o código anterior montava HTML sem nenhum escaping.
-
-O **conteúdo** deles está obsoleto: descrevem o modelo antigo de 8 fases, o projeto DevCore Platform (descontinuado) e uma paleta de cores que não é mais usada. Não devem ser reaproveitados como dados — apenas como registro histórico. Podem ser removidos com segurança.
 
 ## Publicação na Vercel
 
 `vercel.json` já define `cleanUrls`. Framework Preset `Other`, Build Command vazio, Output Directory `public`.
 
-## Dívida técnica conhecida
+## Decisão de armazenamento
 
-| Item | Situação |
-|---|---|
-| `!important` nas trilhas | As páginas de trilha ainda têm ~45 `!important` cada, concentrados nos blocos de patch (`-responsive-refactor`, `-theme-overrides`). Vários eram para vencer o antigo `styles.css` (já removido) e hoje são redundantes, mas removê-los em massa sem validar cada breakpoint das 14 páginas quebraria layout silenciosamente. A redução depende de consolidar esses blocos de patch — dívida P2. O dashboard já está em 5 (todos justificados: Bootstrap e utilitários). |
-| CSS de componentes das trilhas | Cada página de trilha ainda tem ~1.200–1.800 linhas de CSS inline, ~60% comum entre elas (`.doc-section`, `.track-hero-page`, `.reference-card`…). Extrair um `trilha-components.css` compartilhado é o próximo passo — hoje só as cores (`tokens.css`) e o reset (`base.css`) são compartilhados. |
+Os PDFs comerciais continuam versionados por decisão consciente do proprietário. Essa escolha aumenta o repositório e exige atenção antes de publicar o site abertamente, mas não é tratada como dívida a remover automaticamente.
 
 ## Validação rápida
 
+Execute primeiro a validação automatizada:
+
+```bash
+node scripts/validate-content.mjs
+```
+
 - [ ] O site é servido por HTTP (não `file://`).
 - [ ] Console do navegador sem erros ao carregar `index.html`.
-- [ ] As 8 abas renderizam: Visão Geral, Consulta rápida, Rotina diária, Fases, Trilhas, PDFs, Sincronização, Regras.
+- [ ] As 10 abas renderizam: Hoje, Visão Geral, Sincronização, Rotina, Progresso, Consulta, Fases, Trilhas, PDFs e Regras.
 - [ ] Os 7 dias da rotina abrem, e todo dia começa com o bloco de sono.
 - [ ] Nenhum dia útil tem mais de 2 domínios técnicos.
 - [ ] O seletor de fase muda o conteúdo dos blocos da rotina.
-- [ ] As 14 páginas de trilha mostram o roadmap de 12 fases em `#phaseRoadmap`.
+- [ ] As 13 trilhas curriculares mostram o roadmap de 12 fases em `#phaseRoadmap`; Treino mantém seu plano físico próprio.
+- [ ] As 14 páginas começam com pré-requisitos, objetivos e critérios de conclusão.
+- [ ] As 14 páginas mostram três exercícios com evidência esperada.
+- [ ] `Validado` recusa tópico sem URL HTTP(S), `Dominado` recusa tópico sem D30 e trocas de URL aparecem no histórico.
+- [ ] Modos Ideal/Mínima/Recuperação, mapa de oito dependências e 12 simulados aparecem no dashboard.
+- [ ] Nenhuma página de trilha contém `<style>` inline; Hubs carregam `hub.css` e Academias carregam `academy.css`.
+- [ ] Nenhum arquivo `*-hub.css`, `*-academy.css`, `*-hub.js` ou `*-module.js` específico voltou a ser criado.
+- [ ] As seis partes de IA abrem, pesquisam e retornam ao Hub.
 - [ ] Buscas de trilha e de PDF filtram e mostram o aviso de lista vazia.
 - [ ] A bibliografia lista 21 livros sem link para PDF.
 - [ ] Nenhum link interno retorna 404.

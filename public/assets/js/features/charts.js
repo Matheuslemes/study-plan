@@ -48,7 +48,7 @@ function svgBarras(dados, cor) {
     <text x="4" y="16" font-size="8" fill="currentColor" opacity=".5" font-family="IBM Plex Mono, monospace">${max}</text>`;
 
   return `<svg viewBox="0 0 ${L} ${A}" class="chart-svg" role="img"
-    aria-label="Tópicos concluídos por semana nas últimas ${dados.length} semanas">${eixo}${barras}</svg>`;
+    aria-label="Objetivos praticados por semana nas últimas ${dados.length} semanas">${eixo}${barras}</svg>`;
 }
 
 /** Heatmap dos últimos 30 dias. */
@@ -86,13 +86,13 @@ export function renderEvolucao(containerId, cor = '#22d3b0') {
     <div class="chart-stats">
       <div class="chart-stat"><span class="chart-stat-num">${t.diasAtivos}</span><span>dias com atividade</span></div>
       <div class="chart-stat"><span class="chart-stat-num">${seq}</span><span>dias seguidos</span></div>
-      <div class="chart-stat"><span class="chart-stat-num">${t.topicos}</span><span>tópicos concluídos</span></div>
+      <div class="chart-stat"><span class="chart-stat-num">${t.topicos}</span><span>objetivos praticados</span></div>
       <div class="chart-stat"><span class="chart-stat-num">${t.revisoes}</span><span>revisões feitas</span></div>
     </div>
 
     ${houve ? `
       <div class="chart-block">
-        <h6 class="chart-title">Tópicos concluídos por semana <span>últimas 8 semanas</span></h6>
+        <h6 class="chart-title">Objetivos praticados por semana <span>últimas 8 semanas</span></h6>
         ${svgBarras(semanas, cor)}
       </div>
       <div class="chart-block">
@@ -102,7 +102,7 @@ export function renderEvolucao(containerId, cor = '#22d3b0') {
       </div>`
     : `<div class="chart-empty">
         <strong>Ainda não há histórico.</strong>
-        <p>Marque tópicos como concluídos nas páginas de trilha e conclua revisões: a evolução por semana
+        <p>Leve objetivos a Praticado nas páginas de trilha e conclua revisões: a evolução por semana
         e a atividade diária aparecem aqui a partir do primeiro registro.</p>
       </div>`}`;
 }

@@ -27,6 +27,9 @@ export const P = [
     ],
     "dsa": [
       "Base: arrays, listas, strings, hashing, pilhas, filas e complexidade Big O",
+      "Collections Framework em Java: escolher entre List, Set, Map, Queue e Deque pela complexidade e semântica",
+      "Contrato de equals em entidades e value objects: reflexividade, simetria, transitividade, consistência e null",
+      "Contrato de hashCode: coerência com equals, distribuição de hash e efeito em HashMap e HashSet",
       "Rotina fixa 3×/semana, 40min — do mês 1 ao mês 36, sem interrupção",
       "Método: resolver, explicar em voz alta, reimplementar sem consultar",
       "Meta da fase: 60 problemas fáceis resolvidos e explicados"
@@ -56,7 +59,7 @@ export const P = [
     "pratica": [
       "Exercícios de Java: 50 problemas resolvidos cobrindo OO, collections, streams e exceptions",
       "Lab de SQL: modelar do zero um domínio pequeno, criar o schema e escrever 30 consultas",
-      "Entregável da fase: uma aplicação de console com regra de negócio real, versionada no Git"
+      "DevCore F1 — Fundação: iniciar um único produto com domínio de negócio, aplicação Java de console, schema PostgreSQL e histórico Git"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -90,10 +93,13 @@ export const P = [
       "Java avançado: streams complexos, Optional, generics avançados, imutabilidade, enums ricos e tratamento de exceções por camada",
       "Spring Boot 3: REST APIs, controllers, services, DTOs, Bean Validation, exception handling global e OpenAPI",
       "Spring Data JPA: entidades, repositories, relacionamentos, paginação, specifications e transações",
-      "Concorrência básica: threads, ExecutorService, CompletableFuture e noção de virtual threads"
+      "Concorrência básica: threads, ExecutorService, CompletableFuture e Virtual Threads, incluindo quando NÃO usar em carga CPU-bound, pinning ou gargalos de pool de conexão"
     ],
     "dsa": [
       "Estruturas lineares avançadas: deque, listas ligadas, two pointers e sliding window",
+      "Comparator e Comparable: ordenar objetos por múltiplos critérios sem violar equals",
+      "Prefix sum: responder consultas de intervalo e reconhecer quando pré-computação reduz a complexidade",
+      "Binary search: buscar valores e limites em dados ordenados, inclusive binary search on answer",
       "Recursão e backtracking introdutório",
       "Meta da fase: 60 problemas médios-fáceis, com análise de complexidade escrita"
     ],
@@ -120,7 +126,7 @@ export const P = [
     "pratica": [
       "Lab de Spring Boot: construir uma API REST completa do zero, com validação e tratamento de erro",
       "Exercícios de JPA: mapear relacionamentos, paginar, e reproduzir e corrigir um N+1 de propósito",
-      "Entregável da fase: API REST autenticada com JWT, documentada em OpenAPI"
+      "DevCore F2 — Backend HTTP: evoluir o domínio da F1 para API Spring Boot com JPA, JWT, validação e contrato OpenAPI"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -150,10 +156,13 @@ export const P = [
     "java": [
       "Testes profissionais: JUnit 5, Mockito, AssertJ, testes de comportamento e não de implementação",
       "Testes de integração com Testcontainers: banco real em container, isolamento e dados de teste",
+      "Testes de contrato: validar compatibilidade de APIs HTTP e eventos entre consumidor e provedor no pipeline",
+      "Mutation testing: executar PIT, analisar mutantes sobreviventes e melhorar assertions que não detectam defeitos",
       "Cobertura por regra de negócio crítica — cobertura decorativa não conta"
     ],
     "dsa": [
       "Árvores: binária, BST, travessias, altura, balanceamento e recursão sobre árvores",
+      "Divide and conquer: decompor, resolver, combinar e justificar a recorrência da solução",
       "Meta da fase: 60 problemas médios, com foco em árvores e recursão"
     ],
     "db": [
@@ -180,9 +189,10 @@ export const P = [
     ],
     "pratica": [
       "Exercícios de teste: escrever a suíte de uma classe de serviço já pronta, cobrindo os casos de borda",
+      "Lab de qualidade: publicar contrato de API, quebrá-lo de propósito e usar mutation testing para encontrar assertions fracas",
       "Lab de Docker: containerizar uma aplicação, subir Compose com banco e reduzir a imagem final",
       "Lab de CI: montar um pipeline do zero com build, teste, lint e gate de qualidade",
-      "Entregável da fase: repositório que qualquer pessoa sobe com um comando e cujo pipeline fecha verde"
+      "DevCore F3 — Fábrica de entrega: adicionar ao artefato da F2 testes, Testcontainers, Docker Compose e pipeline com gate verde"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -218,6 +228,7 @@ export const P = [
     ],
     "dsa": [
       "Grafos: representação, BFS, DFS, caminhos e detecção de ciclo",
+      "Greedy: formular a escolha local, provar por argumento de troca e identificar contraexemplos",
       "Meta da fase: 60 problemas, com foco em grafos e busca"
     ],
     "db": [
@@ -245,7 +256,7 @@ export const P = [
     "pratica": [
       "Lab de segurança: encontrar e corrigir vulnerabilidades plantadas em uma aplicação de treino",
       "Exercícios de OWASP: reproduzir e mitigar injection, XSS, broken auth e exposição de dados",
-      "Entregável da fase: checklist OWASP aplicado a uma API própria, com correções documentadas"
+      "DevCore F4 — Baseline de segurança: atacar e corrigir a API da F3, aplicando OWASP, OAuth2/OIDC e checklist por release"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -279,6 +290,7 @@ export const P = [
     ],
     "dsa": [
       "Heaps, filas de prioridade, ordenação e busca binária aplicada",
+      "Trie: implementar inserção, busca e prefixo, comparando custo e memória com HashMap",
       "Meta da fase: 60 problemas, com foco em otimização de solução"
     ],
     "db": [
@@ -302,7 +314,7 @@ export const P = [
     "pratica": [
       "Lab de performance: partir de uma query lenta, ler o EXPLAIN, criar o índice e medir o ganho",
       "Exercícios de cache: implementar cache-aside com Redis e provocar um problema de invalidação",
-      "Entregável da fase: relatório antes/depois com números reais de latência e throughput"
+      "DevCore F5 — Baseline de performance: otimizar banco e aplicação da F4, incorporar Redis e publicar relatório antes/depois"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -359,7 +371,7 @@ export const P = [
     "pratica": [
       "Lab de observabilidade: instrumentar uma aplicação com logs estruturados, métricas e tracing",
       "Exercício de incidente: simular uma falha, diagnosticar pelos sinais e escrever o postmortem",
-      "Entregável da fase: dashboard funcional, alerta útil e runbook de um cenário de falha"
+      "DevCore F6 — Operação observável: instrumentar o sistema da F5 com logs, métricas, tracing, SLO, alerta, runbook e postmortem"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -404,6 +416,7 @@ export const P = [
     "arquitetura": [
       "C4 Model: contexto, containers, componentes e código",
       "DDD estratégico: bounded context, linguagem ubíqua, context map e anticorruption layer",
+      "Monólito modular antes de microsserviços: consolidar fronteiras testáveis antes de considerar distribuição",
       "ADRs e RFCs completos: contexto, alternativas, trade-offs, riscos, custo e critério de reversão",
       "Padrões: CQRS, Saga e quando NÃO usá-los"
     ],
@@ -416,7 +429,7 @@ export const P = [
     "pratica": [
       "Exercício de refatoração: converter uma aplicação em camadas para arquitetura hexagonal",
       "Lab de DDD: modelar um domínio com agregados, invariantes e linguagem ubíqua",
-      "Entregável da fase: 5 ADRs completos e um diagrama C4 de um sistema real"
+      "DevCore F7 — Monólito modular: refatorar o sistema observado da F6 para arquitetura hexagonal e DDD, com C4 e cinco ADRs"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -460,6 +473,7 @@ export const P = [
       "Versionamento de contratos: schema registry, AsyncAPI e compatibilidade de evento"
     ],
     "arquitetura": [
+      "Pré-condição de distribuição: extrair serviços somente depois de medir limites reais no monólito modular da Fase 7",
       "STUDY-008: mensageria integrada à arquitetura distribuída — Kafka é meio, não fim",
       "Arquitetura orientada a eventos: event notification, event-carried state transfer e event sourcing",
       "Padrões: Outbox, Inbox, Saga coreografada × orquestrada, CQRS aplicado",
@@ -475,7 +489,7 @@ export const P = [
     "pratica": [
       "Lab de Kafka: producer, consumer, consumer group e reprocessamento a partir de uma DLQ",
       "Exercício de idempotência: provocar entrega duplicada e garantir efeito único",
-      "Entregável da fase: fluxo assíncrono com outbox implementado e documentado em AsyncAPI"
+      "DevCore F8 — Fluxos assíncronos: acrescentar Kafka, outbox, idempotência, DLQ e contrato AsyncAPI ao sistema modular da F7"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -511,14 +525,15 @@ export const P = [
       "Meta da fase: 60 problemas em formato de entrevista"
     ],
     "db": [
-      "Banco gerenciado: RDS, backup, restore, réplica de leitura, failover e custo por operação"
+      "Banco gerenciado: RDS, backup, restore, réplica de leitura, failover e custo por operação",
+      "Recuperação de desastre: executar restore em ambiente limpo, medir RTO/RPO e validar consistência após failover"
     ],
     "git": [
       "GitOps: infraestrutura versionada, PR como mecanismo de mudança de ambiente"
     ],
     "arquitetura": [
       "Arquitetura cloud: multi-AZ, escalabilidade horizontal, stateless e desenho para falha",
-      "Well-Architected Framework: os cinco pilares aplicados ao lab de cloud da fase"
+      "Well-Architected Framework: os seis pilares atuais aplicados ao lab de cloud da fase"
     ],
     "devops": [
       "AWS prático: VPC, EC2, ECS/EKS, ALB, S3, RDS, IAM e CloudWatch",
@@ -531,8 +546,9 @@ export const P = [
     ],
     "pratica": [
       "Lab de AWS: provisionar VPC, banco e aplicação manualmente, depois refazer tudo em Terraform",
+      "DR drill de dados: restaurar backup, promover réplica, medir RTO/RPO e executar o runbook sem passo oculto",
       "Lab de Kubernetes: deployment, service, ingress, configmap e rollout com rollback",
-      "Entregável da fase: ambiente reproduzível por IaC, com custo mensal medido e documentado"
+      "DevCore F9 — Ambiente cloud: publicar o sistema da F8 com Terraform, AWS, Kubernetes, pipeline, rollback e custo mensal medido"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -577,7 +593,10 @@ export const P = [
     ],
     "arquitetura": [
       "System Design praticado: 1 desenho completo por semana, cronometrado em 45 minutos",
-      "Casos clássicos: encurtador de URL, feed, chat, rate limiter, sistema de notificação e busca",
+      "Nível 1 — componentes isolados: encurtador de URL e rate limiter",
+      "Nível 2 — comunicação e fan-out: notificações e chat",
+      "Nível 3 — leitura em escala: feed e busca",
+      "Nível 4 — consistência crítica: pagamentos, ledger e reconciliação",
       "Método: requisitos → estimativa de capacidade → API → modelo de dados → desenho → gargalos → trade-offs",
       "Referência: System Design Interview vol. 1 e 2 (ver BIBLIOGRAFIA.md)"
     ],
@@ -590,7 +609,7 @@ export const P = [
     "pratica": [
       "System Design: 12 desenhos completos na fase, um por semana, cronometrados em 45 minutos",
       "Exercício de gargalo: receber um sistema saturado, identificar o limite e propor a correção",
-      "Entregável da fase: 12 documentos de design com estimativa de capacidade e trade-offs"
+      "DevCore F10 — Escala defendida: submeter o ambiente da F9 a carga, modelar capacidade e registrar decisões de escala e deploy"
     ],
     "frontend": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
     "py": ["Trilha inativa nesta fase — entra na Fase 11. Não ocupa espaço na rotina diária."],
@@ -639,13 +658,15 @@ export const P = [
     ],
     "sec": [
       "Segurança de aplicação com IA: prompt injection, vazamento de dado em contexto e sanitização de saída",
+      "Autorização em RAG: filtrar documentos por tenant e permissão antes da recuperação, não depois da resposta",
+      "Red teaming de IA: versionar ataques de prompt injection, exfiltração e abuso de ferramentas como testes de regressão",
       "Segurança frontend: XSS, CSP, armazenamento de token e CORS"
     ],
     "pratica": [
       "Lab de frontend: uma interface React/TypeScript consumindo uma API própria, com estados de erro",
       "Lab de Python: uma API FastAPI tipada com pytest e um script de automação de dados",
       "Lab de IA: um RAG pequeno com avaliação objetiva, custo por requisição e análise de erro",
-      "Entregável da fase: três labs independentes, cada um com README e critério de sucesso"
+      "DevCore F11 — Produto integrado: adicionar ao mesmo sistema da F10 uma interface React, um serviço FastAPI e uma feature RAG avaliada"
     ],
     "frontend": [
       "TRILHA ATIVADA (STUDY-007 — antes ocupava 18% desde o dia 1)",
@@ -658,12 +679,20 @@ export const P = [
       "TRILHA ATIVADA (STUDY-007 — antes ocupava 18% desde o dia 1)",
       "Python moderno: tipagem, estrutura de projeto, venv/pyproject e pytest",
       "FastAPI: rotas, Pydantic, injeção de dependência e contrato HTTP",
+      "Concorrência em Python: async/await, event loop, cancelamento e limites para trabalho CPU-bound",
+      "Persistência: SQLAlchemy 2, Alembic, transações e testes com banco real",
+      "Qualidade: ruff, mypy, cobertura útil e empacotamento reproduzível",
+      "Operação: logging estruturado, métricas, tracing e graceful shutdown",
       "Automação e integração de dados aplicada ao próprio projeto"
     ],
     "ia": [
       "TRILHA ATIVADA (STUDY-007 — antes aparecia todo dia desde o dia 1)",
       "LLMs aplicados: prompt estruturado, function calling, limites e alucinação",
       "RAG completo: chunking, embeddings, recuperação, reranking e citação de fonte",
+      "Baseline: comparar a feature de IA com regra determinística e busca lexical antes de escolher LLM",
+      "Segurança de IA: testar prompt injection, vazamento entre tenants e acesso indevido a ferramentas",
+      "Observabilidade de IA: registrar versão de prompt/modelo, tokens, latência, custo e qualidade sem armazenar dado sensível",
+      "Operação: definir fallback, limite de custo, timeout e rollback de prompt ou modelo",
       "Avaliação obrigatória: métrica objetiva, conjunto de teste, custo por requisição e análise de erro",
       "Regra mantida: prompt isolado não é entrega"
     ],
@@ -718,7 +747,7 @@ export const P = [
     "pratica": [
       "Simulados: entrevistas técnicas cronometradas de Java, SQL, arquitetura e system design",
       "Revisão dirigida: refazer, sem consultar, os exercícios que mais custaram ao longo das 11 fases",
-      "Entregável da fase: portfólio com os melhores labs publicados, cada um com README em inglês"
+      "DevCore F12 — Release de portfólio: consolidar o produto das 11 fases em uma release pública com demo, runbooks, ADRs e case study em inglês"
     ],
     "frontend": [
       "Manutenção do app e apresentação da integração full stack no portfólio"
@@ -733,7 +762,7 @@ export const P = [
       "cert": "Well-Architected Review do próprio projeto",
       "exam": "Sem nova prova",
       "topics": [
-        "Revisão do lab de cloud contra os cinco pilares do Well-Architected",
+        "Revisão do lab de cloud contra os seis pilares atuais do Well-Architected",
         "Certificações adicionais (DVA, SOA, DOP) apenas se houver exigência concreta de vaga"
       ]
     },
@@ -746,23 +775,140 @@ export const P = [
   }
 ];
 
+/*
+ * DIDATIC-007 — cadeia única de projeto.
+ *
+ * Cada fase recebe uma etapa do DevCore e declara explicitamente sua
+ * dependência. O campo `lab` permite que dashboard e futuras visualizações
+ * mostrem a continuidade sem inferir a partir do texto dos exercícios.
+ */
+export const LABS_ENCADEADOS = [
+  { id: 'devcore-f1', fase: 1, titulo: 'Fundação do produto', dependeDe: null, entrega: 'Domínio Java, console, schema PostgreSQL e repositório Git.' },
+  { id: 'devcore-f2', fase: 2, titulo: 'Backend HTTP', dependeDe: 'devcore-f1', entrega: 'API Spring Boot com JPA, JWT, validação e OpenAPI.' },
+  { id: 'devcore-f3', fase: 3, titulo: 'Fábrica de entrega', dependeDe: 'devcore-f2', entrega: 'Testes, Testcontainers, Docker Compose e pipeline com gate.' },
+  { id: 'devcore-f4', fase: 4, titulo: 'Baseline de segurança', dependeDe: 'devcore-f3', entrega: 'OAuth2/OIDC, correções OWASP e checklist por release.' },
+  { id: 'devcore-f5', fase: 5, titulo: 'Baseline de performance', dependeDe: 'devcore-f4', entrega: 'Query tuning, cache Redis, carga e relatório comparativo.' },
+  { id: 'devcore-f6', fase: 6, titulo: 'Operação observável', dependeDe: 'devcore-f5', entrega: 'Logs, métricas, tracing, SLO, alerta, runbook e postmortem.' },
+  { id: 'devcore-f7', fase: 7, titulo: 'Monólito modular', dependeDe: 'devcore-f6', entrega: 'Arquitetura hexagonal, DDD, C4 e cinco ADRs.' },
+  { id: 'devcore-f8', fase: 8, titulo: 'Fluxos assíncronos', dependeDe: 'devcore-f7', entrega: 'Kafka, outbox, idempotência, DLQ e AsyncAPI.' },
+  { id: 'devcore-f9', fase: 9, titulo: 'Ambiente cloud', dependeDe: 'devcore-f8', entrega: 'Terraform, AWS, Kubernetes, pipeline, rollback e custo.' },
+  { id: 'devcore-f10', fase: 10, titulo: 'Escala defendida', dependeDe: 'devcore-f9', entrega: 'Modelo de capacidade, teste de carga e decisões de deploy.' },
+  { id: 'devcore-f11', fase: 11, titulo: 'Produto integrado', dependeDe: 'devcore-f10', entrega: 'React, FastAPI e RAG avaliado integrados ao mesmo sistema.' },
+  { id: 'devcore-f12', fase: 12, titulo: 'Release de portfólio', dependeDe: 'devcore-f11', entrega: 'Demo pública, runbooks, ADRs e case study em inglês.' }
+];
+
+P.forEach((fase, indice) => { fase.lab = LABS_ENCADEADOS[indice]; });
+
 /* ─── Inglês por fase — transversal aos 36 meses ─── */
 
 export const englishByPhase = {
-  1: ["Leitura técnica diária: documentação oficial de Java, PostgreSQL e Git sem tradução automática", "Vocabulário de debugging: error, failure, stack trace, root cause, edge case", "Commits em inglês no imperativo desde o primeiro repositório", "Meta: compreender documentação básica e mensagens de erro"],
-  2: ["Escrita técnica: README, issues e descrição de endpoints", "Conventional Commits e descrição estruturada de Pull Request", "Vocabulário de API: endpoint, payload, request, response, validation, authentication", "Meta: documentar o próprio projeto em inglês sem tradutor"],
-  3: ["Vocabulário de testes e CI/CD: assertion, mock, fixture, coverage, pipeline, build, artifact", "Leitura da documentação do Docker e do GitHub Actions no original", "Meta: seguir tutoriais e docs de ferramentas inteiramente em inglês"],
-  4: ["Vocabulário de segurança: vulnerability, threat, exploit, mitigation, least privilege, hardening", "Leitura do OWASP Top 10 no original", "Meta: entender relatório de segurança e advisory de dependência"],
-  5: ["Vocabulário de performance: latency, throughput, bottleneck, profiling, cache hit ratio, contention", "Leitura de documentação de tuning do PostgreSQL e da JVM", "Meta: interpretar benchmark e relatório de performance em inglês"],
-  6: ["Vocabulário de operação: incident, outage, mitigation, rollback, postmortem, on-call, SLO", "Escrita do primeiro postmortem em inglês", "Speaking: explicar um incidente em 3 minutos", "Meta: comunicar problema de produção em inglês"],
-  7: ["Escrita de ADRs e RFCs em inglês: context, decision, alternatives, consequences, trade-offs", "Vocabulário de arquitetura: coupling, cohesion, boundary, aggregate, adapter, port", "Speaking: explicar uma decisão arquitetural em 5 minutos", "Meta: produzir documentação de decisão em nível profissional"],
-  8: ["Vocabulário de sistemas distribuídos: eventual consistency, idempotency, partition, replication, backpressure", "Leitura de documentação do Kafka no original", "Meta: acompanhar discussão técnica sobre sistemas distribuídos"],
-  9: ["Inglês para certificação: leitura de questões da SAA-C03, whitepapers e documentação AWS", "Vocabulário de cloud: provisioning, scaling, failover, availability zone, cost optimization", "Meta: fazer a prova em inglês com conforto"],
-  10: ["Inglês para system design: conduzir a explicação de um desenho completo em inglês", "Estrutura: requirements → capacity → API → data model → design → bottlenecks → trade-offs", "Meta: apresentar system design de 45 minutos em inglês"],
-  11: ["Vocabulário de IA e frontend: embedding, retrieval, inference, hallucination, component, state, hydration", "Leitura de papers introdutórios e documentação de modelos", "Meta: acompanhar material técnico de IA no original"],
-  12: ["Mock interviews completas em inglês: apresentação, projeto, system design, debugging e comportamental", "Respostas comportamentais com STAR aplicadas a entregas e incidentes reais", "Project pitch de 10 minutos sobre o lab mais complexo do portfólio", "Meta final: inglês técnico funcional B2 para trabalho remoto e internacional"]
+  1: ["Ler documentação oficial de Java, PostgreSQL e Git sem tradução automática e resumir cinco decisões", "Escrever commits no imperativo e explicar um erro usando root cause e edge case"],
+  2: ["Escrever README e contrato de endpoint em inglês sem tradutor", "Apresentar em três minutos o fluxo request, validation, authentication e response"],
+  3: ["Ler documentação de Docker e CI/CD e reproduzir o procedimento", "Descrever em inglês uma falha de teste, a assertion e a correção no Pull Request"],
+  4: ["Ler um advisory e explicar threat, exploit, mitigation e residual risk", "Apresentar o threat model e as correções OWASP da release"],
+  5: ["Interpretar benchmark usando latency, throughput, bottleneck e contention", "Escrever relatório curto de tuning com hipótese, medição e resultado"],
+  6: ["Escrever postmortem com incident, impact, root cause, mitigation e follow-up", "Explicar um incidente de produção em três minutos sem notas"],
+  7: ["Escrever ADR com context, alternatives, decision, consequences e reversal criteria", "Defender uma decisão arquitetural em cinco minutos e responder objeções"],
+  8: ["Explicar eventual consistency, idempotency, partition e backpressure", "Resumir documentação do Kafka e propor um teste de falha"],
+  9: ["Resolver questões SAA-C03 e justificar cada alternativa em inglês", "Apresentar arquitetura cloud usando scaling, failover e cost optimization"],
+  10: ["Conduzir System Design de 45 minutos seguindo requirements até trade-offs", "Responder perguntas de gargalo e capacidade sem trocar para português"],
+  11: ["Apresentar a feature de IA usando retrieval, inference, evaluation e limitation", "Escrever o case study de React, FastAPI e RAG com resultados medidos"],
+  12: ["Concluir mock interview técnica e comportamental integralmente em inglês", "Apresentar o DevCore em dez minutos e responder com STAR sobre uma decisão real"]
 };
-P.forEach(p => { p.ingles = englishByPhase[p.id] || []; });
+/*
+ * DIDATIC-001 — todo tópico contável é exposto como objetivo observável.
+ *
+ * O texto original continua sendo a descrição do escopo; esta camada acrescenta
+ * a ação esperada e um critério de aceite próprio de cada disciplina. A
+ * transformação acontece na fonte de dados, portanto dashboard, busca, rotina,
+ * revisão e roadmaps usam exatamente o mesmo objetivo.
+ */
+const OBJETIVACAO = {
+  java: {
+    abertura: 'Implementar em código',
+    criterio: 'entregar código compilável e ao menos um teste automatizado verde'
+  },
+  db: {
+    abertura: 'Aplicar em banco executável',
+    criterio: 'versionar o script e registrar o resultado esperado de sua execução'
+  },
+  dsa: {
+    abertura: 'Resolver e explicar',
+    criterio: 'registrar a solução, a análise Big O e uma explicação sem consulta'
+  },
+  git: {
+    abertura: 'Executar em repositório',
+    criterio: 'demonstrar o fluxo em histórico, branch ou Pull Request verificável'
+  },
+  arquitetura: {
+    abertura: 'Projetar e justificar',
+    criterio: 'versionar um diagrama ou ADR com decisão, alternativa e trade-off'
+  },
+  devops: {
+    abertura: 'Configurar e operar',
+    criterio: 'executar o ambiente ou pipeline e registrar log de sucesso ou rollback'
+  },
+  sec: {
+    abertura: 'Verificar e proteger',
+    criterio: 'documentar ameaça, teste reproduzível e respectiva mitigação'
+  },
+  frontend: {
+    abertura: 'Construir em interface executável',
+    criterio: 'publicar o fluxo funcional com seus estados e ao menos um teste verificável'
+  },
+  py: {
+    abertura: 'Implementar em Python',
+    criterio: 'entregar módulo executável e teste pytest verde'
+  },
+  ia: {
+    abertura: 'Construir e avaliar',
+    criterio: 'registrar conjunto de teste, métrica, custo e análise de erro'
+  },
+  math: {
+    abertura: 'Calcular e aplicar',
+    criterio: 'resolver três exemplos e explicar o resultado no contexto técnico'
+  },
+  ingles: {
+    abertura: 'Produzir em inglês',
+    criterio: 'entregar um artefato oral ou escrito e revisá-lo com checklist'
+  },
+  aws: {
+    abertura: 'Demonstrar em AWS',
+    criterio: 'executar um lab e registrar configuração, resultado e custo'
+  },
+  pratica: {
+    abertura: 'Concluir na prática',
+    criterio: 'versionar o artefato e comprovar o critério de sucesso no README'
+  }
+};
+
+export function converterTopicoEmObjetivo(texto, trilha) {
+  const original = String(texto || '').trim().replace(/[.;]\s*$/, '');
+  const modelo = OBJETIVACAO[trilha];
+  if (!modelo || !original || /^Trilha inativa nesta fase/.test(original)) return original;
+  if (original.includes('critério observável:')) return original;
+  return `${modelo.abertura}: ${original} — critério observável: ${modelo.criterio}.`;
+}
+
+const TRILHAS_OBJETIVAS = [
+  'java', 'db', 'dsa', 'git', 'arquitetura', 'devops', 'sec',
+  'frontend', 'py', 'ia', 'math', 'ingles', 'aws', 'pratica'
+];
+
+P.forEach((p) => {
+  p.ingles = englishByPhase[p.id] || [];
+  TRILHAS_OBJETIVAS.forEach((trilha) => {
+    if (trilha === 'aws') {
+      if (!/^Sem AWS|^Sem prova/.test(p.aws?.cert || '')) {
+        p.aws.topics = (p.aws?.topics || []).map((t) => converterTopicoEmObjetivo(t, trilha));
+      }
+      return;
+    }
+    if (!Array.isArray(p[trilha]) || /^Trilha inativa nesta fase/.test(p[trilha][0] || '')) return;
+    p[trilha] = p[trilha].map((t) => converterTopicoEmObjetivo(t, trilha));
+    if (trilha === 'ingles') englishByPhase[p.id] = p[trilha];
+  });
+});
 
 /* ═══════════════════════════════════════════════
    HELPERS — consulta da fase ativa (STUDY-020)

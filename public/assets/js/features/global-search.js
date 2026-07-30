@@ -4,16 +4,17 @@
    O campo de busca do topo pesquisa ao mesmo tempo:
      · trilhas (por nome)
      · PDFs (título e tags)
-     · tópicos de conteúdo (todos os itens de phases.js)
+     · objetivos observáveis (todos os itens de phases.js)
 
    Resultados agrupados num dropdown; clicar navega para o
    destino. A tecla "/" foca o campo de qualquer lugar.
 ═══════════════════════════════════════════════ */
 
 import { P, trilhaAtiva, conteudoDaFase } from '../../../data/phases.js';
-import { pdfDocuments } from '../../../data/pdfs.js';
+import { biblioteca } from '../../../data/biblioteca.js';
 import { ARQUIVO_TRILHA, NOME_TRILHA, CK } from '../../../data/tracks.js';
 import { normalizar, escapeHtml } from '../core/render.js';
+import { resolvePublicUrl } from '../core/public-url.js';
 
 const cor = (k) => (CK[k] || CK.n).t;
 
@@ -29,16 +30,17 @@ function construirIndice() {
     });
   }
 
-  // pdfs
-  for (const pdf of pdfDocuments) {
+  // livros da biblioteca — abrem o PDF hospedado (ou o recurso online)
+  for (const l of biblioteca) {
     itens.push({
-      tipo: 'pdf', label: pdf.title,
-      busca: normalizar(`${pdf.title} ${pdf.area} ${(pdf.tags || []).join(' ')}`),
-      href: pdf.file, cor: cor(pdf.key), meta: pdf.area
+      tipo: 'livro', label: l.titulo,
+      busca: normalizar(`${l.titulo} ${l.autor} ${l.tema} ${l.prioridade}`),
+      href: l.path ? resolvePublicUrl(l.path) : (l.url || null),
+      cor: cor('n'), meta: `${l.tema} · ${l.fase}`
     });
   }
 
-  // tópicos de conteúdo (de cada fase ativa de cada trilha)
+  // objetivos observáveis (de cada fase ativa de cada trilha)
   const TRILHAS = ['java', 'db', 'dsa', 'git', 'arquitetura', 'devops', 'sec', 'frontend', 'py', 'ia', 'math', 'ingles', 'aws'];
   for (const p of P) {
     for (const k of TRILHAS) {
@@ -56,8 +58,8 @@ function construirIndice() {
   return itens;
 }
 
-const GRUPOS = { trilha: 'Trilhas', pdf: 'PDFs', topico: 'Tópicos' };
-const LIMITE = { trilha: 6, pdf: 5, topico: 8 };
+const GRUPOS = { trilha: 'Trilhas', livro: 'Biblioteca', topico: 'Objetivos' };
+const LIMITE = { trilha: 6, livro: 6, topico: 8 };
 
 export function setupBuscaGlobal(inputId = 'trackSearchInput', resultadosId = 'globalSearchResults') {
   const input = document.getElementById(inputId);
@@ -67,7 +69,11 @@ export function setupBuscaGlobal(inputId = 'trackSearchInput', resultadosId = 'g
   let indice = null;
   const garantirIndice = () => (indice ||= construirIndice());
 
-  const fechar = () => { painel.hidden = true; painel.innerHTML = ''; };
+  const fechar = () => {
+    painel.hidden = true;
+    painel.innerHTML = '';
+    input.setAttribute('aria-expanded', 'false');
+  };
 
   const buscar = (termo) => {
     const q = normalizar(termo);
@@ -77,6 +83,7 @@ export function setupBuscaGlobal(inputId = 'trackSearchInput', resultadosId = 'g
     if (!achados.length) {
       painel.hidden = false;
       painel.innerHTML = `<div class="gs-empty">Nada encontrado para "<strong>${escapeHtml(termo)}</strong>".</div>`;
+      input.setAttribute('aria-expanded', 'true');
       return;
     }
 
@@ -90,18 +97,20 @@ export function setupBuscaGlobal(inputId = 'trackSearchInput', resultadosId = 'g
       const total = (porGrupo[tipo] || []).length;
       return `<div class="gs-group">
         <div class="gs-group-title">${titulo} <span>${total}</span></div>
-        ${lista.map((x) => x.href ? `<a class="gs-item" href="${x.href}" style="--gs-color:${x.cor}">
+        ${lista.map((x, indice) => x.href ? `<a class="gs-item" id="gs-option-${tipo}-${indice}"
+          role="option" aria-selected="false" href="${x.href}" style="--gs-color:${x.cor}">
           <span class="gs-item-label">${escapeHtml(x.label)}</span>
           ${x.meta ? `<span class="gs-item-meta">${escapeHtml(x.meta)}</span>` : ''}
         </a>` : '').join('')}
       </div>`;
     }).join('') || `<div class="gs-empty">Nada encontrado.</div>`;
+    input.setAttribute('aria-expanded', 'true');
   };
 
   input.setAttribute('role', 'combobox');
   input.setAttribute('aria-expanded', 'false');
   input.setAttribute('aria-controls', resultadosId);
-  input.setAttribute('placeholder', 'Buscar trilhas, PDFs e tópicos…  ( / )');
+  input.setAttribute('placeholder', 'Buscar trilhas, PDFs e objetivos…  ( / )');
 
   input.addEventListener('input', (e) => {
     buscar(e.target.value);

@@ -5,6 +5,7 @@
 import { CK } from '../../../data/tracks.js';
 import { PC, PBG } from '../../../data/config.js';
 import { P } from '../../../data/phases.js';
+import { escapeHtml } from '../core/render.js';
 
 export function renderPhaseDetails(filterId) {
   const phases = filterId ? P.filter(p => p.id === filterId) : P;
@@ -18,13 +19,25 @@ export function renderPhaseDetails(filterId) {
     return `<div class="phase-detail-card" style="border-top:3px solid ${PC[i]}">
   <div class="phase-detail-header" style="background:${PBG[i]}">
     <div>
-      <span class="s-label" style="background:${PC[i]}22;color:${PC[i]}">${p.l}</span>
+      <span class="s-label" style="background:color-mix(in srgb, ${PC[i]} 13%, transparent);color:${PC[i]}">${p.l}</span>
       <span class="text-muted small ms-2">${p.w} · ${p.h}h</span>
     </div>
     <span style="color:${PC[i]};font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem">${p.t}</span>
   </div>
   ${p.cand ? `<div class="px-3 pb-2"><div class="cand-badge">${p.cn}</div></div>` : ''}
   <div class="phase-detail-body">
+    ${p.lab ? `<div class="phase-lab-chain" style="--lab-color:${PC[i]}">
+      <div class="phase-lab-step">
+        <span class="phase-lab-index">DevCore · F${p.id}/12</span>
+        <strong>${escapeHtml(p.lab.titulo)}</strong>
+      </div>
+      <div class="phase-lab-flow">
+        ${p.lab.dependeDe
+          ? `<span>Continua ${escapeHtml(p.lab.dependeDe.replace('devcore-', '').toUpperCase())}</span><b aria-hidden="true">→</b>`
+          : '<span>Inicia o produto</span><b aria-hidden="true">→</b>'}
+        <span>${escapeHtml(p.lab.entrega)}</span>
+      </div>
+    </div>` : ''}
     <div class="row g-3">
       <div class="col-12 col-lg-3">
         ${['java', 'dsa', 'git', 'arquitetura', 'ingles'].map(k => `<div class="track-section">
@@ -96,7 +109,7 @@ export function filterTrack(k) {
   // não mais comparando o texto visível (que quebra ao renomear um rótulo)
   document.querySelectorAll('[data-track-filter]').forEach(btn => {
     const isActive = btn.dataset.trackFilter === k;
-    btn.style.background = isActive ? (CK[k] ? CK[k].b + 'cc' : '#141a24') : 'transparent';
+    btn.style.background = isActive ? (CK[k] ? CK[k].b : 'var(--surface-soft)') : 'transparent';
     btn.style.fontWeight = isActive ? '700' : '500';
     btn.setAttribute('aria-pressed', String(isActive));
   });

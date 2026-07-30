@@ -1,0 +1,18 @@
+/*
+ * INTERVIEW SIMULATIONS — progressão de entrevistas por fase (DIDATIC-024)
+ */
+
+export const SIMULADOS_ENTREVISTA = [
+  { id: 'mock-f1', fase: 1, tipo: 'Fundamentos', titulo: 'Java 21, contratos e SQL básico', duracao: 40, roteiro: ['Modelar uma sealed hierarchy com invariantes', 'Corrigir equals/hashCode em chave de Map', 'Explicar erasure/PECS e resolver uma consulta com JOIN'], criterio: 'Prevê comportamento, entrega código executável sem warnings e explica o contrato.' },
+  { id: 'mock-f2', fase: 2, tipo: 'Backend', titulo: 'API Spring e persistência', duracao: 45, roteiro: ['Desenhar contrato REST', 'Investigar N+1', 'Explicar transação e concorrência'], criterio: 'Implementa o fluxo e justifica decisões sem tutorial.' },
+  { id: 'mock-f3', fase: 3, tipo: 'Qualidade', titulo: 'Testes e pipeline', duracao: 45, roteiro: ['Criar estratégia de testes', 'Diagnosticar build quebrado', 'Criticar uma assertion fraca'], criterio: 'Distingue cobertura de qualidade e recupera o pipeline.' },
+  { id: 'mock-f4', fase: 4, tipo: 'Segurança', titulo: 'Threat modeling e OWASP', duracao: 45, roteiro: ['Identificar ameaça', 'Explorar falha de autorização', 'Propor teste de regressão'], criterio: 'Prioriza risco e prova a mitigação.' },
+  { id: 'mock-f5', fase: 5, tipo: 'Performance', titulo: 'JVM, GC e banco sob carga', duracao: 60, roteiro: ['Separar warm-up, JIT, GC, lock, pool e SQL', 'Escolher JMH, JFR, jcmd ou EXPLAIN para a hipótese', 'Propor experimento com baseline e rollback'], criterio: 'Otimiza por medição, não confunde correlação com causa e declara o trade-off.' },
+  { id: 'mock-f6', fase: 6, tipo: 'Incidente', titulo: 'Troubleshooting Java de produção', duracao: 60, roteiro: ['Conduzir triagem por SLO', 'Correlacionar JFR, GC log, thread dump, métricas e trace', 'Distinguir heap, off-heap, deadlock e downstream'], criterio: 'Reduz impacto, preserva evidência, encontra causa provável e evita recorrência.' },
+  { id: 'mock-f7', fase: 7, tipo: 'Arquitetura', titulo: 'Monólito modular e DDD', duracao: 60, roteiro: ['Desenhar C4', 'Definir bounded contexts', 'Defender não usar microsserviços'], criterio: 'Fronteiras e decisão são coerentes com as restrições.' },
+  { id: 'mock-f8', fase: 8, tipo: 'Distribuídos', titulo: 'Eventos e consistência', duracao: 60, roteiro: ['Projetar outbox', 'Tratar duplicidade', 'Explicar DLQ, Saga e CAP'], criterio: 'Desenha recuperação e não promete consistência impossível.' },
+  { id: 'mock-f9', fase: 9, tipo: 'Cloud', titulo: 'AWS, IaC e recuperação', duracao: 60, roteiro: ['Desenhar multi-AZ', 'Explicar Terraform state', 'Executar plano de failover'], criterio: 'Equilibra disponibilidade, segurança, operação e custo.' },
+  { id: 'mock-f10', fase: 10, tipo: 'System Design', titulo: 'Feed e pagamentos', duracao: 60, roteiro: ['Estimar capacidade', 'Projetar feed em escala', 'Preservar ledger e reconciliação'], criterio: 'Expõe premissas, gargalos e mudança de decisão por escala.' },
+  { id: 'mock-f11', fase: 11, tipo: 'Produto', titulo: 'React, FastAPI e RAG', duracao: 60, roteiro: ['Explicar integração ponta a ponta', 'Comparar baseline com LLM', 'Responder a prompt injection'], criterio: 'Defende qualidade, custo, latência e segurança com dados.' },
+  { id: 'mock-f12', fase: 12, tipo: 'Completa · inglês', titulo: 'Entrevista Java sênior/expert do DevCore', duracao: 120, roteiro: ['Pitch do capstone em inglês', 'Debugging ao vivo de concorrência/JVM', 'System Design distribuído com consistência e SLO', 'Architecture review e STAR de influência entre equipes'], criterio: 'Entrega narrativa clara, evidência real, decisões reversíveis e mecanismos que reduzem complexidade organizacional.' }
+];

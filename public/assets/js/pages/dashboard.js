@@ -11,7 +11,7 @@ import { P } from '../../../data/phases.js';
 import { rules, awsMilestones } from '../../../data/milestones.js';
 
 import { renderDailyDayTabs, setActiveDay, renderMonthlyCycle } from '../features/routine.js';
-import { renderQuickTrackCards, renderPdfCards, setupNavbarTrackSearch, setupPdfSearch, renderBibliografia } from '../features/tracks.js';
+import { renderQuickTrackCards, setupNavbarTrackSearch, setupPdfSearch, renderBibliografia } from '../features/tracks.js';
 import { renderPhaseDetails, filterPhase, filterTrack } from '../features/phases.js';
 import { renderSync } from '../features/sync.js';
 import { renderSeletorDeFase, getFaseAtual } from '../features/active-phase.js';
@@ -22,7 +22,12 @@ import { renderHoje } from '../features/today.js';
 import { setupBuscaGlobal } from '../features/global-search.js';
 import { renderEvolucao } from '../features/charts.js';
 import { renderBackup } from '../features/backup.js';
+import { renderRecoveryProtocol } from '../features/recovery.js';
+import { renderDependencyMap } from '../features/dependency-map.js';
+import { renderInterviewSimulations } from '../features/interviews.js';
 import { registrarServiceWorker } from '../core/pwa.js';
+import { renderSystemHeader } from '../core/system-header.js';
+import { getTrackConfig } from '../../../data/tracks.js';
 
 const corDaTrilha = (k) => (CK[k] || CK.n).t;
 
@@ -64,6 +69,12 @@ function renderPainelProgresso() {
 
 function init() {
   registrarServiceWorker();
+  renderSystemHeader({
+    config: getTrackConfig('java'),
+    firstPage: 'fundamentos.html',
+    view: 'system',
+    depth: 'system'
+  });
   // Hero tags
   document.getElementById('heroTags').innerHTML =
     heroTagsData.map(t => `<span class="htag ${t.cls}">${t.label}</span>`).join('');
@@ -90,7 +101,6 @@ function init() {
 
   renderQuickTrackCards();
   renderMonthlyCycle();
-  renderPdfCards();
   renderBibliografia();
   setupNavbarTrackSearch();
   setupPdfSearch();
@@ -101,8 +111,21 @@ function init() {
   // Busca global: trilhas + PDFs + tópicos, com atalho "/" (STUDY-060/061)
   setupBuscaGlobal('trackSearchInput', 'globalSearchResults');
 
+  // Pílula de fase atual na barra de comando (Command Center)
+  const atualizarPilulaFase = () => {
+    const pill = document.getElementById('phaseStatusPill');
+    if (!pill) return;
+    const fase = P.find((p) => p.id === getFaseAtual());
+    if (!fase) return;
+    pill.textContent = `${fase.l} · ${fase.t}`;
+    pill.hidden = false;
+  };
+  atualizarPilulaFase();
+  document.addEventListener('fase:change', atualizarPilulaFase);
+
   // Painel de progresso, revisão e certificações (Etapa 8)
   renderPainelProgresso();
+  renderInterviewSimulations('interviewPanel');
   // reflete conclusões marcadas nas páginas de trilha (storage) e revisões feitas
   document.addEventListener('progress:change', () => { renderPainelProgresso(); renderHoje('todayView'); });
   document.addEventListener('review:change', () => { renderRevisoesDeHoje('reviewToday', corDaTrilha); renderHoje('todayView'); });
@@ -120,13 +143,16 @@ function init() {
     renderProgressoGlobal('globalProgress', faseId);
     renderPhaseCards(faseId); // move o destaque "FASE ATUAL"
     renderHoje('todayView');  // "Hoje" reflete o conteúdo da nova fase
+    atualizarPilulaFase();    // atualiza a pílula da barra de comando
   });
+  renderRecoveryProtocol('routineModes');
 
   // Daily weekly navigation
   renderDailyDayTabs();
   setActiveDay('segunda');
 
   // Phase filter buttons
+  renderDependencyMap('dependencyMap');
   document.getElementById('phaseFilterBtns').innerHTML =
     `<button type="button" class="btn btn-sm" data-phase="all" style="background:var(--accent);color:#000;font-family:'IBM Plex Mono',monospace;font-size:.72rem;padding:.28rem .75rem;border-radius:6px;font-weight:700">Todas</button>` +
     P.map((p, i) => `<button type="button" class="btn btn-sm" data-phase="${p.id}" style="border:1px solid ${PC[i]};color:${PC[i]};font-family:'IBM Plex Mono',monospace;font-size:.72rem;padding:.28rem .75rem;border-radius:6px">${p.l}</button>`).join('');

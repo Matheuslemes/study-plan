@@ -3,15 +3,17 @@
 ═══════════════════════════════════════════════ */
 
 import { CK, quickTracks } from '../../../data/tracks.js';
-import { pdfDocuments, bibliografia, bibliografiaNotas } from '../../../data/pdfs.js';
+import { bibliografiaNotas } from '../../../data/pdfs.js';
+import { biblioteca } from '../../../data/biblioteca.js';
 import { normalizar, escapeHtml } from '../core/render.js';
+import { resolvePublicUrl } from '../core/public-url.js';
 import { filtrarCards, ligarBusca } from '../core/search.js';
 
 export function renderQuickTrackCards() {
   const html = quickTracks.map(t => {
     const c = CK[t.key] || CK.n;
     const badgeRow = t.extraBadges
-      ? `<div class="track-chip-row">${t.extraBadges.map(b => `<span class="track-chip" style="background:${b.color}18;color:${b.color};border:1px solid ${b.color}40">${b.label}</span>`).join('')}</div>`
+      ? `<div class="track-chip-row">${t.extraBadges.map(b => `<span class="track-chip">${b.label}</span>`).join('')}</div>`
       : '';
     return `<div class="col-12 col-sm-6 col-lg-3 track-card-item" data-track-card data-track-name="${(t.label + ' ' + (t.extraBadges || []).map(b => b.label).join(' ')).toLowerCase()}" data-track-key="${t.key}">
   <a class="quick-track-card" href="${t.href}"
@@ -58,78 +60,76 @@ export function setupNavbarTrackSearch() {
 }
 
 /* ─── PDF library cards ───────────────────── */
-export function renderPdfCards() {
-  const container = document.getElementById('pdfCards');
-  const counter = document.getElementById('pdfCounter');
-  if (!container) return;
-  if (counter) counter.textContent = `${pdfDocuments.length} PDFs disponíveis`;
-  container.innerHTML = pdfDocuments.map(pdf => {
-    const c = CK[pdf.key] || CK.n;
-    const searchable = normalizeTrackTerm(`${pdf.title} ${pdf.area} ${pdf.level} ${pdf.desc} ${(pdf.tags || []).join(' ')}`);
-    const tags = (pdf.tags || []).slice(0, 6).map(tag => `<span class="pdf-meta">${tag}</span>`).join('');
-    return `<div class="col-12 col-sm-6 col-lg-4 pdf-card-item" data-pdf-card data-pdf-name="${searchable}">
-  <article class="pdf-card" style="--pdf-color:${c.t};--pdf-bg:${c.b}">
-    <div class="pdf-card-top">
-      <div class="d-flex align-items-center gap-2">
-        <div class="pdf-icon">PDF</div>
-        <span class="pdf-chip">${pdf.area}</span>
-      </div>
-      <span class="pdf-chip">${pdf.level}</span>
-    </div>
-    <h6 class="pdf-title">${pdf.title}</h6>
-    <p class="pdf-desc">${pdf.desc}</p>
-    <div class="pdf-meta-row">${tags}</div>
-    <a class="pdf-open-link" href="${pdf.file}" target="_blank" rel="noopener noreferrer">
-      Abrir PDF em nova guia <span aria-hidden="true">↗</span>
-    </a>
-  </article>
-</div>`;
-  }).join('');
+/**
+ * BIBLIOTECA — catálogo completo de livros do plano (data/biblioteca.js),
+ * já ordenado por tema → fase → importância. Nenhum PDF é hospedado.
+ */
+function statusLivro(status) {
+  if (status === 'online') return '<span class="biblio-status is-online" title="Curso online gratuito">online</span>';
+  if (status === 'ausente') return '<span class="biblio-status is-ausente" title="A adquirir">a adquirir</span>';
+  return '<span class="biblio-status is-presente" title="No acervo">no acervo</span>';
 }
 
-/**
- * STUDY-015 — bibliografia de livros comerciais.
- * Só referência: título, autor, área e fase. Nenhum PDF é hospedado.
- */
 export function renderBibliografia() {
   const el = document.getElementById('bibliografiaList');
   if (!el) return;
 
-  const porArea = bibliografia.reduce((acc, l) => {
-    (acc[l.area] = acc[l.area] || []).push(l);
-    return acc;
-  }, {});
+  const counter = document.getElementById('pdfCounter');
+  const presentes = biblioteca.filter(l => l.status === 'presente').length;
+  if (counter) counter.textContent = `${biblioteca.length} livros · ${presentes} no acervo`;
 
-  const grupos = Object.entries(porArea).map(([area, livros]) => `
-    <div class="biblio-group">
-      <h6 class="biblio-area">${escapeHtml(area)} <span class="biblio-count">${livros.length}</span></h6>
-      ${livros.map(l => `<div class="biblio-item">
+  // A lista já vem ordenada por tema → fase → importância; agrupa preservando a ordem.
+  const grupos = [];
+  let atual = null;
+  for (const l of biblioteca) {
+    if (!atual || atual.tema !== l.tema) { atual = { tema: l.tema, livros: [] }; grupos.push(atual); }
+    atual.livros.push(l);
+  }
+
+  const listaHtml = grupos.map(g => `
+    <section class="biblio-group" data-biblio-group>
+      <h5 class="biblio-area">${escapeHtml(g.tema)} <span class="biblio-count">${g.livros.length}</span></h5>
+      ${g.livros.map(l => {
+        const busca = normalizar(`${l.titulo} ${l.autor} ${l.tema} ${l.prioridade} ${l.fase}`);
+        const link = l.path ? resolvePublicUrl(l.path) : (l.url || '');
+        const tag = link ? 'a' : 'div';
+        const attrs = link ? ` href="${escapeHtml(link)}" target="_blank" rel="noopener noreferrer"` : '';
+        return `<${tag} class="biblio-item${link ? ' is-linked' : ''}"${attrs} data-biblio-card data-biblio-name="${escapeHtml(busca)}">
         <div class="biblio-main">
-          <span class="biblio-title">${escapeHtml(l.titulo)}</span>
-          <span class="biblio-author">${escapeHtml(l.autor)}</span>
+          <span class="biblio-title">${escapeHtml(l.titulo)}${l.gratis ? ' <span class="biblio-free" title="Gratuito/oficial">🆓</span>' : ''}</span>
+          <span class="biblio-author">${escapeHtml(l.autor)}${l.ano ? ` · ${escapeHtml(l.ano)}` : ''}</span>
         </div>
         <div class="biblio-meta">
-          <span class="biblio-phase">Fase ${l.fase}</span>
+          <span class="biblio-phase">${escapeHtml(l.fase)}</span>
           <span class="biblio-prio biblio-prio-${l.prioridade.toLowerCase().replace(/[^a-z]/g, '')}">${escapeHtml(l.prioridade)}</span>
+          ${statusLivro(l.status)}
+          ${link ? '<span class="biblio-open" aria-hidden="true">↗</span>' : ''}
         </div>
-      </div>`).join('')}
-    </div>`).join('');
+      </${tag}>`;
+      }).join('')}
+    </section>`).join('');
 
   el.innerHTML = `
     <div class="biblio-note">
-      <strong>Os PDFs destes livros não são hospedados neste site.</strong> São obras comerciais protegidas por
-      direitos autorais — aqui existe apenas a referência bibliográfica e a fase em que cada uma entra no plano.
+      <strong>Clique em um livro para abrir o PDF.</strong> Acervo pessoal de estudo — obras protegidas por
+      direitos autorais; use apenas para leitura própria e não redistribua. Ordenado por tema, fase e importância.
       <ul class="biblio-rules">${bibliografiaNotas.map(n => `<li>${escapeHtml(n)}</li>`).join('')}</ul>
     </div>
-    ${grupos}`;
+    ${listaHtml}`;
 }
 
 export function setupPdfSearch() {
   ligarBusca({
     inputId: 'pdfSearchInput',
-    seletor: '[data-pdf-card]',
-    atributo: 'data-pdf-name',
-    vaziosIds: ['pdfSearchEmpty']
+    seletor: '[data-biblio-card]',
+    atributo: 'data-biblio-name',
+    vaziosIds: ['pdfSearchEmpty'],
+    aoBuscar: () => {
+      document.querySelectorAll('[data-biblio-group]').forEach((g) => {
+        const algum = g.querySelector('[data-biblio-card]:not(.is-hidden-by-search)');
+        g.classList.toggle('is-hidden-by-search', !algum);
+      });
+    }
   });
 }
 

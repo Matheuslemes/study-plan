@@ -1,0 +1,142 @@
+/*
+ * Única fonte de identidade cromática das 14 trilhas.
+ * Componentes consomem somente --accent, --accent-2, --accent-ink e
+ * --accent-line. As variáveis --track-* existem para cards do dashboard.
+ */
+
+:root {
+  --track-java: #34d399;
+  --track-ia: #a78bfa;
+  --track-arquitetura: #f472b6;
+  --track-python: #60a5fa;
+  --track-aws: #f59e0b;
+  --track-devops: #fb7185;
+  --track-frontend: #06b6d4;
+  --track-bancos: #2dd4bf;
+  --track-git: #fb923c;
+  --track-ingles: #818cf8;
+  --track-matematica: #e879f9;
+  --track-sec: #f87171;
+  --track-financeiro: #a3e635;
+  --track-treino: #facc15;
+
+  /*
+   * Cores auxiliares de UI (não são identidade de trilha). Cada valor é
+   * declarado aqui uma única vez; nenhum hex de UI deve existir fora deste bloco.
+   */
+  --ui-blue: #4f9ef8;    /* estado "em estudo" / fase 1 */
+  --ui-teal: #22d3b0;    /* estado "dominado" / accent padrão */
+  --ui-amber: #fbbf24;   /* estado "praticado" */
+  --ui-sky: #38bdf8;     /* fase 5 */
+  --ui-violet: #c084fc;  /* fase 11 */
+
+  /* Escala de maestria (estados de tópico) */
+  --mastery-studying: var(--ui-blue);
+  --mastery-practiced: var(--ui-amber);
+  --mastery-mastered: var(--ui-teal);
+
+  /*
+   * Escala das 12 fases — reutiliza a paleta de trilhas onde as cores
+   * coincidem; assim cada valor de marca continua definido só uma vez.
+   */
+  --phase-1: var(--ui-blue);
+  --phase-2: var(--ui-teal);
+  --phase-3: var(--track-ia);
+  --phase-4: var(--track-git);
+  --phase-5: var(--ui-sky);
+  --phase-6: var(--track-arquitetura);
+  --phase-7: var(--track-java);
+  --phase-8: var(--track-aws);
+  --phase-9: var(--track-bancos);
+  --phase-10: var(--track-python);
+  --phase-11: var(--ui-violet);
+  --phase-12: var(--track-sec);
+}
+
+[data-track="java"] {
+  --accent: var(--track-java);
+  --accent-2: #4f9ef8;
+  --accent-ink: #09231a;
+}
+
+[data-track="ia"] {
+  --accent: var(--track-ia);
+  --accent-2: #38bdf8;
+  --accent-ink: #19152f;
+}
+
+[data-track="arquitetura"] {
+  --accent: var(--track-arquitetura);
+  --accent-2: #38bdf8;
+  --accent-ink: #2a1023;
+}
+
+[data-track="python"] {
+  --accent: var(--track-python);
+  --accent-2: #22d3b0;
+  --accent-ink: #0d1e35;
+}
+
+[data-track="aws"] {
+  --accent: var(--track-aws);
+  --accent-2: #38bdf8;
+  --accent-ink: #2e2010;
+}
+
+[data-track="devops"] {
+  --accent: var(--track-devops);
+  --accent-2: #67e8f9;
+  --accent-ink: #2e1119;
+}
+
+[data-track="frontend"] {
+  --accent: var(--track-frontend);
+  --accent-2: #a78bfa;
+  --accent-ink: #092a33;
+}
+
+[data-track="bancos"] {
+  --accent: var(--track-bancos);
+  --accent-2: #38bdf8;
+  --accent-ink: #0c2623;
+}
+
+[data-track="git"] {
+  --accent: var(--track-git);
+  --accent-2: #facc15;
+  --accent-ink: #2e170c;
+}
+
+[data-track="ingles"] {
+  --accent: var(--track-ingles);
+  --accent-2: #14b8a6;
+  --accent-ink: #171a38;
+}
+
+[data-track="matematica"] {
+  --accent: var(--track-matematica);
+  --accent-2: #34d399;
+  --accent-ink: #2c1231;
+}
+
+[data-track="sec"] {
+  --accent: var(--track-sec);
+  --accent-2: #4fd1a1;
+  --accent-ink: #301316;
+}
+
+[data-track="financeiro"] {
+  --accent: var(--track-financeiro);
+  --accent-2: #fb923c;
+  --accent-ink: #1c2809;
+}
+
+[data-track="treino"] {
+  --accent: var(--track-treino);
+  --accent-2: #ef4444;
+  --accent-ink: #2e2608;
+}
+
+[data-track] {
+  --accent-line: color-mix(in srgb, var(--accent) 32%, transparent);
+}

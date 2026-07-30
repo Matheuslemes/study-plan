@@ -10,41 +10,41 @@
 ═══════════════════════════════════════════════ */
 
 export const CK = {
-  java: { t: "#22c55e", b: "#0d2e1a" },
-  ingles: { t: "#14b8a6", b: "#0c2f2b" },
-  sec: { t: "#2dd4bf", b: "#0c2623" },
-  git: { t: "#f97316", b: "#2e170c" },
-  arquitetura: { t: "#facc15", b: "#2e2608" },
-  frontend: { t: "#06b6d4", b: "#092a33" },
-  dsa: { t: "#fb7185", b: "#2e1119" },
-  pratica: { t: "#7c6ae8", b: "#1e1a3a" },
-  aws: { t: "#f59e0b", b: "#2e2010" },
-  py: { t: "#60a5fa", b: "#0d1e35" },
-  devops: { t: "#f472b6", b: "#2e1025" },
-  db: { t: "#38bdf8", b: "#0e2538" },
-  math: { t: "#34d399", b: "#0d2e1a" },
-  ia: { t: "#a78bfa", b: "#1a1735" },
-  fin: { t: "#fb923c", b: "#2e1a10" },
-  treino: { t: "#ef4444", b: "#2f1115" },
-  sleep: { t: "#a78bfa", b: "#1a1735" },
-  cardio: { t: "#ef4444", b: "#2f1115" },
-  strength: { t: "#ef4444", b: "#2f1115" },
-  dinner: { t: "#fb923c", b: "#2e1a10" },
-  database: { t: "#38bdf8", b: "#0e2538" },
-  testing: { t: "#22d3b0", b: "#0d2e28" },
-  cloud: { t: "#f59e0b", b: "#2e2010" },
-  security: { t: "#2dd4bf", b: "#0c2623" },
-  architecture: { t: "#facc15", b: "#2e2608" },
-  ai: { t: "#a78bfa", b: "#1a1735" },
-  frontendBlock: { t: "#06b6d4", b: "#092a33" },
-  specialization: { t: "#a78bfa", b: "#1a1735" },
-  break: { t: "#94a3b8", b: "#141a24" },
-  review: { t: "#22d3b0", b: "#0d2e28" },
-  closing: { t: "#94a3b8", b: "#141a24" },
-  buffer: { t: "#fbbf24", b: "#2e2410" },
-  project: { t: "#7c6ae8", b: "#1e1a3a" },
-  study: { t: "#22c55e", b: "#0d2e1a" },
-  n: { t: "#94a3b8", b: "#141a24" }
+  java: { t: 'var(--track-java)', b: 'color-mix(in srgb, var(--track-java) 10%, transparent)' },
+  ingles: { t: 'var(--track-ingles)', b: 'color-mix(in srgb, var(--track-ingles) 10%, transparent)' },
+  sec: { t: 'var(--track-sec)', b: 'color-mix(in srgb, var(--track-sec) 10%, transparent)' },
+  git: { t: 'var(--track-git)', b: 'color-mix(in srgb, var(--track-git) 10%, transparent)' },
+  arquitetura: { t: 'var(--track-arquitetura)', b: 'color-mix(in srgb, var(--track-arquitetura) 10%, transparent)' },
+  frontend: { t: 'var(--track-frontend)', b: 'color-mix(in srgb, var(--track-frontend) 10%, transparent)' },
+  dsa: { t: 'var(--state-recovery)', b: 'color-mix(in srgb, var(--state-recovery) 10%, transparent)' },
+  pratica: { t: 'var(--state-validated)', b: 'color-mix(in srgb, var(--state-validated) 10%, transparent)' },
+  aws: { t: 'var(--track-aws)', b: 'color-mix(in srgb, var(--track-aws) 10%, transparent)' },
+  py: { t: 'var(--track-python)', b: 'color-mix(in srgb, var(--track-python) 10%, transparent)' },
+  devops: { t: 'var(--track-devops)', b: 'color-mix(in srgb, var(--track-devops) 10%, transparent)' },
+  db: { t: 'var(--track-bancos)', b: 'color-mix(in srgb, var(--track-bancos) 10%, transparent)' },
+  math: { t: 'var(--track-matematica)', b: 'color-mix(in srgb, var(--track-matematica) 10%, transparent)' },
+  ia: { t: 'var(--track-ia)', b: 'color-mix(in srgb, var(--track-ia) 10%, transparent)' },
+  fin: { t: 'var(--track-financeiro)', b: 'color-mix(in srgb, var(--track-financeiro) 10%, transparent)' },
+  treino: { t: 'var(--track-treino)', b: 'color-mix(in srgb, var(--track-treino) 10%, transparent)' },
+  sleep: { t: 'var(--state-validated)', b: 'color-mix(in srgb, var(--state-validated) 10%, transparent)' },
+  cardio: { t: 'var(--state-danger)', b: 'color-mix(in srgb, var(--state-danger) 10%, transparent)' },
+  strength: { t: 'var(--state-danger)', b: 'color-mix(in srgb, var(--state-danger) 10%, transparent)' },
+  dinner: { t: 'var(--state-warning)', b: 'color-mix(in srgb, var(--state-warning) 10%, transparent)' },
+  database: { t: 'var(--track-bancos)', b: 'color-mix(in srgb, var(--track-bancos) 10%, transparent)' },
+  testing: { t: 'var(--state-success)', b: 'color-mix(in srgb, var(--state-success) 10%, transparent)' },
+  cloud: { t: 'var(--track-aws)', b: 'color-mix(in srgb, var(--track-aws) 10%, transparent)' },
+  security: { t: 'var(--track-sec)', b: 'color-mix(in srgb, var(--track-sec) 10%, transparent)' },
+  architecture: { t: 'var(--track-arquitetura)', b: 'color-mix(in srgb, var(--track-arquitetura) 10%, transparent)' },
+  ai: { t: 'var(--track-ia)', b: 'color-mix(in srgb, var(--track-ia) 10%, transparent)' },
+  frontendBlock: { t: 'var(--track-frontend)', b: 'color-mix(in srgb, var(--track-frontend) 10%, transparent)' },
+  specialization: { t: 'var(--state-validated)', b: 'color-mix(in srgb, var(--state-validated) 10%, transparent)' },
+  break: { t: 'var(--text-3)', b: 'var(--surface-soft)' },
+  review: { t: 'var(--state-success)', b: 'color-mix(in srgb, var(--state-success) 10%, transparent)' },
+  closing: { t: 'var(--text-3)', b: 'var(--surface-soft)' },
+  buffer: { t: 'var(--state-warning)', b: 'color-mix(in srgb, var(--state-warning) 10%, transparent)' },
+  project: { t: 'var(--state-validated)', b: 'color-mix(in srgb, var(--state-validated) 10%, transparent)' },
+  study: { t: 'var(--state-success)', b: 'color-mix(in srgb, var(--state-success) 10%, transparent)' },
+  n: { t: 'var(--text-3)', b: 'var(--surface-soft)' }
 };
 
 export const heroTagsData = [
@@ -92,15 +92,15 @@ export const quickTracks = [
     badge: "Backend",
     desc: "Java 21, Spring Boot em produção, JPA/Hibernate avançado, Security, APIs profissionais, Kafka, Redis, observabilidade, performance, legado e arquitetura.",
     extraBadges: [
-      { label: "Java 21", color: "#22c55e" },
-      { label: "Spring Boot", color: "#4f9ef8" },
-      { label: "Spring Security", color: "#a78bfa" },
-      { label: "JPA/Hibernate", color: "#22c55e" },
-      { label: "PostgreSQL", color: "#38bdf8" },
-      { label: "Kafka", color: "#a78bfa" },
-      { label: "Hexagonal · DDD", color: "#22c55e" },
-      { label: "Observabilidade", color: "#38bdf8" },
-      { label: "System Design", color: "#a78bfa" }
+      { label: "Java 21" },
+      { label: "Spring Boot" },
+      { label: "Spring Security" },
+      { label: "JPA/Hibernate" },
+      { label: "PostgreSQL" },
+      { label: "Kafka" },
+      { label: "Hexagonal · DDD" },
+      { label: "Observabilidade" },
+      { label: "System Design" }
     ]
   },
 
@@ -111,14 +111,14 @@ export const quickTracks = [
     badge: "Fluência técnica",
     desc: "Inglês aplicado ao fluxo real de desenvolvimento: documentação oficial, debugging, logs, commits, PRs, README, escrita técnica, speaking, entrevistas, arquitetura e comunicação profissional.",
     extraBadges: [
-      { label: "B1+/B2 técnico", color: "#14b8a6" },
-      { label: "Documentação oficial", color: "#facc15" },
-      { label: "Debugging em inglês", color: "#38bdf8" },
-      { label: "Commits e PRs", color: "#22d3b0" },
-      { label: "Speaking técnico", color: "#eab308" },
-      { label: "Entrevistas", color: "#38bdf8" },
-      { label: "Fluência funcional", color: "#14b8a6" },
-      { label: "Portfólio global", color: "#eab308" }
+      { label: "B1+/B2 técnico" },
+      { label: "Documentação oficial" },
+      { label: "Debugging em inglês" },
+      { label: "Commits e PRs" },
+      { label: "Speaking técnico" },
+      { label: "Entrevistas" },
+      { label: "Fluência funcional" },
+      { label: "Portfólio global" }
     ]
   },
 
@@ -130,18 +130,18 @@ export const quickTracks = [
     badge: "Versionamento",
     desc: "Git do básico ao nível sênior: commits, branches, PR/MR, rebase, conflitos, GitHub, GitLab, Bitbucket, Azure Repos, CI/CD, segurança, governança, monorepo e GitOps.",
     extraBadges: [
-      { label: "Git Core", color: "#f97316" },
-      { label: "GitHub", color: "#38bdf8" },
-      { label: "GitLab", color: "#f97316" },
-      { label: "Bitbucket", color: "#60a5fa" },
-      { label: "Azure Repos", color: "#38bdf8" },
-      { label: "PR/MR", color: "#facc15" },
-      { label: "Rebase · Bisect", color: "#a78bfa" },
-      { label: "CI/CD", color: "#22d3b0" },
-      { label: "Branch Protection", color: "#f97316" },
-      { label: "CODEOWNERS", color: "#facc15" },
-      { label: "Monorepo", color: "#38bdf8" },
-      { label: "GitOps", color: "#22c55e" }
+      { label: "Git Core" },
+      { label: "GitHub" },
+      { label: "GitLab" },
+      { label: "Bitbucket" },
+      { label: "Azure Repos" },
+      { label: "PR/MR" },
+      { label: "Rebase · Bisect" },
+      { label: "CI/CD" },
+      { label: "Branch Protection" },
+      { label: "CODEOWNERS" },
+      { label: "Monorepo" },
+      { label: "GitOps" }
     ]
   },
 
@@ -152,18 +152,18 @@ export const quickTracks = [
     badge: "Architecture",
     desc: "Arquitetura de integração e solução: APIs, eventos, mensageria, contratos, resiliência, segurança, observabilidade, cloud, governança, ADRs, RFCs e decisões técnicas de nível sênior.",
     extraBadges: [
-      { label: "C4 Model", color: "#facc15" },
-      { label: "ADRs · RFCs", color: "#a78bfa" },
-      { label: "OpenAPI", color: "#38bdf8" },
-      { label: "AsyncAPI", color: "#22d3b0" },
-      { label: "Kafka", color: "#a78bfa" },
-      { label: "Outbox · Inbox", color: "#facc15" },
-      { label: "Saga · CQRS", color: "#fb923c" },
-      { label: "Cloud Solution", color: "#38bdf8" },
-      { label: "Resiliência", color: "#22d3b0" },
-      { label: "Governança", color: "#facc15" },
-      { label: "Trade-offs", color: "#fb923c" },
-      { label: "Senior Design", color: "#a78bfa" }
+      { label: "C4 Model" },
+      { label: "ADRs · RFCs" },
+      { label: "OpenAPI" },
+      { label: "AsyncAPI" },
+      { label: "Kafka" },
+      { label: "Outbox · Inbox" },
+      { label: "Saga · CQRS" },
+      { label: "Cloud Solution" },
+      { label: "Resiliência" },
+      { label: "Governança" },
+      { label: "Trade-offs" },
+      { label: "Senior Design" }
     ]
   },
 
@@ -171,42 +171,32 @@ export const quickTracks = [
     key: "frontend",
     label: "Frontend Engineering",
     href: "./trilhas/frontend.html",
-    badge: "Frontend",
-    desc: "Frontend do básico ao sênior: HTML semântico, CSS moderno, JavaScript, TypeScript, React, Next.js, arquitetura, performance, segurança, acessibilidade, testes, observabilidade e design systems.",
+    badge: "Frontend Academy",
+    desc: "20 módulos da plataforma Web à produção: HTML, CSS, JavaScript, TypeScript, React, acessibilidade, design systems, testes, Web Vitals, segurança e arquitetura.",
     extraBadges: [
-      { label: "HTML Semântico", color: "#06b6d4" },
-      { label: "CSS Moderno", color: "#38bdf8" },
-      { label: "JavaScript", color: "#facc15" },
-      { label: "TypeScript", color: "#60a5fa" },
-      { label: "React", color: "#06b6d4" },
-      { label: "Next.js", color: "#e2e8f0" },
-      { label: "A11y", color: "#22d3b0" },
-      { label: "Performance", color: "#fb923c" },
-      { label: "Testes", color: "#a78bfa" },
-      { label: "Design System", color: "#06b6d4" },
-      { label: "BFF", color: "#38bdf8" },
-      { label: "Web Vitals", color: "#22d3b0" }
+      { label: "20 módulos" },
+      { label: "10 livros" },
+      { label: "WCAG 2.2" },
+      { label: "TypeScript + React" },
+      { label: "Web Vitals" },
+      { label: "Projeto evolutivo" }
     ]
   },
 
   {
     key: "aws",
-    label: "AWS Certifications",
+    label: "AWS",
     href: "./trilhas/aws.html",
-    badge: "Cloud",
-    desc: "CLF-C02, SAA-C03, DVA-C02, labs obrigatórios, simulados, revisão e marcos de prova.",
+    badge: "Cloud Academy",
+    desc: "20 módulos de arquitetura e operação: IAM, VPC, dados, serverless, containers, resiliência, segurança, FinOps e Well-Architected.",
     extraBadges: [
-      { label: "CLF-C02", color: "#f59e0b" },
-      { label: "SAA-C03", color: "#38bdf8" },
-      { label: "DVA-C02", color: "#a78bfa" },
-      { label: "SOA-C03", color: "#f59e0b" },
-      { label: "DOP-C02", color: "#38bdf8" },
-      { label: "156 semanas", color: "#a78bfa" },
-      { label: "AWS 4x/semana", color: "#fb923c" },
-      { label: "Free Tier Labs", color: "#38bdf8" },
-      { label: "Simulados", color: "#a78bfa" },
-      { label: "Obsidian SP", color: "#f59e0b" },
-      { label: "Projeto Blog Cloud-Native", color: "#38bdf8" }
+      { label: "SAA-C03" },
+      { label: "20 módulos" },
+      { label: "7 livros" },
+      { label: "IaC" },
+      { label: "Game Day" },
+      { label: "FinOps" },
+      { label: "Projeto evolutivo" }
     ]
   },
 
@@ -217,15 +207,15 @@ export const quickTracks = [
     badge: "Backend + IA",
     desc: "Python moderno, typing, FastAPI, Django/DRF, SQLAlchemy, pytest, Docker, APIs profissionais, dados, ML, PyTorch, LLMs, RAG, agentes, MLOps/LLMOps e integração com Java.",
     extraBadges: [
-      { label: "Python 3.12+", color: "#60a5fa" },
-      { label: "FastAPI", color: "#22d3b0" },
-      { label: "Django DRF", color: "#22d3b0" },
-      { label: "SQLAlchemy", color: "#a78bfa" },
-      { label: "pytest", color: "#a78bfa" },
-      { label: "Pandas · NumPy", color: "#eab308" },
-      { label: "PyTorch", color: "#f59e0b" },
-      { label: "RAG · Agentes", color: "#fb923c" },
-      { label: "MLOps/LLMOps", color: "#fb923c" }
+      { label: "Python 3.12+" },
+      { label: "FastAPI" },
+      { label: "Django DRF" },
+      { label: "SQLAlchemy" },
+      { label: "pytest" },
+      { label: "Pandas · NumPy" },
+      { label: "PyTorch" },
+      { label: "RAG · Agentes" },
+      { label: "MLOps/LLMOps" }
     ]
   },
 
@@ -236,49 +226,47 @@ export const quickTracks = [
     badge: "Operação",
     desc: "Linux, redes, Docker, CI/CD, Kubernetes, Terraform, observabilidade, SRE, DevSecOps, FinOps e troubleshooting real.",
     extraBadges: [
-      { label: "Linux", color: "#f472b6" },
-      { label: "Networking", color: "#38bdf8" },
-      { label: "Git", color: "#a78bfa" },
-      { label: "Docker", color: "#f9a8d4" },
-      { label: "CI/CD", color: "#38bdf8" },
-      { label: "GitHub Actions", color: "#a78bfa" },
-      { label: "Jenkins", color: "#f9a8d4" },
-      { label: "Kubernetes", color: "#38bdf8" },
-      { label: "Helm", color: "#a78bfa" },
-      { label: "Terraform", color: "#f9a8d4" },
-      { label: "GitOps", color: "#38bdf8" },
-      { label: "ArgoCD", color: "#a78bfa" },
-      { label: "Prometheus", color: "#f9a8d4" },
-      { label: "Grafana", color: "#38bdf8" },
-      { label: "OpenTelemetry", color: "#a78bfa" },
-      { label: "DevSecOps", color: "#f9a8d4" },
-      { label: "SRE", color: "#38bdf8" },
-      { label: "DORA Metrics", color: "#a78bfa" },
-      { label: "FinOps", color: "#f9a8d4" },
-      { label: "Platform Engineering", color: "#38bdf8" }
+      { label: "Linux" },
+      { label: "Networking" },
+      { label: "Git" },
+      { label: "Docker" },
+      { label: "CI/CD" },
+      { label: "GitHub Actions" },
+      { label: "Jenkins" },
+      { label: "Kubernetes" },
+      { label: "Helm" },
+      { label: "Terraform" },
+      { label: "GitOps" },
+      { label: "ArgoCD" },
+      { label: "Prometheus" },
+      { label: "Grafana" },
+      { label: "OpenTelemetry" },
+      { label: "DevSecOps" },
+      { label: "SRE" },
+      { label: "DORA Metrics" },
+      { label: "FinOps" },
+      { label: "Platform Engineering" }
     ]
   },
 
 
   {
     key: "sec",
-    label: "Segurança Full Stack",
+    label: "Segurança — Confiança Verificável",
     href: "./trilhas/sec.html",
-    badge: "AppSec · DevSecOps",
-    desc: "Trilha técnica aprofundada de segurança para desenvolvedores full stack: OWASP, frontend seguro, backend seguro, APIs, Auth/Authz, banco, cloud IAM, DevSecOps, threat modeling, observabilidade, supply chain e projetos práticos.",
+    badge: "AppSec · Engenharia de Segurança",
+    desc: "Threat modeling, ASVS 5.0.0, identidade, autorização, segurança web e de APIs, testes, supply chain, detecção, incidentes e programa AppSec com evidência.",
     extraBadges: [
-      { label: "20 seções", color: "#2dd4bf" },
-      { label: "9 projetos", color: "#38bdf8" },
-      { label: "12+ checklists", color: "#a78bfa" },
-      { label: "OWASP Top 10", color: "#34d399" },
-      { label: "ASVS · API Security", color: "#38bdf8" },
-      { label: "Threat Modeling", color: "#f43f5e" },
-      { label: "JWT · OAuth2 · OIDC", color: "#a78bfa" },
-      { label: "Spring Security", color: "#34d399" },
-      { label: "DevSecOps", color: "#f59e0b" },
-      { label: "Cloud IAM · KMS", color: "#38bdf8" },
-      { label: "SAST · DAST · SCA", color: "#a78bfa" },
-      { label: "Supply Chain", color: "#f43f5e" }
+      { label: "20 módulos" },
+      { label: "4 entregas encadeadas" },
+      { label: "10 livros locais" },
+      { label: "OWASP Top 10:2025" },
+      { label: "ASVS 5.0.0" },
+      { label: "Threat Modeling" },
+      { label: "AuthN · AuthZ" },
+      { label: "SAST · DAST · SCA" },
+      { label: "Supply Chain" },
+      { label: "Incident Response" }
     ]
   },
 
@@ -289,22 +277,22 @@ export const quickTracks = [
     badge: "Dados",
     desc: "SQL relacional, PostgreSQL, JPA/Hibernate, query tuning, MongoDB, Redis, DynamoDB, transações, índices, backup, segurança e modelagem para produção.",
     extraBadges: [
-      { label: "SQL", color: "#38bdf8" },
-      { label: "PostgreSQL", color: "#22c55e" },
-      { label: "JPA/Hibernate", color: "#a78bfa" },
-      { label: "MongoDB", color: "#38bdf8" },
-      { label: "Redis", color: "#22c55e" },
-      { label: "DynamoDB", color: "#a78bfa" },
-      { label: "Query Tuning", color: "#38bdf8" },
-      { label: "EXPLAIN ANALYZE", color: "#22c55e" },
-      { label: "Transactions", color: "#a78bfa" },
-      { label: "Locks", color: "#38bdf8" },
-      { label: "Outbox", color: "#22c55e" },
-      { label: "CQRS", color: "#a78bfa" },
-      { label: "Saga", color: "#38bdf8" },
-      { label: "Backup/Restore", color: "#22c55e" },
-      { label: "Observabilidade", color: "#a78bfa" },
-      { label: "LGPD", color: "#38bdf8" }
+      { label: "SQL" },
+      { label: "PostgreSQL" },
+      { label: "JPA/Hibernate" },
+      { label: "MongoDB" },
+      { label: "Redis" },
+      { label: "DynamoDB" },
+      { label: "Query Tuning" },
+      { label: "EXPLAIN ANALYZE" },
+      { label: "Transactions" },
+      { label: "Locks" },
+      { label: "Outbox" },
+      { label: "CQRS" },
+      { label: "Saga" },
+      { label: "Backup/Restore" },
+      { label: "Observabilidade" },
+      { label: "LGPD" }
     ]
   },
 
@@ -315,18 +303,18 @@ export const quickTracks = [
     badge: "Base IA + Código",
     desc: "Matemática aplicada à programação e IA: lógica, Big O, grafos, álgebra linear com NumPy, probabilidade, estatística, cálculo, otimização, métricas ML/RAG, embeddings, attention e entregáveis por fase.",
     extraBadges: [
-      { label: "3x/semana", color: "#22d3b0" },
-      { label: "156 semanas", color: "#38bdf8" },
-      { label: "12 fases", color: "#a78bfa" },
-      { label: "Programação", color: "#fb923c" },
-      { label: "Algoritmos", color: "#22c55e" },
-      { label: "Machine Learning", color: "#60a5fa" },
-      { label: "Deep Learning", color: "#a78bfa" },
-      { label: "LLMs", color: "#fb923c" },
-      { label: "RAG", color: "#22d3b0" },
-      { label: "Retrieval", color: "#60a5fa" },
-      { label: "Métricas", color: "#a78bfa" },
-      { label: "Portfólio", color: "#fb923c" }
+      { label: "3x/semana" },
+      { label: "156 semanas" },
+      { label: "12 fases" },
+      { label: "Programação" },
+      { label: "Algoritmos" },
+      { label: "Machine Learning" },
+      { label: "Deep Learning" },
+      { label: "LLMs" },
+      { label: "RAG" },
+      { label: "Retrieval" },
+      { label: "Métricas" },
+      { label: "Portfólio" }
     ]
   },
 
@@ -337,21 +325,21 @@ export const quickTracks = [
     badge: "IA aplicada · produção",
     desc: "Trilha técnica completa de Inteligência Artificial, do básico ao profissional/sênior: fundamentos, matemática, Python e dados, Machine Learning, Deep Learning, NLP, LLMs, IA Generativa, RAG, agentes, engenharia de aplicações, MLOps, cloud, segurança, governança, projetos, cronogramas, checklist e biblioteca de livros em PDF.",
     extraBadges: [
-      { label: "31 seções", color: "#a78bfa" },
-      { label: "4 níveis", color: "#38bdf8" },
-      { label: "9 livros PDF", color: "#fcd34d" },
-      { label: "ML clássico", color: "#22d3b0" },
-      { label: "Deep Learning", color: "#a78bfa" },
-      { label: "NLP", color: "#38bdf8" },
-      { label: "LLMs", color: "#fb923c" },
-      { label: "RAG", color: "#34d399" },
-      { label: "Agentes", color: "#f87171" },
-      { label: "MLOps", color: "#93c5fd" },
-      { label: "Cloud IA", color: "#38bdf8" },
-      { label: "OWASP LLM", color: "#c084fc" },
-      { label: "NIST AI RMF", color: "#fcd34d" },
-      { label: "LGPD", color: "#fb923c" },
-      { label: "Portfólio", color: "#22d3b0" }
+      { label: "31 seções" },
+      { label: "4 níveis" },
+      { label: "9 livros PDF" },
+      { label: "ML clássico" },
+      { label: "Deep Learning" },
+      { label: "NLP" },
+      { label: "LLMs" },
+      { label: "RAG" },
+      { label: "Agentes" },
+      { label: "MLOps" },
+      { label: "Cloud IA" },
+      { label: "OWASP LLM" },
+      { label: "NIST AI RMF" },
+      { label: "LGPD" },
+      { label: "Portfólio" }
     ]
   },
 
@@ -362,18 +350,18 @@ export const quickTracks = [
     badge: "Renda",
     desc: "Orçamento, dívidas, reserva, investimentos, precificação, produtos digitais, microSaaS e evolução financeira.",
     extraBadges: [
-      { label: "31 módulos", color: "#fb923c" },
-      { label: "5 macroáreas", color: "#f59e0b" },
-      { label: "12 fases / 156 semanas", color: "#22d3b0" },
-      { label: "3x/semana", color: "#fb923c" },
-      { label: "70/20/10", color: "#f59e0b" },
-      { label: "Orçamento", color: "#22d3b0" },
-      { label: "Dívidas", color: "#fb923c" },
-      { label: "Reserva", color: "#f59e0b" },
-      { label: "Investimentos", color: "#22d3b0" },
-      { label: "Negócios digitais", color: "#fb923c" },
-      { label: "IA aplicada", color: "#f59e0b" },
-      { label: "Proteção patrimonial", color: "#22d3b0" }
+      { label: "31 módulos" },
+      { label: "5 macroáreas" },
+      { label: "12 fases / 156 semanas" },
+      { label: "3x/semana" },
+      { label: "70/20/10" },
+      { label: "Orçamento" },
+      { label: "Dívidas" },
+      { label: "Reserva" },
+      { label: "Investimentos" },
+      { label: "Negócios digitais" },
+      { label: "IA aplicada" },
+      { label: "Proteção patrimonial" }
     ]
   },
 
@@ -384,15 +372,15 @@ export const quickTracks = [
     badge: "Saúde + Cardio",
     desc: "Plano de treino híbrido otimizado: musculação 3x/semana, cardio 6x/semana, fases progressivas, Zona 2, preservação muscular, adaptação para semanas difíceis e limite de 90 min/dia.",
     extraBadges: [
-      { label: "103 kg", color: "#f87171" },
-      { label: "1,80 m", color: "#38bdf8" },
-      { label: "Massa muscular", color: "#84cc16" },
-      { label: "1h30/treino", color: "#fb923c" },
-      { label: "3 fases", color: "#f9a8d4" },
-      { label: "Cardio 6x", color: "#22d3b0" },
-      { label: "Musculação 3x", color: "#84cc16" },
-      { label: "Zona 2", color: "#fb923c" },
-      { label: "Semana 8", color: "#f87171" }
+      { label: "103 kg" },
+      { label: "1,80 m" },
+      { label: "Massa muscular" },
+      { label: "1h30/treino" },
+      { label: "3 fases" },
+      { label: "Cardio 6x" },
+      { label: "Musculação 3x" },
+      { label: "Zona 2" },
+      { label: "Semana 8" }
     ]
   }
 ];
@@ -438,3 +426,180 @@ export const trilhasRelacionadas = {
   fin: ['ingles'],
   treino: []
 };
+
+/*
+ * Registro canônico das três vistas.
+ *
+ * O slug público, data-track e diretório da Academia usam o mesmo identificador.
+ * Os aliases existem somente para resolver URLs e dados legados durante a
+ * migração; componentes e novas páginas nunca devem emiti-los.
+ */
+export const TRACK_ALIASES = Object.freeze({
+  py: 'python',
+  db: 'bancos',
+  math: 'matematica',
+  fin: 'financeiro'
+});
+
+export const TRACK_REGISTRY = Object.freeze({
+  java: {
+    label: 'Java 21+, JVM e Engenharia de Produção',
+    shortLabel: 'Java',
+    brand: 'Java Track',
+    dataFile: 'java-advanced.js',
+    exports: { academy: 'javaAcademy', modules: 'javaModules', books: 'javaBooks', assessment: 'javaAssessment' },
+    academy: true
+  },
+  ia: {
+    label: 'IA Engineering aplicada',
+    shortLabel: 'IA',
+    brand: 'AI Engineering',
+    dataFile: 'ia-advanced.js',
+    exports: {
+      academy: 'iaAcademy',
+      modules: 'iaModules',
+      books: 'iaBooks',
+      assessment: 'iaAssessment',
+      projects: 'iaProjects',
+      answerKey: 'iaAnswerKey',
+      baseline: 'iaTechnologyBaseline'
+    },
+    academy: true,
+    assessmentPart: 'pratica'
+  },
+  arquitetura: {
+    label: 'Arquitetura de Software',
+    shortLabel: 'Arquitetura',
+    brand: 'Architecture Track',
+    dataFile: 'arquitetura-advanced.js',
+    exports: {
+      academy: 'arquiteturaAcademy',
+      modules: 'arquiteturaModules',
+      books: 'arquiteturaBooks',
+      assessment: 'arquiteturaAssessment'
+    },
+    academy: true
+  },
+  python: {
+    label: 'Python aplicado a dados',
+    shortLabel: 'Python',
+    brand: 'Python Track',
+    dataFile: 'python-advanced.js',
+    exports: { academy: 'pythonAcademy', modules: 'pythonModules', books: 'pythonBooks', assessment: 'pythonAssessment' },
+    academy: true
+  },
+  aws: {
+    label: 'AWS e Cloud de produção',
+    shortLabel: 'AWS',
+    brand: 'AWS Academy',
+    dataFile: 'aws-advanced.js',
+    exports: { academy: 'awsAcademy', modules: 'awsModules', books: 'awsBooks', assessment: 'awsAssessment' },
+    academy: true
+  },
+  devops: {
+    label: 'DevOps e Entrega Contínua',
+    shortLabel: 'DevOps',
+    brand: 'DevOps Academy',
+    dataFile: 'devops-advanced.js',
+    exports: { academy: 'devopsAcademy', modules: 'devopsModules', books: 'devopsBooks', assessment: 'devopsAssessment' },
+    academy: true
+  },
+  frontend: {
+    label: 'Frontend Engineering',
+    shortLabel: 'Frontend',
+    brand: 'Frontend Academy',
+    dataFile: 'frontend-advanced.js',
+    exports: {
+      academy: 'frontendAcademy',
+      modules: 'frontendModules',
+      books: 'frontendBooks',
+      assessment: 'frontendAssessment'
+    },
+    academy: true
+  },
+  bancos: {
+    label: 'Bancos de Dados',
+    shortLabel: 'Bancos',
+    brand: 'Database Track',
+    dataFile: 'bancos-advanced.js',
+    exports: { academy: 'bancosAcademy', modules: 'bancosModules', books: 'bancosBooks', assessment: 'bancosAssessment' },
+    academy: true
+  },
+  git: {
+    label: 'Git e Versionamento',
+    shortLabel: 'Git',
+    brand: 'Git Track',
+    dataFile: 'git-advanced.js',
+    exports: { academy: 'gitAcademy', modules: 'gitModules', books: 'gitBooks', assessment: 'gitAssessment' },
+    academy: true
+  },
+  ingles: {
+    label: 'Inglês Técnico',
+    shortLabel: 'Inglês',
+    brand: 'English Track',
+    dataFile: 'ingles-advanced.js',
+    exports: {
+      academy: 'inglesAcademy',
+      modules: 'inglesModules',
+      books: 'inglesBooks',
+      assessment: 'inglesAssessment'
+    },
+    academy: true
+  },
+  matematica: {
+    label: 'Matemática Aplicada',
+    shortLabel: 'Matemática',
+    brand: 'Math Track',
+    dataFile: 'matematica-advanced.js',
+    exports: {
+      academy: 'matematicaAcademy',
+      modules: 'matematicaModules',
+      books: 'matematicaBooks',
+      assessment: 'matematicaAssessment'
+    },
+    academy: true
+  },
+  sec: {
+    label: 'Segurança de Aplicações',
+    shortLabel: 'Segurança',
+    brand: 'Security Academy',
+    dataFile: 'sec-advanced.js',
+    exports: {
+      academy: 'secAcademy',
+      modules: 'secModules',
+      books: 'secBooks',
+      assessment: 'secAssessment'
+    },
+    academy: true
+  },
+  financeiro: {
+    label: 'Gestão Financeira',
+    shortLabel: 'Financeiro',
+    brand: 'Finance Track',
+    dataFile: 'financeiro-advanced.js',
+    exports: {
+      academy: 'financeiroAcademy',
+      modules: 'financeiroModules',
+      books: 'financeiroBooks',
+      assessment: 'financeiroAssessment'
+    },
+    academy: true
+  },
+  treino: {
+    label: 'Treino Híbrido',
+    shortLabel: 'Treino',
+    brand: 'Training Log',
+    academy: false
+  }
+});
+
+export function resolveTrackId(value = '') {
+  const candidate = String(value).trim().toLowerCase();
+  return TRACK_ALIASES[candidate] || candidate;
+}
+
+export function getTrackConfig(value = '') {
+  const id = resolveTrackId(value);
+  const config = TRACK_REGISTRY[id];
+  return config ? { id, ...config } : null;
+}
