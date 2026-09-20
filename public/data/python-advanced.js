@@ -30,7 +30,31 @@ const official = {
   logging: { label: 'Python — logging', url: 'https://docs.python.org/3/library/logging.html' },
   httpx: { label: 'HTTPX', url: 'https://www.python-httpx.org/' },
   fastapi: { label: 'FastAPI', url: 'https://fastapi.tiangolo.com/' },
-  dataclasses: { label: 'dataclasses', url: 'https://docs.python.org/3/library/dataclasses.html' }
+  dataclasses: { label: 'dataclasses', url: 'https://docs.python.org/3/library/dataclasses.html' },
+  whatsnew314: { label: 'What’s New in Python 3.14', url: 'https://docs.python.org/3/whatsnew/3.14.html' },
+  pep703: { label: 'PEP 703 — Making the GIL Optional in CPython', url: 'https://peps.python.org/pep-0703/' },
+  pep779: { label: 'PEP 779 — Free-threaded Python com status suportado (3.14)', url: 'https://peps.python.org/pep-0779/' },
+  freeThreadingGuide: { label: 'Python Free-Threading Guide', url: 'https://py-free-threading.github.io/' },
+  dis: { label: 'dis — Disassembler de bytecode CPython', url: 'https://docs.python.org/3/library/dis.html' },
+  gc: { label: 'gc — Interface do coletor de lixo', url: 'https://docs.python.org/3/library/gc.html' },
+  sysModule: { label: 'sys — Parâmetros e funções do sistema', url: 'https://docs.python.org/3/library/sys.html' },
+  descriptor: { label: 'Descriptor HowTo Guide', url: 'https://docs.python.org/3/howto/descriptor.html' },
+  mro: { label: 'The Python 2.3 Method Resolution Order (C3)', url: 'https://docs.python.org/3/howto/mro.html' },
+  capi: { label: 'Python/C API Reference Manual', url: 'https://docs.python.org/3/c-api/index.html' },
+  extending: { label: 'Extending and Embedding the Python Interpreter', url: 'https://docs.python.org/3/extending/index.html' },
+  ctypes: { label: 'ctypes — Biblioteca de funções estrangeiras', url: 'https://docs.python.org/3/library/ctypes.html' },
+  bufferProtocol: { label: 'Buffer Protocol — C API', url: 'https://docs.python.org/3/c-api/buffer.html' },
+  pyo3: { label: 'PyO3 — bindings Rust para Python', url: 'https://pyo3.rs/' },
+  cython: { label: 'Cython — documentação', url: 'https://cython.readthedocs.io/' },
+  pep517: { label: 'PEP 517 — Interface de build backend', url: 'https://peps.python.org/pep-0517/' },
+  pep621: { label: 'PEP 621 — Metadados do projeto em pyproject.toml', url: 'https://peps.python.org/pep-0621/' },
+  manylinux: { label: 'manylinux — wheels binárias portáveis', url: 'https://github.com/pypa/manylinux' },
+  cibuildwheel: { label: 'cibuildwheel — build de wheels em CI', url: 'https://cibuildwheel.pypa.io/' },
+  uv: { label: 'uv — gerenciador de pacotes e projetos', url: 'https://docs.astral.sh/uv/' },
+  ruff: { label: 'Ruff — linter e formatter', url: 'https://docs.astral.sh/ruff/' },
+  cpythonRepo: { label: 'CPython — código-fonte no GitHub', url: 'https://github.com/python/cpython' },
+  cpythonDevGuide: { label: 'CPython Developer’s Guide', url: 'https://devguide.python.org/' },
+  pep1: { label: 'PEP 1 — o processo de PEPs', url: 'https://peps.python.org/pep-0001/' }
 };
 
 export const pythonBooks = Object.freeze({
@@ -140,13 +164,33 @@ export const pythonBooks = Object.freeze({
   }
 });
 
+/*
+ * Baseline tecnológico: 3.12+ é o piso de compatibilidade dos exemplos; 3.14 é o
+ * que está corrente e mudou respostas que eram verdadeiras até ontem — free-threading
+ * deixou de ser experimental. A distância entre as duas linhas é o conteúdo dos
+ * módulos 21–26, não uma defasagem.
+ */
+export const pythonTechnologyBaseline = [
+  { technology: 'Python dos exemplos', baseline: '3.12+', status: 'Piso de compatibilidade', note: 'Exemplos rodam de 3.12 em diante; nenhum depende de recurso mais novo.' },
+  { technology: 'Python corrente', baseline: '3.14 (out/2025)', status: 'Adotar em projeto novo', note: '3.15 chega em out/2026. Verifique suporte das dependências antes de subir.' },
+  { technology: 'Free-threading', baseline: 'suportado no 3.14 (PEP 779)', status: 'Suportado, não padrão', note: 'Binário separado `python3.14t`. Deixou de ser experimental — a resposta "threads não paralelizam CPU" passou a ter ressalva. Módulo 23.' },
+  { technology: 'JIT (copy-and-patch)', baseline: 'experimental desde 3.13', status: 'Experimental', note: 'Presente nos instaladores oficiais; ganho depende da carga. Medir, não presumir.' },
+  { technology: 'uv', baseline: 'padrão de fato', status: 'Recomendado', note: 'Substitui pip, pip-tools, virtualenv e pyenv num só fluxo. Lockfile universal.' },
+  { technology: 'Ruff', baseline: 'padrão de fato', status: 'Recomendado', note: 'Substitui flake8, black e isort. Ausente das edições dos livros da biblioteca.' },
+  { technology: 'Verificador de tipos', baseline: 'mypy (referência) · ty e pyright', status: 'Em movimento', note: 'mypy segue a referência do currículo; ty (Rust) é a alternativa emergente. Escolha uma e trave em CI.' },
+  { technology: 'Empacotamento', baseline: 'pyproject.toml (PEP 621) + backend PEP 517', status: 'Estável', note: '`setup.py` como interface de build é legado. Módulo 25.' },
+  { technology: 'Wheels binárias', baseline: 'manylinux + cibuildwheel', status: 'Estável', note: 'Tags de ABI definem portabilidade; testar em cada plataforma alvo.' },
+  { technology: 'FFI sem compilar', baseline: 'ctypes (stdlib) · cffi', status: 'Estável', note: 'Caminho de menor custo antes de escrever extensão. Módulo 24.' },
+  { technology: 'Extensões nativas', baseline: 'PyO3 (Rust) · Cython · C API', status: 'Estável', note: 'PyO3 é hoje o caminho mais comum para código novo. Módulo 24.' }
+];
+
 export const pythonAcademy = Object.freeze({
   title: 'Academia de Python',
-  baseline: 'Python 3.12+, código idiomático, tipado, testado e mensurável',
+  baseline: 'Exemplos em Python 3.12+ · corrente 3.14 · baseline completo na avaliação',
   book: 'Fluent Python (Ramalho) como espinha dorsal da linguagem; obras específicas por tema',
   parts: {
     fundamentos: {
-      index: '1/5',
+      index: '1/6',
       range: 'Módulos 1–5',
       title: 'Linguagem e modelo de dados',
       subtitle: 'Data model, estruturas built-in, funções de primeira classe, OO idiomática e tipagem robusta.',
@@ -163,7 +207,7 @@ export const pythonAcademy = Object.freeze({
       ]
     },
     qualidade: {
-      index: '2/5',
+      index: '2/6',
       range: 'Módulos 6–10',
       title: 'Idiomas, testes e arquitetura',
       subtitle: 'Iteração preguiçosa, código pythônico, ambientes, testes com pytest e arquitetura de aplicações.',
@@ -180,7 +224,7 @@ export const pythonAcademy = Object.freeze({
       ]
     },
     performance: {
-      index: '3/5',
+      index: '3/6',
       range: 'Módulos 11–15',
       title: 'Concorrência, assíncrono e performance',
       subtitle: 'GIL, asyncio, paralelismo, otimização orientada a medida e computação numérica com NumPy.',
@@ -197,7 +241,7 @@ export const pythonAcademy = Object.freeze({
       ]
     },
     producao: {
-      index: '4/5',
+      index: '4/6',
       range: 'Módulos 16–20',
       title: 'Automação, dados, IA e produção',
       subtitle: 'Automação prática, pandas, integração com APIs, IA aplicada e operação de serviços Python.',
@@ -213,8 +257,27 @@ export const pythonAcademy = Object.freeze({
         'Levar um modelo do notebook à API observável, segura e em produção.'
       ]
     },
+    fronteira: {
+      index: '5/6',
+      range: 'Módulos 21–26',
+      title: 'Fronteira: o interpretador por dentro',
+      subtitle: 'Objetos e bytecode, descritores e metaclasses, free-threading, extensões nativas, distribuição binária e leitura do CPython.',
+      prerequisites: [
+        'Dominar os módulos 1–14: data model, tipagem, geradores, GIL, asyncio e medição.',
+        'Saber medir antes de concluir — profile com baseline registrada, não impressão.',
+        'Aceitar que boa parte das respostas aqui é "depende da build do interpretador".'
+      ],
+      objectives: [
+        'Explicar o custo de um objeto Python: refcount, ciclos, layout e bytecode emitido.',
+        'Implementar descritores e metaclasses sabendo quando um decorator resolveria melhor.',
+        'Avaliar free-threading e o JIT por medição, e revisar a resposta antiga sobre o GIL.',
+        'Escolher entre ctypes, Cython, PyO3 e C API por custo total, não por preferência.',
+        'Distribuir um pacote com wheel reprodutível e ABI declarada.',
+        'Responder uma dúvida de comportamento lendo o código-fonte do CPython.'
+      ]
+    },
     avaliacao: {
-      index: '5/5',
+      index: '6/6',
       range: 'Evidência',
       title: 'Avaliação, casos e capstones',
       subtitle: 'Rubricas por senioridade, estudos de caso, projetos e biblioteca técnica rastreável.',
@@ -593,8 +656,8 @@ export const pythonModules = [
     objective: 'Entender o GIL e escolher o modelo de concorrência correto — threads para I/O, processos para CPU — sem esperar paralelismo de CPU de threads em CPython.',
     prerequisites: ['Módulos 1–3', 'Funções e I/O', 'Noção de latência'],
     problem: 'Muitos esperam que threads acelerem trabalho de CPU em Python e se frustram: por causa do GIL, threads não executam bytecode Python em paralelo, e a escolha errada de modelo não traz ganho ou até piora.',
-    concepts: ['O Global Interpreter Lock (GIL) e suas implicações', 'I/O-bound vs CPU-bound', 'threading para concorrência de I/O', 'multiprocessing para paralelismo de CPU', 'Custo de criação e de comunicação entre processos'],
-    internals: ['O GIL permite que apenas uma thread execute bytecode Python por vez; threads ajudam quando o trabalho espera por I/O e libera o GIL.', 'Para paralelizar CPU em CPython, usam-se processos, que têm memória própria e não compartilham o GIL.', 'Processos custam mais para criar e comunicam por serialização; isso pode anular o ganho em tarefas pequenas.'],
+    concepts: ['O Global Interpreter Lock (GIL) e suas implicações', 'I/O-bound vs CPU-bound', 'threading para concorrência de I/O', 'multiprocessing para paralelismo de CPU', 'Custo de criação e de comunicação entre processos', 'Build free-threaded: a exceção que o módulo 23 trata'],
+    internals: ['Na build padrão do CPython o GIL permite que apenas uma thread execute bytecode Python por vez; threads ajudam quando o trabalho espera por I/O e libera o GIL.', 'Para paralelizar CPU na build padrão, usam-se processos, que têm memória própria e não compartilham o GIL.', 'Processos custam mais para criar e comunicam por serialização; isso pode anular o ganho em tarefas pequenas.', 'Desde o Python 3.14 existe a build free-threaded, oficialmente suportada (PEP 779), em que threads paralelizam CPU — ela é opt-in, tem penalidade de thread única e exige dependências compatíveis. Todo enunciado sobre o GIL precisa dizer de qual build está falando; o módulo 23 trata a decisão.'],
     useWhen: ['Use threads (ou asyncio) para cargas I/O-bound com muita espera.', 'Use processos para trabalho CPU-bound que precisa de núcleos reais.', 'Dimensione o pool pelo tipo de carga, não por um número mágico.'],
     avoidWhen: ['Não espere que threads acelerem cálculo puro de CPU em CPython.', 'Não use processos para tarefas minúsculas onde a serialização domina.', 'Não crie threads/processos sem limite nem pool.'],
     contrast: {
@@ -606,7 +669,7 @@ export const pythonModules = [
     risks: ['Threads para CPU-bound', 'Processos para tarefas triviais', 'Pool sem limite', 'Ignorar custo de serialização'],
     checklist: ['A carga é I/O-bound ou CPU-bound?', 'O GIL é liberado durante a espera?', 'Processos se justificam pelo tamanho da tarefa?', 'O pool está dimensionado ao tipo de carga?', 'Medi o ganho real antes de concluir?'],
     interview: [
-      { level: 'Júnior/Pleno', question: 'O que é o GIL e por que ele importa?', expected: 'O Global Interpreter Lock permite que só uma thread execute bytecode Python por vez em CPython; por isso threads não paralelizam CPU, embora ajudem em I/O, que libera o GIL durante a espera.' },
+      { level: 'Júnior/Pleno', question: 'O que é o GIL e por que ele importa?', expected: 'Na build padrão do CPython, o Global Interpreter Lock permite que só uma thread execute bytecode por vez; por isso threads não paralelizam CPU, embora ajudem em I/O, que libera o GIL durante a espera. Resposta completa em 2026 acrescenta que a build free-threaded do 3.14 é suportada e muda isso — ver módulo 23.' },
       { level: 'Sênior/Expert', question: 'Como escolher entre threading, multiprocessing e asyncio?', expected: 'I/O-bound com muita espera: asyncio ou threads; CPU-bound: multiprocessing (ou libs que liberam o GIL, como NumPy); a decisão depende do perfil da carga e do custo de comunicação.' }
     ],
     exercises: [
@@ -617,7 +680,7 @@ export const pythonModules = [
     challenge: 'Comparar, sob a mesma carga, serial, threads, processos e asyncio, e recomendar o modelo por tipo de tarefa com base em medição.',
     book: 'High Performance Python, cap. sobre concorrência e multiprocessing; Effective Python (concorrência).',
     complements: [official.multiprocessing, official.concurrent],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/src/pyexpert/free_threading.py'
   },
   {
     number: 12,
@@ -722,7 +785,7 @@ export const pythonModules = [
     challenge: 'Pegar um programa lento, perfilar, corrigir o gargalo real (complexidade ou memória) e apresentar um relatório de performance com baseline e ganho medido.',
     book: 'High Performance Python, cap. 1–5 (profiling, listas/arrays, dicts, memória) e cap. 11.',
     complements: [official.profiling, official.numpy],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/src/pyexpert/interpreter_internals.py'
   },
   {
     number: 15,
@@ -933,6 +996,246 @@ export const pythonModules = [
     book: 'Effective Python (robustez e produção); Architecture Patterns with Python (fronteiras e testes).',
     complements: [official.logging, official.pytest],
     exampleFile: '../../examples/python-senior/README.md'
+  },
+  {
+    number: 21,
+    part: 'fronteira',
+    id: 'interpretador-objetos',
+    title: 'O interpretador por dentro: objetos, refcount, ciclos e bytecode',
+    level: 'Expert',
+    objective: 'Explicar o custo real de um objeto Python — alocação, contagem de referências, ciclos e bytecode emitido — e usar isso para decidir estrutura de dados em vez de adivinhar.',
+    prerequisites: ['Módulo 1 (data model)', 'Módulo 14 (profiling)', 'Noção de ponteiro e alocação'],
+    problem: '"Python é lento" é um diagnóstico vazio. O custo está em lugares específicos: toda operação passa por objetos com cabeçalho e refcount, atributos vivem em dicionários, e um laço inocente emite dezenas de instruções de bytecode. Sem enxergar isso, otimização em Python vira troca de biblioteca por superstição.',
+    concepts: ['`PyObject`: cabeçalho, tipo e contagem de referências', 'Contagem de referências versus coletor de ciclos', 'Caches do interpretador: inteiros pequenos e strings internadas', '`dis` e o bytecode realmente executado', 'Code objects, constantes e nomes', 'Alocação: pymalloc, arenas e fragmentação'],
+    internals: [
+      'A contagem de referências libera na hora, mas não resolve ciclos: para isso existe o `gc`, que roda por geração e tem custo próprio.',
+      'Inteiros pequenos e algumas strings são compartilhados pelo interpretador — por isso `is` às vezes "funciona" por acidente e ensina a lição errada.',
+      'Cada atributo de instância normalmente vive num dicionário por objeto; é isso que `__slots__` elimina.',
+      'O bytecode muda entre versões do CPython: uma conclusão tirada com `dis` no 3.11 pode não valer no 3.14.'
+    ],
+    useWhen: ['Use `dis` quando duas formas equivalentes tiverem desempenho diferente.', 'Use `sys.getsizeof` e `tracemalloc` para atacar memória com número.', 'Use `gc.set_debug` quando suspeitar de ciclos retendo objetos caros.'],
+    avoidWhen: ['Não otimize com base em contagem de bytecode sem medir tempo.', 'Não use `is` para comparar valores — o cache de inteiros pequenos vai enganar você.', 'Não desabilite o `gc` como "otimização" sem entender o que passa a vazar.'],
+    contrast: {
+      bad: 'Concluir que `a is b` é uma comparação válida porque funcionou com `256`.',
+      good: 'Usar `==` para valor e `is` só para identidade, sabendo exatamente por que o teste com inteiro pequeno enganava.'
+    },
+    tradeoffs: ['Refcount dá liberação determinística e custa uma operação em cada atribuição.', 'O coletor de ciclos resolve grafos e introduz pausas.', 'Caches do interpretador economizam memória e criam comportamento contraintuitivo em testes de identidade.'],
+    production: 'Um worker cresce em memória ao longo do dia sem vazamento aparente. `tracemalloc` aponta acúmulo em objetos de domínio; `gc.get_referrers` revela um cache com referência circular a um callback. A correção é uma referência fraca, não mais memória no container.',
+    risks: ['Conclusão de performance tirada de bytecode sem medição', 'Uso de `is` para valor', 'Ciclos retendo objetos grandes', 'Otimização válida só na versão do interpretador testada'],
+    checklist: ['Medi tempo, não só contei instruções?', 'A conclusão vale na versão de produção do interpretador?', 'Há ciclos retendo objetos caros?', 'O crescimento de memória foi atribuído com `tracemalloc`?', 'A comparação usa identidade onde deveria usar valor?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que `a is b` dá `True` para `256` e `False` para `257`?', expected: 'O CPython pré-aloca inteiros pequenos num cache; a identidade coincide por detalhe de implementação, não por contrato. Comparação de valor é `==`.' },
+      { level: 'Sênior/Expert', question: 'Um processo cresce em memória sem exceção nem vazamento óbvio. Como você investiga?', expected: '`tracemalloc` com snapshots comparados, inspeção de ciclos via `gc`, verificação de caches e referências fortes retidas por callbacks; só depois considerar limites de container.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Desmontar com `dis` três formas equivalentes de somar uma lista e explicar a diferença de instruções.', evidence: 'Saída do `dis` lado a lado e medição de tempo das três formas.' },
+      { level: 'Aplicado', task: 'Criar um ciclo de referências com objetos grandes, mostrar que o refcount não libera e coletar com o `gc`.', evidence: 'Memória antes/depois medida com `tracemalloc` e explicação do mecanismo.' },
+      { level: 'Expert', task: 'Diagnosticar crescimento de memória em um serviço real e atribuir a causa a uma linha de código.', evidence: 'Comparação de snapshots, causa identificada e correção com teste de regressão.' }
+    ],
+    challenge: 'Escrever um relatório que explique o custo de memória de uma estrutura de dados do seu projeto, medido e comparado com pelo menos uma alternativa.',
+    book: 'Fluent Python, cap. 6 (referências, mutabilidade e reciclagem); High Performance Python, cap. 3–4 (listas, dicionários e o custo real dos objetos).',
+    complements: [official.dis, official.gc, official.sysModule, official.datamodel],
+    exampleFile: '../../examples/python-senior/src/pyexpert/interpreter_internals.py'
+  },
+  {
+    number: 22,
+    part: 'fronteira',
+    id: 'descritores-metaclasses',
+    title: 'Descritores, metaclasses, MRO e `__slots__`',
+    level: 'Expert',
+    objective: 'Implementar o mecanismo que sustenta `property`, métodos e ORMs, e escolher entre descritor, decorator, `__init_subclass__` e metaclasse pelo custo de manutenção.',
+    prerequisites: ['Módulo 4 (OO idiomática)', 'Módulo 21', 'Ter usado `property` e herança múltipla'],
+    problem: 'Metaclasse é a ferramenta que mais gente usa sem precisar e mais gente teme sem entender. Ao mesmo tempo, quem não conhece o protocolo de descritores não consegue ler o código de um ORM, de um framework de validação ou de uma biblioteca de configuração — e fica preso ao que a documentação cobre.',
+    concepts: ['Protocolo de descritores: `__get__`, `__set__`, `__delete__`, `__set_name__`', 'Descritor de dados versus de não-dados e a ordem de resolução', 'Como `property`, `classmethod` e métodos são descritores', '`__init_subclass__` como alternativa barata a metaclasse', 'Metaclasses: `type`, `__new__` e quando realmente compensam', 'MRO e linearização C3', '`__slots__`: layout de memória e o que se perde'],
+    internals: [
+      'Um descritor de dados no tipo tem precedência sobre o `__dict__` da instância; um de não-dados não tem. É essa regra que explica por que `property` não pode ser sobrescrita por atribuição na instância.',
+      'Todo método é um descritor de não-dados: o acesso via instância produz um objeto ligado na hora.',
+      '`__init_subclass__` resolve a maioria dos casos que levariam a uma metaclasse, com uma fração da complexidade.',
+      '`__slots__` troca o dicionário por posições fixas: economiza memória e impede atributos dinâmicos e, por padrão, `__weakref__`.'
+    ],
+    useWhen: ['Use descritor quando a mesma lógica de atributo se repete em muitos campos.', 'Use `__init_subclass__` para validar ou registrar subclasses.', 'Use `__slots__` em objetos criados aos milhões, depois de medir.'],
+    avoidWhen: ['Não use metaclasse onde um decorator de classe resolve.', 'Não use `__slots__` por padrão: quebra atributos dinâmicos e complica herança.', 'Não empilhe metaclasse com herança múltipla sem entender o conflito de metaclasses.'],
+    contrast: {
+      bad: 'Uma metaclasse de 80 linhas para garantir que toda subclasse declare um atributo obrigatório.',
+      good: '`__init_subclass__` com cinco linhas fazendo a mesma validação, legível para quem chegar depois.'
+    },
+    tradeoffs: ['Descritores eliminam repetição e adicionam indireção ao ler o código.', 'Metaclasses dão poder de construção e envenenam a herança.', '`__slots__` economiza memória e reduz flexibilidade.'],
+    production: 'Uma biblioteca interna de configuração usa metaclasse para registrar campos. Uma subclasse com herança múltipla passa a falhar com conflito de metaclasses, e ninguém do time consegue diagnosticar. A reescrita com descritores mais `__init_subclass__` mantém o comportamento e devolve a composição.',
+    risks: ['Conflito de metaclasses em herança múltipla', 'Descritor sem `__set_name__` acoplado ao nome do atributo', 'MRO surpreendente em diamante', '`__slots__` quebrando `weakref` ou pickle'],
+    checklist: ['Um decorator ou `__init_subclass__` resolveria?', 'O descritor usa `__set_name__`?', 'O MRO foi verificado com `__mro__`?', 'O ganho de `__slots__` foi medido?', 'Quem mantém consegue ler isso em seis meses?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Como `property` funciona por baixo?', expected: 'É um descritor de dados: define `__get__` e `__set__` no tipo, e por isso tem precedência sobre o `__dict__` da instância.' },
+      { level: 'Sênior/Expert', question: 'Quando você recusaria uma metaclasse em revisão de código?', expected: 'Quase sempre: se o objetivo é validar, registrar ou ajustar subclasses, `__init_subclass__` ou um decorator de classe entregam o mesmo com menos acoplamento e sem risco de conflito de metaclasses.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Implementar um descritor de dados que valide um campo tipado e reutilizá-lo em três atributos.', evidence: 'Código com `__set_name__` e testes de valor válido e inválido.' },
+      { level: 'Aplicado', task: 'Resolver com `__init_subclass__` um caso que estava implementado com metaclasse e comparar as duas versões.', evidence: 'As duas implementações, testes iguais e nota sobre linhas e legibilidade.' },
+      { level: 'Expert', task: 'Medir o ganho de `__slots__` em memória e tempo para um milhão de instâncias e listar o que se perdeu.', evidence: 'Medição com `tracemalloc`, tempo de criação e lista de restrições assumidas.' }
+    ],
+    challenge: 'Escrever um mini-framework de validação declarativa com descritores, sem metaclasse, e explicar por que ela não foi necessária.',
+    book: 'Fluent Python, cap. 22–24 (atributos dinâmicos, descritores e metaprogramação de classes); Python Cookbook, cap. 8–9 (classes, objetos e metaprogramação).',
+    complements: [official.descriptor, official.mro, official.datamodel],
+    exampleFile: '../../examples/python-senior/src/pyexpert/descriptors_and_metaclasses.py'
+  },
+  {
+    number: 23,
+    part: 'fronteira',
+    id: 'free-threading-jit',
+    title: 'Free-threading e o JIT: revisando a resposta sobre o GIL',
+    level: 'Expert',
+    objective: 'Avaliar por medição se a build sem GIL e o JIT ajudam a sua carga, e enunciar a resposta sobre o GIL com a ressalva que ela passou a exigir.',
+    prerequisites: ['Módulo 11 (GIL, threads e processos)', 'Módulo 14 (medição confiável)', 'Módulo 21'],
+    problem: 'A frase "threads não paralelizam CPU em Python" foi verdadeira por trinta anos e deixou de ser universal: desde o 3.14 a build free-threaded é oficialmente suportada (PEP 779). Quem repete a versão antiga sem ressalva dá, hoje, uma resposta incompleta — e quem adota a build nova sem medir troca um problema conhecido por três desconhecidos.',
+    concepts: ['PEP 703 e PEP 779: o caminho do GIL opcional ao status suportado', 'Build `python3.14t` e como detectá-la em runtime', 'Penalidade de thread única e por que ela existe', 'Segurança de thread em extensões C na ausência do GIL', 'JIT copy-and-patch: o que acelera e o que não', 'Quando processos continuam sendo a resposta certa'],
+    internals: [
+      'A build free-threaded é um binário separado, não uma flag: `python3.14t`. `sys._is_gil_enabled()` informa o estado em runtime.',
+      'Remover o GIL exige contagem de referências mais cara e estruturas internas protegidas, o que custa desempenho em código de thread única.',
+      'Extensões C escritas assumindo o GIL como lock global podem corromper estado nessa build — a compatibilidade precisa ser declarada, não presumida.',
+      'O JIT é especulativo e ainda experimental: ele acelera trechos quentes de bytecode, não chamadas que já estão em C.'
+    ],
+    useWhen: ['Considere free-threading para carga CPU-bound paralela em Python puro, com dependências compatíveis.', 'Continue usando processos quando o isolamento importa ou as dependências não são seguras.', 'Meça o JIT na sua carga antes de contar com ele.'],
+    avoidWhen: ['Não migre para a build sem GIL sem verificar cada extensão nativa da árvore de dependências.', 'Não espere ganho onde o trabalho pesado já está em C (NumPy, compressão, criptografia): essas libs já liberam o GIL.', 'Não trate o JIT como garantia de ganho.'],
+    contrast: {
+      bad: 'Responder em entrevista "threads em Python nunca paralelizam CPU" como verdade absoluta, em 2026.',
+      good: 'Responder que na build padrão o GIL serializa bytecode, que a build free-threaded do 3.14 mudou isso com status suportado, e que a escolha depende de medição e de compatibilidade de dependências.'
+    },
+    tradeoffs: ['Free-threading dá paralelismo real e cobra desempenho de thread única e risco de compatibilidade.', 'Processos isolam e custam memória e serialização.', 'O JIT pode acelerar código Python puro e não ajuda quem já delega para C.'],
+    production: 'Um pipeline de transformação em Python puro satura um núcleo enquanto sete ficam ociosos. Três caminhos são medidos: multiprocessing ganha 4x com custo de serialização; a build free-threaded ganha 5x mas uma dependência nativa apresenta corrupção sob carga; NumPy vetorizado resolve o mesmo problema sem paralelismo. A decisão registrada escolhe a vetorização e mantém a build padrão.',
+    risks: ['Corrupção silenciosa por extensão não segura sem GIL', 'Regressão de desempenho em thread única', 'Conclusão tirada de benchmark sem contenção real', 'Dependência de recurso experimental em produção'],
+    checklist: ['A carga é CPU-bound em Python puro, e não já delegada a C?', 'Todas as extensões nativas declaram compatibilidade sem GIL?', 'A medição comparou serial, threads, processos e vetorização?', 'A penalidade de thread única foi medida?', 'Existe caminho de volta?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Threads em Python paralelizam trabalho de CPU?', expected: 'Na build padrão, não: o GIL serializa a execução de bytecode. Desde o 3.14 existe a build free-threaded, oficialmente suportada, em que paralelizam — com ressalvas de desempenho e compatibilidade.' },
+      { level: 'Sênior/Expert', question: 'O time quer migrar para a build sem GIL. Que evidência você exige antes de aprovar?', expected: 'Medição da carga real nos quatro modelos, inventário de extensões nativas com compatibilidade declarada, medida da penalidade de thread única e plano de rollback — além de checar se o trabalho pesado não está já em C.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Detectar em runtime se o GIL está ativo e comparar o tempo de uma carga CPU-bound em serial e em threads.', evidence: 'Saída com o estado do GIL, versão do interpretador e os dois tempos.' },
+      { level: 'Aplicado', task: 'Rodar a mesma carga na build padrão e na `3.14t` e medir a penalidade de thread única.', evidence: 'Tabela com os dois binários, thread única e múltiplas threads.' },
+      { level: 'Expert', task: 'Auditar as dependências nativas de um projeto real quanto a compatibilidade sem GIL e emitir uma recomendação.', evidence: 'Inventário de dependências, evidência de compatibilidade e ADR com a recomendação.' }
+    ],
+    challenge: 'Reescrever a resposta do módulo 11 sobre o GIL na forma que você daria hoje em entrevista, com a ressalva correta, e justificar cada cláusula com medição própria.',
+    book: 'High Performance Python, cap. sobre concorrência e multiprocessing (a base que continua válida); Using Asyncio in Python (o modelo alternativo para I/O).',
+    complements: [official.pep703, official.pep779, official.freeThreadingGuide, official.whatsnew314],
+    exampleFile: '../../examples/python-senior/src/pyexpert/free_threading.py'
+  },
+  {
+    number: 24,
+    part: 'fronteira',
+    id: 'extensoes-nativas',
+    title: 'Sair do Python: ctypes, buffers, Cython, PyO3 e C API',
+    level: 'Expert',
+    objective: 'Decidir quando o gargalo justifica sair do Python e escolher o mecanismo de fronteira nativa pelo custo total — build, manutenção e risco — e não por preferência de linguagem.',
+    prerequisites: ['Módulo 14 (profiling)', 'Módulo 15 (NumPy e vetorização)', 'Módulo 21'],
+    problem: 'Existe um degrau entre "otimizei o Python" e "reescrevi em outra linguagem", e quase todo time o pula. Entre os dois há vetorização, buffers sem cópia, `ctypes` sobre uma lib existente, Cython e PyO3 — com custos de manutenção muito diferentes. Escolher o mais caro primeiro é o erro comum.',
+    concepts: ['A ordem de tentativa: algoritmo → estrutura → vetorização → fronteira nativa', 'Protocolo de buffer, `memoryview` e cópia zero', '`ctypes` e `cffi`: usar biblioteca nativa sem compilar nada', 'Cython: Python anotado que compila', 'PyO3: extensões em Rust', 'C API e a liberação explícita do GIL em código nativo', 'Custo de travessia da fronteira por chamada'],
+    internals: [
+      'Cada travessia da fronteira Python↔nativo tem custo fixo: mil chamadas pequenas costumam perder para uma chamada com mil itens.',
+      '`memoryview` expõe o buffer sem copiar; fatiar uma `bytes` copia, fatiar uma `memoryview` não.',
+      'Uma extensão nativa que libera o GIL durante trabalho pesado permite paralelismo real mesmo na build padrão — é assim que NumPy escala.',
+      'A escolha do mecanismo define o custo de build e de CI: `ctypes` não compila nada, PyO3 e Cython exigem toolchain e wheels por plataforma.'
+    ],
+    useWhen: ['Use `memoryview` quando o custo estiver em cópia de bytes.', 'Use `ctypes`/`cffi` quando já existe uma biblioteca nativa pronta.', 'Use PyO3 ou Cython quando o trecho quente é seu e vetorizar não resolve.'],
+    avoidWhen: ['Não escreva extensão antes de medir e de tentar vetorizar.', 'Não exponha uma API nativa de granularidade fina: o custo de travessia domina.', 'Não assuma o custo de manutenção de uma extensão para ganhar 5%.'],
+    contrast: {
+      bad: 'Reescrever o módulo em Rust porque o profile mostrou que ele é o mais lento — sem verificar que o laço percorria uma lista onde cabia um `dict`.',
+      good: 'Subir o degrau por vez, registrando o ganho de cada passo, e parar quando o requisito for atendido.'
+    },
+    tradeoffs: ['`ctypes` é imediato e sem build, e não dá desempenho de código compilado sob medida.', 'Cython aproveita o código existente e adiciona uma etapa de compilação.', 'PyO3 dá segurança de memória e desempenho, e adiciona uma linguagem e um toolchain ao projeto.'],
+    production: 'Um serviço gasta 60% do tempo decodificando um formato binário. A vetorização não se aplica porque o formato é irregular. Uma extensão PyO3 resolve o trecho, mas a API inicial expõe uma chamada por registro e o ganho desaparece na travessia; a versão que recebe o buffer inteiro e devolve um array entrega o resultado esperado.',
+    risks: ['Extensão adotada sem medir a alternativa mais barata', 'API nativa de granularidade fina', 'Wheel que não existe para uma plataforma alvo', 'Segfault por gerenciamento de referências incorreto'],
+    checklist: ['Já medi e tentei os degraus anteriores?', 'A API cruza a fronteira em lote?', 'A extensão libera o GIL no trabalho pesado?', 'Existe wheel para todas as plataformas alvo?', 'Quem no time mantém isso se você sair?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que NumPy é rápido se é usado a partir do Python?', expected: 'O trabalho acontece em código compilado sobre buffers contíguos, com uma travessia por operação em vez de por elemento; e as operações pesadas liberam o GIL.' },
+      { level: 'Sênior/Expert', question: 'Que critérios você usaria para aprovar a inclusão de uma extensão em Rust no projeto?', expected: 'Gargalo medido, degraus anteriores esgotados, API em lote, ganho que justifique o custo de CI e wheels por plataforma, e mais de uma pessoa capaz de manter.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Comparar cópia com fatiamento de `bytes` e acesso via `memoryview` em um buffer grande.', evidence: 'Medição de tempo e de memória nas duas formas.' },
+      { level: 'Aplicado', task: 'Chamar uma função de uma biblioteca nativa do sistema com `ctypes`, incluindo o caminho de erro.', evidence: 'Código com assinatura declarada, teste de sucesso e de falha.' },
+      { level: 'Expert', task: 'Levar um trecho quente por todos os degraus e registrar o ganho de cada um até atingir o requisito.', evidence: 'Tabela ganho × degrau e ADR justificando onde parou.' }
+    ],
+    challenge: 'Escolher um gargalo real, percorrer os degraus e documentar o ponto em que parar foi a decisão certa — inclusive se a resposta foi não escrever extensão nenhuma.',
+    book: 'High Performance Python, cap. 7 e 12 (compilar para C, módulos e clusters); Python Cookbook, cap. 15 (extensões em C).',
+    complements: [official.ctypes, official.bufferProtocol, official.capi, official.pyo3, official.cython],
+    exampleFile: '../../examples/python-senior/src/pyexpert/native_boundary.py'
+  },
+  {
+    number: 25,
+    part: 'fronteira',
+    id: 'empacotar-distribuir',
+    title: 'Empacotar e distribuir: pyproject, wheels, ABI e reprodutibilidade',
+    level: 'Expert',
+    objective: 'Publicar um pacote instalável e reprodutível, entendendo tags de ABI, wheels binárias por plataforma e a cadeia de confiança entre o código e o ambiente do usuário.',
+    prerequisites: ['Módulo 8 (ambientes e dependências)', 'Módulo 24', 'Noção de CI'],
+    problem: 'Empacotar é onde projetos Python bons morrem: funciona na máquina de quem escreveu, quebra no CI, instala versão diferente em produção. E é onde entra a maior parte do risco de cadeia de suprimentos da linguagem — um `pip install` executa código de terceiros por padrão.',
+    concepts: ['`pyproject.toml` (PEP 621) e backends de build (PEP 517)', 'Wheel versus sdist e por que a diferença importa', 'Tags de compatibilidade: Python, ABI e plataforma', 'manylinux e wheels binárias portáveis', '`cibuildwheel` e a matriz de plataformas', 'Lockfile, resolução determinística e `uv`', 'Cadeia de suprimentos: hashes, atestações e origem do artefato'],
+    internals: [
+      'A instalação de um sdist executa o build na máquina do usuário; a de um wheel apenas copia arquivos — por isso wheel é mais rápido e mais seguro.',
+      'As tags do nome do wheel (`cp312-cp312-manylinux_2_17_x86_64`) declaram exatamente onde ele pode ser instalado; errar a tag produz falha de instalação ou, pior, um binário incompatível.',
+      'A ABI estável permite um wheel servir várias versões do interpretador, ao custo de acesso a parte da API.',
+      'Um lockfile só garante reprodutibilidade se incluir hashes: sem eles, o mesmo número de versão pode entregar conteúdo diferente.'
+    ],
+    useWhen: ['Publique wheel sempre que houver código compilado.', 'Use lockfile com hashes em qualquer ambiente que vá para produção.', 'Use `cibuildwheel` quando precisar de mais de uma plataforma.'],
+    avoidWhen: ['Não use `setup.py` como interface de build em projeto novo.', 'Não publique só sdist para pacote com extensão nativa.', 'Não instale sem lockfile em produção porque "o CI passou".'],
+    contrast: {
+      bad: '`pip install -r requirements.txt` sem versões travadas nem hashes, e um `setup.py` que só funciona na máquina do autor.',
+      good: '`pyproject.toml` declarativo, lockfile com hashes, wheels construídas em CI por plataforma e instalação verificável.'
+    },
+    tradeoffs: ['Wheel por plataforma dá instalação rápida e multiplica a matriz de build.', 'ABI estável simplifica distribuição e restringe a API disponível.', 'Lockfile garante reprodutibilidade e exige disciplina de atualização.'],
+    production: 'Um deploy quebra em produção com erro de símbolo não encontrado. A causa: o CI construía o wheel numa imagem mais nova que a de produção, gerando dependência de uma glibc indisponível. A correção é construir em imagem manylinux e validar a tag, não fixar a versão do pacote.',
+    risks: ['Wheel com tag incompatível com o ambiente alvo', 'Build não reprodutível entre CI e produção', 'Dependência instalada por resolução diferente da testada', 'Execução de código arbitrário em tempo de instalação'],
+    checklist: ['O projeto declara build em `pyproject.toml`?', 'Há wheel para todas as plataformas alvo?', 'O lockfile inclui hashes?', 'O ambiente de build é igual ou mais antigo que o de produção?', 'A instalação foi testada num ambiente limpo?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre um sdist e um wheel?', expected: 'Sdist é o fonte e exige build na instalação; wheel é o artefato pronto e só é copiado. Para pacote com código nativo, a diferença é entre exigir toolchain do usuário ou não.' },
+      { level: 'Sênior/Expert', question: 'O mesmo commit instala dependências diferentes em dois ambientes. Como você elimina isso?', expected: 'Lockfile com hashes, resolução única versionada no repositório, build em imagem controlada e instalação sem resolução em produção — e verificar se algo estava instalando de sdist.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Converter um projeto com `setup.py` para `pyproject.toml` e gerar sdist e wheel.', evidence: 'Os dois artefatos e a instalação verificada em ambiente limpo.' },
+      { level: 'Aplicado', task: 'Gerar um lockfile com hashes e provar que a instalação é idêntica em duas máquinas.', evidence: 'Lockfile versionado e comparação das duas instalações.' },
+      { level: 'Expert', task: 'Construir wheels para mais de uma plataforma em CI e explicar cada componente da tag gerada.', evidence: 'Pipeline, artefatos e nota explicando as tags.' }
+    ],
+    challenge: 'Publicar um pacote próprio (mesmo que num índice privado) com wheel, lockfile com hashes e instalação verificada em ambiente limpo por outra pessoa.',
+    book: 'Robust Python (estrutura de projeto e manutenção); Effective Python (empacotamento e dependências).',
+    complements: [official.pep517, official.pep621, official.manylinux, official.cibuildwheel, official.uv],
+    exampleFile: '../../examples/python-senior/src/pyexpert/packaging_probe.py'
+  },
+  {
+    number: 26,
+    part: 'fronteira',
+    id: 'ler-cpython',
+    title: 'Ler o CPython: da dúvida ao código-fonte',
+    level: 'Expert → fronteira',
+    objective: 'Responder uma dúvida de comportamento da linguagem lendo a implementação e a PEP correspondente, e distinguir o que é contrato do que é detalhe daquela versão.',
+    prerequisites: ['Módulos 21–23', 'Inglês técnico de leitura', 'Git e leitura de histórico'],
+    problem: 'Metade do folclore de performance em Python é verdade obsoleta: algo que era caro no 3.8 e deixou de ser, ou um detalhe de implementação promovido a regra. A fonte resolve em minutos discussões que duram sprints — e ensina a diferença entre "o CPython faz assim" e "a linguagem garante isso".',
+    concepts: ['Estrutura do repositório do CPython: `Objects/`, `Python/`, `Lib/`, `Modules/`', 'Ler `dictobject.c`, `listobject.c` e o crescimento amortizado', 'O laço de avaliação em `ceval.c`', 'PEP como fonte de decisão e de contrato', 'Distinguir especificação de implementação', '`python -X importtime` e outras flags de diagnóstico', 'Construir o CPython e rodar a suíte de testes'],
+    internals: [
+      'A ordem de inserção em `dict` era detalhe de implementação no 3.6 e virou contrato da linguagem no 3.7 — a PEP é o que marca essa passagem.',
+      'A lista cresce em fator amortizado: por isso `append` é O(1) amortizado e não O(n), e por isso o `sys.getsizeof` de uma lista salta em degraus.',
+      'O que está em `Lib/` é Python legível e é o melhor lugar para começar; `Objects/` e `Python/` são C e exigem mais contexto.',
+      'Muitas decisões só fazem sentido lendo a discussão da PEP, não o código — o código diz o quê, a PEP diz por quê.'
+    ],
+    useWhen: ['Use a fonte quando o comportamento contraria a documentação.', 'Use a PEP quando precisar saber se algo é garantido ou incidental.', 'Use o histórico quando o comportamento mudou entre versões.'],
+    avoidWhen: ['Não transforme detalhe de implementação em premissa de arquitetura.', 'Não generalize para outros interpretadores (PyPy, GraalPy) o que leu no CPython.', 'Não abra issue sem reprodução mínima na versão corrente.'],
+    contrast: {
+      bad: 'Afirmar que "concatenar strings em laço é sempre O(n²) em Python" sem verificar a otimização in-place do CPython nem medir.',
+      good: 'Medir, encontrar a otimização, explicar por que ela é frágil (depende de refcount igual a um) e recomendar `join` mesmo assim — com o motivo certo.'
+    },
+    tradeoffs: ['Ler a fonte dá certeza e custa tempo.', 'Conhecer a implementação melhora o diagnóstico e tenta a depender do que não é garantido.', 'Contribuir ensina muito e envolve processo e revisão.'],
+    production: 'Uma função que processava listas grandes ficou 3x mais lenta depois de uma atualização do interpretador. A leitura do changelog e do commit correspondente mostra uma mudança de comportamento numa estrutura interna; a reprodução mínima confirma, e a correção é uma linha — não um rollback de versão.',
+    risks: ['Ler versão diferente da que roda em produção', 'Depender de otimização que a documentação não promete', 'Generalizar CPython para outros interpretadores', 'Aprofundar mais do que o problema exigia'],
+    checklist: ['Estou lendo a versão que roda em produção?', 'Isso é contrato da linguagem ou implementação?', 'Existe PEP ou issue sobre o assunto?', 'Consigo reduzir a uma reprodução mínima?', 'O achado virou teste ou nota no repositório?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'A ordem de inserção de um `dict` é garantida?', expected: 'Sim desde o 3.7, quando virou parte da especificação da linguagem; no 3.6 era detalhe de implementação do CPython. A distinção é o ponto.' },
+      { level: 'Sênior/Expert', question: 'Como você resolveria uma regressão de desempenho que aparece só após atualizar o interpretador?', expected: 'Reproduzir minimamente, comparar entre versões, ler o changelog e o commit relacionado, confirmar com medição e corrigir no código — usando rollback apenas como contenção temporária.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Medir o crescimento de uma lista com `sys.getsizeof` e explicar os degraus lendo `listobject.c`.', evidence: 'Tabela tamanho × capacidade e a explicação com o trecho citado.' },
+      { level: 'Aplicado', task: 'Escolher uma dúvida real que você já teve e respondê-la pela fonte ou pela PEP.', evidence: 'Documento com a pergunta, o caminho até a fonte, a citação e a reprodução mínima.' },
+      { level: 'Expert', task: 'Construir o CPython localmente e rodar uma parte da suíte de testes da área estudada.', evidence: 'Build concluído, testes executados e registro dos obstáculos.' }
+    ],
+    challenge: 'Desmontar uma crença de performance que você carrega há anos: medir, encontrar a explicação na fonte e escrever a versão correta da afirmação.',
+    book: 'Fluent Python como mapa da linguagem antes de descer à fonte; Python Cookbook (para separar receita de contrato ao ler código alheio).',
+    complements: [official.cpythonRepo, official.cpythonDevGuide, official.pep1, official.dis],
+    exampleFile: '../../examples/python-senior/src/pyexpert/reading_cpython.py'
   }
 ];
 
@@ -1038,11 +1341,27 @@ export const pythonAssessment = Object.freeze({
     }
   ],
   completion: [
-    'Todos os 20 objetivos foram demonstrados por evidência (código, testes, tipos, medição), não por leitura.',
+    'Os 20 objetivos dos módulos 1–20 foram demonstrados por evidência (código, testes, tipos, medição), não por leitura.',
     'O código roda em Python 3.12+, passa em mypy e tem testes significativos.',
     'Ao menos 36 exercícios foram concluídos, incluindo 20 aplicados e 5 de nível expert.',
     'Os cinco casos foram defendidos com trade-offs, riscos, medição e sinais de senioridade.',
     'Um capstone atende aos critérios; o projeto Expert exige também reprodutibilidade e custo controlado.',
-    'Nenhum módulo é marcado como Dominado antes de evidência validada em revisão.'
+    'Nenhum módulo é marcado como Dominado antes de evidência validada em revisão.',
+    'Fronteira (módulos 21–26) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira concluída exige: um custo de memória medido e atribuído a uma linha, um mini-framework com descritores sem metaclasse, a mesma carga medida na build padrão e na free-threaded, um gargalo levado degrau a degrau com o ganho de cada um registrado, um pacote instalado em ambiente limpo por outra pessoa e uma dúvida respondida pelo código-fonte do CPython.'
   ]
 });
+
+/*
+ * Gabarito de autoavaliação. Não substitui a evidência exigida pela rubrica: serve
+ * para o estudo solo saber se a resposta estava certa antes de marcar o módulo.
+ */
+export const pythonAnswerKey = pythonModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: module.interview.map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Concluir sem medir.',
+  criterioDeAceite: module.exercises.map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));

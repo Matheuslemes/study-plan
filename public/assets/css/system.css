@@ -2906,3 +2906,50 @@ li.is-done .topic-check span,
   .cc-cbar { flex-wrap: wrap; }
   .cc-search { width: 100%; margin-left: 0; }
 }
+
+/* ═══════════════════════════════════════════════
+   PROJETOS DE PORTFÓLIO (aba Projetos)
+   A cor de cada card vem de var(--accent), setado
+   pelo [data-track] do próprio card (tracks-palette.css).
+═══════════════════════════════════════════════ */
+.proj-intro { margin-bottom: 1.2rem; }
+.proj-fase { margin-bottom: 2rem; }
+.proj-fase-titulo {
+  display: flex; align-items: center; gap: .55rem;
+  margin: 0 0 .9rem;
+  font: 700 1.02rem/1.2 var(--font-display);
+  color: var(--text1);
+}
+.proj-fase-num {
+  font: 700 .58rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--text3); border: 1px solid var(--border); border-radius: 6px; padding: .2rem .5rem;
+}
+.proj-fase-count { margin-left: auto; font: 700 .62rem/1 var(--font-mono); color: var(--text3); }
+
+.proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1rem; }
+.proj-card {
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  background: var(--panel);
+}
+.proj-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: .5rem; }
+.proj-track { font: 700 .6rem/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.proj-fase-chip { font: 600 .58rem/1 var(--font-mono); color: var(--text3); }
+.proj-titulo { margin: 0 0 .3rem; font-size: .95rem; font-weight: 700; color: var(--text1); }
+.proj-resumo { margin: 0 0 .5rem; font-size: .82rem; color: var(--text2); }
+.proj-desc { margin: 0 0 .7rem; font-size: .8rem; line-height: 1.5; color: var(--text3); }
+.proj-bloco { margin-bottom: .6rem; }
+.proj-bloco-lab {
+  display: block; margin-bottom: .3rem;
+  font: 700 .58rem/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text3);
+}
+.proj-bloco ul { margin: 0; padding-left: 1.1rem; }
+.proj-bloco li,
+.proj-bloco p { margin: .15rem 0; font-size: .78rem; line-height: 1.45; color: var(--text2); }
+.proj-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: .6rem; }
+.proj-tag {
+  font: 600 .62rem/1 var(--font-mono); color: var(--text2);
+  border: 1px solid var(--border); border-radius: 999px; padding: .22rem .5rem; background: var(--surface-2);
+}

@@ -63,6 +63,44 @@ public final class CompileSmoke {
         assert ConcurrencyModels.countSafely(500) == 500;
         assert ConcurrencyModels.boundedIo(List.of("a", "b"), 1).equals(List.of("A", "B"));
 
-        System.out.println("Java 21 academy examples: OK");
+        // Módulo 21 — o bytecode destes métodos é o objeto de estudo; aqui só travamos o comportamento.
+        assert BytecodeAndAgents.concat("checkout", 2).equals("retry 2 for checkout");
+        assert BytecodeAndAgents.switchOnString("stop") == 2;
+        assert BytecodeAndAgents.sum(new int[] {1, 2, 3, 4}) == 10;
+
+        // Módulo 22 — escape analysis: o resultado é determinístico, o custo é que varia com as flags.
+        assert JitAndEscapeAnalysis.distanceSum(4) == 12;
+        assert JitAndEscapeAnalysis.applyAll(value -> value, 4) == 6;
+
+        // Módulo 23 — publicação com acquire/release e contagem sob contenção.
+        var publication = new LowLevelMemory.SafePublication();
+        assert publication.read() == null;
+        publication.publish("ready");
+        assert "ready".equals(publication.read());
+        var casCounter = new LowLevelMemory.CasCounter();
+        casCounter.increment();
+        casCounter.increment();
+        assert casCounter.get() == 2;
+        assert LowLevelMemory.concurrentCount(4, 1_000) == 4_000;
+
+        // Módulo 24 — o profile de startup existe e é coerente com o processo atual.
+        var startup = StartupAndAot.profile();
+        assert startup.loadedClasses() > 0;
+        assert startup.uptimeMillis() >= 0;
+
+        // Módulo 25 — round-trip do layout binário declarado.
+        var trade = new ForeignMemoryAndVectors.Trade(7L, 1_250L, 3, (short) 1);
+        var encoded = ForeignMemoryAndVectors.encode(List.of(trade));
+        assert ForeignMemoryAndVectors.readTrade(encoded, 0).equals(trade);
+        assert ForeignMemoryAndVectors.totalNotionalCents(encoded, 1) == 3_750L;
+
+        // Módulo 26 — colisão total de hash: o mapa continua correto, o custo é que muda.
+        var colliding = ReadingTheJdk.buildCollidingMap(64);
+        assert colliding.size() == 64;
+        assert colliding.get(new ReadingTheJdk.CollidingKey(63)) == 63;
+        assert ReadingTheJdk.iterationOrder().get("TreeMap (natural)")
+            .equals(List.of("alpha", "bravo", "charlie", "delta"));
+
+        System.out.println("Java 21 academy examples: OK (módulos 1-26)");
     }
 }

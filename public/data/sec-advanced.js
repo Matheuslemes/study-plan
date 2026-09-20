@@ -3,7 +3,7 @@
  * O currículo trata confiança como hipótese que precisa de controle e evidência.
  */
 
-export const SECURITY_RESEARCH_DATE = '2026-07-29';
+export const SECURITY_RESEARCH_DATE = '2026-09-20';
 
 const official = Object.freeze({
   top10: { label: 'OWASP Top 10:2025', url: 'https://owasp.org/Top10/' },
@@ -21,8 +21,44 @@ const official = Object.freeze({
   webSecurity: { label: 'MDN — Web Security', url: 'https://developer.mozilla.org/en-US/docs/Web/Security' },
   oauth: { label: 'OAuth 2.0 Security Best Current Practice — RFC 9700', url: 'https://www.rfc-editor.org/rfc/rfc9700' },
   tls: { label: 'TLS 1.3 — RFC 8446', url: 'https://www.rfc-editor.org/rfc/rfc8446' },
-  kubernetes: { label: 'Kubernetes Security Checklist', url: 'https://kubernetes.io/docs/concepts/security/security-checklist/' }
+  kubernetes: { label: 'Kubernetes Security Checklist', url: 'https://kubernetes.io/docs/concepts/security/security-checklist/' },
+  cwe25: { label: 'MITRE CWE Top 25 Most Dangerous Weaknesses', url: 'https://cwe.mitre.org/top25/' },
+  kev: { label: 'CISA Known Exploited Vulnerabilities (KEV)', url: 'https://www.cisa.gov/known-exploited-vulnerabilities-catalog' },
+  memorySafety: { label: 'CISA/NSA — The Case for Memory Safe Roadmaps', url: 'https://www.cisa.gov/resources-tools/resources/case-memory-safe-roadmaps' },
+  pqc: { label: 'NIST — Post-Quantum Cryptography (FIPS 203/204/205)', url: 'https://csrc.nist.gov/projects/post-quantum-cryptography' },
+  pqcTransition: { label: 'NIST IR 8547 — Transition to PQC Standards', url: 'https://csrc.nist.gov/pubs/ir/8547/ipd' },
+  llmTop10: { label: 'OWASP Top 10 for LLM Applications 2025', url: 'https://genai.owasp.org/llm-top-10/' },
+  agenticTop10: { label: 'OWASP Top 10 for Agentic Applications 2026', url: 'https://genai.owasp.org/resource/owasp-top-10-for-agentic-applications-for-2026/' },
+  aflpp: { label: 'AFL++ — coverage-guided fuzzing', url: 'https://aflplus.plus/' },
+  libfuzzer: { label: 'LLVM libFuzzer', url: 'https://llvm.org/docs/LibFuzzer.html' },
+  ossfuzz: { label: 'OSS-Fuzz — continuous fuzzing', url: 'https://google.github.io/oss-fuzz/' },
+  tamarin: { label: 'Tamarin Prover', url: 'https://tamarin-prover.com/' },
+  proverif: { label: 'ProVerif', url: 'https://bblanche.gitlabpages.inria.fr/proverif/' },
+  ghidra: { label: 'Ghidra — reverse engineering framework', url: 'https://ghidra-sre.org/' },
+  cra: { label: 'EU Cyber Resilience Act — reporting obligations', url: 'https://digital-strategy.ec.europa.eu/en/policies/cra-reporting' },
+  euvd: { label: 'ENISA European Vulnerability Database (EUVD)', url: 'https://euvd.enisa.europa.eu/' }
 });
+
+/*
+ * Baseline técnico verificado em 2026-09-20. O currículo já era atual em
+ * padrões (ASVS 5.0.0, OWASP Top 10:2025); esta tabela fixa a fronteira de
+ * 2026 que os módulos 21–27 passaram a cobrir e o que ainda é regulatório/de
+ * campo, para não envelhecer em silêncio.
+ */
+export const secTechnologyBaseline = [
+  { technology: 'OWASP Top 10 (Web)', baseline: '2025 (nov/2025)', status: 'Corrente', note: 'A03:2025 Software Supply Chain Failures é a maior mudança; A10 passou a Mishandling of Exceptional Conditions. Módulo 15.' },
+  { technology: 'OWASP ASVS', baseline: '5.0.0', status: 'Corrente', note: 'Contrato de verificação versionado. Cite sempre o identificador com a versão. Módulo 3.' },
+  { technology: 'OWASP LLM Top 10', baseline: '2025', status: 'Corrente', note: 'Prompt injection, agência excessiva, vazamento de dados. Nove dos dez mapeiam em controles já existentes. Módulo 27.' },
+  { technology: 'OWASP Agentic Top 10', baseline: '2026 (dez/2025)', status: 'Novo', note: 'Agência excessiva decomposta em funcionalidade, permissão e autonomia. Módulo 27.' },
+  { technology: 'PQC — NIST', baseline: 'FIPS 203/204/205 (ago/2024); HQC selecionado 2025', status: 'Padronizado', note: 'ML-KEM, ML-DSA, SLH-DSA finais. Deprecação do clássico ~2030, corte ~2035. Módulo 25.' },
+  { technology: 'PQC em produção', baseline: 'X25519MLKEM768 híbrido', status: 'Ativo', note: 'Já é o grupo padrão de troca de chave nos navegadores. Migração é aditiva, não substitutiva. Módulo 25.' },
+  { technology: 'Segurança de memória', baseline: 'Roteiro CISA/NSA (marco jan/2026)', status: 'Exigência de campo', note: 'Linguagens memory-safe ou hardware equivalente. Cobrado por clientes e pela CRA em aquisição. Módulo 21.' },
+  { technology: 'Mitigações de hardware', baseline: 'Intel CET, ARM MTE, CFI', status: 'Disponíveis', note: 'Encarecem, não eliminam exploração; ROP/JOP/COOP e data-only seguem vivos. Módulo 21.' },
+  { technology: 'Execução transiente', baseline: 'Spectre → VMScape (CVE-2025-40300, 2025)', status: 'Ativa', note: 'VM não isola do micro-arquitetural: guest vaza do hipervisor na config padrão. Módulo 26.' },
+  { technology: 'EU Cyber Resilience Act', baseline: 'Reporte obrigatório desde 11/set/2026', status: 'Em vigor', note: 'Vulnerabilidade explorada reportada em 24h à ENISA/CSIRT; SBOM efetivamente pré-requisito. Módulos 15 e 20.' },
+  { technology: 'Base de vulnerabilidades', baseline: 'CVE + EUVD (ENISA, beta desde mai/2025)', status: 'Corrente', note: 'EUVD complementa o CVE; ENISA a caminho de Top-Level Root CNA. Módulos 15 e 19.' },
+  { technology: 'Livros do acervo', baseline: '2011–2021', status: 'Método atual, exemplos datados', note: 'Tangled Web (2011), WAHH (2011), Threat Modeling (2014) e Serious Cryptography (2018) ensinam método sólido; ferramentas e payloads devem ser conferidos nas fontes vigentes. Nenhum cobre PQC final, segurança de IA ou CRA.' }
+];
 
 export const secBooks = Object.freeze({
   asvs: {
@@ -163,38 +199,57 @@ export const secAcademy = Object.freeze({
   book: 'asvs',
   parts: {
     modelagem: {
-      index: '1/5', range: 'Módulos 1–5', page: 'modelagem.html', navLabel: 'Modelar confiança',
+      index: '1/6', range: 'Módulos 1–5', page: 'modelagem.html', navLabel: 'Modelar confiança',
       title: 'Risco, requisitos e fronteiras de confiança',
       subtitle: 'Transforme medo genérico em ativos, abusos, controles e requisitos verificáveis.',
       prerequisites: ['Executar uma aplicação web e sua API', 'Ler diagramas de arquitetura e fluxos HTTP', 'Usar Git, testes e ambiente local isolado'],
       objectives: ['Modelar ativos, atores e fronteiras de confiança', 'Priorizar ameaças por impacto e exposição', 'Especificar requisitos ASVS versionados', 'Justificar primitivas e limites da plataforma web']
     },
     controles: {
-      index: '2/5', range: 'Módulos 6–10', page: 'controles.html', navLabel: 'Construir controles',
+      index: '2/6', range: 'Módulos 6–10', page: 'controles.html', navLabel: 'Construir controles',
       title: 'Identidade, acesso e segurança de aplicações',
       subtitle: 'Implemente controles no servidor e prove falhas com testes negativos.',
       prerequisites: ['Threat model e requisitos de segurança revisados', 'API com autenticação e persistência', 'Conhecimento de SQL, navegador e testes de integração'],
       objectives: ['Implementar identidade e sessão com assurance explícito', 'Testar autorização por objeto, função e tenant', 'Bloquear injeção com interpretação contextual', 'Reduzir XSS, CSRF, SSRF e abuso de fluxos']
     },
     verificacao: {
-      index: '3/5', range: 'Módulos 11–15', page: 'verificacao.html', navLabel: 'Verificar ataque',
+      index: '3/6', range: 'Módulos 11–15', page: 'verificacao.html', navLabel: 'Verificar ataque',
       title: 'Testes, revisão e cadeia de software',
       subtitle: 'Combine análise humana e automação sem transformar scanner em oráculo.',
       prerequisites: ['Aplicação com controles testáveis', 'Pipeline de CI reproduzível', 'Autorização formal para qualquer teste ofensivo'],
       objectives: ['Projetar uma estratégia de verificação baseada em risco', 'Triar SAST, DAST, SCA e fuzzing por sinal', 'Executar teste manual seguro e reproduzível', 'Verificar proveniência, SBOM, segredos e artefatos']
     },
     operacao: {
-      index: '4/5', range: 'Módulos 16–20', page: 'operacao.html', navLabel: 'Operar resposta',
+      index: '4/6', range: 'Módulos 16–20', page: 'operacao.html', navLabel: 'Operar resposta',
       title: 'Plataforma, detecção e programa AppSec',
       subtitle: 'Mantenha controles eficazes durante mudança, incidente e escala organizacional.',
       prerequisites: ['Pipeline com gates proporcionais ao risco', 'Telemetria e ambientes separados', 'Acesso controlado a IAM, containers e segredos'],
       objectives: ['Reduzir privilégio em cloud e runtime', 'Detectar abuso sem registrar segredos ou PII', 'Executar contenção, rotação e recuperação', 'Operar vulnerabilidades, exceções e métricas de AppSec']
     },
+    fronteira: {
+      index: '5/6', range: 'Módulos 21–27', page: 'fronteira.html', navLabel: 'Fronteira',
+      title: 'Fronteira: por baixo do controle',
+      subtitle: 'Exploração e mitigação, engenharia reversa, fuzzing por dentro, criptografia pós-quântica, prova formal, canal lateral e segurança de IA.',
+      prerequisites: [
+        'Dominar os módulos 1–20: risco, controles, verificação e operação.',
+        'Manter um laboratório isolado e autorizado — aqui se ataca para entender a defesa.',
+        'Aceitar que a resposta vem do mecanismo: do binário, do silício, da prova.'
+      ],
+      objectives: [
+        'Explicar o que cada mitigação de exploração custa ao atacante — e por que a classe se elimina, não se remedia.',
+        'Ler um binário que você não compilou e sustentar uma conclusão antes de executá-lo.',
+        'Construir um harness de fuzzing com oráculo, cobertura e minimização.',
+        'Conduzir a migração pós-quântica pelo custo real: tamanho, agilidade e prazo.',
+        'Especificar e refutar um protocolo com o modelo do atacante-rede.',
+        'Reconhecer e conter vazamento por tempo, cache e execução transiente.',
+        'Tratar o modelo de IA como fronteira nova: conter o dano supondo a injeção bem-sucedida.'
+      ]
+    },
     avaliacao: {
-      index: '5/5', range: 'Evidência', page: 'avaliacao.html', navLabel: 'Avaliação e biblioteca',
+      index: '6/6', range: 'Evidência', page: 'avaliacao.html', navLabel: 'Avaliação e biblioteca',
       title: 'Avaliação, laboratório e biblioteca técnica',
       subtitle: 'Defenda decisões de segurança com exploração controlada, correção e evidência.',
-      prerequisites: ['Concluir os 20 módulos ou comprovar equivalência', 'Manter um laboratório isolado e autorizado', 'Possuir URLs HTTP(S) de evidência por entrega'],
+      prerequisites: ['Concluir os 27 módulos ou comprovar equivalência', 'Manter um laboratório isolado e autorizado', 'Possuir URLs HTTP(S) de evidência por entrega'],
       objectives: ['Demonstrar profundidade por risco reduzido', 'Resolver incidentes e abusos sob restrições', 'Evoluir um produto em quatro entregas', 'Validar retenção com evidência e revisão D30']
     }
   }
@@ -608,8 +663,158 @@ export const secModules = Object.freeze([
     challenge: 'Reduzir recorrência de broken access control em dezenas de times sem criar gargalo central.',
     book: 'Alice and Bob Learn Application Security, caps. 7–9; OWASP ASVS 5.0.0 como contrato.',
     complements: [official.nistSsdf, official.asvs], exampleFile: '../../examples/security-senior/resposta-incidente.md'
+  }),
+  moduleOf({
+    number: 21, part: 'fronteira', id: 'exploracao-mitigacoes', title: 'Exploração de binário e mitigações', level: 'Fronteira',
+    objective: 'Percorrer a escada de mitigações em binário próprio, medir o que cada uma custa ao atacante e concluir por que a classe se elimina na linguagem.',
+    prerequisites: ['Módulo 8 (injeção)', 'C e assembly básico', 'Laboratório isolado e autorizado'],
+    problem: 'Sem entender como corrupção de memória vira controle de execução, o defensor trata mitigação como caixa-preta e não sabe o que ela realmente impede.',
+    concepts: ['Classes de corrupção de memória', 'ROP e reuso de código', 'ASLR, DEP, canary, CET, MTE', 'Heap grooming', 'Segurança de memória por linguagem'],
+    internals: ['Quase toda corrupção vira primitiva de leitura/escrita arbitrária.', 'Cada mitigação encarece uma etapa; nenhuma elimina a exploração sozinha.', 'CET protege o retorno; JOP, COOP e data-only continuam.', 'Eliminar a classe (linguagem memory-safe) supera detectar e mitigar.'],
+    useWhen: ['Justificar prioridade de patch e de migração para linguagem segura.', 'Avaliar o valor real de uma mitigação de hardware.'],
+    avoidWhen: ['Nunca contra software de terceiros sem autorização e escopo.', 'Não trate mitigação como prova de imunidade.'],
+    contrast: { bad: 'Afirmar que "com ASLR e DEP está seguro".', good: 'Mostrar, degrau a degrau, o que cada mitigação custou ao atacante e qual leak ele passaria a precisar.' },
+    tradeoffs: ['Mitigações custam desempenho e compatibilidade.', 'Migrar de C/C++ tem custo alto e prazo longo.', 'Detecção em runtime não remove a classe.'],
+    production: 'Uma equipe adia a migração de memória porque "as mitigações resolvem"; um data-only attack contorna CET e a auditoria da CRA cobra o roteiro ausente.',
+    risks: ['Confundir encarecer com eliminar.', 'Ignorar ataques data-only.', 'Roteiro de segurança de memória inexistente.', 'Praticar fora de lab autorizado.'],
+    checklist: ['O lab é isolado e o binário é próprio?', 'Cada degrau tem o custo medido ao atacante?', 'A classe pode ser eliminada por linguagem?', 'Existe roteiro de memory safety?', 'A conclusão vira controle defensivo?'],
+    interview: [['Sênior', 'ASLR impede exploração?', 'Não; encarece exigindo um leak. Explicar PIE e o custo do leak.'], ['Staff', 'A CET acabou com o ROP?', 'Com o ROP por endereço de retorno; migra-se para JOP, COOP e data-only. Nomear o que a shadow stack não vê.']],
+    exercises: [['Aplicado', 'Sobrescrever o retorno em binário próprio sem mitigações.', 'PoC em lab, com o controle defensivo correspondente.'], ['Sênior', 'Ligar mitigações uma a uma e tabelar o custo ao atacante.', 'Tabela por degrau com o que parou e o que ele passaria a precisar.'], ['Staff', 'Recompilar o alvo em linguagem memory-safe.', 'Demonstração de que a mesma entrada vira erro controlado.']],
+    challenge: 'Defender, para a liderança, investir em migração de memória em vez de só empilhar mitigações — com dados do próprio exercício.',
+    book: 'The Web Application Hacker\'s Handbook (perspectiva ofensiva); roteiro CISA/NSA de segurança de memória.',
+    complements: [official.memorySafety, official.cwe25], exampleFile: '../../examples/security-senior/fronteira/exploracao-binaria.md'
+  }),
+  moduleOf({
+    number: 22, part: 'fronteira', id: 'engenharia-reversa', title: 'Engenharia reversa e análise de binário', level: 'Fronteira',
+    objective: 'Analisar estaticamente um binário desconhecido, sustentar uma hipótese de comportamento antes de executá-lo e confirmar por análise dinâmica pontual.',
+    prerequisites: ['Módulo 21', 'Formatos executáveis (ELF/PE)', 'VM descartável e isolada'],
+    problem: 'Confiar em fornecedor e em dependência binária sem saber ler o artefato deixa o defensor cego a malware, backdoor e ao que o patch de fato mudou.',
+    concepts: ['Estática antes de dinâmica', 'Disassembly e decompilação', 'Tabela de imports e strings', 'Patch diffing', 'Segurança operacional de amostra'],
+    internals: ['A tabela de imports limita o universo do que o binário faz.', 'O decompiler reconstrói um palpite legível; tipos e nomes são inferência.', 'Patch diffing revela o bug ao comparar antes e depois.', 'Executar antes de entender é abrir a amostra suspeita.'],
+    useWhen: ['Triagem de amostra, análise de patch e auditoria de dependência binária.', 'Confirmar que o binário publicado corresponde ao código revisado.'],
+    avoidWhen: ['Não rodar amostra fora de VM isolada e descartável.', 'Não confiar em tipo/nome do decompiler sem checar a instrução.'],
+    contrast: { bad: 'Executar o binário suspeito para "ver o que faz".', good: 'Triar por tipo, strings, imports e entropia; levantar hipótese; só então confirmar dinamicamente num ponto específico.' },
+    tradeoffs: ['Estática é segura mas incompleta.', 'Dinâmica confirma mas executa o alvo.', 'Ofuscação e packing elevam o custo de leitura.'],
+    production: 'Uma dependência binária muda de hash entre releases; a análise revela um import de rede novo que a proveniência não explicava.',
+    risks: ['Rodar amostra com rede aberta.', 'Tomar pseudo-C como verdade.', 'Perder cadeia de custódia em incidente.', 'Ignorar a janela que o patch diff abre.'],
+    checklist: ['A análise começou pela estática?', 'Imports e strings foram lidos?', 'A hipótese precede a execução?', 'A amostra está em VM isolada?', 'A janela de patch foi considerada na priorização?'],
+    interview: [['Sênior', 'Por onde começa a analisar um binário desconhecido?', 'Estática primeiro: tipo, strings, imports, entropia; nunca executar antes de entender.'], ['Staff', 'Por que patch diffing importa para a defesa?', 'Encurta a janela de exploração ao revelar o bug; justifica deploy rápido e priorização real.']],
+    exercises: [['Aplicado', 'Achar a "senha" de um binário próprio só por estática.', 'Nota de triagem sem execução.'], ['Sênior', 'Fazer diff de duas versões e descrever a falha pela diferença.', 'Descrição do bug derivada só do diff.'], ['Staff', 'Comparar pseudo-C de -O0 e -O2 do mesmo código.', 'Registro de onde o decompiler acertou e onde inventou.']],
+    challenge: 'Produzir uma nota de triagem que sustente uma conclusão sobre o comportamento do binário antes de qualquer execução.',
+    book: 'Referência de campo (Ghidra/radare2); The Tangled Web para internals de formato quando aplicável.',
+    complements: [official.ghidra, official.kev], exampleFile: '../../examples/security-senior/fronteira/engenharia-reversa.md'
+  }),
+  moduleOf({
+    number: 23, part: 'fronteira', id: 'fuzzing-por-dentro', title: 'Fuzzing guiado por cobertura por dentro', level: 'Fronteira',
+    objective: 'Construir um harness com oráculo, realimentação de cobertura e minimização, e explicar por que a mutação cega não encontra o defeito.',
+    prerequisites: ['Módulo 12 (SAST/DAST/SCA/fuzzing)', 'Um alvo com fronteira de parsing', 'Sanitizer ou oráculo equivalente'],
+    problem: 'Instalar um fuzzer com defaults gera crashes sem oráculo e inputs brutos sem valor; o defeito explorável fica no caminho que a mutação cega nunca alcança.',
+    concepts: ['Oráculo (sanitizer)', 'Realimentação de cobertura', 'Corpus e sementes', 'Minimização', 'Fuzzing estrutural'],
+    internals: ['O oráculo define o que é bug; sem ele só se acha crash.', 'Cobertura transforma busca cega em escalada de degraus.', 'O sanitizer torna leitura fora do limite uma falha observável.', 'O input bruto não é relatório: minimização é obrigatória.'],
+    useWhen: ['Alvos de parsing, formato binário e fronteira de deserialização.', 'Integrar fuzzing contínuo (OSS-Fuzz) por propriedade.'],
+    avoidWhen: ['Não rodar fuzzing sem sanitizer/oráculo.', 'Não reportar o input bruto sem minimizar.'],
+    contrast: { bad: 'Rodar AFL++ com defaults e reportar o crash bruto.', good: 'Definir oráculo, realimentar por cobertura, acumular corpus e minimizar a reprodução ao mínimo.' },
+    tradeoffs: ['Mais sinal custa compute e triagem.', 'Harness bom dá trabalho de escrever.', 'Cobertura guia, mas não garante alcançar tudo.'],
+    production: 'Um parser tem caminho rápido "só da versão nova" sem checar limite; a mutação cega passa 200 mil execuções e não acha, o guiado acha em ~1 mil.',
+    risks: ['Fuzz sem oráculo.', 'Corpus pobre.', 'Reprodução não minimizada.', 'Sem limite de recurso.'],
+    checklist: ['Há um oráculo explícito?', 'A cobertura realimenta o corpus?', 'A reprodução foi minimizada?', 'O sanitizer está ativo?', 'O crash virou teste de regressão?'],
+    interview: [['Sênior', 'O que torna o fuzzing "guiado por cobertura"?', 'Guardar a entrada que abre aresta nova, transformando busca cega em escalada.'], ['Staff', 'Por que minimizar é obrigatório?', 'O input bruto não é relatório; minimizar isola a causa e vira regressão reproduzível.']],
+    exercises: [['Aplicado', 'Escrever um harness com oráculo para um parser.', 'Harness que separa erro de negócio de falha real.'], ['Sênior', 'Comparar fuzzing cego e guiado no mesmo alvo.', 'Medição do custo de encontrar o defeito nas duas estratégias.'], ['Staff', 'Minimizar uma reprodução e transformá-la em regressão.', 'Caso mínimo versionado no CI.']],
+    challenge: 'Explicar, com números do próprio experimento, por que a realimentação de cobertura muda a ordem de grandeza da busca.',
+    book: 'Documentação de libFuzzer e AFL++; práticas do OSS-Fuzz.',
+    complements: [official.aflpp, official.ossfuzz], exampleFile: '../../examples/security-senior/fronteira/fuzzer.mjs'
+  }),
+  moduleOf({
+    number: 24, part: 'fronteira', id: 'verificacao-formal', title: 'Verificação formal de protocolos', level: 'Fronteira',
+    objective: 'Especificar um protocolo com termos, regras, atacante e propriedades, formular autenticação como correspondência e refutar uma versão ingênua.',
+    prerequisites: ['Módulo 4 (criptografia aplicada)', 'Máquinas de estado', 'Lógica básica'],
+    problem: '"Testamos bastante" não cobre um protocolo: o atacante explora justamente a sequência de mensagens que ninguém testou, para sessões concorrentes ilimitadas.',
+    concepts: ['Modelo Dolev-Yao', 'Sigilo e correspondência', 'Correspondência injetiva e replay', 'Simbólico vs computacional', 'Limite do modelo'],
+    internals: ['O atacante controla a rede, mas não quebra a primitiva (cripto perfeita).', 'A prova vale para sessões ilimitadas — o que teste não alcança.', 'Correspondência injetiva impede replay.', 'A prova cobre o modelo, não a implementação nem o RNG.'],
+    useWhen: ['Antes de padronizar ou adotar um protocolo de autenticação/chave.', 'Quando falha de lógica seria cara e retroativa.'],
+    avoidWhen: ['Não dizer "verificado" sem declarar o quê.', 'Não confundir prova de protocolo com correção de implementação.'],
+    contrast: { bad: 'Afirmar que o protocolo é seguro porque passou nos testes.', good: 'Escrever termos, regras, atacante e propriedades e exibir o contraexemplo quando a versão ingênua falha.' },
+    tradeoffs: ['Modelo simplifica a realidade.', 'Tamarin é expressivo mas exige mais do usuário.', 'Prova não cobre implementação.'],
+    production: 'Um handshake não amarra identidade e papel dentro do cifrado; a prova encontra um homem-no-meio que a revisão humana deixou passar.',
+    risks: ['Modelo que esquece um campo.', 'Autenticação não injetiva (permite replay).', '"Verificado" sem escopo.', 'Ignorar a implementação.'],
+    checklist: ['Termos, regras, atacante e propriedades estão escritos?', 'A autenticação é correspondência injetiva?', 'O contraexemplo foi descrito?', 'O modelo do atacante é Dolev-Yao?', 'O limite do modelo está declarado?']
+    , interview: [['Sênior', 'O que a verificação formal prova?', 'Propriedades de lógica de protocolo para sessões ilimitadas sob atacante-rede, dentro de um modelo declarado.'], ['Staff', 'Simbólico vs computacional?', 'Simbólico assume cripto perfeita e automatiza; computacional raciocina sobre probabilidade e redução. Tamarin/ProVerif vs CryptoVerif.']],
+    exercises: [['Aplicado', 'Escrever as quatro partes de um handshake em português.', 'Especificação legível com propriedades explícitas.'], ['Sênior', 'Formular autenticação como correspondência injetiva.', 'Propriedade que exclui replay, justificada.'], ['Staff', 'Refutar a versão ingênua e corrigir o campo faltante.', 'Contraexemplo descrito e mensagens corrigidas.']],
+    challenge: 'Declarar honestamente o que a sua especificação cobre e o que ela deliberadamente deixa de fora.',
+    book: 'Serious Cryptography e Real-World Cryptography para as primitivas; documentação de Tamarin/ProVerif.',
+    complements: [official.tamarin, official.proverif], exampleFile: '../../examples/security-senior/fronteira/verificacao-formal.md'
+  }),
+  moduleOf({
+    number: 25, part: 'fronteira', id: 'pos-quantico', title: 'Criptografia por dentro e migração pós-quântica', level: 'Fronteira',
+    objective: 'Conduzir a migração pós-quântica pelo custo real — tamanho de artefato, padrão híbrido e prazo de dado com validade longa — usando primitivas padronizadas.',
+    prerequisites: ['Módulo 4 (criptografia aplicada)', 'TLS e assinatura', 'Noção de agilidade criptográfica'],
+    problem: 'Tratar "pós-quântico" como assunto futuro ignora que dado sigiloso capturado hoje é decifrado depois (harvest now, decrypt later) e que a migração dói em tamanho, não em CPU.',
+    concepts: ['ML-KEM e ML-DSA (FIPS 203/204)', 'Padrão híbrido', 'Harvest now, decrypt later', 'Agilidade criptográfica', 'Cronograma NIST'],
+    internals: ['ML-KEM/ML-DSA crescem chave e artefato em ~30–40×; o custo é de rede.', 'A migração é aditiva: híbrido clássico + PQC, seguro se um cair.', 'Assinatura protege o futuro; sigilo de longo prazo é retroativo.', 'Agilidade criptográfica é o que permite trocar primitiva sem reescrever o sistema.'],
+    useWhen: ['Dado cuja validade cruza o horizonte quântico.', 'Proveniência, firmware e certificados de vida longa.'],
+    avoidWhen: ['Não inventar esquema próprio.', 'Não trocar clássico por PQC sem híbrido durante a transição.'],
+    contrast: { bad: 'Adiar por "não existe computador quântico".', good: 'Inventariar cripto, priorizar por validade do dado e adotar híbrido com plano de agilidade.' },
+    tradeoffs: ['PQC aumenta tamanho de handshake e assinatura.', 'Híbrido dobra material durante a transição.', 'Agilidade exige desenho antecipado.'],
+    production: 'Um backup cifrado só com esquema clássico e retido por 20 anos já está exposto a harvest-now-decrypt-later, mesmo sem quântico existir hoje.',
+    risks: ['Ignorar dado de validade longa.', 'Trocar sem híbrido.', 'Sem inventário criptográfico.', 'Sistema sem agilidade para migrar.'],
+    checklist: ['Há inventário do que usa cripto?', 'A prioridade segue a validade do dado?', 'A transição é híbrida?', 'O sistema tem agilidade criptográfica?', 'O prazo NIST (2030/2035) está no plano?'],
+    interview: [['Sênior', 'Por que migrar agora sem quântico existir?', 'Harvest now, decrypt later: dado de validade longa capturado hoje é decifrado depois.'], ['Staff', 'Por que híbrido e não substituição?', 'Se o PQC tiver falha desconhecida, o clássico segura; se o quântico quebrar o clássico, o PQC segura.']],
+    exercises: [['Aplicado', 'Medir tamanho de chave/artefato clássico vs ML-KEM/ML-DSA.', 'Comparação com os números reais do experimento.'], ['Sênior', 'Derivar um segredo híbrido (clássico ‖ PQC) por KDF.', 'Segredo híbrido verificado.'], ['Staff', 'Priorizar a migração por validade de dado.', 'Plano com inventário, ordem e agilidade criptográfica.']],
+    challenge: 'Defender o orçamento de migração mostrando que o custo é tamanho e compatibilidade, não CPU, e que o prazo do dado longevo já venceu.',
+    book: 'Serious Cryptography e Real-World Cryptography (partes de PQC); FIPS 203/204/205 e NIST IR 8547.',
+    complements: [official.pqc, official.pqcTransition], exampleFile: '../../examples/security-senior/fronteira/pos-quantico.mjs'
+  }),
+  moduleOf({
+    number: 26, part: 'fronteira', id: 'canais-laterais', title: 'Canais laterais e execução transiente', level: 'Fronteira',
+    objective: 'Reconhecer vazamento por tempo, cache e execução especulativa, medir o vazamento de uma comparação ingênua e inventariar as comparações de segredo do sistema.',
+    prerequisites: ['Módulo 4 (criptografia aplicada)', 'Noção de cache e pipeline', 'Ambiente de medição'],
+    problem: 'Um sistema logicamente correto pode vazar pelo tempo, pelo cache ou pela execução especulativa; o segredo sai pela fresta que ninguém modelou.',
+    concepts: ['Comparação de tempo constante', 'Canal de cache', 'Execução transiente (Spectre)', 'Isolamento micro-arquitetural', 'Escopo de risco'],
+    internals: ['Saída antecipada em comparação de segredo vaza pelo tempo.', 'A especulação reverte o resultado lógico, mas não o resíduo no cache.', 'VM isola logicamente, não micro-arquiteturalmente (VMScape).', 'Nenhum ramo/índice/tempo pode depender de segredo.'],
+    useWhen: ['Comparar segredo, token, MAC ou assinatura.', 'Operar multi-tenant no mesmo host físico.'],
+    avoidWhen: ['Não comparar segredo com igualdade de saída antecipada.', 'Não assumir que VM isola de canal micro-arquitetural.'],
+    contrast: { bad: 'Comparar token com == e confiar no isolamento de VM.', good: 'Usar comparação de tempo constante e acompanhar CVEs transientes com mitigação por camada.' },
+    tradeoffs: ['Mitigação de transiente custa desempenho.', 'Tempo constante é menos "natural" de escrever.', 'Isolamento físico é caro.'],
+    production: 'Uma verificação de token com == vaza o tamanho do prefixo correto; em nuvem compartilhada, VMScape vaza segredo do hipervisor na configuração padrão.',
+    risks: ['Comparação de segredo com saída antecipada.', 'Rolar a própria cripto sem tempo constante.', 'Multi-tenant sem política de mitigação.', 'Confiar só no isolamento lógico.'],
+    checklist: ['Toda comparação de segredo é de tempo constante?', 'A cripto usa biblioteca constant-time?', 'O deployment é multi-tenant físico?', 'Há política para CVEs transientes?', 'O vazamento de tempo foi medido?'],
+    interview: [['Sênior', 'Por que comparar tokens com == é bug?', 'A saída antecipada vaza o tamanho do prefixo correto pelo tempo; usar comparação de tempo constante.'], ['Staff', 'VM isola de canal lateral?', 'Não do micro-arquitetural; VMScape (2025) vaza do guest para o hipervisor.']],
+    exercises: [['Aplicado', 'Medir o tempo das comparações ingênua e constante.', 'Medição que mostra o vazamento e a ausência dele.'], ['Sênior', 'Inventariar comparações de segredo do sistema.', 'Lista com veredito de tempo constante por item.'], ['Staff', 'Definir política de mitigação para transiente em multi-tenant.', 'Política por camada com trade-off de desempenho declarado.']],
+    challenge: 'Decidir, para um serviço multi-tenant, quanto desempenho abrir mão por isolamento micro-arquitetural, com o risco explícito.',
+    book: 'Serious Cryptography (canais laterais e tempo constante); avisos de fabricante para execução transiente.',
+    complements: [official.kev, official.webSecurity], exampleFile: '../../examples/security-senior/fronteira/canais-laterais.md'
+  }),
+  moduleOf({
+    number: 27, part: 'fronteira', id: 'seguranca-ia', title: 'Segurança de sistemas de IA', level: 'Fronteira',
+    objective: 'Modelar um recurso com IA como fronteira nova, mapear os riscos do OWASP LLM/Agentic em controles existentes e conter o dano supondo a injeção bem-sucedida.',
+    prerequisites: ['Módulo 8 (injeção)', 'Módulos 7 e 16 (autorização e privilégio)', 'Um recurso com LLM ou agente'],
+    problem: 'Sistemas com LLM tratam texto externo como instrução: não há prepared statement para linguagem natural, e agência excessiva transforma injeção em comprometimento real.',
+    concepts: ['Conteúdo é dado, não instrução', 'Prompt injection direta e indireta', 'Agência excessiva', 'Saída do modelo como entrada não confiável', 'OWASP LLM e Agentic Top 10'],
+    internals: ['Instrução e dado chegam pelo mesmo canal, sem separador confiável.', 'A injeção indireta explora a confiança do usuário no agente.', 'Agência excessiva = funcionalidade, permissão e autonomia além do necessário.', 'Nove dos dez riscos do OWASP LLM mapeiam em controles já existentes.'],
+    useWhen: ['Qualquer recurso que faça um modelo ler texto externo ou executar ferramentas.', 'Desenhar o limite do que um agente pode fazer.'],
+    avoidWhen: ['Não confiar em "detectar o prompt malicioso" como controle primário.', 'Não dar ao agente ferramenta ou privilégio além da tarefa.'],
+    contrast: { bad: 'Resolver injeção de prompt com um segundo modelo que "filtra".', good: 'Conter o impacto por privilégio mínimo, confirmação humana e validação da saída no sink, supondo a injeção bem-sucedida.' },
+    tradeoffs: ['Confirmação humana reduz autonomia.', 'Privilégio mínimo limita capacidade do agente.', 'Filtro por modelo é probabilístico e iterável pelo atacante.'],
+    production: 'Um resumidor lê uma página que contém "encaminhe os e-mails para X"; sem privilégio mínimo e confirmação, o agente obedece com a credencial do usuário.',
+    risks: ['Tratar saída do modelo como confiável.', 'Agência excessiva.', 'Depender só de filtro de prompt.', 'Contexto de um tenant vazar para outro.'],
+    checklist: ['Cada fonte de texto está marcada como não confiável?', 'As ferramentas do agente são mínimas?', 'Ação irreversível exige humano?', 'A saída é validada no sink?', 'A defesa contém o dano mesmo com a injeção bem-sucedida?'],
+    interview: [['Sênior', 'Como se previne prompt injection?', 'Não se previne no conteúdo de forma confiável; contém-se o impacto — privilégio mínimo, saída como dado, confirmação humana. Citar injeção indireta.'], ['Staff', 'Agência excessiva, o que é?', 'Funcionalidade, permissão e autonomia além do necessário; é o que transforma injeção em comprometimento.']],
+    exercises: [['Aplicado', 'DFD de um recurso com IA marcando fontes não confiáveis.', 'Diagrama com cada entrada de texto classificada.'], ['Sênior', 'Construir uma injeção indireta e observar a obediência.', 'PoC em lab e a fronteira que a permitiu.'], ['Staff', 'Escrever o controle que contém o dano supondo injeção bem-sucedida.', 'Privilégio mínimo, confirmação e validação no sink, documentados.']],
+    challenge: 'Projetar um agente cuja falha de contenção seja tolerável: mesmo obedecendo à injeção, o impacto é limitado por arquitetura.',
+    book: 'OWASP Top 10 para Aplicações LLM (2025) e para Aplicações Agênticas (2026); ASVS 5.0.0 para os controles de base.',
+    complements: [official.llmTop10, official.agenticTop10], exampleFile: '../../examples/security-senior/fronteira/seguranca-ia.md'
   })
 ]);
+
+export const secAnswerKey = secModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: (module.interview || []).map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Confundir conformidade com ausência de risco.',
+  criterioDeAceite: (module.exercises || []).map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));
 
 export const secAssessment = Object.freeze({
   levels: [
@@ -691,7 +896,7 @@ export const secAssessment = Object.freeze({
     }
   ],
   completion: [
-    'Concluir os 20 módulos com ao menos um exercício aplicado e uma URL HTTP(S) de evidência por módulo.',
+    'Concluir os 27 módulos com ao menos um exercício aplicado e uma URL HTTP(S) de evidência por módulo.',
     'Explicar risco, trust boundary, authn, authz, injeção, criptografia, supply chain e resposta sem depender de notas.',
     'Explorar e corrigir ao menos cinco classes de falha em laboratório isolado e autorizado.',
     'Evoluir as quatro entregas no mesmo repositório, preservando threat model, testes, SBOM, telemetria e decisões.',

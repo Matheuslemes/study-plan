@@ -186,13 +186,57 @@ export const awsBooks = Object.freeze({
   }
 });
 
+const frontier = Object.freeze({
+  buildersLibrary: { label: 'Amazon Builders’ Library', url: 'https://aws.amazon.com/builders-library/' },
+  staticStability: { label: 'Builders’ Library — Static stability using Availability Zones', url: 'https://aws.amazon.com/builders-library/static-stability-using-availability-zones/' },
+  shuffleSharding: { label: 'Builders’ Library — Workload isolation using shuffle-sharding', url: 'https://aws.amazon.com/builders-library/workload-isolation-using-shuffle-sharding/' },
+  timeouts: { label: 'Builders’ Library — Timeouts, retries and backoff with jitter', url: 'https://aws.amazon.com/builders-library/timeouts-retries-and-backoff-with-jitter/' },
+  constantWork: { label: 'Builders’ Library — Reliability, constant work and a good cup of coffee', url: 'https://aws.amazon.com/builders-library/reliability-and-constant-work/' },
+  avoidingFallback: { label: 'Builders’ Library — Avoiding fallback in distributed systems', url: 'https://aws.amazon.com/builders-library/avoiding-fallback-in-distributed-systems/' },
+  cellBased: { label: 'AWS — Reducing the scope of impact with cell-based architecture', url: 'https://docs.aws.amazon.com/wellarchitected/latest/reducing-scope-of-impact-with-cell-based-architecture/reducing-scope-of-impact-with-cell-based-architecture.html' },
+  nitro: { label: 'AWS Nitro System', url: 'https://aws.amazon.com/ec2/nitro/' },
+  nitroSecurity: { label: 'The Security Design of the AWS Nitro System (whitepaper)', url: 'https://docs.aws.amazon.com/whitepapers/latest/security-design-of-aws-nitro-system/security-design-of-aws-nitro-system.html' },
+  firecracker: { label: 'Firecracker — microVM', url: 'https://firecracker-microvm.github.io/' },
+  arc: { label: 'AWS Application Recovery Controller (ARC)', url: 'https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html' },
+  multiRegion: { label: 'AWS — Disaster recovery workloads on AWS', url: 'https://docs.aws.amazon.com/whitepapers/latest/disaster-recovery-workloads-on-aws/disaster-recovery-workloads-on-aws.html' },
+  quotas: { label: 'AWS Service Quotas', url: 'https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html' },
+  throttling: { label: 'AWS SDKs — retry behavior e error handling', url: 'https://docs.aws.amazon.com/sdkref/latest/guide/feature-retry-behavior.html' },
+  cdk: { label: 'AWS CDK — Developer Guide', url: 'https://docs.aws.amazon.com/cdk/v2/guide/home.html' },
+  cdkConstructs: { label: 'AWS CDK — construct levels e bibliotecas', url: 'https://docs.aws.amazon.com/cdk/v2/guide/constructs.html' },
+  customResource: { label: 'CloudFormation — custom resources', url: 'https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-custom-resources.html' },
+  bedrock: { label: 'Amazon Bedrock — documentação', url: 'https://docs.aws.amazon.com/bedrock/' },
+  bedrockAgents: { label: 'Amazon Bedrock — agentes e AgentCore', url: 'https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html' },
+  sagemaker: { label: 'Amazon SageMaker AI — documentação', url: 'https://docs.aws.amazon.com/sagemaker/' },
+  bedrockOrSagemaker: { label: 'AWS — decision guide: Bedrock ou SageMaker AI?', url: 'https://docs.aws.amazon.com/decision-guides/latest/bedrock-or-sagemaker/bedrock-or-sagemaker.html' }
+});
+
+/*
+ * Baseline tecnológico. A trilha ensina decisão e operação, não console: o que
+ * muda de nome com frequência está aqui, para o conteúdo dos módulos não precisar
+ * envelhecer junto. O livro de certificação do acervo cobre o SAA-C02 e a prova
+ * corrente é a SAA-C03 — isso já está declarado na ficha do livro, e não é erro:
+ * é limite editorial conhecido.
+ */
+export const awsTechnologyBaseline = [
+  { technology: 'Certificação SAA', baseline: 'SAA-C03', status: 'Prova corrente', note: 'O livro do acervo é SAA-C02 (2021). Use-o para fundamentos e siga o guia oficial vigente para o escopo da prova.' },
+  { technology: 'Well-Architected', baseline: 'seis pilares', status: 'Estável', note: 'Sustentabilidade entrou como sexto pilar. Módulo 19.' },
+  { technology: 'Substrato de computação', baseline: 'Nitro System', status: 'Padrão em instâncias modernas', note: 'Virtualização, rede e armazenamento descarregados em hardware dedicado. Explica desempenho e o modelo de confiança. Módulo 21.' },
+  { technology: 'Serverless — isolamento', baseline: 'Firecracker microVM', status: 'Estável', note: 'Base de Lambda e Fargate. Entender o microVM explica cold start e limites. Módulo 21.' },
+  { technology: 'Isolamento de falha', baseline: 'células + shuffle sharding', status: 'Padrão interno da AWS', note: 'A matemática do raio de impacto está na trilha de Arquitetura, módulo 23. Aqui é a realização em AZ, zonal e ARC. Módulo 22.' },
+  { technology: 'Recuperação multi-região', baseline: 'Application Recovery Controller', status: 'Estável', note: 'Failover com verificação de prontidão. Um failover nunca testado é uma hipótese, não um plano. Módulo 23.' },
+  { technology: 'IaC', baseline: 'CloudFormation · CDK v2', status: 'Estável', note: 'CDK v1 encerrado. Terraform e OpenTofu são tratados na trilha de DevOps, módulos 9 e 26.' },
+  { technology: 'IA gerenciada — inferência', baseline: 'Amazon Bedrock', status: 'Camada de orquestração', note: 'Deixou de ser só acesso a modelos: traz agentes, bases de conhecimento e guardrails gerenciados. Módulo 26.' },
+  { technology: 'IA gerenciada — ciclo de ML', baseline: 'SageMaker AI · Unified Studio', status: 'Consolidando', note: 'Treino, registry, endpoints e governança. O Unified Studio aproximou as duas superfícies. Módulo 26.' },
+  { technology: 'Fronteira de decisão em IA', baseline: 'construir × comprar', status: 'Decisão recorrente', note: 'A construção de sistemas de IA é a trilha de IA; aqui a decisão é de arquitetura, custo e dependência de fornecedor.' }
+];
+
 export const awsAcademy = Object.freeze({
   title: 'Academia AWS — arquitetura e operação',
   baseline: `Pesquisa técnica: ${AWS_RESEARCH_DATE} · evidência acima de console e certificação`,
   book: 'action',
   parts: {
     fundamentos: {
-      index: '1/5',
+      index: '1/6',
       range: 'Módulos 1–5',
       page: 'fundamentos.html',
       navLabel: 'Fundamentos e limites',
@@ -202,7 +246,7 @@ export const awsAcademy = Object.freeze({
       objectives: ['Explicar responsabilidade, região, zona e conta como limites distintos', 'Projetar identidade temporária e rede segmentada', 'Escolher computação e armazenamento por requisito', 'Produzir uma fundação rastreável sem acesso público acidental']
     },
     plataforma: {
-      index: '2/5',
+      index: '2/6',
       range: 'Módulos 6–10',
       page: 'plataforma.html',
       navLabel: 'Dados e execução',
@@ -212,7 +256,7 @@ export const awsAcademy = Object.freeze({
       objectives: ['Escolher banco pelo padrão de acesso e falha', 'Modelar funções e eventos idempotentes', 'Comparar ECS, EKS, Fargate e Lambda por custo total', 'Operar backpressure, retries e dead-letter queues']
     },
     confiabilidade: {
-      index: '3/5',
+      index: '3/6',
       range: 'Módulos 11–15',
       page: 'confiabilidade.html',
       navLabel: 'Confiabilidade',
@@ -222,7 +266,7 @@ export const awsAcademy = Object.freeze({
       objectives: ['Correlacionar telemetria e mudanças', 'Dimensionar disponibilidade e capacidade', 'Testar backup, restore e failover', 'Entregar infraestrutura versionada e caminhos de baixa latência']
     },
     arquitetura: {
-      index: '4/5',
+      index: '4/6',
       range: 'Módulos 16–20',
       page: 'arquitetura.html',
       navLabel: 'Governança e decisão',
@@ -231,8 +275,30 @@ export const awsAcademy = Object.freeze({
       prerequisites: ['Workload observável e recuperável', 'Infraestrutura como código revisável', 'Capacidade de escrever ADR, runbook e threat model'],
       objectives: ['Projetar defesa em profundidade e resposta', 'Organizar landing zone e controles multiaccount', 'Alocar custo por unidade econômica', 'Conduzir revisão dos seis pilares e plano de evolução']
     },
+    fronteira: {
+      index: '5/6',
+      range: 'Módulos 21–27',
+      page: 'fronteira.html',
+      navLabel: 'Fronteira',
+      title: 'Fronteira: o substrato e a engenharia da AWS',
+      subtitle: 'Nitro e Firecracker, células e estabilidade estática, multi-região, quotas e throttling, CDK, IA gerenciada e a Builders’ Library.',
+      prerequisites: [
+        'Concluir os módulos 11–15: telemetria, disponibilidade, recuperação e desempenho.',
+        'Ter operado um workload real, com incidente e restauração medidos.',
+        'Aceitar que aqui a referência é a engenharia publicada pela AWS, não o console.'
+      ],
+      objectives: [
+        'Explicar o que a AWS executa por baixo da instância e por que isso muda o modelo de confiança.',
+        'Projetar isolamento por AZ e célula com estabilidade estática, sem depender do plano de controle.',
+        'Escolher a topologia multi-região pelo RTO, RPO e custo, com failover testado.',
+        'Operar no limite da API: quota, throttling, retry com jitter e trabalho constante.',
+        'Estender a IaC com constructs próprios em vez de copiar template.',
+        'Decidir entre Bedrock, SageMaker e construir, por custo, controle e dependência.',
+        'Extrair da Builders’ Library um padrão e aplicá-lo com medição.'
+      ]
+    },
     avaliacao: {
-      index: '5/5',
+      index: '6/6',
       range: 'Evidência',
       page: 'avaliacao.html',
       navLabel: 'Avaliação e biblioteca',
@@ -652,6 +718,279 @@ export const awsModules = Object.freeze([
     challenge: 'Propor não migrar um workload e demonstrar que a decisão é técnica, econômica e reversível.',
     book: 'Amazon Web Services in Action, Architecting on AWS; Cloud FinOps, adoção e operação.',
     complements: [official.migration, official.saa], exampleFile: '../../examples/aws-senior/governanca-well-architected.md'
+  }),
+  moduleOf({
+    number: 21,
+    part: 'fronteira',
+    id: 'nitro-firecracker',
+    title: 'O substrato: Nitro, Firecracker e o que executa por baixo',
+    level: 'Expert',
+    objective: 'Explicar o que a AWS executa abaixo da sua instância e usar isso para justificar desempenho, isolamento e o modelo de confiança que você assina.',
+    prerequisites: ['Módulo 4 (EC2 e elasticidade)', 'Módulo 8 (Lambda)', 'Noção de virtualização e I/O'],
+    problem: '"É uma máquina virtual na nuvem" era verdade em 2010. Hoje virtualização, rede e armazenamento saíram do hipervisor para hardware dedicado, e o operador não tem acesso ao seu dado nem por engano — por projeto. Quem não conhece o substrato não consegue explicar o desempenho que observa, nem responder à área de segurança sobre o que exatamente está sendo confiado.',
+    concepts: ['Hipervisor tradicional versus descarga em hardware', 'Nitro: cartões dedicados para rede, armazenamento e segurança', 'Nitro Security Chip e a ausência de acesso interativo', 'Firecracker: microVM como unidade de isolamento', 'Por que Lambda e Fargate isolam em VM, não em container', 'Cold start explicado pelo mecanismo', 'Instance store, EBS e o caminho real do I/O', 'O que o modelo de responsabilidade compartilhada significa tecnicamente'],
+    internals: [
+      'No Nitro, o trabalho de virtualização de rede e armazenamento roda em cartões dedicados, e não consome CPU da instância — é por isso que instâncias modernas entregam praticamente todo o processador ao seu workload.',
+      'O Nitro System foi projetado sem acesso interativo de operador: não há shell no host de produção. É uma afirmação verificável em whitepaper, e é o que sustenta a resposta a auditoria.',
+      'Firecracker cria microVMs em dezenas de milissegundos com superfície mínima: isolamento de VM com custo próximo ao de container. É por isso que multi-tenancy em Lambda é seguro.',
+      'Cold start não é um defeito do serviço: é o tempo de criar a microVM, carregar o runtime e inicializar seu código. Conhecer as três parcelas indica onde atacar.'
+    ],
+    useWhen: ['Use este conhecimento ao justificar isolamento para auditoria ou área de segurança.', 'Use ao dimensionar desempenho de rede e armazenamento por tipo de instância.', 'Use ao explicar e atacar cold start.'],
+    avoidWhen: ['Não transforme detalhe do substrato em premissa de arquitetura: a AWS pode mudá-lo.', 'Não presuma o mesmo comportamento em famílias antigas de instância.', 'Não use "é Nitro" como resposta a um problema de desempenho sem medir.'],
+    contrast: {
+      bad: 'Responder à área de segurança que "a AWS é segura" e citar certificações, sem saber o que o isolamento faz tecnicamente.',
+      good: 'Explicar o modelo de isolamento, apontar o whitepaper e delimitar exatamente o que permanece responsabilidade sua.'
+    },
+    tradeoffs: ['Descarga em hardware dá desempenho e previsibilidade, e amarra ao tipo de instância.', 'Isolamento por microVM dá segurança em multi-tenancy e custa o tempo de criação.', 'Serverless entrega o substrato pronto e reduz o controle sobre ele.'],
+    production: 'Um serviço em Lambda tem p99 penalizado por cold start em picos. A análise separa as três parcelas — criação da microVM, inicialização do runtime e do código — e mostra que a maior é a inicialização de dependências do código. A correção é enxugar o pacote e inicializar fora do handler, e não aumentar memória às cegas.',
+    risks: ['Depender de detalhe do substrato como garantia', 'Comparar desempenho entre famílias sem controlar o tipo de instância', 'Atribuir a cold start uma latência que é do código', 'Confundir isolamento do provedor com segurança da aplicação'],
+    checklist: ['Sei o que a AWS opera e o que eu opero, tecnicamente?', 'A comparação de desempenho controla o tipo de instância?', 'As três parcelas do cold start foram separadas?', 'A afirmação de isolamento tem fonte oficial?', 'A conclusão sobrevive a uma troca de família de instância?'],
+    interview: [
+      ['Pleno/Sênior', 'Por que instâncias modernas entregam quase toda a CPU ao workload?', 'Porque a virtualização de rede e armazenamento foi descarregada para hardware dedicado (Nitro), em vez de consumir ciclos do hipervisor na própria instância.'],
+      ['Sênior/Expert', 'A área de segurança pergunta como sabemos que ninguém da AWS lê nossos dados. O que você responde?', 'Aponto o modelo de responsabilidade compartilhada e o design do Nitro — sem acesso interativo de operador ao host, com o whitepaper de segurança como fonte — e delimito o que continua sendo nossa responsabilidade: criptografia, chaves, IAM e dados.']
+    ],
+    exercises: [
+      ['Aplicado', 'Comparar desempenho de rede e armazenamento entre duas famílias de instância no mesmo workload.', 'Medição com o tipo declarado e a explicação da diferença.'],
+      ['Aplicado', 'Separar as três parcelas do cold start de uma função e atacar a maior.', 'Medição antes e depois, com a parcela reduzida identificada.'],
+      ['Sênior', 'Escrever a resposta técnica de isolamento para uma auditoria, com fonte oficial.', 'Documento com o que é do provedor, o que é seu e a referência de cada afirmação.']
+    ],
+    challenge: 'Explicar a um time cético, sem usar a palavra "confie", por que multi-tenancy em serverless é seguro — e onde estão os limites reais.',
+    book: 'Amazon Web Services in Action (computação e o que a plataforma entrega); The Good Parts of AWS (escolher o que realmente importa).',
+    complements: [frontier.nitro, frontier.nitroSecurity, frontier.firecracker], exampleFile: '../../examples/aws-senior/fronteira/substrato-e-isolamento.md'
+  }),
+  moduleOf({
+    number: 22,
+    part: 'fronteira',
+    id: 'estabilidade-estatica',
+    title: 'Estabilidade estática, zonas e células na AWS',
+    level: 'Expert',
+    objective: 'Projetar workloads que continuam servindo durante a falha sem depender do plano de controle, e calcular o raio de impacto em vez de estimá-lo.',
+    prerequisites: ['Módulo 12 (alta disponibilidade e quotas)', 'Módulo 13 (recuperação)', 'Arquitetura módulo 23 para a matemática de células'],
+    problem: 'A resposta padrão a falha é "escalar" ou "provisionar o que faltou". Isso exige que o plano de controle funcione exatamente no momento em que ele está mais sobrecarregado — durante um evento que afeta todo mundo ao mesmo tempo. Sistemas que dependem disso falham justamente quando precisam funcionar.',
+    concepts: ['Estabilidade estática: sobreviver sem mudar nada', 'Plano de controle versus plano de dados e a regra de dependência', 'Pré-provisionar em vez de reagir', 'Trabalho constante: sistemas que fazem sempre a mesma coisa não têm modo de sobrecarga', 'Zona de disponibilidade como unidade de falha', 'Células e shuffle sharding na realização AWS', 'Evitar fallback: o caminho alternativo que nunca é exercitado', 'Limites de célula e deploy em onda'],
+    internals: [
+      'A ideia central é contraintuitiva: para sobreviver à perda de uma AZ, você já precisa estar com capacidade para operar sem ela ANTES de perdê-la. Reagir exige o plano de controle, que pode estar saturado.',
+      'Trabalho constante elimina o modo de sobrecarga: um sistema que processa a lista inteira a cada ciclo, independentemente de quantos itens mudaram, tem o mesmo custo em dia normal e em dia de crise.',
+      'Caminho de fallback raramente exercitado é código que só roda no pior momento, sem nunca ter sido testado — por isso a recomendação é eliminá-lo, e não melhorá-lo.',
+      'O plano de dados da AWS é projetado para ser mais disponível que o plano de controle: é por isso que a dependência deve valer sempre nessa direção.'
+    ],
+    useWhen: ['Pré-provisione capacidade para a perda de uma AZ quando o SLO não tolera a espera do autoscaling.', 'Prefira trabalho constante em componentes de controle.', 'Use células quando o sistema é multi-tenant e a indisponibilidade total é inaceitável.'],
+    avoidWhen: ['Não dependa de criar recursos durante um evento de falha regional.', 'Não construa caminho de fallback que só roda em emergência.', 'Não celularize sem automação: dez células manuais são dez vezes o trabalho.'],
+    contrast: {
+      bad: 'Três AZs com capacidade justa e autoscaling configurado: quando uma AZ cai, o autoscaling tenta provisionar exatamente quando todo mundo está tentando, e a fila de provisionamento vira o gargalo.',
+      good: 'Três AZs com capacidade para operar em duas. A perda de uma AZ não requer nenhuma ação do plano de controle — o sistema apenas continua.'
+    },
+    tradeoffs: ['Estabilidade estática dá sobrevivência sem ação e custa capacidade ociosa.', 'Trabalho constante é previsível e gasta o mesmo em dia calmo.', 'Mais células reduzem o raio de impacto e aumentam o custo operacional.'],
+    production: 'Um sistema sobrevive ao teste de falha de AZ em ambiente controlado e falha no evento real: o autoscaling não conseguiu provisionar porque a região inteira estava tentando. O redesenho pré-provisiona 150% da capacidade distribuída em três AZs, custando mais em regime e removendo a dependência do plano de controle no pior momento.',
+    risks: ['Dependência do plano de controle no momento da falha', 'Capacidade dimensionada para o caso feliz', 'Fallback nunca exercitado', 'Dependência compartilhada escondida entre células'],
+    checklist: ['O workload sobrevive à perda de uma AZ sem nenhuma ação?', 'Alguma recuperação depende de criar recurso novo?', 'Existe caminho de fallback que nunca roda?', 'Qual o raio de impacto, em número de clientes, por modo de falha?', 'O deploy é por onda entre células?'],
+    interview: [
+      ['Pleno/Sênior', 'O que é estabilidade estática?', 'A propriedade de continuar operando durante uma falha sem precisar de nenhuma mudança — sem provisionar, escalar ou reconfigurar —, o que remove a dependência do plano de controle exatamente quando ele está mais pressionado.'],
+      ['Sênior/Expert', 'Por que a AWS recomenda evitar fallback em vez de melhorá-lo?', 'Porque é código que só executa na emergência: não é exercitado, não é testado sob carga real e costuma falhar junto com o caminho principal. A alternativa é fazer o caminho principal resiliente o bastante para não precisar de um segundo.']
+    ],
+    exercises: [
+      ['Aplicado', 'Calcular o raio de impacto de cada modo de falha do seu workload, em número de clientes.', 'Tabela modo de falha × clientes afetados, com a origem de cada número.'],
+      ['Aplicado', 'Testar a perda de uma AZ e registrar se alguma recuperação dependeu do plano de controle.', 'Resultado do teste com as dependências identificadas.'],
+      ['Sênior', 'Converter um componente reativo em trabalho constante e comparar o comportamento sob pico.', 'Medição nos dois desenhos, incluindo o custo em regime normal.']
+    ],
+    challenge: 'Encontrar no seu workload a dependência do plano de controle que só apareceria durante um evento regional — e removê-la.',
+    book: 'The Good Parts of AWS (escolher o simples e previsível); Amazon Web Services in Action (disponibilidade e zonas).',
+    complements: [frontier.staticStability, frontier.constantWork, frontier.avoidingFallback, frontier.cellBased], exampleFile: '../../examples/aws-senior/fronteira/estabilidade-estatica.md'
+  }),
+  moduleOf({
+    number: 23,
+    part: 'fronteira',
+    id: 'multi-regiao',
+    title: 'Multi-região: topologias, consistência e failover que foi testado',
+    level: 'Expert',
+    objective: 'Escolher a topologia multi-região pelo RTO, RPO e custo declarados, e provar o failover por execução, não por documento.',
+    prerequisites: ['Módulo 13 (backup, restore e DR)', 'Módulo 22', 'Noção de consistência distribuída'],
+    problem: 'Multi-região é pedida como requisito genérico — "queremos alta disponibilidade" — sem RTO, RPO nem orçamento. O resultado é uma topologia cara que ninguém sabe acionar, com um plano de failover que nunca foi executado e, portanto, não é um plano: é uma hipótese.',
+    concepts: ['As quatro topologias: backup/restore, pilot light, warm standby, ativo-ativo', 'RTO e RPO como entrada, não como resultado', 'Replicação de dados e o limite da física', 'Roteamento e verificação de prontidão (ARC)', 'Failover controlado versus automático', 'O problema do retorno: failback', 'Dependências regionais escondidas', 'Custo: cada topologia em regime, não só no desastre'],
+    internals: [
+      'A escolha da topologia é determinada pelo RPO: se ele é zero, a replicação precisa ser síncrona, e isso impõe a latência entre as regiões em toda escrita. Não há como contornar — é a velocidade da luz.',
+      'Failover automático troca tempo de recuperação por risco de acionamento indevido; em muitos casos o failover controlado, com decisão humana, é a escolha certa.',
+      'A verificação de prontidão existe porque failover para uma região que não está pronta transforma um incidente em dois.',
+      'Failback é a parte esquecida: voltar exige reconciliar o que foi escrito na região secundária, e isso raramente está desenhado.'
+    ],
+    useWhen: ['Use backup/restore quando o RTO é de horas e o custo importa.', 'Use warm standby quando o RTO é de minutos.', 'Considere ativo-ativo apenas quando o requisito justificar o custo e a complexidade de consistência.'],
+    avoidWhen: ['Não faça ativo-ativo sem resolver conflito de escrita.', 'Não conte com um plano de failover nunca executado.', 'Não esqueça o failback no desenho.'],
+    contrast: {
+      bad: 'Warm standby provisionado há dois anos, nunca acionado, com a versão da aplicação três releases atrás e credenciais expiradas.',
+      good: 'Failover exercitado trimestralmente, com RTO medido a cada execução e o resultado comparado ao objetivo declarado.'
+    },
+    tradeoffs: ['Ativo-ativo dá RTO próximo de zero e cobra consistência, custo e complexidade.', 'Pilot light é barato e tem RTO longo.', 'Failover automático é rápido e pode disparar sem necessidade.'],
+    production: 'Uma empresa mantém warm standby por dois anos sem exercitar. No primeiro evento real, o failover falha: a secundária tem uma versão antiga do esquema de banco e uma dependência regional não replicada. O RTO real é de nove horas contra o objetivo declarado de quinze minutos — e o custo de manter a standby foi pago o tempo todo.',
+    risks: ['Plano de failover nunca executado', 'Dependência regional escondida (fila, segredo, DNS)', 'Divergência de versão entre regiões', 'Failback sem desenho', 'Custo da topologia não comparado ao risco real'],
+    checklist: ['RTO e RPO estão escritos e acordados com o negócio?', 'Quando o failover foi executado pela última vez?', 'Qual RTO foi medido na última execução?', 'Existe alguma dependência que só existe na região primária?', 'O failback está desenhado e testado?'],
+    interview: [
+      ['Pleno/Sênior', 'Qual a diferença entre RTO e RPO?', 'RTO é quanto tempo se pode levar para voltar; RPO é quanto dado se pode perder. São independentes, e cada um empurra a topologia e o custo numa direção.'],
+      ['Sênior/Expert', 'Pedem multi-região ativo-ativo. Que perguntas você faz antes?', 'Qual RTO e RPO, por escrito; se há escrita nas duas regiões e como o conflito é resolvido; qual a latência aceitável se a consistência for síncrona; qual o custo em regime; quem aciona e com que critério; e quando o failover será exercitado.']
+    ],
+    exercises: [
+      ['Aplicado', 'Mapear as quatro topologias para um workload seu, com RTO, RPO e custo estimado de cada uma.', 'Tabela comparativa com a recomendação e a justificativa.'],
+      ['Aplicado', 'Executar um failover controlado em ambiente de teste e medir o RTO real.', 'Timeline da execução, RTO medido e lacunas encontradas.'],
+      ['Sênior', 'Desenhar o failback e identificar o que precisa ser reconciliado.', 'Procedimento de retorno com o tratamento das escritas na secundária.']
+    ],
+    challenge: 'Executar o failover do seu ambiente mais crítico que você puder e comparar o RTO medido com o prometido no documento.',
+    book: 'Amazon Web Services in Action (disponibilidade e recuperação); Cloud FinOps (o custo de cada topologia em regime).',
+    complements: [frontier.multiRegion, frontier.arc, frontier.staticStability], exampleFile: '../../examples/aws-senior/fronteira/multi-regiao.md'
+  }),
+  moduleOf({
+    number: 24,
+    part: 'fronteira',
+    id: 'quotas-throttling',
+    title: 'No limite da API: quotas, throttling, retry e trabalho constante',
+    level: 'Expert',
+    objective: 'Operar no limite da plataforma sabendo onde estão as quotas, como a API se comporta sob pressão e por que retry ingênuo transforma degradação em interrupção.',
+    prerequisites: ['Módulo 12 (quotas)', 'Módulo 22', 'Noção de fila e backpressure'],
+    problem: 'Quase todo incidente grande em nuvem tem o mesmo desenho: algo degrada, os clientes tentam de novo, a carga de retry supera a carga original e o sistema que ia se recuperar sozinho não consegue mais. O mecanismo de resiliência vira a causa da indisponibilidade.',
+    concepts: ['Quota como propriedade de arquitetura, não detalhe operacional', 'Quotas por conta, por região e por operação', 'Throttling e o que a API devolve quando você excede', 'Retry exponencial com jitter e por que o jitter é obrigatório', 'Tempestade de retry e colapso metaestável', 'Orçamento de retry: teto global de tentativas em voo', 'Trabalho constante como imunidade a sobrecarga', 'Diferença entre erro transitório e permanente'],
+    internals: [
+      'Retry exponencial sem jitter sincroniza os clientes: todos esperam o mesmo intervalo e voltam juntos, criando ondas. O jitter existe para espalhar as tentativas no tempo, e é o detalhe mais ignorado do padrão.',
+      'Colapso metaestável é o estado em que o sistema permanece degradado mesmo depois de a causa original ter sumido, porque a carga de retry se autossustenta. Sair dele costuma exigir intervenção manual.',
+      'Um orçamento de retry limita o total de tentativas em voo no cliente inteiro, não por requisição — é o que impede a multiplicação silenciosa.',
+      'Tentar de novo um erro permanente (403, validação) é desperdício garantido; distinguir transitório de permanente é o primeiro passo de qualquer política de retry.'
+    ],
+    useWhen: ['Use retry apenas para erro transitório, com backoff, jitter e teto.', 'Use orçamento de retry no cliente.', 'Inventarie quotas na fase de desenho, não no incidente.'],
+    avoidWhen: ['Não faça retry em erro permanente.', 'Não empilhe retry em várias camadas — multiplica.', 'Não descubra a quota durante o pico.'],
+    contrast: {
+      bad: 'Três tentativas com espera fixa de um segundo, em três camadas do sistema: 27 chamadas ao destino degradado por requisição do usuário.',
+      good: 'Uma camada com retry, backoff exponencial com jitter, teto de tentativas e orçamento global — degradação continua sendo degradação.'
+    },
+    tradeoffs: ['Retry melhora a taxa de sucesso em falha transitória e amplifica carga em falha sistêmica.', 'Aumentar quota resolve hoje e pode esconder um problema de desenho.', 'Trabalho constante é imune a pico e gasta o mesmo sempre.'],
+    production: 'Uma degradação de cinco minutos numa dependência vira uma indisponibilidade de quarenta. O motivo: retry em três camadas sem jitter, com os clientes sincronizados em ondas. A dependência se recupera aos oito minutos e volta a cair, porque a carga acumulada de retry é maior que a original. A correção é retry em uma camada só, com jitter e orçamento.',
+    risks: ['Tempestade de retry', 'Quota descoberta no pico', 'Retry em múltiplas camadas', 'Erro permanente sendo retentado', 'Falta de load shedding quando a saturação é inevitável'],
+    checklist: ['Quais quotas este workload encosta em pico, e qual a folga?', 'Quantas camadas fazem retry?', 'O backoff tem jitter?', 'Existe teto global de tentativas em voo?', 'O sistema derruba carga em excesso, ou tenta atender tudo e cai?'],
+    interview: [
+      ['Pleno/Sênior', 'Por que o backoff exponencial precisa de jitter?', 'Sem jitter todos os clientes esperam o mesmo intervalo e voltam ao mesmo tempo, em ondas sincronizadas que mantêm o destino saturado. O jitter espalha as tentativas no tempo.'],
+      ['Sênior/Expert', 'Uma dependência degradou por 5 minutos e o sistema ficou fora por 40. O que aconteceu?', 'Provável colapso metaestável: a carga de retry acumulada superou a original e passou a se autossustentar. Investigo camadas de retry, ausência de jitter, ausência de teto e de load shedding — e corrijo o mecanismo de resiliência, que virou a causa.']
+    ],
+    exercises: [
+      ['Aplicado', 'Inventariar as quotas que o workload encosta em pico e a folga de cada uma.', 'Tabela quota × uso em pico × folga × ação se exceder.'],
+      ['Aplicado', 'Simular uma dependência degradada e medir a carga gerada pelos retries do seu sistema.', 'Comparação entre carga original e carga total com retry.'],
+      ['Sênior', 'Implementar orçamento de retry com jitter e demonstrar que a amplificação desaparece.', 'Medição antes e depois sob a mesma degradação simulada.']
+    ],
+    challenge: 'Calcular o pior caso de chamadas que uma requisição de usuário gera na sua dependência mais crítica, somando todas as camadas de retry.',
+    book: 'Amazon Web Services in Action (limites e operação); Cloud FinOps (o custo de carga desperdiçada).',
+    complements: [frontier.timeouts, frontier.quotas, frontier.throttling, frontier.constantWork], exampleFile: '../../examples/aws-senior/fronteira/quotas-e-retry.md'
+  }),
+  moduleOf({
+    number: 25,
+    part: 'fronteira',
+    id: 'cdk-constructs',
+    title: 'Estender a IaC: constructs CDK, custom resources e abstração com contrato',
+    level: 'Expert',
+    objective: 'Criar abstrações de infraestrutura reutilizáveis com interface, padrão seguro por omissão e escotilha de saída — em vez de copiar template entre projetos.',
+    prerequisites: ['Módulo 14 (CloudFormation, CDK e entrega de infraestrutura)', 'Módulo 17 (landing zone)', 'Noção de versionamento semântico'],
+    problem: 'Template copiado entre projetos diverge no primeiro mês: cada time corrige o seu, e a correção de segurança que um fez não chega aos outros. Do lado oposto, abstração que esconde tudo impede o time de diagnosticar o próprio recurso. O equilíbrio exige tratar o construct como produto.',
+    concepts: ['Níveis de construct: recurso bruto, recurso com padrões, padrão completo', 'Seguro por omissão: criptografia, log e menor privilégio sem pedir', 'Interface mínima: expor a decisão, esconder a mecânica', 'Escotilha de saída para o recurso subjacente', 'Aspects e validação em tempo de síntese', 'Custom resource: quando o CloudFormation não cobre', 'Versionamento e depreciação de um construct interno', 'Testar infraestrutura pelo template sintetizado'],
+    internals: [
+      'A síntese acontece antes do deploy: validar ali é barato e o erro aparece para quem escreveu, não no meio de um rollback.',
+      'Uma abstração sem escotilha de saída obriga o time a abandoná-la inteira quando aparece um caso não previsto — é o que mata construct interno.',
+      'Custom resource é uma função que o CloudFormation chama e cuja falha precisa responder corretamente, ou a pilha trava em estado de transição.',
+      'Construct interno é dependência compartilhada: sem versionamento, uma mudança atinge todos os consumidores ao mesmo tempo — a mesma lição do módulo 26 da trilha de DevOps.'
+    ],
+    useWhen: ['Crie construct quando o mesmo conjunto de recursos se repete em mais de dois times.', 'Codifique o padrão de segurança da organização como default.', 'Use custom resource apenas quando não houver recurso nativo.'],
+    avoidWhen: ['Não abstraia antes de ter três usos reais.', 'Não esconda o recurso subjacente sem escotilha.', 'Não publique construct sem versão e política de depreciação.'],
+    contrast: {
+      bad: 'Um construct que recebe vinte parâmetros e expõe todas as propriedades do recurso: uma camada a mais sem nenhuma decisão embutida.',
+      good: 'Um construct que recebe três decisões de negócio, aplica os padrões de segurança da organização por omissão e expõe o recurso subjacente para o caso não previsto.'
+    },
+    tradeoffs: ['Abstração reduz repetição e adiciona uma camada a manter e versionar.', 'Padrão seguro por omissão protege quem não sabe e frustra o caso legítimo — resolvido pela escotilha.', 'Custom resource cobre o que falta e vira código crítico no caminho do deploy.'],
+    production: 'Uma correção de segurança precisa ser aplicada a quarenta buckets criados por template copiado. Não há um lugar para corrigir: cada projeto tem sua cópia, com variações. A consolidação num construct versionado transforma a próxima correção em atualizar uma dependência.',
+    risks: ['Abstração sem escotilha de saída', 'Construct sem versionamento atingindo todos os consumidores', 'Custom resource que trava a pilha ao falhar', 'Interface grande demais, que não decide nada', 'Deriva entre o código e o que está implantado'],
+    checklist: ['Existem pelo menos três usos reais?', 'A interface expõe decisão ou mecânica?', 'Os padrões de segurança são default?', 'Existe escotilha para o recurso subjacente?', 'Há versão, changelog e política de depreciação?'],
+    interview: [
+      ['Pleno/Sênior', 'Qual a diferença entre os níveis de construct do CDK?', 'O nível mais baixo espelha o recurso do CloudFormation, sem opinião; o intermediário adiciona padrões sensatos e reduz a verbosidade; o mais alto compõe vários recursos num padrão arquitetural completo.'],
+      ['Sênior/Expert', 'Como você evita que um construct interno vire uma camada que só atrapalha?', 'Interface pequena expondo decisões e não mecânica, padrões seguros por omissão, escotilha de saída documentada para o recurso subjacente, versionamento com depreciação anunciada, e no mínimo três usos reais antes de abstrair.']
+    ],
+    exercises: [
+      ['Aplicado', 'Escrever um construct que aplique os padrões de segurança da organização por omissão.', 'Construct com interface documentada e teste sobre o template sintetizado.'],
+      ['Aplicado', 'Adicionar validação em tempo de síntese que barre uma configuração insegura.', 'Teste mostrando a síntese falhando com mensagem clara.'],
+      ['Sênior', 'Publicar o construct com versão e migrar um consumidor real.', 'Versão publicada, changelog e o consumidor migrado sem interrupção.']
+    ],
+    challenge: 'Encontrar o template mais copiado da sua organização e transformá-lo num construct versionado com escotilha de saída.',
+    book: 'Amazon Web Services in Action (infraestrutura como código); AWS Cookbook (receitas e composição).',
+    complements: [frontier.cdk, frontier.cdkConstructs, frontier.customResource], exampleFile: '../../examples/aws-senior/fronteira/construct-contract.md'
+  }),
+  moduleOf({
+    number: 26,
+    part: 'fronteira',
+    id: 'ia-gerenciada',
+    title: 'IA gerenciada: Bedrock, SageMaker e a decisão de construir ou comprar',
+    level: 'Sênior → Expert',
+    objective: 'Escolher entre serviço gerenciado de IA, plataforma de ML e construção própria a partir de custo, controle, latência e dependência de fornecedor — e desenhar a fronteira em volta.',
+    prerequisites: ['Módulo 8 (funções e eventos)', 'Módulo 18 (FinOps)', 'Trilha de IA para construir o sistema em si'],
+    problem: 'A pressão para "colocar IA" chega sem requisito, e a decisão costuma ser tomada pela facilidade de começar. Seis meses depois aparecem a conta de inferência, a latência que não cabe no SLO e uma dependência de fornecedor que ninguém dimensionou. A decisão é de arquitetura, não de produto.',
+    concepts: ['Bedrock como camada de orquestração: modelos, agentes, bases de conhecimento e guardrails', 'SageMaker AI: treino, registry, endpoints e governança do ciclo de ML', 'Critério de escolha: controle do modelo, custo por requisição, latência e dado', 'Onde o dado trafega e onde ele fica', 'Custo de inferência como custo unitário, não como linha de infraestrutura', 'Dependência de fornecedor e porta de saída', 'Fronteira de permissão de um agente na AWS: IAM, limite e confirmação', 'Avaliação contínua como requisito operacional'],
+    internals: [
+      'Serviço gerenciado troca controle por velocidade de entrega: você não escolhe a versão do modelo nem o momento em que ela muda, e uma mudança de versão é uma regressão silenciosa sem avaliação automatizada.',
+      'O custo de inferência escala com tokens e passos, não com requisições — o modelo de capacidade é diferente de tudo o mais na conta, e precisa de teto por requisição.',
+      'A fronteira de permissão de um agente é IAM: ele deve agir com a identidade do usuário final e nunca com uma credencial de serviço ampla. A arquitetura disso está na trilha de Arquitetura, módulo 25.',
+      'Endpoint dedicado dá latência previsível e é pago por tempo provisionado, não por uso; sob carga intermitente, isso inverte a conta.'
+    ],
+    useWhen: ['Use serviço gerenciado quando o requisito é entregar rápido e o modelo não é diferencial.', 'Use plataforma de ML quando o modelo é seu e o ciclo de vida precisa ser governado.', 'Considere construir quando custo em escala, latência ou soberania do dado exigirem.'],
+    avoidWhen: ['Não coloque inferência no caminho crítico sem fallback determinístico.', 'Não adote sem teto de custo por requisição.', 'Não troque de versão de modelo sem avaliação automatizada.'],
+    contrast: {
+      bad: 'Chamada ao modelo direto do handler, sem limite de tokens, sem timeout, sem fallback e sem medir custo por requisição — a conta aparece no fechamento do mês.',
+      good: 'Chamada com teto de tokens, timeout menor que o SLO, fallback determinístico, custo por requisição medido e avaliação rodando antes de qualquer troca de versão.'
+    },
+    tradeoffs: ['Gerenciado entrega rápido e reduz controle sobre modelo e custo.', 'Plataforma de ML dá governança e exige equipe.', 'Construir dá controle total e custa tempo, especialização e operação.'],
+    production: 'Um recurso de sumarização entra em produção sem teto de tokens. Um cliente envia documentos grandes e o custo diário multiplica por doze. A correção combina limite de tokens, truncamento explícito com aviso ao usuário e alarme sobre custo por requisição — e o incidente vira um item de orçamento, não de infraestrutura.',
+    risks: ['Custo por requisição sem teto', 'Regressão silenciosa em troca de versão de modelo', 'Dado sensível cruzando fronteira não mapeada', 'Latência de inferência estourando o SLO', 'Dependência de fornecedor sem porta de saída'],
+    checklist: ['Qual o custo por requisição, medido?', 'Existe teto de tokens e de passos?', 'Há fallback determinístico?', 'Onde o dado trafega e onde fica?', 'Existe avaliação automatizada antes de trocar de versão?'],
+    interview: [
+      ['Pleno/Sênior', 'Quando usar um serviço gerenciado de inferência em vez de hospedar o modelo?', 'Quando o modelo não é diferencial competitivo, o volume não justifica infraestrutura dedicada e a velocidade de entrega importa mais que o controle — medindo custo por requisição e latência antes de assumir.'],
+      ['Sênior/Expert', 'Que controles você exige antes de colocar inferência no caminho crítico?', 'Teto de tokens e de passos, timeout menor que o SLO, fallback determinístico, custo por requisição medido e alarmado, avaliação automatizada antes de troca de versão, e a fronteira de permissão do agente por IAM com identidade do usuário final.']
+    ],
+    exercises: [
+      ['Aplicado', 'Medir o custo por requisição de um caso de uso real e projetar para o volume de um ano.', 'Custo unitário medido e a projeção com a premissa de crescimento explícita.'],
+      ['Aplicado', 'Implementar teto de tokens, timeout e fallback determinístico num fluxo com inferência.', 'Código e demonstração do comportamento com o provedor indisponível.'],
+      ['Sênior', 'Comparar gerenciado, plataforma de ML e construir para um caso concreto.', 'ADR com custo, latência, controle, dependência e gatilho de reversão.']
+    ],
+    challenge: 'Escrever o ADR que recusa colocar IA num fluxo em que ela foi pedida, com a alternativa que atende ao requisito real mais barato.',
+    book: 'Cloud FinOps (custo unitário e decisão econômica); The Good Parts of AWS (escolher o serviço pelo que ele resolve). A construção do sistema de IA é a trilha de IA.',
+    complements: [frontier.bedrock, frontier.bedrockAgents, frontier.sagemaker, frontier.bedrockOrSagemaker], exampleFile: '../../examples/aws-senior/fronteira/ia-gerenciada.md'
+  }),
+  moduleOf({
+    number: 27,
+    part: 'fronteira',
+    id: 'builders-library',
+    title: 'Ler a engenharia da AWS: Builders’ Library e os papers',
+    level: 'Expert → fronteira',
+    objective: 'Extrair da engenharia publicada pela AWS um padrão aplicável e implementá-lo com medição, em vez de repetir o vocabulário dela.',
+    prerequisites: ['Módulos 21–24', 'Inglês técnico de leitura', 'Um workload próprio para aplicar o que ler'],
+    problem: 'A AWS publica como opera seus próprios sistemas — em detalhe, de graça e sem marketing. É o material mais denso disponível sobre operação em escala, e quase ninguém lê. Enquanto isso, as mesmas decisões são tomadas por tentativa e erro dentro das empresas.',
+    concepts: ['Builders’ Library: engenharia interna publicada', 'Timeouts, retries e backoff com jitter', 'Trabalho constante e imunidade a sobrecarga', 'Evitar fallback em sistemas distribuídos', 'Estabilidade estática usando zonas', 'Shuffle sharding e isolamento de carga', 'Leader election, filas e o que a AWS aprendeu operando', 'Ler o texto do provedor sem engolir a conclusão'],
+    internals: [
+      'Os textos descrevem decisões tomadas sob restrição real, com os modos de falha que as motivaram — é o oposto do material de marketing, e a diferença aparece na primeira página.',
+      'Vários artigos contradizem a prática comum da indústria: evitar fallback, preferir trabalho constante, desconfiar de cache como solução de disponibilidade. Essas contradições são o conteúdo mais valioso.',
+      'O contexto importa: são decisões na escala da AWS, e nem toda conclusão transfere para um sistema com três instâncias.',
+      'É engenharia publicada pelo fornecedor: excelente e não neutra. Ler criticamente faz parte.'
+    ],
+    useWhen: ['Use ao desenhar resiliência, para não reinventar o que já foi estudado.', 'Use como leitura dirigida de time, um artigo por vez.', 'Use para embasar decisão com referência em vez de opinião.'],
+    avoidWhen: ['Não aplique a decisão sem verificar se a restrição é a sua.', 'Não use como argumento de autoridade em vez de raciocínio.', 'Não confunda o que a AWS faz internamente com o que o serviço entrega a você.'],
+    contrast: {
+      bad: 'Citar "a AWS recomenda" numa revisão, sem ter lido o artigo nem verificado se a restrição descrita se aplica ao seu sistema.',
+      good: 'Ler o artigo, identificar a restrição, verificar que ela existe no seu caso, aplicar e medir — e registrar o resultado, inclusive se não melhorou.'
+    },
+    tradeoffs: ['Ler dá profundidade e custa horas por artigo.', 'Aplicar padrão validado em escala reduz risco e pode ser exagero na sua escala.', 'Fonte do fornecedor é detalhada e não é imparcial.'],
+    production: 'Um time discute por três sprints como tratar retry numa integração instável. A leitura dirigida de um artigo sobre timeouts, retries e jitter resolve a discussão em uma hora: o padrão está descrito, com os modos de falha e o motivo de cada escolha. A implementação leva um dia e o resultado é medido na semana seguinte.',
+    risks: ['Aplicar fora do contexto de escala', 'Autoridade substituindo raciocínio', 'Confundir prática interna com garantia do serviço', 'Ler e não aplicar'],
+    checklist: ['Qual restrição o artigo tentava resolver?', 'Ela existe no meu sistema?', 'O que foi sacrificado na decisão descrita?', 'A aplicação foi medida?', 'O resultado foi registrado, inclusive se negativo?'],
+    interview: [
+      ['Pleno/Sênior', 'Por que a AWS recomenda jitter no backoff?', 'Porque sem ele os clientes ficam sincronizados e voltam em ondas, mantendo o destino saturado. O jitter espalha as tentativas e é o que faz o backoff funcionar de verdade.'],
+      ['Sênior/Expert', 'A Builders’ Library recomenda evitar fallback. Você aplicaria isso no seu sistema?', 'Depende de verificar a restrição: o argumento é que caminho de fallback não é exercitado e falha junto com o principal. Se o meu fallback roda com frequência e é testado, o raciocínio muda. A decisão vem da verificação, não da citação.']
+    ],
+    exercises: [
+      ['Aplicado', 'Ler um artigo da Builders’ Library e responder às quatro perguntas do módulo.', 'Registro com restrição, aplicabilidade, sacrifício e decisão.'],
+      ['Aplicado', 'Aplicar um padrão lido a um componente real e medir antes e depois.', 'Medição comparada e a conclusão, inclusive se não houve ganho.'],
+      ['Sênior', 'Conduzir uma leitura dirigida com o time e transformar o resultado numa mudança.', 'Ata curta, decisão tomada e a mudança implantada com métrica.']
+    ],
+    challenge: 'Escolher a prática de resiliência do seu sistema que você menos consegue justificar e confrontá-la com o artigo correspondente.',
+    book: 'The Good Parts of AWS (leitura crítica do catálogo); Amazon Web Services in Action como mapa dos serviços citados nos artigos.',
+    complements: [frontier.buildersLibrary, frontier.timeouts, frontier.constantWork, frontier.avoidingFallback, frontier.shuffleSharding], exampleFile: '../../examples/aws-senior/fronteira/leitura-dirigida.md'
   })
 ]);
 
@@ -737,6 +1076,22 @@ export const awsAssessment = Object.freeze({
     'Executa carga, falha, backup, restore e failover com métricas de resultado.',
     'Entrega as quatro fases encadeadas no mesmo repositório, sem saltar dependências.',
     'Defende revisão Well-Architected atual dos seis pilares e custo unitário mensal.',
-    'Não marca Dominado antes de evidência validada e revisão D30.'
+    'Não marca Dominado antes de evidência validada e revisão D30.',
+    'Fronteira (módulos 21–27) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira concluída exige: uma resposta técnica de isolamento com fonte oficial, um workload que sobrevive à perda de uma AZ sem nenhuma ação, um failover executado com RTO medido e comparado ao objetivo, a amplificação de retry calculada e reduzida, um construct versionado com escotilha de saída, um custo por requisição de IA medido e projetado, e um padrão da Builders’ Library aplicado com medição — inclusive se o resultado for negativo.'
   ]
 });
+
+/*
+ * Gabarito de autoavaliação. Não substitui a evidência exigida pela rubrica:
+ * serve para o estudo solo verificar a resposta antes de concluir o módulo.
+ */
+export const awsAnswerKey = awsModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: (module.interview || []).map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Decidir sem medir.',
+  criterioDeAceite: (module.exercises || []).map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));

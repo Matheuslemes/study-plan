@@ -114,13 +114,33 @@ export const bancosBooks = Object.freeze({
   })
 });
 
+/*
+ * Baseline tecnológico. Duas mudanças de 2025–2026 alteram respostas que eram
+ * verdadeiras antes: o fork do Redis (Valkey virou padrão nos serviços gerenciados)
+ * e a busca vetorial passando a ser carga do banco operacional, não de um serviço
+ * separado. Ambas são tratadas nos módulos, não escondidas aqui.
+ */
+export const bancosTechnologyBaseline = [
+  { technology: 'PostgreSQL', baseline: '18.x', status: 'Corrente', note: 'Série 18 lançada em set/2025; a 19 entra em GA agora. O acervo tem o livro de internals da 14 — conferir diferenças no manual da 18.' },
+  { technology: 'PostgreSQL — I/O assíncrono', baseline: 'novidade da 18', status: 'Ajustar com medição', note: 'O novo subsistema de I/O muda o comportamento de leitura sequencial. Refazer baselines de desempenho ao migrar.' },
+  { technology: 'Redis', baseline: '8.x (RSALv2 / SSPLv1 / AGPLv3)', status: 'Licença mudou em 2024', note: 'Deixou de ser BSD. Em 2025 o Redis 8 acrescentou AGPLv3 como terceira opção — verifique com o jurídico antes de assumir uso livre.' },
+  { technology: 'Valkey', baseline: '9.x (GA out/2025)', status: 'Padrão nos gerenciados', note: 'Fork BSD do Redis sob a Linux Foundation. Default em novas instâncias de AWS ElastiCache e Google Memorystore. Compatível com o protocolo; migração costuma ser troca de endpoint. Módulo 14.' },
+  { technology: 'MongoDB', baseline: '8.x', status: 'Corrente', note: 'Licença SSPL desde 2018 — mesma verificação jurídica do Redis.' },
+  { technology: 'DynamoDB', baseline: 'contínuo', status: 'Estável', note: 'Sem versionamento; modelagem por padrão de acesso continua sendo o contrato. Módulo 17.' },
+  { technology: 'Hibernate ORM', baseline: '7.x', status: 'Corrente', note: 'Requer Jakarta Persistence 3.2. Spring Boot 4 já traz essa linha.' },
+  { technology: 'pgvector', baseline: '0.8.x', status: 'Estável e onipresente', note: 'Busca vetorial dentro do Postgres, com HNSW e IVFFlat. Elimina um banco separado na maior parte dos casos. Módulo 26.' },
+  { technology: 'DuckDB', baseline: '1.x', status: 'Estável', note: 'Motor colunar embutido. Virou o caminho padrão para análise local sobre Parquet. Módulo 23.' },
+  { technology: 'Apache Iceberg', baseline: 'v3', status: 'Consolidando como padrão', note: 'Formato de tabela de lakehouse com suporte dos principais motores. Módulo 23.' },
+  { technology: 'Apache Arrow', baseline: 'formato estável', status: 'Estável', note: 'Representação colunar em memória; base da interoperabilidade entre motores sem serialização.' }
+];
+
 export const bancosAcademy = Object.freeze({
   title: 'Academia de Banco de Dados',
-  baseline: 'PostgreSQL 18 · MongoDB 8.x · Redis 8.x · DynamoDB · Hibernate ORM 7.x',
+  baseline: 'PostgreSQL 18 · MongoDB 8.x · Valkey/Redis 8+ · DynamoDB · Hibernate ORM 7.x',
   book: 'database-internals',
   parts: Object.freeze({
     fundamentos: Object.freeze({
-      index: '1/5',
+      index: '1/6',
       page: 'fundamentos.html',
       range: 'Módulos 1–5',
       title: 'Modelo relacional e consistência',
@@ -139,7 +159,7 @@ export const bancosAcademy = Object.freeze({
       ]
     }),
     postgresql: Object.freeze({
-      index: '2/5',
+      index: '2/6',
       page: 'postgresql.html',
       range: 'Módulos 6–10',
       title: 'PostgreSQL por dentro',
@@ -158,7 +178,7 @@ export const bancosAcademy = Object.freeze({
       ]
     }),
     integracao: Object.freeze({
-      index: '3/5',
+      index: '3/6',
       page: 'integracao.html',
       range: 'Módulos 11–15',
       title: 'Aplicação, migração e eventos',
@@ -177,7 +197,7 @@ export const bancosAcademy = Object.freeze({
       ]
     }),
     distribuidos: Object.freeze({
-      index: '4/5',
+      index: '4/6',
       page: 'distribuidos.html',
       range: 'Módulos 16–20',
       title: 'Dados distribuídos e operação',
@@ -195,8 +215,29 @@ export const bancosAcademy = Object.freeze({
         'Operar SLOs, capacidade, incidentes, backup e restauração.'
       ]
     }),
+    fronteira: Object.freeze({
+      index: '5/6',
+      page: 'fronteira.html',
+      range: 'Módulos 21–27',
+      title: 'Fronteira: o banco por dentro',
+      subtitle: 'Implementar storage engine, ler o otimizador, execução colunar, commit distribuído, CRDTs, busca vetorial e o código do PostgreSQL.',
+      prerequisites: [
+        'Concluir os módulos 6–10: heap, WAL, planner, locks e recuperação.',
+        'Escrever e ler EXPLAIN com buffers, e saber distinguir estimativa de linha real.',
+        'Aceitar que aqui a resposta certa costuma sair da leitura do código, não da documentação.'
+      ],
+      objectives: [
+        'Implementar um storage engine com WAL e provar durabilidade sob crash.',
+        'Explicar uma escolha do planner pela estatística e pelo modelo de custo que a produziu.',
+        'Decidir entre linha e coluna por padrão de acesso, com medição em ambos.',
+        'Comparar 2PC, consenso e determinismo pelo que cada um cobra em latência e disponibilidade.',
+        'Reconhecer quando convergência sem coordenação resolve e quando esconde conflito de negócio.',
+        'Dimensionar busca vetorial no banco operacional com recall e custo medidos.',
+        'Responder uma dúvida de comportamento lendo o código-fonte do PostgreSQL.'
+      ]
+    }),
     avaliacao: Object.freeze({
-      index: '5/5',
+      index: '6/6',
       page: 'avaliacao.html',
       range: 'Evidência',
       title: 'Avaliação, projetos e biblioteca',
@@ -680,13 +721,13 @@ export const bancosModules = Object.freeze([
     number: 14,
     part: 'integracao',
     id: 'cache-redis',
-    title: 'Cache e estruturas Redis',
+    title: 'Cache e estruturas Redis/Valkey',
     level: 'Intermediário',
-    objective: 'Implementar cache com validade, invalidação, proteção contra stampede e limite de memória medidos.',
-    prerequisites: ['Módulos 5, 10 e 12', 'Consistência eventual', 'Redis básico'],
-    problem: 'Cache é adicionado para esconder query lenta e cria dado obsoleto, avalanche, hot key e falha maior que a origem.',
-    concepts: ['Cache-aside e write-through', 'TTL, freshness e staleness', 'Eviction LRU/LFU', 'Stampede e single-flight', 'Hashes, sets, sorted sets e streams'],
-    internals: ['TTL expira validade; eviction remove por pressão de memória e são mecanismos diferentes.', 'Hot key concentra CPU/rede numa única partição ou nó.', 'RDB e AOF oferecem perfis distintos de persistência; cache pode deliberadamente não persistir.'],
+    objective: 'Implementar cache com validade, invalidação, proteção contra stampede e limite de memória medidos — e escolher a implementação sabendo que Redis e Valkey divergiram.',
+    prerequisites: ['Módulos 5, 10 e 12', 'Consistência eventual', 'Redis ou Valkey básico'],
+    problem: 'Cache é adicionado para esconder query lenta e cria dado obsoleto, avalanche, hot key e falha maior que a origem. Desde 2024 há um problema a mais: "usar Redis" deixou de ser uma decisão só técnica — a licença mudou e o ecossistema se dividiu.',
+    concepts: ['Cache-aside e write-through', 'TTL, freshness e staleness', 'Eviction LRU/LFU', 'Stampede e single-flight', 'Hashes, sets, sorted sets e streams', 'Redis × Valkey: licença, governança e compatibilidade de protocolo'],
+    internals: ['TTL expira validade; eviction remove por pressão de memória e são mecanismos diferentes.', 'Hot key concentra CPU/rede numa única partição ou nó.', 'RDB e AOF oferecem perfis distintos de persistência; cache pode deliberadamente não persistir.', 'Em 2024 o Redis deixou a licença BSD; a comunidade criou o Valkey sob a Linux Foundation, que hoje é o default de novas instâncias em AWS ElastiCache e Google Memorystore. O protocolo permanece compatível e a migração costuma ser troca de endpoint — mas a decisão passou a ter um eixo jurídico que precisa do time responsável, não só do time técnico.'],
     useWhen: ['Cacheie leitura cara e repetida com staleness aceitável.', 'Escolha tipo Redis pelo acesso.', 'Defina maxmemory e política de eviction.'],
     avoidWhen: ['Não use cache como fonte de verdade por acidente.', 'Não cacheie antes de otimizar acesso primário.', 'Não use lock distribuído sem modelo de falha.'],
     contrast: {
@@ -920,6 +961,286 @@ export const bancosModules = Object.freeze([
     book: 'Database Internals; Designing Data-Intensive Applications, reliability e operability.',
     complements: [pgDocs('PostgreSQL 18 — Monitoring Database Activity', 'monitoring-stats.html'), pgDocs('PostgreSQL 18 — Statistics Collector', 'monitoring-stats.html')],
     exampleFile: '../../examples/database-senior/06-operations-runbook.md'
+  }),
+  defineModule({
+    number: 21,
+    part: 'fronteira',
+    id: 'storage-engine',
+    title: 'Implementar um storage engine: B-tree, LSM e WAL',
+    level: 'Expert',
+    objective: 'Construir um motor de armazenamento com log de escrita antecipada e provar durabilidade sob crash, entendendo por escrita própria o que cada motor comercial escolheu e por quê.',
+    prerequisites: ['Módulo 6 (heap, buffer, WAL, checkpoint)', 'Módulo 9 (locks e MVCC)', 'Estruturas de dados e noção de custo de I/O'],
+    problem: 'Saber que "B-tree é bom para leitura e LSM para escrita" é repetir uma frase. Sem ter implementado nenhum dos dois, não dá para prever o comportamento de um banco sob uma carga nova, nem entender por que a mesma consulta fica lenta depois de uma janela de escrita intensa.',
+    concepts: ['Log de escrita antecipada: escrever a intenção antes do dado', 'B-tree: páginas, fanout, split e escrita in-place', 'LSM: memtable, SSTable imutável e compactação', 'Amplificação de escrita, leitura e espaço', 'Filtro de Bloom e o custo de negar', 'fsync, durabilidade e o que o SO promete', 'Recuperação: redo, undo e ponto de consistência'],
+    internals: [
+      'A durabilidade vem do WAL, não da estrutura: o dado pode estar só em memória desde que a intenção já esteja em disco e sincronizada.',
+      'B-tree troca escrita in-place (aleatória, cara) por leitura previsível; LSM troca leitura (que pode varrer vários níveis) por escrita sequencial barata.',
+      'Os três tipos de amplificação estão em tensão: nenhum motor otimiza os três, e o ajuste de compactação é onde se escolhe qual sacrificar.',
+      'Um `write()` bem-sucedido não significa dado em disco. Sem `fsync`, a promessa é do cache do SO, e um corte de energia a desfaz.'
+    ],
+    useWhen: ['Use B-tree quando leitura por faixa e latência previsível dominam.', 'Use LSM quando a carga é dominada por escrita e ingestão sequencial.', 'Implemente um motor de brinquedo quando precisar entender o comportamento do motor de verdade.'],
+    avoidWhen: ['Não escreva um storage engine para produção: use um existente.', 'Não conclua sobre amplificação sem medir os três tipos.', 'Não confie em durabilidade que não foi testada com crash real.'],
+    contrast: {
+      bad: 'Explicar a lentidão de um banco LSM como "precisa de mais memória", sem olhar o estado da compactação.',
+      good: 'Reconhecer o acúmulo de níveis, medir a amplificação de leitura e ajustar a política de compactação — ou mudar de motor com número na mão.'
+    },
+    tradeoffs: ['LSM dá ingestão alta e cobra em leitura e em picos de compactação.', 'B-tree dá leitura previsível e cobra em escrita aleatória e fragmentação.', 'fsync a cada commit dá durabilidade e limita o throughput ao disco.'],
+    production: 'Uma fila persistente construída sobre um banco relacional degrada após semanas: a tabela sofre atualização constante no mesmo conjunto de linhas, o índice fragmenta e o autovacuum não acompanha. O diagnóstico só é possível conhecendo escrita in-place e o custo de versões mortas — e a solução é trocar o padrão de acesso, não o hardware.',
+    risks: ['Confundir escrita bem-sucedida com dado durável', 'Concluir sobre motor sem medir os três tipos de amplificação', 'Teste de crash que não corta energia de verdade (nem simula)', 'Generalizar de um motor de brinquedo para um de produção'],
+    checklist: ['O WAL é escrito e sincronizado antes do dado?', 'A recuperação reconstrói exatamente o estado confirmado?', 'As três amplificações foram medidas, não estimadas?', 'O teste de crash interrompe no pior momento possível?', 'A conclusão vale para a carga real ou só para o benchmark?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Por que um WAL torna a escrita mais rápida, se ele adiciona uma escrita a mais?', expected: 'Porque a escrita do log é sequencial e pequena, enquanto a do dado é aleatória e pode ser adiada e agrupada. Troca-se I/O aleatório por sequencial, e é isso que paga a escrita extra.' },
+      { level: 'Sênior/Expert', question: 'Uma carga de ingestão alta com leituras por faixa: B-tree ou LSM?', expected: 'Depende da proporção e da tolerância a picos. LSM absorve melhor a ingestão mas a leitura por faixa pode tocar vários níveis e a compactação gera picos de latência; B-tree dá leitura previsível e sofre com escrita aleatória. Responder sem medir é chute — o caminho é benchmark com a carga real.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Implementar um armazenamento chave-valor com WAL e recuperação por replay.', evidence: 'Código que, morto no meio da escrita, reconstrói exatamente o estado confirmado.' },
+      { level: 'Aplicado', task: 'Acrescentar memtable, flush para SSTable e compactação, medindo amplificação de escrita.', evidence: 'Bytes escritos no log versus bytes de dados lógicos, por cenário.' },
+      { level: 'Expert', task: 'Comparar o seu motor com o PostgreSQL na mesma carga e explicar cada diferença.', evidence: 'Medição lado a lado e nota explicando o que o motor real faz a mais.' }
+    ],
+    challenge: 'Escrever o teste de crash que mata o processo no pior instante possível e provar que nenhum commit confirmado se perde.',
+    book: 'Database Internals, parte I (armazenamento, B-trees e LSM); PostgreSQL 14 Internals (WAL, checkpoint e recuperação).',
+    complements: [pgDocs('PostgreSQL 18 — Write-Ahead Logging', 'wal-intro.html'), pgDocs('PostgreSQL 18 — Reliability', 'wal-reliability.html')],
+    exampleFile: '../../examples/database-senior/07-storage-engine/lsm_engine.py'
+  }),
+  defineModule({
+    number: 22,
+    part: 'fronteira',
+    id: 'otimizador-internals',
+    title: 'O otimizador por dentro: estatística, cardinalidade e ordem de junção',
+    level: 'Expert',
+    objective: 'Explicar a escolha do planner a partir da estatística e do modelo de custo que a produziram, e corrigir a causa em vez de forçar o plano.',
+    prerequisites: ['Módulo 7 (planner, estatísticas e EXPLAIN)', 'Módulo 5 (índices)', 'Leitura de EXPLAIN com buffers'],
+    problem: 'Quando o plano está errado, a reação comum é reescrever a consulta até "dar certo" ou desabilitar um tipo de junção. Isso conserta um caso e deixa a causa intacta. A causa quase sempre é estimativa de cardinalidade errada — e ela tem origem identificável.',
+    concepts: ['`pg_statistic` e o que o ANALYZE coleta: MCV, histograma, correlação, n_distinct', 'Seletividade e propagação do erro de estimativa ao subir a árvore', 'Correlação entre colunas e estatística estendida', 'Modelo de custo: `seq_page_cost`, `random_page_cost` e por que os padrões são de outra época de hardware', 'Espaço de busca de junção, programação dinâmica e GEQO', 'Estimativa versus linhas reais: ler a razão, não o tempo', 'Por que forçar o plano é dívida'],
+    internals: [
+      'O planner escolhe pelo custo estimado, e o custo depende da cardinalidade estimada: errar a cardinalidade em 1000× no nó de baixo faz toda a árvore acima escolher errado.',
+      'A estimativa supõe independência entre colunas por padrão; quando há correlação real (cidade e estado, por exemplo), a estimativa desaba — é para isso que existe estatística estendida.',
+      '`random_page_cost = 4` presume disco rotacional. Em SSD o valor realista está mais perto de 1.1, e manter o padrão enviesa o planner contra índices.',
+      'Acima de um número de tabelas, a busca exaustiva é trocada por heurística genética (GEQO), e o plano deixa de ser determinístico.'
+    ],
+    useWhen: ['Use `EXPLAIN (ANALYZE, BUFFERS)` e compare estimativa com linhas reais antes de qualquer mudança.', 'Use estatística estendida quando as colunas do filtro são correlacionadas.', 'Ajuste `random_page_cost` ao hardware real, com medição.'],
+    avoidWhen: ['Não desabilite tipos de junção em produção para "resolver" um plano.', 'Não aumente `default_statistics_target` globalmente sem medir o custo do ANALYZE.', 'Não conclua por tempo de execução: em máquina ociosa, um plano ruim pode parecer bom.'],
+    contrast: {
+      bad: '`set enable_nestloop = off` no início da consulta, em produção, e um comentário dizendo "sem isso fica lento".',
+      good: 'Identificar a subestimativa de 2000×, criar a estatística estendida sobre as colunas correlacionadas e ver o planner escolher sozinho o plano certo.'
+    },
+    tradeoffs: ['Mais estatística dá estimativa melhor e custa tempo de ANALYZE e memória de planejamento.', 'Forçar o plano resolve hoje e congela a decisão para dados que vão mudar.', 'Planejar mais dá plano melhor e adiciona latência a consultas curtas.'],
+    production: 'Um relatório passa de 200 ms a 40 s após uma carga de dados. O EXPLAIN mostra estimativa de 12 linhas onde existem 180 mil: duas colunas do filtro são fortemente correlacionadas e o planner as tratou como independentes. A estatística estendida corrige a estimativa e o plano volta sozinho — sem tocar na consulta.',
+    risks: ['Estatística desatualizada após carga grande', 'Correlação entre colunas ignorada', 'Parâmetro de custo herdado de hardware rotacional', 'Plano forçado escondendo a causa', 'Parameter sniffing em prepared statement'],
+    checklist: ['Qual a razão entre linhas estimadas e reais em cada nó?', 'O erro nasce em qual nó, e por quê?', 'As colunas do filtro são correlacionadas?', 'O ANALYZE rodou depois da última carga?', 'Os parâmetros de custo correspondem ao disco real?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'O que você olha primeiro num EXPLAIN ANALYZE lento?', expected: 'A razão entre linhas estimadas e reais, de baixo para cima, para achar onde a estimativa começou a errar — antes de olhar o tempo total, que é consequência.' },
+      { level: 'Sênior/Expert', question: 'O planner insiste num nested loop ruim. Quais são as causas possíveis, em ordem?', expected: 'Estatística desatualizada; correlação entre colunas tratada como independência; n_distinct errado; parâmetros de custo inadequados ao hardware; parameter sniffing. Forçar o plano é a última opção e vem com prazo de revisão.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Provocar uma subestimativa criando colunas correlacionadas e medir o erro no EXPLAIN.', evidence: 'Razão estimado/real antes e depois de `CREATE STATISTICS`.' },
+      { level: 'Aplicado', task: 'Medir o efeito de `random_page_cost` na escolha entre seq scan e index scan.', evidence: 'Planos com valores diferentes e a justificativa do valor escolhido.' },
+      { level: 'Expert', task: 'Encontrar no seu sistema uma consulta com plano ruim e corrigir a causa sem alterar a consulta.', evidence: 'Diagnóstico da origem da estimativa errada, correção e plano resultante.' }
+    ],
+    challenge: 'Pegar uma consulta que alguém "resolveu" com hint ou com desabilitação de junção e eliminar a gambiarra corrigindo a estatística.',
+    book: 'PostgreSQL 14 Internals (planner, estatísticas e custo); SQL Performance Explained (como o índice entra na conta do otimizador).',
+    complements: [pgDocs('PostgreSQL 18 — Statistics Used by the Planner', 'planner-stats.html'), pgDocs('PostgreSQL 18 — Planner Cost Constants', 'runtime-config-query.html'), pgDocs('PostgreSQL 18 — Extended Statistics', 'sql-createstatistics.html')],
+    exampleFile: '../../examples/database-senior/08-optimizer-internals.sql'
+  }),
+  defineModule({
+    number: 23,
+    part: 'fronteira',
+    id: 'colunar-vetorizado',
+    title: 'Colunar e vetorizado: Parquet, Arrow, DuckDB e lakehouse',
+    level: 'Expert',
+    objective: 'Escolher entre armazenamento por linha e por coluna a partir do padrão de acesso, e reconhecer quando o problema analítico saiu do banco transacional.',
+    prerequisites: ['Módulo 6 (heap e páginas)', 'Módulo 8 (SQL analítico e janelas)', 'Noção de custo de I/O'],
+    problem: 'Relatórios analíticos são executados no banco transacional até que deixem de caber: a varredura lê todas as colunas para agregar uma, concorre com a carga operacional e o índice não ajuda. A reação típica é comprar máquina maior, quando o problema é o formato de armazenamento.',
+    concepts: ['Linha versus coluna: o que cada um otimiza', 'Compressão por coluna: valores semelhantes ficam juntos', 'Parquet: row groups, estatísticas por bloco e predicate pushdown', 'Arrow: representação em memória e interoperabilidade sem serialização', 'Execução vetorizada: processar lotes em vez de uma linha por vez', 'DuckDB como motor colunar embutido', 'Lakehouse e formatos de tabela (Iceberg): transação sobre arquivos', 'HTAP e o limite entre operacional e analítico'],
+    internals: [
+      'Agregar uma coluna em formato de linha lê a linha inteira do disco; em formato de coluna, lê só aquela coluna — a diferença é de ordem de grandeza, e não de percentual.',
+      'Colunas guardam valores do mesmo tipo e domínio, o que torna a compressão muito mais eficaz: menos bytes lidos é menos I/O, antes de qualquer CPU.',
+      'As estatísticas por row group do Parquet permitem pular blocos inteiros sem ler — é um índice implícito e barato.',
+      'Vetorização processa lotes, o que amortiza o custo por linha do interpretador e usa melhor o cache da CPU. É a mesma ideia do módulo 22 da trilha de Java, em outro domínio.'
+    ],
+    useWhen: ['Use colunar quando a consulta agrega poucas colunas sobre muitas linhas.', 'Use DuckDB para análise local sobre Parquet, sem subir infraestrutura.', 'Considere lakehouse quando os dados analíticos crescem além do que o operacional comporta.'],
+    avoidWhen: ['Não use colunar para carga transacional de linha inteira e escrita ponto a ponto.', 'Não monte lakehouse sem volume que o justifique — o custo operacional é real.', 'Não replique o operacional para o analítico sem definir latência aceitável de dado.'],
+    contrast: {
+      bad: 'Relatório de fechamento varrendo a tabela transacional em horário comercial, competindo com o checkout.',
+      good: 'Extração incremental para Parquet, consulta com motor colunar e latência de dado declarada em contrato.'
+    },
+    tradeoffs: ['Colunar dá agregação rápida e escrita ponto a ponto ruim.', 'Lakehouse separa as cargas e adiciona pipeline, latência e um sistema a operar.', 'Manter tudo no operacional é simples até deixar de ser — e o momento da virada tem sinais mensuráveis.'],
+    production: 'Um painel executivo agrega 18 meses de lançamentos e leva 90 s, travando conexões no horário de pico. A extração para Parquet particionado por mês e a consulta com motor colunar levam o mesmo relatório a menos de 2 s, sem tocar no banco operacional — ao custo de dado com até 15 minutos de atraso, acordado com a área de negócio.',
+    risks: ['Pipeline analítico sem contrato de latência', 'Divergência entre número do painel e do operacional', 'Small files problem no lakehouse', 'Custo de varredura sem particionamento nem poda'],
+    checklist: ['A consulta agrega poucas colunas sobre muitas linhas?', 'Qual a latência de dado aceitável, por escrito?', 'O particionamento permite podar a maior parte dos arquivos?', 'Há reconciliação entre o número analítico e o operacional?', 'O custo operacional do pipeline foi comparado ao de continuar no banco?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Por que um formato colunar acelera agregação?', expected: 'Lê apenas as colunas necessárias, comprime muito melhor porque os valores são homogêneos e permite pular blocos por estatística — é menos I/O antes de ser mais CPU.' },
+      { level: 'Sênior/Expert', question: 'Quando você tiraria os relatórios do banco transacional?', expected: 'Quando a varredura analítica passa a competir por recursos com a carga operacional, o índice deixa de ajudar e o crescimento é previsível — com latência de dado negociada e reconciliação definida, não por moda de arquitetura.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Comparar o custo de agregar uma coluna sobre uma tabela larga em formato de linha e em Parquet.', evidence: 'Bytes lidos e tempo nos dois formatos, com a mesma consulta.' },
+      { level: 'Aplicado', task: 'Particionar um conjunto Parquet e medir o efeito da poda de partições.', evidence: 'Arquivos lidos com e sem filtro de partição.' },
+      { level: 'Expert', task: 'Definir o gatilho mensurável que moveria um relatório do operacional para o analítico.', evidence: 'ADR com a métrica, o limiar, o custo dos dois lados e a latência acordada.' }
+    ],
+    challenge: 'Pegar o relatório mais pesado do seu sistema, medi-lo nos dois formatos e escrever a recomendação — inclusive se for "continua no operacional".',
+    book: 'Designing Data-Intensive Applications, cap. 3 (armazenamento e recuperação; seção de armazenamento colunar); Database Internals (organização de dados em disco).',
+    complements: [pgDocs('PostgreSQL 18 — Table Partitioning', 'ddl-partitioning.html')],
+    exampleFile: '../../examples/database-senior/09-columnar-and-lakehouse.md'
+  }),
+  defineModule({
+    number: 24,
+    part: 'fronteira',
+    id: 'commit-distribuido',
+    title: 'Commit distribuído e consenso: 2PC, Raft, determinismo e relógio',
+    level: 'Expert',
+    objective: 'Comparar as formas de obter acordo entre nós pelo que cada uma cobra em latência, disponibilidade e complexidade operacional.',
+    prerequisites: ['Módulo 4 (transações e isolamento)', 'Módulo 18 (replicação e consistência)', 'Módulo 15 (outbox e CDC)'],
+    problem: 'Toda discussão sobre banco distribuído termina em "ele garante consistência forte?" — e a resposta só significa alguma coisa quando se sabe o que foi pago por ela. Sem conhecer os mecanismos, a avaliação de um produto vira leitura de material de marketing.',
+    concepts: ['2PC: o coordenador como ponto único e o bloqueio in-doubt', 'Consenso (Raft/Paxos): quórum, log replicado e eleição', 'Diferença entre replicar o log e coordenar a transação', 'Abordagem determinística (Calvin): ordenar antes de executar', 'Relógio como infraestrutura: TrueTime e incerteza limitada', 'Relógios lógicos, HLC e ordenação sem relógio físico', 'Consistência externa, linearizabilidade e snapshot isolation', 'O custo em latência de cada garantia'],
+    internals: [
+      '2PC bloqueia: se o coordenador cai entre prepare e commit, os participantes ficam com locks segurados e não podem decidir sozinhos. É por isso que raramente serve entre serviços.',
+      'Consenso resolve acordo sobre uma sequência de valores com maioria, tolerando minoria de falhas — e cobra pelo menos um round-trip de quórum por decisão.',
+      'A abordagem determinística inverte a ordem: decide a sequência de transações antes de executar, eliminando a negociação em troca de exigir o conjunto de acesso conhecido de antemão.',
+      'Consistência externa em escala global precisa de uma noção de tempo confiável; TrueTime compra isso com hardware e paga esperando a incerteza passar.'
+    ],
+    useWhen: ['Use consenso quando precisa de uma decisão única e tolerante a falhas.', 'Use saga com compensação entre serviços — 2PC entre bancos independentes quase nunca é a resposta.', 'Aceite consistência eventual quando o domínio tolera e a disponibilidade vale mais.'],
+    avoidWhen: ['Não use 2PC entre serviços independentes.', 'Não presuma que "consistência forte" do fornecedor significa linearizabilidade.', 'Não ignore o custo de latência do quórum multi-região.'],
+    contrast: {
+      bad: 'Escolher um banco distribuído pela frase "consistência forte e alta disponibilidade" na página do produto.',
+      good: 'Perguntar: qual o comportamento sob partição, qual a suposição de relógio, o que acontece com escritas durante failover e que verificação independente existe.'
+    },
+    tradeoffs: ['Consenso dá acordo tolerante a falhas e custa latência de quórum.', '2PC dá atomicidade entre recursos e cria bloqueio e ponto único.', 'Consistência eventual dá disponibilidade e transfere a resolução de conflito para a aplicação.'],
+    production: 'Um cluster multi-região com quórum é configurado com nós em três continentes. A escrita passa a levar 250 ms porque cada commit espera o quórum atravessar o oceano. Nenhum defeito: é o preço da garantia. O redesenho coloca o quórum em uma região e usa réplicas de leitura nas outras, com o trade-off explícito.',
+    risks: ['Coordenador de 2PC como ponto único', 'Latência de quórum ignorada no desenho multi-região', 'Garantia anunciada diferente da garantia entregue', 'Split-brain por configuração de quórum incorreta'],
+    checklist: ['Qual garantia exata, em linguagem precisa, o sistema oferece?', 'O que acontece sob partição?', 'Qual a latência de escrita imposta pelo quórum?', 'Existe verificação independente da garantia?', 'O domínio realmente precisa disso?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Por que 2PC é evitado entre microsserviços?', expected: 'Porque bloqueia: uma falha do coordenador entre prepare e commit deixa participantes com locks segurados, sem poder decidir. Acopla disponibilidade dos serviços e escala mal — saga com compensação é a alternativa usual.' },
+      { level: 'Sênior/Expert', question: 'Um fornecedor afirma consistência forte sem custo de latência. O que você pergunta?', expected: 'Qual definição de "forte" (linearizável? snapshot?), comportamento sob partição, suposição de relógio, onde fica o quórum, o que acontece com escritas em failover e quais resultados de verificação independente existem.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Descrever o que acontece, passo a passo, quando o coordenador de um 2PC cai após o prepare.', evidence: 'Sequência com o estado de cada participante e o que os desbloqueia.' },
+      { level: 'Aplicado', task: 'Medir a latência de escrita de um cluster com quórum em uma e em três regiões.', evidence: 'p50 e p99 nas duas topologias e a explicação da diferença.' },
+      { level: 'Expert', task: 'Avaliar um banco distribuído real contra a lista de perguntas do módulo e emitir recomendação.', evidence: 'Documento com a garantia exata, o que foi pago por ela e a verificação independente encontrada.' }
+    ],
+    challenge: 'Escrever as perguntas que você faria a um fornecedor de banco distribuído, de modo que material de marketing não consiga respondê-las.',
+    book: 'Database Internals, parte II (sistemas distribuídos, consenso e replicação); Designing Data-Intensive Applications, cap. 7–9 (transações, problemas distribuídos e consistência).',
+    complements: [pgDocs('PostgreSQL 18 — Two-Phase Commit', 'sql-prepare-transaction.html'), pgDocs('PostgreSQL 18 — High Availability and Replication', 'high-availability.html')],
+    exampleFile: '../../examples/database-senior/10-distributed-commit.md'
+  }),
+  defineModule({
+    number: 25,
+    part: 'fronteira',
+    id: 'crdt-sem-coordenacao',
+    title: 'Convergência sem coordenação: CRDTs e dados local-first',
+    level: 'Expert',
+    objective: 'Reconhecer quando réplicas podem convergir sem negociar e quando a convergência automática esconde um conflito que é do negócio, não do dado.',
+    prerequisites: ['Módulo 18 (replicação e consistência)', 'Módulo 24', 'Noção de ordem parcial'],
+    problem: 'Escrita em múltiplos pontos sem coordenação normalmente produz conflito, e a saída padrão — "o último que escreve vence" — descarta dados em silêncio. Existe uma classe de estruturas que converge por construção, e conhecê-la muda o que é possível oferecer em aplicações offline, colaborativas e multi-região.',
+    concepts: ['Convergência forte eventual: mesmas atualizações, mesmo estado final', 'Operações comutativas, associativas e idempotentes', 'Estruturas baseadas em estado e em operação', 'Contador de incremento, conjunto com remoção, registro e sequência', 'Last-write-wins e a perda silenciosa que ele causa', 'Metadados que crescem: túmulos e o custo do esquecimento', 'Local-first: o dispositivo como réplica de primeira classe', 'Conflito de dado versus conflito de negócio'],
+    internals: [
+      'A propriedade que faz funcionar é a estrutura da operação, não o protocolo: se a junção é comutativa, associativa e idempotente, a ordem de chegada deixa de importar.',
+      'Remover de um conjunto replicado exige registrar a remoção — é por isso que essas estruturas acumulam metadados e precisam de política de descarte.',
+      'LWW converge e perde dados: duas escritas simultâneas, uma desaparece sem aviso. É uma escolha válida quando perder é aceitável, e uma armadilha quando não é.',
+      'Convergir não é o mesmo que estar correto: duas reservas do mesmo assento podem convergir para um estado consistente e ainda assim serem inaceitáveis para o negócio.'
+    ],
+    useWhen: ['Use quando o dado é acumulativo ou colaborativo (contador, presença, texto editado a várias mãos).', 'Use em aplicação offline-first em que a escrita local não pode esperar rede.', 'Use replicação com coordenação quando a regra exige exclusividade.'],
+    avoidWhen: ['Não use para invariante que exige unicidade ou saldo não negativo.', 'Não adote sem política de descarte de metadados.', 'Não trate convergência automática como resolução de conflito de negócio.'],
+    contrast: {
+      bad: 'Estoque replicado em três regiões com LWW: duas vendas simultâneas convergem, e uma some.',
+      good: 'Reserva com coordenação onde a exclusividade é requisito; contador acumulativo sem coordenação onde só o total importa.'
+    },
+    tradeoffs: ['Convergência sem coordenação dá disponibilidade e latência local, e cobra em metadados e em expressividade.', 'LWW é barato e perde escrita.', 'Coordenação preserva invariante e exige rede disponível.'],
+    production: 'Um aplicativo de campo permite edição offline. A sincronização com LWW faz observações de dois técnicos no mesmo formulário se sobrescreverem. A troca por uma estrutura que converge por união preserva as duas contribuições; os campos em que só um valor pode valer passam a exigir resolução explícita pelo supervisor.',
+    risks: ['LWW descartando escrita em silêncio', 'Metadados crescendo sem limite', 'Invariante de negócio violada por convergência automática', 'Complexidade adotada sem necessidade real de offline'],
+    checklist: ['A operação é comutativa, associativa e idempotente?', 'Qual invariante de negócio precisa de coordenação?', 'Existe política de descarte para os metadados?', 'O que acontece com duas escritas simultâneas — converge ou perde?', 'O modo offline é requisito ou conveniência?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Qual o problema de resolver conflito com "o último que escreve vence"?', expected: 'Converge, mas descarta uma das escritas em silêncio, e "último" depende de relógio, que em sistema distribuído não é confiável. Só é aceitável quando perder aquela escrita é irrelevante.' },
+      { level: 'Sênior/Expert', question: 'Dá para implementar reserva de assento com CRDT?', expected: 'Não para a exclusividade: convergência garante mesmo estado final, não unicidade. Dá para modelar a intenção sem coordenação e resolver a exclusividade num ponto coordenado — separando conflito de dado de conflito de negócio.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Implementar um contador replicado que converge com atualizações fora de ordem e duplicadas.', evidence: 'Teste que aplica as mesmas operações em ordens diferentes e chega ao mesmo estado.' },
+      { level: 'Aplicado', task: 'Implementar um conjunto com remoção e mostrar o crescimento dos metadados.', evidence: 'Medição do tamanho do estado ao longo de operações e proposta de descarte.' },
+      { level: 'Expert', task: 'Classificar os dados de um sistema real entre os que podem convergir sem coordenação e os que não podem.', evidence: 'Tabela dado × invariante × estratégia, com a justificativa de cada linha.' }
+    ],
+    challenge: 'Encontrar no seu sistema um lugar onde "o último que escreve vence" está descartando dado em silêncio, e propor a alternativa.',
+    book: 'Designing Data-Intensive Applications, cap. 5 (replicação, escrita concorrente e resolução de conflito); Database Internals (replicação sem líder).',
+    complements: [],
+    exampleFile: '../../examples/database-senior/11-crdt-replication.py'
+  }),
+  defineModule({
+    number: 26,
+    part: 'fronteira',
+    id: 'busca-vetorial',
+    title: 'Busca vetorial no banco operacional: pgvector, HNSW e o custo do recall',
+    level: 'Expert',
+    objective: 'Dimensionar busca por similaridade dentro do banco relacional, escolhendo o índice por recall medido e custo, e decidir com evidência se um banco vetorial dedicado se justifica.',
+    prerequisites: ['Módulo 5 (índices e caminhos de acesso)', 'Módulo 7 (planner)', 'Noção de embedding — a geração é assunto da trilha de IA'],
+    problem: 'A adoção de RAG colocou busca vetorial em quase todo produto, e a decisão default virou "subir um banco vetorial". Na maior parte dos casos o volume cabe no Postgres que já existe, e adicionar um sistema novo traz sincronização, consistência e operação que ninguém orçou. A decisão certa depende de números que quase nunca são medidos.',
+    concepts: ['Vetor como tipo de coluna e as métricas de distância', 'Busca exata versus aproximada: recall como parâmetro, não como defeito', 'HNSW: grafo navegável, `m`, `ef_construction` e `ef_search`', 'IVFFlat: listas, `probes` e a dependência dos dados no momento da criação', 'Recall medido contra a busca exata como referência', 'Filtro combinado com similaridade e a armadilha do pós-filtro', 'Custo de memória do índice e tempo de construção', 'Quando o banco dedicado se justifica'],
+    internals: [
+      'Índice vetorial é aproximado por construção: ele troca recall por latência, e o parâmetro de busca é o botão dessa troca — em tempo de consulta, no HNSW.',
+      'HNSW constrói devagar e consome memória, e entrega latência baixa com recall alto; IVFFlat constrói rápido e depende de os dados no momento da criação representarem o conjunto final.',
+      'Filtrar por metadado e ordenar por similaridade é onde a maioria erra: se o filtro é aplicado depois da busca aproximada, o resultado pode vir vazio mesmo havendo candidatos.',
+      'Recall não é observável sem referência: precisa ser medido contra a busca exata no mesmo conjunto, e não estimado.'
+    ],
+    useWhen: ['Use pgvector quando os vetores cabem no banco que você já opera — o que cobre a maior parte dos casos.', 'Use HNSW quando a latência importa e há memória disponível.', 'Considere banco dedicado quando volume, latência ou funcionalidades específicas o exigirem, com medição que mostre.'],
+    avoidWhen: ['Não adote banco vetorial separado antes de medir no que você já tem.', 'Não aceite o recall padrão sem medir contra a busca exata.', 'Não aplique filtro depois da busca aproximada esperando resultado completo.'],
+    contrast: {
+      bad: 'Subir um banco vetorial dedicado para 200 mil documentos, criando um segundo sistema para sincronizar e manter consistente com o Postgres.',
+      good: 'Uma coluna de vetor na tabela que já existe, índice HNSW com recall medido e a mesma transação garantindo que documento e vetor nunca divergem.'
+    },
+    tradeoffs: ['HNSW dá latência baixa e custa memória e tempo de construção.', 'Recall alto dá resultado melhor e custa latência.', 'Banco dedicado oferece recursos especializados e adiciona sincronização, consistência e operação.'],
+    production: 'Um sistema de busca interna adota banco vetorial dedicado. Seis meses depois, 4% dos documentos estão dessincronizados entre os dois sistemas, ninguém sabe desde quando, e não há reconciliação. A migração para pgvector na mesma transação do documento elimina a classe inteira de defeito, com latência equivalente no volume real.',
+    risks: ['Dois sistemas divergindo sem reconciliação', 'Recall nunca medido', 'Pós-filtro devolvendo resultado vazio indevidamente', 'Índice não cabendo em memória e degradando em silêncio', 'Reconstrução de índice necessária após mudança de modelo de embedding'],
+    checklist: ['Quantos vetores, de que dimensão, com que crescimento?', 'O recall foi medido contra a busca exata?', 'O filtro é aplicado antes ou depois da aproximação?', 'O índice cabe em memória?', 'Documento e vetor são escritos na mesma transação?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Por que um índice vetorial é aproximado?', expected: 'Porque a busca exata em alta dimensão exige comparar com tudo; o índice troca garantia de encontrar os vizinhos mais próximos por latência muito menor, com recall controlável por parâmetro.' },
+      { level: 'Sênior/Expert', question: 'Quando você recusaria um banco vetorial dedicado?', expected: 'Quando o volume cabe no banco operacional e a medição mostra latência aceitável — porque o sistema separado adiciona sincronização, consistência eventual entre documento e vetor e mais um componente a operar, sem ganho demonstrado.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Criar uma coluna vetorial, inserir dados e comparar busca exata com HNSW no mesmo conjunto.', evidence: 'Latência e resultados das duas buscas, lado a lado.' },
+      { level: 'Aplicado', task: 'Medir o recall do índice aproximado contra a busca exata variando o parâmetro de busca.', evidence: 'Curva recall × latência e o ponto escolhido, com justificativa.' },
+      { level: 'Expert', task: 'Comparar filtro antes e depois da busca aproximada e demonstrar a diferença de resultado.', evidence: 'Consultas nas duas formas, resultados e recomendação de modelagem.' }
+    ],
+    challenge: 'Dimensionar a busca vetorial de um caso real e escrever o ADR que decide entre pgvector e banco dedicado — com recall, latência e custo medidos, não estimados.',
+    book: 'Database Internals (estruturas de índice e o custo do acesso aproximado) como base; a geração de embeddings e a avaliação de RAG são a trilha de IA, módulos 16 e 17.',
+    complements: [pgDocs('PostgreSQL 18 — Index Types', 'indexes-types.html'), { label: 'pgvector — documentação', url: 'https://github.com/pgvector/pgvector' }],
+    exampleFile: '../../examples/database-senior/12-vector-search.sql'
+  }),
+  defineModule({
+    number: 27,
+    part: 'fronteira',
+    id: 'ler-postgresql',
+    title: 'Ler o PostgreSQL: código-fonte, extensões e comunidade',
+    level: 'Expert → fronteira',
+    objective: 'Responder uma dúvida de comportamento lendo o código e as listas do PostgreSQL, e distinguir o que é garantido do que é detalhe daquela versão.',
+    prerequisites: ['Módulos 21–22', 'Inglês técnico de leitura', 'Git e leitura de histórico'],
+    problem: 'A documentação do PostgreSQL é excelente e mesmo assim não responde tudo: por que esta estimativa, por que este lock, por que este comportamento mudou entre versões. As respostas estão no código, nos comentários — que são dos melhores da indústria — e no arquivo das listas de discussão, onde a decisão foi debatida.',
+    concepts: ['Estrutura do repositório: `src/backend`, `src/include`, `contrib`', 'Os arquivos README dentro do código-fonte como documentação de projeto', 'Ler `nodeHashjoin.c`, `selfuncs.c` e `heapam.c`', 'Catálogo do sistema como fonte de verdade em runtime', 'Extensões: o mecanismo que torna o Postgres extensível', 'pgsql-hackers e o arquivo de discussões', 'Commitfest e como uma mudança entra', 'Construir do fonte e usar as ferramentas de desenvolvimento'],
+    internals: [
+      'Os READMEs dentro de `src/backend` explicam decisões de projeto que não estão na documentação do usuário — é o material mais subestimado do projeto.',
+      'O que a documentação garante é contrato; o que o código faz além disso pode mudar na próxima versão sem aviso, e é aí que nasce a dependência frágil.',
+      'A extensibilidade é arquitetural: tipos, operadores, métodos de índice e hooks são pontos de extensão previstos — pgvector é uma extensão, não um fork.',
+      'Quase toda decisão não óbvia foi discutida em pgsql-hackers, e o arquivo é público e pesquisável.'
+    ],
+    useWhen: ['Use quando o comportamento observado contraria a documentação.', 'Use o arquivo das listas quando quiser saber por que algo é assim.', 'Use o catálogo do sistema para descobrir o estado real em runtime.'],
+    avoidWhen: ['Não dependa de comportamento que a documentação não promete.', 'Não generalize do PostgreSQL para outros bancos.', 'Não escreva extensão em C sem contar o custo de manutenção e de build.'],
+    contrast: {
+      bad: 'Afirmar em revisão que "o Postgres sempre usa índice quando ele existe", com base em experiência pessoal.',
+      good: 'Mostrar o trecho do estimador que decide, explicar a variável que inverte a escolha e demonstrar com EXPLAIN nos dois cenários.'
+    },
+    tradeoffs: ['Ler a fonte dá certeza e custa tempo.', 'Conhecer internals melhora o diagnóstico e tenta a depender do que não é garantido.', 'Extensão em C dá poder e adiciona build, compatibilidade por versão e manutenção.'],
+    production: 'Um comportamento de lock muda após atualização de versão e um job passa a travar. A busca no arquivo das listas encontra a discussão que motivou a mudança, com a justificativa e o caso que ela corrige. O time ajusta o job com entendimento, em vez de reverter a versão inteira.',
+    risks: ['Ler versão diferente da que roda em produção', 'Depender de detalhe de implementação', 'Confundir comentário desatualizado com comportamento atual', 'Extensão que trava a atualização de versão'],
+    checklist: ['Estou lendo a mesma versão que roda em produção?', 'Isso é documentado ou é implementação?', 'Existe discussão sobre isso no arquivo das listas?', 'Consigo reproduzir minimamente?', 'O achado virou nota, teste ou ADR?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Onde você procuraria a razão de uma mudança de comportamento entre duas versões do PostgreSQL?', expected: 'Nas notas de versão primeiro, depois no commit correspondente e na discussão em pgsql-hackers — que costuma trazer o caso que motivou a mudança.' },
+      { level: 'Sênior/Expert', question: 'Quando escrever uma extensão em C se justifica?', expected: 'Quando o ponto de extensão previsto resolve algo que SQL e procedural não resolvem, o ganho é grande e há quem mantenha por versão. Na maioria dos casos uma extensão existente ou uma função em linguagem procedural já cobre.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Consultar o catálogo do sistema para descobrir estatísticas, índices e bloat de uma tabela sem usar ferramenta externa.', evidence: 'Consultas ao catálogo com a interpretação de cada número.' },
+      { level: 'Aplicado', task: 'Escolher uma dúvida real e respondê-la pelo código-fonte ou pelo arquivo das listas.', evidence: 'Documento com a pergunta, o caminho até a fonte, a citação e a reprodução mínima.' },
+      { level: 'Expert', task: 'Construir o PostgreSQL do fonte e executar uma parte da suíte de regressão.', evidence: 'Build concluído, testes executados e registro dos obstáculos.' }
+    ],
+    challenge: 'Encontrar uma crença sua sobre o PostgreSQL que nunca foi verificada, confrontá-la com a documentação e o código, e registrar o resultado.',
+    book: 'PostgreSQL 14 Internals (Rogov) como mapa antes de entrar no código; The Art of PostgreSQL (o que a linguagem e o servidor oferecem que costuma ser ignorado).',
+    complements: [pgDocs('PostgreSQL 18 — System Catalogs', 'catalogs.html'), pgDocs('PostgreSQL 18 — Extending SQL', 'extend.html'), { label: 'PostgreSQL — código-fonte no GitHub', url: 'https://github.com/postgres/postgres' }, { label: 'pgsql-hackers — arquivo da lista', url: 'https://www.postgresql.org/list/pgsql-hackers/' }],
+    exampleFile: '../../examples/database-senior/13-reading-postgres.sql'
   })
 ]);
 
@@ -1034,6 +1355,22 @@ export const bancosAssessment = Object.freeze({
     'Diagnosticar uma regressão de consulta e um incidente de concorrência com artefatos reproduzíveis.',
     'Evoluir o projeto db-ledger-core → db-ledger-scale → db-ledger-polyglot preservando dados, testes e decisões.',
     'Demonstrar backup/restore, rollback/roll-forward, observabilidade e resposta a game day dentro dos SLOs.',
-    'Registrar uma URL HTTP(S) de evidência validada e concluir a revisão D30 antes de marcar Dominado.'
+    'Registrar uma URL HTTP(S) de evidência validada e concluir a revisão D30 antes de marcar Dominado.',
+    'Fronteira (módulos 21–27) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira concluída exige: um storage engine próprio que sobrevive a crash no pior instante, uma estimativa de cardinalidade corrigida pela causa e não por hint, um relatório medido em linha e em coluna, uma avaliação de banco distribuído com a garantia em vocabulário formal, um caso de "último que escreve vence" que estava perdendo dado, uma busca vetorial dimensionada com recall medido, e uma crença sobre o PostgreSQL confrontada com o código-fonte.'
   ])
 });
+
+/*
+ * Gabarito de autoavaliação. Não substitui a evidência exigida pela rubrica:
+ * serve para o estudo solo saber se a resposta estava certa antes de concluir.
+ */
+export const bancosAnswerKey = bancosModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: (module.interview || []).map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Concluir sem medir.',
+  criterioDeAceite: (module.exercises || []).map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));

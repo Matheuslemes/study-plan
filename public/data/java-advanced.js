@@ -16,6 +16,26 @@ const official = {
   jep446: { label: 'JEP 446 — Scoped Values (preview no JDK 21)', url: 'https://openjdk.org/jeps/446' },
   jep453: { label: 'JEP 453 — Structured Concurrency (preview no JDK 21)', url: 'https://openjdk.org/jeps/453' },
   jep525: { label: 'JEP 525 — Structured Concurrency (sexto preview no JDK 26)', url: 'https://openjdk.org/jeps/525' },
+  jdk25: { label: 'OpenJDK — JDK 25 (LTS atual)', url: 'https://openjdk.org/projects/jdk/25/' },
+  jep506: { label: 'JEP 506 — Scoped Values (final no JDK 25)', url: 'https://openjdk.org/jeps/506' },
+  jep511: { label: 'JEP 511 — Module Import Declarations (final no JDK 25)', url: 'https://openjdk.org/jeps/511' },
+  jep513: { label: 'JEP 513 — Flexible Constructor Bodies (final no JDK 25)', url: 'https://openjdk.org/jeps/513' },
+  jep484: { label: 'JEP 484 — Class-File API (final no JDK 24)', url: 'https://openjdk.org/jeps/484' },
+  jep454: { label: 'JEP 454 — Foreign Function & Memory API (final no JDK 22)', url: 'https://openjdk.org/jeps/454' },
+  jep469: { label: 'JEP 469 — Vector API (incubação continuada)', url: 'https://openjdk.org/jeps/469' },
+  jep483: { label: 'JEP 483 — Ahead-of-Time Class Loading & Linking', url: 'https://openjdk.org/jeps/483' },
+  leyden: { label: 'Project Leyden — tempo de startup e warmup', url: 'https://openjdk.org/projects/leyden/' },
+  valhalla: { label: 'Project Valhalla — value types', url: 'https://openjdk.org/projects/valhalla/' },
+  crac: { label: 'OpenJDK CRaC — Coordinated Restore at Checkpoint', url: 'https://openjdk.org/projects/crac/' },
+  graalvm: { label: 'GraalVM Native Image — documentação', url: 'https://www.graalvm.org/latest/reference-manual/native-image/' },
+  instrument: { label: 'java.lang.instrument — Java SE 21 API', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.instrument/java/lang/instrument/package-summary.html' },
+  varhandle: { label: 'VarHandle — modos de acesso e memória', url: 'https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/invoke/VarHandle.html' },
+  jmh: { label: 'JMH — Java Microbenchmark Harness', url: 'https://github.com/openjdk/jmh' },
+  openjdkRepo: { label: 'OpenJDK — código-fonte no GitHub', url: 'https://github.com/openjdk/jdk' },
+  jbs: { label: 'JDK Bug System (JBS)', url: 'https://bugs.openjdk.org/' },
+  jep1: { label: 'JEP 1 — o processo de JEPs do OpenJDK', url: 'https://openjdk.org/jeps/1' },
+  bootDocs: { label: 'Spring Boot — referência oficial', url: 'https://docs.spring.io/spring-boot/index.html' },
+  frameworkDocs: { label: 'Spring Framework — referência oficial', url: 'https://docs.spring.io/spring-framework/reference/' },
   jfr: { label: 'JDK Flight Recorder Guide 21', url: 'https://docs.oracle.com/en/java/javase/21/jfapi/' },
   jcmd: { label: 'jcmd — JDK 21 Tool Specification', url: 'https://docs.oracle.com/en/java/javase/21/docs/specs/man/jcmd.html' },
   gc: { label: 'HotSpot Garbage Collection Tuning Guide 21', url: 'https://docs.oracle.com/en/java/javase/21/gctuning/' },
@@ -235,13 +255,36 @@ export const javaBooks = Object.freeze({
   }
 });
 
+export const JAVA_RESEARCH_DATE = '2026-09-20';
+
+/*
+ * Baseline tecnológico: o que os exemplos compilam contra (21 LTS, escolhido
+ * por ser a baseline do exame 1Z0-830) e o que já é corrente em produção.
+ * A distância entre as duas colunas é conteúdo, não erro — módulos 21–26
+ * cobrem o que mudou depois do 21.
+ */
+export const javaTechnologyBaseline = [
+  { technology: 'JDK dos exemplos', baseline: '21 LTS', status: 'Baseline de compilação', note: 'Alinhado ao exame 1Z0-830. Exemplos compilam com `javac --release 21 -Xlint:all`.' },
+  { technology: 'JDK LTS corrente', baseline: '25 (set/2025)', status: 'Adotar em projeto novo', note: 'JDK 21 sob licença permissiva da Oracle termina em out/2026; migrar para 25 ou posterior.' },
+  { technology: 'JDK não-LTS', baseline: '26 (mar/2026)', status: 'Acompanhar', note: 'Usado aqui para ler JEPs em preview, não como alvo de produção.' },
+  { technology: 'Scoped Values', baseline: 'final no 25 (JEP 506)', status: 'Estável', note: 'Substitui ThreadLocal em fluxos com Virtual Threads. Era preview no 21.' },
+  { technology: 'Structured Concurrency', baseline: 'preview (JEP 525, JDK 26)', status: 'Ainda preview', note: 'Sexto preview; API mudou entre versões. Não usar em produção sem política de upgrade.' },
+  { technology: 'Class-File API', baseline: 'final no 24 (JEP 484)', status: 'Estável', note: 'Substitui ASM para ler e gerar bytecode com API suportada. Módulo 21.' },
+  { technology: 'FFM API (Panama)', baseline: 'final no 22 (JEP 454)', status: 'Estável', note: 'Substituto suportado de JNI e de `sun.misc.Unsafe`, em remoção. Módulo 25.' },
+  { technology: 'Vector API', baseline: 'incubação (JEP 469)', status: 'Instável', note: 'Depende de Valhalla para estabilizar. Estudar, não depender.' },
+  { technology: 'Spring Boot', baseline: '4.1 (2026)', status: 'Corrente', note: 'Boot 3.5 saiu do suporte aberto em jun/2026. Os livros da biblioteca cobrem Boot 2.x — usar a doc oficial.' },
+  { technology: 'Spring Framework', baseline: '7.0', status: 'Corrente', note: 'JSpecify para nulidade, versionamento nativo de API REST, resiliência embutida, Jackson 3.' },
+  { technology: 'Spring Security', baseline: '7.x', status: 'Corrente', note: 'Livro da biblioteca cobre a linha 6.x; conferir mudanças de configuração antes de copiar exemplos.' },
+  { technology: 'GraalVM Native Image', baseline: 'acompanha o JDK corrente', status: 'Estável para casos definidos', note: 'Closed-world: reflexão e recursos exigem configuração explícita. Módulo 24.' }
+];
+
 export const javaAcademy = Object.freeze({
   title: 'Academia Java 21+',
-  baseline: 'Java 21 LTS, sem recursos preview nos exemplos compiláveis',
+  baseline: 'Exemplos em Java 21 LTS · LTS corrente 25 · baseline completo na avaliação',
   book: 'OCP (Deshmukh) sustenta a linguagem; Effective Java, Java Concurrency in Practice, Optimizing Java, Spring in Action e mais 11 obras aprofundam cada tema por área',
   parts: {
     fundamentos: {
-      index: '1/4',
+      index: '1/5',
       title: 'Linguagem, contratos e modelagem',
       subtitle: 'Módulos 1–8 · da semântica da linguagem a APIs de domínio previsíveis.',
       prerequisites: [
@@ -257,7 +300,7 @@ export const javaAcademy = Object.freeze({
       ]
     },
     runtime: {
-      index: '2/4',
+      index: '2/5',
       title: 'Runtime, concorrência e performance',
       subtitle: 'Módulos 9–13 · JMM, Loom, JVM, GC e diagnóstico orientado por evidência.',
       prerequisites: [
@@ -273,7 +316,7 @@ export const javaAcademy = Object.freeze({
       ]
     },
     producao: {
-      index: '3/4',
+      index: '3/5',
       title: 'Engenharia de produção',
       subtitle: 'Módulos 14–20 · APIs, testes, dados, distribuição, segurança e arquitetura.',
       prerequisites: [
@@ -288,8 +331,26 @@ export const javaAcademy = Object.freeze({
         'Defender uma arquitetura com segurança, observabilidade, ADRs e critérios de evolução.'
       ]
     },
+    fronteira: {
+      index: '4/5',
+      title: 'Fronteira: a plataforma por dentro',
+      subtitle: 'Módulos 21–26 · bytecode, JIT, memória de baixo nível, AOT, FFM e leitura do OpenJDK.',
+      prerequisites: [
+        'Dominar os módulos 9–13: JMM, concorrência, JVM, GC e diagnóstico com JFR/JMH.',
+        'Saber medir antes de concluir — benchmark com warmup, baseline registrada e variância conhecida.',
+        'Aceitar que aqui a resposta certa costuma ser "medi e não compensou".'
+      ],
+      objectives: [
+        'Ler e gerar bytecode, e instrumentar uma aplicação em runtime com um agent próprio.',
+        'Explicar o que o JIT faz com o seu código e provar o efeito de inlining, escape analysis e desotimização.',
+        'Escolher o modo de acesso à memória pelo custo real e reconhecer false sharing e contenção.',
+        'Decidir entre JIT, AOT, Native Image e checkpoint por requisito de startup, pico e operação.',
+        'Substituir JNI e Unsafe por FFM em fronteiras nativas e dados densos.',
+        'Responder uma dúvida de comportamento lendo o código-fonte do OpenJDK, não um blog.'
+      ]
+    },
     avaliacao: {
-      index: '4/4',
+      index: '5/5',
       title: 'Avaliação, casos e capstones',
       subtitle: 'Rubricas, estudos de caso e projetos para produzir evidência de nível sênior/expert.',
       prerequisites: [
@@ -691,7 +752,7 @@ export const javaModules = [
     challenge: 'Explicar uma regressão de startup separando class loading, framework initialization e JIT.',
     book: 'The Well-Grounded Java Developer (class loading e bytecode); Optimizing Java, cap. 2–4 (JVM, interpretador e JIT).',
     complements: [official.jvms, official.jfr, official.jcmd],
-    exampleFile: '../../examples/java21-senior/README.md'
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/BytecodeAndAgents.java'
   },
   {
     number: 12,
@@ -761,7 +822,7 @@ export const javaModules = [
     challenge: 'Investigar uma regressão plantada sem alterar flags até apresentar evidência causal.',
     book: 'Optimizing Java, cap. 5 e 9–12 (metodologia de performance, JMH, profiling e diagnóstico).',
     complements: [official.jfr, official.jcmd],
-    exampleFile: '../../examples/java21-senior/README.md'
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/JitAndEscapeAnalysis.java'
   },
   {
     number: 14,
@@ -1007,6 +1068,246 @@ export const javaModules = [
     book: 'Refactoring (2ª ed) e Clean Code (fronteiras e arquitetura limpa); DDD e microsserviços aprofundam na trilha de Arquitetura.',
     complements: [official.jls, official.otel],
     exampleFile: '../../examples/java21-senior/README.md'
+  },
+  {
+    number: 21,
+    part: 'fronteira',
+    id: 'bytecode-agents',
+    title: 'Class file, bytecode e instrumentação em runtime',
+    level: 'Expert',
+    objective: 'Ler o bytecode gerado pelo compilador, explicar a diferença entre o que você escreveu e o que a JVM executa, e escrever um agent que instrumenta classes sem tocar no código da aplicação.',
+    prerequisites: ['Módulo 11', 'Class loading e linking', 'Leitura de stack traces e descritores de método'],
+    problem: 'Comportamentos sem explicação no código-fonte — concatenação que não aloca StringBuilder, lambda que não vira classe anônima, campo que some, método de APM que aparece do nada no profile — só têm explicação um nível abaixo. Quem não lê bytecode atribui isso a "mágica do framework" e para o diagnóstico ali.',
+    concepts: ['Formato class file: constant pool, descritores e atributos', 'Verificação de bytecode antes da execução', '`javap -c -p` como ferramenta de diagnóstico', 'Class-File API (JEP 484) e ASM', '`java.lang.instrument`: premain, agentmain e ClassFileTransformer', 'Retransformação e seus limites'],
+    internals: [
+      'A JVM verifica o bytecode antes de executar: type-safety do fluxo de operandos é garantida no linking, não em runtime.',
+      '`invokedynamic` adia a ligação: lambdas e concatenação de strings resolvem o call site na primeira execução e o memorizam.',
+      'Um `-javaagent` roda o `premain` antes do `main` da aplicação, e enxerga as classes antes de serem definidas.',
+      'A retransformação não pode adicionar, remover ou mudar a assinatura de membros — só trocar corpos de métodos.'
+    ],
+    useWhen: ['Use `javap` quando o comportamento observado não bate com o código-fonte.', 'Use a Class-File API para gerar ou reescrever bytecode com API suportada pelo JDK.', 'Use um agent para instrumentar código que você não controla (biblioteca, legado, fornecedor).'],
+    avoidWhen: ['Não instrumente para resolver um problema que uma interface ou um decorator resolve.', 'Não gere bytecode à mão onde um record ou uma lambda basta.', 'Não deixe agent de diagnóstico ligado em produção sem medir o overhead que ele mesmo introduz.'],
+    contrast: {
+      bad: 'Concluir "o Hibernate é lento" a partir de um profile em que metade das entradas são classes proxy geradas que você não sabe ler.',
+      good: 'Descompilar o proxy, identificar a interceptação, medir o custo dela isolado e decidir com número.'
+    },
+    tradeoffs: ['Instrumentação enxerga tudo sem alterar o código, e cria uma camada invisível no diagnóstico.', 'Class-File API é suportada e acompanha o JDK; ASM é mais madura e tem mais exemplos.', 'Retransformação permite instrumentar tarde, ao custo de restrições de forma da classe.'],
+    production: 'Um serviço ganha 40 ms de p99 após subir a versão do agent de APM. O time culpa o GC. A investigação com `-XX:+TraceClassLoading`, `javap` no bytecode transformado e um benchmark do interceptor mostra instrumentação aplicada a um método chamado em loop quente. A correção é um filtro de pacote no agent, não tuning de GC.',
+    risks: ['Agent que instrumenta caminho quente e some do radar', 'Bytecode gerado inválido que só falha no linking em runtime', 'Conflito entre dois agents transformando a mesma classe', 'Dependência de detalhe de implementação que muda de JDK'],
+    checklist: ['Consigo prever o bytecode antes de rodar `javap`?', 'O agent declara e respeita um filtro de escopo?', 'O overhead da instrumentação foi medido separado da aplicação?', 'A geração usa API suportada ou detalhe interno?', 'A transformação sobrevive a uma troca de JDK?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que acontece com `"a" + variavel` depois que o compilador processa?', expected: 'Não é necessariamente StringBuilder: desde o Java 9 o compilador emite `invokedynamic` para `StringConcatFactory`, que resolve a estratégia no primeiro uso.' },
+      { level: 'Sênior/Expert', question: 'Como você investigaria uma regressão de latência que só aparece com o agent de observabilidade ligado?', expected: 'Isolar com e sem agent, listar classes transformadas, medir o interceptor em JMH, comparar bytecode antes/depois e restringir escopo — não tratar como problema de GC ou de aplicação.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Compilar cinco trechos (concatenação, lambda, switch sobre string, foreach em List, try-with-resources) e prever o bytecode antes de rodar `javap -c -p`.', evidence: 'Tabela previsão × saída real do javap, com as divergências explicadas.' },
+      { level: 'Aplicado', task: 'Escrever um `-javaagent` que mede o tempo dos métodos de um pacote configurável e imprime um histograma ao encerrar.', evidence: 'Agent versionado, MANIFEST com Premain-Class e execução sobre uma aplicação de teste.' },
+      { level: 'Expert', task: 'Medir o custo da própria instrumentação com JMH e definir um filtro que mantenha o overhead abaixo de um limite declarado.', evidence: 'Benchmark com e sem agent, overhead em percentual e ADR do limite adotado.' }
+    ],
+    challenge: 'Escrever um agent que detecte chamadas bloqueantes dentro de virtual threads e reporte o stack trace responsável, sem alterar a aplicação observada.',
+    book: 'Optimizing Java, cap. 2–4 (bytecode, class loading e o que o compilador realmente emite); The Well-Grounded Java Developer (plataforma, bytecode e ferramentas).',
+    complements: [official.jvms, official.jep484, official.instrument],
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/BytecodeAndAgents.java'
+  },
+  {
+    number: 22,
+    part: 'fronteira',
+    id: 'jit-compilacao',
+    title: 'JIT: tiered compilation, inlining, escape analysis e desotimização',
+    level: 'Expert',
+    objective: 'Explicar o que o compilador JIT faz com um método quente e provar experimentalmente o efeito de inlining, escape analysis e desotimização sobre um benchmark próprio.',
+    prerequisites: ['Módulo 11', 'Módulo 13 (JMH e JFR)', 'Noção de perfil de execução e warmup'],
+    problem: 'Medições de performance em Java mentem por padrão. Um benchmark sem warmup mede o interpretador; um loop que "ficou mais rápido" pode ter sido eliminado inteiro por dead code elimination; uma abstração "gratuita" deixa de ser quando o call site vira megamórfico. Sem entender o JIT, otimização em Java é superstição.',
+    concepts: ['Interpretador → C1 (rápido, pouco otimizado) → C2 (lento, agressivo)', 'Profiling em runtime e compilação especulativa', 'Inlining: limites de tamanho, hot/warm e call sites mono/bi/megamórficos', 'Escape analysis e scalar replacement', 'Desotimização (uncommon trap) e recompilação', 'OSR — On-Stack Replacement', 'JVMCI e o compilador Graal como alternativa ao C2'],
+    internals: [
+      'O C2 compila com base no perfil observado até ali; se a suposição quebra (um tipo novo aparece, um branch nunca tomado é tomado), ele desotimiza e devolve a execução ao interpretador.',
+      'Inlining é a otimização habilitadora: sem ela, escape analysis e constant folding não enxergam através da chamada.',
+      'Um call site que vê um só tipo é inlinado; com dois, ainda pode; com três ou mais vira megamórfico e a chamada passa a ser virtual de verdade.',
+      'Escape analysis pode eliminar a alocação inteira de um objeto que não escapa do método, substituindo-o por campos em registradores.'
+    ],
+    useWhen: ['Use `-XX:+PrintCompilation` para ver o que compila, recompila e desotimiza.', 'Use `-XX:+UnlockDiagnosticVMOptions -XX:+PrintInlining` quando uma abstração parecer cara.', 'Use JMH com `Blackhole` sempre que medir trecho pequeno.'],
+    avoidWhen: ['Não conclua nada de benchmark sem warmup declarado.', 'Não "otimize" removendo métodos pequenos: eles são inlinados e ajudam o JIT.', 'Não desabilite o JIT para "medir o custo real" — o custo real inclui o JIT.'],
+    contrast: {
+      bad: 'Rodar um `System.nanoTime()` em volta de um loop de mil iterações e publicar o número como evidência de performance.',
+      good: 'JMH com warmup, forks, modo de saída explícito e Blackhole, reportando média, desvio e intervalo de confiança.'
+    },
+    tradeoffs: ['Compilação especulativa dá pico alto e custa warmup e imprevisibilidade no começo.', 'Mais inlining melhora o código e aumenta o code cache e o tempo de compilação.', 'Graal costuma otimizar melhor código com muita abstração; o C2 é mais previsível e mais testado.'],
+    production: 'Um endpoint tem p99 alto só nos primeiros minutos após cada deploy. O time aumenta réplicas. A leitura de `PrintCompilation` mostra o caminho crítico ainda em C1 durante o aquecimento, e o `CodeCache` enchendo por causa de um agente que gera classes. A correção combina warmup dirigido no readiness probe e limite de geração de classes — não escala horizontal.',
+    risks: ['Deoptimization storm por perfil instável', 'CodeCache cheio e queda para modo interpretado', 'Benchmark que mede dead code eliminado', 'Megamorfismo introduzido por uma abstração nova em caminho quente'],
+    checklist: ['O benchmark tem warmup e fork?', 'O resultado é consumido por Blackhole?', 'O call site crítico é mono, bi ou megamórfico?', 'Houve desotimização repetida no log?', 'O CodeCache tem folga?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que o mesmo código fica mais rápido depois de alguns segundos rodando?', expected: 'Tiered compilation: começa interpretado, passa por C1 e chega ao C2 conforme o método esquenta e o perfil é coletado.' },
+      { level: 'Sênior/Expert', question: 'Uma refatoração introduziu uma interface e a latência subiu 15%. Como você investiga sem reverter às cegas?', expected: 'Verificar se o call site virou megamórfico, checar PrintInlining, medir com JMH nos dois desenhos, avaliar se escape analysis deixou de eliminar alocação; só então decidir entre reverter, especializar ou aceitar.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Rodar o mesmo método com `-Xint`, com `-XX:TieredStopAtLevel=1` e normal, e explicar as três medições.', evidence: 'Tabela com os três tempos e a explicação de cada diferença.' },
+      { level: 'Aplicado', task: 'Construir um benchmark JMH que demonstre escape analysis, comparando com `-XX:-DoEscapeAnalysis`.', evidence: 'Resultado JMH com alocação por operação (`-prof gc`) nos dois modos.' },
+      { level: 'Expert', task: 'Provocar megamorfismo em um call site e medir o custo, depois eliminá-lo por especialização.', evidence: 'PrintInlining antes/depois, números de JMH e ADR justificando o desenho final.' }
+    ],
+    challenge: 'Pegar uma otimização "óbvia" já aplicada em algum projeto seu, medir corretamente com JMH e mostrar que ela não fazia diferença — ou quanto fazia.',
+    book: 'Optimizing Java, cap. 9–11 (JIT, inlining e otimizações do C2); Java Concurrency in Practice, cap. 11 (performance e a armadilha da medição ingênua).',
+    complements: [official.jmh, official.jvms, official.jfr],
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/JitAndEscapeAnalysis.java'
+  },
+  {
+    number: 23,
+    part: 'fronteira',
+    id: 'memoria-baixo-nivel',
+    title: 'Memória de baixo nível: VarHandle, barreiras, false sharing e lock-free',
+    level: 'Expert',
+    objective: 'Escolher o modo de acesso à memória pelo custo real que ele impõe, reconhecer contenção de cache line e avaliar honestamente quando uma estrutura lock-free compensa.',
+    prerequisites: ['Módulo 9 (JMM e happens-before)', 'Módulo 22 (medição confiável)', 'Noção de cache de CPU'],
+    problem: '`volatile` em tudo é caro e `volatile` em nada é incorreto. Entre os dois extremos existe um espectro de modos de acesso que a maioria dos desenvolvedores Java nunca usou, e existe um custo invisível — duas variáveis independentes na mesma linha de cache podem destruir a escalabilidade de um contador sem nenhum erro aparente no código.',
+    concepts: ['`VarHandle` e os modos plain, opaque, acquire/release e volatile', 'Barreiras de memória e o que cada modo garante', 'Compare-and-set e o problema ABA', 'False sharing, linha de cache e `@Contended`', '`LongAdder` versus `AtomicLong` sob contenção', '`Thread.onSpinWait` e espera ativa'],
+    internals: [
+      'Cada modo de acesso é um contrato de ordenação diferente: plain não ordena nada, acquire/release ordena um lado, volatile ordena os dois e é o mais caro.',
+      'A unidade de coerência entre núcleos é a linha de cache (tipicamente 64 bytes), não a variável: escrever em um campo invalida a linha inteira para os outros núcleos.',
+      '`LongAdder` troca precisão de leitura instantânea por células separadas, evitando que todos os núcleos disputem a mesma linha.',
+      'CAS em loop sob alta contenção degrada: o trabalho útil cai e o de repetição sobe.'
+    ],
+    useWhen: ['Use acquire/release quando publicar um objeto construído, e não precisar de ordem total.', 'Use `LongAdder` para contadores de alta frequência e leitura rara.', 'Use padding ou `@Contended` só depois de medir contenção real.'],
+    avoidWhen: ['Não escreva estrutura lock-free porque parece mais rápida — escreva quando o benchmark mostrar que o lock é o gargalo.', 'Não use modo plain em publicação entre threads.', 'Não conclua false sharing sem medir: a maior parte dos casos suspeitos não é.'],
+    contrast: {
+      bad: 'Substituir `synchronized` por um loop CAS artesanal em um caminho com pouca contenção e comemorar o "código sem lock".',
+      good: 'Medir contenção com JFR, verificar que o lock domina, testar `LongAdder` e CAS, e escolher o mais simples que atinge a meta.'
+    },
+    tradeoffs: ['Lock-free elimina bloqueio e multiplica a dificuldade de prova de correção.', 'Modos fracos são mais baratos e exigem raciocínio explícito sobre ordenação.', 'Padding gasta memória para ganhar escalabilidade — vale por variável, não por padrão.'],
+    production: 'Um contador de requisições com `AtomicLong` deixa de escalar acima de 16 núcleos: o throughput cai conforme se adicionam threads. O perfil mostra a maior parte do tempo em CAS repetido. A troca por `LongAdder` restaura a escala linear; a leitura passa a ser aproximada, o que o caso de uso aceita.',
+    risks: ['Correção concorrente frágil que passa nos testes e falha em produção', 'ABA em estrutura artesanal', 'Otimização de false sharing aplicada sem medição, gastando memória à toa', 'Dependência de detalhe de arquitetura de CPU'],
+    checklist: ['A contenção foi medida antes de otimizar?', 'Cada acesso tem o modo mais fraco que ainda é correto?', 'Existe prova (ou teste de stress) da correção concorrente?', 'A escalabilidade foi medida com número crescente de threads?', 'O ganho justifica a perda de legibilidade?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre `AtomicLong` e `LongAdder`?', expected: 'AtomicLong é um único ponto de CAS; LongAdder distribui em células para reduzir contenção, ao custo de leitura agregada e não instantânea.' },
+      { level: 'Sênior/Expert', question: 'Quando você usaria acquire/release em vez de volatile?', expected: 'Quando a garantia necessária é publicação de um lado (escreve e depois publica; lê a flag e depois lê os dados) e a ordem total do volatile não é requisito — com o custo de ter que justificar a ordenação explicitamente.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Implementar um contador com `VarHandle` nos quatro modos e medir o custo relativo de cada um.', evidence: 'Benchmark JMH com os quatro modos e a explicação da ordem obtida.' },
+      { level: 'Aplicado', task: 'Reproduzir false sharing com dois contadores adjacentes e eliminá-lo com padding, medindo antes e depois.', evidence: 'Throughput por número de threads nos dois desenhos.' },
+      { level: 'Expert', task: 'Comparar `synchronized`, `AtomicLong`, `LongAdder` e uma fila lock-free sob contenção crescente, e recomendar um.', evidence: 'Curva de escalabilidade, análise de correção e ADR com a recomendação.' }
+    ],
+    challenge: 'Escrever uma estrutura lock-free simples (pilha ou fila SPSC), provar a correção com teste de stress e depois mostrar em que faixa de contenção ela perde para a versão com lock.',
+    book: 'Java Concurrency in Practice, cap. 15–16 (atômicos, não-bloqueio e o modelo de memória); Optimizing Java, cap. 5–7 (hardware, cache e o custo real da memória).',
+    complements: [official.varhandle, official.jmh, official.jvms],
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/LowLevelMemory.java'
+  },
+  {
+    number: 24,
+    part: 'fronteira',
+    id: 'aot-startup',
+    title: 'Startup e AOT: CDS, Project Leyden, GraalVM Native Image e CRaC',
+    level: 'Expert',
+    objective: 'Escolher entre JIT puro, AOT cache, imagem nativa e checkpoint/restore a partir de requisitos explícitos de startup, throughput de pico, custo e carga operacional — e provar a escolha com medição.',
+    prerequisites: ['Módulo 22 (o que o JIT entrega e a que custo)', 'Módulo 11 (class loading)', 'Noção de custo de infraestrutura e de escala elástica'],
+    problem: 'Java tem excelente throughput de pico e péssimo startup, e as duas coisas estão ligadas: o pico vem do JIT, que precisa de tempo e perfil. Em função serverless, escala reativa e CLI, esse trade-off quebra. As quatro respostas disponíveis têm custos muito diferentes, e escolher por moda custa caro.',
+    concepts: ['Custo de class loading, linking e warmup no startup', 'AppCDS: arquivo de classes compartilhado', 'AOT cache do Project Leyden (JEP 483 e sucessores)', 'GraalVM Native Image e o modelo closed-world', 'Configuração de reflexão, proxies e recursos na imagem nativa', 'CRaC: checkpoint e restore de um processo aquecido', 'Startup × pico × footprint × previsibilidade'],
+    internals: [
+      'Native Image resolve o mundo em tempo de build: o que não for alcançável estaticamente não existe em runtime, e reflexão dinâmica precisa ser declarada.',
+      'Sem JIT, a imagem nativa não tem perfil de runtime: o pico costuma ficar abaixo do da JVM, mesmo com startup ordens de grandeza melhor.',
+      'AppCDS e o AOT cache do Leyden atacam o startup mantendo a JVM e o JIT — ganho menor, risco muito menor.',
+      'CRaC restaura um processo já aquecido, o que exige que recursos externos (conexões, arquivos, aleatoriedade) sejam fechados no checkpoint e reabertos no restore.'
+    ],
+    useWhen: ['Use AppCDS/AOT cache quando o requisito é reduzir startup sem mudar a arquitetura.', 'Use Native Image quando startup e footprint dominam e o pico sustentado não é o gargalo.', 'Use CRaC quando o warmup é longo e o ambiente permite snapshot do processo.'],
+    avoidWhen: ['Não adote Native Image em serviço de throughput sustentado sem medir o pico.', 'Não escolha AOT para "ficar mais rápido" — AOT melhora o começo, raramente o regime.', 'Não subestime o custo de manter a configuração de reflexão de um ecossistema inteiro.'],
+    contrast: {
+      bad: 'Migrar o serviço principal para imagem nativa porque o cold start de um lambda secundário incomodava.',
+      good: 'Classificar os workloads por requisito, aplicar CDS no serviço de regime e imagem nativa só onde o startup é o SLO.'
+    },
+    tradeoffs: ['Imagem nativa dá startup em milissegundos e custa pico, build lento e ecossistema restrito.', 'CDS/AOT cache é barato e conservador, com ganho proporcionalmente menor.', 'CRaC preserva o pico aquecido e adiciona um ciclo de vida novo para gerenciar.'],
+    production: 'Uma API em container leva 6 s para ficar pronta; o autoscaler reage tarde e o p99 estoura em picos. Três caminhos são medidos: AppCDS reduz para 4 s sem mudar nada; imagem nativa cai para 90 ms mas perde 20% de throughput sustentado; CRaC entrega 200 ms e obriga a tratar o pool de conexões no checkpoint. A decisão registrada em ADR escolhe CDS para este serviço e imagem nativa apenas para os jobs de curta duração.',
+    risks: ['Falha só em runtime por reflexão não declarada na imagem', 'Queda silenciosa de throughput após migração', 'Divergência entre o comportamento em JVM e em imagem nativa nos testes', 'Snapshot CRaC com estado externo inválido no restore'],
+    checklist: ['O requisito é startup, pico ou footprint? Está escrito?', 'A medição comparou os quatro caminhos no mesmo workload?', 'Os testes rodam no mesmo modo de execução que a produção?', 'A configuração de reflexão está versionada e testada?', 'Existe caminho de volta se o pico regredir?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que uma aplicação Java compilada para imagem nativa inicia tão mais rápido?', expected: 'Não há class loading, linking nem warmup do JIT em runtime: o trabalho foi feito em tempo de build.' },
+      { level: 'Sênior/Expert', question: 'Em que situação você recusaria Native Image mesmo com o time pedindo?', expected: 'Serviço de throughput sustentado onde o pico do C2 é o que atende o SLO, ou stack com reflexão dinâmica pesada cuja configuração seria um custo permanente — apresentando a medição de pico como argumento.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Medir o startup da mesma aplicação com JVM padrão e com AppCDS ativado.', evidence: 'Tempo até readiness nos dois modos, com cinco execuções cada.' },
+      { level: 'Aplicado', task: 'Gerar uma imagem nativa de um serviço simples e fazer passar um teste que usa reflexão.', evidence: 'Build reproduzível, configuração de reflexão versionada e teste verde na imagem.' },
+      { level: 'Expert', task: 'Comparar JVM, CDS e imagem nativa no mesmo workload e recomendar um caminho por tipo de serviço.', evidence: 'Startup, p99 em regime, memória e custo por requisição, com ADR.' }
+    ],
+    challenge: 'Definir uma política de execução para uma plataforma com três perfis de workload (API de regime, job curto, CLI), com o critério de escolha escrito e medido.',
+    book: 'Optimizing Java, cap. 1–3 e 12 (custo de execução, medição e o ciclo de vida da JVM); The Well-Grounded Java Developer (plataforma, build e alternativas de runtime).',
+    complements: [official.jep483, official.leyden, official.graalvm, official.crac],
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/StartupAndAot.java'
+  },
+  {
+    number: 25,
+    part: 'fronteira',
+    id: 'panama-dados-densos',
+    title: 'FFM (Panama), Vector API e dados densos fora do heap',
+    level: 'Expert',
+    objective: 'Substituir JNI e `sun.misc.Unsafe` por FFM em fronteiras nativas, controlar o ciclo de vida de memória fora do heap com `Arena` e avaliar o ganho real de vetorização.',
+    prerequisites: ['Módulo 7 (I/O e NIO.2)', 'Módulo 23 (memória e cache)', 'Noção de layout binário e endianness'],
+    problem: '`sun.misc.Unsafe` está em remoção e JNI é caro de escrever, inseguro e difícil de manter. Ao mesmo tempo, cresce a demanda por processar formatos binários densos e chamar bibliotecas nativas sem sair do Java. A FFM API é a resposta suportada, e quem só conhece `ByteBuffer` não consegue avaliá-la.',
+    concepts: ['`MemorySegment`, `MemoryLayout` e acesso estruturado', '`Arena` e ciclo de vida: confined, shared e automático', '`Linker` e `downcall`/`upcall` para código nativo', 'FFM como substituto de JNI e de Unsafe', 'Vector API e SIMD: quando o ganho é real', 'Relação com Project Valhalla e value types'],
+    internals: [
+      'Uma `Arena` define quem pode acessar a memória e quando ela é liberada: o acesso após o fechamento falha de forma determinística, e não com corrupção silenciosa.',
+      'Um `MemoryLayout` descreve o formato binário uma vez e deriva os acessadores, em vez de espalhar offsets mágicos pelo código.',
+      'A Vector API expressa intenção de SIMD; a JVM decide se consegue mapear para instruções do hardware — sem garantia.',
+      'Valhalla é o que falta para que tipos de valor eliminem a indireção de objeto; até lá, densidade em Java significa arrays de primitivos ou memória fora do heap.'
+    ],
+    useWhen: ['Use FFM quando precisar chamar biblioteca nativa ou mapear formato binário grande.', 'Use `Arena.ofConfined` quando o ciclo de vida é claramente delimitado.', 'Considere Vector API só depois de comprovar que o loop escalar é o gargalo.'],
+    avoidWhen: ['Não use FFM onde `ByteBuffer` ou uma biblioteca madura resolve.', 'Não use `Arena` compartilhada sem necessidade: o fechamento seguro custa coordenação.', 'Não dependa de Vector API em produção enquanto estiver em incubação.'],
+    contrast: {
+      bad: 'Parser binário com dezenas de `buffer.getInt(offset + 12)` e constantes mágicas espalhadas por três classes.',
+      good: 'Um `MemoryLayout` declarativo que descreve o registro uma vez, com acessadores derivados e nomes de campo.'
+    },
+    tradeoffs: ['FFM é segura e explícita; exige aprender um modelo novo.', 'Memória fora do heap tira pressão do GC e transfere a responsabilidade de liberar para você.', 'Vetorização pode dar múltiplos de ganho ou nenhum, dependendo do hardware e do formato dos dados.'],
+    production: 'Um serviço que lê arquivos binários de mercado gasta 30% do tempo em cópias entre `byte[]` e objetos de domínio, e pressiona o GC com objetos de vida curta. A reescrita com `MemorySegment` mapeando o arquivo e um layout declarado elimina a cópia, reduz a taxa de alocação e torna o parser legível — o ganho medido vem mais da cópia eliminada do que de qualquer vetorização.',
+    risks: ['Vazamento de memória fora do heap por `Arena` não fechada', 'Crash do processo em chamada nativa mal descrita', 'Ganho presumido de SIMD que não se confirma no hardware alvo', 'Acoplamento a API em incubação'],
+    checklist: ['Quem é dono da `Arena` e quando ela fecha?', 'O layout binário está declarado em um lugar só?', 'A fronteira nativa tem teste que cobre o caminho de erro?', 'O ganho foi medido no hardware de produção?', 'Existe alternativa suportada mais simples?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre memória no heap e fora do heap para uma aplicação Java?', expected: 'Heap é gerenciado pelo GC; fora do heap não é coletado, não pressiona o GC e precisa ser liberado explicitamente — com FFM, pelo fechamento da Arena.' },
+      { level: 'Sênior/Expert', question: 'Por que a FFM API é preferível a JNI para uma integração nova?', expected: 'Segurança de ciclo de vida verificada, sem código C intermediário, sem build nativo separado, com erros determinísticos em vez de corrupção — e porque Unsafe está em remoção.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Ler um arquivo binário de formato conhecido com `ByteBuffer` e depois com `MemorySegment` + `MemoryLayout`.', evidence: 'As duas implementações, com comparação de legibilidade e de tempo.' },
+      { level: 'Aplicado', task: 'Fazer um downcall para uma função da libc e tratar o caminho de erro.', evidence: 'Código versionado, teste do caminho feliz e do caminho de falha.' },
+      { level: 'Expert', task: 'Vetorizar um loop numérico com a Vector API e medir o ganho contra o loop escalar no hardware alvo.', evidence: 'Benchmark JMH nos dois desenhos, com a conclusão — inclusive se for "não compensou".' }
+    ],
+    challenge: 'Escrever um leitor de um formato binário real (por exemplo, um cabeçalho de arquivo conhecido) com layout declarativo, zero cópia e liberação determinística de memória.',
+    book: 'Optimizing Java, cap. 6–8 (memória, alocação e o custo da cópia); Core Java Vol. II (I/O, NIO e interoperabilidade da plataforma).',
+    complements: [official.jep454, official.jep469, official.valhalla, official.api],
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/ForeignMemoryAndVectors.java'
+  },
+  {
+    number: 26,
+    part: 'fronteira',
+    id: 'ler-openjdk',
+    title: 'Ler o OpenJDK: da dúvida ao código-fonte',
+    level: 'Expert → fronteira',
+    objective: 'Responder uma dúvida de comportamento da plataforma lendo a implementação no OpenJDK, e transformar o achado em reprodução mínima, teste ou relato de bug.',
+    prerequisites: ['Módulos 21–23', 'Inglês técnico de leitura', 'Git e leitura de histórico de commits'],
+    problem: 'Quase toda dúvida difícil de Java tem resposta definitiva em três lugares: a especificação, o código-fonte e o histórico de mudanças. A maioria das pessoas procura em um quarto lugar — posts de blog de 2014 — e herda conclusões erradas ou desatualizadas. Saber navegar a fonte é o que encerra a discussão.',
+    concepts: ['Estrutura do repositório do OpenJDK e onde fica cada coisa', 'Ler `java.util.HashMap`, `ConcurrentHashMap`, `ArrayList` e `ForkJoinPool`', 'Especificação (JLS/JVMS) versus implementação', 'JBS: buscar um bug, ler a discussão e a decisão', 'O processo de JEP: draft, candidate, preview, final', 'jtreg e como um comportamento é travado por teste', 'Construir o JDK localmente'],
+    internals: [
+      'Nem tudo que a implementação faz é garantido: a especificação define o contrato, e detalhes como a ordem de iteração de um `HashMap` são implementação, não promessa.',
+      '`HashMap` converte um bucket em árvore a partir de um limiar, o que muda o pior caso de O(n) para O(log n) — e isso é implementação, não contrato.',
+      'Recursos em preview mudam entre releases justamente porque o processo de JEP reserva o direito de mudá-los; ler o JEP evita depender de API instável.',
+      'Cada correção relevante costuma vir acompanhada de um teste jtreg que trava o comportamento — o teste é a melhor documentação do caso de borda.'
+    ],
+    useWhen: ['Use a fonte quando o comportamento observado contraria a documentação.', 'Use o JBS antes de reportar: quase sempre alguém já descreveu o caso.', 'Use o JEP quando precisar decidir se adota um recurso novo.'],
+    avoidWhen: ['Não transforme detalhe de implementação em premissa de arquitetura.', 'Não copie otimização interna do JDK para código de aplicação sem medir.', 'Não abra bug sem reprodução mínima e sem checar a versão corrente.'],
+    contrast: {
+      bad: 'Afirmar em code review que "HashMap é O(n) no pior caso" com base em um artigo antigo, sem checar a implementação corrente.',
+      good: 'Abrir o código, mostrar a conversão para árvore, citar a versão em que entrou e explicar por que continua sendo implementação e não contrato.'
+    },
+    tradeoffs: ['Ler a fonte dá certeza e custa tempo.', 'Conhecer a implementação melhora o diagnóstico e tenta a depender do que não é garantido.', 'Contribuir ensina muito e envolve processo, revisão e paciência.'],
+    production: 'Um serviço apresenta latência anômala em um `ConcurrentHashMap` sob carga específica. A busca no JBS encontra um caso conhecido corrigido em uma versão posterior, com teste jtreg anexado. O time reproduz localmente com o teste, confirma o diagnóstico e resolve com atualização do JDK — em vez de reescrever a estrutura de dados.',
+    risks: ['Ler versão diferente da que roda em produção', 'Confundir comentário desatualizado com comportamento atual', 'Generalizar detalhe específico de uma implementação da JVM', 'Gastar tempo em profundidade que o problema não exigia'],
+    checklist: ['Estou lendo a mesma versão que roda em produção?', 'O comportamento é especificado ou é implementação?', 'Existe issue no JBS sobre isso?', 'Consigo reduzir a uma reprodução mínima?', 'O achado virou teste ou nota no repositório?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'A ordem de iteração de um `HashMap` é garantida?', expected: 'Não. É consequência da implementação e pode mudar entre versões; quem precisa de ordem usa `LinkedHashMap` ou `TreeMap`.' },
+      { level: 'Sênior/Expert', question: 'Como você resolveria uma divergência de comportamento entre dois JDKs que ninguém do time consegue explicar?', expected: 'Reproduzir minimamente, comparar a especificação, ler a implementação nas duas versões, buscar no JBS e no histórico de commits, e concluir com evidência — não com tentativa e erro.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Ler a implementação de `HashMap` no JDK 21 e explicar a treeificação, o limiar e por que ele existe.', evidence: 'Nota técnica com trechos citados, link permanente e a diferença entre contrato e implementação.' },
+      { level: 'Aplicado', task: 'Escolher uma dúvida real que você já teve, encontrar a resposta no código-fonte ou no JBS e escrever a conclusão.', evidence: 'Documento com a pergunta, o caminho até a fonte, a citação e a reprodução mínima.' },
+      { level: 'Expert', task: 'Construir o OpenJDK localmente e executar um teste jtreg existente da área que você estudou.', evidence: 'Build concluído, teste executado e registro dos obstáculos encontrados.' }
+    ],
+    challenge: 'Escolher um caso de borda documentado do JDK, escrever a reprodução mínima, o teste que o trava e a explicação — no formato que um relato de bug exigiria.',
+    book: 'Core Java Vol. I & II como mapa da plataforma antes de descer à fonte; Effective Java, cap. 3 e 5 (para separar contrato de implementação ao ler código alheio).',
+    complements: [official.openjdkRepo, official.jbs, official.jep1, official.jls],
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/ReadingTheJdk.java'
   }
 ];
 
@@ -1112,13 +1413,29 @@ export const javaAssessment = Object.freeze({
     }
   ],
   completion: [
-    'Todos os 20 objetivos foram demonstrados por evidência, não apenas leitura.',
+    'Os 20 objetivos dos módulos 1–20 foram demonstrados por evidência, não apenas leitura.',
     'Os exemplos JDK 21 compilam com `javac --release 21 -Xlint:all` e o smoke test passa com assertions.',
     'Ao menos 40 exercícios foram concluídos, incluindo 20 aplicados e 5 expert.',
     'Os cinco casos foram defendidos com decisões, riscos, rollback e sinais.',
     'Um capstone atende aos critérios; o projeto Expert exige também impacto entre equipes.',
-    'Nenhum módulo é marcado Dominado antes de evidência validada e revisão D30.'
+    'Nenhum módulo é marcado Dominado antes de evidência validada e revisão D30.',
+    'Fronteira (módulos 21–26) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira concluída exige: bytecode lido com previsão registrada, um agent próprio executado, uma medição refeita em JMH que contradiga uma conclusão anterior, um comparativo de startup entre pelo menos dois modos de execução e uma dúvida respondida pelo código-fonte do OpenJDK.'
   ]
 });
+
+/*
+ * Gabarito de autoavaliação. Não substitui a evidência exigida pela rubrica: serve para o estudo
+ * solo saber se a resposta estava certa antes de marcar o módulo como concluído.
+ */
+export const javaAnswerKey = javaModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: module.interview.map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Concluir sem medir.',
+  criterioDeAceite: module.exercises.map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));
 
 export const javaOfficialSources = Object.values(official);

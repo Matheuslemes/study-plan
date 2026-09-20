@@ -24,8 +24,52 @@ const official = Object.freeze({
   testingLibrary: { label: 'Testing Library — princípios', url: 'https://testing-library.com/docs/guiding-principles/' },
   csp: { label: 'OWASP — Content Security Policy', url: 'https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html' },
   security: { label: 'OWASP — Web Security Testing Guide', url: 'https://owasp.org/www-project-web-security-testing-guide/' },
-  observability: { label: 'OpenTelemetry JS — browser', url: 'https://opentelemetry.io/docs/languages/js/getting-started/browser/' }
+  observability: { label: 'OpenTelemetry JS — browser', url: 'https://opentelemetry.io/docs/languages/js/getting-started/browser/' },
+  renderingPath: { label: 'web.dev — como o navegador renderiza uma página', url: 'https://web.dev/articles/howbrowserswork' },
+  renderingNG: { label: 'Chromium — arquitetura RenderingNG', url: 'https://developer.chrome.com/docs/chromium/renderingng' },
+  containment: { label: 'MDN — CSS containment', url: 'https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment' },
+  devtoolsPerf: { label: 'Chrome DevTools — painel de performance', url: 'https://developer.chrome.com/docs/devtools/performance' },
+  reactFiber: { label: 'React — arquitetura Fiber (notas de implementação)', url: 'https://github.com/facebook/react/blob/main/packages/react-reconciler/README.md' },
+  reactConcurrent: { label: 'React — renderização concorrente e transitions', url: 'https://react.dev/reference/react/useTransition' },
+  reactCompiler: { label: 'React Compiler 1.0', url: 'https://react.dev/learn/react-compiler' },
+  reactProfiler: { label: 'React — Profiler e DevTools', url: 'https://react.dev/reference/react/Profiler' },
+  viewTransitions: { label: 'React — ViewTransition (estável no 19.3)', url: 'https://react.dev/reference/react/ViewTransition' },
+  signals: { label: 'TC39 — proposta de Signals', url: 'https://github.com/tc39/proposal-signals' },
+  astExplorer: { label: 'AST Explorer — inspecionar árvores sintáticas', url: 'https://astexplorer.net/' },
+  babelPlugin: { label: 'Babel — escrever um plugin', url: 'https://github.com/jamiebuilds/babel-handbook' },
+  wasm: { label: 'MDN — WebAssembly', url: 'https://developer.mozilla.org/en-US/docs/WebAssembly' },
+  wasmBindgen: { label: 'wasm-bindgen — Rust e WebAssembly', url: 'https://rustwasm.github.io/docs/wasm-bindgen/' },
+  webgpu: { label: 'MDN — WebGPU API', url: 'https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API' },
+  workers: { label: 'MDN — Web Workers', url: 'https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API' },
+  http3: { label: 'MDN — HTTP/3 e QUIC', url: 'https://developer.mozilla.org/en-US/docs/Glossary/HTTP_3' },
+  serviceWorker: { label: 'MDN — Service Worker API', url: 'https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API' },
+  indexedDb: { label: 'MDN — IndexedDB', url: 'https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API' },
+  localFirst: { label: 'Local-first software (Ink & Switch)', url: 'https://www.inkandswitch.com/local-first/' },
+  moduleFederation: { label: 'Module Federation — documentação', url: 'https://module-federation.io/' },
+  baseline: { label: 'web.dev — Baseline: o que é seguro usar', url: 'https://web.dev/baseline' },
+  chromiumSource: { label: 'Chromium — código-fonte do Blink', url: 'https://chromium.googlesource.com/chromium/src/+/main/third_party/blink/' }
 });
+
+/*
+ * Baseline tecnológico. O conteúdo da trilha é ancorado em documentação viva
+ * (MDN, react.dev, nextjs.org) e por isso envelhece devagar. Os LIVROS do acervo
+ * são o ponto fraco: os quatro principais são de 2018–2020 e antecedem Server
+ * Components, o compilador e boa parte do que os módulos 7–10 ensinam. Isso está
+ * declarado aqui em vez de escondido.
+ */
+export const frontendTechnologyBaseline = [
+  { technology: 'React', baseline: '19.3 (set/2026)', status: 'Corrente', note: 'ViewTransition e Fragment Refs estáveis; suporte a Trusted Types; Context em Server Components.' },
+  { technology: 'React Compiler', baseline: '1.0 (out/2025)', status: 'Estável — premissa padrão', note: 'Memoização automática. Muda o que se ensina sobre useMemo e useCallback: otimizar à mão virou exceção justificada. Módulo 24.' },
+  { technology: 'Next.js', baseline: '16.x', status: 'Corrente', note: 'App Router e Server Components como padrão. Módulo 10.' },
+  { technology: 'Core Web Vitals', baseline: 'LCP · INP · CLS', status: 'Estável', note: 'INP substituiu o FID em 2024. Módulo 16.' },
+  { technology: 'WCAG', baseline: '2.2 AA', status: 'Corrente', note: 'WCAG 3 segue em rascunho; não é alvo de conformidade. Módulos 11 e 12.' },
+  { technology: 'Baseline (web.dev)', baseline: 'newly / widely available', status: 'Critério de adoção', note: 'Substitui a consulta caso a caso de suporte: use "widely available" como régua padrão.' },
+  { technology: 'WebGPU', baseline: 'Baseline desde jan/2026', status: 'Disponível em todos os principais', note: 'Chrome, Edge, Firefox e Safari, incluindo mobile. Deixou de ser experimento. Módulo 25.' },
+  { technology: 'WebAssembly', baseline: 'estável, com threads e SIMD', status: 'Maduro', note: 'Para computação pesada no cliente. Não é substituto de JavaScript para UI. Módulo 25.' },
+  { technology: 'Signals', baseline: 'proposta TC39 estágio inicial', status: 'Observar', note: 'Reatividade granular já é padrão em vários frameworks. Estudar o mecanismo vale; depender da proposta, não. Módulo 23.' },
+  { technology: 'HTTP/3 e QUIC', baseline: 'amplamente disponível', status: 'Estável', note: 'Muda o custo de conexão e o comportamento sob perda de pacote. Módulo 21.' },
+  { technology: 'Livros do acervo', baseline: '2018–2020', status: 'Defasados quanto a React', note: 'Learning React 2ª ed (React 16/17), JS Definitive Guide 7ª, Eloquent JS 3ª, Effective TypeScript 1ª. Nenhum cobre Server Components, Actions, use() ou o compilador. Use-os para plataforma e linguagem; para React, a doc oficial.' }
+];
 
 export const frontendBooks = Object.freeze({
   cssDepth: {
@@ -166,35 +210,54 @@ export const frontendAcademy = Object.freeze({
   book: 'cssDepth',
   parts: {
     fundamentos: {
-      index: '1/5', range: 'Módulos 1–5', page: 'fundamentos.html', navLabel: 'Plataforma Web',
+      index: '1/6', range: 'Módulos 1–5', page: 'fundamentos.html', navLabel: 'Plataforma Web',
       title: 'Documento, estilo e runtime do navegador',
       subtitle: 'Domine a plataforma antes de adicionar abstrações.',
       prerequisites: ['Programar estruturas simples e usar Git', 'Executar uma página por servidor local', 'Reconhecer request, response, DOM e DevTools'],
       objectives: ['Construir documentos semânticos e navegáveis', 'Compor layouts responsivos sem overflow', 'Explicar escopo, event loop e mutação do DOM', 'Relacionar rede e renderização à experiência']
     },
     aplicacoes: {
-      index: '2/5', range: 'Módulos 6–10', page: 'aplicacoes.html', navLabel: 'Aplicações tipadas',
+      index: '2/6', range: 'Módulos 6–10', page: 'aplicacoes.html', navLabel: 'Aplicações tipadas',
       title: 'Tipos, componentes, estado e entrega',
       subtitle: 'Transforme requisitos e falhas em estados explícitos.',
       prerequisites: ['HTML semântico, CSS responsivo e JavaScript assíncrono', 'API HTTP documentada', 'Testes e build executáveis localmente'],
       objectives: ['Modelar contratos TypeScript sem any silencioso', 'Construir componentes previsíveis em React', 'Tratar loading, vazio, erro e sucesso', 'Escolher renderização e estado pelo requisito']
     },
     sistemas: {
-      index: '3/5', range: 'Módulos 11–15', page: 'sistemas.html', navLabel: 'Sistemas de interface',
+      index: '3/6', range: 'Módulos 11–15', page: 'sistemas.html', navLabel: 'Sistemas de interface',
       title: 'Acessibilidade, design system e qualidade',
       subtitle: 'Faça componentes coerentes sobreviverem a conteúdo, escala e diversidade.',
       prerequisites: ['Aplicação tipada com fluxo real', 'Navegação por teclado e DevTools', 'Testes unitários e de integração básicos'],
       objectives: ['Auditar WCAG 2.2 com teste humano', 'Implementar padrões interativos acessíveis', 'Governar tokens e componentes reutilizáveis', 'Validar comportamento, aparência e contrato']
     },
     producao: {
-      index: '4/5', range: 'Módulos 16–20', page: 'producao.html', navLabel: 'Produção',
+      index: '4/6', range: 'Módulos 16–20', page: 'producao.html', navLabel: 'Produção',
       title: 'Performance, segurança e arquitetura operável',
       subtitle: 'Meça usuários reais, limite risco e evolua sem reescrever por reflexo.',
       prerequisites: ['Aplicação acessível e testada', 'Pipeline reproduzível', 'Acesso a métricas, logs e traces de um ambiente'],
       objectives: ['Medir Core Web Vitals e orçamento de recursos', 'Projetar cache, segurança e privacidade no cliente', 'Correlacionar erro e experiência reais', 'Conduzir evolução arquitetural com métricas']
     },
+    fronteira: {
+      index: '5/6', range: 'Módulos 21–27', page: 'fronteira.html', navLabel: 'Fronteira',
+      title: 'Fronteira: a plataforma por dentro',
+      subtitle: 'Motor de renderização, React interno, reatividade do zero, compiladores, Wasm e GPU, colaboração local e arquitetura em escala.',
+      prerequisites: [
+        'Dominar os módulos 5–10: rede, caminho crítico, TypeScript, React, estado e fronteira cliente-servidor.',
+        'Saber ler um perfil de performance do navegador sem adivinhar.',
+        'Aceitar que aqui a resposta vem do mecanismo, não da configuração.'
+      ],
+      objectives: [
+        'Explicar um jank pelo estágio do pipeline de renderização em que ele nasce.',
+        'Descrever o que o React faz por dentro ao atualizar, e por que ele pode interromper.',
+        'Implementar reatividade granular do zero e entender o que um framework compra.',
+        'Ler a árvore sintática do próprio código e escrever uma transformação.',
+        'Decidir quando sair do JavaScript para WebAssembly ou GPU — e quando não.',
+        'Projetar colaboração e trabalho offline sem perder escrita.',
+        'Conduzir arquitetura de front em escala com fronteiras e migração incremental.'
+      ]
+    },
     avaliacao: {
-      index: '5/5', range: 'Evidência', page: 'avaliacao.html', navLabel: 'Avaliação e biblioteca',
+      index: '6/6', range: 'Evidência', page: 'avaliacao.html', navLabel: 'Avaliação e biblioteca',
       title: 'Avaliação, projeto e biblioteca técnica',
       subtitle: 'Defenda decisões de interface com código, teste e impacto observável.',
       prerequisites: ['Concluir os 20 módulos ou comprovar equivalência', 'Manter repositório e deploy revisáveis', 'Possuir evidências HTTP(S) por entrega'],
@@ -611,6 +674,251 @@ export const frontendModules = Object.freeze([
     challenge: 'Reduzir acoplamento e lead time sem duplicar runtime, experiência e plataforma.',
     book: 'Effective TypeScript, desenho de APIs; Learning React, composição; Refactoring UI, consistência do sistema.',
     complements: [official.react, official.next], exampleFile: '../../examples/frontend-senior/producao-web.md'
+  }),
+  moduleOf({
+    number: 21, part: 'fronteira', id: 'navegador-por-dentro', title: 'O navegador por dentro: parsing, estilo, layout, paint e composição', level: 'Expert',
+    objective: 'Explicar um travamento de interface pelo estágio do pipeline de renderização em que ele nasce, e escolher a correção pelo mecanismo em vez de por tentativa.',
+    prerequisites: ['Módulo 4 (event loop e DOM)', 'Módulo 5 (caminho crítico)', 'Leitura de perfil no DevTools'],
+    problem: '"A página está travando" é onde a maioria das investigações começa e termina. Sem saber que existem cinco estágios distintos, e que cada um é disparado por coisas diferentes, a correção vira sorteio: mexe no CSS, adiciona `will-change`, e às vezes funciona.',
+    concepts: ['Parsing: HTML em DOM, CSS em CSSOM, e por que script bloqueia', 'Style: casar seletor com elemento e calcular valores', 'Layout (reflow): calcular geometria', 'Paint: gerar as listas de desenho', 'Composite: montar camadas na GPU', 'Quais propriedades disparam quais estágios', 'Layout thrashing: ler depois de escrever', 'CSS containment e isolamento de custo', 'Main thread versus compositor thread'],
+    internals: [
+      'O pipeline é em cascata: mudar geometria refaz layout, paint e composição; mudar cor pula o layout; mudar apenas transform e opacity pode ficar só na composição, fora da main thread.',
+      'Layout thrashing acontece quando se lê uma propriedade geométrica depois de escrever: o navegador é obrigado a recalcular o layout na hora para responder. Num laço, isso vira um reflow por iteração.',
+      'A composição roda em outra thread: por isso uma animação de transform continua fluida mesmo com a main thread ocupada — e por isso animar `left` e animar `transform` têm custos de ordens de grandeza diferentes.',
+      '`content-visibility` e `contain` dizem ao navegador que o custo de um subárvore pode ser pulado; é dos poucos casos em que uma linha de CSS muda o comportamento do motor.'
+    ],
+    useWhen: ['Use transform e opacity para animar.', 'Use containment para isolar o custo de listas longas.', 'Use o perfil de performance antes de qualquer hipótese.'],
+    avoidWhen: ['Não anime propriedades que disparam layout.', 'Não espalhe `will-change`: cada camada custa memória de GPU.', 'Não conclua por impressão — o pipeline é observável.'],
+    contrast: {
+      bad: 'Animar `left` num laço e, ao notar o travamento, adicionar `will-change: left` em tudo — criando camadas demais e trocando um problema por outro.',
+      good: 'Trocar por `transform: translateX()`, confirmar no perfil que a animação saiu da main thread e medir o ganho.'
+    },
+    tradeoffs: ['Promover a camada tira da main thread e consome memória de GPU.', 'Containment isola custo e restringe o que pode transbordar.', 'Menos camadas é mais barato em memória e pode significar mais trabalho na main thread.'],
+    production: 'Uma lista longa trava ao rolar. O perfil mostra layout dominando cada quadro: o componente lê `offsetHeight` de cada item logo depois de aplicar estilo, forçando reflow por item. A correção separa leituras e escritas em duas fases e acrescenta `content-visibility: auto` — o custo por quadro cai sem alterar uma linha de lógica.',
+    risks: ['Layout thrashing em laço', 'Camadas demais esgotando memória de GPU', 'Animar propriedade que dispara layout', 'Otimizar sem perfil'],
+    checklist: ['Qual estágio domina o quadro no perfil?', 'A animação usa transform e opacity?', 'Há leitura geométrica depois de escrita?', 'Quantas camadas foram promovidas?', 'A correção foi medida?'],
+    interview: [
+      ['Pleno/Sênior', 'Por que animar `transform` é mais barato que animar `left`?', '`left` altera a geometria e dispara layout, paint e composição a cada quadro, na main thread. `transform` pode ser resolvido só na etapa de composição, em outra thread, sem recalcular geometria.'],
+      ['Sênior/Expert', 'Uma lista trava ao rolar e o JavaScript aparece leve no perfil. Como investiga?', 'Verifico qual estágio domina o quadro. Se é layout, procuro leitura geométrica após escrita (thrashing) e separo as fases; se é paint, procuro sombras, filtros e áreas grandes repintadas; se é composição, conto camadas. Só então mexo no código.']
+    ],
+    exercises: [
+      ['Aplicado', 'Provocar layout thrashing de propósito e corrigi-lo separando leituras e escritas.', 'Perfil antes e depois, com o tempo de layout por quadro.'],
+      ['Aplicado', 'Comparar a mesma animação feita com `left` e com `transform`.', 'Quadros por segundo e o estágio dominante em cada versão.'],
+      ['Sênior', 'Aplicar containment a uma lista longa e medir o efeito por quadro.', 'Medição com e sem `content-visibility`, e o limite encontrado.']
+    ],
+    challenge: 'Pegar o travamento mais conhecido da sua aplicação e nomear o estágio exato do pipeline em que ele nasce, com o perfil como prova.',
+    book: 'High Performance Browser Networking (o caminho até o primeiro byte); CSS in Depth (layout, cascata e o custo de cada propriedade).',
+    complements: [official.renderingPath, official.renderingNG, official.containment, official.devtoolsPerf], exampleFile: '../../examples/frontend-senior/fronteira/pipeline-renderizacao.md'
+  }),
+  moduleOf({
+    number: 22, part: 'fronteira', id: 'react-por-dentro', title: 'React por dentro: fiber, lanes e o scheduler', level: 'Expert',
+    objective: 'Explicar o que o React faz entre o `setState` e o pixel, e usar isso para diagnosticar re-render e travamento em vez de espalhar memoização.',
+    prerequisites: ['Módulo 7 (render e identidade)', 'Módulo 8 (estado e concorrência)', 'Módulo 21'],
+    problem: 'Quando a interface trava, a reação padrão é envolver tudo em memoização até melhorar. Isso adiciona código, esconde a causa e frequentemente não resolve — porque o problema não era o número de re-renders, era o trabalho de cada um, ou a prioridade errada.',
+    concepts: ['Fiber como unidade de trabalho interrompível', 'Fase de render (pura, descartável) versus commit (efeitos, síncrona)', 'Lanes: prioridade por tipo de atualização', 'Por que a fase de render pode ser abandonada e refeita', 'Transitions e o que `useTransition` realmente faz', 'Reconciliação e o papel da key', 'Batching automático', 'Profiler: interpretar o que ele mostra'],
+    internals: [
+      'A árvore de fibers é uma lista encadeada percorrida de forma interrompível: é isso que permite ao React parar no meio, atender um evento de entrada e retomar depois — algo impossível com recursão pura.',
+      'A fase de render pode ser jogada fora e refeita; por isso ela precisa ser pura. Efeito colateral ali é a origem dos bugs mais difíceis de reproduzir.',
+      'Lanes classificam a urgência: digitar é urgente, resultado de busca não é. `useTransition` marca a atualização como interrompível, e não a torna mais rápida — torna a interface responsiva enquanto ela acontece.',
+      'Com o React Compiler estável, a memoização manual passou a ser exceção: ela ainda importa onde o compilador não alcança, e espalhar `useMemo` por reflexo virou custo sem retorno.'
+    ],
+    useWhen: ['Use transition para atualização derivada e cara.', 'Use o Profiler para descobrir o que custa, antes de memoizar.', 'Use key para comunicar identidade, não para forçar remontagem por acidente.'],
+    avoidWhen: ['Não memoize por reflexo — meça primeiro, e considere o compilador.', 'Não faça efeito colateral na fase de render.', 'Não use índice como key em lista que reordena.'],
+    contrast: {
+      bad: 'Envolver trinta componentes em memoização porque "estava lento", sem nunca abrir o Profiler.',
+      good: 'Abrir o Profiler, achar o componente que custa 40 ms por render, descobrir que ele recalcula uma lista inteira e corrigir o cálculo — sem nenhuma memoização nova.'
+    },
+    tradeoffs: ['Memoização evita trabalho e custa comparação e memória.', 'Transition mantém a interface responsiva e adia o resultado.', 'Dividir componente melhora granularidade e aumenta o número de peças.'],
+    production: 'Um campo de busca trava ao digitar: cada tecla refiltra dez mil itens de forma síncrona. A correção não é memoizar — é marcar a filtragem como transition, para que a digitação continue prioritária, e reduzir o custo do filtro. O Profiler mostra a diferença antes e depois.',
+    risks: ['Memoização espalhada escondendo a causa', 'Efeito colateral na fase de render', 'Key instável remontando subárvore inteira', 'Conclusão tirada sem Profiler'],
+    checklist: ['O Profiler foi aberto antes de otimizar?', 'O custo está no número de renders ou no trabalho de cada um?', 'A atualização cara é urgente ou pode ser transition?', 'Há efeito colateral na fase de render?', 'As keys são estáveis?'],
+    interview: [
+      ['Pleno/Sênior', 'Por que a fase de render do React precisa ser pura?', 'Porque ela pode ser interrompida, descartada e refeita. Efeito colateral ali executa mais de uma vez, ou executa e é descartado, gerando comportamento não reproduzível.'],
+      ['Sênior/Expert', '`useTransition` deixa a atualização mais rápida?', 'Não. Ele a marca como interrompível e de baixa prioridade: o trabalho leva o mesmo tempo, mas a interface continua respondendo a entradas urgentes enquanto ele acontece. Ganha-se responsividade percebida, não throughput.']
+    ],
+    exercises: [
+      ['Aplicado', 'Usar o Profiler para identificar o componente mais caro de uma tela e a causa do custo.', 'Captura do Profiler com a causa identificada e a correção aplicada.'],
+      ['Aplicado', 'Converter uma atualização cara em transition e medir o efeito na responsividade da entrada.', 'INP ou latência de digitação antes e depois.'],
+      ['Sênior', 'Remover memoizações desnecessárias de um componente e provar, com medição, que nada piorou.', 'Medição antes e depois, com o número de linhas removidas.']
+    ],
+    challenge: 'Encontrar na sua base o `useMemo` mais antigo, descobrir se ele ainda serve para alguma coisa e remover se não servir.',
+    book: 'Learning React (modelo mental de componente e render) — com a ressalva de que a edição do acervo antecede a renderização concorrente; a referência corrente é a documentação oficial.',
+    complements: [official.reactFiber, official.reactConcurrent, official.reactProfiler, official.viewTransitions], exampleFile: '../../examples/frontend-senior/fronteira/react-render-lab.md'
+  }),
+  moduleOf({
+    number: 23, part: 'fronteira', id: 'reatividade-do-zero', title: 'Escrever reatividade do zero: signals, grafo de dependências e agendamento', level: 'Expert',
+    objective: 'Implementar um sistema reativo granular em menos de cem linhas e usar isso para entender o que cada framework escolheu — e o que cobrou por isso.',
+    prerequisites: ['Módulo 3 (closures)', 'Módulo 22', 'Noção de grafo e de fila'],
+    problem: 'Framework reativo parece mágica enquanto não se escreve um. Depois de escrever, as decisões de React, Vue, Solid e Svelte deixam de ser preferência e viram trade-offs comparáveis — e a escolha de ferramenta passa a ter argumento.',
+    concepts: ['Sinal: valor com lista de dependentes', 'Rastreamento automático de dependências em tempo de leitura', 'Computado: derivado com cache e invalidação', 'Efeito: folha do grafo que produz efeito colateral', 'Propagação push versus pull', 'Agendamento: lote, microtask e o problema do glitch', 'Descarte e vazamento de assinatura', 'Reatividade granular versus reconciliação de árvore'],
+    internals: [
+      'O truque central é simples: ao ler um sinal dentro de um efeito, o efeito em execução se registra como dependente. Não é preciso declarar dependência — ela é observada em tempo de execução.',
+      'Glitch é o estado inconsistente intermediário: um computado que depende de dois sinais pode ser recalculado duas vezes se a propagação for ingênua, e chegar a ver um valor novo com outro velho. Resolver isso é agendamento, não reatividade.',
+      'Reatividade granular atualiza exatamente o nó que mudou; reconciliação de árvore recalcula e compara. A primeira é mais eficiente por atualização e distribui o custo pelo grafo; a segunda é mais simples de raciocinar.',
+      'Efeito que não é descartado mantém referência ao sinal para sempre — é a fonte clássica de vazamento em sistemas reativos.'
+    ],
+    useWhen: ['Implemente para entender, não para usar em produção.', 'Use o conhecimento ao escolher framework com argumento técnico.', 'Use ao depurar comportamento reativo inesperado em qualquer biblioteca.'],
+    avoidWhen: ['Não substitua um framework maduro pelo seu experimento.', 'Não conclua que granular é sempre melhor: depende do padrão de atualização.', 'Não ignore descarte — vazamento aparece só em produção.'],
+    contrast: {
+      bad: 'Escolher framework por preferência de sintaxe e defender a escolha com adjetivos.',
+      good: 'Explicar que um atualiza o nó exato e o outro reconcilia a árvore, e qual dos dois combina com o padrão de atualização da sua aplicação.'
+    },
+    tradeoffs: ['Granular é eficiente por atualização e espalha complexidade pelo grafo.', 'Reconciliação é simples de raciocinar e recalcula mais.', 'Rastreamento automático é ergonômico e torna a dependência implícita, logo menos visível.'],
+    production: 'Um painel com trezentos indicadores atualizados por websocket trava com reconciliação de árvore a cada mensagem. A troca por atualização granular nos nós afetados elimina o travamento — mas só depois de medir, porque a causa poderia igualmente ser a frequência das mensagens, e aí nenhum framework resolveria.',
+    risks: ['Efeito sem descarte vazando', 'Glitch por propagação sem agendamento', 'Dependência implícita dificultando o rastreio', 'Reescrever framework em produção'],
+    checklist: ['O efeito se registra como dependente ao ler?', 'Há descarte, e ele é chamado?', 'Atualizações são agrupadas antes de propagar?', 'Um computado pode ver estado inconsistente?', 'Entendi o trade-off do framework que uso?'],
+    interview: [
+      ['Pleno/Sênior', 'Como um sistema de signals sabe quais efeitos reexecutar?', 'Ao ler um sinal dentro de um efeito em execução, o sinal registra esse efeito como dependente. A dependência é observada em tempo de leitura, não declarada.'],
+      ['Sênior/Expert', 'Qual a diferença de fundo entre reatividade granular e reconciliação de árvore?', 'Granular sabe exatamente qual nó mudou e atualiza só ele; reconciliação recalcula a árvore e compara para descobrir. A primeira ganha em atualizações pontuais frequentes; a segunda é mais simples de raciocinar e lida melhor com mudanças amplas.']
+    ],
+    exercises: [
+      ['Aplicado', 'Implementar signal, computed e effect com rastreamento automático de dependências.', 'Código com testes de propagação, incluindo dependência condicional.'],
+      ['Aplicado', 'Acrescentar agrupamento de atualizações e demonstrar a eliminação do glitch.', 'Teste que falha sem o agendamento e passa com ele.'],
+      ['Sênior', 'Comparar o seu sistema com o framework que você usa, num caso de atualização frequente.', 'Medição comparada e a explicação da diferença pelo mecanismo.']
+    ],
+    challenge: 'Escrever o sistema reativo em menos de cem linhas e explicar, a partir dele, uma decisão de projeto do framework que você usa todo dia.',
+    book: 'Eloquent JavaScript (closures e estruturas de dados); You Don’t Know JS Yet: Scope & Closures (o mecanismo que sustenta o rastreamento).',
+    complements: [official.signals, official.javascript, official.reactConcurrent], exampleFile: '../../examples/frontend-senior/fronteira/signals.mjs'
+  }),
+  moduleOf({
+    number: 24, part: 'fronteira', id: 'compiladores-front', title: 'Compiladores de front: AST, transformações e o React Compiler', level: 'Expert',
+    objective: 'Ler a árvore sintática do próprio código, escrever uma transformação que resolva um problema real e entender o que o React Compiler faz por você.',
+    prerequisites: ['Módulo 6 (TypeScript)', 'Módulo 22', 'Noção de árvore e de percurso'],
+    problem: 'Todo projeto de front passa por meia dúzia de compiladores — TypeScript, bundler, minificador, agora o React Compiler — e a maioria dos desenvolvedores os trata como caixa-preta. Quando um deles gera algo inesperado, não há por onde começar.',
+    concepts: ['Código-fonte, tokens, AST e geração', 'Visitor: percorrer e transformar nós', 'Escopo e binding na análise estática', 'Source map e por que o stack trace aponta para o lugar certo', 'O que o React Compiler analisa e por que precisa das regras dos hooks', 'Memoização automática e o fim do useMemo por reflexo', 'Codemod: migração em escala por transformação', 'Limites da análise estática'],
+    internals: [
+      'Toda ferramenta do ecossistema faz a mesma sequência: parse para AST, transforma a árvore, gera código. Entender essa sequência torna todas elas inspecionáveis.',
+      'O React Compiler consegue memoizar automaticamente porque assume as regras dos hooks: componentes puros, sem chamada condicional. As regras deixaram de ser convenção e viraram a premissa que habilita a otimização.',
+      'Source map mapeia posição gerada para posição original; sem ele, o stack trace de produção aponta para código minificado e o diagnóstico morre ali.',
+      'Análise estática não resolve tudo: indireção dinâmica, acesso por string computada e efeito colateral escondido são os limites onde o compilador desiste — e é por isso que ele às vezes não otimiza.'
+    ],
+    useWhen: ['Use codemod para migração que tocaria dezenas de arquivos.', 'Use regra de lint personalizada para travar um padrão específico do time.', 'Use o compilador e remova memoização manual onde ele já cobre.'],
+    avoidWhen: ['Não escreva plugin para o que uma função resolve.', 'Não gere código que ninguém consegue depurar.', 'Não desligue as regras dos hooks: elas são a premissa do compilador.'],
+    contrast: {
+      bad: 'Migrar duzentos arquivos na mão com busca e substituição, introduzindo três erros sutis no caminho.',
+      good: 'Escrever um codemod, rodar em um arquivo, revisar, rodar em todos, e revisar o diff completo num único commit.'
+    },
+    tradeoffs: ['Codemod é rápido e exige entender a AST.', 'Compilador remove trabalho manual e reduz o controle sobre o resultado.', 'Regra de lint automatiza revisão e adiciona atrito quando é rígida demais.'],
+    production: 'Uma renomeação de API interna afeta 180 arquivos. Feita na mão, quebra três casos com invocação indireta. Feita por codemod sobre a AST, respeita escopo e binding, e o diff é revisável de uma vez — a diferença entre as duas abordagens é justamente entender que texto e árvore não são a mesma coisa.',
+    risks: ['Transformação que ignora escopo e renomeia o símbolo errado', 'Código gerado sem source map', 'Regras dos hooks desligadas quebrando a premissa do compilador', 'Plugin mantido por uma pessoa só'],
+    checklist: ['A transformação respeita escopo e binding?', 'Foi testada num arquivo antes de todos?', 'O diff é revisável?', 'Há source map no build?', 'O compilador está habilitado e as regras dos hooks valem?'],
+    interview: [
+      ['Pleno/Sênior', 'Por que o React Compiler depende das regras dos hooks?', 'Porque ele precisa provar que o componente é puro e que os hooks são chamados sempre na mesma ordem. Sem essa garantia, memoizar automaticamente mudaria o comportamento.'],
+      ['Sênior/Expert', 'Quando um codemod é melhor que uma busca e substituição?', 'Sempre que o padrão depender de contexto sintático — escopo, tipo, posição na árvore. Texto não distingue um identificador de uma string que por acaso tem o mesmo conteúdo; a AST sim.']
+    ],
+    exercises: [
+      ['Aplicado', 'Inspecionar a AST de um trecho próprio e identificar os nós de uma construção que você usa todo dia.', 'Captura da árvore com os nós anotados.'],
+      ['Aplicado', 'Escrever um codemod que faça uma renomeação respeitando escopo.', 'Transformação testada, com um caso que a busca e substituição erraria.'],
+      ['Sênior', 'Habilitar o React Compiler num projeto, remover memoização manual redundante e medir.', 'Medição antes e depois, com as linhas removidas e o que o compilador não cobriu.']
+    ],
+    challenge: 'Encontrar uma regra de código que seu time repete em revisão e transformá-la numa regra de lint que a verifica sozinha.',
+    book: 'Effective TypeScript (o que o compilador de tipos consegue e não consegue provar) — a edição do acervo é a 1ª, anterior às versões recentes do TypeScript.',
+    complements: [official.reactCompiler, official.astExplorer, official.babelPlugin, official.typescript], exampleFile: '../../examples/frontend-senior/fronteira/codemod.mjs'
+  }),
+  moduleOf({
+    number: 25, part: 'fronteira', id: 'wasm-gpu', title: 'Sair do JavaScript: WebAssembly, workers e GPU no navegador', level: 'Expert',
+    objective: 'Decidir quando o trabalho pesado deve sair da main thread — e do JavaScript — escolhendo entre worker, WebAssembly e GPU por medição.',
+    prerequisites: ['Módulo 4 (event loop)', 'Módulo 21', 'Módulo 16 (Core Web Vitals)'],
+    problem: 'Computação pesada no cliente trava a interface porque o JavaScript da página roda numa thread só. A reação comum é otimizar o algoritmo até onde der e desistir — pulando três degraus que existem entre isso e "não dá para fazer no navegador".',
+    concepts: ['Os degraus: algoritmo → worker → WebAssembly → GPU', 'Worker: outra thread, sem acesso ao DOM', 'Custo de transferência e objetos transferíveis', 'WebAssembly: quando compilar vale a pena', 'O custo de atravessar a fronteira JS↔Wasm', 'SharedArrayBuffer e os requisitos de isolamento', 'WebGPU: computação paralela, não só gráficos', 'Quando a resposta é fazer no servidor'],
+    internals: [
+      'Worker roda em outra thread e não vê o DOM: a comunicação é por mensagem, e o custo de copiar o dado pode anular o ganho — a menos que se use objeto transferível, que passa a posse em vez de copiar.',
+      'WebAssembly ganha em computação numérica densa e previsível; para lógica com muitos objetos e strings, a travessia da fronteira costuma comer o ganho. A regra é a mesma do módulo 24 da trilha de Python: API em lote, não por item.',
+      'WebGPU expõe computação paralela de propósito geral, não apenas gráficos — e desde o início de 2026 está disponível nos principais navegadores. O ganho aparece em problemas massivamente paralelos, e some em trabalho sequencial.',
+      'Cada degrau adiciona build, depuração mais difícil e um caminho de fallback: o custo não é só de execução.'
+    ],
+    useWhen: ['Use worker quando o trabalho é pesado e não toca o DOM.', 'Use Wasm quando o cálculo é numérico, denso e já existe biblioteca madura.', 'Considere GPU quando o problema é massivamente paralelo.'],
+    avoidWhen: ['Não suba degrau antes de medir o anterior.', 'Não use Wasm para lógica de interface.', 'Não esqueça o fallback: nem todo ambiente suporta tudo.'],
+    contrast: {
+      bad: 'Reescrever o módulo em Rust porque "JavaScript é lento", sem ter verificado que o laço percorria uma lista onde cabia um índice.',
+      good: 'Subir um degrau por vez, medindo cada um, e parar quando o requisito for atendido — registrando onde parou e por quê.'
+    },
+    tradeoffs: ['Worker libera a main thread e custa serialização e complexidade.', 'Wasm dá desempenho numérico e adiciona toolchain e travessia.', 'GPU dá paralelismo e exige o problema certo e um caminho alternativo.'],
+    production: 'Um editor de imagens no navegador trava ao aplicar filtro em imagens grandes. Mover o processamento para um worker com buffer transferível resolve o travamento da interface sem tocar no algoritmo; o Wasm, avaliado depois, traz ganho adicional apenas nos filtros com aritmética densa — e não nos demais.',
+    risks: ['Custo de transferência anulando o ganho do worker', 'Travessia JS↔Wasm por item', 'Ausência de fallback', 'Toolchain que só uma pessoa sabe manter'],
+    checklist: ['O degrau anterior foi medido?', 'O trabalho realmente precisa acontecer no cliente?', 'A transferência usa objeto transferível?', 'A API cruza a fronteira em lote?', 'Existe fallback quando o recurso não está disponível?'],
+    interview: [
+      ['Pleno/Sênior', 'Por que mover um cálculo para um worker nem sempre acelera?', 'Porque a comunicação copia o dado por padrão. Se o volume transferido for grande em relação ao cálculo, a cópia domina. Objetos transferíveis passam a posse sem copiar, e mudam a conta.'],
+      ['Sênior/Expert', 'Quando você recusaria WebAssembly numa proposta?', 'Quando o degrau anterior não foi medido, quando o trabalho é lógica de interface com muitos objetos e strings (a travessia come o ganho), ou quando o time não tem como manter o toolchain — e também quando a resposta certa é fazer no servidor.']
+    ],
+    exercises: [
+      ['Aplicado', 'Mover um cálculo pesado para um worker e medir o efeito na responsividade da interface.', 'INP ou latência de interação antes e depois, com o custo de transferência isolado.'],
+      ['Aplicado', 'Comparar transferência por cópia e por objeto transferível num buffer grande.', 'Medição das duas formas e o ponto em que a diferença passa a importar.'],
+      ['Sênior', 'Levar um problema real pelos degraus e registrar o ganho de cada um até atingir o requisito.', 'Tabela ganho × degrau e a justificativa de onde parou.']
+    ],
+    challenge: 'Escolher o trecho mais pesado do seu cliente e descobrir, com medição, se o degrau certo é worker, Wasm, GPU — ou o servidor.',
+    book: 'High Performance Browser Networking (o custo de mover dado); JavaScript: The Definitive Guide (workers e APIs da plataforma).',
+    complements: [official.workers, official.wasm, official.wasmBindgen, official.webgpu], exampleFile: '../../examples/frontend-senior/fronteira/degraus-computacao.md'
+  }),
+  moduleOf({
+    number: 26, part: 'fronteira', id: 'offline-first', title: 'Offline-first: service worker, sincronização e colaboração sem perder escrita', level: 'Expert',
+    objective: 'Projetar uma aplicação que funciona sem rede e sincroniza sem descartar trabalho do usuário em silêncio.',
+    prerequisites: ['Módulo 9 (dados e estados de falha)', 'Módulo 17 (cache e resiliência)', 'Banco de Dados módulo 25 para a convergência'],
+    problem: 'Offline costuma ser tratado como estado de erro: mostra-se um aviso e bloqueia-se a interface. Quando alguém tenta fazer melhor, aparece o problema real — duas edições simultâneas, e uma desaparece sem ninguém saber.',
+    concepts: ['Service worker como proxy programável', 'Estratégias de cache e qual serve a qual recurso', 'Fila de escrita com persistência local', 'Idempotência e chave de operação', 'Atualização otimista e reconciliação', 'Conflito de dado versus conflito de negócio', 'Convergência sem coordenação, aplicada ao cliente', 'Sinalizar ao usuário o estado real da sincronização'],
+    internals: [
+      'O service worker intercepta requisições e responde do cache ou da rede: é um proxy que roda no cliente, e um erro nele pode servir conteúdo velho por tempo indeterminado — daí a necessidade de estratégia de atualização deliberada.',
+      'Escrita offline precisa de fila persistente: se ela vive em memória, um fechamento de aba perde o trabalho. E cada item precisa de chave de idempotência, porque a sincronização pode reenviar.',
+      'Convergência automática resolve conflito de DADO. Conflito de NEGÓCIO — duas pessoas reservando o mesmo recurso — não se resolve por merge, e precisa de decisão explícita. É a mesma distinção do módulo 25 da trilha de Banco de Dados.',
+      'A interface precisa dizer a verdade sobre o estado: "salvo localmente" e "salvo no servidor" são estados diferentes, e esconder isso é o que gera perda de confiança quando algo dá errado.'
+    ],
+    useWhen: ['Use offline-first quando o usuário trabalha em campo ou com rede instável.', 'Use fila persistente sempre que aceitar escrita sem rede.', 'Use convergência automática apenas onde o dado é acumulativo.'],
+    avoidWhen: ['Não aceite escrita offline sem fila persistente e chave de idempotência.', 'Não resolva conflito de negócio por merge automático.', 'Não esconda do usuário que algo ainda não foi sincronizado.'],
+    contrast: {
+      bad: 'Atualização otimista sem fila: a tela mostra salvo, o usuário fecha a aba, e o dado nunca existiu.',
+      good: 'Escrita na fila persistente, interface mostrando "aguardando sincronização", e confirmação só depois do servidor responder.'
+    },
+    tradeoffs: ['Offline-first dá autonomia e adiciona sincronização e conflito.', 'Convergência automática evita fricção e pode violar invariante de negócio.', 'Atualização otimista melhora a percepção e exige reconciliação e reversão.'],
+    production: 'Um aplicativo de vistoria em campo perde observações quando dois técnicos editam o mesmo formulário: a sincronização usa "o último que escreve vence". A correção preserva as duas contribuições nos campos acumulativos e passa a exigir resolução explícita nos campos em que só um valor pode valer — o problema era de modelagem, não de rede.',
+    risks: ['Escrita perdida em silêncio', 'Service worker servindo conteúdo velho indefinidamente', 'Fila em memória perdida ao fechar a aba', 'Invariante de negócio violada por merge automático', 'Usuário sem visibilidade do estado de sincronização'],
+    checklist: ['A fila de escrita é persistente?', 'Toda operação tem chave de idempotência?', 'O usuário vê a diferença entre salvo local e salvo no servidor?', 'Qual campo pode convergir e qual precisa de decisão?', 'Existe caminho para atualizar um service worker preso?'],
+    interview: [
+      ['Pleno/Sênior', 'Qual o risco de atualização otimista sem fila persistente?', 'A interface confirma o que ainda não aconteceu. Se a aba fechar ou a sincronização falhar em definitivo, o usuário acredita ter salvo algo que não existe.'],
+      ['Sênior/Expert', 'Duas pessoas editam o mesmo registro offline. Como você resolve?', 'Separo conflito de dado de conflito de negócio: campos acumulativos podem convergir automaticamente; campos em que só um valor pode valer exigem decisão explícita, com as duas versões mostradas. "Último que escreve vence" descarta trabalho em silêncio e raramente é aceitável.']
+    ],
+    exercises: [
+      ['Aplicado', 'Implementar fila de escrita persistente com chave de idempotência e reenvio.', 'Demonstração de recuperação após fechar e reabrir a aba sem rede.'],
+      ['Aplicado', 'Classificar os campos de um formulário entre os que podem convergir e os que exigem decisão.', 'Tabela campo × invariante × estratégia, com a justificativa.'],
+      ['Sênior', 'Projetar a sinalização de estado de sincronização e testá-la com usuários ou pares.', 'Protótipo dos estados e o registro do que foi compreendido.']
+    ],
+    challenge: 'Encontrar no seu produto um lugar em que a interface confirma antes do servidor e medir quanto trabalho isso pode custar ao usuário.',
+    book: 'High Performance Browser Networking (comportamento de rede real); Inclusive Components (comunicar estado de forma acessível).',
+    complements: [official.serviceWorker, official.indexedDb, official.localFirst], exampleFile: '../../examples/frontend-senior/fronteira/offline-first.md'
+  }),
+  moduleOf({
+    number: 27, part: 'fronteira', id: 'front-em-escala', title: 'Front em escala: micro-frontends, federação e migração incremental', level: 'Staff',
+    objective: 'Decidir fronteiras de front por autonomia real de deploy e conduzir migração incremental sem parar a entrega — inclusive decidindo não fragmentar.',
+    prerequisites: ['Módulo 20 (arquitetura frontend e migração)', 'Módulo 14 (design system)', 'Arquitetura módulo 15 para a estratégia de migração'],
+    problem: 'Micro-frontends são adotados pelo motivo errado — "o repositório está grande" — e pagam-se os custos sem colher o benefício: runtime duplicado, experiência inconsistente e uma plataforma a mais para operar. O benefício real é autonomia de deploy, e ele só existe se as fronteiras acompanharem as equipes.',
+    concepts: ['Monólito modular no front como padrão razoável', 'Autonomia de deploy como o único benefício que justifica', 'Composição em build, em servidor e em runtime', 'Federação de módulos e dependências compartilhadas', 'Versão compartilhada: o problema que mais aparece', 'Design system como contrato entre fragmentos', 'Strangler fig aplicado a interface', 'Orçamento de recursos por fragmento'],
+    internals: [
+      'Cada fragmento carregado em runtime traz seu grafo de dependências: sem compartilhamento cuidadoso, a mesma biblioteca é baixada várias vezes, e o orçamento de recursos estoura sem ninguém perceber.',
+      'Compartilhar dependência em runtime resolve o peso e cria acoplamento de versão: atualizar a biblioteca compartilhada passa a exigir coordenação entre times — exatamente o que se queria evitar.',
+      'Sem design system compartilhado, a autonomia produz inconsistência visível ao usuário, que é o custo mais caro e o menos mensurado.',
+      'Strangler fig no front funciona rota a rota: as duas implementações convivem atrás do roteador, com métrica comparando as duas — a mesma estratégia do módulo 15 da trilha de Arquitetura.'
+    ],
+    useWhen: ['Fragmente quando times diferentes precisam de fato liberar em ritmos diferentes.', 'Use monólito modular com fronteiras verificadas por build como padrão.', 'Migre rota a rota, com as duas versões convivendo e medidas.'],
+    avoidWhen: ['Não fragmente por tamanho de repositório.', 'Não adote runtime distinto por fragmento — o usuário paga.', 'Não migre sem métrica comparando antes e depois.'],
+    contrast: {
+      bad: 'Seis micro-frontends, três versões da mesma biblioteca de componentes, quatro megabytes de JavaScript e um time de plataforma coordenando cada atualização.',
+      good: 'Monólito modular com regras de importação verificadas no build, fragmentado apenas na fronteira em que dois times realmente liberam em ritmos diferentes.'
+    },
+    tradeoffs: ['Fragmentar dá autonomia de deploy e custa peso, consistência e plataforma.', 'Compartilhar dependência reduz peso e reintroduz acoplamento de versão.', 'Monólito modular é mais simples e limita a autonomia de liberação.'],
+    production: 'Uma migração de framework é planejada como reescrita de seis meses. Depois de quatro, nada foi para produção e a versão antiga acumulou mudanças. O replanejamento migra rota a rota atrás do roteador, com as duas convivendo e métricas comparando ambas — a primeira rota vai a produção em duas semanas, e a reescrita deixa de ser aposta.',
+    risks: ['Dependência duplicada estourando o orçamento de recursos', 'Inconsistência visual entre fragmentos', 'Acoplamento de versão na biblioteca compartilhada', 'Reescrita grande sem entrega intermediária', 'Plataforma de front sem dono'],
+    checklist: ['Que times precisam liberar em ritmos diferentes, nominalmente?', 'Qual o peso total com todos os fragmentos carregados?', 'A biblioteca de componentes é compartilhada e versionada?', 'A migração entrega valor a cada rota?', 'Existe métrica comparando a rota antiga e a nova?'],
+    interview: [
+      ['Sênior', 'Qual o único benefício que justifica micro-frontends?', 'Autonomia real de deploy entre times que precisam liberar em ritmos diferentes. Tamanho de repositório, preferência de framework e organização de código se resolvem com módulos e regras de importação.'],
+      ['Staff', 'Como conduzir a migração de framework de uma aplicação grande sem parar a entrega?', 'Strangler fig por rota: roteador na frente, as duas implementações convivendo, migração de uma rota por vez com métrica comparando desempenho e erro, e critério explícito de parada ou reversão. Reescrita completa só quando a aplicação é pequena o bastante para caber numa entrega.']
+    ],
+    exercises: [
+      ['Aplicado', 'Mapear as fronteiras de deploy reais da sua aplicação e compará-las com a estrutura de código.', 'Mapa times × fronteiras × ritmo de liberação, com as divergências.'],
+      ['Aplicado', 'Medir o peso total de JavaScript com todos os fragmentos carregados, incluindo duplicação.', 'Relatório de bundle com as dependências duplicadas identificadas.'],
+      ['Sênior', 'Planejar a migração de uma rota com as duas versões convivendo e métrica comparativa.', 'Plano com a rota escolhida, a métrica, o critério de avanço e o de reversão.']
+    ],
+    challenge: 'Escrever a justificativa de NÃO fragmentar uma aplicação em que isso foi proposto — com o custo de cada opção medido.',
+    book: 'Refactoring UI (consistência como propriedade do sistema); Effective TypeScript (contratos entre módulos). A estratégia de migração está na trilha de Arquitetura, módulo 15.',
+    complements: [official.moduleFederation, official.baseline, official.next], exampleFile: '../../examples/frontend-senior/fronteira/front-em-escala.md'
   })
 ]);
 
@@ -696,6 +1004,22 @@ export const frontendAssessment = Object.freeze({
     'Valida contratos externos, estados de falha, idempotência e browsers-alvo.',
     'Demonstra budgets de LCP, INP e CLS com laboratório e campo segmentado.',
     'Reproduz e corrige uma falha de segurança e uma regressão de produção.',
-    'Não marca Dominado antes de evidência validada e revisão D30.'
+    'Não marca Dominado antes de evidência validada e revisão D30.',
+    'Fronteira (módulos 21–27) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira concluída exige: um travamento nomeado pelo estágio do pipeline com o perfil como prova, um diagnóstico de render feito pelo Profiler antes de qualquer memoização, um sistema reativo próprio em menos de cem linhas, um codemod que respeita escopo, um gargalo levado pelos degraus de computação com o ponto de parada justificado, uma fila de escrita offline que não perde trabalho, e uma decisão de fragmentar (ou não) com o peso medido.'
   ]
 });
+
+/*
+ * Gabarito de autoavaliação. Não substitui a evidência exigida pela rubrica:
+ * serve para o estudo solo verificar a resposta antes de concluir o módulo.
+ */
+export const frontendAnswerKey = frontendModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: (module.interview || []).map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Otimizar sem medir.',
+  criterioDeAceite: (module.exercises || []).map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));

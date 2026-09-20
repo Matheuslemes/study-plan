@@ -26,7 +26,32 @@ const official = {
   ddd: { label: 'DDD Reference — Eric Evans', url: 'https://www.domainlanguage.com/ddd/reference/' },
   sre: { label: 'Google SRE Book', url: 'https://sre.google/sre-book/table-of-contents/' },
   otel: { label: 'OpenTelemetry', url: 'https://opentelemetry.io/docs/' },
-  teamtopologies: { label: 'Team Topologies — recursos', url: 'https://teamtopologies.com/key-concepts' }
+  teamtopologies: { label: 'Team Topologies — recursos', url: 'https://teamtopologies.com/key-concepts' },
+  eventSourcing: { label: 'Martin Fowler — Event Sourcing', url: 'https://martinfowler.com/eaaDev/EventSourcing.html' },
+  cqrs: { label: 'Martin Fowler — CQRS', url: 'https://martinfowler.com/bliki/CQRS.html' },
+  eventStorming: { label: 'EventStorming — Alberto Brandolini', url: 'https://www.eventstorming.com/' },
+  tlaplus: { label: 'TLA+ — Leslie Lamport', url: 'https://lamport.azurewebsites.net/tla/tla.html' },
+  learnTla: { label: 'Learn TLA+ — guia prático', url: 'https://learntla.com/' },
+  alloy: { label: 'Alloy — modelagem e análise de software', url: 'https://alloytools.org/' },
+  amazonTla: { label: 'How Amazon Web Services Uses Formal Methods (CACM)', url: 'https://dl.acm.org/doi/10.1145/2699417' },
+  jepsen: { label: 'Jepsen — análises de consistência sob falha', url: 'https://jepsen.io/analyses' },
+  fdbTesting: { label: 'FoundationDB — simulação determinística', url: 'https://apple.github.io/foundationdb/testing.html' },
+  tigerbeetle: { label: 'TigerBeetle — VOPR e simulação', url: 'https://docs.tigerbeetle.com/concepts/safety/' },
+  principlesChaos: { label: 'Principles of Chaos Engineering', url: 'https://principlesofchaos.org/' },
+  cellBased: { label: 'AWS — Reducing the scope of impact with cell-based architecture', url: 'https://docs.aws.amazon.com/wellarchitected/latest/reducing-scope-of-impact-with-cell-based-architecture/reducing-scope-of-impact-with-cell-based-architecture.html' },
+  shuffleSharding: { label: 'Amazon Builders’ Library — Workload isolation using shuffle-sharding', url: 'https://aws.amazon.com/builders-library/workload-isolation-using-shuffle-sharding/' },
+  staticStability: { label: 'Amazon Builders’ Library — Static stability using Availability Zones', url: 'https://aws.amazon.com/builders-library/static-stability-using-availability-zones/' },
+  buildersLibrary: { label: 'Amazon Builders’ Library', url: 'https://aws.amazon.com/builders-library/' },
+  dynamoPaper: { label: 'Dynamo: Amazon’s Highly Available Key-value Store', url: 'https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf' },
+  spannerPaper: { label: 'Spanner: Google’s Globally-Distributed Database', url: 'https://research.google/pubs/pub39966/' },
+  borgPaper: { label: 'Large-scale cluster management at Google with Borg', url: 'https://research.google/pubs/pub43438/' },
+  kafkaPaper: { label: 'Kafka: a Distributed Messaging System for Log Processing', url: 'https://notes.stephenholiday.com/Kafka.pdf' },
+  papersWeLove: { label: 'Papers We Love — repositório de papers fundadores', url: 'https://github.com/papers-we-love/papers-we-love' },
+  howToRead: { label: 'How to Read a Paper — S. Keshav', url: 'https://web.stanford.edu/class/ee384m/Handouts/HowtoReadPaper.pdf' },
+  modulith: { label: 'Spring Modulith — fronteiras verificadas em monólito modular', url: 'https://docs.spring.io/spring-modulith/reference/' },
+  archunit: { label: 'ArchUnit — fitness functions executáveis', url: 'https://www.archunit.org/' },
+  mcp: { label: 'Model Context Protocol — especificação', url: 'https://modelcontextprotocol.io/' },
+  nistAi: { label: 'NIST AI Risk Management Framework', url: 'https://www.nist.gov/itl/ai-risk-management-framework' }
 };
 
 export const arquiteturaBooks = Object.freeze({
@@ -188,13 +213,35 @@ export const arquiteturaBooks = Object.freeze({
   }
 });
 
+/*
+ * A trilha é deliberadamente agnóstica de fornecedor, então este baseline não
+ * lista produtos: lista as ESPECIFICAÇÕES e OBRAS DE REFERÊNCIA que sustentam as
+ * decisões, com o estado de cada uma. Onde a biblioteca local está uma edição
+ * atrás, isso é declarado em vez de escondido.
+ */
+export const arquiteturaTechnologyBaseline = [
+  { technology: 'Fundamentals of Software Architecture (livro-âncora)', baseline: '2ª ed (set/2025)', status: 'Biblioteca tem a 1ª ed (2020)', note: 'A 2ª edição traz cinco capítulos novos, incluindo IA generativa, dados e Team Topologies. Conteúdo da trilha já cobre boa parte; usar a 1ª ed sabendo o que falta.' },
+  { technology: 'Designing Data-Intensive Applications', baseline: '2ª ed (mar/2026)', status: 'Biblioteca tem a de 2017', note: 'Kleppmann & Riccomini. Os fundamentos mudam em décadas; os detalhes de tecnologia mudaram. Espinha dorsal dos módulos 11 e 18.' },
+  { technology: 'C4 Model', baseline: 'corrente', status: 'Estável', note: 'Notação para os quatro níveis de diagrama. Estável há anos; não há versionamento formal.' },
+  { technology: 'arc42', baseline: '8.x', status: 'Estável', note: 'Template de documentação arquitetural. Complementa o C4: o C4 desenha, o arc42 estrutura o texto.' },
+  { technology: 'OpenAPI', baseline: '3.1.x', status: 'Estável', note: 'Alinhada a JSON Schema. Contrato de API síncrona.' },
+  { technology: 'AsyncAPI', baseline: '3.x', status: 'Estável', note: 'Contrato de API assíncrona. A mudança 2.x→3.x foi quebrante; conferir a versão do seu tooling.' },
+  { technology: 'CloudEvents', baseline: '1.0.2', status: 'Estável (CNCF)', note: 'Envelope padrão de evento. Resolve metadado comum sem acoplar ao broker.' },
+  { technology: 'RFC 9457 (Problem Details)', baseline: 'publicada', status: 'Estável', note: 'Substitui a RFC 7807. Formato de erro HTTP interoperável.' },
+  { technology: 'OpenTelemetry — convenções semânticas', baseline: 'estáveis para HTTP e parciais para o resto', status: 'Em evolução', note: 'Sinal de observabilidade é contrato arquitetural. Fixe a versão da convenção usada.' },
+  { technology: 'Monólito modular como padrão', baseline: 'consenso revisado (2026)', status: 'Corrente', note: 'Parte das organizações que adotaram microsserviços está reconsolidando. Módulos 8 e 15 já tratam; a decisão é por acoplamento e capacidade, não por moda.' },
+  { technology: 'Fitness functions executáveis', baseline: 'ArchUnit · Spring Modulith', status: 'Estável', note: 'Fronteira que não é verificada por build não é fronteira. Módulo 4.' },
+  { technology: 'TLA+ / Alloy', baseline: 'maduros', status: 'Nicho de alto valor', note: 'Usados em produção por AWS e outros para protocolos distribuídos. Módulo 20.' },
+  { technology: 'Agentes de IA como componente', baseline: 'MCP (padrão de fato, 2026)', status: 'Emergente', note: 'Componente não determinístico dentro da arquitetura, com custo e latência variáveis. Módulo 25.' }
+];
+
 export const arquiteturaAcademy = Object.freeze({
   title: 'Academia de Arquitetura',
   baseline: 'Decisões agnósticas de fornecedor, com trade-offs explícitos e evidência auditável',
   book: 'Fundamentals of Software Architecture (Richards & Ford) como espinha dorsal; obras específicas por tema',
   parts: {
     fundamentos: {
-      index: '1/5',
+      index: '1/6',
       range: 'Módulos 1–5',
       title: 'Fundamentos e design',
       subtitle: 'Natureza da arquitetura, atributos de qualidade, estilos, modularidade e documentação viva.',
@@ -211,7 +258,7 @@ export const arquiteturaAcademy = Object.freeze({
       ]
     },
     estrategico: {
-      index: '2/5',
+      index: '2/6',
       range: 'Módulos 6–9',
       title: 'Domínio e integração',
       subtitle: 'DDD estratégico e tático, decomposição em serviços e integração corporativa por mensagens.',
@@ -228,7 +275,7 @@ export const arquiteturaAcademy = Object.freeze({
       ]
     },
     distribuidos: {
-      index: '3/5',
+      index: '3/6',
       range: 'Módulos 10–14',
       title: 'Sistemas distribuídos e dados',
       subtitle: 'CAP e falha parcial, dados intensivos, consistência, resiliência e escala mensurável.',
@@ -245,7 +292,7 @@ export const arquiteturaAcademy = Object.freeze({
       ]
     },
     evolucao: {
-      index: '4/5',
+      index: '4/6',
       range: 'Módulos 15–18',
       title: 'Evolução, operação e organização',
       subtitle: 'Migração incremental, observabilidade, segurança arquitetural e topologias de time.',
@@ -261,8 +308,28 @@ export const arquiteturaAcademy = Object.freeze({
         'Alinhar fronteiras de software a topologias de time e governança evolutiva.'
       ]
     },
+    fronteira: {
+      index: '5/6',
+      range: 'Módulos 19–25',
+      title: 'Fronteira: provar a arquitetura',
+      subtitle: 'Event sourcing, especificação formal, simulação determinística, caos, células e os papers que definiram a área.',
+      prerequisites: [
+        'Dominar os módulos 10–14: falha parcial, consistência, resiliência e escala.',
+        'Ter desenhado ao menos um sistema distribuído e visto uma hipótese sua ser desmentida por produção.',
+        'Aceitar que aqui o objetivo é procurar o erro no próprio desenho antes que o cliente encontre.'
+      ],
+      objectives: [
+        'Modelar o estado como log de eventos e derivar projeções, sabendo o preço de fazer isso.',
+        'Especificar um protocolo em TLA+ ou Alloy e encontrar por verificação um erro que a revisão humana não pegaria.',
+        'Testar sistema distribuído por simulação determinística e injeção de falha, com reprodução por semente.',
+        'Conduzir chaos engineering como experimento com hipótese, raio de alcance e critério de parada.',
+        'Projetar isolamento por células e shuffle sharding, calculando o raio de impacto em vez de estimá-lo.',
+        'Extrair de um paper fundador a decisão, a restrição da época e o que ainda se aplica.',
+        'Tratar um agente de IA como componente arquitetural: não determinístico, com custo, latência e fallback.'
+      ]
+    },
     avaliacao: {
-      index: '5/5',
+      index: '6/6',
       range: 'Evidência',
       title: 'Avaliação, casos e capstones',
       subtitle: 'Rubricas por senioridade, estudos de caso, projetos e biblioteca técnica rastreável.',
@@ -911,6 +978,286 @@ export const arquiteturaModules = [
     book: 'Team Topologies (Skelton & Pais); Fundamentals of Software Architecture, cap. sobre soft skills e efetividade.',
     complements: [official.teamtopologies, official.fowler, official.adr],
     exampleFile: '../../examples/arquitetura-senior/README.md'
+  },
+  {
+    number: 19,
+    part: 'fronteira',
+    id: 'event-sourcing-cqrs',
+    title: 'Event sourcing e CQRS: o log como modelo de escrita',
+    level: 'Sênior → Expert',
+    objective: 'Decidir quando o estado deve ser derivado de um log de eventos imutáveis, e projetar streams, projeções e versionamento sabendo o preço que isso cobra por décadas.',
+    prerequisites: ['Módulo 7 (agregados e domain events)', 'Módulo 12 (outbox e idempotência)', 'Módulo 11 (dados intensivos)'],
+    problem: 'Event sourcing é adotado por motivos errados — "queremos auditoria", "queremos desacoplar" — e o custo só aparece dois anos depois, quando é preciso mudar o formato de um evento que já tem cem milhões de instâncias gravadas, ou apagar o dado de um cliente de um log imutável.',
+    concepts: ['Evento como fato imutável no passado, não como comando', 'Stream por agregado e limite de consistência', 'Projeções e read models eventualmente consistentes', 'Snapshots e o custo do replay', 'Versionamento de evento, upcasting e weak schema', 'CQRS: separar o modelo de escrita do de leitura', 'Direito ao esquecimento sobre log imutável: crypto-shredding'],
+    internals: [
+      'O log é a fonte da verdade; qualquer visão de leitura é derivada e descartável — essa é a propriedade que dá o poder e também o custo.',
+      'Replay é a operação que torna tudo possível e é o gargalo: sem snapshot, reconstruir um agregado longevo lê o stream inteiro.',
+      'Evento gravado não se altera. Evoluir formato significa conviver com todas as versões passadas — upcasting na leitura, não migração na escrita.',
+      'CQRS é ortogonal a event sourcing: dá para ter um sem o outro, e a maior parte dos sistemas quer CQRS sem event sourcing.'
+    ],
+    useWhen: ['Use quando o histórico de como se chegou ao estado É o requisito (financeiro, regulatório, auditoria forense).', 'Use quando várias leituras muito diferentes precisam do mesmo fato.', 'Use CQRS sozinho quando o problema é só assimetria entre leitura e escrita.'],
+    avoidWhen: ['Não use para CRUD com auditoria: tabela de histórico resolve com uma fração do custo.', 'Não use quando o time não tem como sustentar versionamento de evento por anos.', 'Não aplique ao sistema inteiro — é decisão por bounded context.'],
+    contrast: {
+      bad: 'Event sourcing em todos os contextos "para padronizar", com eventos nomeados como comandos (`AtualizarCliente`) e sem política de versionamento.',
+      good: 'Event sourcing apenas no contexto de conta corrente, onde o extrato é o produto; os demais contextos usam estado com histórico, e só a leitura é segregada.'
+    },
+    tradeoffs: ['O log dá auditoria perfeita e temporalidade, e cobra complexidade permanente de versionamento.', 'Projeções dão leituras sob medida e introduzem consistência eventual visível ao usuário.', 'Snapshots aceleram replay e criam um segundo artefato para manter correto.'],
+    production: 'Um sistema de pedidos adota event sourcing em todos os contextos. Dois anos depois, a inclusão de um campo obrigatório exige upcaster para quatro versões do evento, o replay de um agregado leva 40 s e uma solicitação de exclusão de dados pessoais não tem resposta técnica. O redesign mantém o log apenas onde o histórico é o produto e adota crypto-shredding para o dado pessoal.',
+    risks: ['Evento nomeado como comando, acoplando o log à implementação', 'Ausência de política de versionamento desde o primeiro evento', 'Replay inviável por falta de snapshot', 'Consistência eventual exposta ao usuário sem desenho de UX', 'Conflito entre log imutável e direito ao esquecimento'],
+    checklist: ['O histórico é requisito ou conveniência?', 'Os eventos estão no passado e na linguagem do domínio?', 'Existe política de versionamento escrita antes do primeiro deploy?', 'O replay do maior agregado cabe no orçamento de tempo?', 'Há resposta técnica para exclusão de dado pessoal?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre CQRS e event sourcing?', expected: 'CQRS separa o modelo de leitura do de escrita; event sourcing guarda o estado como sequência de eventos. São independentes — CQRS sem event sourcing é comum e muito mais barato.' },
+      { level: 'Sênior/Expert', question: 'Como evoluir o formato de um evento que já tem milhões de instâncias gravadas?', expected: 'Não se altera o gravado: adiciona-se versão nova e um upcaster na leitura, mantendo compatibilidade com todas as anteriores; mudanças quebrantes exigem novo tipo de evento e período de convivência. Discutir também weak schema e tolerância a campos desconhecidos.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Modelar um agregado de conta corrente como stream de eventos e derivar o saldo por replay.', evidence: 'Eventos nomeados no passado, projeção de saldo e teste que reconstrói o estado do zero.' },
+      { level: 'Aplicado', task: 'Evoluir um evento para uma versão nova e implementar o upcaster sem tocar no que já está gravado.', evidence: 'As duas versões convivendo, upcaster testado e nota de compatibilidade.' },
+      { level: 'Expert', task: 'Comparar event sourcing e estado com histórico para o mesmo contexto e recomendar um.', evidence: 'ADR com custo de manutenção por 3 anos, resposta a exclusão de dado pessoal e critério de reversão.' }
+    ],
+    challenge: 'Escrever o ADR que recusa event sourcing para um contexto em que ele foi pedido, com a alternativa que atende ao requisito real por um custo menor.',
+    book: 'Implementing Domain-Driven Design, cap. 8 (domain events); Designing Data-Intensive Applications, cap. 11 (processamento de stream e derivação de estado).',
+    complements: [official.eventSourcing, official.cqrs, official.eventStorming],
+    exampleFile: '../../examples/arquitetura-senior/adr/0006-event-sourcing-scope.md'
+  },
+  {
+    number: 20,
+    part: 'fronteira',
+    id: 'metodos-formais',
+    title: 'Especificação formal: TLA+, Alloy e verificação de protocolos',
+    level: 'Expert',
+    objective: 'Especificar um protocolo distribuído em TLA+ ou Alloy e deixar o verificador encontrar o intercalamento de eventos que a revisão humana não encontraria.',
+    prerequisites: ['Módulo 10 (falha parcial e consenso)', 'Módulo 12 (saga e idempotência)', 'Disposição para pensar em estados, não em código'],
+    problem: 'Os piores defeitos de sistemas distribuídos não são bugs de código: são desenhos que só falham numa ordem específica de mensagens, sob uma falha específica, uma vez a cada milhões de execuções. Nenhum volume de code review acha isso, porque o ser humano não enumera intercalamentos. Um verificador de modelos enumera.',
+    concepts: ['Especificar o QUE o sistema deve fazer, separado de COMO', 'Estado, ação, invariante e propriedade temporal', 'Safety ("nada ruim acontece") versus liveness ("algo bom acaba acontecendo")', 'Verificação por enumeração de estados e explosão combinatória', 'TLA+/PlusCal para protocolos; Alloy para estruturas e relações', 'Contraexemplo como principal produto: o traço que leva à violação', 'Onde parar: especificar o protocolo, não a implementação'],
+    internals: [
+      'O verificador explora todos os intercalamentos possíveis dentro dos limites que você declarar; ele não prova o sistema, prova o modelo — a fidelidade do modelo é sua responsabilidade.',
+      'O valor prático aparece antes de rodar o verificador: escrever a invariante obriga a dizer o que "correto" significa, e é aí que boa parte das ambiguidades morre.',
+      'A explosão de estados é gerenciada limitando o modelo (três nós, duas mensagens) — defeitos de protocolo costumam aparecer em modelos pequenos.',
+      'Amazon relata em publicação revisada o uso de TLA+ para achar defeitos sutis em serviços de produção antes do lançamento.'
+    ],
+    useWhen: ['Use em protocolo de consenso, replicação, saga de múltiplos passos e migração com dupla escrita.', 'Use quando o custo de um defeito raro for alto demais para descobrir em produção.', 'Use Alloy quando a dúvida for sobre estrutura e relações, não sobre ordem no tempo.'],
+    avoidWhen: ['Não especifique CRUD nem lógica de negócio sequencial.', 'Não tente modelar a implementação inteira: o modelo tem de caber na cabeça.', 'Não trate o modelo verificado como garantia da implementação — são artefatos distintos.'],
+    contrast: {
+      bad: 'Revisar por três semanas um desenho de replicação em reunião, aprovar por consenso e descobrir o problema seis meses depois num incidente.',
+      good: 'Escrever 60 linhas de especificação, rodar o verificador, receber um traço de 11 passos que viola a invariante e corrigir o desenho antes de escrever código.'
+    },
+    tradeoffs: ['A verificação encontra defeitos que nenhuma revisão encontra e custa aprender uma notação nova.', 'Modelo pequeno verifica rápido e pode esconder defeitos que só aparecem em escala maior.', 'A especificação envelhece se não for mantida junto com o desenho.'],
+    production: 'Uma migração com dupla escrita entre dois bancos é aprovada em revisão. A especificação em TLA+ revela que, se a segunda escrita falhar exatamente após a confirmação da primeira e antes do registro do outbox, existe uma janela em que a reconciliação escolhe o valor antigo. O contraexemplo tem nove passos; nenhum dos quatro revisores o tinha imaginado.',
+    risks: ['Modelo que não corresponde ao sistema real', 'Confundir modelo verificado com implementação correta', 'Especificação abandonada e divergente do desenho', 'Escopo grande demais tornando a verificação inviável'],
+    checklist: ['A invariante está escrita em uma frase antes do modelo?', 'O modelo tem o menor número de nós que ainda expõe o problema?', 'Safety e liveness estão separadas?', 'O contraexemplo foi traduzido para linguagem de gente?', 'A especificação está versionada junto com o ADR?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que é uma invariante de sistema, e por que escrevê-la ajuda antes de qualquer ferramenta?', expected: 'É uma propriedade que precisa valer em todo estado alcançável. Escrevê-la obriga a definir o que significa "correto", o que resolve ambiguidade mesmo sem verificador.' },
+      { level: 'Sênior/Expert', question: 'Quando você investiria duas semanas escrevendo uma especificação formal?', expected: 'Protocolo novo de replicação, consenso, migração com dupla escrita ou saga longa, em que o defeito é raro, caro e praticamente indetectável em teste — e em que o desenho ainda pode mudar. Nunca para lógica sequencial de negócio.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Escrever em uma frase a invariante de segurança de um sistema que você mantém e mostrar um cenário que a violaria.', evidence: 'Invariante escrita, cenário descrito e verificação de que o sistema atual a protege ou não.' },
+      { level: 'Aplicado', task: 'Especificar em TLA+ (ou PlusCal) uma saga de dois passos com compensação e verificar a invariante de que nunca há débito sem crédito ou compensação.', evidence: 'Especificação versionada, saída do verificador e interpretação do resultado.' },
+      { level: 'Expert', task: 'Introduzir deliberadamente um defeito no desenho e usar o contraexemplo do verificador para explicar a falha a alguém que não conhece TLA+.', evidence: 'Traço do contraexemplo traduzido em narrativa e ADR com a correção.' }
+    ],
+    challenge: 'Pegar um desenho seu já aprovado em revisão, especificá-lo e verificar se o verificador concorda com os revisores.',
+    book: 'Designing Data-Intensive Applications, cap. 8–9 (problemas de sistemas distribuídos, consistência e consenso) como base conceitual da especificação.',
+    complements: [official.tlaplus, official.learnTla, official.alloy, official.amazonTla],
+    exampleFile: '../../examples/arquitetura-senior/formal/OrderSaga.tla'
+  },
+  {
+    number: 21,
+    part: 'fronteira',
+    id: 'simulacao-deterministica',
+    title: 'Testar o distribuído: simulação determinística e injeção de falha',
+    level: 'Expert',
+    objective: 'Projetar um regime de teste em que falhas raras se tornam frequentes e reprodutíveis por semente, em vez de esperar que a produção as encontre.',
+    prerequisites: ['Módulo 10', 'Módulo 13 (resiliência)', 'Módulo 20 ajuda, mas não é obrigatório'],
+    problem: 'Teste de integração comum exercita o caminho feliz com a rede funcionando. As falhas que derrubam sistemas distribuídos — partição no meio de um commit, relógio andando para trás, disco devolvendo dado antigo, mensagem duplicada dez minutos depois — não acontecem em CI, acontecem às três da manhã. E quando acontecem, não se reproduzem.',
+    concepts: ['Determinismo como propriedade de projeto: tempo, aleatoriedade e I/O injetáveis', 'Simulação determinística e reprodução por semente', 'Injeção de falha: partição, atraso, duplicação, reordenação, perda, crash', 'Relógio lógico versus relógio de parede no teste', 'Property-based testing aplicado a protocolo', 'Verificação de linearizabilidade (abordagem Jepsen)', 'Custo de tornar o sistema determinístico'],
+    internals: [
+      'A ideia central é remover toda fonte de não determinismo do sistema e colocá-la no simulador: se tempo, escalonamento, rede e aleatoriedade vêm de uma semente, a execução inteira é reprodutível.',
+      'Com o relógio sob controle, dias de tempo simulado rodam em segundos — é isso que torna a falha rara frequente.',
+      'Quando o teste falha, o artefato é a semente: qualquer pessoa reproduz exatamente a mesma execução, inclusive no depurador.',
+      'FoundationDB e TigerBeetle construíram o sistema inteiro em torno dessa propriedade; adotá-la depois é muito mais caro do que desde o início.'
+    ],
+    useWhen: ['Use quando correção sob falha é requisito e não conveniência (dados, pagamento, coordenação).', 'Use injeção de falha mesmo sem determinismo total — é o degrau mais barato.', 'Use verificação de linearizabilidade para checar a garantia que o sistema anuncia.'],
+    avoidWhen: ['Não busque determinismo total em sistema que só orquestra chamadas de terceiros.', 'Não substitua teste em produção por simulação: o simulador só tem as falhas que você modelou.', 'Não introduza a abstração de tempo injetável em toda a base sem um caso que a justifique.'],
+    contrast: {
+      bad: 'Suite verde há dois anos, e um incidente por trimestre causado por reordenação de mensagem que nenhum teste jamais produziu.',
+      good: 'Teste que roda dez mil execuções com falhas injetadas por semente e, ao falhar, entrega a semente que reproduz o defeito no depurador.'
+    },
+    tradeoffs: ['Determinismo dá reprodutibilidade e exige arquitetura desenhada para isso.', 'Injeção de falha é barata de começar e não cobre o que você não pensou em injetar.', 'Mais execuções aumentam a chance de achar o defeito raro e consomem tempo de CI.'],
+    production: 'Um serviço de conciliação apresenta divergência de centavos uma vez por mês, sem reprodução. A adoção de relógio e rede injetáveis permite rodar 50 mil execuções com duplicação e reordenação; o defeito aparece em 0,3% delas e passa a ter semente fixa. A correção é uma chave de idempotência; o teste que a trava roda em 4 segundos.',
+    risks: ['Falsa confiança: o simulador só falha do jeito que você programou', 'Determinismo parcial que esconde não determinismo residual', 'Tempo de CI inviável por número de execuções', 'Testes que dependem de tempo real e ficam intermitentes'],
+    checklist: ['Tempo, aleatoriedade e I/O são injetáveis?', 'Uma falha entrega semente reprodutível?', 'Quais modos de falha estão modelados — e quais não estão?', 'A suíte roda execuções suficientes para o defeito raro aparecer?', 'A garantia anunciada é verificada, não presumida?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que um teste que usa `sleep` e relógio real costuma ficar intermitente?', expected: 'Porque o resultado depende de escalonamento e carga da máquina, que variam; o teste vira uma amostra aleatória em vez de uma verificação. Tempo injetável elimina a variável.' },
+      { level: 'Sênior/Expert', question: 'Um defeito acontece uma vez por mês em produção e não reproduz. Como você o transforma em teste?', expected: 'Tornar as fontes de não determinismo injetáveis, modelar os modos de falha suspeitos, rodar muitas execuções por semente até reproduzir, fixar a semente como teste de regressão — e declarar quais modos de falha continuam não cobertos.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Substituir relógio real por relógio injetável num componente com timeout e escrever um teste que não usa espera real.', evidence: 'Teste determinístico, rodando em milissegundos, cobrindo o caso de expiração.' },
+      { level: 'Aplicado', task: 'Injetar duplicação e reordenação de mensagens num consumidor e provar (ou refutar) a idempotência dele.', evidence: 'Harness de injeção, execuções com sementes e o defeito encontrado ou a evidência de ausência.' },
+      { level: 'Expert', task: 'Construir um laço de simulação com semente que rode mil execuções com falhas combinadas e reporte a semente de cada falha.', evidence: 'Harness versionado, relatório de execuções e uma regressão travada por semente.' }
+    ],
+    challenge: 'Pegar o último incidente que "não reproduz" do seu sistema e transformá-lo num teste com semente fixa.',
+    book: 'Designing Data-Intensive Applications, cap. 8 (falhas, relógios e verdade em sistemas distribuídos); Release It!, cap. sobre testes e padrões de estabilidade.',
+    complements: [official.fdbTesting, official.tigerbeetle, official.jepsen],
+    exampleFile: '../../examples/arquitetura-senior/testing/deterministic-simulation.md'
+  },
+  {
+    number: 22,
+    part: 'fronteira',
+    id: 'chaos-engineering',
+    title: 'Chaos engineering como disciplina experimental',
+    level: 'Expert',
+    objective: 'Conduzir experimentos de falha em produção com hipótese declarada, raio de alcance limitado e critério de parada — e distinguir isso de quebrar coisas.',
+    prerequisites: ['Módulo 13 (resiliência)', 'Módulo 16 (observabilidade e SLO)', 'Autorização explícita e plano de reversão'],
+    problem: 'Sistema resiliente não é o que tem circuit breaker no código: é o que já foi verificado falhando. A maioria dos mecanismos de resiliência nunca foi exercitada — o timeout está configurado errado, o fallback tem um bug, o alerta não dispara. Isso só se descobre no incidente real, a menos que você provoque o incidente sob controle.',
+    concepts: ['Estado estável definido por métrica de negócio, não por CPU', 'Hipótese falsificável antes do experimento', 'Raio de alcance (blast radius) e escalada gradual', 'Critério de parada e reversão automática', 'Game day: o experimento com pessoas no laço', 'Diferença entre injeção de falha, game day e chaos contínuo', 'Pré-requisitos: observabilidade, SLO e autorização'],
+    internals: [
+      'A ordem é: definir estado estável mensurável → formular hipótese de que ele se mantém sob a falha X → limitar o alcance → executar → comparar. Sem hipótese, é sabotagem com relatório.',
+      'O experimento que confirma a hipótese também tem valor: ele converte uma crença em evidência datada.',
+      'O game day testa o sistema sociotécnico — runbook, alerta, escalonamento, decisão humana — e não só o software.',
+      'Chaos em produção só faz sentido depois que o básico está em pé: sem observabilidade, você provoca a falha e não consegue medir o efeito.'
+    ],
+    useWhen: ['Use para validar mecanismo de resiliência que nunca foi exercitado.', 'Use game day antes de evento de pico conhecido.', 'Use para treinar resposta a incidente sem esperar o incidente.'],
+    avoidWhen: ['Não faça caos sem observabilidade: você não saberá o que aconteceu.', 'Não comece em produção — comece em ambiente de teste e escale.', 'Não execute sem autorização, janela combinada e critério de parada.'],
+    contrast: {
+      bad: '"Vamos matar um pod em produção e ver o que acontece", sem hipótese, sem métrica de estado estável e sem combinar com ninguém.',
+      good: 'Hipótese: "com uma zona indisponível, a taxa de sucesso de checkout permanece acima de 99,5% por 10 minutos". Alcance: 5% do tráfego. Parada: taxa abaixo de 99%. Resultado registrado.'
+    },
+    tradeoffs: ['Caos em produção dá evidência real e carrega risco real ao cliente.', 'Ambiente de teste é seguro e não reproduz a carga, os dados nem as dependências reais.', 'Automação contínua encontra regressões e exige maturidade para não virar ruído.'],
+    production: 'Um serviço anuncia tolerância à perda de uma zona. O game day derruba a zona e a taxa de erro sobe a 30%: o pool de conexões tinha timeout maior que o do balanceador, e o failover levava 90 segundos. O mecanismo existia no diagrama e não na realidade; a correção é de configuração, e agora é verificada a cada trimestre.',
+    risks: ['Experimento sem critério de parada', 'Raio de alcance maior que o previsto por dependência oculta', 'Resultado não registrado, virando folclore', 'Caos como teatro: sempre o mesmo experimento, sempre confirmando'],
+    checklist: ['O estado estável é uma métrica de negócio?', 'A hipótese é falsificável e está escrita antes?', 'O raio de alcance está limitado e é conhecido?', 'Existe critério de parada e reversão automática?', 'O resultado vira ADR, correção ou item de backlog?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre chaos engineering e teste de falha?', expected: 'Teste de falha verifica um comportamento esperado em ambiente controlado; chaos engineering é um experimento com hipótese sobre o sistema real, incluindo dependências e pessoas, com raio de alcance limitado.' },
+      { level: 'Sênior/Expert', question: 'Que pré-requisitos você exigiria antes de autorizar caos em produção?', expected: 'Observabilidade que meça o estado estável, SLO definido, hipótese escrita, raio de alcance limitado, critério de parada, reversão testada, janela combinada e autorização — e a mesma falha já exercitada em ambiente inferior.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Definir o estado estável de um serviço com uma métrica de negócio e o limiar que caracterizaria degradação.', evidence: 'Métrica, limiar, fonte do dado e justificativa do número.' },
+      { level: 'Aplicado', task: 'Executar um game day em ambiente de teste com uma dependência indisponível e registrar o resultado.', evidence: 'Runbook do experimento, hipótese, medição antes/durante/depois e achados.' },
+      { level: 'Expert', task: 'Desenhar a escalada de um experimento até produção, com raio de alcance crescente e gates entre etapas.', evidence: 'Plano com etapas, critérios de avanço e parada, autorização e plano de comunicação.' }
+    ],
+    challenge: 'Escolher o mecanismo de resiliência do seu sistema em que você mais confia e projetar o experimento que provaria que ele não funciona.',
+    book: 'Release It! (padrões de estabilidade e o que falha em produção); Site Reliability Engineering (Google), cap. sobre teste de confiabilidade e resposta a emergência.',
+    complements: [official.principlesChaos, official.sre, official.buildersLibrary],
+    exampleFile: '../../examples/arquitetura-senior/testing/game-day-runbook.md'
+  },
+  {
+    number: 23,
+    part: 'fronteira',
+    id: 'celulas-isolamento',
+    title: 'Isolamento em escala: células, shuffle sharding e raio de impacto',
+    level: 'Expert',
+    objective: 'Projetar particionamento por células e shuffle sharding de modo que o raio de impacto de uma falha seja calculado, e não estimado.',
+    prerequisites: ['Módulo 13 (bulkhead)', 'Módulo 14 (escala e sharding)', 'Módulo 17 (multi-tenancy)'],
+    problem: 'Redundância protege contra falha de componente, não contra falha correlacionada: um deploy ruim, um dado envenenado ou um cliente abusivo atinge todas as réplicas ao mesmo tempo. Sem isolamento deliberado, todo sistema multi-tenant tem um único raio de impacto — todos os clientes — e nenhuma arquitetura de HA muda isso.',
+    concepts: ['Célula como unidade completa e independente do sistema', 'Roteamento de célula e a camada fina que o faz', 'Shuffle sharding: combinações distintas por cliente', 'Cálculo do raio de impacto em vez de estimativa', 'Poison pill e falha correlacionada por dado', 'Control plane versus data plane e a regra de dependência', 'Estabilidade estática: não depender do plano de controle para continuar servindo', 'Deploy por célula e escalonamento de blast radius'],
+    internals: [
+      'Com n nós e k por cliente, existem C(n,k) combinações possíveis; a chance de dois clientes caírem na mesma combinação completa é 1/C(n,k) — é isso que torna o isolamento calculável.',
+      'O ganho do shuffle sharding vem de o cliente barulhento afetar apenas quem compartilha TODAS as suas instâncias, e não quem compartilha alguma.',
+      'A camada de roteamento é a nova fonte de falha global e por isso precisa ser a parte mais simples e estável do sistema.',
+      'Estabilidade estática significa que a célula continua servindo com o plano de controle fora do ar — a dependência vale na direção contrária.'
+    ],
+    useWhen: ['Use células quando o sistema é multi-tenant e a indisponibilidade total é inaceitável.', 'Use shuffle sharding quando o recurso é compartilhado e o abuso de um cliente afeta os demais.', 'Use deploy por célula para converter um deploy ruim em incidente parcial.'],
+    avoidWhen: ['Não celularize antes de ter automação: dez células manuais são dez vezes o trabalho operacional.', 'Não crie células que compartilham banco ou fila — isso é maquiagem, não isolamento.', 'Não aplique a sistema de tenant único.'],
+    contrast: {
+      bad: 'Três zonas de disponibilidade, um único banco regional e um deploy simultâneo em tudo — a arquitetura parece resiliente e tem raio de impacto total.',
+      good: 'Oito células independentes, cliente fixado em uma, deploy em onda por célula: um deploy ruim atinge no máximo 12,5% dos clientes e é revertido antes da onda seguinte.'
+    },
+    tradeoffs: ['Mais células reduzem o raio de impacto e aumentam custo fixo e carga operacional.', 'Shuffle sharding melhora o isolamento sem multiplicar infraestrutura e complica roteamento e diagnóstico.', 'Célula grande é eficiente; célula pequena é segura.'],
+    production: 'Um SaaS sofre indisponibilidade total quando um cliente dispara uma consulta que satura o pool compartilhado. A adoção de shuffle sharding com 16 instâncias e 2 por cliente reduz o conjunto atingido a quem compartilha exatamente as mesmas duas — cerca de 1 em 120 combinações. O mesmo incidente passa a ser um chamado, não uma interrupção.',
+    risks: ['Célula com dependência compartilhada escondida', 'Camada de roteamento virando ponto único de falha', 'Explosão de custo operacional por falta de automação', 'Migração de cliente entre células sem procedimento'],
+    checklist: ['Qual é o raio de impacto, em número de clientes, de cada modo de falha?', 'Existe alguma dependência compartilhada entre células?', 'O plano de dados sobrevive à queda do plano de controle?', 'O deploy é por onda, com gate entre células?', 'O cálculo de combinações foi feito, não estimado?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que redundância não é a mesma coisa que isolamento?', expected: 'Redundância protege contra falha independente de componente; não protege contra falha correlacionada — deploy ruim, dado envenenado, cliente abusivo — que atinge todas as réplicas ao mesmo tempo.' },
+      { level: 'Sênior/Expert', question: 'Como você quantificaria o benefício de shuffle sharding antes de implementá-lo?', expected: 'Calculando C(n,k) para a configuração proposta, a fração de clientes que compartilha o conjunto completo e o raio de impacto resultante por modo de falha — e comparando com o custo operacional das alternativas.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Calcular o raio de impacto de cada modo de falha do seu sistema hoje, em número de clientes afetados.', evidence: 'Tabela modo de falha × clientes afetados, com a origem de cada número.' },
+      { level: 'Aplicado', task: 'Projetar o shuffle sharding de um recurso compartilhado e calcular C(n,k) e a sobreposição esperada.', evidence: 'Cálculo, escolha de n e k justificada e desenho do roteamento.' },
+      { level: 'Expert', task: 'Desenhar a topologia celular de um sistema real, incluindo roteamento, deploy em onda e migração de cliente.', evidence: 'ADR com número de células, dependências verificadas, custo e procedimento de migração.' }
+    ],
+    challenge: 'Encontrar, no seu sistema, a dependência compartilhada que transforma qualquer falha em falha total — e propor o isolamento com o número do raio de impacto antes e depois.',
+    book: 'Release It! (bulkhead, falha correlacionada e padrões de estabilidade); Designing Data-Intensive Applications, cap. 6 (particionamento).',
+    complements: [official.cellBased, official.shuffleSharding, official.staticStability],
+    exampleFile: '../../examples/arquitetura-senior/cells/cell-topology.md'
+  },
+  {
+    number: 24,
+    part: 'fronteira',
+    id: 'papers-fundadores',
+    title: 'Ler os papers que definiram a área',
+    level: 'Expert → fronteira',
+    objective: 'Extrair de um paper fundador a decisão, a restrição da época e o que continua válido — e usar isso para julgar a tecnologia de hoje em vez de repetir o vocabulário dela.',
+    prerequisites: ['Módulos 10–14', 'Inglês técnico de leitura', 'Disposição para ler o original em vez do resumo'],
+    problem: 'Quase todo conceito que a indústria repete — consistência eventual, quórum, log replicado, agendamento de container — nasceu num paper com contexto e restrições explícitas. Quem só conhece a versão de blog herda o vocabulário sem o raciocínio, e aplica em 2026 uma decisão que fazia sentido para o hardware e a escala de 2007.',
+    concepts: ['Método de três passagens para ler um paper (Keshav)', 'Separar a contribuição da engenharia circunstancial', 'Identificar a restrição da época: hardware, rede, custo, escala', 'Dynamo: disponibilidade acima de consistência e o preço disso', 'Spanner: relógio como infraestrutura e o que TrueTime compra', 'Raft: inteligibilidade como requisito de projeto', 'Borg e Kafka: as ideias que viraram Kubernetes e log distribuído', 'O que envelheceu e o que continua verdadeiro'],
+    internals: [
+      'Ler um paper de sistemas é ler uma decisão sob restrição: a pergunta certa não é "o que eles fizeram", é "o que eles não podiam fazer e por quê".',
+      'Dynamo escolhe disponibilidade e entrega o conflito resolvido para a aplicação; boa parte das críticas atuais ignora que essa era a restrição de negócio, não um descuido.',
+      'Spanner só oferece o que oferece porque comprou incerteza de relógio limitada com hardware dedicado — a lição é que uma garantia distribuída sempre é comprada em algum lugar.',
+      'Raft existe porque Paxos era correto e incompreensível: inteligibilidade foi tratada como requisito de engenharia, e isso é uma decisão arquitetural.'
+    ],
+    useWhen: ['Use ao avaliar uma tecnologia nova que reivindica uma garantia forte.', 'Use quando a equipe discute um trade-off que já foi estudado há vinte anos.', 'Use o método de três passagens para triar rápido o que merece leitura profunda.'],
+    avoidWhen: ['Não trate paper como manual de implementação.', 'Não copie a decisão sem copiar a restrição que a justificava.', 'Não transforme leitura em erudição: o produto é uma decisão melhor, não uma citação.'],
+    contrast: {
+      bad: 'Adotar consistência eventual "como o Dynamo" num sistema de saldo, sem o modelo de resolução de conflito que o paper exige da aplicação.',
+      good: 'Reconhecer que a escolha do Dynamo pressupõe que a aplicação resolve conflito, verificar que no seu domínio isso é inaceitável e escolher outra garantia — citando o motivo.'
+    },
+    tradeoffs: ['Ler o original dá profundidade e custa horas por paper.', 'Conhecer o histórico evita reinventar e tenta a aplicar a solução fora do contexto.', 'A terceira passagem dá domínio real e raramente se justifica para todos os papers.'],
+    production: 'Um time propõe um banco distribuído novo alegando "consistência forte e alta disponibilidade sem trade-off". A leitura do paper de referência mostra a suposição de rede e o modo de falha em que a garantia não vale. A avaliação passa a ter uma pergunta objetiva para o fornecedor, e a decisão deixa de depender de material de marketing.',
+    risks: ['Aplicar decisão fora do contexto original', 'Confundir o sistema descrito com o produto atual de mesmo nome', 'Ler apenas o abstract e concluir', 'Usar o paper como argumento de autoridade em vez de raciocínio'],
+    checklist: ['Qual era a restrição que o paper tentava contornar?', 'Essa restrição ainda existe?', 'Qual garantia foi abandonada para obter a outra?', 'O que o paper exige da aplicação?', 'A conclusão mudou alguma decisão minha?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que o teorema CAP, sozinho, é um guia ruim para escolher um banco?', expected: 'Porque ele trata só do comportamento sob partição e é binário; na prática a escolha é sobre latência e consistência no caso sem partição — que é o que o PACELC explicita — e sobre quais anomalias específicas a aplicação tolera.' },
+      { level: 'Sênior/Expert', question: 'Um fornecedor afirma oferecer consistência forte e disponibilidade total. Que perguntas você faz?', expected: 'Qual o comportamento sob partição, qual a suposição de relógio, o que acontece com escritas durante failover, qual a garantia exata em linguagem formal, e quais resultados de verificação independente existem.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Aplicar o método de três passagens a um paper fundador e produzir o resumo da primeira passagem em cinco linhas.', evidence: 'Resumo com contribuição, contexto e decisão de aprofundar ou não.' },
+      { level: 'Aplicado', task: 'Ler o paper do Dynamo e listar o que ele transfere para a aplicação e o que isso implicaria no seu domínio.', evidence: 'Nota técnica com as responsabilidades transferidas e a avaliação de viabilidade no seu contexto.' },
+      { level: 'Expert', task: 'Comparar dois papers que resolvem o mesmo problema com decisões opostas e defender qual se aplica ao seu sistema.', evidence: 'Comparação com restrições de cada época e ADR com a escolha.' }
+    ],
+    challenge: 'Escolher uma tecnologia que seu time usa hoje, ler o paper que a originou e escrever o que muda na forma de operá-la.',
+    book: 'Designing Data-Intensive Applications — as referências ao final de cada capítulo são a melhor lista de leitura dirigida da área; System Design Interview Vol. 1 e 2 para conectar paper e desenho.',
+    complements: [official.howToRead, official.dynamoPaper, official.spannerPaper, official.raft, official.borgPaper, official.kafkaPaper, official.papersWeLove],
+    exampleFile: '../../examples/arquitetura-senior/papers/reading-list.md'
+  },
+  {
+    number: 25,
+    part: 'fronteira',
+    id: 'agentes-componente',
+    title: 'Agentes de IA como componente arquitetural',
+    level: 'Expert',
+    objective: 'Tratar um modelo ou agente como componente de arquitetura — não determinístico, com custo e latência variáveis — e desenhar fronteira, fallback e verificação em torno dele.',
+    prerequisites: ['Módulo 13 (resiliência)', 'Módulo 17 (segurança arquitetural)', 'Módulo 2 (atributos de qualidade)'],
+    problem: 'Componentes de software sempre foram determinísticos: mesma entrada, mesma saída, custo previsível. Um agente quebra as três premissas ao mesmo tempo, e times o integram como se fosse mais uma chamada HTTP. O resultado é um sistema cuja corretude ninguém consegue afirmar, cujo custo varia por requisição e cujo modo de falha é produzir uma resposta errada com confiança.',
+    concepts: ['Não determinismo como atributo de qualidade a ser tratado, não eliminado', 'Fronteira de permissão: o que o agente propõe versus o que ele executa', 'Custo e latência por requisição como requisito arquitetural', 'Fallback determinístico e degradação graciosa', 'Avaliação contínua (evals) como o teste de regressão desse componente', 'Injeção de prompt como fronteira de confiança, não como bug', 'MCP e interoperabilidade de ferramentas', 'Quando um workflow determinístico resolve melhor'],
+    internals: [
+      'A saída do modelo é uma proposta; quem executa é código determinístico que valida, autoriza e limita. Confundir as duas coisas é a origem da maior parte dos incidentes.',
+      'Todo conteúdo que entra no contexto vem de uma fronteira de confiança: documento, página, resposta de ferramenta. Tratar isso como dado, e não como instrução, é decisão de arquitetura.',
+      'Sem eval automatizado, não existe regressão detectável: a mudança de um prompt ou de uma versão de modelo é um deploy sem teste.',
+      'Custo e latência escalam com tokens e passos, não com requisições — o modelo de capacidade é diferente de tudo o mais no sistema.'
+    ],
+    useWhen: ['Use agente onde o espaço de entrada é aberto demais para enumerar regras.', 'Use workflow determinístico quando os passos são conhecidos — é mais barato e verificável.', 'Use human-in-the-loop onde a ação é irreversível ou cara.'],
+    avoidWhen: ['Não coloque agente no caminho crítico sem fallback determinístico.', 'Não dê ao agente permissão que você não daria a um usuário anônimo da internet.', 'Não trate saída de modelo como verdade sem verificação estrutural.'],
+    contrast: {
+      bad: 'Um agente com acesso direto ao banco e à API de pagamento, "porque o prompt diz para ele só consultar".',
+      good: 'O agente propõe; uma camada determinística valida contra o esquema, checa autorização por RBAC, aplica limite de valor e exige confirmação humana para o irreversível.'
+    },
+    tradeoffs: ['Agente cobre casos abertos e reduz a previsibilidade do sistema.', 'Fallback determinístico garante disponibilidade e exige manter dois caminhos.', 'Eval contínuo dá rede de segurança e adiciona custo por execução de pipeline.'],
+    production: 'Um assistente de suporte é integrado com acesso à API interna de reembolso. Um documento enviado por um cliente contém instruções endereçadas ao agente, que as segue. O incidente não é um bug do modelo: é ausência de fronteira. O redesign move o reembolso para uma tool com RBAC, limite de valor e confirmação humana, e passa a tratar todo conteúdo externo como dado.',
+    risks: ['Injeção de prompt por conteúdo externo', 'Custo por requisição sem limite superior', 'Regressão silenciosa ao trocar versão do modelo', 'Ausência de fallback quando o provedor degrada', 'Dependência de fornecedor único sem porta de saída'],
+    checklist: ['O componente tem fallback determinístico?', 'Existe limite superior de custo e de passos por requisição?', 'Todo conteúdo externo é tratado como dado, não como instrução?', 'Há eval automatizado rodando antes de cada mudança de prompt ou modelo?', 'Qual ação o agente pode executar sozinho, e qual exige confirmação?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que um componente baseado em LLM muda o desenho em volta dele?', expected: 'Porque quebra determinismo, previsibilidade de custo e de latência ao mesmo tempo; exige fallback, limite de custo, validação de saída e um teste de regressão que não é teste unitário.' },
+      { level: 'Sênior/Expert', question: 'Como você limitaria o raio de ação de um agente com acesso a ferramentas internas?', expected: 'Separar proposta de execução, autorizar cada ferramenta por RBAC com a identidade do usuário final, impor limites de valor e de passos, exigir confirmação para o irreversível, tratar conteúdo externo como dado e registrar tudo em auditoria.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Classificar as ações de um fluxo com IA em automáticas, revisáveis e que exigem confirmação, com o critério de cada faixa.', evidence: 'Tabela de ações com reversibilidade, custo do erro e decisão.' },
+      { level: 'Aplicado', task: 'Desenhar a fronteira de permissão de um agente com duas ferramentas, uma de leitura e uma de escrita.', evidence: 'Diagrama C4 de componente, contrato das tools e regra de autorização.' },
+      { level: 'Expert', task: 'Escrever o ADR que decide entre workflow determinístico e agente para um caso real, com custo, avaliação e plano de reversão.', evidence: 'ADR com alternativas, orçamento por requisição, estratégia de eval e gatilho de reversão.' }
+    ],
+    challenge: 'Pegar um fluxo do seu sistema que alguém quer "colocar IA" e escrever o desenho em que o agente é a menor parte possível — e o ADR que justifica cada fronteira.',
+    book: 'Release It! (padrões de estabilidade aplicados a dependência instável); Fundamentals of Software Architecture (atributos de qualidade e decisões sob incerteza). A construção do sistema de IA em si é a trilha de IA.',
+    complements: [official.mcp, official.nistAi, official.awswa],
+    exampleFile: '../../examples/arquitetura-senior/adr/0007-agent-boundary.md'
   }
 ];
 
@@ -1016,11 +1363,27 @@ export const arquiteturaAssessment = Object.freeze({
     }
   ],
   completion: [
-    'Todos os 18 objetivos foram demonstrados por evidência (C4, ADR, contrato, teste ou métrica), não por leitura.',
+    'Os 18 objetivos dos módulos 1–18 foram demonstrados por evidência (C4, ADR, contrato, teste ou métrica), não por leitura.',
     'Cada decisão estrutural relevante tem um ADR com contexto, alternativas e consequências.',
     'Ao menos 36 exercícios foram concluídos, incluindo 18 aplicados e 5 de nível expert.',
     'Os cinco casos foram defendidos com trade-offs, riscos, plano de rollback e sinais de senioridade.',
     'Um capstone atende aos critérios; o projeto Expert exige também impacto e governança entre times.',
-    'Nenhum módulo é marcado como Dominado antes de evidência validada em architecture review.'
+    'Nenhum módulo é marcado como Dominado antes de evidência validada em architecture review.',
+    'Fronteira (módulos 19–25) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira concluída exige: um ADR que recusa event sourcing com alternativa defendida, uma especificação formal cujo verificador encontrou um contraexemplo, um defeito que "não reproduzia" travado por semente, um game day executado com hipótese escrita antes, o raio de impacto do sistema calculado em número de clientes, um paper fundador que mudou uma decisão sua, e a fronteira de permissão de um componente de IA desenhada e testada contra injeção.'
   ]
 });
+
+/*
+ * Gabarito de autoavaliação. Em arquitetura a resposta certa quase nunca é única —
+ * o critério é a qualidade do raciocínio e da evidência, não a coincidência com o texto.
+ */
+export const arquiteturaAnswerKey = arquiteturaModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: module.interview.map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Decidir sem registrar a alternativa descartada.',
+  criterioDeAceite: module.exercises.map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));

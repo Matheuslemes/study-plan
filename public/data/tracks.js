@@ -81,7 +81,7 @@ export const tracks = [
   { "key": "ia", "label": "IA Engineering", "h": "fase 11", "suffix": "" },
   { "key": "math", "label": "Matemática aplicada", "h": "acoplada a DB e IA", "suffix": "" },
   { "key": "fin", "label": "Financeiro", "h": "revisão mensal · 1h", "suffix": "" },
-  { "key": "treino", "label": "Treino Híbrido", "h": "5–6x/sem · 60–90min", "suffix": "" }
+  { "key": "treino", "label": "Treino Híbrido", "h": "5x força · cardio 2 turnos", "suffix": "" }
 ];
 
 export const quickTracks = [
@@ -370,17 +370,17 @@ export const quickTracks = [
     label: "Treino Híbrido",
     href: "./trilhas/treino.html",
     badge: "Saúde + Cardio",
-    desc: "Plano de treino híbrido otimizado: musculação 3x/semana, cardio 6x/semana, fases progressivas, Zona 2, preservação muscular, adaptação para semanas difíceis e limite de 90 min/dia.",
+    desc: "Plano de treino híbrido reconstruído: musculação 5x/semana com um grupo por dia (peito, pernas, costas, ombros, braços), cardio em dois turnos diários (Zona 2 em jejum e 4x4 norueguês), volume semanal auditado, progressão dupla, nutrição e avaliação em números.",
     extraBadges: [
-      { label: "103 kg" },
+      { label: "110 kg" },
       { label: "1,80 m" },
-      { label: "Massa muscular" },
-      { label: "1h30/treino" },
-      { label: "3 fases" },
-      { label: "Cardio 6x" },
-      { label: "Musculação 3x" },
-      { label: "Zona 2" },
-      { label: "Semana 8" }
+      { label: "Split por grupo" },
+      { label: "Cardio 2 turnos" },
+      { label: "4x4 norueguês" },
+      { label: "10–18 séries" },
+      { label: "Progressão dupla" },
+      { label: "Braço 2x" },
+      { label: "Abdômen 3x · Panturrilha 2x" }
     ]
   }
 ];
@@ -447,7 +447,14 @@ export const TRACK_REGISTRY = Object.freeze({
     shortLabel: 'Java',
     brand: 'Java Track',
     dataFile: 'java-advanced.js',
-    exports: { academy: 'javaAcademy', modules: 'javaModules', books: 'javaBooks', assessment: 'javaAssessment' },
+    exports: {
+      academy: 'javaAcademy',
+      modules: 'javaModules',
+      books: 'javaBooks',
+      assessment: 'javaAssessment',
+      answerKey: 'javaAnswerKey',
+      baseline: 'javaTechnologyBaseline'
+    },
     academy: true
   },
   ia: {
@@ -476,7 +483,9 @@ export const TRACK_REGISTRY = Object.freeze({
       academy: 'arquiteturaAcademy',
       modules: 'arquiteturaModules',
       books: 'arquiteturaBooks',
-      assessment: 'arquiteturaAssessment'
+      assessment: 'arquiteturaAssessment',
+      answerKey: 'arquiteturaAnswerKey',
+      baseline: 'arquiteturaTechnologyBaseline'
     },
     academy: true
   },
@@ -485,7 +494,14 @@ export const TRACK_REGISTRY = Object.freeze({
     shortLabel: 'Python',
     brand: 'Python Track',
     dataFile: 'python-advanced.js',
-    exports: { academy: 'pythonAcademy', modules: 'pythonModules', books: 'pythonBooks', assessment: 'pythonAssessment' },
+    exports: {
+      academy: 'pythonAcademy',
+      modules: 'pythonModules',
+      books: 'pythonBooks',
+      assessment: 'pythonAssessment',
+      answerKey: 'pythonAnswerKey',
+      baseline: 'pythonTechnologyBaseline'
+    },
     academy: true
   },
   aws: {
@@ -493,7 +509,14 @@ export const TRACK_REGISTRY = Object.freeze({
     shortLabel: 'AWS',
     brand: 'AWS Academy',
     dataFile: 'aws-advanced.js',
-    exports: { academy: 'awsAcademy', modules: 'awsModules', books: 'awsBooks', assessment: 'awsAssessment' },
+    exports: {
+      academy: 'awsAcademy',
+      modules: 'awsModules',
+      books: 'awsBooks',
+      assessment: 'awsAssessment',
+      answerKey: 'awsAnswerKey',
+      baseline: 'awsTechnologyBaseline'
+    },
     academy: true
   },
   devops: {
@@ -501,7 +524,14 @@ export const TRACK_REGISTRY = Object.freeze({
     shortLabel: 'DevOps',
     brand: 'DevOps Academy',
     dataFile: 'devops-advanced.js',
-    exports: { academy: 'devopsAcademy', modules: 'devopsModules', books: 'devopsBooks', assessment: 'devopsAssessment' },
+    exports: {
+      academy: 'devopsAcademy',
+      modules: 'devopsModules',
+      books: 'devopsBooks',
+      assessment: 'devopsAssessment',
+      answerKey: 'devopsAnswerKey',
+      baseline: 'devopsTechnologyBaseline'
+    },
     academy: true
   },
   frontend: {
@@ -513,7 +543,9 @@ export const TRACK_REGISTRY = Object.freeze({
       academy: 'frontendAcademy',
       modules: 'frontendModules',
       books: 'frontendBooks',
-      assessment: 'frontendAssessment'
+      assessment: 'frontendAssessment',
+      answerKey: 'frontendAnswerKey',
+      baseline: 'frontendTechnologyBaseline'
     },
     academy: true
   },
@@ -522,7 +554,14 @@ export const TRACK_REGISTRY = Object.freeze({
     shortLabel: 'Bancos',
     brand: 'Database Track',
     dataFile: 'bancos-advanced.js',
-    exports: { academy: 'bancosAcademy', modules: 'bancosModules', books: 'bancosBooks', assessment: 'bancosAssessment' },
+    exports: {
+      academy: 'bancosAcademy',
+      modules: 'bancosModules',
+      books: 'bancosBooks',
+      assessment: 'bancosAssessment',
+      answerKey: 'bancosAnswerKey',
+      baseline: 'bancosTechnologyBaseline'
+    },
     academy: true
   },
   git: {
@@ -568,7 +607,9 @@ export const TRACK_REGISTRY = Object.freeze({
       academy: 'secAcademy',
       modules: 'secModules',
       books: 'secBooks',
-      assessment: 'secAssessment'
+      assessment: 'secAssessment',
+      answerKey: 'secAnswerKey',
+      baseline: 'secTechnologyBaseline'
     },
     academy: true
   },

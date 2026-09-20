@@ -3,7 +3,7 @@
  * HTML usa network-first; assets versionados usam cache-first com revalidação.
  */
 
-const VERSAO = 'v79-sequential-design-audit';
+const VERSAO = 'v83-treino-ficha-ios-descanso-90s';
 const CACHE = `plano-estudos-${VERSAO}`;
 
 const PARTES_ACADEMIA = {
@@ -19,7 +19,11 @@ const PARTES_ACADEMIA = {
   java: ['avaliacao', 'fundamentos', 'producao', 'runtime'],
   matematica: ['avaliacao', 'discreta', 'linear', 'otimizacao', 'probabilidade'],
   python: ['avaliacao', 'fundamentos', 'performance', 'producao', 'qualidade'],
-  sec: ['avaliacao', 'controles', 'modelagem', 'operacao', 'verificacao']
+  sec: ['avaliacao', 'controles', 'modelagem', 'operacao', 'verificacao'],
+  // treino não é uma Academia, mas seus submódulos seguem o mesmo caminho
+  // ./trilhas/<id>/<parte>.html e precisam entrar no precache — inclusive a
+  // ficha de bolso, que é justamente a página que precisa funcionar offline.
+  treino: ['avaliacao', 'cardio', 'execucao', 'ficha']
 };
 
 const IDS_TRILHA = [

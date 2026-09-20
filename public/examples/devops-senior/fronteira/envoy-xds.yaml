@@ -1,0 +1,129 @@
+# Academia DevOps · módulo 23 — configuração estática de Envoy, anotada
+#
+# CONFERIDO com `envoy --mode validate -c envoy-xds.yaml` (Envoy 1.31).
+#
+#   docker run --rm -v "$PWD:/w" envoyproxy/envoy:v1.31-latest \
+#     envoy --mode validate -c /w/envoy-xds.yaml
+#
+# Por que ler isto: todo service mesh e quase todo gateway moderno usam Envoy como
+# data plane. Entender ESTA estrutura é entender o mecanismo; o produto por cima
+# é embalagem. Num mesh real nada disto é estático — vem por xDS do control plane.
+#
+# O caminho de uma requisição, nos quatro objetos que importam:
+#
+#   listener  ── onde eu escuto
+#      └── filter_chain ── o que faço com o que chega
+#            └── route  ── para qual cluster eu mando
+#                  └── cluster ── conjunto de endpoints + política
+#                        └── endpoint ── o destino real
+
+static_resources:
+  listeners:
+    - name: listener_ingress
+      address:
+        socket_address: { address: 0.0.0.0, port_value: 10000 }
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: ingress_http
+                # Trace e access log não são opcionais num data plane:
+                # sem eles o proxy vira uma caixa-preta no meio do caminho.
+                access_log:
+                  - name: envoy.access_loggers.stdout
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog
+                route_config:
+                  name: local_route
+                  virtual_hosts:
+                    - name: backend
+                      domains: ["*"]
+                      routes:
+                        - match: { prefix: "/" }
+                          route:
+                            cluster: service_backend
+                            # TIMEOUT: sem isto o Envoy usa 15s por padrão, o que
+                            # costuma ser muito mais do que o seu SLO tolera.
+                            timeout: 3s
+                            retry_policy:
+                              # ATENÇÃO — módulo 23: se a aplicação TAMBÉM tem
+                              # retry, 2 aqui x 3 lá = 6 chamadas ao destino sob
+                              # degradação. Decida UMA camada e desligue a outra.
+                              retry_on: "5xx,reset,connect-failure"
+                              num_retries: 2
+                              per_try_timeout: 1s
+                              retry_back_off:
+                                base_interval: 0.05s
+                                max_interval: 1s
+                http_filters:
+                  - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+  clusters:
+    - name: service_backend
+      type: STRICT_DNS
+      lb_policy: ROUND_ROBIN
+      connect_timeout: 1s
+      # CIRCUIT BREAKER: o limite que impede o proxy de empurrar mais carga
+      # para um destino que já está afogado. Padrões do Envoy são altos demais
+      # para a maioria dos serviços — ajuste com medição.
+      circuit_breakers:
+        thresholds:
+          - priority: DEFAULT
+            max_connections: 100
+            max_pending_requests: 50
+            max_requests: 200
+            max_retries: 10        # teto global de retries em voo
+      # OUTLIER DETECTION: remove endpoint doente do balanceamento sozinho.
+      # É o mecanismo que mais se aproxima de "circuit breaker por instância".
+      outlier_detection:
+        consecutive_5xx: 5
+        interval: 10s
+        base_ejection_time: 30s
+        max_ejection_percent: 50   # nunca ejetar mais que metade
+      health_checks:
+        - timeout: 1s
+          interval: 5s
+          unhealthy_threshold: 3
+          healthy_threshold: 2
+          http_health_check: { path: "/healthz" }
+      load_assignment:
+        cluster_name: service_backend
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address: { address: backend.default.svc.cluster.local, port_value: 8080 }
+
+admin:
+  address:
+    socket_address: { address: 127.0.0.1, port_value: 9901 }
+
+# ---------------------------------------------------------------------------
+# O QUE MUDA NUM MESH DE VERDADE
+#
+# Nada acima é estático. O Envoy sobe quase vazio e pergunta ao control plane:
+#
+#   LDS  listeners    "onde eu escuto?"
+#   RDS  routes       "para onde eu mando?"
+#   CDS  clusters     "quais destinos existem?"
+#   EDS  endpoints    "quais instâncias estão vivas agora?"
+#   SDS  secrets      "qual meu certificado?"   <- é aqui que o mTLS acontece
+#
+# É por isso que dá para mudar roteamento sem reiniciar nada: o control plane
+# empurra a atualização e o data plane aplica.
+#
+# E é por isso que o control plane é crítico: com ele fora do ar, os proxies
+# continuam com a última configuração (isso é bom), mas nada novo é descoberto —
+# um pod novo não entra no balanceamento. Pergunte sempre: quem opera isso, e
+# quem é o reserva?
+#
+# EXERCÍCIO DO MÓDULO 23
+#   1. Trace o caminho de uma requisição para /api nos quatro objetos acima.
+#   2. Calcule o pior caso de chamadas ao destino somando o retry desta
+#      configuração com o da sua aplicação.
+#   3. Meça a latência do seu serviço com e sem sidecar. Registre p50 e p99,
+#      e a memória por pod. Esse é o preço do mesh.
+# ---------------------------------------------------------------------------

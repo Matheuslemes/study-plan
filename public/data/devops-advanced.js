@@ -23,7 +23,30 @@ const official = Object.freeze({
   sreWorkbook: { label: 'Google SRE - workbook', url: 'https://sre.google/workbook/table-of-contents/' },
   slsa: { label: 'SLSA - supply-chain levels', url: 'https://slsa.dev/spec/' },
   finops: { label: 'FinOps Framework', url: 'https://www.finops.org/framework/' },
-  backstage: { label: 'Backstage - software catalog', url: 'https://backstage.io/docs/features/software-catalog/' }
+  backstage: { label: 'Backstage - software catalog', url: 'https://backstage.io/docs/features/software-catalog/' },
+  doraAi: { label: 'DORA - State of AI-assisted Software Development 2025', url: 'https://dora.dev/dora-report-2025/' },
+  doraAiModel: { label: 'DORA - AI Capabilities Model', url: 'https://dora.dev/research/ai/capabilities-model/' },
+  crd: { label: 'Kubernetes - Custom Resources e CRDs', url: 'https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/' },
+  operatorPattern: { label: 'Kubernetes - Operator pattern', url: 'https://kubernetes.io/docs/concepts/extend-kubernetes/operator/' },
+  controllerRuntime: { label: 'controller-runtime - biblioteca de controllers', url: 'https://github.com/kubernetes-sigs/controller-runtime' },
+  kubebuilder: { label: 'Kubebuilder Book', url: 'https://book.kubebuilder.io/' },
+  apiConventions: { label: 'Kubernetes - API conventions', url: 'https://github.com/kubernetes/community/blob/master/contributors/devel/sig-architecture/api-conventions.md' },
+  ebpf: { label: 'eBPF - documentação', url: 'https://ebpf.io/what-is-ebpf/' },
+  cilium: { label: 'Cilium - rede e observabilidade com eBPF', url: 'https://docs.cilium.io/' },
+  bpftrace: { label: 'bpftrace - linguagem de rastreamento', url: 'https://github.com/bpftrace/bpftrace' },
+  brendanGregg: { label: 'Brendan Gregg - Linux performance', url: 'https://www.brendangregg.com/linuxperf.html' },
+  envoy: { label: 'Envoy Proxy - documentação', url: 'https://www.envoyproxy.io/docs/envoy/latest/' },
+  xds: { label: 'Envoy - xDS API', url: 'https://www.envoyproxy.io/docs/envoy/latest/api-docs/xds_protocol' },
+  gatewayApi: { label: 'Kubernetes - Gateway API', url: 'https://gateway-api.sigs.k8s.io/' },
+  istio: { label: 'Istio - arquitetura', url: 'https://istio.io/latest/docs/ops/deployment/architecture/' },
+  opentofu: { label: 'OpenTofu - documentação', url: 'https://opentofu.org/docs/' },
+  tofuRegistry: { label: 'OpenTofu - registry de providers', url: 'https://search.opentofu.org/' },
+  terraformProvider: { label: 'Terraform - escrever um provider', url: 'https://developer.hashicorp.com/terraform/plugin/framework' },
+  platformEng: { label: 'CNCF - Platform Engineering maturity model', url: 'https://tag-app-delivery.cncf.io/whitepapers/platform-eng-maturity-model/' },
+  teamTopologies: { label: 'Team Topologies - conceitos', url: 'https://teamtopologies.com/key-concepts' },
+  k8sRepo: { label: 'Kubernetes - código-fonte no GitHub', url: 'https://github.com/kubernetes/kubernetes' },
+  keps: { label: 'Kubernetes Enhancement Proposals (KEPs)', url: 'https://github.com/kubernetes/enhancements/tree/master/keps' },
+  k8sContributor: { label: 'Kubernetes - Contributor Guide', url: 'https://www.kubernetes.dev/docs/' }
 });
 
 export const devopsBooks = Object.freeze({
@@ -159,13 +182,34 @@ export const devopsBooks = Object.freeze({
   }
 });
 
+/*
+ * Baseline tecnológico. Duas mudanças recentes alteram respostas que eram
+ * corretas até pouco tempo: o licenciamento do Terraform (que criou o OpenTofu)
+ * e a evolução do próprio modelo DORA, que deixou de ser "as quatro métricas".
+ * Ambas são tratadas nos módulos, não escondidas aqui.
+ */
+export const devopsTechnologyBaseline = [
+  { technology: 'Kubernetes', baseline: '1.34–1.36 em suporte', status: 'Três minors suportadas', note: 'A janela de suporte é curta: planeje atualização como rotina, não como projeto. A 1.35 é a última a suportar containerd 1.x.' },
+  { technology: 'Gateway API', baseline: 'estável para HTTP', status: 'Sucessora do Ingress', note: 'Modelo com papéis separados (infra, cluster, aplicação). Ingress está em manutenção. Módulo 8.' },
+  { technology: 'containerd', baseline: '2.x', status: 'Obrigatório a partir da 1.36', note: 'Migre antes de subir de versão do Kubernetes — é um bloqueio, não um aviso.' },
+  { technology: 'Terraform', baseline: '1.x sob BSL', status: 'Licença mudou em 2023', note: 'Deixou de ser MPL. A BSL restringe uso competitivo e converte para MPL após quatro anos por release. Verifique com o jurídico.' },
+  { technology: 'OpenTofu', baseline: '1.x, Linux Foundation', status: 'Alternativa consolidada', note: 'Fork MPL do Terraform. Cerca de 12% de adoção; o GitLab depreciou os templates Terraform em 2025 por licenciamento. Compatível na maior parte dos casos. Módulo 26.' },
+  { technology: 'DORA — métricas', baseline: 'cinco, não quatro', status: 'Modelo evoluiu', note: 'Rework rate entrou; Reliability é quase-métrica; "MTTR" virou failed deployment recovery time. Módulo 5.' },
+  { technology: 'DORA — modelo de IA', baseline: 'AI Capabilities Model (2025)', status: 'Novo eixo', note: 'Sete capacidades que amplificam o benefício de IA; os quatro níveis de performance deram lugar a sete arquétipos de time. Módulos 5 e 20.' },
+  { technology: 'OpenTelemetry', baseline: 'convenções estáveis para HTTP', status: 'Em evolução por domínio', note: 'Fixe a versão da convenção semântica; mudança dela quebra dashboard e alerta. Módulo 11.' },
+  { technology: 'eBPF', baseline: 'produção em larga escala', status: 'Maduro', note: 'Base de Cilium, Pixie e da geração atual de observabilidade sem instrumentação. Exige kernel recente. Módulo 22.' },
+  { technology: 'Envoy / xDS', baseline: 'estável', status: 'Padrão de fato', note: 'Data plane da maioria dos meshes e gateways. Conhecer xDS é conhecer o mecanismo, não o produto. Módulo 23.' },
+  { technology: 'SLSA', baseline: 'v1.x', status: 'Estável', note: 'Níveis de proveniência de build. Referência para supply chain. Módulo 17.' },
+  { technology: 'Service mesh', baseline: 'adoção em queda', status: 'Reavaliar', note: 'A adoção caiu de ~18% (2023) para ~8% (2025): o custo passou a ser a restrição dominante. Adote por requisito medido, não por padrão de arquitetura.' }
+];
+
 export const devopsAcademy = Object.freeze({
   title: 'Academia DevOps, Cloud e SRE',
   baseline: `Pesquisa técnica: ${DEVOPS_RESEARCH_DATE} · evidência operacional acima de presença`,
   book: 'handbook',
   parts: {
     fundamentos: {
-      index: '1/5',
+      index: '1/6',
       range: 'Módulos 1-5',
       page: 'fundamentos.html',
       navLabel: 'Fluxo e entrega',
@@ -175,7 +219,7 @@ export const devopsAcademy = Object.freeze({
       objectives: ['Mapear um fluxo de valor com espera e retrabalho', 'Diagnosticar falha de host ou rede por evidência', 'Projetar pipeline com feedback rápido e gates proporcionais', 'Medir entrega sem transformar métrica em meta local']
     },
     plataforma: {
-      index: '2/5',
+      index: '2/6',
       range: 'Módulos 6-10',
       page: 'plataforma.html',
       navLabel: 'Plataforma e IaC',
@@ -185,7 +229,7 @@ export const devopsAcademy = Object.freeze({
       objectives: ['Construir imagem mínima e verificável', 'Operar workloads e rede Kubernetes com probes e limites', 'Projetar state remoto e módulos Terraform', 'Testar infraestrutura e bloquear mudanças inseguras']
     },
     confiabilidade: {
-      index: '3/5',
+      index: '3/6',
       range: 'Módulos 11-15',
       page: 'confiabilidade.html',
       navLabel: 'Observabilidade e SRE',
@@ -195,7 +239,7 @@ export const devopsAcademy = Object.freeze({
       objectives: ['Instrumentar sinais correlacionáveis com OpenTelemetry', 'Definir SLI, SLO e política de error budget', 'Projetar alertas acionáveis e resposta a incidentes', 'Testar capacidade, recuperação e continuidade']
     },
     operacao: {
-      index: '4/5',
+      index: '4/6',
       range: 'Módulos 16-20',
       page: 'operacao.html',
       navLabel: 'Operação e liderança',
@@ -204,8 +248,30 @@ export const devopsAcademy = Object.freeze({
       prerequisites: ['Pipeline, IaC e SLO demonstráveis', 'Experiência com incidentes ou game days', 'Capacidade de escrever ADR, runbook e postmortem'],
       objectives: ['Projetar golden path como produto de plataforma', 'Proteger supply chain e identidade de workloads', 'Alocar custo e capacidade por unidade econômica', 'Conduzir melhoria contínua sem otimização local']
     },
+    fronteira: {
+      index: '5/6',
+      range: 'Módulos 21-27',
+      page: 'fronteira.html',
+      navLabel: 'Fronteira',
+      title: 'Fronteira: estender a plataforma',
+      subtitle: 'Operator próprio, eBPF, Envoy e xDS, kernel e latência, IDP como produto, OpenTofu e o código do Kubernetes.',
+      prerequisites: [
+        'Dominar os módulos 6-10: containers, workloads, rede Kubernetes e IaC.',
+        'Ter operado um incidente real e lido telemetria sob pressão.',
+        'Aceitar que aqui a resposta costuma estar no código do componente, não na documentação dele.'
+      ],
+      objectives: [
+        'Escrever um operator que reconcilia estado desejado e real, e explicar por que é um laço e não um script.',
+        'Instrumentar kernel e rede com eBPF sem alterar a aplicação observada.',
+        'Explicar o data plane pelo mecanismo (Envoy e xDS) em vez de pelo produto que o embala.',
+        'Diagnosticar latência abaixo do runtime, com perf e ferramentas de kernel.',
+        'Tratar a plataforma interna como produto, com contrato, versionamento e clientes.',
+        'Decidir entre Terraform e OpenTofu por critério técnico e jurídico, e publicar um módulo testado.',
+        'Responder uma dúvida de comportamento lendo o código e os KEPs do Kubernetes.'
+      ]
+    },
     avaliacao: {
-      index: '5/5',
+      index: '6/6',
       range: 'Evidência',
       page: 'avaliacao.html',
       navLabel: 'Avaliação e projetos',
@@ -335,8 +401,8 @@ export const devopsModules = Object.freeze([
     objective: 'Calcular métricas de entrega com definições auditáveis e usá-las para testar uma hipótese de melhoria.',
     prerequisites: ['Eventos de commit, deploy e incidente', 'Noções de percentis', 'Mapa de fluxo'],
     problem: 'Contadores sem definição comum geram comparação falsa, gaming e decisões locais.',
-    concepts: ['Deployment frequency', 'Lead time for changes', 'Change failure rate', 'Failed deployment recovery time', 'Reliability'],
-    internals: ['A unidade de mudança precisa ser consistente.', 'Percentis revelam cauda escondida pela média.', 'Métricas funcionam em conjunto; otimizar uma isolada distorce comportamento.'],
+    concepts: ['Deployment frequency', 'Lead time for changes', 'Change failure rate', 'Failed deployment recovery time', 'Reliability', 'Rework rate', 'Arquétipos de time e o fim dos quatro níveis'],
+    internals: ['A unidade de mudança precisa ser consistente.', 'Percentis revelam cauda escondida pela média.', 'Métricas funcionam em conjunto; otimizar uma isolada distorce comportamento.', 'O modelo evoluiu: não são mais "as quatro métricas". Rework rate entrou como medida de retrabalho não planejado, Reliability é quase-métrica, e o antigo MTTR virou failed deployment recovery time — nome que deixa explícito o que está sendo medido.', 'A classificação em quatro níveis de performance deu lugar a sete arquétipos de time, obtidos por análise de agrupamento: a pergunta deixou de ser "em que nível estamos" e passou a ser "com qual perfil nos parecemos, e qual é a nossa restrição".', 'O relatório de 2025 acrescenta o eixo de IA: a tese central é que IA é amplificadora — ela magnifica a capacidade existente, boa ou ruim. Um time com fluxo ruim entrega problemas mais rápido. Módulo 20 trata o modelo de capacidades.'],
     useWhen: ['Avaliar tendência do mesmo sistema.', 'Priorizar capacidade de entrega.'],
     avoidWhen: ['Não ranquear indivíduos.', 'Não comparar contextos sem normalização.'],
     contrast: { bad: 'Meta de deploys força mudanças artificiais.', good: 'Equipe define eventos, acompanha tendência e conecta melhoria a resultado e confiabilidade.' },
@@ -443,8 +509,8 @@ export const devopsModules = Object.freeze([
     objective: 'Projetar state remoto, locking, módulos pequenos e composição com blast radius explícito.',
     prerequisites: ['Cloud e IAM', 'HCL básico', 'Git e pipeline'],
     problem: 'State monolítico ou local mistura equipes, amplia impacto e permite concorrência destrutiva.',
-    concepts: ['State e binding', 'Backend remoto', 'Locking', 'Módulo root/child', 'Outputs e dependências'],
-    internals: ['State liga endereço lógico a objeto remoto.', 'Plan compara configuração, state e leitura do provider.', 'Módulo é unidade de composição; state é unidade operacional.'],
+    concepts: ['State e binding', 'Backend remoto', 'Locking', 'Módulo root/child', 'Outputs e dependências', 'Terraform e OpenTofu: a escolha da ferramenta'],
+    internals: ['State liga endereço lógico a objeto remoto.', 'Plan compara configuração, state e leitura do provider.', 'Módulo é unidade de composição; state é unidade operacional.', 'Desde 2023 "usar Terraform" deixou de ser decisão puramente técnica: a licença passou de MPL para BSL, e o fork OpenTofu nasceu sob a Linux Foundation mantendo licença aberta. Os conceitos deste módulo — state, plan, módulos, locking — valem igualmente nos dois. A escolha da ferramenta é tratada no módulo 26.'],
     useWhen: ['Gerenciar lifecycle declarativo.', 'Reutilizar abstração estável.'],
     avoidWhen: ['Não guardar state no Git.', 'Não criar módulo para cada recurso isolado.'],
     contrast: { bad: 'Um state global e módulo universal.', good: 'States por ciclo de vida, backend protegido e módulos orientados a capacidade.' },
@@ -760,7 +826,287 @@ export const devopsModules = Object.freeze([
     ],
     challenge: 'Redesenhar interação entre plataforma e produtos com limites de responsabilidade e métricas de outcome.',
     book: 'The DevOps Handbook, Three Ways e transformação; Accelerate, parte III; The Phoenix Project.',
-    complements: [official.dora, official.sre], exampleFile: '../../examples/devops-senior/operacao-e-lideranca.md'
+    complements: [official.dora, official.sre, official.doraAiModel], exampleFile: '../../examples/devops-senior/operacao-e-lideranca.md'
+  }),
+  moduleOf({
+    number: 21,
+    part: 'fronteira',
+    id: 'operator-kubernetes',
+    title: 'Escrever um operator: CRD, reconciliação e controller-runtime',
+    level: 'Expert',
+    objective: 'Estender a API do Kubernetes com um recurso próprio e um laço de reconciliação, entendendo por que o modelo é um laço convergente e não um script de instalação.',
+    prerequisites: ['Módulo 7 (workloads e ciclo de vida)', 'Módulo 8 (rede, RBAC e ServiceAccount)', 'Leitura de YAML e noção de API declarativa'],
+    problem: 'Toda operação recorrente vira script: criar banco, rotacionar credencial, provisionar tenant. Script roda uma vez, falha no meio e deixa estado parcial que ninguém reconcilia. O Kubernetes resolveu isso com um padrão, e quem não o entende reimplementa a parte fácil e ignora a difícil.',
+    concepts: ['CRD: estender a API sem alterar o núcleo', 'Spec (desejado) versus Status (observado)', 'Reconciliação: função idempotente de convergência, não sequência de passos', 'Nível versus borda: reagir ao estado, não ao evento', 'Requeue, backoff e o que fazer quando não converge', 'Finalizers e remoção ordenada', 'Owner references e coleta de lixo', 'Conditions e o contrato de status da API'],
+    internals: [
+      'O reconciler recebe apenas uma chave e vai LER o estado atual — ele não recebe o evento nem confia nele. É por isso que perder um evento não quebra o sistema: o próximo laço corrige.',
+      'Reconciliação precisa ser idempotente: será chamada muitas vezes para o mesmo objeto, inclusive sem mudança alguma.',
+      'Finalizer impede a remoção até o operator limpar o recurso externo; esquecer de removê-lo deixa o objeto preso para sempre — o erro clássico de quem começa.',
+      'Owner reference faz o Kubernetes apagar os filhos quando o pai some, sem o operator precisar orquestrar a remoção.'
+    ],
+    useWhen: ['Use operator quando há conhecimento operacional recorrente a codificar (backup, failover, provisionamento).', 'Use CRD quando o conceito é de domínio e merece ser um recurso de primeira classe.', 'Use um operator pronto antes de escrever o seu.'],
+    avoidWhen: ['Não escreva operator para instalar algo uma vez — isso é um Job.', 'Não use CRD como banco de dados: etcd não é para isso.', 'Não faça reconciliação com efeito colateral não idempotente.'],
+    contrast: {
+      bad: 'Um controller que reage ao evento de criação, executa cinco passos em sequência e, se falhar no terceiro, deixa o recurso em estado inconsistente sem nunca mais tentar.',
+      good: 'Um reconciler que lê o estado atual, calcula a diferença para o desejado, aplica o próximo passo convergente e devolve requeue — chamado mil vezes, converge sempre.'
+    },
+    tradeoffs: ['Operator codifica operação e adiciona um componente crítico a manter e atualizar.', 'CRD dá vocabulário de domínio na API e acopla o time ao ciclo de versões do Kubernetes.', 'Reconciliação frequente converge rápido e pressiona o servidor de API.'],
+    production: 'Um operator de provisionamento de tenants entra em laço: a reconciliação falha ao criar um recurso externo, requeue imediato, e o servidor de API recebe milhares de requisições por minuto. A causa é backoff ausente; a correção é requeue exponencial e uma condition de erro no status — que também torna o problema visível em vez de silencioso.',
+    risks: ['Reconciliação não idempotente', 'Laço de requeue sem backoff saturando a API', 'Finalizer que nunca é removido, travando a exclusão', 'RBAC amplo demais no ServiceAccount do operator', 'Status que não reflete a realidade'],
+    checklist: ['A reconciliação é idempotente?', 'O requeue tem backoff?', 'Existe finalizer, e ele é removido em todos os caminhos?', 'O RBAC é mínimo?', 'O status usa conditions e é observável?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Qual a diferença entre reagir a evento e reconciliar estado?', expected: 'Reagir a evento depende de receber todos os eventos, em ordem; reconciliar lê o estado atual e converge para o desejado, o que torna o sistema tolerante a evento perdido, duplicado ou fora de ordem.' },
+      { level: 'Sênior/Expert', question: 'Quando você recusaria a proposta de escrever um operator?', expected: 'Quando a tarefa é pontual (é um Job), quando já existe operator maduro para o caso, ou quando o time não tem capacidade de manter um componente crítico acoplado ao ciclo de versões do Kubernetes.' }
+    ],
+    exercises: [
+      { level: 'Aplicado', task: 'Definir um CRD com spec, status, conditions e validação de esquema, e aplicá-lo num cluster.', evidence: 'Manifesto do CRD, recurso de exemplo aceito e um inválido rejeitado pela API.' },
+      { level: 'Aplicado', task: 'Implementar um reconciler que cria e mantém um Deployment a partir do recurso próprio.', evidence: 'Código do controller, teste de idempotência e demonstração de convergência após deleção manual do Deployment.' },
+      { level: 'Sênior', task: 'Adicionar finalizer com limpeza de recurso externo e provar que a exclusão não trava em caso de falha.', evidence: 'Teste de exclusão com o recurso externo indisponível e o caminho de saída.' }
+    ],
+    challenge: 'Escolher uma operação recorrente do seu time, modelá-la como recurso e provar que o operator converge mesmo quando morto no meio da reconciliação.',
+    book: 'Kubernetes: Up and Running (extensão da API e padrões de controller); The Site Reliability Workbook (automação e eliminação de toil).',
+    complements: [official.crd, official.operatorPattern, official.controllerRuntime, official.kubebuilder],
+    exampleFile: '../../examples/devops-senior/fronteira/operator/tenant-crd.yaml'
+  }),
+  moduleOf({
+    number: 22,
+    part: 'fronteira',
+    id: 'ebpf',
+    title: 'eBPF: observar e controlar o kernel sem tocar na aplicação',
+    level: 'Expert',
+    objective: 'Instrumentar chamadas de sistema, rede e latência com eBPF, e avaliar quando isso substitui instrumentação na aplicação.',
+    prerequisites: ['Módulo 2 (Linux, processos e rede)', 'Módulo 11 (telemetria)', 'Acesso a um kernel recente'],
+    problem: 'Boa parte do que importa em produção acontece abaixo da aplicação: syscall lenta, retransmissão de TCP, pressão de memória, DNS demorando. A instrumentação tradicional não enxerga nada disso, e adicionar código à aplicação para medir o kernel não é opção — nem sempre existe código para alterar.',
+    concepts: ['eBPF: programas verificados executando no kernel', 'O verificador e por que ele recusa seu programa', 'Pontos de anexação: kprobe, tracepoint, uprobe, XDP, tc', 'Mapas como canal entre kernel e espaço de usuário', 'bpftrace para investigação ad hoc', 'Cilium: rede e política sem iptables', 'Observabilidade sem instrumentação, e seus limites', 'Custo real do overhead'],
+    internals: [
+      'O verificador rejeita programas que possam travar o kernel: sem laço ilimitado, sem acesso arbitrário à memória. É essa garantia que permite rodar código de terceiro no kernel com segurança.',
+      'Tracepoint é interface estável; kprobe é ponto de implementação e pode sumir entre versões do kernel — a mesma distinção entre contrato e implementação dos outros módulos de fronteira.',
+      'Mapas são a única forma de o programa em kernel conversar com o espaço de usuário, e o custo de leitura deles é parte do overhead que precisa ser medido.',
+      'Cilium substitui a cadeia de iptables por programas eBPF, o que muda o perfil de latência da rede do cluster à medida que o número de serviços cresce.'
+    ],
+    useWhen: ['Use quando precisa observar o que a aplicação não expõe.', 'Use para instrumentar software de terceiros sem alterá-lo.', 'Use bpftrace para investigar hipótese pontual em incidente.'],
+    avoidWhen: ['Não substitua métrica de negócio por métrica de kernel — elas respondem perguntas diferentes.', 'Não rode programa não auditado em produção.', 'Não presuma overhead zero: meça.'],
+    contrast: {
+      bad: 'Latência inexplicada atribuída ao "banco lento" porque a instrumentação da aplicação termina na chamada ao driver.',
+      good: 'Rastreamento de syscall mostrando a espera real em `connect` por esgotamento de porta efêmera — um problema que nenhuma métrica da aplicação revelaria.'
+    },
+    tradeoffs: ['eBPF vê tudo e exige kernel recente e privilégio elevado.', 'Sem instrumentação é rápido de aplicar e não conhece semântica de negócio.', 'Tracepoint é estável e cobre menos pontos que kprobe.'],
+    production: 'Um serviço apresenta p99 alto sem causa aparente: CPU baixa, banco rápido, sem erro. O rastreamento de syscalls revela tempo em `getaddrinfo` — o DNS do cluster com cache mal dimensionado. Nenhuma métrica da aplicação apontava para isso, porque a resolução acontecia dentro de uma biblioteca.',
+    risks: ['Programa eBPF com overhead não medido', 'Dependência de kprobe que some em atualização de kernel', 'Privilégio elevado ampliando a superfície de ataque', 'Coleta de dado sensível no rastreamento'],
+    checklist: ['O ponto de anexação é estável ou de implementação?', 'O overhead foi medido sob carga?', 'O programa foi auditado?', 'A coleta captura dado sensível?', 'Existe alternativa mais simples que responda à mesma pergunta?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Por que eBPF permite rodar código no kernel com segurança?', expected: 'Porque o verificador prova, antes de carregar, que o programa termina e não acessa memória arbitrária — sem laço ilimitado e com acesso restrito a estruturas conhecidas.' },
+      { level: 'Sênior/Expert', question: 'Quando você usaria eBPF em vez de instrumentar a aplicação?', expected: 'Quando o que interessa está abaixo da aplicação (syscall, rede, escalonamento), quando não há código para alterar, ou quando a instrumentação precisa cobrir processos de terceiros — sabendo que ele não conhece semântica de negócio.' }
+    ],
+    exercises: [
+      { level: 'Aplicado', task: 'Usar bpftrace para medir a distribuição de latência de uma syscall específica de um processo.', evidence: 'Histograma capturado e a interpretação do que ele mostra.' },
+      { level: 'Aplicado', task: 'Rastrear conexões TCP de um pod sem alterar a aplicação, identificando destino e latência.', evidence: 'Saída do rastreamento correlacionada com a telemetria da aplicação.' },
+      { level: 'Sênior', task: 'Medir o overhead da própria instrumentação sob carga e definir um limite aceitável.', evidence: 'Comparação com e sem o programa carregado, e o limite adotado.' }
+    ],
+    challenge: 'Pegar um incidente em que a causa raiz ficou como "não identificada" e verificar se instrumentação de kernel a teria revelado.',
+    book: 'Observability Engineering (o que a telemetria tradicional não alcança); Site Reliability Engineering (Google), capítulos de monitoramento e depuração em produção.',
+    complements: [official.ebpf, official.bpftrace, official.cilium, official.brendanGregg],
+    exampleFile: '../../examples/devops-senior/fronteira/ebpf-playbook.md'
+  }),
+  moduleOf({
+    number: 23,
+    part: 'fronteira',
+    id: 'envoy-xds',
+    title: 'Data plane por dentro: Envoy, xDS e o que um service mesh realmente faz',
+    level: 'Expert',
+    objective: 'Explicar mesh e gateway pelo mecanismo — proxy, descoberta dinâmica e mTLS — e decidir a adoção por requisito medido, não por padrão de arquitetura.',
+    prerequisites: ['Módulo 8 (rede e Gateway API)', 'Módulo 13 (resiliência)', 'Noção de TLS e certificados'],
+    problem: 'Service mesh foi adotado como default por muita gente e desadotado depois: a participação caiu de cerca de 18% para 8% entre 2023 e 2025, porque o custo passou a ser a restrição dominante. Quem só conhece o produto não consegue avaliar o que está pagando, nem o que perderia ao remover.',
+    concepts: ['Proxy sidecar versus modo sem sidecar', 'Envoy como data plane e o control plane que o configura', 'xDS: descoberta dinâmica de listeners, rotas, clusters e endpoints', 'mTLS e identidade de workload (SPIFFE)', 'Retry, timeout e circuit breaking na camada de rede', 'Onde a resiliência deve morar: rede ou aplicação', 'Custo: latência adicional, memória por pod e um control plane a operar', 'Gateway API como alternativa parcial'],
+    internals: [
+      'O Envoy não sabe nada ao subir: ele pergunta ao control plane, por xDS, quais listeners, rotas, clusters e endpoints existem — e continua recebendo atualizações. É essa dinâmica que permite mudar roteamento sem reiniciar nada.',
+      'Cada sidecar adiciona um salto de proxy na ida e outro na volta: duas travessias a mais por requisição, com latência e memória por pod.',
+      'mTLS automático é o argumento mais forte do mesh: identidade criptográfica por workload sem a aplicação participar.',
+      'Retry configurado no mesh e na aplicação se multiplicam: três tentativas em cada camada viram nove no serviço de destino.'
+    ],
+    useWhen: ['Use mesh quando mTLS entre serviços e política de tráfego uniforme são requisitos e o número de serviços justifica.', 'Use Gateway API quando o problema é só tráfego de entrada.', 'Use biblioteca na aplicação quando há poucos serviços e uma linguagem só.'],
+    avoidWhen: ['Não adote mesh por padrão de arquitetura sem medir custo e latência.', 'Não duplique retry entre mesh e aplicação.', 'Não trate o mesh como substituto de autorização na aplicação.'],
+    contrast: {
+      bad: 'Instalar um mesh completo para obter mTLS entre seis serviços, e descobrir depois um control plane crítico que ninguém sabe operar.',
+      good: 'Medir o requisito real — mTLS — e avaliar mesh, mTLS na aplicação e mTLS no gateway, com latência, memória e carga operacional de cada um.'
+    },
+    tradeoffs: ['Mesh dá política uniforme e mTLS de graça para a aplicação, e cobra latência, memória e um control plane.', 'Sem sidecar reduz o custo por pod e amarra mais ao provedor.', 'Resiliência na rede é uniforme; na aplicação é específica e consciente do domínio.'],
+    production: 'Um cluster com mesh apresenta p99 40 ms acima do esperado. A investigação mostra retry configurado nas duas camadas: três tentativas no mesh multiplicadas por três na aplicação geram nove chamadas ao destino sob degradação, que passa a ser saturado pelo próprio mecanismo de resiliência. A correção é decidir uma camada e desligar a outra.',
+    risks: ['Retry multiplicado entre camadas', 'Control plane como ponto único não operado', 'Latência adicional não medida antes da adoção', 'Certificado expirado derrubando toda a comunicação', 'Mesh usado como se fosse autorização'],
+    checklist: ['Qual requisito exige mesh, em uma frase?', 'A latência adicional foi medida?', 'Retry existe em quantas camadas?', 'Quem opera o control plane, e quem é o reserva?', 'O que acontece quando o certificado expira?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'O que um sidecar de service mesh faz com o tráfego?', expected: 'Intercepta entrada e saída do pod, aplica política (mTLS, retry, timeout, roteamento) e encaminha. Adiciona dois saltos de proxy por requisição.' },
+      { level: 'Sênior/Expert', question: 'Um time propõe adotar service mesh. O que você exige antes?', expected: 'O requisito em uma frase, a medição da latência adicional no workload real, quem opera o control plane, a decisão sobre onde a resiliência mora, e a comparação com alternativas mais baratas (Gateway API, mTLS na aplicação).' }
+    ],
+    exercises: [
+      { level: 'Aplicado', task: 'Ler uma configuração de Envoy e identificar listener, rota, cluster e endpoint, explicando o caminho de uma requisição.', evidence: 'Configuração anotada com o percurso descrito.' },
+      { level: 'Aplicado', task: 'Medir a latência adicional de um sidecar em um serviço real, com e sem ele.', evidence: 'p50 e p99 nas duas configurações e o custo de memória por pod.' },
+      { level: 'Sênior', task: 'Avaliar mesh, Gateway API e mTLS na aplicação para um requisito concreto e recomendar um.', evidence: 'ADR com latência, custo operacional e critério de reversão.' }
+    ],
+    challenge: 'Escrever a justificativa de remoção do mesh de um cluster que o adotou sem requisito — ou a justificativa medida de mantê-lo.',
+    book: 'Kubernetes: Up and Running (rede e extensão); Release It! (padrões de estabilidade, para decidir onde a resiliência mora).',
+    complements: [official.envoy, official.xds, official.gatewayApi, official.istio],
+    exampleFile: '../../examples/devops-senior/fronteira/envoy-xds.yaml'
+  }),
+  moduleOf({
+    number: 24,
+    part: 'fronteira',
+    id: 'kernel-latencia',
+    title: 'Abaixo do runtime: kernel, perf e análise de latência',
+    level: 'Expert',
+    objective: 'Diagnosticar latência que não aparece na aplicação nem no runtime, usando as ferramentas do sistema operacional e um método que não depende de palpite.',
+    prerequisites: ['Módulo 2 (Linux e diagnóstico)', 'Módulo 22', 'Módulo 14 (capacidade e degradação)'],
+    problem: 'Chega um ponto em que todas as camadas observáveis dizem estar bem e a latência continua alta. A causa está no escalonador, na pressão de memória, na rede do host, no throttling de cgroup ou no disco — e nenhuma dessas aparece no dashboard da aplicação.',
+    concepts: ['Método USE: utilização, saturação e erros por recurso', 'Escalonador, run queue e latência de agendamento', 'Throttling de CPU por cgroup e o efeito do limite em cargas com picos', 'Pressão de memória, reclaim e PSI', 'Rede do host: retransmissão, fila e buffer', 'perf e flame graph de CPU', 'off-CPU: onde o tempo passa esperando, não executando', 'Ruído de vizinho em ambiente compartilhado'],
+    internals: [
+      'Limite de CPU em cgroup não desacelera de forma suave: ele impõe janelas de throttling, e uma carga com picos curtos pode ser penalizada mesmo com utilização média baixa.',
+      'Flame graph de CPU mostra onde o tempo é gasto executando; boa parte dos problemas de latência é tempo esperando, que só aparece em análise off-CPU.',
+      'PSI (pressure stall information) mede quanto tempo tarefas ficaram bloqueadas por falta de CPU, memória ou I/O — é a métrica que separa "está usando" de "está sofrendo".',
+      'Retransmissão de TCP entre pods costuma ser atribuída à aplicação; o contador está no host e desmente.'
+    ],
+    useWhen: ['Use quando o runtime e a aplicação não explicam a latência.', 'Use o método USE para não depender de intuição sobre qual recurso investigar.', 'Use análise off-CPU quando a CPU está baixa e a latência é alta.'],
+    avoidWhen: ['Não faça tuning de kernel sem baseline nem hipótese.', 'Não copie parâmetro de blog sem entender o que ele troca.', 'Não desça para o kernel antes de esgotar as camadas acima.'],
+    contrast: {
+      bad: 'Aumentar o limite de CPU do pod porque "estava lento", sem olhar o contador de throttling nem o perfil de carga.',
+      good: 'Verificar o throttling, constatar que o limite recorta picos curtos, e decidir entre elevar o limite, remover o limite mantendo o request, ou suavizar o pico na aplicação — com medição.'
+    },
+    tradeoffs: ['Limite de CPU dá previsibilidade ao cluster e pode penalizar carga com picos.', 'Tuning de kernel pode resolver e reduz a portabilidade da conclusão.', 'Análise profunda dá certeza e consome tempo que o incidente nem sempre permite.'],
+    production: 'Um serviço apresenta p99 de 800 ms com CPU média em 30%. O contador de throttling do cgroup mostra o container recortado em quase metade das janelas: a carga tem picos curtos e o limite é baixo. Remover o limite, mantendo o request, elimina a cauda sem aumentar o consumo médio.',
+    risks: ['Tuning aplicado sem baseline', 'Conclusão tirada só de CPU média', 'Ruído de vizinho confundido com problema da aplicação', 'Parâmetro de kernel copiado sem entender o trade-off'],
+    checklist: ['Utilização, saturação e erros foram verificados por recurso?', 'Há throttling de cgroup?', 'O tempo é on-CPU ou off-CPU?', 'Existe baseline antes da mudança?', 'A conclusão vale fora deste host?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'CPU média em 30% e latência alta. O que investigar?', expected: 'Throttling de cgroup (picos recortados), saturação por run queue, tempo off-CPU esperando I/O ou lock, pressão de memória e rede do host — média esconde cauda.' },
+      { level: 'Sênior/Expert', question: 'Quando remover o limite de CPU de um container é a decisão certa?', expected: 'Quando a carga tem picos curtos, o request está corretamente dimensionado e o cluster tem folga: o limite recorta o pico sem beneficiar ninguém. Exige medir throttling antes e monitorar o vizinho depois.' }
+    ],
+    exercises: [
+      { level: 'Aplicado', task: 'Aplicar o método USE a um host sob carga e preencher a matriz recurso × utilização, saturação e erros.', evidence: 'Matriz preenchida com a origem de cada número.' },
+      { level: 'Aplicado', task: 'Provocar throttling de cgroup com um limite baixo e medir o efeito na cauda de latência.', evidence: 'Contador de throttling e distribuição de latência com e sem limite.' },
+      { level: 'Sênior', task: 'Gerar um flame graph de um processo sob carga e identificar o caminho quente.', evidence: 'Flame graph e a conclusão, inclusive se for "o gargalo não é CPU".' }
+    ],
+    challenge: 'Escrever o runbook de investigação de latência do seu serviço, das camadas de cima até o kernel, com o comando de cada etapa.',
+    book: 'Site Reliability Engineering (Google), capítulos de monitoramento e depuração; The Site Reliability Workbook (prática de investigação).',
+    complements: [official.brendanGregg, official.ebpf, official.kubernetesDebug],
+    exampleFile: '../../examples/devops-senior/fronteira/latency-runbook.md'
+  }),
+  moduleOf({
+    number: 25,
+    part: 'fronteira',
+    id: 'plataforma-produto',
+    title: 'Plataforma interna como produto: contrato, versionamento e clientes',
+    level: 'Staff/Principal',
+    objective: 'Tratar a plataforma interna como produto com clientes reais, contrato explícito e métricas de adoção — e reconhecer quando ela virou gargalo em vez de alavanca.',
+    prerequisites: ['Módulo 16 (golden paths)', 'Módulo 20 (sistema sociotécnico)', 'Ter sido cliente de uma plataforma interna'],
+    problem: 'Times de plataforma costumam nascer de uma reorganização e não de uma demanda. Sem cliente definido, contrato e métrica de adoção, a plataforma vira um portão: todo mundo precisa passar por ela, ninguém escolheu usá-la, e a carga cognitiva que ela deveria reduzir só mudou de lugar.',
+    concepts: ['Plataforma como produto: quem é o cliente e qual o problema dele', 'Golden path é caminho recomendado, não caminho obrigatório', 'Contrato de interface e versionamento do que a plataforma oferece', 'Adoção voluntária como métrica de qualidade', 'Carga cognitiva: reduzir de fato, não transferir', 'Modelo de maturidade de plataforma', 'Autosserviço com guardrails versus portão de aprovação', 'Quando a plataforma vira gargalo — e como perceber'],
+    internals: [
+      'A diferença entre plataforma e portão é a possibilidade de saída: se o time não pode sair do caminho, a qualidade dele nunca é medida, porque a adoção é compulsória.',
+      'Adoção voluntária é o melhor sinal de qualidade que uma plataforma interna tem: se o caminho é bom, as pessoas o escolhem.',
+      'Toda abstração vaza; a pergunta é se, quando vaza, o cliente tem como descer um nível ou fica preso.',
+      'Plataforma tem versionamento e compatibilidade como qualquer API pública — quebrar o contrato interno custa a confiança que sustenta a adoção voluntária.'
+    ],
+    useWhen: ['Construa plataforma quando há repetição cara entre times, medida.', 'Ofereça golden path com saída explícita documentada.', 'Meça adoção voluntária e tempo até o primeiro deploy.'],
+    avoidWhen: ['Não crie plataforma por reorganização, sem demanda medida.', 'Não torne o caminho obrigatório para garantir adoção.', 'Não esconda complexidade a ponto de o cliente não conseguir diagnosticar o próprio serviço.'],
+    contrast: {
+      bad: 'Toda mudança de infraestrutura passa por um ticket para o time de plataforma, que virou fila. O tempo de espera não aparece em nenhuma métrica DORA de produto.',
+      good: 'Autosserviço com guardrails: o time faz sozinho dentro do permitido, e o time de plataforma só entra quando o caso sai do envelope.'
+    },
+    tradeoffs: ['Padronizar reduz variedade e custo, e limita casos legítimos fora do padrão.', 'Autosserviço acelera e exige investimento grande em guardrails.', 'Abstrair reduz carga cognitiva e afasta o time do que ele opera.'],
+    production: 'Uma plataforma interna é celebrada internamente e os times de produto reclamam de lentidão. A medição do tempo entre pedido e entrega de infraestrutura mostra fila de cinco dias, invisível nas métricas de deploy. A mudança para autosserviço com guardrails reduz o ciclo a minutos e transforma o time de plataforma em autor de caminhos, não em aprovador.',
+    risks: ['Plataforma obrigatória mascarando baixa qualidade', 'Fila de tickets invisível nas métricas', 'Abstração sem escotilha de saída', 'Quebra de contrato interno sem aviso', 'Time de plataforma sem cliente definido'],
+    checklist: ['Quem é o cliente, nominalmente?', 'A adoção é voluntária?', 'Existe saída documentada do golden path?', 'O tempo de espera por plataforma é medido?', 'O contrato tem versionamento e política de depreciação?'],
+    interview: [
+      { level: 'Sênior', question: 'Como saber se uma plataforma interna está funcionando?', expected: 'Adoção voluntária, tempo até o primeiro deploy de um serviço novo, ausência de fila de tickets e redução medida de carga cognitiva — não pelo número de recursos entregues.' },
+      { level: 'Staff/Principal', question: 'A plataforma virou gargalo. Como você reverte sem desmontá-la?', expected: 'Medir o tempo de espera e torná-lo visível, converter aprovações em guardrails automatizados, abrir escotilhas de saída, e mudar a métrica do time de entregas para adoção e tempo de ciclo dos clientes.' }
+    ],
+    exercises: [
+      { level: 'Aplicado', task: 'Escrever o contrato de um golden path: o que ele garante, o que exige e como sair dele.', evidence: 'Documento de contrato com versionamento e política de depreciação.' },
+      { level: 'Sênior', task: 'Medir o tempo entre pedido e entrega de um recurso de infraestrutura no seu contexto.', evidence: 'Distribuição do tempo de espera e onde ele aparece (ou não) nas métricas atuais.' },
+      { level: 'Sênior', task: 'Avaliar a plataforma contra um modelo de maturidade e definir o próximo nível.', evidence: 'Avaliação, lacuna priorizada e a métrica que provará o avanço.' }
+    ],
+    challenge: 'Entrevistar três times clientes da sua plataforma e descobrir o que eles fariam se pudessem não usá-la.',
+    book: 'Team Topologies (plataforma como serviço para times de stream); Accelerate (autonomia, arquitetura e desempenho); The DevOps Handbook.',
+    complements: [official.platformEng, official.backstage, official.teamTopologies],
+    exampleFile: '../../examples/devops-senior/fronteira/platform-contract.md'
+  }),
+  moduleOf({
+    number: 26,
+    part: 'fronteira',
+    id: 'iac-avancado',
+    title: 'IaC além do Terraform: OpenTofu, providers próprios e testes de infraestrutura',
+    level: 'Expert',
+    objective: 'Decidir entre Terraform e OpenTofu por critério técnico e jurídico, e publicar um módulo versionado com testes que rodam em CI.',
+    prerequisites: ['Módulo 9 (state, módulos e composição)', 'Módulo 10 (testes e policy as code)', 'Noção de versionamento semântico'],
+    problem: 'A mudança de licença do Terraform em 2023 transformou uma decisão puramente técnica em decisão com eixo jurídico, e a maior parte dos times nunca a tomou explicitamente — continuou onde estava. Ao mesmo tempo, módulos internos crescem sem versionamento nem teste, e uma mudança quebra dez times ao mesmo tempo.',
+    concepts: ['A mudança de licença e o que a BSL restringe na prática', 'OpenTofu: fork, governança e compatibilidade', 'Critério de decisão: técnico, jurídico e de ecossistema', 'Módulo como produto: interface, versionamento e depreciação', 'Testes de infraestrutura: unidade, contrato e integração', 'Escrever um provider e quando isso se justifica', 'Registry e distribuição interna', 'Migração e caminho de volta'],
+    internals: [
+      'A BSL não é software livre: ela restringe uso competitivo e converte para licença aberta após um período por release. Para a maioria dos usuários finais não muda nada, e para quem oferece serviço gerenciado muda tudo — por isso a avaliação é caso a caso.',
+      'A compatibilidade entre as duas ferramentas cobre a maior parte dos casos, mas as bases divergiram: recursos exclusivos de cada lado existem e crescem.',
+      'Módulo sem versionamento é dependência sem contrato: quem consome fica refém de qualquer commit no branch principal.',
+      'Teste de infraestrutura que só valida sintaxe não testa nada relevante; o valor está em verificar o plano gerado e o comportamento sob mudança.'
+    ],
+    useWhen: ['Avalie OpenTofu quando a licença for restrição real ou quando quiser governança em fundação.', 'Versione todo módulo consumido por mais de um time.', 'Teste o plano gerado, não só a sintaxe.'],
+    avoidWhen: ['Não migre por ideologia sem checar os providers que você usa.', 'Não escreva provider próprio antes de esgotar os existentes.', 'Não publique módulo sem política de depreciação.'],
+    contrast: {
+      bad: 'Módulo interno referenciado pelo branch principal, sem versão, consumido por dez times. Um commit muda o comportamento de todos ao mesmo tempo.',
+      good: 'Módulo versionado por tag, com testes de plano em CI, changelog e janela de depreciação anunciada.'
+    },
+    tradeoffs: ['OpenTofu remove a restrição de licença e tem ecossistema menor.', 'Permanecer no Terraform mantém compatibilidade e aceita a licença.', 'Testar infraestrutura custa tempo de CI e evita mudança destrutiva em produção.'],
+    production: 'Um módulo interno de rede é atualizado no branch principal para corrigir um caso específico. A mudança altera o nome de um recurso e, no próximo plano de outro time, aparece como destruição e recriação da sub-rede de produção. O incidente é evitado por um segundo par de olhos, não por processo — a correção é versionar e testar o plano em CI.',
+    risks: ['Módulo sem versão consumido por vários times', 'Mudança que aparece como destruir/recriar no plano', 'Migração de ferramenta sem checar providers', 'State corrompido ou perdido sem backup', 'Provider próprio sem manutenção'],
+    checklist: ['A decisão Terraform/OpenTofu está registrada e datada?', 'Todo módulo compartilhado tem versão?', 'O CI valida o plano, não só a sintaxe?', 'Existe alerta para plano com destruição inesperada?', 'O state tem backup e procedimento de recuperação?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'Por que existe o OpenTofu?', expected: 'A HashiCorp mudou a licença do Terraform de MPL para BSL em 2023, restringindo uso competitivo. A comunidade criou um fork sob a Linux Foundation, mantendo licença aberta.' },
+      { level: 'Sênior/Expert', question: 'Como você conduziria a decisão entre Terraform e OpenTofu?', expected: 'Levantar se a restrição da BSL afeta o negócio (jurídico), inventariar providers e recursos usados, testar o plano com as duas ferramentas no mesmo state, avaliar ecossistema e suporte, e registrar em ADR com gatilho de revisão — não decidir por preferência.' }
+    ],
+    exercises: [
+      { level: 'Aplicado', task: 'Escrever um módulo com interface explícita, validação de variáveis e saídas documentadas.', evidence: 'Módulo versionado por tag, com README e exemplo de uso.' },
+      { level: 'Aplicado', task: 'Criar testes que validem o plano gerado e falhem diante de uma mudança destrutiva.', evidence: 'Testes rodando em CI e um caso em que o teste barra a mudança.' },
+      { level: 'Sênior', task: 'Avaliar a migração para OpenTofu inventariando providers e testando o plano.', evidence: 'ADR com inventário, resultado do teste comparado e recomendação com gatilho de revisão.' }
+    ],
+    challenge: 'Pegar o módulo interno mais usado do seu time, versioná-lo e adicionar o teste que teria barrado a última mudança arriscada.',
+    book: 'Terraform: Up & Running (state, módulos e testes); Infrastructure as Code (Kief Morris) para os princípios independentes de ferramenta.',
+    complements: [official.opentofu, official.tofuRegistry, official.terraformTest, official.terraformProvider],
+    exampleFile: '../../examples/devops-senior/fronteira/iac/main.tf'
+  }),
+  moduleOf({
+    number: 27,
+    part: 'fronteira',
+    id: 'ler-kubernetes',
+    title: 'Ler o Kubernetes: código-fonte, KEPs e comunidade',
+    level: 'Expert → fronteira',
+    objective: 'Responder uma dúvida de comportamento lendo o código e os KEPs do Kubernetes, distinguindo o que é garantido do que é implementação da versão.',
+    prerequisites: ['Módulos 21–23', 'Inglês técnico de leitura', 'Git e leitura de histórico'],
+    problem: 'A documentação do Kubernetes descreve o que os recursos fazem, e quase nunca por quê nem em que ordem. Perguntas como "por que meu pod demorou a ser removido", "qual a ordem exata de terminação" ou "quando o scheduler desiste" têm resposta no código e nos KEPs — e uma quantidade enorme de folclore operacional existe por ninguém ter ido lá.',
+    concepts: ['Estrutura do repositório: apimachinery, kubelet, scheduler, controller-manager', 'O ciclo de terminação de um pod, passo a passo', 'KEP: como uma mudança entra e por que foi decidida assim', 'Feature gates e estágios alpha, beta e GA', 'API conventions: o contrato que todo recurso segue', 'Diferença entre comportamento documentado e de implementação', 'SIGs e onde cada assunto é discutido', 'Construir e rodar os testes'],
+    internals: [
+      'A ordem de terminação de um pod — remoção do endpoint, sinal de término, período de graça, sinal de morte — é implementada em pontos distintos, e é a fonte da maioria dos casos de erro durante deploy que aparecem como "problema da aplicação".',
+      'Feature gate em alpha pode mudar ou sumir entre versões; construir operação em cima de um sem plano de saída é assumir uma dívida com vencimento.',
+      'Os KEPs registram a motivação e as alternativas descartadas — é onde está o porquê que a documentação não traz.',
+      'As convenções de API definem o contrato que todo recurso segue; conhecê-las é o que permite desenhar um CRD que parece nativo (módulo 21).'
+    ],
+    useWhen: ['Use quando o comportamento observado não bate com a documentação.', 'Use o KEP para saber se um recurso é estável e para onde vai.', 'Use o código para entender ordem e tempo de operações do ciclo de vida.'],
+    avoidWhen: ['Não construa operação sobre detalhe de implementação não documentado.', 'Não dependa de feature gate alpha sem plano de saída.', 'Não aprofunde além do que o problema exige.'],
+    contrast: {
+      bad: 'Adicionar um sleep no encerramento da aplicação "porque resolve" os erros durante deploy, sem entender o que acontece entre a remoção do endpoint e o sinal de término.',
+      good: 'Ler a ordem real de terminação, identificar a janela em que o pod ainda recebe tráfego, e resolver com preStop e período de graça dimensionados — com o motivo registrado.'
+    },
+    tradeoffs: ['Ler a fonte dá certeza e custa tempo.', 'Conhecer internals melhora o diagnóstico e tenta a depender do não garantido.', 'Contribuir ensina muito e envolve processo, SIG e revisão.'],
+    production: 'Um serviço apresenta erros a cada deploy, sempre nos primeiros segundos. A leitura da sequência de terminação mostra que a remoção do endpoint e o sinal de término são concorrentes: o pod pode receber requisição depois de começar a encerrar. A correção é um preStop com espera curta e encerramento gracioso — e agora o time sabe por quê.',
+    risks: ['Ler versão diferente da que roda em produção', 'Depender de comportamento não documentado', 'Feature gate alpha em produção sem saída', 'Conclusão generalizada para outra distribuição do Kubernetes'],
+    checklist: ['Estou lendo a versão do cluster em produção?', 'Isso é documentado ou é implementação?', 'Existe KEP sobre o assunto?', 'Consigo reproduzir num cluster descartável?', 'O achado virou runbook, teste ou ADR?'],
+    interview: [
+      { level: 'Pleno/Sênior', question: 'O que acontece, em ordem, quando um pod é removido?', expected: 'O objeto recebe deletionTimestamp; em paralelo o endpoint é removido do Service e o container recebe o sinal de término, com preStop antes dele; após o período de graça vem o sinal de morte. O paralelismo entre remoção de endpoint e término é a origem dos erros durante deploy.' },
+      { level: 'Sênior/Expert', question: 'Como você investigaria uma mudança de comportamento após atualizar o cluster?', expected: 'Notas de versão primeiro, depois o KEP e o commit relacionados, feature gates alterados entre as versões, e reprodução mínima num cluster descartável — antes de considerar reverter.' }
+    ],
+    exercises: [
+      { level: 'Aplicado', task: 'Documentar a sequência completa de terminação de um pod, com o ponto em que cada etapa é implementada.', evidence: 'Diagrama de sequência com referência ao código ou à documentação de cada etapa.' },
+      { level: 'Aplicado', task: 'Escolher um recurso que você usa e ler o KEP correspondente, registrando motivação e alternativas descartadas.', evidence: 'Nota com o porquê da decisão e o estágio atual do recurso.' },
+      { level: 'Sênior', task: 'Investigar uma dúvida real pelo código ou pelos KEPs e produzir a reprodução mínima.', evidence: 'Pergunta, caminho até a fonte, citação e reprodução em cluster descartável.' }
+    ],
+    challenge: 'Escolher uma prática operacional que seu time adota "porque funciona" e descobrir, na fonte, se o motivo real é o que se imagina.',
+    book: 'Kubernetes: Up and Running como mapa antes de entrar no código; The Site Reliability Workbook (investigação disciplinada).',
+    complements: [official.k8sRepo, official.keps, official.apiConventions, official.k8sContributor],
+    exampleFile: '../../examples/devops-senior/fronteira/pod-termination.md'
   })
 ]);
 
@@ -850,6 +1196,22 @@ export const devopsAssessment = Object.freeze({
     'Define SLI/SLO e diagnostica um incidente correlacionando logs, métricas e traces.',
     'Executa rollback, restore e game day dentro dos limites declarados.',
     'Entrega as quatro evoluções do mesmo produto com runbooks, decisões e métricas.',
-    'Não marca Dominado antes de evidência HTTP(S) validada e revisão D30.'
+    'Não marca Dominado antes de evidência HTTP(S) validada e revisão D30.',
+    'Fronteira (módulos 21–27) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira concluída exige: um operator que converge após ser morto no meio da reconciliação, uma causa de latência encontrada por instrumentação de kernel, o custo do sidecar medido no workload real, um caso de throttling de cgroup diagnosticado, o contrato de um golden path com escotilha de saída, um módulo IaC versionado cujos testes barram a mudança destrutiva, e uma prática operacional do time confrontada com o código do Kubernetes.'
   ]
 });
+
+/*
+ * Gabarito de autoavaliação. Não substitui a evidência operacional exigida pela
+ * rubrica: serve para o estudo solo verificar a resposta antes de concluir.
+ */
+export const devopsAnswerKey = devopsModules.map((module) => ({
+  module: module.number,
+  title: module.title,
+  objetivoAtingido: module.objective,
+  respostaEsperadaNaEntrevista: (module.interview || []).map((item) => `${item.level}: ${item.expected}`),
+  erroMaisComum: module.contrast?.bad || module.risks?.[0] || 'Mudar sem baseline.',
+  criterioDeAceite: (module.exercises || []).map((item) => `${item.level} — evidência: ${item.evidence}`),
+  sinalDeQueNaoDominou: module.risks || []
+}));

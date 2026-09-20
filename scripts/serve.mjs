@@ -1,9 +1,11 @@
-import { createReadStream, existsSync, statSync } from 'node:fs';
+import { createReadStream, existsSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { createServer } from 'node:http';
 import { extname, join, normalize } from 'node:path';
 
 const porta = Number(process.argv[2] || 5599);
 const raiz = join(import.meta.dirname, '..', 'public');
+// Progresso de estudo persistido em arquivo (fonte durável, versionável no Git).
+const PROGRESSO = join(import.meta.dirname, '..', 'progresso.json');
 const tipos = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -16,6 +18,28 @@ const tipos = {
 
 createServer((req, res) => {
   const url = new URL(req.url, 'http://localhost');
+
+  // ── API de progresso: GET lê, POST grava progresso.json ──
+  if (url.pathname === '/progress') {
+    const cab = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' };
+    if (req.method === 'POST') {
+      let corpo = '';
+      req.on('data', (c) => { corpo += c; if (corpo.length > 8e6) req.destroy(); });
+      req.on('end', () => {
+        try {
+          JSON.parse(corpo); // valida antes de gravar
+          writeFileSync(PROGRESSO, corpo);
+          res.writeHead(200, cab).end('{"ok":true}');
+        } catch {
+          res.writeHead(400, cab).end('{"ok":false}');
+        }
+      });
+      return;
+    }
+    res.writeHead(200, cab).end(existsSync(PROGRESSO) ? readFileSync(PROGRESSO) : '{}');
+    return;
+  }
+
   const relativa = decodeURIComponent(url.pathname).replace(/^\/+/, '') || 'index.html';
   let arquivo = normalize(join(raiz, relativa));
   if (!arquivo.startsWith(raiz)) {

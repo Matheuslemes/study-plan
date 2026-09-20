@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+
+<html data-bs-theme="dark" lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Futuro do mercado dev — skills de pleno e sênior em web, mobile e IA</title>
+  <meta
+    content="Levantamento de setembro de 2026 sobre o futuro do mercado de desenvolvimento: reconfiguração da demanda por nível, comparativo entre Brasil, Estados Unidos e Europa, skills mais cobradas de pleno e sênior, camada de IA aplicada (RAG, agentes, evals, LLMOps), web server-first, mobile com IA on-device, plataforma, segurança, governança, salários e matriz de prioridade de estudo."
+    name="description" />
+  <link href="./public/assets/vendor/bootstrap.min.css" rel="stylesheet" />
+  <link href="./public/assets/vendor/fonts/fonts.css" rel="stylesheet" />
+  <link href="./public/assets/css/tokens.css" rel="stylesheet" />
+  <link href="./public/assets/css/tracks-palette.css" rel="stylesheet" />
+  <link href="./public/assets/css/base.css" rel="stylesheet" />
+  <link href="./public/assets/css/hub.css" rel="stylesheet" />
+  <link rel="icon" href="./public/favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#0d1117" />
+  <style>
+    /* Complementos locais — só o que o design system ainda não cobre. */
+    body.is-hub .footer-link {
+      color: var(--accent);
+      font: 700 .78rem/1.4 var(--font-mono);
+      text-decoration: none;
+    }
+
+    body.is-hub .footer-link:hover {
+      color: var(--text-1);
+    }
+
+    body.is-hub .page-footer .footer-row,
+    body.is-hub .page-footer > p {
+      max-width: var(--content-max);
+      margin-inline: auto;
+      padding-inline: var(--page-gutter);
+    }
+
+    body.is-hub .page-footer > p {
+      margin-top: var(--space-4);
+      color: var(--text-3);
+      font-size: .8rem;
+    }
+
+    body.is-hub .footer-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+
+    body.is-hub .footer-pill {
+      padding: .32rem .6rem;
+      border: 1px solid var(--accent-line);
+      border-radius: var(--radius-pill);
+      color: var(--accent-strong);
+      background: var(--accent-soft);
+      font: 700 .68rem/1.3 var(--font-mono);
+    }
+
+    /* Cartão de skill com peso de demanda */
+    body.is-hub .skill-card {
+      display: grid;
+      gap: var(--space-2);
+    }
+
+    body.is-hub .skill-card > header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    body.is-hub .skill-card > header > strong {
+      color: var(--text-1);
+      font: 700 .95rem/1.25 var(--font-display);
+    }
+
+    body.is-hub .skill-weight {
+      flex: none;
+      padding: .18rem .45rem;
+      border-radius: var(--radius-xs);
+      font: 700 .62rem/1.3 var(--font-mono);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    body.is-hub .skill-weight[data-weight="critica"] {
+      color: var(--state-danger);
+      background: color-mix(in srgb, var(--state-danger) 14%, transparent);
+      border: 1px solid color-mix(in srgb, var(--state-danger) 34%, transparent);
+    }
+
+    body.is-hub .skill-weight[data-weight="alta"] {
+      color: var(--state-warning);
+      background: color-mix(in srgb, var(--state-warning) 13%, transparent);
+      border: 1px solid color-mix(in srgb, var(--state-warning) 32%, transparent);
+    }
+
+    body.is-hub .skill-weight[data-weight="base"] {
+      color: var(--state-success);
+      background: color-mix(in srgb, var(--state-success) 13%, transparent);
+      border: 1px solid color-mix(in srgb, var(--state-success) 32%, transparent);
+    }
+
+    body.is-hub .skill-card > p {
+      margin: 0;
+    }
+
+    body.is-hub .skill-card > footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      color: var(--text-3);
+      font: 600 .68rem/1.3 var(--font-mono);
+    }
+
+    body.is-hub .skill-card > footer > span {
+      padding: .16rem .42rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xs);
+      background: var(--surface-soft);
+    }
+
+    /* Comparativo pleno × sênior */
+    body.is-hub .level-split {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-3);
+    }
+
+    body.is-hub .level-split > article > strong:first-child {
+      display: block;
+      margin-bottom: var(--space-2);
+      color: var(--accent);
+      font: 700 .7rem/1.3 var(--font-mono);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    body.is-hub .level-split ul {
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+
+    body.is-hub .level-split li + li {
+      margin-top: var(--space-2);
+    }
+
+    /* Fontes */
+    body.is-hub .source-list {
+      display: grid;
+      gap: var(--space-2);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    body.is-hub .source-list li {
+      padding: var(--space-3);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent-line);
+      border-radius: var(--radius-sm);
+      background: var(--surface-soft);
+      font-size: .8rem;
+    }
+
+    body.is-hub .source-list a {
+      overflow-wrap: anywhere;
+    }
+
+    body.is-hub .source-kind {
+      display: inline-block;
+      margin-right: var(--space-2);
+      color: var(--text-3);
+      font: 700 .62rem/1.3 var(--font-mono);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      body.is-hub .level-split {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body class="track-page is-hub" data-track="ia">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="track-hero-page ac-hub-hero">
+    <div class="container ac-hero-layout">
+      <div class="ac-hero-copy">
+        <div class="hero-label">Pesquisa de mercado · Setembro de 2026 · Pleno e sênior</div>
+        <h1 class="track-title">Futuro do mercado dev</h1>
+        <p class="track-lead">O que o mercado está realmente cobrando de desenvolvedores <strong>pleno</strong> e
+          <strong>sênior</strong> em web, mobile e IA — e o que mudou desde que agentes de código viraram infraestrutura
+          padrão. O eixo da senioridade deixou de ser velocidade de escrita e passou a ser <strong>julgamento
+          verificável</strong>: arquitetura, especificação, revisão do que a IA produz, avaliação de qualidade e
+          operação em produção.
+        </p>
+        <div class="track-badge-set" aria-label="Temas cobertos por esta pesquisa">
+          <span class="tag">Mercado</span>
+          <span class="tag">BR × EUA × Europa</span>
+          <span class="tag">Pleno × Sênior</span>
+          <span class="tag">AI Engineering</span>
+          <span class="tag">RAG · Agentes · Evals</span>
+          <span class="tag">Web server-first</span>
+          <span class="tag">Mobile · IA on-device</span>
+          <span class="tag">Plataforma</span>
+          <span class="tag">Segurança de IA</span>
+          <span class="tag">Governança</span>
+          <span class="tag">Salários</span>
+        </div>
+      </div>
+      <aside class="ac-route-map" aria-label="Lógica da pesquisa">
+        <div class="ac-route-map__header">
+          <span>Como ler este documento</span>
+          <strong>Do sinal de mercado à decisão de estudo</strong>
+        </div>
+        <ol class="ac-route-map__flow">
+          <li><span>01</span>
+            <div><strong>Sinal</strong><small>O que os dados de mercado mostram</small></div>
+          </li>
+          <li><span>02</span>
+            <div><strong>Skill</strong><small>O que isso exige de você na prática</small></div>
+          </li>
+          <li><span>03</span>
+            <div><strong>Nível</strong><small>Onde é pleno e onde é sênior</small></div>
+          </li>
+          <li><span>04</span>
+            <div><strong>Prova</strong><small>O artefato que comprova a skill</small></div>
+          </li>
+        </ol>
+        <p><span><strong>16</strong> seções</span><span><strong>42</strong> fontes</span><span><strong>3</strong>
+            mercados comparados</span></p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="sitenav">
+    <div class="container">
+      <div class="sitenav-top">
+        <a class="sitenav-brand" href="#resumo">Mercado Dev <span>2026 → 2029</span></a>
+        <span class="nav-ver">Pesquisa de skills</span>
+        <a class="nav-back" href="./public/index.html">← Dashboard</a>
+        <div class="sitenav-top-right">
+          <input class="search-box" id="searchInput" placeholder="Filtrar seções…" type="search"
+            aria-label="Filtrar seções desta pesquisa" />
+        </div>
+      </div>
+    </div>
+    <div class="sitenav-bar-outer">
+      <button aria-label="Rolar para esquerda" class="nav-scroll-btn left" id="navScrollLeft" type="button">‹</button>
+      <div class="sitenav-bar-inner" id="navSectionsBar">
+        <div class="nav-group">
+          <span class="nav-group-label">Panorama</span>
+          <a class="nav-link" href="#resumo">01 · Resumo executivo</a>
+          <a class="nav-link" href="#reconfiguracao">02 · Reconfiguração da demanda</a>
+          <a class="nav-link" href="#brasil">03 · Recorte Brasil</a>
+          <a class="nav-link" href="#comparativo">04 · Brasil × EUA × Europa</a>
+          <a class="nav-link" href="#contrato">05 · Novo contrato por nível</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Skills</span>
+          <a class="nav-link" href="#nucleo">06 · Núcleo (agnóstico)</a>
+          <a class="nav-link" href="#ia-aplicada">07 · IA aplicada</a>
+          <a class="nav-link" href="#web">08 · Web</a>
+          <a class="nav-link" href="#mobile">09 · Mobile</a>
+          <a class="nav-link" href="#plataforma">10 · Plataforma e dados</a>
+          <a class="nav-link" href="#seguranca">11 · Segurança e governança</a>
+          <a class="nav-link" href="#humanas">12 · Competências humanas</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Decisão</span>
+          <a class="nav-link" href="#salarios">13 · Salários e prêmio de IA</a>
+          <a class="nav-link" href="#prioridade">14 · Matriz de prioridade</a>
+          <a class="nav-link" href="#plano">15 · Conexão com o plano</a>
+          <a class="nav-link" href="#metodologia">16 · Metodologia e fontes</a>
+        </div>
+      </div>
+      <button aria-label="Rolar para direita" class="nav-scroll-btn right" id="navScrollRight" type="button">›</button>
+    </div>
+  </nav>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="main container">
+      <aside class="sidebar" aria-label="Índice da pesquisa">
+        <div class="sidebar-group">
+          <div class="sidebar-label">Panorama</div>
+          <a href="#resumo">1. Resumo executivo</a>
+          <a href="#reconfiguracao">2. Reconfiguração da demanda</a>
+          <a href="#brasil">3. Recorte Brasil</a>
+          <a href="#comparativo">4. Brasil × EUA × Europa</a>
+          <a href="#contrato">5. Novo contrato por nível</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Skills cobradas</div>
+          <a href="#nucleo">6. Núcleo agnóstico de stack</a>
+          <a href="#ia-aplicada">7. Camada de IA aplicada</a>
+          <a href="#web">8. Desenvolvimento web</a>
+          <a href="#mobile">9. Desenvolvimento mobile</a>
+          <a href="#plataforma">10. Plataforma, cloud e dados</a>
+          <a href="#seguranca">11. Segurança e governança</a>
+          <a href="#humanas">12. Competências humanas</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Decisão</div>
+          <a href="#salarios">13. Salários e prêmio de IA</a>
+          <a href="#prioridade">14. Matriz de prioridade</a>
+          <a href="#plano">15. Conexão com o plano de 36 meses</a>
+          <a href="#metodologia">16. Metodologia, limites e fontes</a>
+        </div>
+      </aside>
+
+      <div class="content">
+
+        <!-- 01 -->
+        <section class="doc-section searchable-section" data-search-section id="resumo">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Resumo executivo</h2>
+              <p class="section-subtitle">Sete conclusões que sustentam todo o resto do documento.</p>
+            </div>
+            <span class="section-badge">Panorama</span>
+          </div>
+
+          <p class="lead">O mercado não encolheu: ele mudou de forma. A demanda por escrita de código caiu, a demanda
+            por <strong>garantia de que o código está certo</strong> subiu, e uma camada nova — engenharia de IA
+            aplicada — abriu vagas mais rápido do que o mercado consegue formar gente.</p>
+
+          <div class="metric-strip mt-3" role="list" aria-label="Números-chave do mercado">
+            <div class="metric-pill" role="listitem">
+              <strong>84%</strong>
+              <small>dos devs usam ou planejam usar IA no fluxo de trabalho</small>
+            </div>
+            <div class="metric-pill" role="listitem">
+              <strong>3%</strong>
+              <small>confiam plenamente no que a IA produz — 46% desconfiam ativamente</small>
+            </div>
+            <div class="metric-pill" role="listitem">
+              <strong>3,4 : 1</strong>
+              <small>vagas de IA abertas por candidato qualificado</small>
+            </div>
+            <div class="metric-pill" role="listitem">
+              <strong>+280%</strong>
+              <small>crescimento a/a em vagas de IA agêntica (≈90 mil anúncios)</small>
+            </div>
+          </div>
+
+          <h3>As sete conclusões</h3>
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>01 · O funil inverteu</strong>
+              <span>Vagas generalistas de entrada caíram ~25% em relação ao pico de 2023, enquanto a faixa de 30+ anos
+                em áreas de alta exposição a IA cresceu de 6% a 12%. Quem já está em pleno/sênior está no lado certo da
+                curva — mas o critério de entrada nesses níveis subiu.</span>
+            </article>
+            <article class="mini-card">
+              <strong>02 · Verificação virou a skill de senioridade</strong>
+              <span>Com geração de código próxima de custo zero, o gargalo passou a ser revisão. Código de IA parece
+                limpo e esconde erro de lógica, requisito mal lido e edge case errado. A pergunta sênior de 2026 é
+                “isso pode ir para produção?”, não “quem escreve mais rápido?”.</span>
+            </article>
+            <article class="mini-card">
+              <strong>03 · Arquitetura é o que a IA não preenche</strong>
+              <span>Agente sem arquitetura definida preenche lacunas com suposições e gera <em>drift</em>. O fluxo
+                dominante virou <strong>plan-and-review</strong>: o humano desenha o sistema e escreve a especificação,
+                o agente implementa, o humano audita.</span>
+            </article>
+            <article class="mini-card">
+              <strong>04 · IA aplicada é a camada com maior déficit</strong>
+              <span>RAG, agentes e <em>evals</em> são o tripé mais pedido em vagas sênior. Avaliação (golden datasets,
+                LLM-as-a-judge, harness de regressão) é o diferenciador de 2026: time que não mede qualidade de modelo
+                não consegue liberar com segurança.</span>
+            </article>
+            <article class="mini-card">
+              <strong>05 · Web ficou server-first e TypeScript virou piso</strong>
+              <span>TypeScript aparece em ~36% dos anúncios e paga prêmio; React lidera com folga; Next.js e
+                meta-frameworks com renderização no servidor viraram ponto de partida padrão. O boilerplate que a IA
+                escreve elevou a régua do que se espera de um profissional.</span>
+            </article>
+            <article class="mini-card">
+              <strong>06 · Mobile mudou o critério de escolha de stack</strong>
+              <span>IA <em>on-device</em> deixou de ser experimento. React Native lidera em ferramental de IA
+                (ExecuTorch, MCP, agent skills), Flutter segue forte em performance, e migração <em>brownfield</em>
+                tela a tela substituiu o rewrite completo.</span>
+            </article>
+            <article class="mini-card">
+              <strong>07 · Segurança e governança viraram requisito de engenharia</strong>
+              <span><em>Prompt injection</em> segue como risco nº 1 do OWASP GenAI e não tem correção completa; a fase
+                de alto risco do EU AI Act passa a ser exigível em agosto de 2026. Isso empurra requisitos de
+                <em>guardrails</em>, auditoria e rastreabilidade para dentro do time de produto.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Consequência prática</strong>
+              <span>Para pleno: dominar o fluxo com agentes sem perder fundamento. Para sênior: virar dono de
+                arquitetura, contrato de qualidade e custo do sistema — inclusive dos pedaços que a IA escreveu.</span>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>O que este documento não é</h3>
+            <p>Não é previsão. É a leitura do que já está impresso em anúncios de vaga, pesquisas de desenvolvedores e
+              relatórios de mercado disponíveis até setembro de 2026. A seção <a href="#metodologia">16</a> declara
+              explicitamente a qualidade de cada fonte e onde os números divergem entre si.</p>
+          </div>
+        </section>
+
+        <!-- 02 -->
+        <section class="doc-section searchable-section" data-search-section id="reconfiguracao">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Reconfiguração da demanda</h2>
+              <p class="section-subtitle">Para onde as vagas foram — e de onde saíram.</p>
+            </div>
+            <span class="section-badge">Dados</span>
+          </div>
+
+          <p>O padrão que aparece em praticamente toda base de anúncios é o mesmo: <strong>contração na base, expansão
+            no topo e explosão numa faixa nova</strong>. Não é um mercado em queda; é um mercado que reprecificou o que
+            considera valioso.</p>
+
+          <h3>Onde a demanda caiu</h3>
+          <div class="doc-grid-3 mt-3">
+            <article class="mini-card">
+              <strong>Entrada generalista</strong>
+              <span>Queda de 20% a 35% em vagas de nível de entrada no último ano, dependendo da base consultada.
+                Anúncios para recém-formados caíram ~28% frente ao pico de 2022.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Frontend rotineiro</strong>
+              <span>Estimativas apontam 35% a 50% do trabalho repetitivo de frontend júnior/pleno já absorvido por
+                assistentes — telas CRUD, formulários, ajustes de layout.</span>
+            </article>
+            <article class="mini-card">
+              <strong>QA e automação manual</strong>
+              <span>Times relatam redução de 3–5 engenheiros de teste para 1 responsável humano supervisionando
+                geração e execução automatizada.</span>
+            </article>
+          </div>
+
+          <h3>Onde a demanda subiu</h3>
+          <div class="doc-grid-3 mt-3">
+            <article class="mini-card">
+              <strong>IA / ML aplicada</strong>
+              <span>≈49,2 mil anúncios em 2025 (+163% a/a) em uma base dos EUA; IA agêntica sozinha cresceu 280% a/a,
+                chegando a ~90 mil anúncios. Vagas com skills de IA nos EUA subiram 143% a/a.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Segurança</strong>
+              <span>66,8 mil anúncios de segurança nos EUA em 2025, +124% a/a. A ISC2 aponta IA/ML como a skill nº 1
+                requerida por times de segurança em 2026 (41% citam como principal necessidade).</span>
+            </article>
+            <article class="mini-card">
+              <strong>Infra para cargas de IA</strong>
+              <span>Kubernetes, Terraform, serving de modelo, GPU/inferência e observabilidade específica de LLM
+                aparecem como o conjunto que mais separa candidatos em processos sênior.</span>
+            </article>
+          </div>
+
+          <h3>O paradoxo que define o momento</h3>
+          <p>Adoção e confiança andam em direções opostas. A adoção de ferramentas de IA subiu para 84% (de 76% no ano
+            anterior) e 51% dos profissionais usam diariamente — mas a confiança caiu 11 pontos, com apenas 3% dizendo
+            confiar plenamente e 46% desconfiando ativamente. A frustração nº 1, citada por 64%, é o output
+            <em>“quase certo”</em> e o custo de depurar código gerado.</p>
+
+          <div class="callout mt-3">
+            <h3>Por que isso importa para a sua carreira</h3>
+            <p>Esse gap de confiança é exatamente a vaga que sobrou. Se 84% usam e só 3% confiam, o mercado está pagando
+              por quem <strong>fecha esse gap</strong>: quem consegue medir, testar, revisar e responsabilizar-se pelo
+              output. Isso é uma descrição bastante literal do papel de pleno experiente e sênior em 2026.</p>
+          </div>
+
+          <h3>O efeito amplificador</h3>
+          <p>O relatório DORA sobre desenvolvimento assistido por IA chega a uma conclusão que contraria a expectativa
+            comum: IA <strong>não melhora automaticamente</strong> a performance de entrega. Ela amplifica o que já
+            existe — fortalece times de alta performance e expõe disfunção em organizações com processo fragmentado. O
+            desdobramento de 2026 é ainda mais direto: o maior retorno de investimento em IA não vem da ferramenta, e
+            sim da qualidade da plataforma interna, da clareza dos fluxos e do alinhamento dos times. Cerca de 90% dos
+            desenvolvedores já relatam usar alguma forma de assistência.</p>
+          <p>Traduzindo para skill individual: <strong>engenharia de base — testes, CI/CD, observabilidade, revisão,
+            arquitetura — passou a ter retorno maior, não menor</strong>, porque é o que determina se a IA multiplica
+            ganho ou multiplica dívida.</p>
+        </section>
+
+        <!-- 03 -->
+        <section class="doc-section searchable-section" data-search-section id="brasil">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Recorte Brasil</h2>
+              <p class="section-subtitle">Escassez estrutural, mercado nacional unificado e o piso real de sênior.</p>
+            </div>
+            <span class="section-badge">Local</span>
+          </div>
+
+          <p>O Brasil vive uma versão diferente da mesma história: a contração de entrada existe, mas a escassez
+            estrutural de profissionais qualificados é tão grande que a pressão sobre pleno e sênior é ainda mais
+            favorável ao candidato.</p>
+
+          <div class="doc-grid-4 mt-3">
+            <article class="mini-card">
+              <strong>+18,5%</strong>
+              <span>crescimento do mercado de TI brasileiro em 2025, acima da média global.</span>
+            </article>
+            <article class="mini-card">
+              <strong>700 mil+</strong>
+              <span>vagas de tecnologia abertas ao fim de 2025, segundo dados do Ministério do Trabalho.</span>
+            </article>
+            <article class="mini-card">
+              <strong>53 mil × 159 mil</strong>
+              <span>formados por ano contra demanda anual — um déficit de aproximadamente 3 para 1.</span>
+            </article>
+            <article class="mini-card">
+              <strong>68%</strong>
+              <span>dos profissionais de TI afirmam que dominar IA já é requisito básico para manter ou conquistar
+                vaga.</span>
+            </article>
+          </div>
+
+          <h3>Faixas salariais praticadas (CLT, full-stack)</h3>
+          <div class="table-wrap mt-3">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Nível</th>
+                  <th>Faixa referência 2026</th>
+                  <th>Leitura de mercado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Pleno</strong></td>
+                  <td>R$ 9.550 – R$ 15.900</td>
+                  <td>A parte alta da faixa exige autonomia em produção, não só entrega de feature. Domínio de IA
+                    aplicada é o que move do meio para o topo da faixa.</td>
+                </tr>
+                <tr>
+                  <td><strong>Sênior</strong></td>
+                  <td>R$ 12.450 – R$ 20.950</td>
+                  <td>Relatos de mercado indicam que oferta abaixo de R$ 10 mil CLT para sênior praticamente não recebe
+                    candidatura qualificada; o piso real praticado gira em torno de R$ 13 mil.</td>
+                </tr>
+                <tr>
+                  <td><strong>Júnior em dados/ML</strong></td>
+                  <td>R$ 4.500 – R$ 6.000 (entrada)</td>
+                  <td>Entrada mais agressiva que a de dev generalista — sinal claro de para onde a demanda migrou.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>O trabalho 100% remoto dissolveu a barreira geográfica e criou um mercado nacional unificado: salários
+            subiram em cidades médias e a concorrência por talento qualificado aumentou em todo lugar. Para pleno e
+            sênior isso corta nos dois sentidos — a vaga boa não depende mais de onde você mora, mas o concorrente
+            também não.</p>
+
+          <div class="callout mt-3">
+            <h3>Leitura honesta dos números brasileiros</h3>
+            <p>As faixas acima vêm de guias salariais de consultorias e agregadores, não de uma base pública auditada.
+              Servem para calibrar expectativa e negociação, não como garantia. Variação por segmento (fintech, health,
+              consultoria, produto internacional) é grande, e contratos PJ ou em moeda estrangeira operam em outra
+              escala.</p>
+          </div>
+        </section>
+
+        <!-- 04 -->
+        <section class="doc-section searchable-section" data-search-section id="comparativo">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Brasil × EUA × Europa</h2>
+              <p class="section-subtitle">Três mercados, três lógicas econômicas — e três portas de entrada
+                diferentes.</p>
+            </div>
+            <span class="section-badge">Comparativo</span>
+          </div>
+
+          <p class="lead">Os três mercados estão contratando IA, mas por motivos distintos. Os <strong>EUA</strong>
+            correm atrás de escala e produto; a <strong>Europa</strong> corre atrás de soberania e conformidade; o
+            <strong>Brasil</strong> corre atrás de gente. Entender qual força move cada mercado importa mais do que
+            comparar salário bruto — é isso que define quais skills cada um está disposto a pagar caro.</p>
+
+          <h3>Quadro comparativo</h3>
+          <div class="table-wrap mt-3">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Dimensão</th>
+                  <th>Brasil</th>
+                  <th>Estados Unidos</th>
+                  <th>Europa</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Força dominante</strong></td>
+                  <td>Escassez estrutural de profissionais qualificados</td>
+                  <td>Reprecificação: corte no meio, disputa feroz no topo</td>
+                  <td>Regulação e soberania tecnológica como motor de demanda</td>
+                </tr>
+                <tr>
+                  <td><strong>Tamanho e déficit</strong></td>
+                  <td>+700 mil vagas abertas; forma ~53 mil/ano contra demanda de ~159 mil</td>
+                  <td>500 mil+ vagas de IA/ML no mundo; 3,4 vagas de IA por candidato qualificado</td>
+                  <td>10,3 mi de especialistas em TIC, meta de 20 mi até 2030; 57% das empresas não acham talento</td>
+                </tr>
+                <tr>
+                  <td><strong>Direção da contratação</strong></td>
+                  <td>Crescimento amplo; TI cresceu 18,5% em 2025, acima da média global</td>
+                  <td>Bipolar: 52 mil cortes só no 1º trimestre de 2026 e, ao mesmo tempo, +85% a/a em vagas de IA/ML
+                  </td>
+                  <td>Crescimento constante e menos volátil; +57% a/a em vagas de engenharia de IA</td>
+                </tr>
+                <tr>
+                  <td><strong>Faixa sênior de referência</strong></td>
+                  <td>R$ 12.450 – 20.950/mês CLT (full-stack); piso real praticado ~R$ 13 mil</td>
+                  <td>~US$ 240 mil/ano de base para sênior de IA; total em big tech passa de US$ 400 mil</td>
+                  <td>Alemanha e Reino Unido ~€ 67–68 mil/ano; Polônia € 53–56 mil (pleno); Suíça no topo absoluto</td>
+                </tr>
+                <tr>
+                  <td><strong>Prêmio por skills de IA</strong></td>
+                  <td>68% dos profissionais já veem IA como requisito básico; prêmio existe mas é pouco medido
+                    formalmente</td>
+                  <td>15–25% acima do benchmark do mesmo nível; até 43% quando o anúncio pede duas ou mais skills de IA
+                  </td>
+                  <td>20–40% sobre o engenheiro equivalente; 35–50% para especialista em LLM e IA generativa</td>
+                </tr>
+                <tr>
+                  <td><strong>Modelo de trabalho</strong></td>
+                  <td>Remoto consolidado; mercado nacional unificado dissolveu a barreira geográfica</td>
+                  <td>Forte retorno ao presencial: cargos 100% no escritório saltaram de 65% para 87% em dois
+                    trimestres</td>
+                  <td>Híbrido estável, proteção trabalhista forte e nearshoring interno para o Leste Europeu</td>
+                </tr>
+                <tr>
+                  <td><strong>Skill que mais diferencia</strong></td>
+                  <td>Generalista sólido (full-stack + cloud + inglês) — o mercado ainda cobre muita superfície com
+                    pouca gente</td>
+                  <td>Escala e produto: agentes em produção, evals, infraestrutura de inferência, custo</td>
+                  <td>Conformidade aplicada: EU AI Act, NIS2, rastreabilidade, cloud e dado soberanos</td>
+                </tr>
+                <tr>
+                  <td><strong>Principal barreira</strong></td>
+                  <td>Teto salarial local e encargo trabalhista alto para o empregador</td>
+                  <td>Visto, fuso e política de presencial; concorrência global no remoto</td>
+                  <td>Idioma local em muitos países, burocracia de contratação e faixa salarial menor que a americana
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Retrato de cada mercado</h3>
+          <div class="doc-grid-3 mt-3">
+            <article class="module-card">
+              <strong>Brasil · volume e escassez</strong>
+              <p>Maior comunidade de desenvolvedores da América Latina, com cerca de 759 mil engenheiros qualificados e
+                um número de devs que mais que quadruplicou entre 2020 e 2025. A demanda cresce mais rápido que a
+                formação, o que sustenta a pressão salarial mesmo com a contração global de vagas de entrada. Salários
+                na região sobem de 8% a 12% ao ano.</p>
+              <p><strong>Ponto cego:</strong> o encargo do empregador chega a ~71% sobre a base no regime CLT — bem
+                acima de México (41%) e Argentina (53%). Isso empurra parte relevante do mercado para PJ e para
+                contratação via EOR.</p>
+            </article>
+            <article class="module-card">
+              <strong>EUA · o mercado mais desigual</strong>
+              <p>Convive com corte recorde e escassez extrema ao mesmo tempo. Foram ~52 mil demissões em tech só no
+                primeiro trimestre de 2026 — o maior primeiro trimestre desde 2023 — enquanto 87% dos líderes técnicos
+                dizem não encontrar gente qualificada. Bases de engenheiro de software generalista seguem 15–25% abaixo
+                do pico de 2022; especialista em IA vai na direção oposta.</p>
+              <p><strong>Ponto cego:</strong> a janela do remoto internacional está mais estreita que em 2021. Cargos
+                totalmente presenciais subiram de 65% para 87% entre o último trimestre de 2025 e o segundo de 2026,
+                ainda que 72% dos recrutadores admitam que vaga remota é mais fácil de preencher.</p>
+            </article>
+            <article class="module-card">
+              <strong>Europa · demanda puxada por regra</strong>
+              <p>Cerca de 31,7 mil vagas de engenharia de IA anunciadas nos seis meses até agosto de 2026, dentro de
+                mais de 72,5 mil rastreadas desde meados de 2025 — ritmo de 4,5 a 6,6 mil novas vagas por mês, com Reino
+                Unido e Alemanha concentrando perto de 40%. A mediana europeia de desenvolvedor subiu de € 38 mil (2022)
+                para ~€ 45 mil, alta de 18% em quatro anos.</p>
+              <p><strong>Ponto cego:</strong> o capital não acompanha. Startups de IA europeias levantaram US$ 23 bi no
+                primeiro semestre de 2026 — o dobro do ano anterior, mas ainda cerca de 7% do volume americano. Mais
+                vagas de conformidade, menos vagas de fronteira.</p>
+            </article>
+          </div>
+
+          <h3>O que a Europa está construindo — e por que isso vira vaga</h3>
+          <p>O pacote de soberania tecnológica da Comissão Europeia e o Cloud and AI Development Act miram triplicar a
+            capacidade de data center do bloco em cinco a sete anos, com licitação para até sete <em>AI
+            gigafactories</em>. No lado corporativo, 52% das empresas da Europa Ocidental pretendem acelerar
+            investimento em soberania de dados e 47% estão reavaliando dependência de nuvem não europeia. Somado ao EU
+            AI Act (obrigações de alto risco exigíveis desde agosto de 2026) e ao NIS2, isso cria um perfil de vaga que
+            praticamente não existe nos EUA na mesma proporção.</p>
+
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>Skills que a Europa premia acima da média</strong>
+              <span>Rastreabilidade e auditoria de sistemas de IA, classificação de risco por caso de uso, residência e
+                minimização de dado, deploy em nuvem europeia, documentação técnica para conformidade, segurança sob
+                NIS2. É engenharia com obrigação legal anexada — e é escassa porque exige base técnica que o perfil
+                puro de compliance não tem.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Skills que os EUA premiam acima da média</strong>
+              <span>Sistemas agênticos em produção, harness de avaliação, infraestrutura de inferência e GPU,
+                otimização de custo por token, roteamento multi-modelo, escala de produto. É engenharia de fronteira,
+                paga em faixa que nenhum outro mercado alcança — e disputada globalmente.</span>
+            </article>
+          </div>
+
+          <h3>Três portas de entrada para quem está no Brasil</h3>
+          <div class="doc-grid-3 mt-3">
+            <article class="mini-card">
+              <strong>1 · CLT ou PJ local</strong>
+              <span>Menor atrito e menor teto. A faixa sênior praticada fica entre R$ 12,4 mil e R$ 21 mil, com o
+                mercado remoto nacional já unificado — a vaga boa não depende mais de onde você mora, e o concorrente
+                também não.</span>
+            </article>
+            <article class="mini-card">
+              <strong>2 · Nearshore para os EUA</strong>
+              <span>O caminho com melhor relação esforço/retorno hoje: mesmo fuso horário, contratação via PJ ou EOR e
+                mercado crescendo cerca de 23% ao ano. Faixas reportadas para sênior variam bastante entre fontes —
+                aproximadamente US$ 55 mil a US$ 120 mil por ano, ou US$ 34 a US$ 92 por hora conforme stack e país.
+                Exige inglês de trabalho real, não inglês de leitura.</span>
+            </article>
+            <article class="mini-card">
+              <strong>3 · Europa remota ou relocação</strong>
+              <span>Faixa intermediária, mas com estabilidade e proteção trabalhista maiores. A média de remoto europeu
+                fica em torno de US$ 118 mil/ano, e o Leste Europeu é onde os salários crescem mais rápido (15–25% ao
+                ano). Diferencial de entrada: conformidade e soberania, não velocidade de entrega.</span>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>Leitura estratégica para o leitor brasileiro</h3>
+            <p>As três portas exigem o mesmo núcleo técnico — arquitetura, verificação, evals, operação — e se separam
+              no <strong>segundo eixo</strong>. Se o alvo é os EUA, o segundo eixo é escala e agentes em produção. Se é
+              a Europa, é governança e conformidade aplicadas. Se é o Brasil, é amplitude: full-stack sólido com cloud
+              e uma vertical de IA. Escolher o alvo antes de escolher o que estudar economiza meses — e o inglês
+              técnico é o único item que multiplica as três opções ao mesmo tempo.</p>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>Como não se enganar ao comparar esses números</h3>
+            <p><strong>Câmbio não é poder de compra.</strong> US$ 120 mil em São Francisco e € 67 mil em Berlim podem
+              significar padrões de vida próximos depois de moradia, imposto e saúde. <strong>Regimes não são
+              comparáveis diretamente:</strong> CLT brasileira, W2 americano e contrato europeu carregam pacotes de
+              benefício e estabilidade muito diferentes, e a faixa de PJ no Brasil não inclui o que a CLT embute.
+              <strong>As bases também diferem:</strong> os números dos EUA vêm de bases de anúncios enormes, os
+              europeus de agregadores regionais e os brasileiros de guias salariais de consultoria — a precisão não é a
+              mesma nos três casos.</p>
+          </div>
+        </section>
+
+        <!-- 05 -->
+        <section class="doc-section searchable-section" data-search-section id="contrato">
+          <div class="doc-section-heading">
+            <div>
+              <h2>O novo contrato por nível</h2>
+              <p class="section-subtitle">O que muda concretamente na definição de pleno e de sênior.</p>
+            </div>
+            <span class="section-badge">Níveis</span>
+          </div>
+
+          <p>A distinção clássica — júnior executa, pleno entrega sozinho, sênior decide — continua válida na forma, mas
+            mudou de conteúdo. O que era “entregar sozinho” virou “entregar sozinho <em>com agentes</em> sem perder
+            controle”; o que era “decidir” virou “decidir e conseguir provar que a decisão se sustenta em produção”.</p>
+
+          <div class="level-split mt-3">
+            <article>
+              <strong>Pleno em 2026</strong>
+              <ul>
+                <li><strong>Fluxo com agentes sem dependência cega.</strong> Sabe usar Copilot, Cursor ou Claude Code
+                  para acelerar, e sabe explicar em entrevista <em>como</em> usa. Candidatos que articulam isso são
+                  vistos com vantagem clara.</li>
+                <li><strong>Fundamento preservado.</strong> Consegue ler o que o agente escreveu e apontar por que
+                  funciona — ou por que não vai funcionar sob carga, concorrência ou dado sujo.</li>
+                <li><strong>Escrita de teste como rede de segurança real</strong>, não como cobertura decorativa. Teste
+                  é o que torna geração automática segura.</li>
+                <li><strong>Uma vertical aplicada de IA</strong>: integração de LLM em produto, RAG básico sobre dado da
+                  empresa, ou automação de fluxo. Sem isso, o pleno compete em um mercado com prêmio decrescente.</li>
+                <li><strong>Operação mínima</strong>: sabe ler log estruturado, métrica e trace do que ele mesmo
+                  entregou.</li>
+              </ul>
+            </article>
+            <article>
+              <strong>Sênior em 2026</strong>
+              <ul>
+                <li><strong>Arquitetura como produto principal.</strong> Define fronteiras, contratos e onde o agente
+                  <em>não</em> tem permissão de decidir. Sem isso, agente gera drift arquitetural.</li>
+                <li><strong>Especificação executável.</strong> Escrever spec precisa virou skill de engenharia: é o
+                  artefato que faz a IA produzir o certo de forma repetível.</li>
+                <li><strong>Revisão como gargalo assumido.</strong> IA gera mais código do que sênior consegue revisar;
+                  o sênior desenha o processo que torna a revisão viável (checagens automatizadas, camadas de risco,
+                  revisão humana obrigatória em pagamento e segurança).</li>
+                <li><strong>Medição de qualidade.</strong> Em sistema com IA, isso significa evals, golden datasets e
+                  regressão de prompt. Em sistema tradicional, SLO e orçamento de erro.</li>
+                <li><strong>Custo e risco.</strong> Custo de inferência, latência, dependência de fornecedor, exposição
+                  regulatória. Sênior que não fala de custo hoje soa júnior de arquitetura.</li>
+                <li><strong>Contexto organizacional.</strong> É a parte explicitamente citada como insubstituível:
+                  saber por que o sistema é assim, o que já falhou e o que não pode quebrar.</li>
+              </ul>
+            </article>
+          </div>
+
+          <h3>A mudança de figura: de codificador a regente</h3>
+          <p>A descrição que mais se repete em análises sérias do período é a passagem de <em>coder</em> para
+            <em>conductor</em>: o engenheiro define a melodia — arquitetura, restrições, critério de aceite — e os
+            agentes executam as notas. O valor não está em tocar mais rápido; está em saber quando a execução saiu do
+            tom e ter autoridade técnica para parar a entrega.</p>
+
+          <div class="callout mt-3">
+            <h3>O teste de senioridade de 2026</h3>
+            <p>Uma formulação direta que circula entre engenheiros e vale como critério pessoal: <strong>o melhor
+              engenheiro não é o que escreve mais rápido, é o que sabe quando desconfiar da IA</strong>. Se você não
+              consegue justificar tecnicamente por que rejeitou uma sugestão de agente, você ainda não está exercendo
+              senioridade — está terceirizando decisão.</p>
+          </div>
+        </section>
+
+        <!-- 06 -->
+        <section class="doc-section searchable-section" data-search-section id="nucleo">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Núcleo agnóstico de stack</h2>
+              <p class="section-subtitle">As skills que valem em web, mobile, backend ou IA — e que decidem nível.</p>
+            </div>
+            <span class="section-badge">Fundamento</span>
+          </div>
+
+          <p>Este é o bloco que não depende de framework e que sobrevive à próxima virada de moda. É também o bloco onde
+            o mercado mais reclama de falta de gente.</p>
+
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card skill-card">
+              <header><strong>Revisão de código gerado por IA</strong><span class="skill-weight"
+                  data-weight="critica">Crítica</span></header>
+              <p>Código de IA tem modos de falha próprios: parece limpo, compila, passa em teste raso e erra requisito,
+                edge case e premissa de segurança. Revisar isso exige mentalidade diferente da revisão de código
+                humano.</p>
+              <footer><span>Prova: PRs com rejeição justificada</span><span>Prova: checklist de revisão do
+                  time</span></footer>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Arquitetura e system design</strong><span class="skill-weight"
+                  data-weight="critica">Crítica</span></header>
+              <p>Fronteiras de módulo, contratos, estado, concorrência, consistência, modos de falha. É o que impede o
+                agente de preencher lacuna com suposição — a causa raiz de drift em projetos assistidos por IA.</p>
+              <footer><span>Prova: ADR escrito</span><span>Prova: diagrama + trade-off explícito</span></footer>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Escrita de especificação</strong><span class="skill-weight"
+                  data-weight="critica">Crítica</span></header>
+              <p>No fluxo plan-and-review, a spec é o input de maior alavancagem. Requisito ambíguo vira implementação
+                errada em minutos e em escala. Spec boa carrega critério de aceite e caso de teste.</p>
+              <footer><span>Prova: spec que outro dev executa sem perguntar</span></footer>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Testes como contrato</strong><span class="skill-weight" data-weight="critica">Crítica</span>
+              </header>
+              <p>Com geração barata, o teste deixa de ser custo e vira o mecanismo que autoriza a geração. Unidade,
+                integração, contrato, propriedade e teste de regressão de comportamento.</p>
+              <footer><span>Prova: suíte que pega bug real</span><span>Prova: teste de contrato entre serviços</span>
+              </footer>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Observabilidade e operação</strong><span class="skill-weight" data-weight="alta">Alta</span>
+              </header>
+              <p>Log estruturado, métrica, trace distribuído, SLO, orçamento de erro. Em sistema com IA soma-se rastreio
+                de prompt, custo por requisição e taxa de fallback.</p>
+              <footer><span>Prova: dashboard que você usou em incidente</span></footer>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Fundamentos de CS que não envelhecem</strong><span class="skill-weight"
+                  data-weight="base">Base</span></header>
+              <p>Complexidade, estrutura de dados, concorrência, memória, rede, modelo de consistência. É o que permite
+                perceber o erro sutil que o agente introduziu — o argumento é explícito nas análises do período.</p>
+              <footer><span>Prova: diagnóstico de performance real</span></footer>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Engenharia de dados aplicada</strong><span class="skill-weight" data-weight="alta">Alta</span>
+              </header>
+              <p>Modelagem, SQL de verdade, pipeline, qualidade de dado, versionamento de dataset. Aparece
+                consistentemente entre as skills mais pedidas em IA — porque toda aplicação de IA é, no fundo, um
+                problema de dado.</p>
+              <footer><span>Prova: pipeline com validação e reprocessamento</span></footer>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Consciência de custo</strong><span class="skill-weight" data-weight="alta">Alta</span>
+              </header>
+              <p>Custo por requisição, por token, por GPU-hora, por query. Otimização de custo aparece explicitamente
+                entre as skills que substituíram o currículo genérico de IA de anos anteriores.</p>
+              <footer><span>Prova: redução mensurada de custo em produção</span></footer>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>Regra de estudo para este bloco</h3>
+            <p>Nenhuma dessas skills se aprende assistindo conteúdo. Todas se comprovam com artefato: um ADR, uma spec,
+              uma suíte de teste, um dashboard, um relatório de incidente. Em processo seletivo de pleno e sênior, o
+              artefato vale mais do que o curso.</p>
+          </div>
+        </section>
+
+        <!-- 07 -->
+        <section class="doc-section searchable-section" data-search-section id="ia-aplicada">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Camada de IA aplicada</h2>
+              <p class="section-subtitle">O bloco com maior déficit de oferta — e o que separa pleno de sênior nele.</p>
+            </div>
+            <span class="section-badge">AI Engineering</span>
+          </div>
+
+          <p class="lead">Existe uma diferença que quase toda vaga hoje assume implicitamente: <strong>usar IA para
+            programar</strong> não é o mesmo que <strong>programar sistemas de IA</strong>. A primeira é ferramenta de
+            produtividade e virou requisito básico. A segunda é a especialidade escassa.</p>
+
+          <h3>O tripé que domina as descrições de vaga</h3>
+          <div class="doc-grid-3 mt-3">
+            <article class="module-card">
+              <strong>RAG e recuperação</strong>
+              <p>Padrão default corporativo para ancorar LLM em dado privado. Já é <em>table stakes</em>: chunking,
+                embedding, banco vetorial, busca híbrida, reranking, citação de fonte, avaliação de recall e
+                precisão.</p>
+            </article>
+            <article class="module-card">
+              <strong>Agentes e uso de ferramenta</strong>
+              <p>Orquestração séria roda sobre frameworks com máquina de estado, checkpoint e human-in-the-loop
+                (LangGraph, CrewAI, Claude Agent SDK). Some-se integração via MCP, que passou a aparecer nominalmente em
+                requisitos.</p>
+            </article>
+            <article class="module-card">
+              <strong>Evals e observabilidade</strong>
+              <p>Quase toda vaga sênior de IA pede desenho de pipeline de avaliação, golden dataset e fluxo de
+                LLM-as-a-judge. É descrito como <strong>o diferenciador de 2026</strong>: quem não mede qualidade não
+                consegue liberar com segurança.</p>
+            </article>
+          </div>
+
+          <h3>Skills que substituíram o currículo antigo</h3>
+          <p>O conjunto “LangChain + Pinecone” deixou de impressionar. O que aparece no lugar, em análises de
+            contratação do período: orquestração de agentes, integração MCP, desenho de eval, engenharia de prompt e
+            contexto, banco vetorial e RAG, otimização de custo, guardrails e segurança, deploy de <em>computer
+            use</em>, observabilidade em produção e fluência em modelos de fronteira.</p>
+
+          <div class="level-split mt-3">
+            <article>
+              <strong>Escopo de pleno em IA aplicada</strong>
+              <ul>
+                <li>Integrar LLM em produto real com tratamento de erro, timeout, fallback e streaming.</li>
+                <li>Construir e manter um RAG funcional: ingestão, indexação, avaliação de recall, citação.</li>
+                <li>Escrever e versionar prompts como código, com teste de regressão.</li>
+                <li>Rodar pipeline de eval existente e interpretar o resultado.</li>
+                <li>Aplicar guardrails prontos e validar entrada e saída.</li>
+              </ul>
+            </article>
+            <article>
+              <strong>Escopo de sênior em IA aplicada</strong>
+              <ul>
+                <li>Desenhar a arquitetura de recuperação: quando RAG, quando fine-tune, quando nada disso resolve.</li>
+                <li>Criar o harness de avaliação do zero — golden dataset, métrica, critério de release, detecção de
+                  regressão.</li>
+                <li>Definir topologia de agentes, limites de autonomia, checkpoint e ponto de intervenção humana.</li>
+                <li>Responder por custo de inferência, latência p95 e estratégia multi-modelo.</li>
+                <li>Defender o sistema contra prompt injection e exfiltração — com defesa em profundidade, porque não
+                  existe correção completa.</li>
+                <li>Governança: rastreabilidade, auditoria e mapeamento regulatório do que o sistema decide.</li>
+              </ul>
+            </article>
+          </div>
+
+          <h3>Papéis novos que já têm nome próprio</h3>
+          <div class="doc-grid-4 mt-3">
+            <article class="mini-card">
+              <strong>Eval Engineer</strong>
+              <span>Tipicamente pleno. Desenha, mantém e roda pipelines de avaliação de sistemas de IA em
+                produção.</span>
+            </article>
+            <article class="mini-card">
+              <strong>RAG Engineer</strong>
+              <span>Tipicamente sênior. Dono da arquitetura de recuperação e da engenharia de prompt em nível de
+                sistema.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Agentic AI Engineer</strong>
+              <span>Constrói sistemas agênticos de produção. A faixa mais aquecida em remuneração no recorte
+                internacional.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Responsible AI Engineer</strong>
+              <span>Interseção de engenharia e conformidade — cresce puxado por regulação, não por hype.</span>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>Onde está o gargalo real</h3>
+            <p>A oferta de gente que sabe chamar uma API de LLM é enorme. A oferta de gente que sabe <strong>provar que
+              o sistema de IA está funcionando</strong> — com dataset de referência, métrica defensável e processo de
+              regressão — é pequena. Se você precisa escolher <em>um</em> investimento diferenciador nesta camada,
+              escolha evals.</p>
+          </div>
+        </section>
+
+        <!-- 08 -->
+        <section class="doc-section searchable-section" data-search-section id="web">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Desenvolvimento web</h2>
+              <p class="section-subtitle">Server-first por padrão, TypeScript como piso, IA como camada de produto.</p>
+            </div>
+            <span class="section-badge">Web</span>
+          </div>
+
+          <p>O frontend de 2026 é descrito como <strong>server-first por padrão</strong>: React Server Components, SSR e
+            renderização na edge deixaram de ser otimização avançada e viraram ponto de partida. Como a IA escreve o
+            boilerplate, a régua do que se espera de um profissional subiu — o valor migrou para arquitetura de
+            renderização, performance e integração.</p>
+
+          <h3>O que os anúncios pedem</h3>
+          <div class="table-wrap mt-3">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Tecnologia</th>
+                  <th>Sinal de mercado</th>
+                  <th>Como isso é cobrado em pleno/sênior</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>TypeScript</strong></td>
+                  <td>≈35,6% dos anúncios; prêmio relatado de ~US$ 27 mil sobre JavaScript puro</td>
+                  <td>Piso, não diferencial. Sênior é cobrado em tipos que modelam domínio, generics úteis, tipagem de
+                    fronteira de API e ausência de <code>any</code> estratégico.</td>
+                </tr>
+                <tr>
+                  <td><strong>React</strong></td>
+                  <td>Lidera com folga; aparece em cerca de 3/4 dos anúncios de frontend</td>
+                  <td>Não é “saber React” — é saber o modelo de renderização: server vs client component, fronteira de
+                    hidratação, suspense, streaming, cache.</td>
+                </tr>
+                <tr>
+                  <td><strong>Next.js</strong></td>
+                  <td>Maior prêmio entre meta-frameworks: ~US$ 15–17 mil acima da mediana de US$ 134,5 mil</td>
+                  <td>Estratégia de renderização por rota, revalidação, server actions, edge runtime e o custo real de
+                    cada escolha.</td>
+                </tr>
+                <tr>
+                  <td><strong>Node / BFF</strong></td>
+                  <td>Vagas full-stack frequentemente empacotam React + TypeScript + Node/Next como requisito único</td>
+                  <td>Fronteira entre cliente e servidor deixou de existir no organograma. Pleno full-stack é o padrão
+                    esperado, não a exceção.</td>
+                </tr>
+                <tr>
+                  <td><strong>Ferramental de IA</strong></td>
+                  <td>Copilot/Cursor citados como expectativa de fluxo de trabalho</td>
+                  <td>Cobrado na entrevista: como você usa, o que você não delega, como valida o resultado.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>A camada nova: interface de produto com IA</h3>
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>UX de resposta incerta</strong>
+              <span>Streaming token a token, estado de carregamento longo, cancelamento, retry, exibição de fonte e
+                citação, e o desenho honesto do erro quando o modelo alucina. É design de interação, não só
+                código.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Arquitetura de chamada</strong>
+              <span>Onde a chamada ao modelo acontece (edge, servidor, cliente), como a chave é protegida, como o custo
+                é limitado por usuário, como o timeout degrada sem quebrar a tela.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Performance como requisito</strong>
+              <span>Core Web Vitals continuam sendo o critério objetivo de qualidade percebida. Com mais JavaScript
+                gerado automaticamente, orçamento de bundle e medição viraram trabalho de sênior.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Acessibilidade e semântica</strong>
+              <span>É a área onde código gerado erra com mais frequência silenciosa. Saber auditar acessibilidade virou
+                uma forma concreta de agregar valor sobre output de agente.</span>
+            </article>
+          </div>
+        </section>
+
+        <!-- 09 -->
+        <section class="doc-section searchable-section" data-search-section id="mobile">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Desenvolvimento mobile</h2>
+              <p class="section-subtitle">IA on-device, brownfield e um novo critério de escolha de stack.</p>
+            </div>
+            <span class="section-badge">Mobile</span>
+          </div>
+
+          <p>Mobile mudou menos em volume de vagas e mais em <strong>critério técnico</strong>. A frase que resume o
+            momento: IA deixou de ser opcional e inferência no dispositivo é a próxima fronteira. Escolher stack deixou
+            de ser decisão puramente técnica — passa por qual ecossistema tem ferramental de IA maduro.</p>
+
+          <h3>Panorama de frameworks</h3>
+          <div class="table-wrap mt-3">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Stack</th>
+                  <th>Maturidade</th>
+                  <th>Ferramental de IA</th>
+                  <th>Onde é mais contratado</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>React Native</strong></td>
+                  <td>Alta</td>
+                  <td>O mais avançado: ExecuTorch para execução on-device, servidores MCP, agent skills, bibliotecas
+                    prontas para fluxo com IA</td>
+                  <td>Brownfield, produtos com feature de IA, times que já vêm de React/TypeScript</td>
+                </tr>
+                <tr>
+                  <td><strong>Flutter</strong></td>
+                  <td>Alta</td>
+                  <td>Forte: GenUI SDK e servidor MCP experimental para Dart/Flutter</td>
+                  <td>Projetos com exigência de performance e consistência visual entre plataformas</td>
+                </tr>
+                <tr>
+                  <td><strong>Kotlin Multiplatform</strong></td>
+                  <td>Média-alta</td>
+                  <td>Limitado — é o ponto fraco atual do ecossistema</td>
+                  <td>Times já centrados em Kotlin, compartilhamento de lógica com Android nativo</td>
+                </tr>
+                <tr>
+                  <td><strong>Nativo (Swift / Kotlin)</strong></td>
+                  <td>Alta</td>
+                  <td>Acesso direto às APIs de ML da plataforma</td>
+                  <td>Enterprise, bancos, apps críticos de performance — demanda constante e estável</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Mudanças concretas do ciclo 2026</h3>
+          <div class="doc-grid-3 mt-3">
+            <article class="mini-card">
+              <strong>React Native 0.84 (fev/2026)</strong>
+              <span>Hermes V1 como padrão, arquitetura legada removida e binários iOS pré-compilados como padrão —
+                mudanças que quebram suposições de projetos antigos e criam demanda por quem sabe migrar.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Brownfield sobre rewrite</strong>
+              <span>Migração tela a tela com 80–95% de compartilhamento de código e relato de 20–40% mais velocidade de
+                entrega. Saber conviver com nativo existente virou skill de sênior mobile.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Android 17 · Developer Verification</strong>
+              <span>Exigência de verificação de desenvolvedor a partir de setembro de 2026, com impacto direto em
+                distribuição independente e corporativa.</span>
+            </article>
+          </div>
+
+          <h3>Skills mobile que o mercado paga</h3>
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card skill-card">
+              <header><strong>Inferência on-device</strong><span class="skill-weight" data-weight="critica">Crítica</span>
+              </header>
+              <p>Rodar modelo local: quantização, tamanho de binário, consumo de bateria, memória, fallback para nuvem e
+                decisão de privacidade. É o diferencial mais citado no ciclo atual.</p>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Arquitetura híbrida nativo + cross-platform</strong><span class="skill-weight"
+                  data-weight="alta">Alta</span></header>
+              <p>Ponte entre módulo nativo e camada cross-platform, versionamento das duas, e estratégia de migração
+                incremental sem congelar o roadmap do produto.</p>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Performance e ciclo de vida real</strong><span class="skill-weight"
+                  data-weight="alta">Alta</span></header>
+              <p>Cold start, jank, offline-first, sincronização, conflito de dados. Problemas que agente de código
+                resolve mal porque dependem de contexto de dispositivo e de usuário.</p>
+            </article>
+            <article class="mini-card skill-card">
+              <header><strong>Distribuição e compliance de loja</strong><span class="skill-weight"
+                  data-weight="base">Base</span></header>
+              <p>Assinatura, verificação, política de privacidade, declaração de uso de IA, rollout gradual. Cresce em
+                peso com formatos novos (dobráveis, wearables) e regras mais estritas.</p>
+            </article>
+          </div>
+        </section>
+
+        <!-- 10 -->
+        <section class="doc-section searchable-section" data-search-section id="plataforma">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Plataforma, cloud e dados</h2>
+              <p class="section-subtitle">O bloco que sustenta tudo o que as outras seções prometem.</p>
+            </div>
+            <span class="section-badge">Infra</span>
+          </div>
+
+          <p>Este é o bloco menos falado e o que mais aparece como filtro silencioso em processo sênior. A conclusão do
+            DORA é literal: o retorno de investimento em IA vem da <strong>qualidade da plataforma interna</strong>, da
+            clareza dos fluxos e do alinhamento dos times — não da ferramenta.</p>
+
+          <div class="doc-grid-3 mt-3">
+            <article class="mini-card">
+              <strong>Kubernetes e Terraform</strong>
+              <span>Aparecem juntos como o par de infraestrutura que mais eleva taxa de resposta em vagas sênior.
+                Infraestrutura como código deixou de ser especialidade de DevOps isolado.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Serving e MLOps</strong>
+              <span>Deploy de modelo, versionamento, rollback, canário, teste A/B de modelo e monitoramento de drift.
+                Faixa consistentemente bem remunerada no recorte internacional.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Infra para inferência</strong>
+              <span>GPU, batching, cache de resposta, roteamento entre modelos, limite de gasto. Citada entre as
+                posições mais protegidas contra automação.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Bancos vetoriais</strong>
+              <span>Escolha, dimensionamento, custo, estratégia de reindexação e busca híbrida. Parte inseparável de
+                qualquer RAG que precise durar.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Observabilidade de LLM</strong>
+              <span>Rastreio de prompt, custo por chamada, latência por etapa, taxa de erro e de fallback, além da
+                gravação do contexto que produziu cada resposta.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Plataforma interna</strong>
+              <span>Golden path, template de serviço, pipeline padrão. É o multiplicador que faz IA render — e o motivo
+                pelo qual times com processo fragmentado não veem ganho.</span>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>Leitura para quem vem de backend</h3>
+            <p>Se a sua base é backend sólido, este bloco é a ponte mais curta e mais bem paga para a camada de IA. Um
+              sistema de IA em produção é, em larga medida, um problema clássico de sistema distribuído: latência,
+              fila, cache, retry, idempotência, custo e observabilidade — com um componente não determinístico no
+              meio.</p>
+          </div>
+        </section>
+
+        <!-- 11 -->
+        <section class="doc-section searchable-section" data-search-section id="seguranca">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Segurança e governança</h2>
+              <p class="section-subtitle">De preocupação de especialista a requisito de qualquer time que embarca IA.</p>
+            </div>
+            <span class="section-badge">Risco</span>
+          </div>
+
+          <h3>O risco técnico dominante</h3>
+          <p><em>Prompt injection</em> permanece no topo do OWASP GenAI LLM Top 10 na edição de 2026, com riscos
+            associados a autonomia, contexto e impacto downstream ganhando peso. Os números que circulam são
+            desconfortáveis: taxa de sucesso de ataque entre 50% e 84% conforme a configuração do sistema e o número de
+            tentativas, e <strong>nenhuma correção completa disponível</strong> — mesmo modelos de fronteira seguem
+            vulneráveis após aplicarem suas melhores defesas. A conclusão prática é que defesa em profundidade é a única
+            estratégia viável.</p>
+
+          <div class="doc-grid-3 mt-3">
+            <article class="mini-card">
+              <strong>Fronteira de confiança</strong>
+              <span>Tratar todo conteúdo observado — página, documento, resultado de ferramenta, e-mail — como dado, não
+                como instrução. É a defesa arquitetural, não um filtro de string.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Menor privilégio para agentes</strong>
+              <span>Ferramenta com escopo mínimo, confirmação humana em ação irreversível, e separação entre ler e
+                agir.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Exfiltração e vazamento</strong>
+              <span>Dado sensível em prompt, em log, em cache e em índice vetorial. Superfície nova que auditoria
+                tradicional não cobre.</span>
+            </article>
+          </div>
+
+          <h3>Governança virou cronograma, não intenção</h3>
+          <p>A partir de <strong>2 de agosto de 2026</strong>, o conjunto completo de obrigações para sistemas de IA de
+            alto risco do EU AI Act passa a ser exigível, com o AI Office e as autoridades dos Estados-membros
+            responsáveis por implementar, supervisionar e aplicar. Prompt injection, por si só, mapeia para pelo menos
+            sete frameworks — OWASP, MITRE ATLAS, NIST, EU AI Act, ISO 42001, GDPR e NIS2 —, o que transforma
+            rastreabilidade em requisito de engenharia.</p>
+
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>Efeito no mercado de trabalho</strong>
+              <span>Previsão de que 60% das grandes empresas nomeiem um responsável por governança de IA até o fim de
+                2026, e quase 99% das organizações afirmam precisar de mais profissionais de governança de IA. Surgem
+                papéis híbridos: engenheiro de segurança de IA, pesquisador de segurança de ML, analista de governança e
+                especialista em prompt injection.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Efeito no seu dia a dia</strong>
+              <span>Mesmo sem virar especialista, pleno e sênior passam a responder por: registro do que o sistema
+                decidiu, explicabilidade mínima, retenção de dado, consentimento e classificação de risco da feature de
+                IA que entregaram.</span>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>Assimetria de oportunidade</h3>
+            <p>Segurança teve crescimento de 124% a/a em anúncios e ainda assim é apontada como área com escassez
+              crônica. A interseção <strong>engenharia de software + segurança de IA</strong> é provavelmente o nicho
+              com melhor relação entre esforço de aprendizado e diferenciação competitiva hoje — justamente porque exige
+              base de engenharia que a maioria dos candidatos de segurança não tem.</p>
+          </div>
+        </section>
+
+        <!-- 12 -->
+        <section class="doc-section searchable-section" data-search-section id="humanas">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Competências humanas</h2>
+              <p class="section-subtitle">O que aparece em toda pesquisa séria e quase nunca em roadmap técnico.</p>
+            </div>
+            <span class="section-badge">Diferencial</span>
+          </div>
+
+          <p>O relatório de futuro do trabalho do Fórum Econômico Mundial coloca IA e big data como as skills de
+            crescimento mais rápido, seguidas por redes e cibersegurança e por literacia tecnológica — mas registra que
+            as skills de crescimento mais rápido até 2030 combinam técnica com <strong>habilidades cognitivas e de
+            colaboração</strong>, e que perto de 40% das skills exigidas no trabalho vão mudar. A leitura da PwC vai na
+            mesma direção: o mercado se divide em dois caminhos, e o que é recompensado são as competências humanas
+            somadas à fluência técnica.</p>
+
+          <div class="doc-grid-3 mt-3">
+            <article class="mini-card">
+              <strong>Comunicação técnica escrita</strong>
+              <span>Spec, ADR, RFC, post-mortem. Virou skill de produção, não de burocracia: é o formato em que humano e
+                agente compartilham intenção.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Julgamento sob incerteza</strong>
+              <span>Decidir com informação parcial e assumir a decisão. É o que resta quando a execução fica barata.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Domínio de negócio</strong>
+              <span>Entender o problema que o software resolve. Aparece explicitamente como competência central no novo
+                arranjo — porque é o que o modelo não tem.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Mentoria</strong>
+              <span>Com a base do funil contraída, formar gente virou responsabilidade estratégica do sênior, não
+                gentileza.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Ceticismo calibrado</strong>
+              <span>Nem rejeitar IA por princípio nem aceitar por conveniência. Saber onde a ferramenta é confiável e
+                onde não é.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Inglês técnico</strong>
+              <span>No mercado remoto unificado, é o que separa a faixa nacional da faixa internacional — e a maior
+                parte da documentação relevante nasce em inglês.</span>
+            </article>
+          </div>
+        </section>
+
+        <!-- 13 -->
+        <section class="doc-section searchable-section" data-search-section id="salarios">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Salários e prêmio de IA</h2>
+              <p class="section-subtitle">Quanto o mercado está pagando pela camada de IA — e por que os números
+                divergem.</p>
+            </div>
+            <span class="section-badge">Remuneração</span>
+          </div>
+
+          <div class="metric-strip mt-3" role="list" aria-label="Prêmio salarial por skills de IA">
+            <div class="metric-pill" role="listitem">
+              <strong>62%</strong>
+              <small>prêmio salarial de vagas com skills de IA (PwC, >1 bi de anúncios, 27 países)</small>
+            </div>
+            <div class="metric-pill" role="listitem">
+              <strong>28%</strong>
+              <small>prêmio em anúncios que listam skills de IA (Lightcast, 1,3 bi de anúncios) ≈ US$ 18 mil/ano</small>
+            </div>
+            <div class="metric-pill" role="listitem">
+              <strong>43%</strong>
+              <small>prêmio quando o anúncio pede duas ou mais skills de IA</small>
+            </div>
+            <div class="metric-pill" role="listitem">
+              <strong>15–25%</strong>
+              <small>acima do benchmark do mesmo nível para engenheiros com skill de IA comprovada</small>
+            </div>
+          </div>
+
+          <h3>Por que 62% e 28% não se contradizem</h3>
+          <p>Medem coisas diferentes. A PwC mede <strong>o que cargos com skill de IA efetivamente pagam</strong>; a
+            Lightcast mede <strong>o que o empregador anuncia quando lista skill de IA como requisito</strong>. O
+            primeiro captura também a composição de cargos (funções mais sêniores concentram IA); o segundo isola melhor
+            o efeito do requisito. Nos dois casos, a direção é a mesma e o intervalo útil de planejamento é
+            <strong>“algo entre 25% e 60%”</strong>, não um número exato.</p>
+
+          <h3>Referências internacionais por especialidade</h3>
+          <div class="table-wrap mt-3">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Perfil</th>
+                  <th>Faixa reportada (base anual, USD)</th>
+                  <th>Observação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Engenheiro de IA pleno</td>
+                  <td>≈ 193 mil (mediana de base)</td>
+                  <td>Recorte de mercado norte-americano</td>
+                </tr>
+                <tr>
+                  <td>Engenheiro de IA sênior</td>
+                  <td>≈ 240 mil</td>
+                  <td>Com RAG em produção, relatos de 195–290 mil de base</td>
+                </tr>
+                <tr>
+                  <td>Especialista em LLM</td>
+                  <td>220 mil – 280 mil</td>
+                  <td>Somente base, sem equity</td>
+                </tr>
+                <tr>
+                  <td>Agentic AI Engineer</td>
+                  <td>185 mil – 320 mil + equity 40–120 mil</td>
+                  <td>Empresas em estágio de crescimento</td>
+                </tr>
+                <tr>
+                  <td>MLOps pleno</td>
+                  <td>200 mil – 250 mil</td>
+                  <td>Faixa estável e menos volátil</td>
+                </tr>
+                <tr>
+                  <td>Governança de IA</td>
+                  <td>99 mil – 273 mil conforme o papel</td>
+                  <td>Crescimento puxado por regulação</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <p>Dois sinais adicionais de escassez no topo: a pesquisa global de escassez de talentos da ManpowerGroup, com
+            39 mil empregadores em 41 países, aponta <strong>pela primeira vez</strong> skills de IA como as mais
+            difíceis de contratar no mundo; e o tempo mediano de contratação de engenheiro sênior no Vale do Silício
+            passou de 38 para 67 dias entre o terceiro trimestre de 2025 e o primeiro de 2026.</p>
+
+          <div class="callout mt-3">
+            <h3>Como usar esses números sem se enganar</h3>
+            <p>Faixas internacionais não se convertem para o Brasil por câmbio. Elas importam por dois motivos: definem
+              o teto do mercado remoto internacional e indicam <strong>quais especialidades o mercado está disposto a
+              pagar mais caro</strong> — que é a informação de verdade útil para escolher o que estudar. Para
+              negociação local, use as faixas da seção <a href="#brasil">3</a>.</p>
+          </div>
+        </section>
+
+        <!-- 14 -->
+        <section class="doc-section searchable-section" data-search-section id="prioridade">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Matriz de prioridade</h2>
+              <p class="section-subtitle">O que estudar em cada horizonte, e o artefato que comprova cada bloco.</p>
+            </div>
+            <span class="section-badge">Ação</span>
+          </div>
+
+          <p>A ordem abaixo não é lista de desejos: é sequência de dependência. Cada horizonte só rende se o anterior
+            estiver sustentado — o mesmo princípio das 12 fases do plano principal.</p>
+
+          <h3>Horizonte 1 · 0–6 meses — não negociável</h3>
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>Fluxo profissional com agentes</strong>
+              <span>Usar Copilot, Cursor ou Claude Code em trabalho real, com regra própria sobre o que você não delega.
+                <em>Prova:</em> conseguir descrever seu fluxo em dois minutos numa entrevista.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Revisão crítica de código gerado</strong>
+              <span>Treinar o olho para os modos de falha específicos de IA. <em>Prova:</em> um registro de casos em que
+                você rejeitou output e por quê.</span>
+            </article>
+            <article class="mini-card">
+              <strong>TypeScript de verdade (se web)</strong>
+              <span>Tipagem de domínio e de fronteira, não anotação decorativa. <em>Prova:</em> um módulo tipado sem
+                escape hatches.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Teste como contrato</strong>
+              <span>Suíte que autoriza geração automática com segurança. <em>Prova:</em> um bug real capturado por teste
+                que você escreveu antes.</span>
+            </article>
+          </div>
+
+          <h3>Horizonte 2 · 6–18 meses — o diferencial pago</h3>
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>RAG de ponta a ponta</strong>
+              <span>Ingestão, chunking, embedding, busca híbrida, reranking, citação e avaliação de recall.
+                <em>Prova:</em> um sistema com métrica de recuperação publicada.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Evals e golden datasets</strong>
+              <span>O diferenciador explícito de 2026. <em>Prova:</em> um harness que roda em CI e barra regressão de
+                qualidade.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Agentes com limite</strong>
+              <span>Máquina de estado, checkpoint, human-in-the-loop, integração MCP. <em>Prova:</em> um agente que sabe
+                parar e pedir confirmação.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Observabilidade e custo de IA</strong>
+              <span>Rastreio de prompt, custo por requisição, latência p95. <em>Prova:</em> um relatório de redução de
+                custo com número antes e depois.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Segurança de LLM</strong>
+              <span>OWASP GenAI Top 10, defesa em profundidade contra prompt injection, controle de privilégio de
+                ferramenta. <em>Prova:</em> um threat model escrito de uma feature de IA.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Infra: Kubernetes + Terraform</strong>
+              <span>O par que mais aparece como filtro em vaga sênior. <em>Prova:</em> ambiente reprodutível a partir de
+                código.</span>
+            </article>
+          </div>
+
+          <h3>Horizonte 3 · 18–36 meses — territorialidade sênior</h3>
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>Arquitetura de sistemas com IA</strong>
+              <span>Decidir entre RAG, fine-tuning, cache, roteamento multi-modelo ou não usar IA. <em>Prova:</em> ADR
+                comparando alternativas com custo e risco.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Especificação como disciplina</strong>
+              <span>Spec que um agente executa corretamente sem supervisão contínua. <em>Prova:</em> feature entregue a
+                partir de spec sua por outra pessoa.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Governança aplicada</strong>
+              <span>Rastreabilidade, auditoria, classificação de risco, mapeamento regulatório. <em>Prova:</em> registro
+                de decisão de um sistema em produção.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Liderança técnica sem cargo</strong>
+              <span>Definir padrão de revisão, formar pleno, negociar escopo com produto. <em>Prova:</em> um padrão que
+                o time adotou porque você propôs.</span>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>O que não priorizar</h3>
+            <p>Colecionar frameworks de agente, decorar API de biblioteca que muda a cada trimestre, e perseguir a moda
+              de modelo do mês. O que envelheceu mais rápido nos últimos dois anos foi exatamente o currículo baseado em
+              nome de ferramenta; o que se manteve foi arquitetura, avaliação, dados e operação.</p>
+          </div>
+        </section>
+
+        <!-- 15 -->
+        <section class="doc-section searchable-section" data-search-section id="plano">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Conexão com o plano de 36 meses</h2>
+              <p class="section-subtitle">Onde esta pesquisa confirma o plano — e onde sugere ajuste.</p>
+            </div>
+            <span class="section-badge">Plano</span>
+          </div>
+
+          <p>O plano integrado deste projeto ancora em backend Java/Spring, com frontend, Python e IA entrando na Fase
+            11, sobre base consolidada. Vale confrontar essa estrutura com o que o mercado sinalizou.</p>
+
+          <div class="doc-grid-2 mt-3">
+            <article class="mini-card">
+              <strong>O que a pesquisa confirma</strong>
+              <span>A tese central do plano — base de engenharia primeiro, IA depois — é exatamente a conclusão do DORA:
+                IA amplifica o sistema que já existe. Sem CI/CD, teste, observabilidade e arquitetura, IA multiplica
+                dívida. A ordem do plano está do lado certo da evidência.</span>
+            </article>
+            <article class="mini-card">
+              <strong>O que a pesquisa confirma (2)</strong>
+              <span>Trilhas que o plano trata como transversais — Git, inglês, algoritmos, segurança — aparecem no
+                mercado exatamente como transversais e não como fase. Segurança, em particular, cresce mais rápido do
+                que quase todo o resto.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Ponto de atenção 1 · o prêmio de IA é agora</strong>
+              <span>Deixar toda a exposição a IA para os meses 31–33 significa passar quase três anos sem tocar na
+                camada com maior prêmio salarial e maior déficit de oferta. Isso não invalida a ordem, mas sugere uma
+                <em>faixa mínima de exposição contínua</em>: usar IA no fluxo diário e entregar ao menos uma integração
+                real por fase.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Ponto de atenção 2 · evals combinam com testes</strong>
+              <span>Avaliação de sistemas de IA é, conceitualmente, a mesma disciplina de teste automatizado que o plano
+                já trabalha cedo. Introduzir a ideia de golden dataset junto da fase de testes custa pouco e antecipa o
+                diferenciador de 2026.</span>
+            </article>
+            <article class="mini-card">
+              <strong>Ponto de atenção 3 · frontend não é apêndice</strong>
+              <span>Vagas full-stack empacotam React + TypeScript + Node/Next como requisito único. Se o objetivo inclui
+                mercado de produto, tratar frontend apenas como fase tardia reduz o número de vagas elegíveis durante o
+                percurso.</span>
+            </article>
+            <article class="mini-card">
+              <strong>O que não muda</strong>
+              <span>Nada aqui justifica trocar a âncora. Backend sólido continua sendo a base mais barata para migrar
+                para IA aplicada — porque sistema de IA em produção é, em grande parte, sistema distribuído com um
+                componente não determinístico.</span>
+            </article>
+          </div>
+
+          <div class="callout mt-3">
+            <h3>Sugestão de ajuste mínimo, sem quebrar a lógica das fases</h3>
+            <p>Manter as 12 fases como estão e adicionar uma <strong>faixa transversal de IA aplicada</strong> —
+              pequena, contínua e subordinada à fase ativa: uso diário de agente com revisão crítica desde a Fase 1, uma
+              integração de LLM por trimestre a partir da fase em que houver API própria, e a noção de avaliação
+              introduzida junto do bloco de testes. A Fase 11 continua sendo o aprofundamento; o que muda é não chegar
+              nela do zero.</p>
+          </div>
+        </section>
+
+        <!-- 16 -->
+        <section class="doc-section searchable-section" data-search-section id="metodologia">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Metodologia, limites e fontes</h2>
+              <p class="section-subtitle">O que foi consultado, com que peso, e onde os dados não devem ser levados ao
+                pé da letra.</p>
+            </div>
+            <span class="section-badge">Transparência</span>
+          </div>
+
+          <h3>Como esta pesquisa foi feita</h3>
+          <p>Busca web em setembro de 2026, cobrindo pesquisas de desenvolvedores, relatórios de mercado de trabalho,
+            análises de bases de anúncios de vaga, guias salariais e documentação de segurança e regulação. As
+            afirmações foram priorizadas quando apareciam em mais de uma fonte independente; números isolados foram
+            mantidos apenas quando a fonte primária é identificável.</p>
+
+          <div class="callout mt-3">
+            <h3>Limites que você deve considerar</h3>
+            <p><strong>1.</strong> Parte relevante do conteúdo disponível sobre “skills de 2026” é material secundário
+              de blogs e plataformas de curso, com incentivo comercial e metodologia não publicada — usei esse tipo de
+              fonte apenas para tendência qualitativa, nunca como base de número isolado.
+              <strong>2.</strong> Bases de anúncios medem <em>demanda declarada</em>, não contratação efetiva; empresas
+              publicam requisitos aspiracionais.
+              <strong>3.</strong> A maior parte dos dados salariais e de volume de vagas é do mercado dos EUA e não se
+              transfere ao Brasil por conversão cambial.
+              <strong>4.</strong> Prêmios salariais de IA sofrem viés de composição: cargos que exigem IA tendem a ser
+              mais sêniores, o que infla o prêmio aparente.
+              <strong>5.</strong> Alguns números de pesquisas de desenvolvedores circulam com rótulos de ano
+              inconsistentes entre veículos; onde havia divergência, mantive a formulação mais conservadora.
+              <strong>6.</strong> No comparativo entre mercados da seção <a href="#comparativo">4</a>, os três blocos
+              não vêm de uma base única: os dados dos EUA saem de agregadores de anúncios muito grandes, os europeus de
+              relatórios regionais e os brasileiros de guias salariais de consultoria. As faixas de nearshore, em
+              particular, divergem bastante entre fontes — apresentei o intervalo amplo em vez de escolher o número
+              mais favorável.
+            </p>
+          </div>
+
+          <h3>Fontes consultadas</h3>
+          <ul class="source-list mt-3">
+            <li><span class="source-kind">Pesquisa</span><a
+                href="https://stackoverflow.blog/2026/02/18/closing-the-developer-ai-trust-gap/" rel="noreferrer noopener"
+                target="_blank">Stack Overflow — Mind the gap: closing the AI trust gap for developers</a></li>
+            <li><span class="source-kind">Pesquisa</span><a href="https://survey.stackoverflow.co/2025/ai"
+                rel="noreferrer noopener" target="_blank">Stack Overflow Developer Survey — seção de IA</a></li>
+            <li><span class="source-kind">Imprensa</span><a
+                href="https://www.infoworld.com/article/4031673/ai-use-among-software-developers-grows-but-trust-remains-an-issue-stack-overflow-survey.html"
+                rel="noreferrer noopener" target="_blank">InfoWorld — Uso de IA cresce, confiança segue como
+                problema</a></li>
+            <li><span class="source-kind">Relatório</span><a href="https://dora.dev/dora-report-2025/"
+                rel="noreferrer noopener" target="_blank">DORA — State of AI-assisted Software Development</a></li>
+            <li><span class="source-kind">Relatório</span><a
+                href="https://services.google.com/fh/files/misc/2025_state_of_ai_assisted_software_development.pdf"
+                rel="noreferrer noopener" target="_blank">DORA / Google Cloud — Relatório completo (PDF)</a></li>
+            <li><span class="source-kind">Imprensa</span><a
+                href="https://www.infoq.com/news/2026/05/dora-roi-ai-assisted-dev-report/" rel="noreferrer noopener"
+                target="_blank">InfoQ — Fundações de engenharia determinam o ROI de IA</a></li>
+            <li><span class="source-kind">Relatório</span><a
+                href="https://www.weforum.org/publications/the-future-of-jobs-report-2025/in-full/3-skills-outlook/"
+                rel="noreferrer noopener" target="_blank">World Economic Forum — Future of Jobs, Skills Outlook</a></li>
+            <li><span class="source-kind">Relatório</span><a
+                href="https://www.weforum.org/stories/2026/01/davos-here-s-what-to-know-about-jobs-and-skills-transformation/"
+                rel="noreferrer noopener" target="_blank">WEF — Transformação de empregos e skills (Davos 2026)</a></li>
+            <li><span class="source-kind">Relatório</span><a
+                href="https://www.pwc.com/gx/en/news-room/press-releases/2026/pwc-2026-ai-jobs-barometer.html"
+                rel="noreferrer noopener" target="_blank">PwC — Global AI Jobs Barometer 2026</a></li>
+            <li><span class="source-kind">Relatório</span><a
+                href="https://lightcast.io/resources/blog/beyond-the-buzz-press-release-2025-07-23" rel="noreferrer noopener"
+                target="_blank">Lightcast — Prêmio salarial de 28% para skills de IA</a></li>
+            <li><span class="source-kind">Imprensa</span><a
+                href="https://www.forbes.com/sites/rachelwells/2025/11/19/ai--your-money-ai-skills-bump-up-paychecks-by-56-pwc-study-shows/"
+                rel="noreferrer noopener" target="_blank">Forbes — Prêmio salarial de skills de IA segundo a PwC</a></li>
+            <li><span class="source-kind">Análise</span><a
+                href="https://www.finalroundai.com/blog/software-engineering-job-market-2026" rel="noreferrer noopener"
+                target="_blank">Software Engineering Job Market 2026 — dados, tendências e perspectiva</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.secondtalent.com/resources/tech-job-market-trends/"
+                rel="noreferrer noopener" target="_blank">Second Talent — Tendências de contratação em tech</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.aiexposure.org/analysis/coding-jobs-ai-2026"
+                rel="noreferrer noopener" target="_blank">AIExposure — Empregos de programação e IA em 2026</a></li>
+            <li><span class="source-kind">Opinião</span><a href="https://addyosmani.com/blog/next-two-years/"
+                rel="noreferrer noopener" target="_blank">Addy Osmani — The next two years of software engineering</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.faros.ai/blog/ai-code-quality-senior-engineer-review-burden"
+                rel="noreferrer noopener" target="_blank">Faros AI — Como código gerado por IA aumenta a carga de
+                revisão</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.kunalganglani.com/blog/plan-review-software-engineering"
+                rel="noreferrer noopener" target="_blank">Plan-and-Review Software Engineering — o novo papel</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.digitalapplied.com/blog/ai-developer-hiring-skills-that-matter-2026"
+                rel="noreferrer noopener" target="_blank">Digital Applied — Contratação de dev de IA: skills que
+                importam</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.futureproofing.dev/resources/ai-talent-gap/ai-engineer-demand-2026"
+                rel="noreferrer noopener" target="_blank">Futureproofing — Demanda por engenheiros de IA em 2026</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://dataskew.io/roadmaps/ai-engineering/"
+                rel="noreferrer noopener" target="_blank">Dataskew — Roadmap de AI Engineering: da API de LLM à
+                produção</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.nucamp.co/blog/most-in-demand-full-stack-skills-in-2026-react-node-typescript-and-beyond"
+                rel="noreferrer noopener" target="_blank">Nucamp — Skills full-stack mais demandadas em 2026</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://talent500.com/blog/frontend-development-trends-2026/"
+                rel="noreferrer noopener" target="_blank">Talent500 — Tendências de frontend: IA, edge e TypeScript</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://cheesecakelabs.com/blog/state-of-mobile/"
+                rel="noreferrer noopener" target="_blank">Cheesecake Labs — State of Mobile 2026</a></li>
+            <li><span class="source-kind">Análise</span><a href="https://www.edstellar.com/blog/mobile-app-developers-skills"
+                rel="noreferrer noopener" target="_blank">Edstellar — Skills que organizações exigem de devs mobile</a></li>
+            <li><span class="source-kind">Segurança</span><a href="https://genai.owasp.org/llmrisk/llm01-prompt-injection/"
+                rel="noreferrer noopener" target="_blank">OWASP GenAI Security Project — LLM01 Prompt Injection</a></li>
+            <li><span class="source-kind">Segurança</span><a href="https://blog.checkpoint.com/ai-security/reading-the-signals-in-the-owasp-llm-top-10-2026/amp/"
+                rel="noreferrer noopener" target="_blank">Check Point — Lendo os sinais do OWASP LLM Top 10 2026</a></li>
+            <li><span class="source-kind">Regulação</span><a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai"
+                rel="noreferrer noopener" target="_blank">Comissão Europeia — Marco regulatório do AI Act</a></li>
+            <li><span class="source-kind">Brasil</span><a href="https://blog.invgate.com/pt/mercado-para-ti"
+                rel="noreferrer noopener" target="_blank">InvGate — Mercado de TI no Brasil em 2026</a></li>
+            <li><span class="source-kind">Brasil</span><a href="https://www.roberthalf.com/br/pt/vagas-detalhes/desenvolvedora-full-stack-senior"
+                rel="noreferrer noopener" target="_blank">Robert Half — Guia salarial: full-stack sênior no Brasil</a></li>
+            <li><span class="source-kind">Brasil</span><a href="https://www.roberthalf.com/br/pt/vagas-detalhes/desenvolvedora-full-stack-pleno"
+                rel="noreferrer noopener" target="_blank">Robert Half — Guia salarial: full-stack pleno no Brasil</a></li>
+            <li><span class="source-kind">Europa</span><a href="https://www.index.dev/blog/europe-tech-job-market-trends-statistics"
+                rel="noreferrer noopener" target="_blank">Index.dev — European Tech Job Market 2026: estatísticas e
+                tendências</a></li>
+            <li><span class="source-kind">Europa</span><a href="https://predictleads.com/blog/ai-engineering-jobs-in-europe-2026-hiring-report/"
+                rel="noreferrer noopener" target="_blank">PredictLeads — AI Engineering Jobs in Europe: relatório de
+                contratação 2026</a></li>
+            <li><span class="source-kind">Europa</span><a href="https://techstaq.io/european-tech-salaries-2026-the-complete-guide-for-companies-hiring-engineers-and-candidates-evaluating-offers/"
+                rel="noreferrer noopener" target="_blank">Techstaq — Salários de tecnologia na Europa em 2026</a></li>
+            <li><span class="source-kind">Europa</span><a href="https://techfundingnews.com/european-ai-funding-23b-us-gap-2026/"
+                rel="noreferrer noopener" target="_blank">TFN — Funding de IA na Europa atinge US$ 23 bi no 1º semestre
+                de 2026</a></li>
+            <li><span class="source-kind">Europa</span><a href="https://news.crunchbase.com/venture/funding-picked-up-ai-led-europe-q1-2026/"
+                rel="noreferrer noopener" target="_blank">Crunchbase News — IA puxa o segundo trimestre seguido de alta
+                na Europa</a></li>
+            <li><span class="source-kind">Regulação</span><a href="https://commission.europa.eu/news-and-media/news/strengthening-europes-tech-sovereignty-2026-06-03_en"
+                rel="noreferrer noopener" target="_blank">Comissão Europeia — Pacote de soberania tecnológica</a></li>
+            <li><span class="source-kind">Regulação</span><a href="https://digital-strategy.ec.europa.eu/en/policies/eu-tech-sovereignty"
+                rel="noreferrer noopener" target="_blank">Comissão Europeia — EU Tech Sovereignty</a></li>
+            <li><span class="source-kind">EUA</span><a href="https://www.kore1.com/tech-layoffs-2026/"
+                rel="noreferrer noopener" target="_blank">Kore1 — Demissões em tecnologia em 2026 e para onde o talento
+                migra</a></li>
+            <li><span class="source-kind">EUA</span><a href="https://www.techtarget.com/whatis/feature/Tech-job-market-statistics-and-outlook"
+                rel="noreferrer noopener" target="_blank">TechTarget — Estatísticas e perspectiva do mercado de trabalho
+                em tech</a></li>
+            <li><span class="source-kind">EUA</span><a href="https://www.roberthalf.com/us/en/insights/research/remote-work-statistics"
+                rel="noreferrer noopener" target="_blank">Robert Half — Estatísticas e tendências de trabalho remoto
+                2026</a></li>
+            <li><span class="source-kind">Nearshore</span><a href="https://beon.tech/blog/nearshore-software-development-rates/"
+                rel="noreferrer noopener" target="_blank">BEON.tech — Tarifas de desenvolvimento nearshore em 2026</a></li>
+            <li><span class="source-kind">Nearshore</span><a href="https://mismo.team/remote-talent-latin-america-hiring-guide/"
+                rel="noreferrer noopener" target="_blank">Mismo — Guia 2026 de contratação de talento remoto na América
+                Latina</a></li>
+          </ul>
+
+          <p class="mt-3"><em>Levantamento realizado em 11 de setembro de 2026. Dados de mercado envelhecem rápido —
+            revalide números antes de usar em negociação salarial ou decisão de carreira de longo prazo.</em></p>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="footer-row">
+      <a class="footer-link" href="./public/index.html">← Voltar ao dashboard principal</a>
+      <div class="footer-pills">
+        <span class="footer-pill">Verificação</span>
+        <span class="footer-pill">Arquitetura</span>
+        <span class="footer-pill">Evals</span>
+        <span class="footer-pill">RAG</span>
+        <span class="footer-pill">Agentes</span>
+        <span class="footer-pill">Segurança de IA</span>
+      </div>
+    </div>
+    <p><strong>Futuro do mercado dev</strong> · Skills cobradas de pleno e sênior em web, mobile e IA · Setembro de 2026</p>
+  </footer>
+
+  <button aria-label="Voltar ao topo" class="back-to-top" id="backToTop" type="button">↑</button>
+
+  <script>
+    (() => {
+      'use strict';
+
+      // Filtro de seções — mesmo contrato dos hubs (data-search-section).
+      const input = document.getElementById('searchInput');
+      const sections = [...document.querySelectorAll('[data-search-section]')];
+      input?.addEventListener('input', () => {
+        const term = input.value.trim().toLowerCase();
+        sections.forEach((section) => {
+          const match = !term || section.textContent.toLowerCase().includes(term);
+          section.hidden = !match;
+        });
+      });
+
+      // Scrollspy do índice lateral e da barra de navegação.
+      const links = [...document.querySelectorAll('.sidebar a[href^="#"], .nav-link[href^="#"]')];
+      const byId = new Map();
+      links.forEach((link) => {
+        const id = link.getAttribute('href').slice(1);
+        if (!byId.has(id)) byId.set(id, []);
+        byId.get(id).push(link);
+      });
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          links.forEach((link) => link.classList.remove('active'));
+          (byId.get(entry.target.id) || []).forEach((link) => link.classList.add('active'));
+        });
+      }, { rootMargin: '-40% 0px -55% 0px' });
+
+      sections.forEach((section) => observer.observe(section));
+
+      // Botão de topo.
+      const toTop = document.getElementById('backToTop');
+      const toggleTop = () => toTop?.classList.toggle('is-visible', window.scrollY > 600);
+      window.addEventListener('scroll', toggleTop, { passive: true });
+      toggleTop();
+      toTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+      // Setas da barra de seções.
+      const bar = document.getElementById('navSectionsBar');
+      document.getElementById('navScrollLeft')?.addEventListener('click', () => bar?.scrollBy({ left: -280, behavior: 'smooth' }));
+      document.getElementById('navScrollRight')?.addEventListener('click', () => bar?.scrollBy({ left: 280, behavior: 'smooth' }));
+    })();
+  </script>
+</body>
+
+</html>

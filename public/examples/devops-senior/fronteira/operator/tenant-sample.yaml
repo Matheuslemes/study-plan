@@ -1,0 +1,35 @@
+# Recursos de exemplo para o CRD ao lado.
+# Conferido com `kubectl apply --dry-run=server` num Kubernetes 1.31 real:
+#   o inválido é RECUSADO PELA API, sem o controller ser acionado.
+---
+# VÁLIDO
+apiVersion: platform.example.com/v1alpha1
+kind: Tenant
+metadata:
+  name: acme-pro
+spec:
+  plan: pro
+  replicas: 5
+  retentionDays: 90
+---
+# VÁLIDO — replicas usa o default (2) e retentionDays também (30)
+apiVersion: platform.example.com/v1alpha1
+kind: Tenant
+metadata:
+  name: acme-free
+spec:
+  plan: free
+---
+# INVÁLIDO — a regra CEL barra na API:
+#   The Tenant "acme-bad" is invalid: spec: Invalid value: "object":
+#   plano free permite no máximo 2 réplicas
+#
+# Descomente para ver a recusa acontecer:
+#
+# apiVersion: platform.example.com/v1alpha1
+# kind: Tenant
+# metadata:
+#   name: acme-bad
+# spec:
+#   plan: free
+#   replicas: 5

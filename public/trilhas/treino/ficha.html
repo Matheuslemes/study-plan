@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Ficha de Treino — Consulta rápida</title>
+  <meta name="description"
+    content="Ficha de bolso do treino híbrido: treino do dia, séries, repetições, RIR, cronômetro de descanso e registro de carga. Funciona offline." />
+  <meta name="theme-color" content="#07090f" />
+
+  <!-- iOS: adicionar à tela de início abre em tela cheia, sem barra do Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Treino" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="apple-touch-icon"
+    href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAABnklEQVR42u3cuw0AEBhGUQsoFGL/fUyksoAOicdJ7gLfn1OKEFORhgUnEByCQ3AIDsEhOASH4BAcgkOCQ3AIDsEhOASH4BAcgkNwSHAIDsEhOASH4BAcgkNwCA4JDsEhOASH4BAcgkNwCA7BITgkOASH4BAcgkNwCA7BITgEhwSH4BAcgkMf42g1z2QFHHDAAQcccMABBxzOCoezwuGscMBhBRxWwGEFHHBchGP+EHAsuQkccMABBxxwwAEHHHDAAQcccMABBxxwwAEHHHDAAQcc3+HQjuAQHIJDcAgOwQEHHHDAAQcccMABBxxwCA7BITgEh+CAAw4vwbwEgwMOOOCAAw444IADDjjggAMOOOCAAw444IADDjjggMPf51bAYQUccMABBxxwwAEHHHDA4axwOCsczmoFHFbAYcVjOHRUcAgOwSE4BIfgEByCQ3AIDsEhwSE4BIfgEByCQ3AIDsEhOCQ4BIfgEByCQ3AIDsEhOASHBIfgEByCQ3AIDsEhOASH4BAcEhyCQ3AIDsEhOASH4BAcgkOCQ3AIDm2pA2R3xUj2BYdBAAAAAElFTkSuQmCC" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2307090f'/%3E%3Cpath d='M7 12h3v8H7zm15 0h3v8h-3zM11 14.5h10v3H11z' fill='%23facc15'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #07090f;
+      --surface: #0d1117;
+      --surface-2: #121925;
+      --surface-3: #172131;
+      --text-1: #edf3fb;
+      --text-2: #aebbd0;
+      --text-3: #8e9bb0;
+      --accent: #facc15;
+      --accent-2: #ef4444;
+      --accent-soft: rgba(250, 204, 21, .09);
+      --accent-line: rgba(250, 204, 21, .32);
+      --border: rgba(226, 232, 240, .11);
+      --border-strong: rgba(226, 232, 240, .2);
+      --ok: #54d889;
+      --radius: .8rem;
+      --radius-sm: .55rem;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, "IBM Plex Mono", Consolas, monospace;
+      /* margens seguras do iPhone (notch / Dynamic Island / barra de gestos) */
+      --safe-l: env(safe-area-inset-left, 0px);
+      --safe-r: env(safe-area-inset-right, 0px);
+      --safe-b: env(safe-area-inset-bottom, 0px);
+      --safe-t: env(safe-area-inset-top, 0px);
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      /* iOS Safari aumenta o texto sozinho ao girar o aparelho */
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      margin: 0;
+      /* espaço para a barra do cronômetro + barra de gestos do iPhone */
+      padding: 0 0 calc(7rem + var(--safe-b));
+      background:
+        radial-gradient(circle at 12% -4%, rgba(250, 204, 21, .10), transparent 26rem),
+        radial-gradient(circle at 92% 2%, rgba(239, 68, 68, .07), transparent 22rem),
+        var(--bg);
+      background-attachment: fixed;
+      color: var(--text-1);
+      font: 400 1rem/1.55 var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      /* evita o "puxar para atualizar" no meio do treino */
+      overscroll-behavior-y: contain;
+    }
+
+    .wrap {
+      max-width: 44rem;
+      margin-inline: auto;
+      padding-left: calc(1rem + var(--safe-l));
+      padding-right: calc(1rem + var(--safe-r));
+    }
+
+    button,
+    .set,
+    .day-btn {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      /* remove o atraso de 300 ms e o zoom por toque duplo no iOS */
+      touch-action: manipulation;
+      font-family: inherit;
+    }
+
+    /* ── cabeçalho ───────────────────────────── */
+    header.top {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: calc(.7rem + var(--safe-t)) 0 .55rem;
+      border-bottom: 1px solid var(--border);
+      /* fundo quase opaco: o blur pode não estar disponível */
+      background: rgba(7, 9, 15, .96);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+    }
+
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+    }
+
+    .brand {
+      font: 700 .68rem/1 var(--font-mono);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .brand small {
+      display: block;
+      margin-top: .28rem;
+      color: var(--text-3);
+      font-weight: 400;
+      letter-spacing: .05em;
+      text-transform: none;
+    }
+
+    .ghost-btn {
+      min-height: 2.75rem;
+      padding: .5rem .7rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--text-2);
+      font: 600 .72rem/1 var(--font-mono);
+      cursor: pointer;
+    }
+
+    .ghost-btn:active {
+      background: var(--surface-2);
+    }
+
+    .days {
+      display: flex;
+      gap: .35rem;
+      margin-top: .6rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: .15rem;
+    }
+
+    .days::-webkit-scrollbar {
+      display: none;
+    }
+
+    .day-btn {
+      flex: 0 0 auto;
+      min-width: 3.25rem;
+      min-height: 2.75rem;
+      padding: .5rem .55rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--surface);
+      color: var(--text-3);
+      font: 700 .74rem/1.15 var(--font-mono);
+      text-align: center;
+      cursor: pointer;
+      transition: .15s;
+    }
+
+    .day-btn b {
+      display: block;
+      font-size: .58rem;
+      font-weight: 500;
+      letter-spacing: .06em;
+      opacity: .75;
+    }
+
+    .day-btn[aria-selected="true"] {
+      border-color: var(--accent-line);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .day-btn.is-today::after {
+      content: "";
+      display: block;
+      width: .28rem;
+      height: .28rem;
+      margin: .25rem auto 0;
+      border-radius: 50%;
+      background: var(--accent-2);
+    }
+
+    /* ── título do dia ───────────────────────── */
+    .day-head {
+      margin: 1.1rem 0 .85rem;
+    }
+
+    .eyebrow {
+      margin: 0 0 .3rem;
+      font: 700 .64rem/1 var(--font-mono);
+      letter-spacing: .13em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      margin: 0;
+      font: 700 1.55rem/1.15 var(--font-body);
+      letter-spacing: -.015em;
+    }
+
+    .day-sub {
+      margin: .35rem 0 0;
+      color: var(--text-3);
+      font-size: .84rem;
+    }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: .75rem;
+    }
+
+    .bar {
+      flex: 1;
+      height: .38rem;
+      border-radius: 99px;
+      background: var(--surface-3);
+      overflow: hidden;
+    }
+
+    .bar > i {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent), #fde68a);
+      transition: width .25s;
+    }
+
+    .progress span {
+      font: 600 .72rem/1 var(--font-mono);
+      color: var(--text-3);
+      white-space: nowrap;
+    }
+
+    /* ── blocos ──────────────────────────────── */
+    .block {
+      margin: .85rem 0;
+      padding: .8rem .85rem;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: var(--radius-sm);
+      background: var(--accent-soft);
+    }
+
+    .block.red {
+      border-left-color: var(--accent-2);
+      background: rgba(239, 68, 68, .07);
+    }
+
+    .block h2 {
+      margin: 0 0 .3rem;
+      font: 700 .66rem/1 var(--font-mono);
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--text-2);
+    }
+
+    .block p {
+      margin: 0;
+      font-size: .88rem;
+      color: var(--text-1);
+    }
+
+    .block p + p {
+      margin-top: .35rem;
+      color: var(--text-3);
+      font-size: .8rem;
+    }
+
+    /* ── exercícios ──────────────────────────── */
+    .ex {
+      margin: .6rem 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .ex.done {
+      border-color: rgba(84, 216, 137, .35);
+    }
+
+    .ex-head {
+      display: flex;
+      gap: .7rem;
+      padding: .8rem .85rem .55rem;
+    }
+
+    .ex-n {
+      flex: 0 0 auto;
+      width: 1.7rem;
+      height: 1.7rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border-strong);
+      border-radius: 50%;
+      font: 700 .75rem/1 var(--font-mono);
+      color: var(--text-3);
+    }
+
+    .ex.done .ex-n {
+      border-color: var(--ok);
+      color: var(--ok);
+    }
+
+    .ex-name {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .ex-name strong {
+      display: block;
+      font-size: .97rem;
+      font-weight: 650;
+      line-height: 1.25;
+    }
+
+    .ex-name em {
+      display: block;
+      margin-top: .18rem;
+      color: var(--text-3);
+      font-size: .76rem;
+      font-style: normal;
+    }
+
+    .ex-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .35rem;
+      padding: 0 .85rem .6rem;
+    }
+
+    .tag {
+      padding: .25rem .48rem;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      background: var(--surface-2);
+      font: 600 .69rem/1.25 var(--font-mono);
+      color: var(--text-2);
+      white-space: nowrap;
+    }
+
+    .tag.k {
+      border-color: var(--accent-line);
+      color: var(--accent);
+    }
+
+    .ex-row {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .55rem .85rem .8rem;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .sets {
+      display: flex;
+      gap: .35rem;
+      flex: 1 1 10rem;
+      min-width: 0;
+    }
+
+    /* 44 px é o alvo mínimo confiável de toque no iOS */
+    .set {
+      flex: 1;
+      max-width: 3.2rem;
+      min-height: 2.75rem;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      color: var(--text-3);
+      font: 700 .8rem/1 var(--font-mono);
+      cursor: pointer;
+      transition: .12s;
+    }
+
+    .set[aria-pressed="true"] {
+      border-color: var(--ok);
+      background: rgba(84, 216, 137, .14);
+      color: var(--ok);
+    }
+
+    /* 16 px impede o iOS de dar zoom ao focar o campo */
+    .load {
+      width: 5rem;
+      min-height: 2.75rem;
+      padding: 0 .4rem;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-sm);
+      background: var(--surface-2);
+      color: var(--text-1);
+      font: 600 16px/1 var(--font-mono);
+      text-align: center;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .load::placeholder {
+      color: var(--text-3);
+      font-weight: 400;
+    }
+
+    .rest-btn {
+      min-height: 2.75rem;
+      padding: 0 .7rem;
+      border: 1px solid var(--accent-line);
+      border-radius: var(--radius-sm);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: 700 .74rem/1 var(--font-mono);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .rest-btn:active {
+      background: rgba(250, 204, 21, .2);
+    }
+
+    /* ── referência ──────────────────────────── */
+    details.ref {
+      margin: 1.1rem 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    details.ref > summary {
+      padding: .9rem .85rem;
+      font: 700 .72rem/1 var(--font-mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-2);
+      cursor: pointer;
+      list-style: none;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+
+    details.ref > summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details.ref > summary::after {
+      content: "+";
+      float: right;
+      color: var(--accent);
+      font-size: .95rem;
+      line-height: 1;
+    }
+
+    details.ref[open] > summary::after {
+      content: "–";
+    }
+
+    .ref-body {
+      padding: .8rem .85rem .9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .78rem;
+    }
+
+    th, td {
+      padding: .42rem .3rem;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+      color: var(--text-2);
+    }
+
+    th {
+      color: var(--accent);
+      font: 600 .66rem/1.3 var(--font-mono);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    td:first-child {
+      color: var(--text-1);
+      font-weight: 600;
+    }
+
+    .ref-body ul {
+      margin: 0;
+      padding-left: 1.05rem;
+      color: var(--text-2);
+      font-size: .82rem;
+    }
+
+    .ref-body ul li + li {
+      margin-top: .3rem;
+    }
+
+    .ref-body p {
+      margin: 0 0 .55rem;
+      color: var(--text-2);
+      font-size: .82rem;
+    }
+
+    .ref-body strong {
+      color: var(--text-1);
+    }
+
+    /* ── cronômetro ──────────────────────────── */
+    .timer {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 40;
+      transform: translateY(110%);
+      transition: transform .22s ease;
+      border-top: 1px solid var(--accent-line);
+      background: rgba(13, 17, 23, .97);
+      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(14px);
+      padding-bottom: var(--safe-b);
+    }
+
+    .timer.on {
+      transform: none;
+    }
+
+    /* sem vibração no iOS: o fim do descanso pisca */
+    .timer.ring {
+      animation: piscar 1.1s ease-in-out 2;
+    }
+
+    @keyframes piscar {
+      0%, 100% { background: rgba(13, 17, 23, .97); }
+      50% { background: rgba(84, 216, 137, .3); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .timer { transition: none; }
+      .timer.ring { animation: none; }
+      html { scroll-behavior: auto; }
+    }
+
+    .timer-in {
+      max-width: 44rem;
+      margin-inline: auto;
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      padding: .7rem calc(1rem + var(--safe-r)) .7rem calc(1rem + var(--safe-l));
+    }
+
+    .clock {
+      font: 700 1.6rem/1 var(--font-mono);
+      color: var(--accent);
+      font-variant-numeric: tabular-nums;
+      min-width: 4.4rem;
+    }
+
+    .clock.zero {
+      color: var(--ok);
+    }
+
+    .timer-label {
+      flex: 1;
+      min-width: 0;
+      font-size: .74rem;
+      color: var(--text-3);
+      line-height: 1.3;
+    }
+
+    .timer-label b {
+      display: block;
+      color: var(--text-1);
+      font-size: .82rem;
+      font-weight: 600;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    footer {
+      margin: 2rem 0 0;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-3);
+      font-size: .74rem;
+      line-height: 1.6;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+
+    .rest-day {
+      margin: 2rem 0;
+      padding: 2rem 1rem;
+      border: 1px dashed var(--border-strong);
+      border-radius: var(--radius);
+      text-align: center;
+      color: var(--text-3);
+    }
+
+    .rest-day b {
+      display: block;
+      margin-bottom: .4rem;
+      color: var(--text-1);
+      font-size: 1.05rem;
+    }
+
+    @media (min-width: 640px) {
+      .load { width: 6rem; }
+      .set { max-width: 3.6rem; }
+    }
+
+    /* iPhone SE / telas estreitas: campo de carga e descanso na segunda linha */
+    @media (max-width: 380px) {
+      .sets { flex: 1 1 100%; }
+      .load { flex: 1; width: auto; }
+      .rest-btn { flex: 0 0 auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="top">
+    <div class="wrap">
+      <div class="top-row">
+        <div class="brand">Ficha de treino<small>Split por grupo · cardio 2 turnos</small></div>
+        <button class="ghost-btn" id="resetBtn" type="button">Zerar semana</button>
+      </div>
+      <div class="days" id="days" role="tablist" aria-label="Dia da semana"></div>
+    </div>
+  </header>
+
+  <main class="wrap" id="app"></main>
+
+  <div class="wrap">
+    <details class="ref">
+      <summary>Zonas de frequência cardíaca</summary>
+      <div class="ref-body">
+        <p>FC<sub>máx</sub> ≈ <strong>208 − (0,7 × idade)</strong>. Sem monitor, use o teste da fala: em Zona 2 você
+          fala frases completas; no intervalo do 4x4, não fala.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Idade</th>
+              <th>FC máx</th>
+              <th>Zona 2</th>
+              <th>4x4 (85–95%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>25</td><td>191</td><td>114–133</td><td>162–181</td></tr>
+            <tr><td>30</td><td>187</td><td>112–131</td><td>159–178</td></tr>
+            <tr><td>35</td><td>184</td><td>110–128</td><td>156–174</td></tr>
+            <tr><td>40</td><td>180</td><td>108–126</td><td>153–171</td></tr>
+            <tr><td>45</td><td>177</td><td>106–124</td><td>150–168</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="ref">
+      <summary>Protocolo 4x4</summary>
+      <div class="ref-body">
+        <p><strong>8–10 min</strong> aquecimento em Zona 2 → <strong>4 × 4 min</strong> a 85–95% FC máx, com
+          <strong>3 min</strong> de recuperação ativa a 60–70% entre eles → <strong>5 min</strong> de volta à calma.
+          Total ~40 min.</p>
+        <ul>
+          <li>Somente <strong>segunda e sexta de manhã</strong>. Nunca na terça — é o dia de perna.</li>
+          <li>Bicicleta, elíptico ou remo. <strong>Sem corrida.</strong></li>
+          <li>Coma 20–30 g de carboidrato 30–45 min antes — este turno não é em jejum.</li>
+          <li>Duas vezes por semana é o teto, não a meta mínima.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="ref">
+      <summary>Regras rápidas</summary>
+      <div class="ref-body">
+        <ul>
+          <li><strong>Descanso:</strong> 90 s no máximo. Compostos e acessórios 90 s, isoladores 45–75 s.</li>
+          <li><strong>Ordem:</strong> composto pesado → volume → isolador. Sempre.</li>
+          <li><strong>RIR:</strong> 2 nos compostos, 1–2 nos acessórios, 0–1 só em máquina e isolador.</li>
+          <li><strong>Progressão dupla:</strong> topo da faixa em <em>todas</em> as séries → +5 kg nos compostos,
+            +2,5 kg nos acessórios, e volta ao fundo da faixa.</li>
+          <li><strong>Com 90 s, a carga cai um pouco</strong> nas séries 3 e 4 dos compostos. Se perder mais de 2–3
+            repetições entre a primeira e a última série, baixe 5% na carga em vez de esticar o descanso.</li>
+          <li><strong>Amplitude antes de carga.</strong> Se encurtou para o peso entrar, o peso está errado.</li>
+          <li><strong>Prontidão:</strong> nota de 1 a 5 para energia, sono e dor. Soma 6–8 → só exercícios 1 a 3.
+            Soma 3–5 → caminhada ou descanso.</li>
+          <li><strong>Pare a sessão</strong> diante de dor no peito, tontura, escurecimento de visão ou dor articular
+            aguda.</li>
+        </ul>
+      </div>
+    </details>
+
+    <footer>
+      Ficha de bolso do <a href="../treino.html">Plano de Treino Híbrido 5x</a> ·
+      <a href="./execucao.html">execução completa</a> ·
+      <a href="./cardio.html">cardio</a> ·
+      <a href="./avaliacao.html">avaliação</a><br />
+      No iPhone: <strong>Compartilhar → Adicionar à Tela de Início</strong> para abrir em tela cheia e funcionar sem
+      internet.<br />
+      Cargas e séries marcadas ficam salvas só neste aparelho e zeram automaticamente a cada segunda-feira.
+      Estrutura de organização de treino — não substitui avaliação profissional.
+    </footer>
+  </div>
+
+  <div class="timer" id="timer" aria-live="polite">
+    <div class="timer-in">
+      <div class="clock" id="clock">00:00</div>
+      <div class="timer-label"><b id="timerEx">Descanso</b><span id="timerHint">toque em Descanso para reiniciar</span>
+      </div>
+      <button class="ghost-btn" id="timerStop" type="button">Fechar</button>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ─── dados do programa ─────────────────────────── */
+      var AQ_LOWER = 'Bike/esteira 5 min · tornozelo na parede 10×/lado · 90/90 de quadril 8×/lado · gato-camelo 10× · 3 séries de aproximação no exercício 1.';
+      var AQ_UPPER = 'Bike/elíptico 5 min · rotação torácica 8×/lado · band pull apart 15× · rotação externa de ombro 12×/lado · 3 séries de aproximação no exercício 1.';
+
+      var PROGRAMA = {
+        seg: {
+          nome: 'Peito + tríceps', foco: 'Peito completo + tríceps complementar + abdômen',
+          manha: '4x4 norueguês · 40 min · comer algo leve 30–45 min antes',
+          pos: 'Zona 2 · 15 min · bike leve',
+          aq: AQ_UPPER,
+          ex: [
+            { n: 'Supino reto', v: 'barra ou halteres', s: 4, r: '5–8', rir: '2', d: 90, o: 'Escápulas retraídas e fixas, pés no chão' },
+            { n: 'Supino inclinado', v: 'halteres, banco a 30°', s: 4, r: '8–12', rir: '2', d: 90, o: 'Acima de 30° vira desenvolvimento' },
+            { n: 'Supino máquina', v: 'ou paralelas assistidas', s: 3, r: '8–12', rir: '1–2', d: 90, o: 'Terceiro ângulo do dia' },
+            { n: 'Crossover', v: 'ou crucifixo na máquina', s: 3, r: '12–15', rir: '1', d: 75, o: 'Busque alongamento, não carga' },
+            { n: 'Crucifixo inclinado', v: 'halteres', s: 2, r: '12–15', rir: '0–1', d: 60, o: 'Finalizador em alongamento, carga leve' },
+            { n: 'Tríceps francês', v: 'complementar · overhead, halter ou barra W', s: 3, r: '10–15', rir: '1', d: 75, o: 'Braço acima da cabeça alonga a cabeça longa' },
+            { n: 'Tríceps pulley', v: 'complementar · pega pronada', s: 2, r: '12–15', rir: '0–1', d: 60, o: 'Finalizador — pode ir à falha' },
+            { n: 'Prancha frontal', v: 'abdômen', s: 3, r: '30–45 s', rir: '—', d: 45, o: 'Glúteo contraído, quadril alinhado' },
+            { n: 'Elevação de pernas', v: 'abdômen', s: 3, r: '12', rir: '—', d: 45, o: 'Sem balanço, controle na descida' }
+          ]
+        },
+        ter: {
+          nome: 'Pernas completas', foco: 'Quadríceps, posterior, glúteo e panturrilha',
+          manha: 'Zona 2 · 40 min · em jejum · bike ou esteira inclinada',
+          pos: 'Zona 1 · 10 min · bike leve — nada além disso',
+          aq: AQ_LOWER,
+          ex: [
+            { n: 'Agachamento', v: 'livre, hack ou Smith', s: 4, r: '5–8', rir: '2', d: 90, o: 'Coxa paralela, lombar neutra' },
+            { n: 'Leg press 45°', v: '', s: 3, r: '8–12', rir: '1–2', d: 90, o: 'Lombar colada no encosto no fundo' },
+            { n: 'Terra romeno (RDL)', v: 'barra ou halteres', s: 4, r: '6–10', rir: '2', d: 90, o: 'Coluna neutra, joelho levemente flexionado e fixo' },
+            { n: 'Elevação pélvica', v: 'hip thrust', s: 3, r: '8–12', rir: '1–2', d: 90, o: 'Pausa de 1 s no topo, queixo no peito' },
+            { n: 'Mesa flexora', v: 'deitado', s: 3, r: '10–15', rir: '1', d: 90, o: '2 s de controle na volta' },
+            { n: 'Cadeira extensora', v: '', s: 3, r: '12–15', rir: '0–1', d: 75, o: 'Pausa de 1 s no topo' },
+            { n: 'Panturrilha em pé', v: 'gastrocnêmio', s: 4, r: '8–12', rir: '0–1', d: 60, o: 'Pausa de 2 s no alongamento' }
+          ]
+        },
+        qua: {
+          nome: 'Costas + bíceps', foco: 'Costas completa + bíceps complementar + abdômen',
+          manha: 'Zona 2 · 40 min · em jejum',
+          pos: 'Zona 2 · 15 min',
+          aq: AQ_UPPER,
+          ex: [
+            { n: 'Puxada alta', v: 'ou barra fixa assistida', s: 4, r: '6–10', rir: '2', d: 90, o: 'Peito para cima, cotovelo em direção ao bolso' },
+            { n: 'Remada curvada', v: 'barra ou máquina', s: 4, r: '8–12', rir: '2', d: 90, o: 'Lombar reclamou? use a máquina com apoio de peito' },
+            { n: 'Remada baixa', v: 'cavalinho ou máquina', s: 3, r: '8–12', rir: '2', d: 90, o: 'Pausa de 1 s com escápula retraída' },
+            { n: 'Puxada pega neutra', v: 'ou pullover no pulley', s: 3, r: '10–15', rir: '1', d: 90, o: 'Isola o dorsal sem depender do bíceps' },
+            { n: 'Face pull', v: 'ou crucifixo inverso', s: 3, r: '15–20', rir: '1', d: 60, o: 'O antídoto da postura de teclado' },
+            { n: 'Encolhimento', v: 'trapézio · opcional', s: 2, r: '12–15', rir: '1', d: 60, o: 'Primeiro item a cortar em semana curta' },
+            { n: 'Rosca scott', v: 'complementar · barra W ou máquina', s: 3, r: '10–12', rir: '1', d: 75, o: 'O apoio elimina o balanço' },
+            { n: 'Rosca no cabo', v: 'complementar · polia baixa, supinada', s: 2, r: '12–15', rir: '0–1', d: 60, o: 'Tensão constante — pode ir à falha' },
+            { n: 'Prancha lateral', v: 'abdômen', s: 3, r: '25–40 s / lado', rir: '—', d: 45, o: 'Cobre o oblíquo' },
+            { n: 'Abdominal máquina', v: 'abdômen', s: 3, r: '12–15', rir: '—', d: 45, o: 'Controle na volta' }
+          ]
+        },
+        qui: {
+          nome: 'Ombros + antebraço', foco: 'Deltoide completo + antebraço complementar + sóleo',
+          manha: 'Zona 2 · 40 min · em jejum',
+          pos: 'Zona 2 · 20 min',
+          aq: AQ_UPPER,
+          ex: [
+            { n: 'Desenvolvimento sentado', v: 'halteres ou máquina', s: 4, r: '6–10', rir: '2', d: 90, o: 'Com encosto. Em pé só com core mais forte' },
+            { n: 'Elevação lateral', v: 'halteres', s: 4, r: '12–20', rir: '0–1', d: 60, o: 'Carga leve, sem impulso de tronco' },
+            { n: 'Elevação lateral no cabo', v: 'unilateral', s: 3, r: '12–15', rir: '0–1', d: 60, o: 'Mantém tensão na parte baixa do movimento' },
+            { n: 'Crucifixo inverso', v: 'ou face pull', s: 4, r: '15–20', rir: '1', d: 60, o: 'Deltoide posterior. Cotovelo fixo' },
+            { n: 'Elevação frontal', v: 'cabo ou anilha · opcional', s: 2, r: '12–15', rir: '1', d: 60, o: 'O anterior já vem bem servido do supino' },
+            { n: 'Rosca de punho', v: 'complementar · flexores', s: 3, r: '12–20', rir: '0–1', d: 45, o: 'Antebraço apoiado, deixe a barra rolar até os dedos' },
+            { n: 'Rosca de punho inversa', v: 'complementar · extensores', s: 2, r: '15–20', rir: '0–1', d: 45, o: 'Carga bem menor. É o lado que ninguém treina' },
+            { n: 'Panturrilha sentado', v: 'sóleo', s: 4, r: '12–20', rir: '0–1', d: 45, o: 'Joelho a 90°, mais repetições que o gastrocnêmio' }
+          ]
+        },
+        sex: {
+          nome: 'Braços completo + abdômen', foco: 'Bíceps e tríceps alternados',
+          manha: '4x4 norueguês · 40 min · comer algo leve 30–45 min antes',
+          pos: 'Zona 2 · 25 min',
+          aq: AQ_UPPER,
+          ex: [
+            { n: 'Rosca direta', v: 'barra W ou reta', s: 4, r: '8–12', rir: '1–2', d: 90, o: 'Cotovelo parado, sem balanço de lombar' },
+            { n: 'Tríceps pulley', v: 'barra reta', s: 4, r: '10–15', rir: '1', d: 75, o: 'Cotovelo fixo, sem travar a articulação' },
+            { n: 'Rosca inclinada', v: 'halteres, banco a 45°', s: 3, r: '10–12', rir: '1', d: 75, o: 'Bíceps em alongamento' },
+            { n: 'Tríceps testa', v: 'barra W ou halteres', s: 3, r: '10–12', rir: '1', d: 75, o: 'Cabeça longa: cotovelo levemente à frente' },
+            { n: 'Rosca martelo', v: 'pega neutra', s: 3, r: '10–15', rir: '0–1', d: 60, o: 'Braquial e braquiorradial' },
+            { n: 'Tríceps corda', v: 'com abertura no final', s: 3, r: '12–15', rir: '0–1', d: 60, o: 'Finalizador. Pode ir à falha' },
+            { n: 'Prancha frontal', v: 'abdômen', s: 3, r: '30–45 s', rir: '—', d: 45, o: 'Terceira e última sessão de abdômen' },
+            { n: 'Abdominal máquina', v: 'abdômen', s: 3, r: '12–15', rir: '—', d: 45, o: 'Controle na volta' }
+          ]
+        },
+        sab: {
+          nome: 'Cardio longo', foco: 'Volume aeróbico sem custo de recuperação',
+          manha: 'Zona 2 longo · 60–75 min · caminhada, bike ou elíptico',
+          pos: '—', aq: '', ex: [],
+          livre: 'Turno único. Se a semana foi pesada, vire caminhada leve de 40 min — ou descanse. O sábado é complementar, não obrigatório.'
+        },
+        dom: {
+          nome: 'Descanso', foco: 'Recuperação total',
+          manha: 'Caminhada leve de 20–30 min, ou nada',
+          pos: '—', aq: '', ex: [],
+          livre: 'Descanso é parte do programa, não pausa dele. Durma 7 a 9 horas e prepare a semana: comida, roupa de treino, horário do turno da manhã.'
+        }
+      };
+
+      var ORDEM = ['seg', 'ter', 'qua', 'qui', 'sex', 'sab', 'dom'];
+      var ROTULO = { seg: 'SEG', ter: 'TER', qua: 'QUA', qui: 'QUI', sex: 'SEX', sab: 'SÁB', dom: 'DOM' };
+      var CURTO = {
+        seg: 'Peito', ter: 'Pernas', qua: 'Costas', qui: 'Ombros',
+        sex: 'Braços', sab: 'Cardio', dom: 'Off'
+      };
+
+      /* ─── estado persistido (tolerante a falha) ─────── */
+      var CHAVE = 'ficha-treino-v1';
+      var estado = { semana: semanaAtual(), cargas: {}, series: {} };
+
+      function semanaAtual() {
+        var d = new Date();
+        var dia = (d.getDay() + 6) % 7;            // 0 = segunda
+        d.setHours(0, 0, 0, 0);
+        d.setDate(d.getDate() - dia);              // segunda desta semana
+        return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+      }
+
+      function carregar() {
+        try {
+          var bruto = localStorage.getItem(CHAVE);
+          if (!bruto) return;
+          var salvo = JSON.parse(bruto);
+          if (!salvo || typeof salvo !== 'object') return;
+          estado.cargas = salvo.cargas && typeof salvo.cargas === 'object' ? salvo.cargas : {};
+          // as cargas persistem entre semanas; as séries marcadas zeram toda segunda
+          estado.series = salvo.semana === estado.semana && salvo.series ? salvo.series : {};
+        } catch (e) { /* modo privado do Safari, storage bloqueado: segue sem persistir */ }
+      }
+
+      function salvar() {
+        try {
+          localStorage.setItem(CHAVE, JSON.stringify(estado));
+        } catch (e) { /* silencioso por desenho */ }
+      }
+
+      /* ─── som: um único AudioContext, criado no primeiro toque ───
+         O iOS limita o número de AudioContexts e só permite áudio
+         depois de um gesto do usuário — por isso um só, reaproveitado. */
+      var audioCtx = null;
+
+      function prepararAudio() {
+        try {
+          var Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          if (!audioCtx) audioCtx = new Ctx();
+          if (audioCtx.state === 'suspended') audioCtx.resume();
+        } catch (e) { audioCtx = null; }
+      }
+
+      function bip() {
+        if (!audioCtx || audioCtx.state !== 'running') return;
+        try {
+          var osc = audioCtx.createOscillator();
+          var gain = audioCtx.createGain();
+          var t = audioCtx.currentTime;
+          osc.type = 'sine';
+          osc.frequency.value = 880;
+          gain.gain.setValueAtTime(0.0001, t);
+          gain.gain.exponentialRampToValueAtTime(0.25, t + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.45);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(t);
+          osc.stop(t + 0.5);
+        } catch (e) { /* silencioso */ }
+      }
+
+      /* ─── manter a tela acesa durante o descanso ────── */
+      var wakeLock = null;
+
+      function manterTelaAcesa() {
+        if (!('wakeLock' in navigator)) return;
+        navigator.wakeLock.request('screen').then(function (lock) {
+          wakeLock = lock;
+          lock.addEventListener('release', function () { wakeLock = null; });
+        }).catch(function () { /* recusado ou sem suporte */ });
+      }
+
+      function liberarTela() {
+        if (wakeLock) { try { wakeLock.release(); } catch (e) { } wakeLock = null; }
+      }
+
+      /* ─── cronômetro de descanso ─────────────────────
+         Baseado em timestamp, não em contador: o iOS congela
+         setInterval quando a tela apaga ou o app vai para o
+         fundo, e um contador decrescente perderia o tempo. */
+      var timerEl = document.getElementById('timer');
+      var clockEl = document.getElementById('clock');
+      var timerExEl = document.getElementById('timerEx');
+      var timerHintEl = document.getElementById('timerHint');
+
+      var fimEm = 0;
+      var intervalo = null;
+      var tocou = false;
+
+      function mmss(s) {
+        var neg = s < 0;
+        var abs = Math.abs(s);
+        var m = Math.floor(abs / 60), r = abs % 60;
+        return (neg ? '-' : '') + (m < 10 ? '0' : '') + m + ':' + (r < 10 ? '0' : '') + r;
+      }
+
+      function restante() {
+        return Math.round((fimEm - Date.now()) / 1000);
+      }
+
+      function pintar() {
+        var s = restante();
+        clockEl.textContent = mmss(s);
+        clockEl.classList.toggle('zero', s <= 0);
+        if (s <= 0 && !tocou) {
+          tocou = true;
+          bip();
+          timerEl.classList.add('ring');
+          timerHintEl.textContent = 'descanso concluído — próxima série';
+          setTimeout(function () { timerEl.classList.remove('ring'); }, 2400);
+          if (navigator.vibrate) { try { navigator.vibrate([200, 90, 200]); } catch (e) { } }
+        }
+        if (s <= -120) pararDescanso();
+      }
+
+      function iniciarDescanso(segundos, rotulo) {
+        prepararAudio();
+        fimEm = Date.now() + segundos * 1000;
+        tocou = false;
+        timerExEl.textContent = rotulo;
+        timerHintEl.textContent = 'descanso de ' + segundos + ' s';
+        timerEl.classList.remove('ring');
+        timerEl.classList.add('on');
+        pintar();
+        if (intervalo) clearInterval(intervalo);
+        intervalo = setInterval(pintar, 250);
+        manterTelaAcesa();
+      }
+
+      function pararDescanso() {
+        if (intervalo) clearInterval(intervalo);
+        intervalo = null;
+        timerEl.classList.remove('on', 'ring');
+        liberarTela();
+      }
+
+      document.getElementById('timerStop').addEventListener('click', pararDescanso);
+
+      // ao voltar do bloqueio de tela, recalcula na hora e repede o wake lock
+      document.addEventListener('visibilitychange', function () {
+        if (document.visibilityState !== 'visible') return;
+        if (intervalo) { pintar(); manterTelaAcesa(); }
+      });
+
+      /* ─── render ────────────────────────────────────── */
+      var app = document.getElementById('app');
+      var daysEl = document.getElementById('days');
+      var hoje = ORDEM[(new Date().getDay() + 6) % 7];
+      var atual = hoje;
+
+      function esc(t) {
+        return String(t).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+        });
+      }
+
+      function montaDias() {
+        daysEl.innerHTML = ORDEM.map(function (k) {
+          return '<button class="day-btn' + (k === hoje ? ' is-today' : '') + '" role="tab" data-dia="' + k +
+            '" aria-selected="' + (k === atual) + '">' + ROTULO[k] + '<b>' + esc(CURTO[k]) + '</b></button>';
+        }).join('');
+      }
+
+      function totalSeries(dia) {
+        return PROGRAMA[dia].ex.reduce(function (soma, e) { return soma + e.s; }, 0);
+      }
+
+      function feitasNoDia(dia) {
+        var n = 0;
+        PROGRAMA[dia].ex.forEach(function (e, i) {
+          for (var j = 0; j < e.s; j++) { if (estado.series[dia + ':' + i + ':' + j]) n++; }
+        });
+        return n;
+      }
+
+      function atualizaProgresso() {
+        var barra = document.getElementById('barFill');
+        var texto = document.getElementById('barTxt');
+        if (!barra || !texto) return;
+        var total = totalSeries(atual), feitas = feitasNoDia(atual);
+        barra.style.width = total ? (feitas / total * 100) + '%' : '0%';
+        texto.textContent = feitas + '/' + total + ' séries';
+      }
+
+      function render() {
+        var d = PROGRAMA[atual];
+        var html = '' +
+          '<div class="day-head">' +
+          '<p class="eyebrow">' + ROTULO[atual] + (atual === hoje ? ' · hoje' : '') + '</p>' +
+          '<h1>' + esc(d.nome) + '</h1>' +
+          '<p class="day-sub">' + esc(d.foco) + '</p>' +
+          (d.ex.length
+            ? '<div class="progress"><div class="bar"><i id="barFill"></i></div><span id="barTxt">0/0</span></div>'
+            : '') +
+          '</div>' +
+          '<div class="block"><h2>Manhã · em jejum</h2><p>' + esc(d.manha) + '</p></div>';
+
+        if (d.aq) {
+          html += '<div class="block"><h2>Aquecimento · 8 min</h2><p>' + esc(d.aq) + '</p></div>';
+        }
+
+        if (!d.ex.length) {
+          html += '<div class="rest-day"><b>Sem musculação hoje</b>' + esc(d.livre || '') + '</div>';
+        } else {
+          html += d.ex.map(function (e, i) {
+            var botoes = '';
+            for (var j = 0; j < e.s; j++) {
+              var on = !!estado.series[atual + ':' + i + ':' + j];
+              botoes += '<button class="set" type="button" data-ex="' + i + '" data-set="' + j +
+                '" aria-pressed="' + on + '" aria-label="Série ' + (j + 1) + '">' + (j + 1) + '</button>';
+            }
+            var carga = estado.cargas[atual + ':' + i] || '';
+            return '<article class="ex" data-ex="' + i + '">' +
+              '<div class="ex-head"><div class="ex-n">' + (i + 1) + '</div>' +
+              '<div class="ex-name"><strong>' + esc(e.n) + '</strong>' +
+              (e.v ? '<em>' + esc(e.v) + '</em>' : '') + '</div></div>' +
+              '<div class="ex-meta">' +
+              '<span class="tag k">' + e.s + ' × ' + esc(e.r) + '</span>' +
+              '<span class="tag">RIR ' + esc(e.rir) + '</span>' +
+              '<span class="tag">' + esc(e.o) + '</span>' +
+              '</div>' +
+              '<div class="ex-row">' +
+              '<div class="sets">' + botoes + '</div>' +
+              '<input class="load" type="text" inputmode="decimal" enterkeyhint="done" autocomplete="off" ' +
+              'autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="kg" value="' + esc(carga) +
+              '" data-ex="' + i + '" aria-label="Carga de ' + esc(e.n) + '" />' +
+              '<button class="rest-btn" type="button" data-rest="' + e.d + '" data-nome="' + esc(e.n) + '">' +
+              e.d + ' s</button>' +
+              '</div></article>';
+          }).join('');
+
+          html += '<div class="block red"><h2>Pós-treino</h2><p>' + esc(d.pos) + '</p>' +
+            '<p>Só Zona 1–2. Intensidade alta fica no turno da manhã.</p></div>';
+        }
+
+        app.innerHTML = html;
+        atualizaProgresso();
+      }
+
+      /* ─── eventos ───────────────────────────────────── */
+      daysEl.addEventListener('click', function (ev) {
+        var btn = ev.target.closest('.day-btn');
+        if (!btn) return;
+        atual = btn.dataset.dia;
+        montaDias();
+        render();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      app.addEventListener('click', function (ev) {
+        var set = ev.target.closest('.set');
+        if (set) {
+          var chave = atual + ':' + set.dataset.ex + ':' + set.dataset.set;
+          var novo = !estado.series[chave];
+          if (novo) { estado.series[chave] = true; } else { delete estado.series[chave]; }
+          set.setAttribute('aria-pressed', String(novo));
+          var card = set.closest('.ex');
+          var pendentes = card.querySelectorAll('.set[aria-pressed="false"]').length;
+          card.classList.toggle('done', pendentes === 0);
+          salvar();
+          atualizaProgresso();
+          if (novo) {
+            var b = card.querySelector('.rest-btn');
+            if (b) iniciarDescanso(parseInt(b.dataset.rest, 10), b.dataset.nome);
+          }
+          return;
+        }
+        var rest = ev.target.closest('.rest-btn');
+        if (rest) { iniciarDescanso(parseInt(rest.dataset.rest, 10), rest.dataset.nome); }
+      });
+
+      app.addEventListener('input', function (ev) {
+        var campo = ev.target.closest('.load');
+        if (!campo) return;
+        var chave = atual + ':' + campo.dataset.ex;
+        if (campo.value.trim()) { estado.cargas[chave] = campo.value.trim(); } else { delete estado.cargas[chave]; }
+        salvar();
+      });
+
+      // o teclado do iPhone não tem "fechar": Enter/Concluído tira o foco
+      app.addEventListener('keydown', function (ev) {
+        if (ev.key === 'Enter' && ev.target.classList.contains('load')) ev.target.blur();
+      });
+
+      document.getElementById('resetBtn').addEventListener('click', function () {
+        if (!window.confirm('Zerar as séries marcadas desta semana? As cargas registradas continuam salvas.')) return;
+        estado.series = {};
+        estado.semana = semanaAtual();
+        salvar();
+        render();
+      });
+
+      /* ─── início ────────────────────────────────────── */
+      carregar();
+      estado.semana = semanaAtual();
+      montaDias();
+      render();
+      salvar();
+    })();
+  </script>
+</body>
+
+</html>

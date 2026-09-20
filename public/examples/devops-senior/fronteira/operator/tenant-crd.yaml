@@ -1,0 +1,114 @@
+# Academia DevOps · módulo 21 — CRD de exemplo
+#
+# CONFERIDO com `kubectl apply --dry-run=server` num Kubernetes 1.31 real:
+#   - o CRD é aceito pela API
+#   - Tenant com plano pro e 5 réplicas .... aceito
+#   - Tenant com plano free e 5 réplicas ... RECUSADO pela regra CEL,
+#     antes de qualquer controller ser acionado
+# O reconciler que consome este recurso está em reconcile.md, ao lado.
+#
+#   kubectl apply -f tenant-crd.yaml
+#   kubectl apply -f tenant-sample.yaml
+#   kubectl get tenants
+#
+# O que este arquivo demonstra, e que separa um CRD bem feito de um mal feito:
+#   1. spec (desejado) e status (observado) SEPARADOS, com subresource
+#   2. validação de esquema na API — o erro é recusado antes de chegar ao controller
+#   3. conditions no formato padrão do Kubernetes
+#   4. printer columns, para `kubectl get` ser útil
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: tenants.platform.example.com
+spec:
+  group: platform.example.com
+  scope: Namespaced
+  names:
+    plural: tenants
+    singular: tenant
+    kind: Tenant
+    shortNames: [tn]
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      # subresources separa quem escreve o quê: o usuário edita spec,
+      # o controller edita status. Sem isso, os dois brigam pelo mesmo objeto.
+      subresources:
+        status: {}
+      additionalPrinterColumns:
+        - name: Plano
+          type: string
+          jsonPath: .spec.plan
+        - name: Réplicas
+          type: integer
+          jsonPath: .spec.replicas
+        - name: Pronto
+          type: string
+          jsonPath: .status.conditions[?(@.type=="Ready")].status
+        - name: Idade
+          type: date
+          jsonPath: .metadata.creationTimestamp
+      schema:
+        openAPIV3Schema:
+          type: object
+          required: [spec]
+          properties:
+            spec:
+              type: object
+              required: [plan, replicas]
+              properties:
+                plan:
+                  type: string
+                  enum: [free, pro, enterprise]
+                  description: Plano contratado. A API recusa qualquer outro valor.
+                replicas:
+                  type: integer
+                  minimum: 1
+                  maximum: 20
+                  default: 2
+                  description: Réplicas desejadas. Validado pela API, não pelo controller.
+                retentionDays:
+                  type: integer
+                  minimum: 1
+                  maximum: 365
+                  default: 30
+              # Validação que depende de mais de um campo fica aqui, não no controller:
+              # rejeitar cedo é melhor do que reconciliar e falhar.
+              x-kubernetes-validations:
+                - rule: "self.plan != 'free' || self.replicas <= 2"
+                  message: "plano free permite no máximo 2 réplicas"
+            status:
+              type: object
+              properties:
+                observedGeneration:
+                  type: integer
+                  description: |
+                    A generation do spec que este status reflete. Se for menor que
+                    metadata.generation, o controller ainda não reconciliou a
+                    última mudança — é assim que se sabe se o status está velho.
+                readyReplicas:
+                  type: integer
+                conditions:
+                  type: array
+                  items:
+                    type: object
+                    required: [type, status, lastTransitionTime, reason]
+                    properties:
+                      type:
+                        type: string
+                      status:
+                        type: string
+                        enum: ["True", "False", "Unknown"]
+                      lastTransitionTime:
+                        type: string
+                        format: date-time
+                      reason:
+                        type: string
+                        maxLength: 1024
+                      message:
+                        type: string
+                        maxLength: 32768
+                  x-kubernetes-list-type: map
+                  x-kubernetes-list-map-keys: [type]

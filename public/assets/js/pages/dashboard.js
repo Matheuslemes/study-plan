@@ -12,6 +12,7 @@ import { rules, awsMilestones } from '../../../data/milestones.js';
 
 import { renderDailyDayTabs, setActiveDay, renderMonthlyCycle } from '../features/routine.js';
 import { renderQuickTrackCards, setupNavbarTrackSearch, setupPdfSearch, renderBibliografia } from '../features/tracks.js';
+import { renderProjetos } from '../features/projetos.js';
 import { renderPhaseDetails, filterPhase, filterTrack } from '../features/phases.js';
 import { renderSync } from '../features/sync.js';
 import { renderSeletorDeFase, getFaseAtual } from '../features/active-phase.js';
@@ -26,6 +27,7 @@ import { renderRecoveryProtocol } from '../features/recovery.js';
 import { renderDependencyMap } from '../features/dependency-map.js';
 import { renderInterviewSimulations } from '../features/interviews.js';
 import { registrarServiceWorker } from '../core/pwa.js';
+import { sincronizarProgresso } from '../core/storage.js';
 import { renderSystemHeader } from '../core/system-header.js';
 import { getTrackConfig } from '../../../data/tracks.js';
 
@@ -102,6 +104,7 @@ function init() {
   renderQuickTrackCards();
   renderMonthlyCycle();
   renderBibliografia();
+  renderProjetos('projetosView');
   setupNavbarTrackSearch();
   setupPdfSearch();
 
@@ -122,6 +125,12 @@ function init() {
   };
   atualizarPilulaFase();
   document.addEventListener('fase:change', atualizarPilulaFase);
+
+  // Opção B: hidrata o progresso de progresso.json (fonte durável no Git) se for
+  // mais novo que o cache local. O auto-save para o arquivo é feito pelo storage.js.
+  sincronizarProgresso().then((r) => {
+    if (r.importou) { renderPainelProgresso(); renderHoje('todayView'); atualizarPilulaFase(); }
+  });
 
   // Painel de progresso, revisão e certificações (Etapa 8)
   renderPainelProgresso();

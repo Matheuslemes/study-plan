@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Cardio em dois turnos — Zonas, 4x4 e regras de interferência</title>
+  <meta
+    content="Protocolo de cardio em dois turnos: cálculo de zonas de frequência cardíaca, Zona 2 em jejum, intervalado 4x4 norueguês, regras de interferência com a musculação e volume semanal alvo."
+    name="description" />
+  <link href="../../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../../assets/css/tokens.css?v=redesign-33" rel="stylesheet" />
+  <link href="../../assets/css/tracks-palette.css?v=redesign-33" rel="stylesheet" />
+  <link href="../../assets/css/base.css?v=redesign-33" rel="stylesheet" />
+  <link href="../../assets/css/hub.css?v=redesign-33" rel="stylesheet" />
+  <link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/treino/cardio">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Plano Integrado de Estudos">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/treino/cardio">
+  <meta property="og:title" content="Cardio em dois turnos — Zonas, 4x4 e regras de interferência">
+  <meta property="og:description"
+    content="Zonas de FC, Zona 2 em jejum, 4x4 norueguês e como evitar o efeito de interferência com a musculação.">
+  <meta name="twitter:card" content="summary">
+  <link rel="manifest" href="../../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
+</head>
+
+<body class="track-page is-hub" data-track="treino">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+  <header class="ac-hub-hero">
+    <div class="container">
+      <div class="ac-hero-copy">
+        <a class="hero-back-link" href="../treino.html">← Voltar à visão geral do treino</a>
+        <div class="hero-label">Submódulo 02 · Cardio · Dois turnos por dia</div>
+        <h1 class="track-title">Cardio em dois turnos</h1>
+        <p class="track-lead">Manhã em jejum e noite após o treino não são dois cardios iguais. Cada turno tem
+          intensidade, modalidade e função distintas — e é essa separação que torna possível treinar forte e correr
+          longe na mesma semana.</p>
+        <div class="track-badge-set"><span>285–345 min/sem</span><span>~75% Zona 2</span><span>4x4 · 2x/sem</span>
+          <span>Sem impacto</span><span>Separação ≥ 6 h</span>
+        </div>
+      </div>
+    </div>
+  </header>
+  <nav class="sitenav">
+    <div class="container">
+      <div class="sitenav-top">
+        <a class="sitenav-brand" href="#">Cardio <span>2 turnos</span></a>
+        <span class="nav-ver">Zonas · Zona 2 · 4x4 norueguês · interferência</span>
+        <a class="nav-back" href="../treino.html">← Visão geral</a>
+        <div class="sitenav-top-right"><input aria-label="Buscar no protocolo de cardio" class="search-box"
+            id="searchInput" placeholder="Buscar no cardio..." type="search" /></div>
+      </div>
+    </div>
+    <div class="sitenav-bar-outer">
+      <button aria-label="Rolar para esquerda" class="nav-scroll-btn left" id="navScrollLeft">‹</button>
+      <div class="sitenav-bar-inner" id="navSectionsBar">
+        <div class="nav-group"><span class="nav-group-label">Base</span><a class="nav-link" href="#zonas">01 ·
+            Zonas</a><a class="nav-link" href="#turnos">02 · Dois turnos</a></div>
+        <div class="nav-group"><span class="nav-group-label">Protocolos</span><a class="nav-link" href="#zona2">03 ·
+            Zona 2</a><a class="nav-link" href="#quatro-por-quatro">04 · 4x4</a><a class="nav-link"
+            href="#jejum">05 · Jejum</a></div>
+        <div class="nav-group"><span class="nav-group-label">Controle</span><a class="nav-link"
+            href="#interferencia">06 · Interferência</a><a class="nav-link" href="#volume-cardio">07 · Volume</a></div>
+      </div>
+      <button aria-label="Rolar para direita" class="nav-scroll-btn right" id="navScrollRight">›</button>
+    </div>
+  </nav>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="main">
+      <aside class="sidebar">
+        <div class="sidebar-group">
+          <div class="sidebar-label">Base</div><a href="#zonas">1. Zonas e cálculo de FC</a><a href="#turnos">2. Os
+            dois turnos</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Protocolos</div><a href="#zona2">3. Zona 2</a><a href="#quatro-por-quatro">4. 4x4
+            norueguês</a><a href="#jejum">5. Cardio em jejum</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Controle</div><a href="#interferencia">6. Interferência</a><a
+            href="#volume-cardio">7. Volume e progressão</a>
+        </div>
+      </aside>
+      <div class="content" id="mainContent">
+
+        <section class="doc-section" data-search-section="" id="zonas">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Zonas e cálculo de frequência cardíaca</h2>
+              <p class="section-subtitle">O plano anterior falava em "Zona 2" sem dizer em quantos batimentos ela
+                acontece.</p>
+            </div><span class="section-badge">Base</span>
+          </div>
+          <p>Use a fórmula de Tanaka, mais precisa que <em>220 − idade</em> para adultos:
+            <strong>FC<sub>máx</sub> ≈ 208 − (0,7 × idade)</strong>. Encontre sua linha na tabela e anote as duas
+            faixas no relógio ou no celular. Se não tiver monitor, o teste da fala substitui com folga.</p>
+          <div class="table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Idade</th>
+                  <th>FC máx estimada</th>
+                  <th>Zona 2 (60–70%)</th>
+                  <th>Zona 4–5 · intervalo do 4x4 (85–95%)</th>
+                  <th>Recuperação do 4x4 (60–70%)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>25 anos</td>
+                  <td>191 bpm</td>
+                  <td>114–133 bpm</td>
+                  <td>162–181 bpm</td>
+                  <td>114–133 bpm</td>
+                </tr>
+                <tr>
+                  <td>30 anos</td>
+                  <td>187 bpm</td>
+                  <td>112–131 bpm</td>
+                  <td>159–178 bpm</td>
+                  <td>112–131 bpm</td>
+                </tr>
+                <tr>
+                  <td>35 anos</td>
+                  <td>184 bpm</td>
+                  <td>110–128 bpm</td>
+                  <td>156–174 bpm</td>
+                  <td>110–128 bpm</td>
+                </tr>
+                <tr>
+                  <td>40 anos</td>
+                  <td>180 bpm</td>
+                  <td>108–126 bpm</td>
+                  <td>153–171 bpm</td>
+                  <td>108–126 bpm</td>
+                </tr>
+                <tr>
+                  <td>45 anos</td>
+                  <td>177 bpm</td>
+                  <td>106–124 bpm</td>
+                  <td>150–168 bpm</td>
+                  <td>106–124 bpm</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="doc-grid-2">
+            <div class="callout green">
+              <h3>Teste da fala — validação sem relógio</h3>
+              <p><strong>Zona 2:</strong> você consegue falar frases completas, com respiração audível mas sem cortar a
+                frase ao meio. Se só consegue palavras soltas, subiu demais. Se consegue cantar, está leve demais.</p>
+            </div>
+            <div class="callout orange">
+              <h3>Zona 4–5 — o intervalo do 4x4</h3>
+              <p>Respiração pesada, frases impossíveis, mas sustentável por 4 minutos. Não é sprint: se você não
+                aguenta os 4 minutos inteiros, a intensidade está alta demais para o protocolo.</p>
+            </div>
+          </div>
+          <div class="callout">
+            <h3>A estimativa é um ponto de partida</h3>
+            <p>FC<sub>máx</sub> estimada tem desvio individual grande. Depois de 4 semanas, ajuste pelas sensações: se
+              a "Zona 2" te deixa ofegante, baixe 5–8 bpm; se parece caminhada de shopping, suba.</p>
+          </div>
+        </section>
+
+        <section class="doc-section" data-search-section="" id="turnos">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Os dois turnos</h2>
+              <p class="section-subtitle">Manhã e noite têm funções diferentes — e essa é a vantagem estrutural do
+                plano.</p>
+            </div><span class="section-badge">Estrutura</span>
+          </div>
+          <div class="doc-hero-card">
+            <div>
+              <p class="lead">A maioria das pessoas precisa encaixar cardio e musculação na mesma sessão, o que gera
+                fadiga cruzada. Dois turnos resolvem isso de graça: a manhã carrega o volume aeróbico, a noite carrega
+                a força, e entre eles há 8 a 12 horas de separação.</p>
+              <div class="callout rose">
+                <h3>Por que a separação importa</h3>
+                <p>A literatura de treino concorrente indica que separar as modalidades em <strong>≥ 3 h</strong> já
+                  reduz a interferência, e que <strong>6–24 h</strong> é melhor ainda. Sua rotina de home office
+                  entrega essa janela sem esforço.</p>
+              </div>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric"><span>Turno manhã</span><small>30–45 min</small><em>Jejum · Z2 ou 4x4</em></div>
+              <div class="metric"><span>Turno noite</span><small>10–25 min</small><em>Pós-treino · Z1–Z2</em></div>
+              <div class="metric"><span>Separação</span><small>8–12 h</small><em>Manhã × noite</em></div>
+              <div class="metric"><span>Sábado</span><small>60–75 min</small><em>Turno único · Z2</em></div>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Dia</th>
+                  <th>Manhã (em jejum)</th>
+                  <th>Musculação (noite)</th>
+                  <th>Pós-treino</th>
+                  <th>Minutos de cardio</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Segunda</td>
+                  <td><strong>4x4</strong> · 40 min · <em>com refeição leve antes</em></td>
+                  <td>Peito + tríceps + abdômen</td>
+                  <td>Z2 · 15 min · bike leve</td>
+                  <td>55</td>
+                </tr>
+                <tr>
+                  <td>Terça</td>
+                  <td>Z2 · 40 min · bike ou esteira inclinada</td>
+                  <td><strong>Pernas completas</strong></td>
+                  <td>Z1 · 10 min · bike leve</td>
+                  <td>50</td>
+                </tr>
+                <tr>
+                  <td>Quarta</td>
+                  <td>Z2 · 40 min</td>
+                  <td>Costas + bíceps + abdômen</td>
+                  <td>Z2 · 15 min</td>
+                  <td>55</td>
+                </tr>
+                <tr>
+                  <td>Quinta</td>
+                  <td>Z2 · 40 min</td>
+                  <td>Ombros + antebraço + panturrilha</td>
+                  <td>Z2 · 20 min</td>
+                  <td>60</td>
+                </tr>
+                <tr>
+                  <td>Sexta</td>
+                  <td><strong>4x4</strong> · 40 min · <em>com refeição leve antes</em></td>
+                  <td>Braços + abdômen</td>
+                  <td>Z2 · 25 min</td>
+                  <td>65</td>
+                </tr>
+                <tr>
+                  <td>Sábado</td>
+                  <td>Z2 longo · 60–75 min · caminhada ou bike</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>60–75</td>
+                </tr>
+                <tr>
+                  <td>Domingo</td>
+                  <td>Caminhada leve 20–30 min ou descanso total</td>
+                  <td>—</td>
+                  <td>—</td>
+                  <td>0–30</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p><strong>Total semanal: 285–345 min</strong>, dos quais 80 min em alta intensidade (~25%) — a distribuição
+            polarizada que a literatura de condicionamento sustenta. Compare com os 150–300 min/semana de atividade
+            moderada recomendados pela OMS: o plano fica no teto da recomendação, e por isso a intensidade precisa ser
+            controlada em vez de somada.</p>
+          <div class="callout green">
+            <h3>Por que o 4x4 cai na segunda e na sexta</h3>
+            <p>As pernas treinam na <strong>terça</strong>. Colocar o intervalado na segunda deixa ~34 h até o
+              agachamento; na sexta, as pernas já descansaram três dias e não há treino pesado depois. Qualquer outra
+              posição — em especial terça ou quarta de manhã — colocaria pedalada intensa em cima do único dia de
+              perna da semana.</p>
+          </div>
+        </section>
+
+        <section class="doc-section" data-search-section="" id="zona2">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Zona 2 — a base de tudo</h2>
+              <p class="section-subtitle">80% do volume semanal, e a única intensidade permitida em jejum.</p>
+            </div><span class="section-badge">Protocolo</span>
+          </div>
+          <div class="doc-grid-2">
+            <div class="callout">
+              <h3>O protocolo</h3>
+              <p>3 min de Zona 1 para subir a FC · 30–40 min mantendo a FC dentro da faixa de Zona 2 · 2–3 min de volta
+                à calma. Sem picos, sem "acelerar no final". A regularidade da FC é o exercício.</p>
+            </div>
+            <div class="callout green">
+              <h3>Modalidades — em ordem de preferência</h3>
+              <p>1. Bicicleta ergométrica ou spinning · 2. Elíptico · 3. Esteira em inclinação 6–10% caminhando ·
+                4. Remo. <strong>Corrida não entra nesta lista.</strong></p>
+            </div>
+          </div>
+          <div class="callout orange">
+            <h3>Por que nada de corrida a 110 kg</h3>
+            <p>Duas razões somadas: carga articular de impacto repetido em joelho, quadril e tornozelo; e o fato de que
+              a corrida é a modalidade associada a perdas de força e hipertrofia no treino concorrente, enquanto a
+              bicicleta não. Ciclismo e remo são concêntrico-dominantes — menos dano muscular, menos inflamação, menos
+              interferência. Quando o peso corporal cair e a base aeróbica estiver formada, a corrida pode entrar como
+              intervalos curtos na esteira.</p>
+          </div>
+          <h3>Como saber se a Zona 2 está funcionando</h3>
+          <ul class="doc-list">
+            <li>A <strong>mesma velocidade ou watt</strong> passa a exigir menos batimentos, ao longo de semanas.</li>
+            <li>A FC de repouso ao acordar cai 3–8 bpm em 8–12 semanas.</li>
+            <li>Você termina a sessão sentindo que poderia continuar — sempre. Se termina destruído, não era Zona 2.
+            </li>
+            <li>A sessão de musculação da noite não fica pior por causa da manhã. Se fica, reduza a duração antes de
+              reduzir a frequência.</li>
+          </ul>
+        </section>
+
+        <section class="doc-section" data-search-section="" id="quatro-por-quatro">
+          <div class="doc-section-heading">
+            <div>
+              <h2>4x4 norueguês — o protocolo de VO₂máx</h2>
+              <p class="section-subtitle">O item que o plano anterior descrevia como "intervalado controlado", sem
+                número nenhum.</p>
+            </div><span class="section-badge">Protocolo</span>
+          </div>
+          <p>Desenvolvido na Universidade Norueguesa de Ciência e Tecnologia (NTNU), é o protocolo mais estudado para
+            elevar VO₂máx — o marcador com a associação mais forte com mortalidade por todas as causas entre as
+            variáveis de aptidão. Aumentos de aproximadamente 7–10% em 8 semanas são o resultado típico relatado.</p>
+          <div class="table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Bloco</th>
+                  <th>Duração</th>
+                  <th>Intensidade</th>
+                  <th>Sensação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Aquecimento</td>
+                  <td>8–10 min</td>
+                  <td>60–70% FC máx (Zona 2)</td>
+                  <td>Confortável, respiração já ativa</td>
+                </tr>
+                <tr>
+                  <td>Intervalo × 4</td>
+                  <td>4 min cada</td>
+                  <td>85–95% FC máx</td>
+                  <td>Pesado, sustentável, sem sprint. A FC sobe ao longo do bloco.</td>
+                </tr>
+                <tr>
+                  <td>Recuperação × 3</td>
+                  <td>3 min cada</td>
+                  <td>60–70% FC máx</td>
+                  <td>Ativa — continue pedalando, não pare</td>
+                </tr>
+                <tr>
+                  <td>Volta à calma</td>
+                  <td>5 min</td>
+                  <td>Zona 1</td>
+                  <td>Leve, até a FC voltar perto do repouso</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric"><span>Sessão total</span><small>~40 min</small><em>Aquec. + 25 + calma</em></div>
+            <div class="metric"><span>Frequência</span><small>2x/semana</small><em>Teto útil</em></div>
+            <div class="metric"><span>Dias</span><small>Seg e Sex</small><em>Nunca Ter (pernas)</em></div>
+            <div class="metric"><span>Modalidade</span><small>Bike</small><em>Ou elíptico/remo</em></div>
+          </div>
+          <div class="callout rose">
+            <h3>Duas vezes por semana é o teto, não a meta mínima</h3>
+            <p>Uma sessão semanal mantém a aptidão; duas é o ponto de melhor retorno para não-atletas; três leva à
+              sobrecarga na maioria dos casos. Como você já carrega 5 sessões de musculação e ~300 min de aeróbico,
+              <strong>duas é o limite</strong>. Na dúvida, faça uma.</p>
+          </div>
+          <div class="callout orange">
+            <h3>Antes da primeira sessão</h3>
+            <p>Com IMC 34, procure liberação médica — idealmente com teste ergométrico — antes de iniciar o 4x4.
+              Zona 2 e musculação podem começar antes disso; o 4x4 é o item que justifica a consulta.</p>
+          </div>
+          <h3>Progressão dentro do 4x4</h3>
+          <ul class="doc-list">
+            <li><strong>Semanas 1–2:</strong> 3 intervalos em vez de 4, alvo 85% FC máx. Aprender o ritmo.</li>
+            <li><strong>Semanas 3–4:</strong> 4 intervalos, alvo 85–88%.</li>
+            <li><strong>Semana 5+:</strong> 4 intervalos, alvo 88–92%, progredindo por watt/velocidade com a mesma FC.
+            </li>
+            <li><strong>Marcador de progresso:</strong> a carga (watts ou inclinação) que você sustenta a 90% FC máx
+              deve subir mês a mês. Esse é o dado a registrar, não o tempo.</li>
+          </ul>
+        </section>
+
+        <section class="doc-section" data-search-section="" id="jejum">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Cardio em jejum — o que a evidência diz</h2>
+              <p class="section-subtitle">Mantenha, mas pelo motivo certo.</p>
+            </div><span class="section-badge">Evidência</span>
+          </div>
+          <div class="doc-hero-card">
+            <div>
+              <p class="lead">A meta-análise de Vieira et al. (2016) confirma que o exercício em jejum <em>aumenta a
+                  oxidação de gordura durante a sessão</em>. Mas revisões de composição corporal mostram que isso
+                <strong>não se traduz em mais perda de gordura</strong> quando as calorias do dia são equiparadas. A
+                oxidação de gordura durante o exercício e a perda de gordura ao longo de semanas são coisas
+                diferentes.</p>
+              <div class="callout rose">
+                <h3>Conclusão prática</h3>
+                <p>Faça o cardio em jejum porque <strong>cabe na sua agenda</strong> e porque é o turno em que você
+                  consegue ser consistente. Não porque queima mais gordura. O déficit calórico do dia é o que
+                  determina o resultado.</p>
+              </div>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric"><span>Permitido</span><small>Zona 2</small><em>30–45 min</em></div>
+              <div class="metric"><span>Proibido</span><small>4x4</small><em>Come antes</em></div>
+              <div class="metric"><span>Proibido</span><small>Perna pesada</small><em>Nunca em jejum</em></div>
+              <div class="metric"><span>Limite</span><small>60 min</small><em>Acima disso, coma</em></div>
+            </div>
+          </div>
+          <h3>Regras do turno em jejum</h3>
+          <ul class="doc-list">
+            <li><strong>Só Zona 2.</strong> Intensidade alta em jejum piora o desempenho sem entregar vantagem
+              metabólica.</li>
+            <li><strong>Até 60 minutos.</strong> Revisões indicam perda de desempenho em jejum para sessões acima de
+              uma hora; abaixo disso, a diferença é irrelevante.</li>
+            <li><strong>Água e, se quiser, café.</strong> Cafeína não quebra o propósito do turno e melhora a
+              percepção de esforço.</li>
+            <li><strong>Nos dias de 4x4, coma algo leve antes</strong> — 20–30 g de carboidrato de digestão rápida,
+              30–45 min antes. O objetivo é sustentar os 4 minutos na zona, não manter o jejum.</li>
+            <li><strong>Tontura, escurecimento de visão ou mal-estar encerram a sessão.</strong> Isso não é
+              "adaptação".</li>
+          </ul>
+        </section>
+
+        <section class="doc-section" data-search-section="" id="interferencia">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Regras de interferência</h2>
+              <p class="section-subtitle">As seis linhas que evitam que o cardio coma a musculação.</p>
+            </div><span class="section-badge">Controle</span>
+          </div>
+          <p>O "efeito de interferência" é menor do que se acreditava — meta-análises recentes não encontram prejuízo
+            consistente à hipertrofia no treino concorrente bem organizado. Mas ele existe em condições específicas:
+            corrida como modalidade, sessões longas, alta frequência aeróbica e proximidade temporal com a musculação.
+            As regras abaixo atacam exatamente essas quatro condições.</p>
+          <div class="table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Regra</th>
+                  <th>Por quê</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td><strong>Alta intensidade só de manhã</strong>, nunca no mesmo turno da musculação</td>
+                  <td>Separação de 8–12 h reduz a interferência a quase nada</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><strong>Nada de 4x4 na terça nem na segunda à noite</strong> (terça é o dia de perna)</td>
+                  <td>A perna é o alvo comum entre pedalada intensa e agachamento/RDL</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><strong>Pós-treino é só Zona 1–2</strong>, no máximo 25 min</td>
+                  <td>Função de desaquecimento e volume leve, não de estímulo</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td><strong>Zero corrida enquanto o peso estiver acima de ~95 kg</strong></td>
+                  <td>Impacto articular + a modalidade mais associada à interferência</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td><strong>Se precisar cortar, corte o intervalado antes da Zona 2</strong></td>
+                  <td>O 4x4 é o item de maior custo de recuperação da semana</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td><strong>Força primeiro se os dois caírem no mesmo turno</strong></td>
+                  <td>Exigência técnica e neural exige sistema descansado</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout orange">
+            <h3>O sinal de que a interferência chegou</h3>
+            <p>Queda de carga em agachamento, leg press ou terra romeno por <strong>duas sessões seguidas</strong>, com
+              sono preservado. Resposta: cortar um 4x4 por duas semanas e reduzir a Zona 2 da terça de manhã de 40
+              para 25 min. Não reduza a musculação primeiro — num split de 1x por semana, perder uma sessão de pernas
+              custa a semana inteira daquele grupo.</p>
+          </div>
+        </section>
+
+        <section class="doc-section" data-search-section="" id="volume-cardio">
+          <div class="doc-section-heading">
+            <div>
+              <h2>Volume e progressão do cardio</h2>
+              <p class="section-subtitle">Como entrar no plano sem começar por 350 minutos na primeira semana.</p>
+            </div><span class="section-badge">Fases</span>
+          </div>
+          <div class="table-wrap">
+            <table class="doc-table">
+              <thead>
+                <tr>
+                  <th>Fase</th>
+                  <th>Semanas</th>
+                  <th>Turnos manhã</th>
+                  <th>Turnos noite</th>
+                  <th>4x4</th>
+                  <th>Total semanal</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1 · Adaptação</td>
+                  <td>1–2</td>
+                  <td>3× · 25–30 min Z2</td>
+                  <td>2× · 10 min Z1</td>
+                  <td>Nenhum</td>
+                  <td>95–110 min</td>
+                </tr>
+                <tr>
+                  <td>2 · Construção</td>
+                  <td>3–4</td>
+                  <td>4× · 30–35 min Z2</td>
+                  <td>3× · 10–15 min Z1</td>
+                  <td>1× (3 intervalos)</td>
+                  <td>190–215 min</td>
+                </tr>
+                <tr>
+                  <td>3 · Consolidação</td>
+                  <td>5–6</td>
+                  <td>5× · 35–40 min</td>
+                  <td>3× · 15 min</td>
+                  <td>1–2× (4 intervalos)</td>
+                  <td>250–290 min</td>
+                </tr>
+                <tr>
+                  <td>4 · Rotina alvo</td>
+                  <td>7+</td>
+                  <td>5× · 40 min + sábado 60–75</td>
+                  <td>3–4× · 10–25 min</td>
+                  <td>2×</td>
+                  <td>300–375 min</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="doc-grid-2">
+            <div class="callout green">
+              <h3>Critério para avançar de fase</h3>
+              <p>Cumprir 85% do cardio planejado por duas semanas seguidas, sem queda de carga na musculação e sem
+                piora de sono. Ansiedade não é critério.</p>
+            </div>
+            <div class="callout">
+              <h3>Teto semanal</h3>
+              <p>375 min é o teto deste plano. Acima disso, o custo de recuperação passa a competir com as 5 sessões de
+                musculação, e a literatura de treino concorrente começa a registrar prejuízo de força com frequência e
+                duração aeróbicas elevadas.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-row">
+      <a class="footer-link" href="./execucao.html">← Submódulo anterior: execução</a>
+      <a class="footer-link" href="./avaliacao.html">Próximo submódulo: avaliação e controle →</a>
+    </div>
+    <p><strong style="color:var(--muted2)">Cardio em dois turnos</strong> · zonas, Zona 2 em jejum, 4x4 norueguês e
+      regras de interferência</p>
+  </footer>
+  <button aria-label="Voltar ao topo" id="backToTop">↑</button>
+  <script type="module">
+    import { initNav } from '../../assets/js/core/nav.js?v=2';
+    import { registrarServiceWorker } from '../../assets/js/core/pwa.js';
+    registrarServiceWorker();
+    initNav();
+  </script>
+</body>
+
+</html>
