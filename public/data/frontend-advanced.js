@@ -88,11 +88,11 @@ export const frontendBooks = Object.freeze({
   effectiveTs: {
     title: 'Effective TypeScript',
     authors: 'Dan Vanderkam',
-    edition: '1ª edição',
-    year: 2019,
+    edition: '2ª edição',
+    year: 2024,
     language: 'Inglês',
-    pages: 368,
-    path: '/pdfs/livros-frontend/Effective TypeScript -- Dan Vanderkam -- ( WeLib.org ).epub.pdf',
+    pages: 400,
+    path: '/pdfs/livros-frontend/effective-typescript-2e.pdf',
     depth: 'Tipos, inferência e desenho de APIs',
     prerequisites: 'JavaScript e TypeScript básicos',
     structure: 'Modelo estrutural, strictness, any, inferência, desenho de tipos e declarações',
@@ -209,6 +209,13 @@ export const frontendAcademy = Object.freeze({
   baseline: `Pesquisa técnica: ${FRONTEND_RESEARCH_DATE} · semântica, acesso, desempenho e evidência`,
   book: 'cssDepth',
   parts: {
+    base: {
+      index: '0/6', range: 'Módulos 0.1–0.4', page: 'base.html', navLabel: 'Módulo 0',
+      title: 'Módulo 0 — da Faixa 0 ao Frontend',
+      subtitle: 'Ponte dos fundamentos para a Web: como o navegador monta a página, JavaScript essencial, o DOM e as DevTools.',
+      prerequisites: ['Ter passado pela Faixa 0 (Fundamentos de Computação) ou equivalente', 'Saber usar o terminal e abrir um arquivo no navegador', 'Nenhum conhecimento prévio de HTML/CSS/JS'],
+      objectives: ['Explicar o que HTML, CSS e JS fazem e como o navegador carrega e renderiza a página', 'Escrever JavaScript essencial e entender coerção (== vs ===) e valores falsy', 'Selecionar e alterar o DOM e reagir a eventos', 'Usar as DevTools (console, elements, network) e o debugger do navegador']
+    },
     fundamentos: {
       index: '1/6', range: 'Módulos 1–5', page: 'fundamentos.html', navLabel: 'Plataforma Web',
       title: 'Documento, estilo e runtime do navegador',
@@ -275,6 +282,130 @@ function moduleOf(config) {
 }
 
 export const frontendModules = Object.freeze([
+  moduleOf({
+    number: '0.1', part: 'base', id: 'url-ate-pagina-front', title: 'Da URL à página, por dentro: HTML, CSS e JavaScript', level: 'Introdução',
+    objective: 'Explicar o papel de HTML, CSS e JavaScript e como o navegador carrega e renderiza uma página, partindo do que a Faixa 0 viu ("da URL à página").',
+    prerequisites: ['Faixa 0: da URL à página (DNS, HTTP, render)', 'Abrir um arquivo .html no navegador'],
+    problem: 'Quem vem da Faixa 0 sabe que o navegador "baixa e mostra a página", mas não separa estrutura (HTML), estilo (CSS) e comportamento (JS) — nem como eles viram pixels.',
+    concepts: ['HTML = estrutura', 'CSS = estilo', 'JavaScript = comportamento', 'DOM e CSSOM → render tree', 'Carregamento e renderização'],
+    internals: ['O navegador faz o parse do HTML no DOM (uma árvore) e do CSS no CSSOM; combina os dois na render tree e pinta.', 'HTML dá significado e estrutura; CSS decide a aparência; JS altera a página em resposta a eventos — três responsabilidades separadas.', 'Sem CSS a página ainda funciona (só feia); sem JS o conteúdo básico ainda aparece — o HTML é a base.'],
+    useWhen: ['Ao começar qualquer página: primeiro a estrutura, depois estilo e comportamento.', 'Ao diagnosticar "não aparece": é HTML, CSS ou JS?'],
+    avoidWhen: ['Não misture as três responsabilidades num só lugar sem necessidade.', 'Não dependa de JS para mostrar o conteúdo essencial.'],
+    contrast: { bad: 'Montar tudo com <div> e JavaScript, ignorando HTML e CSS.', good: 'HTML para estrutura, CSS para estilo, JS só para comportamento.' },
+    tradeoffs: ['Separar as três camadas dá clareza, ao custo de mais arquivos.', 'Mais JS = mais poder e mais peso/fragilidade.'],
+    production: 'Uma página "em branco" era só um erro de JS que impedia a renderização — mas o conteúdo em HTML já deveria aparecer sem depender do script.',
+    risks: ['Confundir o papel de HTML, CSS e JS.', 'Depender de JS para o conteúdo básico.', 'Não saber onde a página falhou (estrutura, estilo ou script).'],
+    checklist: ['Sei o que cada um (HTML/CSS/JS) faz?', 'Sei o que é o DOM?', 'Sei como o navegador vai do HTML aos pixels?', 'A página mostra o essencial sem JS?'],
+    interview: [
+      ['Introdução', 'Qual o papel de HTML, CSS e JavaScript?', 'HTML é estrutura/significado; CSS é estilo/aparência; JavaScript é comportamento (altera a página e reage a eventos).'],
+      ['Introdução', 'O que é o DOM?', 'A árvore de objetos que o navegador cria a partir do HTML; é o que o JavaScript manipula.']
+    ],
+    exercises: [
+      ['Básico', 'Criar um .html simples, estilizar com um pouco de CSS e abrir no navegador.', 'A página no navegador e a explicação do papel de cada camada.'],
+      ['Aplicado', 'Desativar o CSS e depois o JS e observar o que a página ainda faz.', 'Nota sobre o que cada camada acrescenta.']
+    ],
+    quiz: [
+      { question: 'Qual linguagem cuida da ESTRUTURA da página?', options: ['CSS', 'HTML', 'JavaScript', 'SQL'], answer: 1, why: 'HTML define a estrutura e o significado; CSS estiliza; JS dá comportamento.' },
+      { question: 'O DOM é:', options: ['um servidor', 'a árvore de objetos criada a partir do HTML', 'uma linguagem', 'um arquivo CSS'], answer: 1, why: 'É a representação em árvore da página que o JS manipula.' },
+      { question: 'Sem CSS e sem JS, uma página bem feita:', options: ['fica em branco', 'ainda mostra o conteúdo (HTML)', 'dá erro', 'não carrega'], answer: 1, why: 'O HTML é a base; o conteúdo essencial deve aparecer sem depender de CSS/JS.' }
+    ],
+    challenge: 'Explicar, para quem só viu a Faixa 0, o caminho do HTML baixado até os pixels na tela.',
+    book: 'Eloquent JavaScript, cap. 13–14; MDN — How the web works.',
+    complements: [official.html, official.renderingPath], exampleFile: null
+  }),
+  moduleOf({
+    number: '0.2', part: 'base', id: 'js-essencial', title: 'JavaScript essencial: tipos, coerção e ===', level: 'Introdução',
+    objective: 'Escrever JavaScript básico entendendo que todo número é um double, que == faz coerção (use ===) e o que são valores falsy.',
+    prerequisites: ['Módulo 0.1', 'Faixa 0: tipos e ponto flutuante'],
+    problem: 'JS tem tipagem dinâmica e coerção implícita; sem entender == vs ===, falsy e NaN, o iniciante cria bugs sutis que "às vezes" acontecem.',
+    concepts: ['Tipos dinâmicos e typeof', 'number é double (IEEE 754)', '== (coerção) vs === (sem coerção)', 'Valores truthy/falsy', 'NaN e Number.isNaN', 'const vs let'],
+    internals: ['Não há int separado: todo number é um double, então 0.1 + 0.2 ≠ 0.3, como na Faixa 0.', '== converte tipos antes de comparar (0 == "" é true); === compara sem coerção — por isso se usa ===.', 'Seis valores são falsy (0, "", null, undefined, NaN, false); o resto é truthy. NaN não é igual a nada.'],
+    useWhen: ['Ao comparar valores (sempre ===).', 'Ao checar se algo "existe" (cuidado com 0 e "" que são falsy).'],
+    avoidWhen: ['Não use == (coerção surpreende).', 'Não compare com NaN usando ===; use Number.isNaN.'],
+    contrast: { bad: 'if (valor == 0) para checar "vazio" e pegar "" e null por engano.', good: 'if (valor === 0) para o número; checagens explícitas para vazio/nulo.' },
+    tradeoffs: ['Tipagem dinâmica é flexível, ao custo de erros de tipo só em runtime (TypeScript resolve depois).', '=== é previsível; == é conciso mas traiçoeiro.'],
+    production: 'Um formulário aceitou 0 como "campo vazio" porque usou == e 0 é falsy; a validação deixou passar dado inválido.',
+    risks: ['Usar == e sofrer coerção.', 'Tratar 0 ou "" como "ausente" sem querer.', 'Comparar NaN com ===.', 'Reatribuir const.'],
+    checklist: ['Uso === em vez de ==?', 'Sei que number é double (float da Faixa 0)?', 'Conheço os seis valores falsy?', 'Trato NaN com Number.isNaN?'],
+    interview: [
+      ['Introdução', 'Qual a diferença entre == e === em JavaScript?', '== faz coerção de tipo antes de comparar; === compara valor e tipo sem coerção. Prefira ===.'],
+      ['Introdução', 'Por que 0.1 + 0.2 não é 0.3 em JavaScript?', 'Porque number é um double IEEE 754 (aproximado), exatamente como na Faixa 0.']
+    ],
+    exercises: [
+      ['Básico', 'Rodar o exemplo frontend-zero e explicar cada resultado de coerção e falsy.', 'Notas ligando cada saída ao conceito (coerção, falsy, NaN, float).'],
+      ['Aplicado', 'Achar um bug causado por == e corrigi-lo com === e checagem explícita.', 'Antes/depois com a explicação.']
+    ],
+    quiz: [
+      { question: 'Para comparar valores em JS, prefira:', options: ['==', '===', 'is', 'equals()'], answer: 1, why: '=== compara sem coerção; == pode surpreender.' },
+      { question: 'Em JavaScript, typeof 5 e typeof 5.5 são:', options: ['"int" e "float"', 'ambos "number"', '"number" e "double"', 'erro'], answer: 1, why: 'Só existe number (double); não há int separado.' },
+      { question: 'Qual destes NÃO é falsy?', options: ['0', '""', '"0"', 'null'], answer: 2, why: 'A string "0" é truthy; 0, "" e null são falsy.' }
+    ],
+    challenge: 'Listar os seis valores falsy de cor e mostrar um bug real que cada categoria (0, "", null) pode causar.',
+    book: 'Eloquent JavaScript, cap. 1–2; You Don’t Know JS Yet.',
+    complements: [official.javascript], exampleFile: '../../examples/frontend-senior/frontend-zero.mjs'
+  }),
+  moduleOf({
+    number: '0.3', part: 'base', id: 'dom-eventos', title: 'O DOM: a página é uma árvore — selecionar, mudar e eventos', level: 'Introdução',
+    objective: 'Selecionar elementos, alterar a página e reagir a eventos pelo DOM, entendendo que a página é uma árvore (o pré-requisito do módulo 1).',
+    prerequisites: ['Módulo 0.2', 'Faixa 0: uma coisa é uma árvore de elementos'],
+    problem: 'Sem o modelo do DOM como árvore, "mudar a página com JS" vira decoreba de comandos; e o módulo 1 já assume "árvore de elementos".',
+    concepts: ['DOM como árvore de nós', 'Selecionar (querySelector)', 'Alterar (textContent, classList)', 'Eventos e addEventListener', 'Elemento vs nó de texto'],
+    internals: ['O HTML vira uma árvore de nós (o DOM); cada elemento é um nó com pais e filhos, como qualquer árvore da Faixa 0.', 'O JS seleciona nós (querySelector), lê/altera conteúdo e classes, e escuta eventos (click, input) com addEventListener.', 'Mudar o DOM muda o que aparece; é o mecanismo por trás de toda interatividade.'],
+    useWhen: ['Ao tornar a página interativa (reagir a clique, digitar).', 'Ao atualizar o conteúdo sem recarregar.'],
+    avoidWhen: ['Não manipule o DOM em excesso à mão em apps grandes (é onde frameworks entram, depois).', 'Não confunda o elemento com seu texto.'],
+    contrast: { bad: 'Buscar elementos por índice frágil e reescrever innerHTML inteiro a cada mudança.', good: 'Selecionar por seletor claro, alterar só o necessário e escutar eventos.' },
+    tradeoffs: ['Manipular o DOM direto é simples para pouca coisa; vira caótico em escala (motivo dos frameworks).', 'innerHTML é conveniente, mas arriscado (segurança/perf).'],
+    production: 'Um botão "não fazia nada" porque o addEventListener rodou antes de o elemento existir no DOM — ordem de carregamento importa.',
+    risks: ['Selecionar antes do elemento existir.', 'Reescrever innerHTML e perder estado/listeners.', 'Confundir elemento e nó de texto.'],
+    checklist: ['Sei que o DOM é uma árvore?', 'Sei selecionar um elemento por seletor?', 'Sei alterar conteúdo e classe?', 'Sei reagir a um evento?'],
+    interview: [
+      ['Introdução', 'O que significa dizer que "a página é uma árvore"?', 'O HTML é representado como o DOM, uma árvore de nós com pais e filhos; o JS navega e altera essa árvore.'],
+      ['Introdução', 'Como fazer algo acontecer ao clicar num botão?', 'Selecionar o botão e registrar um ouvinte com addEventListener("click", ...).']
+    ],
+    exercises: [
+      ['Básico', 'Selecionar um elemento, trocar seu texto e reagir a um clique que muda uma classe.', 'A página com o comportamento e o trecho de JS.'],
+      ['Aplicado', 'Desenhar a árvore DOM de uma pequena página e apontar pais/filhos.', 'Diagrama da árvore com os nós identificados.']
+    ],
+    quiz: [
+      { question: 'O DOM é melhor descrito como:', options: ['uma lista', 'uma árvore de nós', 'um banco de dados', 'um arquivo CSS'], answer: 1, why: 'Elementos têm pais e filhos: é uma árvore.' },
+      { question: 'Para reagir a um clique, você usa:', options: ['querySelector', 'addEventListener', 'textContent', 'classList'], answer: 1, why: 'addEventListener registra o ouvinte do evento.' },
+      { question: 'Um botão sem efeito pode ser porque:', options: ['o CSS falhou', 'o listener rodou antes de o elemento existir', 'faltou HTML', 'o navegador é antigo'], answer: 1, why: 'Ordem de carregamento: selecionar antes de existir não encontra o elemento.' }
+    ],
+    challenge: 'Construir um contador que incrementa ao clicar, explicando como o DOM muda a cada clique.',
+    book: 'Eloquent JavaScript, cap. 14–15 (DOM e eventos).',
+    complements: [official.dom], exampleFile: null
+  }),
+  moduleOf({
+    number: '0.4', part: 'base', id: 'devtools-debug-front', title: 'Ferramental do front: DevTools, console e o debugger', level: 'Introdução',
+    objective: 'Usar as DevTools do navegador — console, elements, network e o debugger com breakpoints — para inspecionar e depurar, em vez de adivinhar.',
+    prerequisites: ['Módulo 0.3', 'Faixa 0: ler mensagens de erro e usar o debugger'],
+    problem: 'O iniciante depura front com alert/console.log espalhados; as DevTools fazem o que a Faixa 0 ensinou (inspecionar estado, ler erros, breakpoint) direto no navegador.',
+    concepts: ['Console (erros e logs)', 'Elements (inspecionar o DOM/CSS)', 'Network (requests e status)', 'Sources e breakpoints', 'Ler o erro no console'],
+    internals: ['O console mostra erros de JS com a mensagem e o arquivo:linha — leia isso primeiro, como na Faixa 0.', 'Elements deixa inspecionar e editar o DOM/CSS ao vivo; Network mostra cada request, seu status e tempo.', 'Em Sources você põe breakpoints e inspeciona variáveis passo a passo — o debugger da Faixa 0, no navegador.'],
+    useWhen: ['Sempre que algo não funciona: abra o console primeiro.', 'Ao investigar layout (Elements), rede (Network) ou lógica (Sources).'],
+    avoidWhen: ['Não depure só com alert/console.log quando o breakpoint resolve.', 'Não ignore os erros/avisos do console.'],
+    contrast: { bad: 'Encher o código de alert() e adivinhar o que aconteceu.', good: 'Ler o erro no console, inspecionar no Elements/Network e pôr um breakpoint no Sources.' },
+    tradeoffs: ['DevTools são poderosas; exigem aprender as abas.', 'console.log é rápido para casos triviais; some no ruído em casos grandes.'],
+    production: 'Uma imagem "não carregava" — a aba Network mostrou um 404 no caminho; o problema não era código, era a URL do recurso.',
+    risks: ['Ignorar o console.', 'Não saber ver o status de um request.', 'Depender só de console.log.', 'Não usar breakpoints.'],
+    checklist: ['Sei abrir o console e ler um erro?', 'Sei inspecionar o DOM/CSS no Elements?', 'Sei ver requests e status no Network?', 'Sei pôr um breakpoint no Sources?'],
+    interview: [
+      ['Introdução', 'Qual a primeira coisa a fazer quando algo não funciona no front?', 'Abrir o console das DevTools e ler o erro (mensagem + arquivo:linha).'],
+      ['Introdução', 'Como saber se uma requisição falhou?', 'Na aba Network das DevTools: ela mostra cada request, seu status (ex.: 404/500) e o tempo.']
+    ],
+    exercises: [
+      ['Básico', 'Provocar um erro de JS e lê-lo no console; inspecionar um elemento no Elements.', 'Captura do erro e do elemento inspecionado.'],
+      ['Aplicado', 'Pôr um breakpoint no Sources e inspecionar variáveis de uma função ao clicar.', 'Relato do breakpoint e dos valores observados.']
+    ],
+    quiz: [
+      { question: 'Onde ver o erro de JavaScript de uma página?', options: ['na aba Network', 'no Console das DevTools', 'no Elements', 'no CSS'], answer: 1, why: 'O Console mostra erros e logs de JS.' },
+      { question: 'Para ver se um request retornou 404, use:', options: ['Console', 'Elements', 'Network', 'Sources'], answer: 2, why: 'A aba Network lista requests e seus status.' },
+      { question: 'Para pausar o JS e inspecionar variáveis, use:', options: ['alert()', 'um breakpoint no Sources', 'o Elements', 'recarregar'], answer: 1, why: 'Breakpoints no Sources são o debugger do navegador.' }
+    ],
+    challenge: 'Ligar o que a Faixa 0 ensinou (ler erros + debugger) às DevTools: achar um bug real usando Console, Network e um breakpoint.',
+    book: 'Eloquent JavaScript (depuração); MDN — DevTools; depois siga para o módulo 1.',
+    complements: [official.devtoolsPerf, official.javascript], exampleFile: null
+  }),
   moduleOf({
     number: 1, part: 'fundamentos', id: 'html-semantica', title: 'HTML semântico e contrato do documento', level: 'Fundação',
     objective: 'Construir um documento cuja estrutura, navegação e formulário funcionem antes do CSS e do JavaScript.',

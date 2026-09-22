@@ -242,6 +242,29 @@ body.is-hub .ac-route-map__flow li small {
   line-height: 1.45;
 }
 
+/* Entradas da Rota de domínio agora são links diretos para cada página da
+   trilha: herdam o texto, ganham realce no hover e um alvo de clique amplo. */
+body.is-hub .ac-route-map__link {
+  display: block;
+  margin: -.2rem -.4rem;
+  padding: .2rem .4rem;
+  border-radius: var(--radius-sm);
+  color: inherit;
+  text-decoration: none;
+  transition: background-color .15s ease;
+}
+
+body.is-hub .ac-route-map__link:hover,
+body.is-hub .ac-route-map__link:focus-visible {
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  outline: none;
+}
+
+body.is-hub .ac-route-map__link:hover strong,
+body.is-hub .ac-route-map__link:focus-visible strong {
+  color: var(--accent);
+}
+
 body.is-hub .ac-route-map > p {
   margin: 0;
   padding-top: var(--space-3);
@@ -370,6 +393,26 @@ body.is-hub .nav-link:hover,
 body.is-hub .nav-link.active,
 body.is-hub .nav-link[aria-current="page"] {
   color: var(--accent);
+}
+
+/* Grupo "Páginas": links diretos para cada página da trilha, distintos das
+   âncoras internas — ficam sempre à mão na barra fixa, sem rolar o corpo. */
+body.is-hub .nav-group--pages {
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+}
+
+body.is-hub .nav-group--pages .nav-group-label {
+  color: var(--text-1);
+}
+
+body.is-hub .nav-link--page {
+  color: var(--text-2);
+}
+
+body.is-hub .nav-link--page .nav-link__ext {
+  margin-left: .35em;
+  color: var(--accent);
+  font-size: .9em;
 }
 
 body.is-hub .nav-scroll-btn {

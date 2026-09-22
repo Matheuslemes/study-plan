@@ -27,6 +27,12 @@ export const GUIAS_TRILHA = {
     objetivos: ['Reconhecer padrões antes de codificar', 'Escolher estruturas por custo e semântica', 'Explicar solução e trade-offs sob limite de tempo'],
     criterios: ['Resolve problema médio em até 40 minutos', 'Explica tempo e espaço sem consultar', 'Implementa trie, prefix sum e binary search', 'Usa equals, hashCode e Comparator corretamente', 'Apresenta contraexemplo quando greedy não funciona']
   },
+  aieng: {
+    nome: 'Engenharia Assistida por IA',
+    prerequisitos: ['Fazer engenharia sem IA (código, testes, revisão, Git)', 'Ler um diff e escrever spec/teste', 'Métricas de entrega (DORA) em nível prático'],
+    objetivos: ['Usar a IA como amplificador que se verifica, não como oráculo', 'Dirigir por spec e contexto e revisar por intenção e risco', 'Tratar feature de IA como software: eval, regressão e governança'],
+    criterios: ['Escreve spec executável e mantém o teste (oráculo) fora do que a IA gera sozinha', 'Verifica a saída com testes e checa dependências alucinadas antes de aceitar', 'Mede uma feature de IA com golden dataset e detecta regressão de prompt', 'Mede impacto real (throughput e estabilidade), não velocidade percebida', 'Contém prompt injection e agência de ferramentas e não vaza segredos em prompts']
+  },
   git: {
     nome: 'Git & Versionamento',
     prerequisitos: ['Terminal e sistema de arquivos', 'Editor de código configurado', 'Um projeto pequeno para versionar'],
@@ -98,6 +104,12 @@ export const GUIAS_TRILHA = {
     prerequisitos: ['Extratos e gastos dos últimos três meses', 'Renda líquida conhecida', 'Uma hora mensal reservada para revisão'],
     objetivos: ['Controlar fluxo de caixa e risco', 'Construir reserva e investir com critério', 'Planejar transição profissional com segurança'],
     criterios: ['Fecha orçamento mensal sem valor desconhecido', 'Mantém reserva com meta e prazo', 'Compara investimento por risco, liquidez e custo', 'Calcula preço e margem de serviço', 'Documenta plano financeiro de transição']
+  },
+  fundamentos: {
+    nome: 'Fundamentos de Computação (Faixa 0)',
+    prerequisitos: ['Saber usar um computador (abrir programas e arquivos)', 'Aritmética escolar', 'Nenhuma programação prévia'],
+    objetivos: ['Explicar como a máquina conta, guarda dados e roda programas', 'Pensar um problema em passos e depurar com método', 'Operar terminal, IDE, debugger e Git básico'],
+    criterios: ['Acerta o quiz objetivo de cada módulo', 'Explica bit/byte, encoding, float e memória sem jargão', 'Narra o caminho da URL à página e isola onde falha', 'Rastreia a execução de um trecho na mão', 'Depura com breakpoint (não só com print) e versiona no primeiro repositório']
   },
   treino: {
     nome: 'Treino Híbrido',

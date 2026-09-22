@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Algoritmos e Estruturas de Dados — do básico ao extremo</title>
+  <meta name="description" content="Academia de Algoritmos e Estruturas de Dados: análise, estruturas, grafos, os quatro paradigmas e a fronteira (randomizados, streaming, NP-completude, aproximação), com exemplos executáveis e verificados.">
+  <meta property="og:title" content="Algoritmos e Estruturas de Dados — do básico ao extremo">
+  <meta property="og:description" content="Do custo assintótico à fronteira, com corretude verificável e exemplos que rodam.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/dsa">
+  <meta name="twitter:card" content="summary">
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css?v=redesign-33" rel="stylesheet">
+
+  <link href="../assets/css/tracks-palette.css?v=redesign-33" rel="stylesheet" /><link href="../assets/css/base.css?v=redesign-33" rel="stylesheet">
+
+  <link href="../assets/css/hub.css?v=redesign-33" rel="stylesheet" /><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/dsa">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
+</head>
+<body class="track-page is-hub" data-track="dsa">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="track-hero-page ac-hub-hero">
+    <div class="container ac-hero-layout">
+      <div class="ac-hero-copy">
+        <div class="hero-label">Trilha transversal · Algoritmos e ED · 3×/sem · 40min</div>
+        <h1 class="track-title"><span class="ac-title-nowrap">Algoritmos e</span> Estruturas de Dados</h1>
+        <p class="track-lead">A trilha que o cronograma executa três vezes por semana, agora com academia própria:
+          da análise de custo à fronteira de pesquisa, com corretude verificável e exemplos que rodam.</p>
+        <div class="track-badge-set" aria-label="Principais temas">
+          <span>Complexidade</span>
+          <span>Estruturas</span>
+          <span>Grafos</span>
+          <span>Backtracking</span>
+          <span>Guloso</span>
+          <span>Programação dinâmica</span>
+          <span>Randomizados</span>
+          <span>NP-completude</span>
+        </div>
+      </div>
+
+      <aside class="ac-route-map" aria-label="Percurso da academia de algoritmos">
+        <div class="ac-route-map__header">
+          <span>Do básico ao extremo</span>
+          <strong>Cada parte usa as estruturas e provas construídas antes.</strong>
+        </div>
+        <ol>
+          <li><b>00</b><div><strong>Módulo 0</strong><small>Da Faixa 0: crescimento, contar passos, recursão.</small></div></li>
+          <li><b>01</b><div><strong>Fundamentos</strong><small>Custo, arrays, hashing, listas, busca.</small></div></li>
+          <li><b>02</b><div><strong>Estruturas</strong><small>Árvores, BST, heaps, tries, union-find.</small></div></li>
+          <li><b>03</b><div><strong>Grafos</strong><small>Travessia, topológica, caminhos, MST, fluxo.</small></div></li>
+          <li><b>04</b><div><strong>Paradigmas</strong><small>Backtracking, D&C, guloso, DP.</small></div></li>
+          <li><b>05</b><div><strong>Fronteira</strong><small>Randomizados, sketches, NP, aproximação.</small></div></li>
+        </ol>
+        <p>
+          <span><strong data-ac-count="modules">25</strong>módulos</span>
+          <span><strong data-ac-count="exercises">75</strong>exercícios</span>
+          <span><strong data-ac-count="projects">3</strong>entregas</span>
+        </p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="sitenav" aria-label="Navegação da trilha Algoritmos">
+    <div class="container">
+      <div class="sitenav-top">
+        <a class="sitenav-brand" href="./dsa.html">DSA Academy <span>do básico ao extremo</span></a>
+        <a class="nav-back" href="../index.html">← Dashboard</a>
+        <div class="sitenav-top-right">
+          <input class="search-box" id="searchInput" type="search" aria-label="Buscar nesta trilha"
+            placeholder="Buscar nesta trilha...">
+        </div>
+      </div>
+    </div>
+    <div class="sitenav-bar-outer">
+      <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">‹</button>
+      <div class="sitenav-bar-inner" id="navSectionsBar">
+        <div class="nav-group">
+          <span class="nav-group-label">Contrato</span>
+          <a class="nav-link" href="#resumo">01 · Resumo Executivo</a>
+          <a class="nav-link" href="#contrato">02 · Entrada e saída</a>
+          <a class="nav-link" href="#academia-dsa">03 · Academia</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Engenharia</span>
+          <a class="nav-link" href="#perfil">04 · Perfil</a>
+          <a class="nav-link" href="#decisoes">05 · Decisões</a>
+          <a class="nav-link" href="#roadmap">06 · Roadmap</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Evidência</span>
+          <a class="nav-link" href="#projeto">07 · Projeto</a>
+          <a class="nav-link" href="#referencias">08 · Referências</a>
+          <a class="nav-link" href="#plano-global">09 · Plano global</a>
+        </div>
+      </div>
+      <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">›</button>
+    </div>
+  </nav>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="main">
+      <aside class="sidebar">
+        <div class="sidebar-group">
+          <div class="sidebar-label">Contrato</div>
+          <a href="#resumo">1. Resumo Executivo</a>
+          <a href="#contrato">2. Entrada, resultado e gate</a>
+          <a href="#academia-dsa">3. Academia em seis partes</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Engenharia</div>
+          <a href="#perfil">4. Perfil de saída</a>
+          <a href="#decisoes">5. Mapa de decisões</a>
+          <a href="#roadmap">6. Roadmap de execução</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Evidência</div>
+          <a href="#projeto">7. Produto evolutivo</a>
+          <a href="#referencias">8. Referências técnicas</a>
+          <a href="#plano-global">9. Roadmap das 12 fases</a>
+        </div>
+      </aside>
+
+      <div class="content" id="trackMain">
+        <section id="resumo" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Resumo Executivo</h2>
+              <p class="section-subtitle">Metade da entrevista sênior é algoritmo; o plano tinha System Design para a outra metade e nada para esta.</p>
+            </div>
+            <span class="section-badge">Visão geral</span>
+          </div>
+          <div class="doc-hero-card">
+            <div>
+              <p class="lead">Você começa pela análise de custo e pelas estruturas lineares; sobe por árvores, heaps
+                e grafos; domina os quatro paradigmas de projeto (backtracking, dividir e conquistar, guloso e
+                programação dinâmica); e termina na fronteira — randomizados, streaming, NP-completude e aproximação.</p>
+              <p>Cada módulo parte de um problema real (timeout, OOM, rota errada, colisão adversária), explica o
+                mecanismo e o custo, e cobra <strong>corretude verificável</strong> — não "passou no teste".</p>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-pill"><span data-ac-count="modules">25</span><small>Módulos técnicos</small></div>
+              <div class="metric-pill"><span data-ac-count="parts">6</span><small>Partes progressivas</small></div>
+              <div class="metric-pill"><span data-ac-count="exercises">75</span><small>Exercícios</small></div>
+              <div class="metric-pill"><span data-ac-count="projects">3</span><small>Entregas encadeadas</small></div>
+            </div>
+          </div>
+          <div class="doc-grid-4 mt-3">
+            <article class="mini-card"><strong>Analisar</strong><span>Big O, amortizado e recorrências — prever a escala antes de rodar.</span></article>
+            <article class="mini-card"><strong>Estruturar</strong><span>Escolher a estrutura pelo custo de cada operação, não por hábito.</span></article>
+            <article class="mini-card"><strong>Projetar</strong><span>D&C, guloso e DP — e provar a corretude, não só passar no teste.</span></article>
+            <article class="mini-card"><strong>Ir à fronteira</strong><span>Randomizados, sketches, NP e aproximação com garantia.</span></article>
+          </div>
+        </section>
+
+        <section id="contrato" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Contrato de entrada, resultado e conclusão</h2>
+              <p class="section-subtitle">Use esta régua antes de começar e antes de declarar domínio.</p>
+            </div>
+            <span class="section-badge">Perfil A</span>
+          </div>
+          <div class="doc-grid-2">
+            <article>
+              <span>01 · Entrada</span>
+              <h3>Pré-requisitos</h3>
+              <ul class="doc-list">
+                <li>Escrever e depurar código em uma linguagem (Python/Java).</li>
+                <li>Recursão e laços; nenhuma teoria formal prévia.</li>
+                <li>Disposição para provar corretude e custo, não só testar.</li>
+              </ul>
+            </article>
+            <article>
+              <span>02 · Resultado</span>
+              <h3>Objetivos</h3>
+              <ul class="doc-list">
+                <li>Analisar custo e escolher a estrutura pelo padrão de acesso.</li>
+                <li>Escolher o paradigma pela estrutura do problema e provar a corretude.</li>
+                <li>Decidir entre exato, aproximado e probabilístico com garantia.</li>
+              </ul>
+            </article>
+            <article>
+              <span>03 · Gate</span>
+              <h3>Critérios de conclusão</h3>
+              <ul class="doc-list">
+                <li>Concluir 25 módulos e três entregas encadeadas.</li>
+                <li>Corretude verificada por teste diferencial contra força bruta.</li>
+                <li>Manter evidência reproduzível e executar revisão D30.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="academia-dsa" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Academia de Algoritmos em 25 módulos, com o Módulo 0 de ponte</h2>
+              <p class="section-subtitle">Cinco partes curriculares e uma avaliação ligam análise, estruturas, grafos, paradigmas e fronteira.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="modules">25</b> módulos</span>
+          </div>
+          <p class="lead">Cada módulo parte de um problema real, explica o mecanismo e o custo, contrapõe uma
+            abordagem frágil a uma defensável e termina com exercícios de corretude verificável e perguntas de entrevista.</p>
+          <div class="ac-part-grid" id="dsaAcademyGrid" aria-live="polite" data-academy-grid></div>
+        </section>
+
+        <section id="perfil" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Perfil de saída: engenheiro que escolhe e prova</h2>
+              <p class="section-subtitle">Senioridade em algoritmos aparece na decisão de custo e na prova, não em decorar soluções.</p>
+            </div>
+            <span class="section-badge">Jr → Principal</span>
+          </div>
+          <div class="table-responsive">
+            <table class="doc-table">
+              <thead><tr><th>Capacidade</th><th>Resultado observável</th><th>Evidência</th></tr></thead>
+              <tbody>
+                <tr><td>Análise</td><td>Prevê a escala pelo custo assintótico e amortizado.</td><td>Complexidade justificada e medida.</td></tr>
+                <tr><td>Estruturas</td><td>Escolhe a estrutura pelo custo de cada operação.</td><td>Solução correta com casos de borda.</td></tr>
+                <tr><td>Grafos</td><td>Modela o problema como grafo e escolhe a travessia.</td><td>Algoritmo certo para o tipo de peso.</td></tr>
+                <tr><td>Paradigmas</td><td>Escolhe D&C, guloso ou DP e prova a corretude.</td><td>Prova por troca/indução e medição.</td></tr>
+                <tr><td>Fronteira</td><td>Decide entre exato, aproximado e probabilístico.</td><td>Garantia (erro/razão) declarada.</td></tr>
+                <tr><td>Decisão</td><td>Escolhe a técnica pela restrição real e comunica o trade-off.</td><td>Análise, medição e limite conhecido.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="decisoes" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Faça a pergunta antes de escolher o algoritmo</h2>
+              <p class="section-subtitle">A técnica defensável começa pela estrutura do problema, não pelo hábito.</p>
+            </div>
+            <span class="section-badge">Mapa de decisão</span>
+          </div>
+          <div class="ac-decision-list">
+            <article><span>Acesso</span><h3>Qual operação domina?</h3><p>Índice, ponteiro, prioridade, prefixo ou ordem decidem entre array, lista, heap e árvore.</p></article>
+            <article><span>Estrutura</span><h3>Há subestrutura ou sobreposição?</h3><p>Subestrutura ótima sem sobreposição é dividir e conquistar; com sobreposição, é DP.</p></article>
+            <article><span>Prova</span><h3>O guloso é correto ou só parece?</h3><p>Sem troca de argumento ou contraexemplo, guloso é chute que às vezes acerta.</p></article>
+            <article><span>Viabilidade</span><h3>O exato é viável?</h3><p>Se é NP-difícil, a saída é aproximação, heurística ou parâmetro fixo — com garantia declarada.</p></article>
+          </div>
+        </section>
+
+        <section id="roadmap" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Roadmap de execução</h2>
+              <p class="section-subtitle">Uma sequência real em que cada parte usa as estruturas e provas produzidas antes.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="modules">25</b> módulos</span>
+          </div>
+          <ol class="ac-roadmap">
+            <li><b>0.1–0.4</b><div><strong>Módulo 0 — da Faixa 0 aos algoritmos</strong><span>Intuição de crescimento, contar operações, recursão do zero e escolher a estrutura.</span></div></li>
+            <li><b>01–05</b><div><strong>Fundamentos</strong><span>Custo, arrays e ponteiros, hashing, listas, ordenação e busca.</span></div></li>
+            <li><b>06–10</b><div><strong>Estruturas hierárquicas</strong><span>Árvores, BST, heaps, tries e union-find.</span></div></li>
+            <li><b>11–15</b><div><strong>Grafos</strong><span>Travessia, topológica, caminhos mínimos, MST e fluxo.</span></div></li>
+            <li><b>16–20</b><div><strong>Paradigmas</strong><span>Backtracking, dividir e conquistar, guloso e DP.</span></div></li>
+            <li><b>21–25</b><div><strong>Fronteira</strong><span>Randomizados, streaming, persistentes, NP-completude e aproximação.</span></div></li>
+          </ol>
+        </section>
+
+        <section id="projeto" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Um caderno, três entregas acumuladas</h2>
+              <p class="section-subtitle">Cada etapa evolui o mesmo repositório de soluções, com medição e prova.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="projects">3</b> entregas</span>
+          </div>
+          <div class="ac-project-list" aria-label="Encadeamento das entregas">
+            <article><b>01</b><strong>Caderno de padrões</strong><span>Um padrão por técnica, com template.</span></article>
+            <i aria-hidden="true">→</i>
+            <article><b>02</b><strong>Resolvedor com medição</strong><span>Teste diferencial e curva de tempo.</span></article>
+            <i aria-hidden="true">→</i>
+            <article><b>03</b><strong>Projeto de fronteira</strong><span>Sketch/aproximação com garantia.</span></article>
+          </div>
+          <p class="ac-source-link"><a href="./dsa/avaliacao.html#projetos">Abrir entregas e critérios de aceite →</a></p>
+        </section>
+
+        <section id="referencias" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Referências técnicas</h2>
+              <p class="section-subtitle">Fontes abertas e canônicas em cada módulo; os clássicos ficam como aquisição recomendada.</p>
+            </div>
+            <span class="section-badge">Livre</span>
+          </div>
+          <div class="callout accent-orange">
+            <h3>Os clássicos de DSA não estão no acervo local — as referências são abertas</h3>
+            <p>Cada módulo cita fontes livres e canônicas; <strong>CLRS</strong> (Cormen et al.) e
+              <strong>The Algorithm Design Manual</strong> (Skiena) entram como aquisição recomendada.</p>
+          </div>
+          <div class="ac-navigation">
+            <a href="https://jeffe.cs.illinois.edu/teaching/algorithms/" target="_blank" rel="noopener noreferrer">Jeff Erickson — Algorithms (livro completo) →</a>
+            <a href="https://cses.fi/book/book.pdf" target="_blank" rel="noopener noreferrer">Competitive Programmer’s Handbook →</a>
+            <a href="https://algs4.cs.princeton.edu/home/" target="_blank" rel="noopener noreferrer">Sedgewick &amp; Wayne — Algorithms 4ª ed →</a>
+            <a href="https://cp-algorithms.com/" target="_blank" rel="noopener noreferrer">CP-Algorithms →</a>
+          </div>
+          <p class="ac-source-link"><a href="./dsa/fronteira.html">Abrir a parte Fronteira e os exemplos executáveis →</a></p>
+        </section>
+
+        <section id="plano-global" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Algoritmos nas 12 fases do plano</h2>
+              <p class="section-subtitle">Progresso, evidência e revisão usam o mesmo estado do dashboard.</p>
+            </div>
+            <span class="section-badge">Plano integrado</span>
+          </div>
+          <div id="phaseRoadmap"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="footer-row">
+      <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
+      <div class="footer-pills">
+        <span class="footer-pill green">Complexidade</span>
+        <span class="footer-pill orange">Grafos</span>
+        <span class="footer-pill blue">Programação dinâmica</span>
+        <span class="footer-pill pink">Fronteira</span>
+      </div>
+    </div>
+    <p><strong>Algoritmos e Estruturas de Dados</strong> · corretude, custo e evidência.</p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js?v=redesign-33"></script>
+  <script type="module" src="../assets/js/pages/hub.js?v=redesign-33"></script>
+</body>
+</html>

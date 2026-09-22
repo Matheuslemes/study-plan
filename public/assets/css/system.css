@@ -329,6 +329,39 @@
   color: var(--text3);
 }
 
+.biblio-nota {
+  display: block;
+  margin-top: .2rem;
+  font-size: .72rem;
+  line-height: 1.35;
+  color: var(--text2);
+  border-left: 2px solid var(--border-strong);
+  padding-left: .5rem;
+}
+
+.biblio-alerta {
+  display: flex;
+  gap: .4rem;
+  align-items: flex-start;
+  margin-top: .4rem;
+  font-size: .74rem;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--text1);
+  background: color-mix(in srgb, var(--state-warning) 16%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--state-warning) 55%, transparent);
+  border-left: 3px solid var(--state-warning);
+  border-radius: 6px;
+  padding: .45rem .6rem;
+}
+
+.biblio-alerta::before {
+  content: "⚠";
+  color: var(--state-warning);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
 .biblio-meta {
   display: flex;
   gap: .4rem;

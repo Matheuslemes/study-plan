@@ -198,6 +198,13 @@ export const secAcademy = Object.freeze({
   baseline: `Pesquisa técnica: ${SECURITY_RESEARCH_DATE} · ASVS 5.0.0 · OWASP Top 10:2025`,
   book: 'asvs',
   parts: {
+    base: {
+      index: '0/6', range: 'Módulos 0.1–0.4', page: 'base.html', navLabel: 'Módulo 0',
+      title: 'Módulo 0 — da Faixa 0 à segurança',
+      subtitle: 'Ponte dos fundamentos: a mentalidade de segurança (CIA, superfície de ataque), entrada não confiável e injeção, autenticação × autorização e criptografia básica.',
+      prerequisites: ['Concluir a Trilha 0 (Fundamentos) ou equivalente', 'Ter feito uma aplicação/servidor simples', 'Nenhuma experiência prévia de segurança'],
+      objectives: ['Adotar a mentalidade de segurança (CIA, pensar como atacante, superfície de ataque)', 'Tratar toda entrada como não confiável e evitar injeção (parametrizar, codificar, allowlist)', 'Distinguir autenticação de autorização e o menor privilégio', 'Entender hashing, criptografia e por que nunca inventar a sua']
+    },
     modelagem: {
       index: '1/6', range: 'Módulos 1–5', page: 'modelagem.html', navLabel: 'Modelar confiança',
       title: 'Risco, requisitos e fronteiras de confiança',
@@ -264,6 +271,135 @@ function moduleOf(config) {
 }
 
 export const secModules = Object.freeze([
+  moduleOf({
+    number: '0.1', part: 'base', id: 'base-mentalidade-seguranca', title: 'A mentalidade de segurança (CIA e superfície de ataque)', level: 'Ponte (Faixa 0)',
+    objective: 'Adotar a mentalidade de segurança: pensar em confidencialidade, integridade e disponibilidade (CIA), enxergar a superfície de ataque e raciocinar como um atacante — sem nunca atacar sistemas reais.',
+    prerequisites: ['Trilha 0 (como um programa/rede funciona, HTTP)', 'Ter feito uma aplicação ou script simples', 'Nenhuma experiência prévia de segurança'],
+    problem: 'Quem sai da Faixa 0 pensa só no "caminho feliz": o código funciona quando o usuário coopera. Segurança começa quando alguém NÃO coopera — e sem essa mentalidade, o sistema é seguro só por sorte.',
+    concepts: ['CIA (confidencialidade, integridade, disponibilidade)', 'Superfície de ataque', 'Pensar como atacante (abuso, não só uso)', 'Menor privilégio e defesa em profundidade', 'Confiança e fronteiras'],
+    internals: ['Segurança é proteger três coisas: que só quem deve vê (C), que os dados não são adulterados (I) e que o serviço continua no ar (A).', 'A superfície de ataque é tudo por onde uma entrada externa toca o sistema; quanto menor, menos coisas podem dar errado.', 'Pensar como atacante é perguntar "como eu abusaria disto?" para cada entrada, e não só "como o usuário certo usa?".'],
+    useWhen: ['Liste o que proteger (ativos) e contra o quê (CIA) antes de codificar.', 'Reduza a superfície de ataque: menos portas, menos entradas, menos privilégio.', 'Para cada funcionalidade, imagine o abuso, não só o uso.'],
+    avoidWhen: ['Não trate segurança como um item final do checklist.', 'Não confie na entrada nem no "usuário de boa-fé".', 'Não confunda "nunca fomos hackeados" com "estamos seguros".'],
+    contrast: { bad: 'Projetar só o caminho feliz e adicionar segurança "depois", se sobrar tempo.', good: 'Para cada entrada e função, perguntar o que quebra a confidencialidade, a integridade ou a disponibilidade — e mitigar desde o início.' },
+    tradeoffs: ['Mais controles aumentam segurança e o atrito para o usuário.', 'Reduzir a superfície de ataque limita recursos e a flexibilidade.', 'Defesa em profundidade custa esforço e sobrevive a uma camada falhar.'],
+    production: 'Um endpoint "interno" sem autenticação vaza dados porque estava exposto à internet. O exercício mapeia a superfície de ataque e classifica o impacto por CIA.',
+    risks: ['Pensar só no caminho feliz', 'Confiar na entrada do usuário', 'Superfície de ataque grande sem necessidade', 'Achar que "sem incidente" = seguro'],
+    checklist: ['O que preciso proteger e contra qual propriedade (C, I, A)?', 'Qual é a superfície de ataque?', 'Para cada entrada, qual é o abuso possível?', 'Estou aplicando menor privilégio?', 'Há mais de uma camada de defesa?'],
+    interview: [
+      ['Júnior/Pleno', 'O que é a tríade CIA?', 'Confidencialidade (só quem deve acessa), integridade (dados não adulterados) e disponibilidade (serviço no ar) — as três propriedades que a segurança protege.'],
+      ['Sênior/Staff', 'O que significa "pensar como atacante" na prática?', 'Para cada entrada e função, perguntar como ela pode ser abusada (não só como é usada), mapear a superfície de ataque e priorizar por impacto — de forma ética, sem atacar sistemas reais.']
+    ],
+    exercises: [
+      ['Básico', 'Classificar 6 incidentes hipotéticos em qual propriedade da CIA cada um viola.', 'Tabela incidente → C/I/A.'],
+      ['Aplicado', 'Mapear a superfície de ataque de um app simples (entradas, portas, integrações).', 'Lista de pontos de entrada com o abuso imaginado.'],
+      ['Sênior', 'Reprojetar uma funcionalidade reduzindo a superfície de ataque e aplicando menor privilégio.', 'Antes/depois com a justificativa.']
+    ],
+    challenge: 'Pegar uma funcionalidade comum (reset de senha) e listar 3 formas de abuso e a defesa de cada uma.',
+    book: 'Alice and Bob Learn Application Security, cap. 1–2 (mentalidade e CIA).',
+    complements: [official.top10, official.cisa],
+    quiz: [
+      { question: 'O que é a tríade CIA em segurança?', options: ['Confidencialidade, integridade e disponibilidade', 'Criptografia, internet e autenticação', 'Controle, isolamento e auditoria', 'Confiança, identidade e acesso'], answer: 0, why: 'CIA = as três propriedades protegidas: quem vê (C), dados íntegros (I) e serviço no ar (A).' },
+      { question: 'O que é "superfície de ataque"?', options: ['Todos os pontos por onde uma entrada externa pode tocar o sistema', 'A tela de login', 'O antivírus instalado', 'O número de usuários'], answer: 0, why: 'Quanto menor a superfície (menos entradas/portas/privilégios), menos coisas podem ser abusadas.' },
+      { question: 'Qual mentalidade caracteriza segurança?', options: ['Pensar no abuso (como isto pode ser explorado?), não só no uso', 'Confiar que o usuário sempre coopera', 'Adicionar segurança só no fim', 'Supor que sem incidente = seguro'], answer: 0, why: 'Segurança começa quando alguém não coopera; pense como atacante, de forma ética.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.2', part: 'base', id: 'base-entrada-injecao', title: 'Entrada não confiável e injeção', level: 'Ponte (Faixa 0)',
+    objective: 'Entender por que toda entrada é não confiável e como a injeção acontece quando a entrada vira código — e as defesas: parametrizar, codificar a saída e validar por allowlist.',
+    prerequisites: ['Módulo 0.1', 'Saber o que é uma query e HTML', 'Ideia de string e concatenação'],
+    problem: 'O iniciante monta comandos (SQL, HTML, shell) colando a entrada do usuário no meio da string. Quando a entrada contém caracteres especiais, ela deixa de ser dado e vira parte do comando — é a vulnerabilidade nº 1 da web.',
+    concepts: ['Entrada não confiável', 'Injeção (dado que vira código)', 'Parametrização (dado ≠ código)', 'Codificação de saída (anti-XSS)', 'Validação por allowlist'],
+    internals: ['A injeção ocorre quando a entrada muda a ESTRUTURA do comando, não só seu valor (uma aspa "escapa" da string).', 'Parametrizar (query com ?) mantém o comando fixo e trata a entrada como valor inerte — a defesa correta contra SQL injection.', 'Codificar a saída transforma < > em texto, impedindo que a entrada vire uma tag <script> executável (XSS).'],
+    useWhen: ['Sempre parametrize consultas com dados do usuário.', 'Sempre codifique a saída no contexto certo (HTML, atributo, URL).', 'Valide entrada por allowlist (o que é permitido), negando o resto.'],
+    avoidWhen: ['Não concatene entrada do usuário em SQL/HTML/shell.', 'Não confie em "sanitizar" com blacklist (sempre falta um caso).', 'Não valide só no cliente — a defesa é no servidor.'],
+    contrast: { bad: 'Montar "... WHERE name = \'" + nome + "\'" e imprimir a entrada direto no HTML.', good: 'Query parametrizada com ? e saída codificada; a entrada nunca vira estrutura nem script.' },
+    tradeoffs: ['Parametrizar exige usar a API certa e custa quase nada.', 'Codificar depende do contexto de saída (HTML ≠ atributo ≠ URL).', 'Allowlist é mais segura que blacklist e exige saber o conjunto válido.'],
+    production: 'Um campo de busca concatenado permite alterar a consulta e ler dados de outros usuários. O exercício mostra, no exemplo executável, a versão parametrizada neutralizando o mesmo payload.',
+    risks: ['Concatenar entrada em comandos', 'Confiar em blacklist/sanitização caseira', 'Validar só no cliente', 'Esquecer de codificar a saída'],
+    checklist: ['Toda consulta com dado do usuário é parametrizada?', 'A saída é codificada no contexto certo?', 'A entrada é validada por allowlist no servidor?', 'Nenhum comando é montado por concatenação?', 'As defesas se somam (não dependo de uma só)?'],
+    interview: [
+      ['Júnior/Pleno', 'Por que concatenar entrada do usuário em SQL é perigoso?', 'Porque a entrada pode conter caracteres que mudam a estrutura da query (injeção); a defesa é parametrizar, tratando a entrada como dado.'],
+      ['Sênior/Staff', 'Qual a diferença entre parametrizar e "sanitizar" a entrada?', 'Parametrizar separa dado de código de forma estrutural (a defesa correta); sanitizar por blacklist tenta remover o perigoso e quase sempre deixa passar algum caso.']
+    ],
+    exercises: [
+      ['Básico', 'Rodar o exemplo e explicar por que a versão parametrizada neutraliza o payload.', 'Saída do script + explicação de dado vs código.'],
+      ['Aplicado', 'Reescrever uma consulta concatenada para a forma parametrizada.', 'Antes/depois com o parâmetro separado.'],
+      ['Sênior', 'Identificar o contexto de saída (HTML, atributo, URL) e a codificação correta para cada um.', 'Tabela contexto → codificação.']
+    ],
+    challenge: 'Defender por que validação no cliente nunca substitui as defesas no servidor.',
+    book: 'The Tangled Web (entrada/saída na web); Alice and Bob Learn Application Security (injeção e XSS).',
+    complements: [official.top10, official.cheats],
+    exampleFile: '../../examples/security-senior/seguranca-zero.mjs',
+    quiz: [
+      { question: 'O que é uma injeção (ex.: SQL injection)?', options: ['Quando a entrada do usuário vira parte do comando, mudando sua estrutura', 'Um erro de digitação no código', 'Um vírus no servidor', 'Uma falha de rede'], answer: 0, why: 'Injeção acontece quando o dado escapa do lugar de valor e vira código/estrutura.' },
+      { question: 'Qual é a defesa correta contra SQL injection?', options: ['Parametrizar a consulta (a entrada é dado, não texto do SQL)', 'Remover aspas com uma blacklist', 'Validar só no navegador', 'Confiar em usuários logados'], answer: 0, why: 'Parametrizar separa dado de código de forma estrutural; blacklist e validação só no cliente falham.' },
+      { question: 'Para que serve codificar a saída (output encoding)?', options: ['Impedir que a entrada vire uma tag <script> executável (XSS)', 'Acelerar a página', 'Comprimir o HTML', 'Traduzir o texto'], answer: 0, why: 'Codificar < > transforma a entrada em texto visível, não em script — a defesa contra XSS.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.3', part: 'base', id: 'base-autenticacao-autorizacao', title: 'Autenticação × autorização e menor privilégio', level: 'Ponte (Faixa 0)',
+    objective: 'Distinguir autenticação (quem você é) de autorização (o que você pode) e aplicar o menor privilégio; entender senhas, MFA e sessão sem os erros clássicos.',
+    prerequisites: ['Módulo 0.2', 'Ideia de login e sessão', 'Noção de usuário e permissão'],
+    problem: 'O iniciante confunde "logado" com "pode fazer": verifica quem é a pessoa, mas esquece de checar se ela tem permissão para aquela ação — a origem de metade dos vazamentos por controle de acesso quebrado.',
+    concepts: ['Autenticação (quem é) × autorização (o que pode)', 'Menor privilégio', 'Senha, hashing e MFA', 'Sessão e token', 'Controle de acesso quebrado (BOLA/IDOR)'],
+    internals: ['Autenticar prova a identidade; autorizar decide o acesso — são passos distintos e ambos são obrigatórios em cada ação sensível.', 'Senhas nunca são guardadas em texto; guarda-se um hash lento e salgado (bcrypt/argon2), e MFA acrescenta um segundo fator.', 'Um erro comum (IDOR/BOLA) é confiar num id vindo do cliente sem checar se aquele usuário pode acessar aquele recurso.'],
+    useWhen: ['Cheque autorização a cada ação sensível, no servidor, não só no login.', 'Conceda o menor privilégio necessário a cada papel.', 'Use hashing forte para senhas e ofereça MFA.'],
+    avoidWhen: ['Não trate "autenticado" como "autorizado".', 'Não guarde senha em texto nem com hash rápido (MD5/SHA1).', 'Não confie em id/rota do cliente para decidir acesso.'],
+    contrast: { bad: 'Depois do login, liberar qualquer ação e confiar no id que o cliente mandou.', good: 'Verificar, a cada requisição, se AQUELE usuário pode acessar AQUELE recurso, com menor privilégio.' },
+    tradeoffs: ['MFA aumenta segurança e o atrito de login.', 'Menor privilégio dá segurança e mais papéis para manter.', 'Sessões longas são cômodas e ampliam a janela de abuso se vazarem.'],
+    production: 'Um usuário troca o id na URL e acessa a fatura de outro (IDOR), porque o sistema só checava se estava logado. O exercício adiciona a verificação de autorização por recurso.',
+    risks: ['Confundir autenticação com autorização', 'Senha sem hash forte', 'IDOR/BOLA (id do cliente sem checagem)', 'Sessão/token sem expiração'],
+    checklist: ['Autenticação e autorização são passos distintos?', 'Cada ação sensível checa permissão no servidor?', 'Senhas usam hash lento e salgado?', 'Há MFA disponível?', 'O acesso a um recurso valida o dono?'],
+    interview: [
+      ['Júnior/Pleno', 'Qual a diferença entre autenticação e autorização?', 'Autenticação prova quem é o usuário; autorização decide o que ele pode fazer. Estar autenticado não implica estar autorizado.'],
+      ['Sênior/Staff', 'O que é IDOR/BOLA e como preveni-lo?', 'É acessar um recurso trocando um id sem checagem de permissão; previne-se validando, no servidor, se o usuário autenticado tem direito àquele objeto específico.']
+    ],
+    exercises: [
+      ['Básico', 'Classificar 6 verificações como "autenticação" ou "autorização".', 'Tabela com a categoria de cada uma.'],
+      ['Aplicado', 'Descrever como armazenar senhas com segurança e por que MFA ajuda.', 'Explicação com hash lento + salt + segundo fator.'],
+      ['Sênior', 'Corrigir um endpoint vulnerável a IDOR adicionando checagem de autorização por recurso.', 'Antes/depois com a verificação de dono.']
+    ],
+    challenge: 'Explicar por que "o usuário está logado" nunca basta para liberar uma ação sensível.',
+    book: 'Web Security for Developers (autenticação e sessão); OWASP ASVS (controle de acesso).',
+    complements: [official.nistIdentity, official.oauth],
+    quiz: [
+      { question: 'Qual a diferença entre autenticação e autorização?', options: ['Autenticação é quem você é; autorização é o que você pode fazer', 'São sinônimos', 'Autorização vem antes da autenticação', 'Autenticação só existe em APIs'], answer: 0, why: 'Autenticar prova identidade; autorizar decide acesso — ambos, em cada ação sensível.' },
+      { question: 'Como senhas devem ser armazenadas?', options: ['Como um hash lento e salgado (bcrypt/argon2), nunca em texto', 'Em texto puro para facilitar login', 'Com um hash rápido como MD5', 'Criptografadas com uma chave no código'], answer: 0, why: 'Hash lento + salt resiste a força bruta; texto puro e hashes rápidos são inseguros.' },
+      { question: 'O que é IDOR/BOLA (controle de acesso quebrado)?', options: ['Acessar recurso de outro trocando um id, sem checagem de permissão', 'Um erro de rede', 'Uma senha fraca', 'Um tipo de vírus'], answer: 0, why: 'Confiar num id do cliente sem verificar o dono é uma das falhas de acesso mais comuns.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.4', part: 'base', id: 'base-cripto-basica', title: 'Criptografia básica: hashing, HTTPS e "não invente a sua"', level: 'Ponte (Faixa 0)',
+    objective: 'Entender a diferença entre hashing e criptografia, o papel do HTTPS/TLS, o cuidado com segredos fora do código e a regra de ouro: nunca inventar a própria criptografia.',
+    prerequisites: ['Módulo 0.3', 'Ideia de função e de "em trânsito vs em repouso"', 'Noção de senha e chave'],
+    problem: 'O iniciante "protege" dados inventando uma cifra caseira, guarda segredos no código e serve tráfego sem HTTPS. Cada um desses é um erro clássico que anula toda a segurança do resto.',
+    concepts: ['Hashing (mão única) × criptografia (reversível com chave)', 'Simétrica × assimétrica (visão geral)', 'HTTPS/TLS (dados em trânsito)', 'Segredos fora do código', 'Não invente a sua criptografia'],
+    internals: ['Hash é mão única (verificar senha, checar integridade); criptografia é reversível com a chave certa (proteger o conteúdo).', 'TLS/HTTPS protege os dados EM TRÂNSITO contra escuta e adulteração; não substitui proteger os dados EM REPOUSO.', 'Criptografia é difícil de acertar: use bibliotecas revisadas e padrões (AES, TLS), nunca um algoritmo próprio.'],
+    useWhen: ['Use hash lento e salgado para senhas; hash comum para integridade.', 'Sirva tudo por HTTPS e proteja também os dados em repouso.', 'Guarde segredos em cofre/variáveis de ambiente, fora do repositório.'],
+    avoidWhen: ['Não invente algoritmos de criptografia nem gere chaves de forma amadora.', 'Não coloque chaves/segredos no código ou no Git.', 'Não confunda codificação (Base64) com criptografia.'],
+    contrast: { bad: 'Uma "cifra" caseira (trocar letras) e a chave da API commitada no repositório.', good: 'AES/TLS de biblioteca revisada, senhas com hash lento e segredos num cofre fora do código.' },
+    tradeoffs: ['Criptografar em repouso protege e adiciona gestão de chaves.', 'HTTPS custa certificado/config e é inegociável hoje.', 'Cofre de segredos é mais seguro e exige integração.'],
+    production: 'Uma chave de API vazou porque estava no repositório, e o tráfego sem HTTPS permitiu interceptação. O exercício move o segredo para variável de ambiente e força HTTPS.',
+    risks: ['Criptografia caseira', 'Segredo no código/Git', 'Tráfego sem HTTPS', 'Confundir Base64/encoding com criptografia'],
+    checklist: ['Senhas usam hash lento e salgado?', 'Todo tráfego é HTTPS?', 'Dados sensíveis em repouso são criptografados?', 'Segredos estão fora do código, num cofre?', 'Estou usando cripto de biblioteca padrão, não caseira?'],
+    interview: [
+      ['Júnior/Pleno', 'Qual a diferença entre hashing e criptografia?', 'Hash é mão única (não dá para reverter; serve para senhas e integridade); criptografia é reversível com a chave (serve para proteger o conteúdo).'],
+      ['Sênior/Staff', 'Por que não se deve inventar a própria criptografia?', 'Porque acertar cripto é extremamente difícil e erros sutis a quebram; usam-se algoritmos e bibliotecas padrão, revisados pela comunidade (AES, TLS).']
+    ],
+    exercises: [
+      ['Básico', 'Classificar 6 casos entre "usar hash" e "usar criptografia".', 'Tabela caso → hash/criptografia.'],
+      ['Aplicado', 'Mover um segredo do código para variável de ambiente/cofre e explicar o ganho.', 'Antes/depois com o segredo fora do repositório.'],
+      ['Sênior', 'Explicar o que HTTPS protege e o que ele NÃO protege (dados em repouso).', 'Meia página distinguindo trânsito e repouso.']
+    ],
+    challenge: 'Defender por que "usei Base64" não é criptografia — e o que usar no lugar.',
+    book: 'Serious Cryptography (fundamentos); Real-World Cryptography (TLS e uso aplicado).',
+    complements: [official.tls, official.asvs],
+    quiz: [
+      { question: 'Qual a diferença entre hashing e criptografia?', options: ['Hash é mão única; criptografia é reversível com a chave', 'São a mesma coisa', 'Hash é reversível; criptografia não', 'Ambos são reversíveis sem chave'], answer: 0, why: 'Hash serve para senha/integridade (não reverte); criptografia protege conteúdo e reverte com a chave.' },
+      { question: 'O que o HTTPS/TLS protege?', options: ['Os dados em trânsito contra escuta e adulteração', 'Os dados em repouso no banco', 'O código-fonte', 'A senha do servidor'], answer: 0, why: 'TLS protege o transporte; dados em repouso precisam de proteção própria.' },
+      { question: 'Por que "nunca invente a sua própria criptografia"?', options: ['Cripto é difícil de acertar; use algoritmos/bibliotecas padrão revisados', 'Porque é ilegal', 'Porque é mais lento', 'Porque ocupa muito espaço'], answer: 0, why: 'Erros sutis quebram cifras caseiras; use AES/TLS de bibliotecas revisadas.' }
+    ]
+  }),
   moduleOf({
     number: 1, part: 'modelagem', id: 'risco-ativos-controles', title: 'Risco, ativos e controles', level: 'Fundação',
     objective: 'Modelar ativos, impactos, atores e controles de um fluxo e justificar a prioridade com evidência.',

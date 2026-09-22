@@ -189,6 +189,23 @@ export const pythonAcademy = Object.freeze({
   baseline: 'Exemplos em Python 3.12+ · corrente 3.14 · baseline completo na avaliação',
   book: 'Fluent Python (Ramalho) como espinha dorsal da linguagem; obras específicas por tema',
   parts: {
+    base: {
+      index: '0/6',
+      range: 'Módulos 0.1–0.4',
+      title: 'Módulo 0 — da Faixa 0 ao Python',
+      subtitle: 'Ponte dos fundamentos (memória, ponto flutuante, erros) para o interpretador, tipos e nomes, fluxo/funções e tracebacks.',
+      prerequisites: [
+        'Ter passado pela Faixa 0 (Fundamentos de Computação) ou equivalente.',
+        'Saber usar o terminal e editar arquivos de texto.',
+        'Nenhum conhecimento prévio de Python.'
+      ],
+      objectives: [
+        'Rodar Python pelo REPL e por arquivo, entendendo que é interpretado e que a indentação define blocos.',
+        'Explicar que tudo é objeto e que nomes são referências (`is` vs `==`), e que int não transborda.',
+        'Escrever controle de fluxo, funções e usar list/dict/tuple.',
+        'Ler um traceback e diferenciar SyntaxError de exceção em tempo de execução.'
+      ]
+    },
     fundamentos: {
       index: '1/6',
       range: 'Módulos 1–5',
@@ -298,6 +315,138 @@ export const pythonAcademy = Object.freeze({
 
 export const pythonModules = [
   {
+    number: '0.1', part: 'base', id: 'interpretador-rodar',
+    title: 'Da máquina ao Python: interpretador, REPL e rodar código', level: 'Introdução',
+    objective: 'Executar Python pelo REPL e por arquivo, entendendo que é uma linguagem interpretada e que a indentação define os blocos.',
+    prerequisites: ['Faixa 0: como um programa roda (compilar × interpretar)', 'Terminal básico', 'Python instalado'],
+    problem: 'Quem vem da Faixa 0 sabe que "interpretar executa o código direto", mas não sabe como isso é o Python — nem por que a indentação importa ou o que é o REPL.',
+    concepts: ['Interpretador (CPython)', 'REPL (modo interativo)', 'python arquivo.py', 'Indentação define blocos', 'import e a biblioteca padrão'],
+    internals: ['O CPython lê o código, compila para bytecode em memória e o executa — não há um passo de compilação separado como em Java.', 'A indentação (espaços) NÃO é estética: ela define os blocos; misturar espaços e tabs quebra o programa.', 'O REPL avalia expressão a expressão — ótimo para experimentar antes de escrever um arquivo.'],
+    useWhen: ['Ao testar uma ideia rápida (REPL) antes de escrever um script.', 'Ao rodar qualquer programa Python fora da IDE.'],
+    avoidWhen: ['Não misture espaços e tabs na indentação.', 'Não dependa só do botão Run da IDE sem saber o comando.'],
+    contrast: { bad: 'Copiar código com indentação inconsistente e não entender o IndentationError.', good: 'Indentação consistente (4 espaços) e rodar com `python arquivo.py`.' },
+    tradeoffs: ['Interpretado dá ciclo rápido (edita e roda), ao custo de erros só aparecerem ao executar.', 'O REPL é ótimo para explorar, mas o que vale é versionado num arquivo.'],
+    production: 'Um script "funcionava na minha máquina" e falhava em outra por versão de Python e ambiente diferentes — a lição leva ao venv (ambiente isolado).',
+    risks: ['IndentationError por misturar tabs e espaços.', 'Confundir REPL com arquivo versionado.', 'Depender da versão global de Python.'],
+    checklist: ['Sei rodar código no REPL e por arquivo?', 'Uso indentação consistente (4 espaços)?', 'Sei que o Python compila para bytecode em memória?', 'Sei importar algo da biblioteca padrão?'],
+    interview: [
+      { level: 'Introdução', question: 'Python é compilado ou interpretado?', expected: 'Interpretado: o CPython compila para bytecode em memória e executa direto; não há um binário compilado à parte como em Java.' },
+      { level: 'Introdução', question: 'Por que a indentação importa em Python?', expected: 'Ela define os blocos de código (não é só estética); indentação inconsistente causa IndentationError.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Escrever um ola.py, rodá-lo com `python ola.py` e testar a mesma expressão no REPL.', evidence: 'Os comandos usados e a saída "olá".' },
+      { level: 'Aplicado', task: 'Provocar um IndentationError de propósito e corrigi-lo.', evidence: 'Antes/depois com a explicação do erro.' }
+    ],
+    quiz: [
+      { question: 'Em Python, a indentação:', options: ['é só estética', 'define os blocos de código', 'é opcional', 'substitui os comentários'], answer: 1, why: 'Blocos são delimitados por indentação, não por chaves.' },
+      { question: 'O REPL serve para:', options: ['compilar para binário', 'avaliar expressões interativamente', 'versionar código', 'criar um .exe'], answer: 1, why: 'É o modo interativo: testa expressão a expressão.' },
+      { question: 'Python, ao contrário do Java:', options: ['exige compilar com um comando separado', 'executa o código direto (interpretado)', 'não tem bytecode', 'não roda no terminal'], answer: 1, why: 'O CPython compila para bytecode em memória e executa direto.' }
+    ],
+    challenge: 'Explicar para quem só viu a Faixa 0 por que Python não precisa de um passo de compilação separado como o Java.',
+    book: 'Fluent Python, introdução; docs oficiais (tutorial).',
+    complements: [official.stdtypes, official.venv],
+    exampleFile: null
+  },
+  {
+    number: '0.2', part: 'base', id: 'tipos-nomes-objetos',
+    title: 'Tipos, nomes e objetos: tudo é objeto e nomes são referências', level: 'Introdução',
+    objective: 'Entender que em Python tudo é objeto, que nomes são referências (is vs ==), que int não transborda e que float é aproximado.',
+    prerequisites: ['Módulo 0.1', 'Faixa 0: memória (valor vs referência) e ponto flutuante'],
+    problem: 'Da Faixa 0 vem "valor vs referência"; em Python isso vira "tudo é objeto e nomes apontam para objetos" — e não entender gera bugs de alias e confusão entre `is` e `==`.',
+    concepts: ['Tudo é objeto', 'Nome = referência a um objeto', 'is (identidade) vs == (valor)', 'int sem overflow', 'Mutável (list) vs imutável (tuple/str)'],
+    internals: ['Um nome não "contém" o valor: ele aponta para um objeto (como a referência da Faixa 0); atribuir só reaponta o nome.', 'Dois objetos podem ter o mesmo valor (== True) e identidades diferentes (is False); mutar via um alias muda para todos.', 'int em Python cresce sem limite (não transborda como em linguagens de tipo fixo); float continua aproximado.'],
+    useWhen: ['Ao raciocinar sobre "mudei aqui e mudou lá" (alias).', 'Ao escolher entre estrutura mutável (list) e imutável (tuple).'],
+    avoidWhen: ['Não use `is` para comparar valores (use ==); `is` é para identidade (e para None).', 'Não use estrutura mutável como valor padrão de função.'],
+    contrast: { bad: 'if x is 1000: ... (compara identidade, resultado imprevisível).', good: 'if x == 1000: ... para valor; if x is None: ... para identidade.' },
+    tradeoffs: ['Tipagem dinâmica é flexível, ao custo de erros de tipo só em runtime.', 'Compartilhar referência economiza memória, mas cria alias que pode surpreender.'],
+    production: 'Uma config "copiada" por atribuição (era alias) foi mutada por um módulo e vazou para todos — o clássico bug de referência da Faixa 0, agora em Python.',
+    risks: ['Confundir is com == .', 'Mutar um objeto compartilhado sem querer (alias).', 'Usar list mutável como default de parâmetro.', 'Usar double... digo, esquecer que float é aproximado.'],
+    checklist: ['Sei que nome é referência, não caixa de valor?', 'Uso == para valor e is só para identidade/None?', 'Sei que int não transborda em Python?', 'Sei distinguir mutável de imutável?'],
+    interview: [
+      { level: 'Introdução', question: 'Qual a diferença entre `is` e `==` em Python?', expected: '`==` compara valor (conteúdo); `is` compara identidade (se são o mesmo objeto na memória). Use `is` para None.' },
+      { level: 'Introdução', question: 'O que significa "tudo é objeto" em Python?', expected: 'Todo valor (int, str, função, classe) é um objeto com tipo e identidade; nomes são referências a esses objetos.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Rodar o exemplo python-zero e explicar is vs ==, o int sem overflow e o alias de list.', evidence: 'Notas ligando cada saída ao conceito da Faixa 0.' },
+      { level: 'Aplicado', task: 'Reproduzir um bug de alias (b = a; mutar b) e corrigir com cópia.', evidence: 'Antes/depois mostrando alias vs cópia.' }
+    ],
+    quiz: [
+      { question: 'Para comparar se dois valores são iguais use:', options: ['is', '==', '===', 'equals()'], answer: 1, why: '`==` compara valor; `is` compara identidade.' },
+      { question: 'Em Python, um int muito grande (ex.: 2**100):', options: ['transborda (overflow)', 'vira float', 'é exato, cresce sem limite', 'dá erro'], answer: 2, why: 'int em Python tem precisão arbitrária: não transborda.' },
+      { question: 'Se `b = a` e a é uma lista, então `b.append(1)`:', options: ['não afeta a', 'também altera a (mesmo objeto)', 'copia a lista', 'dá erro'], answer: 1, why: 'a e b são nomes para o MESMO objeto (alias).' }
+    ],
+    challenge: 'Mapear os conceitos da Faixa 0 (memória, valor vs referência, float) para os nomes que têm em Python — e apontar onde o Python difere (int sem overflow).',
+    book: 'Fluent Python, cap. 6 (referências, mutabilidade e igualdade).',
+    complements: [official.datamodel, official.stdtypes],
+    exampleFile: '../../examples/python-senior/python-zero.py'
+  },
+  {
+    number: '0.3', part: 'base', id: 'fluxo-funcoes-estruturas',
+    title: 'Controle de fluxo, funções e estruturas essenciais', level: 'Introdução',
+    objective: 'Escrever condicionais, laços e funções e usar as estruturas built-in (list, dict, tuple, set), traduzindo os "passos" da Faixa 0 em Python.',
+    prerequisites: ['Módulo 0.2', 'Faixa 0: decompor um problema em passos e rastrear a execução'],
+    problem: 'A Faixa 0 ensina a pensar em passos; falta a forma Python — def, for/if, e escolher entre list e dict sem decorar.',
+    concepts: ['if/elif/else', 'for e while, range', 'def, parâmetros e return', 'list, dict, tuple, set', 'List comprehension básica'],
+    internals: ['Uma função (def) recebe argumentos e devolve um valor (ou None) — a decomposição da Faixa 0 virando unidade reutilizável.', 'list é sequência ordenada e mutável; dict mapeia chave→valor com acesso O(1); tuple é imutável; set não tem duplicatas.', 'Comprehension é a forma pythônica de construir uma lista a partir de outra: [x*2 for x in nums].'],
+    useWhen: ['Ao transformar um algoritmo (passos) em código.', 'Ao escolher a estrutura pelo acesso (índice → list, chave → dict).'],
+    avoidWhen: ['Não use list quando precisa de busca por chave (use dict).', 'Não repita lógica; extraia uma função.'],
+    contrast: { bad: 'Procurar um item percorrendo uma list toda a cada consulta.', good: 'Usar um dict para acesso direto por chave (O(1)).' },
+    tradeoffs: ['dict dá acesso rápido por chave ao custo de memória; list é simples e ordenada.', 'Comprehension é concisa, mas pode virar ilegível se fizer demais.'],
+    production: 'Uma busca linear numa list dentro de um laço deixou um relatório O(n²); trocar por um dict de índice resolveu o gargalo.',
+    risks: ['Off-by-one em range.', 'Escolher a estrutura errada (list onde precisa de dict).', 'Esquecer o return.', 'Comprehension ilegível.'],
+    checklist: ['Sei escrever if/for/while e uma função com return?', 'Escolho list/dict/tuple/set pela necessidade?', 'Uso dict para acesso por chave?', 'Meus laços cobrem o intervalo certo?'],
+    interview: [
+      { level: 'Introdução', question: 'Quando usar dict em vez de list?', expected: 'Quando o acesso é por chave (busca/associação): dict dá O(1); procurar numa list é O(n).' },
+      { level: 'Introdução', question: 'O que uma função retorna se não tem return?', expected: 'None.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Escrever uma função que soma 1..n com um laço e testá-la para n=5 (deve dar 15).', evidence: 'A função e a saída conferida (como em python-zero.soma_ate).' },
+      { level: 'Aplicado', task: 'Trocar uma busca linear em list por um dict de índice e comparar.', evidence: 'Antes/depois com a diferença de acesso.' }
+    ],
+    quiz: [
+      { question: 'Para acesso rápido por chave, use:', options: ['list', 'dict', 'tuple', 'str'], answer: 1, why: 'dict dá acesso O(1) por chave; list é O(n).' },
+      { question: '`range(1, 6)` gera:', options: ['1 a 6', '1 a 5', '0 a 6', '0 a 5'], answer: 1, why: 'O fim é exclusivo: 1,2,3,4,5.' },
+      { question: 'Uma função sem return devolve:', options: ['0', 'None', 'False', 'erro'], answer: 1, why: 'A ausência de return equivale a return None.' }
+    ],
+    challenge: 'Pegar um algoritmo que você rastreou na mão na Faixa 0 e implementá-lo como uma função Python testável.',
+    book: 'Fluent Python, cap. 2–3 (sequências e dicts).',
+    complements: [official.stdtypes, official.itertools],
+    exampleFile: null
+  },
+  {
+    number: '0.4', part: 'base', id: 'tracebacks-erros-debug',
+    title: 'Ler tracebacks, erros e o debugger', level: 'Introdução',
+    objective: 'Diferenciar SyntaxError de exceção em tempo de execução, ler um traceback até a linha culpada e depurar com breakpoint — chegando onde o módulo 1 começa.',
+    prerequisites: ['Módulo 0.3', 'Faixa 0: ler mensagens de erro e usar o debugger'],
+    problem: 'O módulo 1 do Python já assume "leitura de tracebacks"; sem esta ponte, o iniciante entra em pânico com o textão e depura no chute.',
+    concepts: ['SyntaxError vs exceção em runtime', 'Anatomia do traceback (ler de baixo para cima)', 'TypeError, NameError, IndexError, KeyError', 'try/except', 'breakpoint()/pdb e o debugger da IDE'],
+    internals: ['SyntaxError impede o programa de rodar; uma exceção (ex.: TypeError) ocorre durante a execução.', 'O traceback lê-se de baixo para cima: a ÚLTIMA linha diz o tipo e a mensagem da exceção; acima, a cadeia de chamadas e a sua linha culpada.', 'O debugger da Faixa 0 vale aqui: `breakpoint()` (ou a IDE) pausa e deixa inspecionar o estado, melhor que print().'],
+    useWhen: ['Sempre que algo não roda ou lança exceção.', 'Ao investigar um TypeError/KeyError ou valor errado.'],
+    avoidWhen: ['Não confunda SyntaxError com exceção de runtime.', 'Não depure só com print quando o debugger resolve.'],
+    contrast: { bad: 'Ver o traceback, entrar em pânico e mudar código no chute.', good: 'Ler a última linha (tipo + mensagem), achar a sua linha e pôr um breakpoint ali.' },
+    tradeoffs: ['Debugger é preciso, mas exige aprender a ferramenta.', 'print é rápido para casos triviais, some no ruído em casos grandes.'],
+    production: 'Um KeyError intermitente foi resolvido em minutos com um breakpoint condicional que parava só quando a chave faltava — impossível no chute.',
+    risks: ['Ignorar a última linha do traceback.', 'Confundir SyntaxError com exceção.', 'Depender só de print.', 'Capturar exceção genérica (except:) e esconder o bug.'],
+    checklist: ['Sei ler o traceback de baixo para cima?', 'Sei diferenciar SyntaxError de exceção de runtime?', 'Sei pôr um breakpoint e inspecionar variáveis?', 'Reproduzo o erro antes de corrigir?'],
+    interview: [
+      { level: 'Introdução', question: 'Como se lê um traceback do Python?', expected: 'De baixo para cima: a última linha dá o tipo e a mensagem da exceção; acima está a cadeia de chamadas até a sua linha culpada.' },
+      { level: 'Introdução', question: 'Qual a diferença entre SyntaxError e uma exceção como TypeError?', expected: 'SyntaxError impede o código de rodar (erro de sintaxe); TypeError ocorre durante a execução.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Provocar um SyntaxError e depois um TypeError, e diferenciar os dois.', evidence: 'Os dois erros com a explicação de quando cada um ocorre.' },
+      { level: 'Aplicado', task: 'Achar um KeyError/IndexError com o debugger (breakpoint, não print) e apontar a linha no traceback.', evidence: 'Relato do breakpoint, do estado observado e da correção.' }
+    ],
+    quiz: [
+      { question: 'Num traceback do Python, o tipo da exceção aparece:', options: ['na primeira linha', 'na última linha', 'no meio', 'não aparece'], answer: 1, why: 'Lê-se de baixo para cima: a última linha traz tipo e mensagem.' },
+      { question: 'Um SyntaxError acontece:', options: ['durante a execução', 'antes de o código rodar', 'só em produção', 'nunca'], answer: 1, why: 'É detectado ao interpretar, antes de executar.' },
+      { question: 'Para pausar e inspecionar o estado, use:', options: ['muitos print', 'breakpoint() ou o debugger da IDE', 'reiniciar', 'apagar o arquivo'], answer: 1, why: 'O debugger mostra o estado real no ponto exato.' }
+    ],
+    challenge: 'Ligar o que aprendeu na Faixa 0 (ler erros + debugger) ao módulo 1 do Python: reproduzir um bug de dunder/hash e depurá-lo.',
+    book: 'Fluent Python (tracebacks); depois siga para o módulo 1.',
+    complements: [official.stdtypes, official.datamodel],
+    exampleFile: null
+  },
+  {
     number: 1,
     part: 'fundamentos',
     id: 'modelo-de-dados',
@@ -330,7 +479,7 @@ export const pythonModules = [
     challenge: 'Implementar um tipo de domínio (ex.: Vetor N-dimensional) totalmente integrado ao data model: operadores, igualdade, hash, repr, iteração e formatação.',
     book: 'Fluent Python, cap. 1 (data model) e cap. 6 (referências, mutabilidade, igualdade).',
     complements: [official.datamodel, official.pep20],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/modelo_de_dados.py'
   },
   {
     number: 2,
@@ -365,7 +514,7 @@ export const pythonModules = [
     challenge: 'Implementar um agregador de logs que conte, agrupe e ordene eventos usando apenas estruturas idiomáticas e provando a complexidade escolhida.',
     book: 'Fluent Python, cap. 2–3 (sequências, dicts e sets); Python Cookbook, cap. 1.',
     complements: [official.stdtypes, official.itertools],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/estruturas_dados.py'
   },
   {
     number: 3,
@@ -400,7 +549,7 @@ export const pythonModules = [
     challenge: 'Construir uma pequena biblioteca de decorators (timing, retry, cache, rate limit) correta, tipada e testada, com preservação de metadados.',
     book: 'Fluent Python, cap. 7–9 (funções, closures, decorators); Python Cookbook, cap. 9.',
     complements: [official.datamodel, official.pep8],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/decorators.py'
   },
   {
     number: 4,
@@ -435,7 +584,7 @@ export const pythonModules = [
     challenge: 'Modelar um subsistema com dataclasses para dados, Protocols para contratos e composição para comportamento, provando a extensibilidade com um novo tipo.',
     book: 'Fluent Python, cap. 11–14 (interfaces, protocols, herança); Robust Python, cap. 10–12.',
     complements: [official.dataclasses, official.typing],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/oo_idiomatico.py'
   },
   {
     number: 5,
@@ -505,7 +654,7 @@ export const pythonModules = [
     challenge: 'Construir um pipeline de ETL que leia um arquivo grande, transforme e agregue com geradores e itertools, mantendo memória constante e recursos liberados.',
     book: 'Fluent Python, cap. 17 (iteradores/geradores) e cap. 18 (context managers); Cookbook cap. 4.',
     complements: [official.itertools, official.contextlib],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/geradores_context.py'
   },
   {
     number: 7,
@@ -540,7 +689,7 @@ export const pythonModules = [
     challenge: 'Fazer uma revisão de código de um módulo real aplicando o Zen do Python, corrigindo armadilhas e justificando cada mudança de legibilidade.',
     book: 'Effective Python (2ª ed), itens de pythonismo, funções e robustez; PEP 8 e PEP 20.',
     complements: [official.pep8, official.pep20],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/pythonico.py'
   },
   {
     number: 8,
@@ -575,7 +724,7 @@ export const pythonModules = [
     challenge: 'Estruturar um projeto Python publicável com pyproject.toml, lock file, extras opcionais e um build reprodutível no CI.',
     book: 'Complemento: empacotamento é coberto pela Python Packaging User Guide (fonte primária).',
     complements: [official.packaging, official.venv],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/empacotamento.py'
   },
   {
     number: 9,
@@ -610,7 +759,7 @@ export const pythonModules = [
     challenge: 'Construir a suíte de testes de um módulo com pirâmide equilibrada (unidade, integração), fixtures limpas, parametrização e um caso desenvolvido por TDD.',
     book: 'Effective Python, itens de testes; Architecture Patterns with Python, cap. sobre testes.',
     complements: [official.pytest, official.cosmic],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/testes.py'
   },
   {
     number: 10,
@@ -715,7 +864,7 @@ export const pythonModules = [
     challenge: 'Construir um coletor assíncrono que consulte dezenas de endpoints com limite de concorrência, timeout, retry e sem bloquear o event loop.',
     book: 'Using Asyncio in Python (Hattingh) — modelo mental, event loop, Tasks e armadilhas.',
     complements: [official.asyncio, official.httpx],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/asyncio_basico.py'
   },
   {
     number: 13,
@@ -750,7 +899,7 @@ export const pythonModules = [
     challenge: 'Construir um processador de lote paralelo com pool adequado, coleta segura de resultados e erros, limite de concorrência e medição de speedup.',
     book: 'High Performance Python, cap. de concorrência/multiprocessing; Effective Python (concorrência).',
     complements: [official.concurrent, official.multiprocessing],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/paralelismo.py'
   },
   {
     number: 14,
@@ -820,7 +969,7 @@ export const pythonModules = [
     challenge: 'Vetorizar um cálculo de features numéricas de ponta a ponta, provando ganho de tempo e controle de memória contra a versão em laços.',
     book: 'High Performance Python, cap. sobre NumPy e matrizes; complemento NumPy docs.',
     complements: [official.numpy, official.pandas],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/vetorizacao.py'
   },
   {
     number: 16,
@@ -855,7 +1004,7 @@ export const pythonModules = [
     challenge: 'Construir uma automação de ponta a ponta (coleta, transformação e saída) idempotente, com dry-run, validação, log e tratamento dos casos fora do padrão.',
     book: 'Automate the Boring Stuff (Sweigart) — arquivos, regex, planilhas, PDFs, web e e-mail.',
     complements: [official.stdtypes, official.logging],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/automacao.py'
   },
   {
     number: 17,
@@ -890,7 +1039,7 @@ export const pythonModules = [
     challenge: 'Construir um pipeline de dados reprodutível (ingestão, limpeza, agregação, saída) vetorizado, tipado e testado, com controle de memória.',
     book: 'Complemento: pandas é coberto pela documentação oficial; base numérica em High Performance Python.',
     complements: [official.pandas, official.numpy],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/dados_tabela.py'
   },
   {
     number: 18,
@@ -995,7 +1144,7 @@ export const pythonModules = [
     challenge: 'Levar um serviço Python à prontidão de produção: logging estruturado, config e segredos por ambiente, métricas, correlação, verificação de dependências e runbook.',
     book: 'Effective Python (robustez e produção); Architecture Patterns with Python (fronteiras e testes).',
     complements: [official.logging, official.pytest],
-    exampleFile: '../../examples/python-senior/README.md'
+    exampleFile: '../../examples/python-senior/observabilidade.py'
   },
   {
     number: 21,

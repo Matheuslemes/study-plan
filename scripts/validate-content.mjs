@@ -50,11 +50,12 @@ function localTarget(sourceFile, reference) {
 const canonicalIds = Object.keys(TRACK_REGISTRY);
 const expectedIds = [
   'java', 'ia', 'arquitetura', 'python', 'aws', 'devops', 'frontend',
-  'bancos', 'git', 'ingles', 'matematica', 'sec', 'financeiro', 'treino'
+  'bancos', 'dsa', 'git', 'aieng', 'fundamentos', 'ingles', 'matematica',
+  'sec', 'financeiro', 'treino'
 ];
-check(canonicalIds.length === 14, `Registro central deveria conter 14 trilhas; contém ${canonicalIds.length}.`);
+check(canonicalIds.length === 17, `Registro central deveria conter 17 trilhas; contém ${canonicalIds.length}.`);
 check(JSON.stringify(canonicalIds.sort()) === JSON.stringify([...expectedIds].sort()),
-  'O registro central não corresponde aos 14 identificadores canônicos.');
+  'O registro central não corresponde aos 17 identificadores canônicos.');
 check(JSON.stringify(TRACK_ALIASES) === JSON.stringify({
   py: 'python', db: 'bancos', math: 'matematica', fin: 'financeiro'
 }), 'Aliases legados não estão centralizados no mapa esperado.');
@@ -103,7 +104,7 @@ const legacyCurriculumKey = {
 const hubFiles = readdirSync(trailsDir)
   .filter((name) => name.endsWith('.html'))
   .map((name) => join(trailsDir, name));
-check(hubFiles.length === 14, `Esperados 14 hubs; encontrados ${hubFiles.length}.`);
+check(hubFiles.length === 17, `Esperados 17 hubs; encontrados ${hubFiles.length}.`);
 
 const forbiddenLegacyClasses = new Set([
   'section', 'hero', 'grid2', 'ia-hero-map', 'ia-module-grid', 'ia-module-card',
@@ -140,12 +141,16 @@ for (const file of hubFiles) {
 }
 
 const academyIds = canonicalIds.filter((id) => TRACK_REGISTRY[id].academy);
-check(academyIds.length === 13, `Esperadas 13 Academias e Treino como registro; encontradas ${academyIds.length}.`);
-const actionVerb = /^(aplicar|analisar|auditar|automatizar|avaliar|bloquear|calcular|comparar|comunicar|conduzir|configurar|construir|criar|definir|demonstrar|diagnosticar|dimensionar|documentar|escolher|escrever|executar|explicar|implementar|integrar|interpretar|investigar|mapear|medir|modelar|operar|otimizar|planejar|produzir|projetar|proteger|reduzir|relacionar|reproduzir|resolver|responder|selecionar|validar|verificar|versionar)\b/i;
+check(academyIds.length === 16, `Esperadas 16 Academias (todas as trilhas menos Treino); encontradas ${academyIds.length}.`);
+// Verbos mensuráveis/observáveis aceitos no início de um objetivo de competência.
+// Deliberadamente NÃO inclui verbos vagos ("entender", "dominar", "raciocinar",
+// "enxergar"): o objetivo tem de descrever uma ação verificável, não um estado mental.
+const actionVerb = /^(alinhar|alocar|analisar|aplicar|auditar|automatizar|avaliar|bloquear|calcular|classificar|comparar|compor|comunicar|conduzir|conectar|configurar|construir|conter|correlacionar|criar|decidir|defender|definir|demonstrar|derivar|desenhar|descobrir|detectar|diagnosticar|dimensionar|distinguir|documentar|entregar|escalar|escolher|escrever|especificar|estender|estruturar|evoluir|executar|explicar|extrair|formular|garantir|gerar|implantar|implementar|incorporar|instrumentar|integrar|interpretar|investigar|isolar|ler|liderar|ligar|localizar|manipular|manter|mapear|medir|modelar|narrar|navegar|obter|operar|ordenar|organizar|otimizar|paralelizar|percorrer|perfilar|planejar|processar|produzir|projetar|proteger|publicar|quebrar|reconhecer|reduzir|relacionar|reproduzir|resolver|responder|revisar|segmentar|selecionar|substituir|transformar|tratar|treinar|trocar|usar|validar|verificar|versionar)\b/i;
 let academyShellCount = 0;
 let moduleCount = 0;
 let bookCount = 0;
 let measurableCount = 0;
+let seniorObjectiveCount = 0;
 const allBookPaths = new Set();
 
 for (const id of academyIds) {
@@ -158,11 +163,17 @@ for (const id of academyIds) {
   const assessment = data[config.exports.assessment] || {};
   const projects = data[config.exports.projects] || assessment.projects || [];
 
+  // A Faixa 0 (Fundamentos) é o degrau pré-senioridade: tem, por desenho, uma
+  // escada de rubricas mais curta e menos critérios de conclusão que as 15
+  // academias sênior. As demais mantêm o piso rígido (4 rubricas / 5 critérios).
+  const isFaixaZero = id === 'fundamentos';
+  const minLevels = isFaixaZero ? 3 : 4;
+  const minCompletion = isFaixaZero ? 4 : 5;
   check(Boolean(academy?.parts), `${id}: academy.parts ausente.`);
   check(Array.isArray(modules) && modules.length > 0, `${id}: modules[] ausente ou vazio.`);
-  check(Array.isArray(assessment.levels) && assessment.levels.length >= 4,
+  check(Array.isArray(assessment.levels) && assessment.levels.length >= minLevels,
     `${id}: rubricas de senioridade insuficientes.`);
-  check(Array.isArray(assessment.completion) && assessment.completion.length >= 5,
+  check(Array.isArray(assessment.completion) && assessment.completion.length >= minCompletion,
     `${id}: critérios de conclusão insuficientes.`);
 
   const parts = Object.keys(academy?.parts || {});
@@ -189,16 +200,34 @@ for (const id of academyIds) {
     check(/<main\b[^>]*id="conteudo"/i.test(html), `${id}/${page}: landmark principal inconsistente.`);
   });
 
+  // Numeração: os módulos de ponte (Módulo 0) usam 0.x e vêm antes da sequência
+  // principal; os módulos de competência são inteiros 1..N em ordem. Validamos as
+  // duas coisas separadamente, em vez de exigir number === index + 1 (que quebra
+  // assim que uma trilha ganha um Módulo 0).
+  let expectedNumber = 1;
   modules.forEach((module, index) => {
     moduleCount += 1;
-    check(module.number === index + 1, `${id}: módulo fora de sequência ${module.id}.`);
+    const numeric = Number(module.number);
+    const isBridge = Number.isFinite(numeric) && numeric > 0 && numeric < 1;
+    if (isBridge) {
+      check(/^0\.\d+$/.test(String(module.number)),
+        `${id}: módulo de ponte com número inválido ${module.number} (${module.id}).`);
+    } else {
+      check(numeric === expectedNumber, `${id}: módulo fora de sequência ${module.id}.`);
+      expectedNumber += 1;
+    }
     check(Boolean(module.id), `${id}: módulo ${index + 1} sem id.`);
     check(curricularParts.has(module.part), `${id}: módulo ${module.id} usa parte inválida ${module.part}.`);
     ['title', 'objective', 'problem', 'prerequisites'].forEach((field) => check(
       Boolean(module[field]) && (!Array.isArray(module[field]) || module[field].length > 0),
       `${id}: módulo ${module.id} sem ${field}.`
     ));
-    if (actionVerb.test(module.objective || '')) measurableCount += 1;
+    // O verbo mensurável é cobrado dos módulos de competência; o Módulo 0 (ponte
+    // conceitual) é avaliado por quiz objetivo, não pelo verbo do objetivo.
+    if (!isBridge) {
+      seniorObjectiveCount += 1;
+      if (actionVerb.test(module.objective || '')) measurableCount += 1;
+    }
     check((module.exercises || []).length > 0, `${id}: módulo ${module.id} sem prática verificável.`);
     check((module.interview || module.interviews || []).length > 0,
       `${id}: módulo ${module.id} sem pergunta de defesa.`);
@@ -216,17 +245,20 @@ for (const id of academyIds) {
     if (index === 0 || !Object.hasOwn(project, 'evolves')) return;
     const previousId = projects[index - 1].id;
     const previousTitle = projects[index - 1].title;
+    const evolves = String(project.evolves).toLocaleLowerCase('pt-BR');
+    const prevTitleLc = String(previousTitle || '').toLocaleLowerCase('pt-BR');
     check(
       project.evolves === previousId
         || project.evolves === previousTitle
-        || String(project.evolves).toLocaleLowerCase('pt-BR').includes('mesmo'),
+        || evolves.includes('mesmo')
+        || (prevTitleLc && evolves.includes(prevTitleLc)),
       `${id}: projeto ${project.id || index + 1} não declara evolução do artefato anterior.`
     );
   });
 }
 
-check(measurableCount / moduleCount >= .8,
-  `Somente ${measurableCount}/${moduleCount} objetivos de Academia começam com verbo mensurável.`);
+check(measurableCount / seniorObjectiveCount >= .8,
+  `Somente ${measurableCount}/${seniorObjectiveCount} objetivos de competência começam com verbo mensurável.`);
 
 const sharedCss = ['tokens.css', 'tracks-palette.css', 'hub.css', 'academy.css'];
 sharedCss.forEach((name) => check(existsSync(join(cssDir, name)), `CSS compartilhado ausente: ${name}.`));
@@ -359,6 +391,7 @@ evidence.push(`${observableTopics.length}/${allTopics.length} tópicos observáv
 evidence.push(`${LABS_ENCADEADOS.length} labs encadeados`);
 evidence.push(`${hubFiles.length} hubs canônicos`);
 evidence.push(`${academyIds.length} Academias · ${academyShellCount} shells · ${moduleCount} módulos`);
+evidence.push(`${measurableCount}/${seniorObjectiveCount} objetivos de competência com verbo mensurável`);
 evidence.push(`${bookCount} livros catalogados · ${pdfReferences.size} PDFs referenciados`);
 evidence.push(`${specificCss.length} CSS específicos · ${specificRenderers.length} renderers específicos`);
 evidence.push(`${allHtml.length} páginas HTML com referências locais válidas`);

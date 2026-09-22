@@ -162,6 +162,28 @@ function renderExercises(items) {
   }).join('');
 }
 
+function renderQuiz(items) {
+  return asArray(items).map((item, index) => {
+    if (typeof item !== 'object') {
+      return `<article class="ac-exercise-card"><span>${String(index + 1).padStart(2, '0')} · Quiz</span><p>${escapeHtml(item)}</p></article>`;
+    }
+    const list = asArray(item.options)
+      .map((opt, i) => `<li>${escapeHtml(String.fromCharCode(97 + i) + ') ' + opt)}</li>`)
+      .join('');
+    const letter = typeof item.answer === 'number' ? String.fromCharCode(97 + item.answer) : String(item.answer ?? '');
+    return `
+      <article class="ac-exercise-card">
+        <span>${String(index + 1).padStart(2, '0')} · Quiz</span>
+        <h4>${escapeHtml(item.question || 'Pergunta')}</h4>
+        <ul>${list}</ul>
+        <details class="ac-details"><summary>Ver resposta</summary>
+          <p><strong>Correta:</strong> ${escapeHtml(letter)})${item.why ? ` — ${escapeHtml(item.why)}` : ''}</p>
+        </details>
+      </article>
+    `;
+  }).join('');
+}
+
 function renderOptionalDetails(module) {
   const cards = FIELD_ORDER
     .filter((key) => module[key] != null && module[key] !== '')
@@ -277,6 +299,7 @@ function renderModule(model, module) {
 
       ${asArray(interviews).length ? `<h3>Entrevista e defesa</h3><div class="ac-interview-grid">${renderInterview(interviews)}</div>` : ''}
       ${asArray(module.exercises).length ? `<h3>Exercícios</h3><div class="ac-exercise-grid">${renderExercises(module.exercises)}</div>` : ''}
+      ${asArray(module.quiz).length ? `<h3>Quiz — resposta objetiva</h3><div class="ac-exercise-grid">${renderQuiz(module.quiz)}</div>` : ''}
       ${challenge.length ? `<aside class="ac-callout"><strong>Desafio de senioridade</strong>${renderValue(challenge)}</aside>` : ''}
       ${module.caseStudy ? `<details class="ac-details"><summary>Estudo de caso completo</summary>${renderValue(module.caseStudy)}</details>` : ''}
       ${module.summary ? `<p class="ac-summary"><strong>Resumo:</strong> ${escapeHtml(module.summary)}</p>` : ''}

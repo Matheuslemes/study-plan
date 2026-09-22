@@ -1,735 +1,357 @@
-# Nível do Conteúdo Didático — Diagnóstico com Checagem Externa
+# Nível do conteúdo didático — estado atual
 
-> **Escopo:** as 13 academias de `public/data/*-advanced.js`, os 114 títulos de `public/data/biblioteca.js`
-> e os exemplos de código de `public/examples/`.
-> **Método:** inventário programático do conteúdo + verificação de cada tema contra fontes oficiais
-> (release notes, specs, docs de fornecedor, relatórios de indústria).
-> **Data da checagem externa:** 20/09/2026.
-> **Ressalva:** versões de software mudam em semanas. Todo número aqui tem fonte datada no final.
+> Retrato do projeto **como ele está hoje** (medido em 21/09/2026). Este documento não guarda histórico de
+> mudanças nem itens já concluídos: descreve o que existe, o quão fundo vai, e **onde ainda há lacunas**.
+> Reanálise focada em profundidade didática e em caçar buracos que sobraram.
+>
+> **Escopo medido:** as 16 academias de `public/data/*-advanced.js`, os 117 títulos de
+> `public/data/biblioteca.js`, os 179 arquivos de `public/examples/` e os dados de apoio
+> (`track-guides.js`, `track-exercises.js`, `phases.js`, `tracks.js`).
 
 ---
 
-## 1. O que existe hoje (medido, não estimado)
+## 1. Inventário (medido, não estimado)
 
 | Métrica | Valor |
 | --- | --- |
-| Academias (trilhas com currículo próprio) | 13 |
-| Módulos didáticos | **272** |
-| Exercícios | **648** |
-| Perguntas de entrevista com resposta esperada | **550** |
-| Livros catalogados | 114 (113 PDFs locais + 1 curso online) |
-| Obras distintas de fato | **109** (ver §5.3) |
-| Exemplos de código executável | 43 arquivos · ~44 KB · 8 trilhas |
-| Rubrica de avaliação por trilha | 13/13 |
+| Academias (trilhas com currículo próprio) | **16** (inclui a Faixa 0 — Fundamentos) |
+| Módulos didáticos | **460** (inclui o **Módulo 0 nas 13 trilhas técnicas** — 4 módulos de ponte cada — e as novas **Fronteiras de Inglês e Financeiro**, +5 cada) |
+| Exercícios | **1138** (+ **198** questões de quiz objetivo — Faixa 0 e os Módulos 0 das 13 trilhas técnicas) |
+| Perguntas de entrevista com resposta esperada | **949** |
+| Livros catalogados | **117** (115 PDFs no acervo + 2 referências online) — edições consolidadas; Core Java Vol. II catalogado |
+| Arquivos de exemplo | **228** (~1260 KB) |
+| — dos quais código/config | **165** (58 `.py`, 20 `.java`, 7 `.sql`, 74 `.mjs`, 3 `.yaml`, 1 `.tla`, 1 `.tf`, 1 `.hcl`) |
+| — dos quais markdown (labs/roteiros) | **63** |
 
-Isso é um volume grande e incomum. A questão não é quantidade — é **em que nível esse volume coloca quem
-estuda** e **se ainda descreve a realidade de 2026**.
+### Retrato por trilha
 
----
+| Trilha | Módulos | Fronteira | answerKey | Código executável (exampleFile) | Observação |
+| --- | --- | --- | --- | --- | --- |
+| Fundamentos (Faixa 0) | 14 | — (é a base) | ✅ | 3 `.py` verificáveis | **nova**: o básico como conteúdo; único com **quiz objetivo** (42 questões) |
+| Java | 30 (26 + **Módulo 0**) | ✅ | ✅ | **27/30 → `.java`** (20 distintos), compilados e verificados sob **JDK 26** | referência de cobertura; tem o **Módulo 0 de ponte** (piloto da Faixa 0 por trilha) |
+| IA, ML e Dados | 41 (37 + **Módulo 0**) | ✅ | ✅ | **37/37 `implementation.code` inline** + 7 `.py` na Fronteira + `ia-zero.py` (Módulo 0) | tem o **Módulo 0 de ponte**; maior schema (36 campos) |
+| Banco de Dados | 31 (27 + **Módulo 0**) | ✅ | ✅ | **13 `.sql` + 2 `.py` + `bancos-zero.mjs`** (Módulo 0, roda em `node:sqlite`) executáveis (+ 12 labs `.md`) | tem o **Módulo 0 de ponte**; SQL roda em PostgreSQL |
+| Python | 30 (26 + **Módulo 0**) | ✅ | ✅ | **23 `.py`** executáveis (Módulo 0 + os **14** que trocaram o README por exemplo real) | ✅ sem placeholder: todo módulo tem exemplo próprio |
+| Arquitetura | 29 (25 + **Módulo 0**) | ✅ | ✅ | **1 `.tla`** + `arquitetura-zero.mjs` (Módulo 0) + **13 `.mjs`** (níveis 1–4, rodam em Node) | ✅ sem placeholder: os 13 módulos sênior ganharam exemplo executável |
+| AWS | 31 (27 + **Módulo 0**) | ✅ | ✅ | `aws-zero.mjs` (Módulo 0) + **8 `.mjs` sênior** (≥1 por parte: elasticidade, DynamoDB, SQS/DLQ, quota, DR, FinOps, multi-região, retry) | tem o **Módulo 0** e **executável em todas as 5 partes**; os demais módulos seguem com labs `.md` (console/CLI) |
+| DevOps/SRE | 31 (27 + **Módulo 0**) | ✅ | ✅ | 2 `.yaml` + 1 `.tf` (config) + `devops-zero.mjs` (Módulo 0, roda em Node) | tem o **Módulo 0 de ponte** (1º artefato executável da base); resto labs `.md` |
+| Frontend | 31 (27 + **Módulo 0**) | ✅ | ✅ | 3 `.mjs` executáveis (inclui `frontend-zero.mjs` do Módulo 0) | tem o **Módulo 0 de ponte**; resto labs `.md` |
+| Segurança | 31 (27 + **Módulo 0**) | ✅ | ✅ | 2 `.mjs` (Fronteira) + `seguranca-zero.mjs` (Módulo 0) | tem o **Módulo 0 de ponte**; resto labs `.md` |
+| DSA | 29 (25 + **Módulo 0**) | ✅ | ✅ | 6 `.py` (Fronteira + `dsa-zero.py` do Módulo 0) | tem o **Módulo 0 de ponte**; base tem `contrast` (bad/good) inline |
+| Eng. Assistida por IA | 18 (14 + **Módulo 0**) | ✅ | ✅ | 5 `.py` + `aieng-zero.mjs` + **9 `.mjs` sênior** (níveis 1–4) | ✅ **todo módulo tem exemplo executável** |
+| Git | 27 (23 + **Módulo 0**) | ✅ | ✅ | 5 `.py` (Fronteira) + `git-zero.mjs` + **18 `.mjs` sênior** (módulos 1–17 + escala) | ✅ **todo módulo tem exemplo executável** |
+| Matemática | 30 (26 + **Módulo 0**) | ✅ | ✅ | 6 `.py` (Fronteira) + `matematica-zero.py` (Módulo 0) | tem o **Módulo 0 de ponte** (traz artefato executável à base) |
+| Inglês Técnico | 21 (16 + **Fronteira**) | ✅ | ✅ | 0 (evidência = artefatos reais: RFC, incidente, talk, PR, mentoria) | ganhou **gabarito** e uma **Fronteira** de comunicação técnica de alto risco (design docs/RFC, incidente p/ liderança, palestra, open source, liderança) |
+| Financeiro | 36 (31 + **Fronteira**) | ✅ | ✅ | **14 `.mjs`** (modelos versionados: orçamento, fluxo, dívida, reserva, juros, renda fixa, alocação, stress test + **Fronteira**: Markowitz, Monte Carlo da aposentadoria, FIRE, tributário, transferência de risco) | ganhou **gabarito**, **modelos executáveis** e a **Fronteira** (engenharia da decisão financeira, 5 módulos com modelo executável cada) |
 
-## 2. Veredito por trilha
-
-Legenda de nível: **Jr** = júnior · **Pl** = pleno · **Sr** = sênior · **St** = staff/principal.
-"Nível declarado" é o que os módulos afirmam; "nível entregue" é o que o texto, os exercícios e os
-exemplos sustentam.
-
-| Trilha | Módulos | Nível declarado | **Nível entregue** | Atualidade técnica |
-| --- | --- | --- | --- | --- |
-| **IA, ML e Dados** | 30 | Fundamental → Expert | **Pl → Sr forte** | 🟢 Versões conferidas e corretas · 🔴 sem MCP |
-| **Java** | 20 | Base → Expert | **Sr real** | 🟠 Java 21 (LTS atual é 25) · 🔴 Spring 5/Boot 2 nos livros |
-| **Arquitetura** | 18 | Base sênior → Expert | **Sr → St** | 🟢 Alinhada ao debate de 2026 · 🟠 livros 1ª ed. |
-| **Segurança** | 20 | Fundação → Staff | **Sr → St** | 🟢 ASVS 5.0 + Top 10:2025 · 🟠 sem pós-quântica/IA |
-| **DevOps/SRE** | 20 | Base → Staff | **Sr → St** | 🟢 DORA de 5 métricas · 🟠 sem OpenTofu |
-| **Banco de Dados** | 20 | Base → Sr/Expert | **Sr** | 🟢 PostgreSQL 18 · 🟠 sem Valkey/pgvector |
-| **AWS** | 20 | Fundação → Staff | **Sr → St** | 🟢 conteúdo · 🔴 livro de certificação 2 gerações atrás |
-| **Python** | 20 | Base sênior → Expert | **Sr** | 🟠 3.12 (atual é 3.14) · 🔴 sem free-threading/ruff |
-| **Frontend** | 20 | Fundação → Staff | **Pl → Sr** | 🟢 INP, WCAG 2.2, RSC · 🔴 livros de 2018–2020 |
-| **Matemática** | 20 | Fundamentos → Produção | **Jr → Pl (adequado)** | 🟢 estável · 🟠 texto genérico |
-| **Git** | 17 | Fundamentos → Produção | **Pl (conteúdo Sr mal servido)** | 🟢 estável · 🟠 texto genérico |
-| **Inglês Técnico** | 16 | Fundamentos → Produção | **B1+ → B2/C1 produção** | 🟢 estável · 🟠 texto genérico |
-| **Financeiro** | 31 | Fundamentos → Produção | **fora do eixo técnico** | 🟢 estável · 🟠 texto genérico |
-| **Algoritmos e ED** | **0** | — | **inexistente** | 🔴 buraco estrutural |
-
-### Resumo em uma frase
-
-> O conteúdo está, no núcleo (9 trilhas, 210 módulos), **legitimamente em nível sênior** — bem acima do
-> material de curso comum em português. O problema não é profundidade: é **defasagem de versão em 3
-> trilhas**, **enchimento automático em 4 trilhas** e **duas ausências que o próprio mercado de 2026
-> trata como obrigatórias** (engenharia assistida por IA e algoritmos).
+> Leitura rápida: **todas as 16 academias têm gabarito** (`answerKey`) — Inglês e Financeiro foram os últimos a
+> ganhar. A parte **Fronteira** (faixa 4) existe agora em **15 das 15** trilhas (Financeiro fechou a lista com
+> a Fronteira de engenharia da decisão financeira). A cobertura de **código executável** melhorou — de total (Java, IA,
+> Bancos, **Python e Arquitetura**, sem placeholder) a ainda em markdown (AWS/DevOps/Frontend/Segurança);
+> Inglês segue sem artefato (é prática de idioma) e **Financeiro tem 14 modelos executáveis** (9 sênior + 5 na Fronteira).
 
 ---
 
-## 3. Por que "sênior" se sustenta no núcleo
+## 2. O padrão que sustenta o nível
 
-Não é auto-declaração. O padrão dos módulos das 9 trilhas principais tem 23 campos e inclui o que
-separa material sênior de material introdutório:
+O núcleo é forte e incomum. Cada módulo das 13 trilhas técnicas segue um esqueleto de 23 campos
+(`problema → conceitos → internals → useWhen/avoidWhen → contrast(bad/good) → tradeoffs → produção → riscos →
+checklist → exercícios → entrevista → desafio → livro`), e a trilha de IA usa um schema ainda mais rico (36
+campos, com `mathematics`, `hypothesis`, `complexity`, `implementation.code`). Esse padrão
+`problema → mecanismo → trade-off → produção → risco → evidência` é o que faz o conteúdo sustentar entrevista
+sênior de verdade — não é curso iniciante disfarçado.
 
-- **`internals`** — mecanismo, não uso. Ex.: *"HashMap usa hash para localizar buckets e igualdade para
-  resolver chaves; alterar campos participantes enquanto o objeto é chave torna a entrada inalcançável."*
-- **`tradeoffs` e `avoidWhen`** — quando *não* usar, com custo explícito.
-- **`production`** — um incidente concreto por módulo, não um exemplo de brinquedo.
-- **`interview`** com dois níveis e **resposta esperada** — 550 no total.
-- **`exercises`** em três faixas (Básico → Aplicado → Expert) com **evidência exigida** (ADR, teste
-  vermelho, tabela hipótese × resultado).
+Os campos auxiliares (`production`, `risks`, `checklist`, `avoidWhen`, `useWhen`, `tradeoffs`,
+`prerequisites`, `summary`) são **autorais por módulo** nas 15 trilhas (nas quatro trilhas de fábrica — Git,
+Matemática, Inglês, Financeiro — medidos como N/N distintos; nas demais, escritos à mão). Não há mais
+"enchimento" de texto genérico.
 
-O currículo de IA vai além: 36 campos por módulo, incluindo `mathematics`, `hypothesis`, `complexity`,
-`wrongApproach` e `correctedApproach`. É o material mais forte do projeto.
-
-**Calibração externa:** o relatório DORA 2025 e o próprio `MERCADO-DEV-2026.html` definem sênior de 2026
-como quem "decide e consegue provar que a decisão se sustenta em produção". A estrutura
-`decisão → trade-off → evidência → risco residual` dos módulos foi desenhada exatamente para isso. O
-método está certo.
+**Onde o padrão é excelente:** a faixa de decisão (ADR, trade-off medido, revisão D30) — o que separa
+"pleno" de "sênior". É o núcleo do projeto e é raro num plano de estudo autoral.
 
 ---
 
-## 4. Checagem externa, tema a tema
+## 3. Cobertura de código executável — o eixo mais irregular
 
-### 4.1 Java — 🟠 defasagem de plataforma, 🔴 defasagem de framework
+O padrão de texto é uniforme; o de **artefato executável** melhorou muito. Hoje há três regimes (o antigo
+regime de "placeholder" foi eliminado):
 
-| Item | No plano | Realidade em 09/2026 |
+1. **Cobertura total e verificável** — Java (26/26 `.java`, compilam e passam no `CompileSmoke` sob JDK 26),
+   IA (37/37 com código inline + `ia-zero.py` no Módulo 0), Banco de Dados (13 `.sql` + 2 `.py` +
+   `bancos-zero.mjs` sob `node:sqlite`), **Python** (todo módulo com `.py` próprio — os 14 placeholders viraram
+   exemplos reais) e **Arquitetura** (Módulo 0 + 13 `.mjs` que rodam em Node, um por módulo sênior).
+2. **Fronteira + base** — DSA, Matemática, Git e Eng. Assistida por IA concentravam os executáveis na
+   Fronteira, mas **todas já têm exemplo executável na base** via Módulo 0 (`dsa-zero.py`,
+   `matematica-zero.py`, `git-zero.mjs`, `aieng-zero.mjs`). Nenhuma trilha técnica fica mais "só na Fronteira".
+3. **Markdown como artefato** — DevOps, Frontend, Segurança e parte da AWS entregam vários módulos com um
+   **lab em markdown** (roteiro), não com código. Faz sentido para nuvem/infra, mas significa menos verificação
+   automática. As exceções já cobrem bastante: 2 `.mjs` em Frontend e em Segurança, os executáveis dos Módulos 0
+   (`devops-zero.mjs`, `aws-zero.mjs`, `seguranca-zero.mjs`) e, na **AWS, 8 `.mjs` sênior com pelo menos um por
+   parte** (retry, quota, custo, failover, DR, elasticidade, DynamoDB, SQS/DLQ).
+
+---
+
+## 4. Lacunas abertas
+
+### 4.1 🟢 Faixa 0 (o "básico"): Trilha 0 criada e "módulo 0" completo nas 13 trilhas técnicas
+
+O módulo 1 das trilhas técnicas assumia base (Java pede compilar com `javac` e ler stack traces; Python começa
+em modelo de dados e dunder; Arquitetura exige "ter mantido um sistema em produção"). Esse buraco está
+**fechado**: a **Trilha 0 — Fundamentos de Computação** existe como academia própria e cada trilha técnica
+ganhou seu **Módulo 0** de ponte.
+
+- ✅ **como a máquina funciona** (binário, encoding, ponto flutuante, memória, processo/SO), **da URL à
+  página** (DNS, HTTP, cliente/servidor), **lógica** (decompor, rastrear na mão, ler erros) e o
+  **ferramental** — terminal, IDE, **debugger** (breakpoint/step/inspeção) e Git básico;
+- ✅ **exercícios de resposta objetiva** — a Faixa 0 introduz um campo `quiz` (certo/errado) com **42
+  questões**, o formato que faltava (todos os outros exercícios são de julgamento aberto);
+- ✅ **3 exemplos executáveis verificáveis** (binário, encoding, ponto flutuante).
+
+- ✅ **Módulo 0 nas 13 trilhas técnicas** (Java, Python, DSA, Frontend, Bancos, IA, Arquitetura, DevOps, AWS,
+  Segurança, Matemática, Git e Eng. Assistida por IA) — a ponte da Trilha 0 para cada trilha: uma parte
+  "Módulo 0" com 4 módulos (0.1–0.4), quiz objetivo e um exemplo verificado (`JavaZero.java` sob JDK 26;
+  `python-zero.py`, `dsa-zero.py`, `ia-zero.py` e `matematica-zero.py` sob Pyodide; `frontend-zero.mjs`,
+  `arquitetura-zero.mjs`, `devops-zero.mjs`, `aws-zero.mjs`, `seguranca-zero.mjs`, `git-zero.mjs` e
+  `aieng-zero.mjs` sob Node; `bancos-zero.mjs` sob `node:sqlite`). Cada uma termina exatamente onde o módulo 1
+  da trilha começa. Java cobre JVM/bytecode, tipos estáticos e stack
+  traces; Python, interpretador e "tudo é objeto"/referências (int sem overflow); DSA, a intuição de
+  crescimento, contar operações e recursão; Frontend, como o navegador monta a página, o JS essencial (== vs
+  ===, number é double), o DOM e as DevTools; Bancos, por que um banco (vs arquivo), o modelo relacional
+  (tabela = linhas × colunas, chaves), SQL essencial (SELECT/WHERE/CRUD/JOIN) e integridade/transação
+  (PK/UNIQUE/FK, atomicidade); IA, o que é aprender com dados (IA/ML/DL/generativa), dados como tabela
+  numérica, modelo/erro/treino (mínimos quadrados) e generalização/overfitting com a armadilha da acurácia;
+  Arquitetura, o que é arquitetura (estrutura vs detalhe), acoplamento e coesão, módulos/interfaces/direção de
+  dependência (grafo acíclico e núcleo estável) e trade-off/ADR; DevOps, o que é DevOps (cultura + automação),
+  automação idempotente, pipeline/CI com gate (fail-fast) e as 4 métricas DORA; AWS, o que é a nuvem e a
+  responsabilidade compartilhada, identidade e menor privilégio (IAM: default deny, Deny vence Allow), serviços
+  essenciais (computar/guardar/conectar) e elasticidade/custo; Segurança, a mentalidade (CIA, superfície de
+  ataque), entrada não confiável e injeção (parametrizar/codificar/allowlist), autenticação × autorização e
+  criptografia básica; Matemática, a linguagem (variáveis, funções, notação), lógica e prova (implicação,
+  contraexemplo), somatório/crescimento (Σ, forma fechada, ritmos) e vetores/probabilidade; Git, o que é
+  controle de versão (snapshots), os três estados/commit limpo, branch/merge e o histórico como DAG (com
+  `git-zero.mjs` reproduzindo o id do `git hash-object`) e o fluxo com remoto; Eng. Assistida por IA, o que
+  muda com a IA no fluxo (amplificador, não oráculo), prompt/contexto e alucinação, verificar a saída com
+  spec/testes e deps alucinadas, e responsabilidade/licença/segurança do código gerado.
+
+**Estado:** a Faixa 0 está **completa** — Trilha 0 (base universal) + Módulo 0 em **todas as 13 trilhas
+técnicas**, sem exceção. As únicas academias sem Módulo 0 são as **educacionais** (Inglês, Financeiro), que não
+têm faixa de "construir por dentro", e a própria **Trilha 0** (que é a base). Extensão opcional: levar os
+exercícios objetivos (`quiz`) à base das trilhas educacionais.
+
+### 4.2 ✅ Python e Arquitetura: placeholders eliminados
+
+**Resolvido.** Os **14 módulos de Python** e os **13 de Arquitetura** que apontavam para um `README.md`
+genérico agora têm **um exemplo executável e autoverificado por módulo** (padrão do Java):
+
+- **Arquitetura** — 13 `.mjs` que **rodam em Node** (verificados um a um): decisão × detalhe, fitness function
+  de acoplamento, bounded contexts, agregado como invariante, idempotência de mensageria, CAP sob partição,
+  hash consistente, circuit breaker, cache/Lei de Little, SLO/error budget, zero trust e lei de Conway.
+- **Python** — 14 `.py` idiomáticos e Pyodide-safe (só stdlib): data model/dunder, estruturas idiomáticas,
+  decorators/closures, OO idiomática, geradores/context managers, armadilhas pythônicas, SemVer/dependências,
+  conceitos de teste, asyncio, paralelismo/GIL, vetorização, automação, pipeline de dados e observabilidade. A
+  lógica de cada um foi conferida por porta para Node (não há Python nativo neste ambiente; a execução real é
+  sob Pyodide, como no resto da trilha).
+
+Os arquivos `README.md` genéricos deixaram de ser referenciados por qualquer módulo.
+
+### 4.3 🟢 AWS: executável em todas as partes
+
+Resolvido o essencial. Além do `aws-zero.mjs` (Módulo 0, avaliador de política IAM), a trilha ganhou **8
+modelos executáveis sênior que rodam em Node**, cobrindo **pelo menos uma parte cada** (na verdade, todas as 5)
+e os conceitos "simuláveis" canônicos:
+
+- **fundamentos** — `elasticidade-autoscaling.mjs` (autoscaling por utilização-alvo);
+- **plataforma** — `dynamo-particao.mjs` (partição quente) e `sqs-idempotencia-dlq.mjs` (at-least-once + DLQ);
+- **confiabilidade** — `quota-throttling.mjs` (token bucket) e `dr-rto-rpo.mjs` (DR por RTO/RPO/custo);
+- **arquitetura** — `finops-custo.mjs` (on-demand × reserved × spot, break-even, custo unitário);
+- **fronteira** — `multi-regiao-failover.mjs` (failover + RPO) e `retry-backoff-jitter.mjs` (backoff + jitter,
+  anti-thundering-herd).
+
+Os demais módulos seguem com labs em markdown (console/CLI), o que é adequado à natureza operacional deles.
+
+### 4.4 🟢 Inglês e Financeiro: gabarito, modelos e Fronteira nas duas
+
+Resolvido o essencial:
+
+- ✅ **gabarito** (`answerKey`) — **ambas** agora têm (Inglês 21 entradas, Financeiro 36); com isso **todas as
+  16 academias** têm gabarito;
+- ✅ para Financeiro, **14 planilhas/modelos versionados e executáveis** (`.mjs` que rodam em Node): 9 sênior —
+  orçamento (50/30/20 e base-zero), fluxo de caixa, custo da dívida, quitação (avalanche × bola de neve), reserva de
+  emergência, juros compostos, renda fixa líquida (pós-IR), alocação/rebalanceamento e stress test — mais 5 na
+  **Fronteira** (ver abaixo);
+- ✅ para Inglês, uma **Fronteira** (5 módulos, nível expert): design doc/RFC (linguagem normativa RFC 2119),
+  comunicação de incidente para liderança (BLUF), palestra técnica, influência em open source e liderança/
+  negociação em inglês — a faixa 4 desta trilha não é "construir por dentro", e sim comunicação técnica de alto
+  risco e alcance, com evidência em artefatos reais (RFC, gravação, PR);
+- ✅ para Financeiro, uma **Fronteira** (5 módulos, nível expert): "engenharia da decisão financeira" — otimização
+  de portfólio (Markowitz/variância mínima), Monte Carlo da aposentadoria e taxa de retirada segura,
+  independência financeira (FIRE) e taxa de poupança, planejamento tributário (IR regressivo × come-cotas) e
+  transferência de risco de cauda (seguro), **cada módulo com um modelo executável verificado** (`.mjs`).
+
+**O que ainda é opcional:** para Inglês, uma faixa de **avaliação objetiva** (gramática/colocação com resposta
+certa, no formato `quiz`).
+
+### 4.5 ✅ Cobertura de exemplo por módulo uniformizada
+
+Resolvido. A base de todas as trilhas técnicas foi coberta pelo Módulo 0 e, agora, **os módulos sênior de Git
+e Eng. Assistida por IA (níveis 1–4) ganharam um exemplo executável cada** — 18 `.mjs` em Git (modelo de
+dados, staging, commits atômicos, reflog, refs, branches, merge/rebase, conflito, PR gate, plataformas,
+hooks/CI, scan de segredos, bisect, branch protection, monorepo, contratos/SemVer, GitOps e escala) e 9 `.mjs`
+em AIeng (amplificador/DORA, prompt/contexto, loop de agente, revisão por risco, teste-oráculo, débito, prompt
+injection, DORA capabilities, adoção). Somados aos placeholders (§4.2) e ao AWS sênior (§4.3), **a cobertura
+de código executável está uniforme**: todo módulo técnico de níveis 1–4 tem exemplo próprio (os labs em
+markdown restam só onde são naturalmente operacionais — console/CLI de nuvem/infra).
+
+### 4.6 ✅ Fiação dos dados de apoio completa
+
+Resolvido. As academias de DSA e Eng. Assistida por IA agora têm a fiação que faltava:
+
+- ✅ **`aieng` adicionado a `track-guides.js`** (guia com nome, pré-requisitos, objetivos e critérios);
+- ✅ **`dsa` e `aieng` adicionados a `track-exercises.js`** (3 exercícios verificáveis cada).
+
+Verificado: `guiaDaTrilha` e `exerciciosDaTrilha` resolvem para as duas, e **nenhuma trilha fica sem guia nem
+sem exercícios** — as seções antes vazias no hub de DSA/AIeng agora renderizam.
+
+### 4.7 🟢 CI único e ambiente reprodutível
+
+Resolvido. Agora existe uma **porta de qualidade única**:
+
+- **`scripts/verify-examples.mjs`** roda, de uma vez, todos os exemplos autoverificáveis e falha (exit 1) se
+  qualquer um que foi executado não terminar com exit 0. É portável: executa os `.mjs` sempre (só Node), e os
+  `.py`/`.java` quando o runtime existe — senão os pula com aviso (não é falha), e pula `.sql` (o SQL
+  executável já é coberto por `bancos-zero.mjs` via `node:sqlite`). Nesta máquina: **74/74 `.mjs` ok, 20
+  classes `.java` compiladas (--release 21) + `CompileSmoke`**; `.py` e `.sql` pulados por falta de runtime.
+- **`.github/workflows/verify-examples.yml`** — CI que instala **Node + Python + JDK** e roda a suíte, de modo
+  que na CI **nada é pulado**: os `.py` (Pyodide-safe, stdlib) e os `.java` rodam de fato.
+- **`.devcontainer/devcontainer.json`** — ambiente reprodutível com os três runtimes.
+
+A verificação deixou de ser artefato a artefato e virou um gate (`node scripts/verify-examples.mjs`).
+
+### 4.8 🟢 Bibliografia — edições duplicadas consolidadas
+
+O acervo está atualizado (DDIA 2ª ed, FoSA 2ª ed, SAA-C03, Effective TypeScript 2ª ed; React via react.dev) e
+tudo está **consolidado na edição corrente**, catálogo e academias juntos:
+
+- **Catálogo**: as fichas de 1ª edição de FoSA (n:17), DDIA (n:19) e Effective TypeScript (n:74) foram
+  removidas e a DDIA cross-listada em Banco de Dados (n:47) passou à 2ª ed — de 119 para **116 fichas**;
+  depois o **Core Java Vol. II** (antes um PDF órfão no acervo, referenciado por nenhuma ficha) foi catalogado
+  e a ficha "Volumes I & II" separada em Vol. I e Vol. II — chegando a **117 fichas** (115 PDFs + 2 online),
+  sem referências pendentes; a contagem na página é dinâmica (`biblioteca.length`).
+- **Academias**: os livros `fundamentals` e `ddia` (Arquitetura), `ddia` (Bancos) e `effectiveTs` (Frontend)
+  foram repontados para o PDF da 2ª ed (edição/ano corrigidos), e o link do livro-base no hub de Arquitetura
+  também. Os **4 PDFs de 1ª edição órfãos foram removidos** do acervo; nenhuma ficha ou academia aponta para
+  arquivo inexistente (verificado). Único PDF ainda fora do catálogo: o **manual de soluções** do Strang
+  (suplemento do livro-texto, exclusão intencional).
+
+**Único ponto restante (externo):** a FoSA 2ª ed no acervo é uma cópia **Early Release** (pode estar parcial —
+já sinalizada com alerta visível na ficha n:116); trocar pela versão final depende de ela sair.
+
+### 4.9 🟢 Higiene técnica — sitemap, código morto e acervo (varredura de set/2026)
+
+Uma varredura cruzando dados × disco (páginas de parte, `exampleFile`, `answerKey`, PDFs, placeholders) veio
+**limpa na estrutura** e apontou três lacunas de higiene, todas corrigidas:
+
+- **`sitemap.xml` desatualizado** → regenerado. Tinha 81 URLs (`lastmod` 2026-07-29) e faltavam **49 páginas
+  (~38%)**: as trilhas novas `aieng` e `dsa` inteiras, o hub `fundamentos` (Faixa 0) e partes, **todos os 13
+  `base.html`** (Módulo 0), **todos os `fronteira.html`** e as partes de `treino`. Agora tem **130 URLs** e há
+  um gerador reprodutível em `scripts/gen-sitemap.mjs` (raiz 1.0 · hub 0.8 · parte 0.7) para não desatualizar
+  mais.
+- **Código morto em `data/pdfs.js`** → removido. `pdfDocuments` (12 "plano em PDF por trilha" apontando para
+  arquivos inexistentes) e a lista `bibliografia` (20 títulos) não eram importados em lugar nenhum (o catálogo
+  vivo é o `biblioteca.js`). Mantido só o export usado (`bibliografiaNotas`).
+- **Core Java Vol. II** → catalogado (ver §4.8).
+- **`scripts/validate-content.mjs` defasado** → atualizado. O gate estava vermelho (397 apontamentos) porque
+  suas constantes eram anteriores às trilhas novas (`dsa`, `aieng`, `fundamentos`): esperava 14 trilhas/14
+  hubs/13 academias (hoje **17/17/16**) e a checagem de sequência (`number === index+1`) quebrava na numeração
+  `0.x` do Módulo 0. Correções: constantes atualizadas; a sequência passou a validar módulos-ponte como `0.x` e
+  os de competência como `1..N` estritos; a razão de "verbo mensurável" cobra só módulos de competência (o
+  Módulo 0 é conceitual, avaliado por quiz) e o dicionário de verbos ganhou os que faltavam (defender, ler,
+  distinguir, derivar, escalar, garantir, liderar…), **sem** admitir os vagos (entender, dominar, raciocinar);
+  a Faixa 0 ganhou piso próprio de rubricas/critérios (3/4 em vez de 4/5). Resultado: **exit 0**, com
+  394/408 (96,6%) dos objetivos de competência em verbo mensurável.
+
+---
+
+## 5. As cinco faixas (amplitude vertical)
+
+Para "do básico ao avançado extremo" ser verificável, cada trilha precisaria cobrir cinco faixas. Onde o
+projeto está hoje:
+
+| Faixa | Pergunta que responde | Cobertura hoje |
 | --- | --- | --- |
-| LTS | Java 21 | **Java 25** (set/2025). Java 26 saiu em mar/2026; Java 27 chega agora |
-| Certificação OCP | 1Z0-829/830 | **1Z0-830 continua a prova corrente** ✅ |
-| Spring (livros) | Spring in Action 6ª ed (Boot 2.x, 2022) | **Spring Boot 4.1 / Framework 7.0** |
-| Spring Security | 2ª ed (Security 6.x, 2024) | **Spring Security 7** |
+| **0 · Fundamento** | "O que é isso e por que existe?" | 🟢 Trilha 0 (Fundamentos) + Módulo 0 nas **13 trilhas técnicas** (todas, sem exceção) — §4.1 |
+| **1 · Aplicação** | "Como uso corretamente?" | 🟢 forte |
+| **2 · Produção** | "Como quebra e como opero?" | 🟢 forte |
+| **3 · Domínio** | "Como decido e defendo?" | 🟢 forte — é o núcleo do projeto |
+| **4 · Fronteira** | "Como é construído por dentro — e eu construo?" | 🟢 em **15 de 15** trilhas técnicas (Inglês tem uma Fronteira de comunicação e o Financeiro ganhou a de engenharia da decisão financeira) |
 
-**Leitura:** a base da *linguagem* está correta e a certificação-alvo continua válida — Java 21 é uma
-escolha defensável para estudo. Mas o mercado migrou: JDK 21 sob licença permissiva termina em
-**outubro de 2026**, e Spring Boot 3.5 já saiu do suporte aberto em **junho de 2026**. Os módulos 9–13
-(JMM, Loom, JVM, GC, JFR/JMH) são genuinamente sênior/expert e envelhecem bem. O que envelheceu foi a
-camada de framework, e ela vem inteira dos livros — que são de Boot 2.x. Um estudante que seguir
-*Spring in Action 6ª ed* hoje aprende uma API que já tem duas gerações.
+O projeto é excelente na faixa 3, forte na 1–2, oferece a 4 em 13 trilhas e agora tem a **faixa 0 completa**: a
+Trilha 0 de Fundamentos como academia própria **mais o Módulo 0 de ponte em todas as 13 trilhas técnicas**. A
+base, que era o maior buraco, está fechada; o que resta é secundário — tornar a faixa 4 uniforme em cobertura
+de código (§4.2, §4.5).
 
-**Ausente e relevante:** Scoped Values e Module Import finalizados no 25; `JSpecify` e versionamento de
-API REST nativo no Boot 4; migração Jackson 2 → 3.
-
-### 4.2 IA — 🟢 o mais bem pesquisado, 🔴 falta o padrão da indústria
-
-A tabela `iaTechnologyBaseline` foi **verificada item a item** e está correta para a data de pesquisa:
-
-| Declarado (27/07/2026) | Verificado hoje |
-| --- | --- |
-| PyTorch 2.13 | ✅ 2.13.0 (08/07/2026) |
-| scikit-learn 1.9 | ✅ 1.9.1 (10/09/2026) |
-| Transformers 5.x | ✅ v5 lançada em 18/12/2025 (PyTorch-only, tokenização redesenhada) |
-| MLflow 3.14 | ✅ correto na época; hoje 3.16.1 |
-
-Isso é raro e merece registro: a trilha de IA é **tecnicamente honesta**, com `status` e `note` por
-dependência ("zero-major: conferir changelog", "APIs mudam; pin obrigatório").
-
-**A lacuna:** `grep` por MCP, A2A, LangGraph, vLLM, DSPy, context engineering, reasoning models,
-test-time compute → **zero ocorrências**. O módulo 18 (Agentes de IA) tem um framing conceitual
-excelente — política π(a|s), orçamento de passos, human-in-the-loop, RBAC por tool — mas é
-deliberadamente agnóstico de protocolo. Em 2026 isso não é mais neutralidade: o **Model Context
-Protocol** foi doado à Linux Foundation (Agentic AI Foundation) em dez/2025, tem ~97 milhões de
-downloads mensais de SDK, 9.400+ servidores públicos e suporte nativo de Anthropic, OpenAI, Google e
-Microsoft. É o equivalente a ensinar APIs sem mencionar HTTP.
-
-### 4.3 Segurança — 🟢 na ponta
-
-`ASVS 5.0.0` (mai/2025, 17 capítulos, ~350 requisitos) e `OWASP Top 10:2025` (final em jan/2026) são
-**as versões correntes**. SLSA, SBOM, Trusted Types, CSP, SSRF e passkeys estão cobertos. Esta é a
-trilha mais atualizada do projeto em relação aos seus próprios padrões de referência.
-
-**Ausências:** criptografia pós-quântica (1 menção isolada) — ML-KEM/ML-DSA já são padrão NIST e a
-migração é pauta de 2026; e segurança específica de IA/LLM (o OWASP Top 10 for LLM Apps aparece uma
-vez, sem módulo próprio). O *Web Application Hacker's Handbook* (2011) é clássico mas descreve uma web
-anterior a CSP, SameSite e passkeys.
-
-### 4.4 DevOps/SRE — 🟢 métricas corretas, 🟠 tooling incompleto
-
-O módulo 5 usa **as cinco métricas DORA atuais** — incluindo *Reliability* e *Failed deployment
-recovery time* (nome novo do antigo MTTR). Isso é correto e a maior parte do material por aí ainda
-ensina "as quatro métricas". Gateway API aparece no módulo 8, o que é atual.
-
-**Ausências:** OpenTofu (fork do Terraform sob BSL; ~12% de adoção, GitLab depreciou templates
-Terraform em 2025 por licenciamento) — o módulo 9 fala só de Terraform; o **DORA AI Capabilities
-Model** de 2025 (sete capacidades que amplificam benefício de IA) e os sete arquétipos de time que
-substituíram os quatro níveis de performance; eBPF/Cilium.
-
-### 4.5 Banco de Dados — 🟢 base correta
-
-`PostgreSQL 18` é a versão estável corrente (18.6). PG 19 está em beta 3 e chega agora — ou seja, o
-baseline foi escolhido bem. MongoDB 8.x e Hibernate 7.x conferem.
-
-**Ausências:** **Valkey** — o fork do Redis é hoje o padrão default no AWS ElastiCache e no Google
-Memorystore, com Valkey 9 GA em out/2025; a trilha ensina "Redis 8.x" sem mencionar a bifurcação de
-licença nem o fork. E **pgvector**: a trilha de IA cobre busca vetorial (HNSW, FAISS, pgvector), mas a
-trilha de banco não conecta — é a integração mais comum de 2026 e cai entre as duas cadeiras.
-
-### 4.6 Frontend — 🟢 conteúdo atual, 🔴 bibliografia antiga
-
-O conteúdo está certo: INP (10 menções), WCAG 2.2, Core Web Vitals, Container Queries, e o módulo 10
-cobre **Server e Client Components, streaming e revalidation** — isto é, o modelo React 19 / Next.js
-App Router. Ancorado em `react.dev`, `nextjs.org` e MDN, o que o mantém vivo por referência.
-
-**O descompasso é bibliográfico:** *Learning React* 2ª ed (2020, React 16/17), *JavaScript: The
-Definitive Guide* 7ª ed (2020), *Eloquent JavaScript* 3ª ed (2018), *Effective TypeScript* 1ª ed
-(2019). Hoje: **React 19.3** (09/09/2026, com View Transitions estável) e **Next.js 16.3**. Nenhum
-desses livros descreve Server Components, Actions ou `use()`. O currículo está à frente dos próprios
-livros.
-
-### 4.7 AWS — 🟢 conteúdo, 🔴 livro de certificação
-
-O conteúdo dos 20 módulos é sólido e vendor-realista (ECS/EKS/Fargate/Lambda por custo total, quotas,
-Well-Architected). O livro de certificação, porém, é **SAA-C02 (2021)**; a prova corrente na página
-oficial da AWS é **SAA-C03**. Duas gerações de defasagem no único livro de prova da trilha.
-
-**Ausência:** nada de Bedrock, SageMaker ou serviços de IA gerenciados — em uma trilha de 2026 com
-uma academia de IA ao lado.
-
-### 4.8 Arquitetura — 🟢 alinhada ao debate corrente
-
-O módulo 8 (monólito modular × microsserviços) e o 15 (strangler fig, arquitetura evolutiva) batem com
-o consenso de 2026: cerca de 42% das organizações que adotaram microsserviços estão reconsolidando, e
-o modular monolith com fronteiras impostas por CI virou o default sensato. O plano já ensina isso —
-não caiu na moda de microsserviços por padrão. Bom sinal.
-
-**Ausências:** Spring Modulith (a ferramenta concreta para modular monolith em Java); event sourcing e
-CQRS (1 menção); agentes de IA como componente arquitetural de primeira classe — o item genuinamente
-novo de 2026.
-
-**Bibliografia:** *Fundamentals of Software Architecture* 2ª ed saiu em set/2025 com cinco capítulos
-novos (incluindo IA generativa e Team Topologies) — a biblioteca tem a 1ª ed (2020). E **DDIA 2ª ed
-(Kleppmann & Riccomini, mar/2026)** — a biblioteca tem a de 2017. DDIA é a espinha dorsal da fase 8 em
-*duas* trilhas.
-
-### 4.9 Python — 🟠 conservador demais
-
-Baseline `3.12+` quando o estável é **3.14.7** e o 3.15 sai em outubro. Ser conservador é defensável,
-mas isso custa dois assuntos que mudam a resposta de entrevista:
-
-- **Free-threaded CPython** (PEP 703/779): oficialmente suportado desde o 3.14. O módulo 11 ensina o
-  GIL como fato absoluto — *"o GIL permite que apenas uma thread execute bytecode Python por vez"* —
-  sem uma linha sobre a build sem GIL. Hoje isso é uma resposta incompleta.
-- **ruff**: zero menções. Virou o linter/formatter padrão de fato; o material fala de mypy (27x, bom)
-  mas não do resto do toolchain moderno. `uv` aparece 2x.
+> Ressalva honesta: fazer *todos* os labs de Fronteira de 15 áreas não forma um especialista em 15 coisas —
+> forma alguém raso em muitas. A faixa 4 já **existe como material**; cabe ao estudante escolher 3–4 labs para
+> de fato executar, pelo eixo de carreira. O material oferece a fronteira sem obrigá-la.
 
 ---
 
-## 5. Três problemas estruturais
-
-### 5.1 🔴 Duas velocidades de qualidade didática
-
-Medi quantos textos são **únicos por módulo** versus **idênticos em todos os módulos da trilha**:
-
-| Trilha | `production` | `risks` | `checklist` | `avoidWhen` | `prerequisites` | `tradeoffs` |
-| --- | --- | --- | --- | --- | --- | --- |
-| java, python, ia, arquitetura, bancos, devops, aws, frontend, sec | 20/20 | 20/20 | 20/20 | 20/20 | 20/20 | 20/20 |
-| **git** | **1/17** | **1/17** | **1/17** | **1/17** | **1/17** | **1/17** |
-| **matematica** | **1/20** | **1/20** | **1/20** | **1/20** | **1/20** | **1/20** |
-| **ingles** | **1/16** | **1/16** | **1/16** | **1/16** | **1/16** | **1/16** |
-| **financeiro** | **1/31** | **1/31** | **1/31** | **1/31** | **1/31** | **1/31** |
-
-`1/N` significa: **o mesmo parágrafo em todos os módulos da trilha.** Em 84 módulos (31% do total),
-seis dos oito campos didáticos são preenchidos por `academy-data-factory.js` com texto genérico:
-
-> `production`: "A entrega deve incluir resultado, limite conhecido, risco residual e procedimento de verificação."
-> `avoidWhen`: "Não use uma técnica por hábito sem comparar restrições e alternativas."
-> `risks`: "Confundir conclusão de leitura com domínio."
-
-Além disso, **84/84** `useWhen` e **84/84** `summary` são gerados por substituição do título, e 25
-objetivos viram frases como:
-
-> *"Aplicar explorar os internals do git com comandos plumbing (cat-file, hash-object, update-ref) e
-> explicar como packfiles e a compressão delta armazenam o histórico. em um cenário verificável e
-> justificar a decisão com evidência."*
-
-(note o ponto duplo — é concatenação de template com o título)
-
-**O que salva:** `problem`, `concepts`, `exercises` e `interview` **são autorais em 100% dos módulos**,
-inclusive nas 4 trilhas. O esqueleto é real; o recheio é que é automático.
-
-**Por que importa:** a trilha de Git tem tópicos de nível sênior — plumbing, packfiles, GitOps,
-proveniência de supply chain, monorepo × multirepo. O conteúdo *merece* o tratamento das outras nove.
-Hoje ele é servido com o mesmo parágrafo genérico 17 vezes.
-
-### 5.2 🟠 Exemplos de código rasos nos módulos mais avançados
-
-43 arquivos, ~44 KB, para 272 módulos. Em Java (a trilha principal), os 20 módulos mapeiam para 8
-arquivos — e **7 módulos apontam para `README.md`, não para código**:
-
-| Módulo | Tema | Artefato |
-| --- | --- | --- |
-| 11 | JVM: class loading, bytecode, JIT | `README.md` |
-| 12 | Garbage Collection e tuning | `README.md` |
-| 13 | JMH, JFR/JMC, jcmd, dumps | `README.md` |
-| 17 | Persistência, transações, locking | `README.md` |
-| 18 | Distribuídos, mensageria, resiliência | `README.md` |
-| 19 | Segurança, observabilidade, operação | `README.md` |
-| 20 | DDD, hexagonal, microsserviços | `README.md` |
-
-São exatamente os módulos **Sênior → Expert**. O texto promete "diagnóstico orientado por evidência" e
-"provar correção concorrente", mas o artefato executável para isso não existe. 598 linhas de Java no
-total.
-
-### 5.3 🟠 Quatro livros "fantasma" na biblioteca
-
-Dos 113 PDFs locais, todos existem em disco (0 arquivos faltando ✅), mas **4 títulos apontam para o
-arquivo de outro livro**:
-
-| Título catalogado | PDF que abre de verdade |
-| --- | --- |
-| System Design Interview — **Volume 2** | `system-design-interview-volume-1.pdf` |
-| JavaScript: The Definitive Guide (7ª ed) | *Eloquent JavaScript, 3rd Edition* |
-| Linear Algebra Done Right (Axler) | *Introduction to Linear Algebra* (Strang) |
-| OWASP Testing Guide 3.0 | `OWASP_ASVS_5.0.0_en.pdf` |
-
-A biblioteca real tem **109 obras distintas**, não 113.
-
----
-
-## 6. As duas ausências que o mercado de 2026 cobra
-
-### 6.1 🔴 Algoritmos e Estruturas de Dados
-
-- Trilha ativa na rotina: **3x/semana · 40 min**
-- Academia: **não existe** (só um guia de 12 linhas com critérios)
-- Livros na biblioteca: **zero** — nenhum Cormen, Skiena, Sedgewick, Grokking ou *Cracking the Coding
-  Interview* entre os 114 títulos
-- Exercícios didáticos: **zero**. O roteiro em `phases.js` define **meta de volume** — 60 problemas por
-  fase, ~660 em 36 meses, com foco declarado (árvores na F3, grafos na F4, DP na F6) — mas não há lista
-  de problemas, taxonomia de padrões, solução comentada nem progressão. É uma cota, não um currículo.
-
-O plano tem *System Design Interview* Vol. 1 e 2 para a metade de design da entrevista sênior, e nada
-para a metade de algoritmos. É a assimetria mais clara do projeto: 272 módulos didáticos e nenhum para
-a trilha que o próprio cronograma executa três vezes por semana durante 36 meses.
-
-### 6.2 🔴 Engenharia assistida por IA como prática
-
-`grep` por Copilot, Cursor, Claude Code, "código gerado por IA", "assistido por IA" em
-`public/data/*.js` → **zero ocorrências**. Uma menção solta a Copilot em `public/trilhas/git.html`.
-
-Isso contradiz diretamente o documento de mercado do próprio projeto
-(`MERCADO-DEV-2026.html`), que define o pleno de 2026 como quem tem "fluxo com agentes sem dependência
-cega" e o sênior como quem faz "revisão como gargalo assumido", "especificação executável" e "evals,
-golden datasets e regressão de prompt". E é reforçado pelo DORA 2025, cuja tese central é que a IA
-**amplifica** — para o bem ou para o mal — a capacidade organizacional existente.
-
-O currículo ensina a fazer engenharia sênior. Não ensina a fazer engenharia sênior **no ambiente onde
-essa engenharia acontece em 2026**. A trilha de IA ensina a *construir* sistemas de IA; não existe
-nada sobre *trabalhar com* IA como ferramenta de engenharia.
-
----
-
-## 7. Prioridade de correção
+## 6. Prioridade de correção (só o que falta)
 
 | # | Ação | Esforço | Impacto |
 | --- | --- | --- | --- |
-| 1 | **Criar a academia de DSA** (20 módulos no padrão de 23 campos) + adicionar 2–3 livros | Alto | 🔴 Crítico |
-| 2 | **Módulo/eixo transversal de engenharia assistida por IA** (spec executável, revisão de código gerado, evals, limites do agente) | Médio | 🔴 Crítico |
-| 3 | **MCP no módulo 18 de IA** + um exercício de servidor MCP | Baixo | 🔴 Alto |
-| 4 | **Reescrever os 6 campos genéricos** das 4 trilhas Tier B (84 módulos) | Alto | 🟠 Alto |
-| 5 | Atualizar bibliografia: **DDIA 2ª ed**, **FoSA 2ª ed**, SAA-C03, React/TS recentes | Baixo (compra/troca) | 🟠 Alto |
-| 6 | **Camada Spring Boot 4 / Framework 7** na trilha Java (independente do livro) | Médio | 🟠 Alto |
-| 7 | Free-threading + ruff na trilha Python; subir baseline para 3.13/3.14 | Baixo | 🟠 Médio |
-| 8 | Código executável para os 7 módulos Java 11–13, 17–20 | Alto | 🟠 Médio |
-| 9 | Valkey + pgvector na trilha de bancos; OpenTofu no DevOps | Baixo | 🟡 Médio |
-| 10 | Corrigir os 4 `path` de livros fantasma em `biblioteca.js` | Trivial | 🟡 Baixo |
-| 11 | Pós-quântica e segurança de LLM na trilha sec | Baixo | 🟡 Médio |
+| 1 | **Faixa 0** — ✅ **concluída**: Trilha 0 (academia Fundamentos, 14 módulos, quiz objetivo, debugger) + **Módulo 0 nas 13 trilhas técnicas** (todas, 4 módulos + exemplo verificado cada) | — (feito) | 🔴→✅ |
+| 2 | **Python e Arquitetura**: ✅ **concluído** — os 27 `README.md` placeholder viraram exemplo executável e autoverificado por módulo (13 `.mjs` em Arquitetura, 14 `.py` em Python) | — (feito) | 🔴→✅ |
+| 3 | **Inglês e Financeiro**: ✅ **concluído** — `answerKey` nas duas (todas as 16 academias têm gabarito), 14 planilhas/modelos versionados executáveis no Financeiro e **Fronteira nas duas** (Inglês: comunicação técnica; Financeiro: engenharia da decisão financeira). Opcional: `quiz` objetivo em Inglês | — (feito) | 🟠→✅ |
+| 4 | **Fiação**: ✅ **concluído** — `aieng` em `track-guides.js`; `dsa` e `aieng` em `track-exercises.js` (seções antes vazias no hub agora renderizam) | — (feito) | 🟠→✅ |
+| 5 | **AWS**: ✅ **concluído** — 8 `.mjs` sênior com ≥1 executável por parte (retry, quota, custo, failover, DR, elasticidade, DynamoDB, SQS/DLQ), além do `aws-zero.mjs` do Módulo 0 | — (feito) | 🟠→✅ |
+| 6 | **Cobertura de exemplo**: ✅ **concluído** — base coberta pelo Módulo 0 e todos os módulos sênior de Git (18) e AIeng (9) nos níveis 1–4 com exemplo executável próprio | — (feito) | 🟡→✅ |
+| 7 | **CI + ambiente reprodutível**: ✅ **concluído** — `scripts/verify-examples.mjs` (gate único), workflow GitHub Actions (Node+Python+JDK) e devcontainer | — (feito) | 🟡→✅ |
+| 8 | **Bibliografia**: ✅ edições duplicadas consolidadas (119→116 fichas) e Core Java Vol. II catalogado (→117). Resta só trocar a FoSA 2ª ed Early Release pela final — depende de release externo | — (parte acionável feita) | 🟡 Baixo |
+| 9 | **Higiene técnica** (varredura set/2026): ✅ `sitemap.xml` regenerado (81→130 URLs) + gerador `scripts/gen-sitemap.mjs`; código morto removido de `data/pdfs.js`; Core Java Vol. II catalogado; **`validate-content.mjs` atualizado** para a estrutura atual (17 trilhas / 16 academias / Módulo 0), gate verde de novo | — (feito) | 🟡 Baixo |
 
-**Os itens 1, 2, 3 e 10 dão o maior retorno por hora investida.** O item 10 leva minutos.
-
----
-
-## 8. O que falta para ir do básico ao avançado extremo
-
-As seções anteriores mediram *atualidade* e *qualidade*. Esta mede **amplitude vertical**: o quanto o
-currículo cobre da faixa completa de uma área, do zero absoluto até a fronteira técnica.
-
-### 8.1 Onde a curva realmente começa e termina
-
-Extraí o pré-requisito do módulo 1 e o teto do último módulo de cada academia:
-
-| Trilha | Entrada real (pré-requisito do módulo 1) | Teto (último módulo) | Faixa coberta |
-| --- | --- | --- | --- |
-| Java | "Sintaxe básica · compilação com javac" | DDD, hexagonal, microsserviços | Pl → Sr/Expert |
-| Python | "Python básico · classes · tracebacks" | Produção e observabilidade | Pl → Sr/Expert |
-| Arquitetura | **"Um sistema completo mantido em produção"** | Team Topologies e governança | Sr → Expert |
-| Banco de Dados | "Entidades · SQL DDL básico" | Observabilidade e incidentes | Pl → Sr/Expert |
-| DevOps/SRE | "Git · noção de deploy · um serviço" | Sistema sociotécnico | Pl → Staff |
-| AWS | "Linux e redes · virtualização · conta sandbox" | Migração e liderança | Pl → Staff |
-| Frontend | "Sintaxe HTML · árvore de elementos" | Arquitetura e liderança | Jr/Pl → Staff |
-| Segurança | "Arquitetura básica · fluxo de negócio · CIA" | Programa AppSec e métricas | Pl → Staff |
-| IA | "Programação básica · nenhuma matemática avançada" | Liderança técnica em IA | **Jr → Expert** |
-| Matemática | (genérico) | Matemática do self-attention | Jr → Pl |
-| Git | (genérico) | GitOps auditável | Jr → Sr |
-
-**A leitura:** o currículo cobre bem a faixa do **meio** — mais ou menos de "pleno inicial" a
-"sênior/staff". As duas pontas são fracas por motivos opostos: **a base é assumida como pré-requisito**
-e **a fronteira nunca é alcançada**. A única trilha que cobre a curva quase inteira é IA, que
-explicitamente parte de "nenhum domínio prévio de cálculo, álgebra linear, estatística ou Python
-científico" e chega a KV cache, MoE e scaling laws.
+**Retorno por hora:** os itens **1** (faixa 0), **2** (placeholders de Python/Arquitetura), **3** (paridade de
+Inglês/Financeiro), **4** (fiação de `aieng`/`dsa`), **5** (executáveis no AWS sênior), **6** (cobertura de
+exemplo em Git/AIeng), **7** (CI único) e a parte acionável do **8** (edições duplicadas consolidadas) estão
+**concluídos**. Não resta nada acionável na lista — só trocar a FoSA 2ª ed Early Release pela final, que
+depende de release externo.
 
 ---
 
-### 8.2 A ponta de baixo: o "básico" é pré-requisito, não conteúdo
+## 7. Conclusão
 
-Nenhuma academia ensina do zero. Alguns exemplos literais:
+O plano forma, no núcleo de 13 trilhas, **um sênior de 2026 que vai da aplicação à fronteira**: sabe usar,
+operar, decidir *e* construir por dentro. Atualidade de versões, gabaritos, laboratórios de Fronteira e campos
+autorais estão no lugar; as duas ausências de escopo que o mercado de 2026 cobra (algoritmos/ED e engenharia
+assistida por IA) têm academia própria.
 
-- **Java**, módulo 1, nível "Base avançada" — já pede saber compilar com `javac` e ler stack traces.
-- **Python**, módulo 1, nível "**Base sênior**" — começa em modelo de dados e métodos dunder.
-- **Arquitetura** — exige "ter construído e mantido pelo menos um sistema completo em produção".
+O que falta **não é profundidade técnica nem tópico de 2026**. É, em ordem:
 
-O único lugar com conteúdo básico é o roteiro de fases (`phases.js`), e ali ele aparece como **meta**,
-não como aula:
+1. ✅ **O chão** — a faixa 0, agora **completa**: a **Trilha 0 (Fundamentos)** (14 módulos, quiz objetivo,
+   debugger) e o **Módulo 0 em todas as 13 trilhas técnicas** (Java, Python, DSA, Frontend, Bancos, IA,
+   Arquitetura, DevOps, AWS, Segurança, Matemática, Git e Eng. Assistida por IA — 4 módulos de ponte + exemplo
+   verificado cada). Nenhuma trilha técnica ficou de fora.
+2. ✅ **Uniformidade de código executável** — os placeholders de Python/Arquitetura foram eliminados (cada
+   módulo com exemplo próprio). Resta apenas estender executáveis aos módulos sênior de AWS (a base de todas as
+   trilhas já está coberta pelo Módulo 0).
+3. ✅ **Paridade de Inglês/Financeiro** — gabarito nas duas (todas as 16 academias têm), 14 modelos
+   executáveis no Financeiro e **Fronteira nas duas** (Inglês: comunicação técnica de alto risco; Financeiro:
+   engenharia da decisão financeira, com modelo executável por módulo); resta, opcional, uma faixa de quiz
+   objetivo em Inglês.
+4. **Acabamento** — ✅ fiação de dados de apoio (DSA/AIeng), ✅ executáveis no AWS sênior, ✅ CI único
+   (gate + workflow + devcontainer) e ✅ bibliografia consolidada (só a edição corrente) feitos.
 
-> *"Implementar em código: Java 21 core: tipos, OO, herança, polimorfismo, interfaces, collections,
-> exceptions, generics, records e streams — critério observável: entregar código compilável…"*
-
-Isso é um objetivo de aprendizagem. Não explica nada. Quem não sabe herança não aprende ali.
-
-**O que falta para o curso ter um "básico" de verdade:**
-
-| Lacuna | O que seria |
-| --- | --- |
-| **Trilha 0 — fundamentos de computação** | Como funciona memória, processo, sistema de arquivos, rede; o que acontece entre digitar uma URL e a página aparecer; binário, encoding, ponto flutuante |
-| **Lógica e resolução de problemas** | Antes de qualquer linguagem: decompor problema, rastrear execução na mão, ler mensagem de erro |
-| **Ferramental** | Terminal e Linux do zero, IDE, **debugger** (não aparece em nenhum módulo), build (Maven/Gradle, pip/uv) |
-| **"Módulo 0" por trilha** | 3–5 módulos antes do atual #1 em cada academia, no mesmo padrão de 23 campos |
-| **Exercícios de correção objetiva** | Os 648 exercícios atuais pedem julgamento aberto (ADR, trade-off, evidência). Na faixa básica é preciso ter resposta certa e errada |
-
----
-
-### 8.3 A ponta de cima, trilha a trilha
-
-Cada linha abaixo foi verificada por busca no conteúdo. "0" significa zero ocorrências em toda a trilha.
-
-#### Java — teto: DDD e microsserviços
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** A trilha Java ganhou a parte **Fronteira**
-> (módulos 21–26) cobrindo bytecode e agents, JIT/escape analysis, VarHandle e false sharing, AOT/Native
-> Image/CRaC, FFM e leitura do OpenJDK — mais `javaTechnologyBaseline` (Java 25, Spring Boot 4.1) e
-> `javaAnswerKey`. A tabela abaixo é o diagnóstico original, mantido como registro.
-
-Já tem: ZGC e Shenandoah citados, manipulação de bytecode (3), *flame graphs* (2), JMM, Loom, JMH/JFR.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| GraalVM e Native Image (AOT, closed-world, config de reflexão) | **0** |
-| Project Panama / FFM API (finalizado no JDK 22) | **0** |
-| Project Valhalla (value types) e Vector API | **0** |
-| Project Leyden e CRaC (startup e snapshot) | **0** |
-| `VarHandle`, memory barriers, *false sharing*, `@Contended` | **0** |
-| Escape analysis, inlining, desotimização do JIT, JVMCI | **0** |
-| Escrever um *java agent* e instrumentar bytecode em runtime | **0** |
-| Estruturas lock-free / wait-free | **0** |
-| Ler código-fonte do OpenJDK (`HashMap`, `ConcurrentHashMap`, `ForkJoinPool`) | **0** |
-
-#### Python — teto: produção e observabilidade
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** A trilha Python ganhou a parte
-> **Fronteira** (módulos 21–26) cobrindo objetos/refcount/bytecode, descritores e metaclasses,
-> free-threading e JIT, extensões nativas, wheels e ABI, e leitura do CPython — mais
-> `pythonTechnologyBaseline` (3.14, PEP 779, uv, ruff), `pythonAnswerKey` e os primeiros exemplos
-> executáveis da trilha. O módulo 11 foi corrigido: a resposta sobre o GIL passou a declarar a build.
-> A tabela abaixo é o diagnóstico original, mantido como registro.
-
-Já tem: CPython citado (6), `dis`/bytecode (3), wheels (2), GIL, asyncio, NumPy.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| Internals do interpretador: loop `ceval`, `PyObject`, *reference counting*, arenas | **0** |
-| Extensões nativas: C API, **Cython**, **PyO3/Rust**, `cffi` | **0** |
-| Metaclasses, protocolo de descritores, `__slots__` e layout de memória | **0** |
-| Free-threading (PEP 703/779) e o JIT copy-and-patch do 3.13+ | **0** |
-| Publicar wheel binária multiplataforma (manylinux, cibuildwheel) | parcial |
-| Escrever uma biblioteca/framework do zero com API pública versionada | **0** |
-
-#### Banco de dados — teto: observabilidade e incidentes
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** A trilha ganhou a parte **Fronteira**
-> (módulos 21–27): storage engine com WAL, internals do otimizador, colunar e lakehouse, commit
-> distribuído e consenso, CRDTs, busca vetorial com pgvector e leitura do código do PostgreSQL — mais
-> `bancosTechnologyBaseline` (que trata a bifurcação Redis/Valkey), `bancosAnswerKey` e sete artefatos
-> novos, quatro deles executados contra um PostgreSQL 18.6 real. O módulo 14 passou a tratar Valkey.
-> A tabela abaixo é o diagnóstico original, mantido como registro.
-
-Já tem: B-tree e LSM (5), WAL, MVCC, planner, EXPLAIN, particionamento.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| **Implementar** um storage engine (B-tree ou LSM) e um WAL | **0** |
-| Consenso: Raft ou Paxos implementado | **0** |
-| Commit distribuído: 2PC, 3PC, Calvin, TrueTime/Spanner | **0** |
-| Armazenamento colunar e execução vetorizada (Parquet, Arrow, DuckDB) | **0** |
-| Internals do otimizador: cardinalidade, *join ordering*, modelo de custo | 1 |
-| Escrever uma extensão PostgreSQL em C; ler o código do Postgres | **0** |
-| CRDTs e replicação sem coordenação | **0** |
-
-#### Arquitetura — teto: Team Topologies e governança
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** A trilha Arquitetura ganhou a parte
-> **Fronteira** (módulos 19–25): event sourcing e CQRS, especificação formal em TLA+/Alloy, simulação
-> determinística, chaos engineering, células e shuffle sharding, papers fundadores e agentes de IA como
-> componente arquitetural — mais `arquiteturaTechnologyBaseline` (que declara DDIA 2ª ed e FoSA 2ª ed),
-> `arquiteturaAnswerKey` e sete artefatos novos, incluindo uma especificação TLA+ e o cálculo de raio de
-> impacto. A tabela abaixo é o diagnóstico original, mantido como registro.
-
-É a trilha com o teto mais bem construído: consenso aparece 17 vezes, relógios lógicos 2.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| Métodos formais: TLA+, Alloy, especificar e verificar um protocolo | **0** |
-| *Deterministic simulation testing* (estilo FoundationDB/Antithesis) | **0** |
-| Chaos engineering como disciplina formal (hipótese, blast radius, automação) | **0** |
-| Event sourcing e CQRS como módulo próprio | 1 menção |
-| *Cell-based architecture* e *shuffle sharding* | **0** |
-| Leitura dirigida dos papers fundadores (Dynamo, Spanner, Raft, Kafka, Borg) | **0** |
-
-#### DevOps/SRE — teto: sistema sociotécnico
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** A trilha ganhou a parte **Fronteira**
-> (módulos 21–27): escrever um operator, eBPF, Envoy e xDS, kernel e latência, plataforma como produto,
-> OpenTofu e leitura do código do Kubernetes — mais `devopsTechnologyBaseline`, `devopsAnswerKey` e oito
-> artefatos novos, três deles validados em ferramentas reais (Kubernetes 1.31, OpenTofu 1.10.6, Envoy 1.31).
-> Os módulos 5 e 9 foram corrigidos: DORA com rework rate, arquétipos e modelo de IA; Terraform com o
-> eixo de licença e OpenTofu. A tabela abaixo é o diagnóstico original, mantido como registro.
-
-Já tem: cgroups, namespaces e OCI (16), builds herméticos com Bazel/Nix (5), DORA de 5 métricas.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| Escrever um **operator** Kubernetes (CRD + reconciliation + controller-runtime) | **0** |
-| **eBPF**: observabilidade e rede no kernel (Cilium, Pixie) | **0** |
-| Service mesh por dentro: Envoy, xDS, mTLS, políticas | **0** |
-| Tuning de kernel, `perf`, análise de latência abaixo do runtime | **0** |
-| Construir uma plataforma interna (IDP) ponta a ponta como projeto | parcial |
-| Escrever um provider/módulo Terraform publicado | **0** |
-
-#### AWS — teto: migração e liderança
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** A trilha ganhou a parte **Fronteira**
-> (módulos 21–27): Nitro e Firecracker, estabilidade estática e células, multi-região com failover
-> medido, quotas e amplificação de retry, constructs CDK, IA gerenciada (Bedrock/SageMaker — que não
-> apareciam em lugar nenhum) e leitura dirigida da Builders’ Library — mais `awsTechnologyBaseline`,
-> `awsAnswerKey` e sete artefatos novos. Registro: a defasagem SAA-C02 → SAA-C03 **já estava declarada**
-> na ficha do livro; não era erro, era limite editorial assumido. A tabela abaixo é o diagnóstico
-> original, mantido como registro.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| Multi-região ativo-ativo com consistência e failover testado | parcial |
-| *Cell-based architecture* e *shuffle sharding* (o padrão da própria AWS) | **0** |
-| Nitro, Firecracker e o modelo de isolamento por baixo dos serviços | **0** |
-| Escrever constructs CDK e providers próprios, publicados | **0** |
-| Amazon Builders' Library e os papers da AWS como leitura dirigida | **0** |
-| Bedrock, SageMaker e a camada de IA gerenciada | **0** |
-
-#### Frontend — teto: arquitetura, migração e liderança
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** Era a trilha com a maior distância até o
-> extremo; ganhou a parte **Fronteira** (módulos 21–27): pipeline de renderização do navegador, React
-> por dentro (fiber, lanes, scheduler), reatividade do zero, compiladores e AST, WebAssembly/workers/GPU,
-> offline-first e front em escala — mais `frontendTechnologyBaseline` (React 19.3, React Compiler 1.0,
-> WebGPU em Baseline) e `frontendAnswerKey`. Dois artefatos são JavaScript executável verificado. O
-> baseline declara explicitamente que os livros do acervo antecedem Server Components e o compilador.
-> A tabela abaixo é o diagnóstico original, mantido como registro.
-
-Esta é a trilha com a **maior distância até o extremo**. O conteúdo é atual, mas para no nível de
-aplicação: ensina a usar a plataforma, não a entender ou construir a plataforma.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| Internals do browser: parsing, style resolution, layout, paint, compositing | **0** |
-| React por dentro: fiber, lanes, scheduler, reconciliação concorrente | **0** |
-| Escrever um framework reativo (ou um renderer) do zero | **0** |
-| Compiladores de front: React Compiler, plugins Babel/SWC, AST | **0** |
-| **WebAssembly** e interoperabilidade com Rust/C | **0** |
-| WebGPU/WebGL e renderização acelerada | **0** |
-| HTTP/3 e QUIC | **0** |
-| Colaboração offline-first e CRDTs | **0** |
-| Micro-frontends e federação de módulos em escala | **0** |
-
-#### Segurança — teto: programa AppSec e governança
-
-> **Atualizado em 20/09/2026 — esta lacuna foi fechada.** A trilha ganhou a parte **Fronteira**
-> (módulos 21–27): exploração de binário e o custo real das mitigações, engenharia reversa e análise
-> de binário, fuzzing guiado por cobertura por dentro, criptografia por dentro e migração pós-quântica,
-> verificação formal de protocolos, canais laterais e execução transiente, e segurança de sistemas de
-> IA — mais `secTechnologyBaseline` (12 linhas, incl. PQC final do NIST, roteiro de memory safety de
-> jan/2026, VMScape e a CRA em vigor desde 11/set/2026), `secAnswerKey` e sete artefatos novos. Dois são
-> executáveis verificados: `fuzzer.mjs` (mutação cega falha em 200 mil execuções; guiado por cobertura
-> acha em ~1 mil e minimiza para 5 bytes) e `pos-quantico.mjs` (ML-KEM-768 e ML-DSA-65 reais via
-> OpenSSL 3.5, com os tamanhos medidos e o handshake híbrido derivado). A tabela abaixo é o diagnóstico
-> original, mantido como registro.
-
-Já tem: fuzzing (7), noções de exploit (3), seccomp/AppArmor (5), ASVS 5.0 completo.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| *Exploit development* real: heap grooming, ROP, contorno de mitigações | 3 menções |
-| Engenharia reversa e análise de binário | **0** |
-| Ataques de canal lateral e *timing* | **0** |
-| Verificação formal de protocolos (ProVerif, Tamarin) | **0** |
-| Escrever um harness de fuzzing *coverage-guided* (AFL++, libFuzzer) | parcial |
-| Criptografia implementada e criptoanálise prática | parcial |
-| Criptografia pós-quântica (ML-KEM/ML-DSA) e plano de migração | 1 |
-
-#### IA — teto: liderança técnica (o teto mais alto do projeto)
-
-Já cobre, e bem: KV cache, *continuous batching*, *speculative decoding*, fusão de kernels, paralelismo
-de dados/modelo/pipeline, MoE, quantização, *scaling laws*, LLM-as-a-judge.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| **Implementar** atenção e um transformer do zero (é tópico, não exercício obrigatório) | conceitual |
-| Pré-treinar um modelo pequeno ponta a ponta (dados → tokenizer → treino → avaliação) | **0** |
-| Escrever kernels CUDA/Triton; FlashAttention por dentro | **0** |
-| RL pós-treino moderno implementado (GRPO, PPO) — hoje é conceitual | conceitual |
-| Interpretabilidade mecanicista (probing, circuitos, SAEs) | **0** |
-| **MCP** e protocolos de interoperabilidade de agentes (ver §4.2) | **0** |
-| Reprodução completa de paper com ablação como **projeto** (existe como desafio em #27) | parcial |
-
-#### Matemática — teto: a matemática do self-attention
-
-Já tem: convexidade (6), SVD, MLE, gradiente, log-sum-exp.
-
-| Falta para o extremo | Hoje |
-| --- | --- |
-| Teoria da informação: entropia, KL, cross-entropy derivada | **0** |
-| Teoria do aprendizado estatístico: PAC, dimensão VC, Rademacher, *bias-variance* formal | **0** |
-| Processos estocásticos e cadeias de Markov | **0** |
-| Otimização convexa formal (dualidade, KKT — nível Boyd) | parcial |
-| Inferência variacional e ELBO (base de VAEs e difusão) | **0** |
-| Análise real e teoria da medida (para probabilidade rigorosa) | **0** |
-
-#### Git — teto: GitOps auditável
-
-O tópico já vai fundo (plumbing, packfiles, delta). O que falta é **forma**: *Building Git*
-(James Coglan) está na biblioteca, mas "escrever um Git mínimo" — o exercício extremo natural da
-área — não existe como projeto.
-
-#### Algoritmos e ED
-
-Não tem academia nenhuma (§6.1). Precisa da curva inteira: do básico (arrays, hashing, Big O) ao
-extremo (algoritmos randomizados, estruturas persistentes, streaming/sketching, geometria
-computacional, NP-completude e redução, algoritmos de aproximação).
+O teto foi alcançado e o **chão está construído**: a base (Trilha 0 + Módulo 0 em todas as 13 trilhas
+técnicas) deixou de ser lacuna, os placeholders de código sumiram, as 16 academias têm gabarito, a AWS tem
+executável em todas as partes, há um **gate único de verificação** e o catálogo está consolidado. Nada
+acionável resta — só trocar a FoSA Early Release pela final quando ela sair (release externo).
 
 ---
 
-### 8.4 O que falta em forma, não em tópico
+## Fontes de verificação dos baselines (21/09/2026)
 
-Cinco ausências que não são "mais um assunto" — são o **mecanismo** pelo qual alguém passa de sênior
-para fronteira:
-
-1. **Laboratórios "construir X do zero".** Não existe nenhum. Escrever um Git, um storage engine, um
-   framework reativo, um java agent, um transformer, um operator — é o único caminho conhecido para
-   sair do nível de usuário avançado. Hoje o projeto tem 43 arquivos de exemplo somando 44 KB (§5.2).
-
-2. **Leitura de código-fonte real.** Zero módulos mandam abrir o código do JDK, do CPython, do
-   PostgreSQL, do React ou do Kubernetes. Ler implementação é o que separa "sei usar" de "sei como
-   funciona".
-
-3. **Reprodução de papers e benchmarks.** Só a trilha de IA toca nisso (módulo 27), e como desafio, não
-   como projeto entregável.
-
-4. **Gabarito.** Apenas IA tem `iaAnswerKey`. As outras 12 trilhas somam **558 exercícios sem
-   referência de correção**. Para estudo solo, isso limita o teto: você não sabe se acertou.
-
-5. **Ambiente reproduzível.** Não há devcontainer, dataset fixo, harness de benchmark nem suíte que
-   valide as entregas. Cada exercício exige montar o ambiente do zero — atrito que, somado em 648
-   exercícios, come mais tempo do que o conteúdo.
-
----
-
-### 8.5 Um modelo de cinco faixas
-
-Para "do básico ao avançado extremo" ser uma afirmação verificável e não um slogan, cada trilha
-precisaria declarar e cobrir cinco faixas. O projeto hoje cobre bem as faixas 1–3.
-
-| Faixa | Pergunta que responde | Evidência exigida | Cobertura hoje |
-| --- | --- | --- | --- |
-| **0 · Fundamento** | "O que é isso e por que existe?" | Exercício de resposta objetiva; conceito explicado sem jargão | 🔴 ausente (é pré-requisito) |
-| **1 · Aplicação** | "Como eu uso corretamente?" | Código que funciona, com teste | 🟢 forte |
-| **2 · Produção** | "Como isso quebra e como eu opero?" | Incidente reproduzido, runbook, métrica | 🟢 forte |
-| **3 · Domínio** | "Como eu decido e defendo a decisão?" | ADR, trade-off medido, revisão D30 | 🟢 forte — é o núcleo do projeto |
-| **4 · Fronteira** | "Como isso é construído por dentro — e eu consigo construir?" | Implementação do zero, leitura de código-fonte, paper reproduzido, contribuição upstream | 🔴 ausente em 12 de 13 trilhas |
-
-A faixa 3 é onde o projeto é excelente e incomum. A faixa 4 é exatamente o que "avançado extremo"
-nomeia, e ela **não existe** — exceto parcialmente em IA.
-
----
-
-### 8.6 Dimensionamento honesto
-
-O que custaria fechar as duas pontas, no mesmo padrão das nove trilhas boas:
-
-| Bloco | Módulos novos/reescritos | Observação |
-| --- | --- | --- |
-| Faixa 0 em 12 trilhas | ~60 (5 por trilha) | O mais barato e o de maior impacto para quem começa |
-| Academia de DSA completa (faixas 0–4) | ~25 | Preenche o buraco do §6.1 |
-| Faixa 4 em 12 trilhas | ~60 (5 por trilha) | O mais caro: exige laboratório executável, não só texto |
-| Reescrita das 4 trilhas Tier B (§5.1) | 84 | Seis campos × 84 módulos |
-| Eixo de engenharia assistida por IA (§6.2) | ~8 | Transversal |
-| **Total** | **~237** | ≈ 87% do volume atual (272 módulos) |
-
-**Uma ressalva que vale mais que a tabela:** *avançado extremo em 13 áreas simultaneamente não é meta
-realista para uma pessoa em 36 meses* — nem é como senioridade funciona. A faixa 4 é cara em horas e
-perde valor rápido fora da área de atuação. Escrever um storage engine **e** um framework reativo **e**
-um transformer do zero não forma um especialista em três coisas; forma alguém raso em três.
-
-A recomendação que decorre da análise é **assimétrica de propósito**:
-
-- **Faixa 0 em todas as trilhas** — barata, destrava o início, elimina a dependência de conhecimento prévio.
-- **Faixas 1–3 em todas** — já é o que existe; manter e atualizar.
-- **Faixa 4 em três ou quatro trilhas escolhidas** — pelo eixo de carreira. Para o perfil declarado no
-  plano (backend Java/cloud com IA aplicada), o corte natural seria **Java, Arquitetura/Distribuídos,
-  Banco de Dados e IA**. Frontend, AWS, DevOps e Segurança param na faixa 3, o que é suficiente e
-  honesto.
-
-Declarar isso explicitamente no material — *"esta trilha vai até a faixa 3 por decisão de escopo"* —
-vale mais do que prometer profundidade extrema em tudo e entregar em nada.
-
----
-
-## 9. Conclusão
-
-O material **não é de nível iniciante disfarçado de avançado** — armadilha comum em planos de estudo
-autorais. Nas nove trilhas principais, o padrão `problema → mecanismo → trade-off → produção → risco →
-evidência` produz conteúdo que sustenta entrevista sênior de verdade, e a trilha de IA tem rigor de
-pesquisa acima da média (as versões declaradas conferem uma a uma com PyPI e release notes oficiais).
-
-O que separa o projeto de "atual" são três coisas de natureza diferente:
-
-1. **Defasagem de versão** (Java/Spring, Python, bibliografia) — mecânica, resolve-se com atualização.
-2. **Enchimento automático em 31% dos módulos** — estrutural, exige escrita.
-3. **Duas ausências de 2026** (DSA e engenharia assistida por IA) — conceitual, exige decisão de escopo.
-
-A número 3 é a que muda o veredito. Hoje o plano forma um **sênior de 2023 muito bem preparado**. Para
-formar um sênior de 2026 — pela definição que o próprio `MERCADO-DEV-2026.html` estabelece — faltam
-duas coisas, e nenhuma delas é profundidade técnica.
-
----
-
-## Fontes consultadas (20/09/2026)
-
-**Java e Spring**
-- [Oracle Java SE Support Roadmap](https://www.oracle.com/java/technologies/java-se-support-roadmap.html)
-- [Oracle Releases Java 26 (17/03/2026)](https://www.oracle.com/news/announcement/oracle-releases-java-26-2026-03-17/)
-- [Java SE 21 Developer Professional — 1Z0-830](https://education.oracle.com/java-se-21-developer-professional/pexam_1Z0-830)
-- [Spring Boot 4.0.7 available now (10/06/2026)](https://spring.io/blog/2026/06/10/spring-boot-4-0-7-available-now/)
-- [Spring Boot 4 & Spring Framework 7 — Baeldung](https://www.baeldung.com/spring-boot-4-spring-framework-7)
-
-**Python e IA**
-- [PEP 745 — Python 3.14 Release Schedule](https://peps.python.org/pep-0745/)
-- [What's New in Python 3.14](https://docs.python.org/3/whatsnew/3.14.html)
-- [PyPI — torch](https://pypi.org/project/torch/) · [scikit-learn](https://pypi.org/project/scikit-learn/) · [mlflow](https://pypi.org/project/mlflow/)
-- [Transformers v5 — Hugging Face](https://huggingface.co/blog/transformers-v5)
-- [MCP — The 2026-07-28 Specification](https://blog.modelcontextprotocol.io/posts/2026-07-28/)
-
-**Dados e infraestrutura**
-- [PostgreSQL 18 Released](https://www.postgresql.org/about/news/postgresql-18-released-3142/) · [PostgreSQL 19 Beta 1](https://www.postgresql.org/about/news/postgresql-19-beta-1-released-3313/)
-- [Valkey — Migration from Redis](https://valkey.io/topics/migration/) · [What is Valkey — Redis](https://redis.io/blog/what-is-valkey/)
-- [Kubernetes Patch Releases](https://kubernetes.io/releases/patch-releases/)
-- [OpenTofu vs Terraform — Scalr](https://scalr.com/learning-center/opentofu-vs-terraform)
-- [AWS Certified Solutions Architect – Associate](https://aws.amazon.com/certification/certified-solutions-architect-associate/)
-
-**Segurança, frontend e prática**
-- [OWASP Top 10:2025](https://owasp.org/Top10/2025/) · [OWASP ASVS](https://github.com/OWASP/ASVS)
-- [React 19.3 (09/09/2026)](https://react.dev/blog/2026/09/09/react-19-3) · [Next.js Blog](https://nextjs.org/blog)
-- [DORA — State of AI-assisted Software Development 2025](https://dora.dev/dora-report-2025/)
-
-**Bibliografia**
-- [Designing Data-Intensive Applications, 2ª ed (mar/2026)](https://martin.kleppmann.com/2026/03/24/designing-data-intensive-applications-2e.html)
-- [Fundamentals of Software Architecture, 2ª ed (set/2025)](https://www.oreilly.com/library/view/fundamentals-of-software/9781098175504/)
+- **Java/Spring:** [Oracle Java SE Roadmap](https://www.oracle.com/java/technologies/java-se-support-roadmap.html) · [Spring Boot 4](https://spring.io/blog/2026/06/10/spring-boot-4-0-7-available-now/) · verificação executável sob **JDK 26** (`CompileSmoke -ea`).
+- **Python/IA:** [What's New in Python 3.14](https://docs.python.org/3/whatsnew/3.14.html) · [PyPI torch](https://pypi.org/project/torch/) · [MCP](https://modelcontextprotocol.io/) · Pyodide 0.28.
+- **Dados/infra:** [PostgreSQL 18](https://www.postgresql.org/about/news/postgresql-18-released-3142/) · [Valkey](https://valkey.io/topics/migration/) · [OpenTofu](https://opentofu.org/) · [Kubernetes patch releases](https://kubernetes.io/releases/patch-releases/).
+- **Segurança/Frontend:** [OWASP Top 10:2025](https://owasp.org/Top10/2025/) · [NIST PQC](https://csrc.nist.gov/projects/post-quantum-cryptography) · [React 19.3](https://react.dev/) · [DORA 2025](https://dora.dev/dora-report-2025/).
+- **Bibliografia:** [DDIA 2ª ed](https://martin.kleppmann.com/2026/03/24/designing-data-intensive-applications-2e.html) · [FoSA 2ª ed](https://www.oreilly.com/library/view/fundamentals-of-software/9781098175504/) · [AWS SAA-C03](https://aws.amazon.com/certification/certified-solutions-architect-associate/).

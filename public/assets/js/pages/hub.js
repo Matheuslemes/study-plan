@@ -68,11 +68,15 @@ function renderRouteMap(config, academy, modules, assessment) {
       <strong>${escapeHtml(academy.title)}</strong>
     </div>
     <ol class="ac-route-map__flow">
-      ${Object.values(academy.parts).map((part, index) => `
+      ${Object.entries(academy.parts).map(([id, part], index) => {
+        const page = part.page || `${id}.html`;
+        return `
         <li><span>${String(index + 1).padStart(2, '0')}</span>
-          <div><strong>${escapeHtml(part.navLabel || part.title)}</strong><small>${escapeHtml(part.subtitle)}</small></div>
-        </li>
-      `).join('')}
+          <a class="ac-route-map__link" href="./${escapeHtml(config.id)}/${escapeHtml(page)}">
+            <strong>${escapeHtml(part.navLabel || part.title)}</strong><small>${escapeHtml(part.subtitle)}</small>
+          </a>
+        </li>`;
+      }).join('')}
     </ol>
     <p><strong>${modules.length}</strong> módulos ·
       <strong>${Object.keys(academy.parts).length}</strong> partes ·
@@ -116,6 +120,31 @@ function renderAcademyGrid(config, academy) {
       </a>
     `;
   }).join('');
+}
+
+/*
+ * Navegação rápida das páginas da trilha.
+ * Insere, na barra fixa (sticky) do hub, um grupo com um link direto para
+ * cada página (parte) da academia — assim é possível pular para qualquer
+ * página sem rolar o corpo do hub inteiro procurando a grade de partes.
+ */
+function renderTrackPagesNav(config, academy) {
+  if (!academy) return;
+  const bar = document.getElementById('navSectionsBar');
+  if (!bar || bar.querySelector('.nav-group--pages')) return;
+  const total = Object.keys(academy.parts).length;
+  const group = document.createElement('div');
+  group.className = 'nav-group nav-group--pages';
+  group.innerHTML = `
+    <span class="nav-group-label">Páginas</span>
+    ${Object.entries(academy.parts).map(([id, part], index) => {
+      const page = part.page || `${id}.html`;
+      const label = part.navLabel || part.title;
+      return `<a class="nav-link nav-link--page" href="./${escapeHtml(config.id)}/${escapeHtml(page)}"
+        title="Parte ${index + 1}/${total} · ${escapeHtml(part.title)}">${String(index + 1).padStart(2, '0')} · ${escapeHtml(label)}<span class="nav-link__ext" aria-hidden="true">↗</span></a>`;
+    }).join('')}
+  `;
+  bar.prepend(group);
 }
 
 async function loadModel(config) {
@@ -164,6 +193,7 @@ async function start() {
         exercises
       });
       renderRouteMap(config, model.academy, model.modules, model.assessment);
+      renderTrackPagesNav(config, model.academy);
       renderAcademyGrid(config, model.academy);
     }
     initNav();

@@ -159,7 +159,15 @@ export const iaSources = Object.freeze({
   ray: { title: 'Ray Serve LLM documentation', author: 'Anyscale/Ray', type: 'Documentação oficial', year: '2026', url: 'https://docs.ray.io/en/latest/serve/llm/index.html', level: 'Sênior', reason: 'Serving distribuído, paralelismo e desagregação prefill/decode' },
   sagemaker: { title: 'Amazon SageMaker AI — MLOps', author: 'AWS', type: 'Documentação oficial', year: '2026', url: 'https://docs.aws.amazon.com/sagemaker/latest/dg/mlops.html', level: 'Sênior', reason: 'Referência gerenciada de pipelines, registry, monitoramento e rollout' },
   azureml: { title: 'Azure Machine Learning documentation', author: 'Microsoft', type: 'Documentação oficial', year: '2026', url: 'https://learn.microsoft.com/en-us/azure/machine-learning/', level: 'Sênior', reason: 'Alternativa gerenciada para ciclo de vida de ML' },
-  vertex: { title: 'Vertex AI documentation', author: 'Google Cloud', type: 'Documentação oficial', year: '2026', url: 'https://cloud.google.com/vertex-ai/docs', level: 'Sênior', reason: 'Alternativa gerenciada para treino, registry, endpoints e GenAI' }
+  vertex: { title: 'Vertex AI documentation', author: 'Google Cloud', type: 'Documentação oficial', year: '2026', url: 'https://cloud.google.com/vertex-ai/docs', level: 'Sênior', reason: 'Alternativa gerenciada para treino, registry, endpoints e GenAI' },
+  flashattention: { title: 'FlashAttention-4: Kernel Pipelining Co-Design for Asymmetric Hardware', author: 'Dao et al.', type: 'Paper', year: '2026', url: 'https://arxiv.org/abs/2603.05451', level: 'Pesquisa', reason: 'Atenção IO-aware; softmax online e tiling para Blackwell' },
+  grpo: { title: 'DeepSeekMath: GRPO (Group Relative Policy Optimization)', author: 'Shao et al.', type: 'Paper', year: '2024', url: 'https://arxiv.org/abs/2402.03300', level: 'Pesquisa', reason: 'RL crítico-free com vantagem relativa ao grupo' },
+  deepseekr1: { title: 'DeepSeek-R1: Incentivizing Reasoning via RL', author: 'DeepSeek-AI', type: 'Paper', year: '2025', url: 'https://arxiv.org/abs/2501.12948', level: 'Pesquisa', reason: 'RLVR em escala; recompensa verificável e raciocínio' },
+  mcp: { title: 'Model Context Protocol — specification', author: 'Anthropic / Agentic AI Foundation (Linux Foundation)', type: 'Padrão aberto', year: '2025', url: 'https://modelcontextprotocol.io/', level: 'Sênior', reason: 'Padrão de interoperabilidade de ferramentas e agentes' },
+  circuits: { title: 'Circuit Tracing: Revealing Computational Graphs in Language Models', author: 'Anthropic — Transformer Circuits', type: 'Publicação de pesquisa', year: '2025', url: 'https://transformer-circuits.pub/2025/attribution-graphs/methods.html', level: 'Pesquisa', reason: 'SAEs, attribution graphs e interpretabilidade mecanicista' },
+  chinchilla: { title: 'Training Compute-Optimal Large Language Models (Chinchilla)', author: 'Hoffmann et al.', type: 'Paper', year: '2022', url: 'https://arxiv.org/abs/2203.15556', level: 'Pesquisa', reason: 'Leis de escala: equilíbrio ótimo entre parâmetros e tokens' },
+  triton: { title: 'Triton — GPU programming language and compiler', author: 'OpenAI / Triton project', type: 'Documentação oficial', year: '2026', url: 'https://triton-lang.org/main/index.html', level: 'Avançado', reason: 'Escrever kernels de GPU em Python sem CUDA C++' },
+  nanogpt: { title: 'nanoGPT', author: 'Andrej Karpathy', type: 'Código de referência', year: '2023', url: 'https://github.com/karpathy/nanoGPT', level: 'Avançado', reason: 'Transformer e loop de pré-treino mínimos e legíveis' }
 });
 
 export const iaTechnologyBaseline = [
@@ -170,45 +178,74 @@ export const iaTechnologyBaseline = [
   { technology: 'MLflow', baseline: '3.14', status: 'Estável', note: 'Inclui fluxos de ML, LLMs e agentes.' },
   { technology: 'JAX', baseline: '0.11', status: 'Evolução rápida', note: 'Zero-major: conferir compatibilidade e changelog por projeto.' },
   { technology: 'KServe', baseline: '0.18', status: 'Estável com APIs GenAI em evolução', note: 'LLMInferenceService possui superfície própria e deve ser validado.' },
-  { technology: 'Ray Serve', baseline: '2.56', status: 'Estável', note: 'Recursos avançados de LLM dependem de hardware e backend.' }
+  { technology: 'Ray Serve', baseline: '2.56', status: 'Estável', note: 'Recursos avançados de LLM dependem de hardware e backend.' },
+  { technology: 'FlashAttention', baseline: 'FA-4 (mar/2026)', status: 'Fronteira de kernels', note: 'Redesenho para Blackwell: 1,3× sobre cuDNN, 2,7× sobre Triton. Requer Hopper/Blackwell; hardware antigo usa FA-2/3. Módulo 33.' },
+  { technology: 'RL pós-treino', baseline: 'GRPO / RLVR (DeepSeek-R1, 2025)', status: 'Padrão de raciocínio', note: 'Crítico-free com vantagem de grupo e recompensa verificável. Variantes GSPO/DAPO em 2025. Módulo 34.' },
+  { technology: 'Model Context Protocol', baseline: 'spec 2025-11-25', status: 'Padrão de interoperabilidade', note: 'Anthropic (nov/2024); adotado por OpenAI, Google e Microsoft; doado à Agentic AI Foundation (Linux Foundation, dez/2025). Módulo 36.' },
+  { technology: 'Interpretabilidade mecanicista', baseline: 'SAEs + circuit tracing (2025)', status: 'Pesquisa ativa', note: 'Attribution graphs e crosscoders/CLTs desempacotam superposição. transformer-circuits.pub. Módulo 35.' },
+  { technology: 'Leis de escala', baseline: 'Chinchilla (2022) como base', status: 'Referência de pré-treino', note: 'Equilíbrio parâmetros×tokens; ponto de partida para orçamento de treino. Módulo 32.' }
 ];
 
 export const iaAcademy = Object.freeze({
   title: 'Academia de Inteligência Artificial',
-  baseline: '30 módulos · 90 exercícios · 150 perguntas · 30 casos · 7 projetos',
+  baseline: '41 módulos (com o Módulo 0) · 123 exercícios · 12 quiz · 205 perguntas · 41 casos · 7 projetos',
   parts: {
+    base: {
+      index: '0/7', title: 'Módulo 0 — da Faixa 0 à IA', range: 'Módulos 0.1–0.4',
+      subtitle: 'Ponte dos fundamentos: o que é aprender com dados, dados como números, modelo/erro/treino e generalização.',
+      prerequisites: ['Concluir a Trilha 0 (Fundamentos) ou equivalente.', 'Ler e escrever uma função simples em Python.', 'Nenhuma matemática além de média e porcentagem.'],
+      objectives: ['Distinguir programar regras de aprender de exemplos e situar IA, ML, deep learning e generativa.', 'Representar dados como tabela numérica e separar treino/teste sem vazamento.', 'Entender modelo, erro e treino como minimização do erro médio.', 'Reconhecer overfitting e escolher a métrica honesta.']
+    },
     fundamentos: {
-      index: '1/6', title: 'Fundamentos matemáticos e Python', range: 'Módulos 1–5',
+      index: '1/7', title: 'Fundamentos matemáticos e Python', range: 'Módulos 1–5',
       subtitle: 'Conceitos, Python científico, álgebra linear, otimização, probabilidade e estatística.',
       prerequisites: ['Programação backend e Git em nível funcional.', 'Nenhum domínio prévio de cálculo, álgebra linear, estatística ou Python científico.', 'Disposição para derivar, implementar, medir e documentar.'],
       objectives: ['Formalizar o vocabulário de IA sem confundir produto, modelo e automação.', 'Implementar operações matemáticas e otimização com NumPy.', 'Interpretar probabilidade e inferência sem abusar de p-values.', 'Construir a base necessária para ML e deep learning.']
     },
     'dados-ml': {
-      index: '2/6', title: 'Dados, aprendizado e avaliação', range: 'Módulos 6–9',
+      index: '2/7', title: 'Dados, aprendizado e avaliação', range: 'Módulos 6–9',
       subtitle: 'Qualidade de dados, ML supervisionado e não supervisionado, métricas e validação.',
       prerequisites: ['Concluir os módulos 1–5 ou demonstrar equivalência.', 'Manipular arrays e tabelas em Python.', 'Entender gradiente, probabilidade condicional, viés e variância.'],
       objectives: ['Projetar splits e pipelines sem leakage.', 'Escolher algoritmos por hipótese e custo, não por moda.', 'Avaliar modelos com métricas ligadas ao risco do produto.', 'Produzir análise de erros, slices e incerteza.']
     },
     'deep-learning': {
-      index: '3/6', title: 'Deep learning, visão, NLP e transformers', range: 'Módulos 10–13',
+      index: '3/7', title: 'Deep learning, visão, NLP e transformers', range: 'Módulos 10–13',
       subtitle: 'Redes profundas por dentro, visão computacional, evolução do NLP e atenção.',
       prerequisites: ['Dominar álgebra linear, cálculo e avaliação.', 'Construir baselines de ML clássico.', 'Saber depurar Python e interpretar uso de memória.'],
       objectives: ['Implementar forward/backprop e um loop PyTorch reproduzível.', 'Selecionar arquiteturas de visão e NLP por tarefa.', 'Derivar self-attention e explicar Q, K, V, máscaras e complexidade.', 'Medir qualidade, latência e vieses de modelos profundos.']
     },
     generativa: {
-      index: '4/6', title: 'LLMs, RAG, agentes e modelos generativos', range: 'Módulos 14–21',
+      index: '4/7', title: 'LLMs, RAG, agentes e modelos generativos', range: 'Módulos 14–21',
       subtitle: 'Foundation models, prompting, recuperação, agentes, adaptação, difusão e RL.',
       prerequisites: ['Concluir transformers e avaliação de modelos.', 'Conhecer APIs, bancos de dados e segurança de aplicações.', 'Saber construir experimento com baseline e conjunto de teste.'],
       objectives: ['Explicar treino, decoding, KV cache, quantização e MoE.', 'Projetar RAG autorizado, observável e avaliável.', 'Distinguir workflow determinístico de agente e limitar autonomia.', 'Decidir entre prompt, RAG, fine-tuning e treino do zero.']
     },
     engenharia: {
-      index: '5/6', title: 'Produção, cloud, segurança e governança', range: 'Módulos 22–26',
+      index: '5/7', title: 'Produção, cloud, segurança e governança', range: 'Módulos 22–26',
       subtitle: 'MLOps, arquitetura de sistemas, cloud, segurança defensiva e IA responsável.',
       prerequisites: ['Ter ao menos um modelo e uma aplicação generativa avaliados.', 'Conhecer Docker, CI/CD, observabilidade e sistemas distribuídos.', 'Conseguir expressar SLO, risco, custo e rollback.'],
       objectives: ['Operar o ciclo de vida com lineage, registry, rollout e drift.', 'Desenhar serving síncrono, assíncrono, batch e streaming.', 'Modelar ameaças e aplicar mínimo privilégio.', 'Converter princípios de governança em controles auditáveis.']
     },
+    fronteira: {
+      index: '6/7', title: 'Fronteira: construir do zero e a fronteira de pesquisa', range: 'Módulos 27–33',
+      subtitle: 'Atenção e transformer do zero, pré-treino, kernels e FlashAttention, RL moderno, interpretabilidade mecanicista, MCP e reprodução de paper.',
+      prerequisites: [
+        'Dominar transformers, treino, avaliação e produção (partes 1–5).',
+        'Ler e escrever numpy sem apoio, e derivar gradientes à mão.',
+        'Aceitar que aqui a resposta vem do mecanismo: do tensor, do kernel, da prova.'
+      ],
+      objectives: [
+        'Implementar atenção, máscara causal e multi-head do zero, com asserts.',
+        'Pré-treinar do tokenizador ao loop, guiado por leis de escala.',
+        'Explicar FlashAttention como I/O, não como FLOPs, e provar a equivalência.',
+        'Implementar a vantagem de grupo do GRPO e o porquê da recompensa verificável.',
+        'Desempacotar superposição com um autoencoder esparso e ler um circuito.',
+        'Expor ferramentas por MCP com governança, não só com código.',
+        'Reproduzir um paper com baseline, ablação e limite declarado.'
+      ]
+    },
     pratica: {
-      index: '6/6', title: 'Pesquisa, performance, avaliação e liderança', range: 'Módulos 27–30 + avaliação',
+      index: '7/7', title: 'Pesquisa, performance, avaliação e liderança', range: 'Módulos 34–37 + avaliação',
       subtitle: 'Leitura científica, otimização medida, avaliação generativa e decisões técnicas.',
       prerequisites: ['Concluir um projeto ponta a ponta das partes anteriores.', 'Manter experimentos, decisões e riscos rastreáveis.', 'Aceitar revisão baseada em evidência e reprodutibilidade.'],
       objectives: ['Ler e reproduzir papers com postura crítica.', 'Otimizar somente após profiling e estabelecer Pareto custo×qualidade.', 'Construir avaliação generativa específica do produto.', 'Liderar viability, build×buy, arquitetura e comunicação de incerteza.']
@@ -287,6 +324,229 @@ function createModule(module) {
 }
 
 const moduleCatalog = [
+  {
+    number: '0.1', part: 'base', id: 'base-aprender-com-dados', level: 'Ponte (Faixa 0)',
+    title: 'O que é "aprender com dados" (IA, ML, deep learning e generativa)',
+    objective: 'Diferenciar programar regras de aprender padrões a partir de exemplos, e situar IA ⊃ ML ⊃ deep learning, discriminativo × generativo e supervisionado/não supervisionado/reforço.',
+    prerequisites: ['Trilha 0 (lógica, como um programa roda, terminal)', 'Ler e escrever uma função simples', 'Nenhuma matemática além de média e porcentagem'],
+    topics: ['programar regras × aprender de exemplos', 'IA, ML e deep learning', 'discriminativo × generativo', 'supervisionado, não supervisionado e reforço', 'treino × inferência', 'quando NÃO usar ML', 'tarefa, dado e rótulo', 'baseline'],
+    problem: 'Quem começa acha que "IA" é uma coisa só e tenta usar um modelo grande para tudo — inclusive onde três linhas de `if` resolveriam melhor, mais barato e auditável.',
+    intuition: 'Programar é você escrever a regra. Aprender de dados é mostrar exemplos (entrada → resposta certa) e deixar a máquina descobrir a regra que os explica. ML é um subconjunto da IA; deep learning é um subconjunto do ML (redes com muitas camadas); IA generativa produz conteúdo novo em vez de só classificar.',
+    mathematics: 'Sem fórmula ainda: existe uma função f desconhecida que leva a entrada X ao rótulo Y, e aprender é procurar uma f que acerte os exemplos e, principalmente, os casos novos.',
+    internals: ['Regra: o humano escreve a lógica; a máquina só executa.', 'Aprendizado: o humano fornece exemplos rotulados; a máquina ajusta uma função para reproduzi-los.', 'Discriminativo separa/classifica ("é spam?"); generativo cria ("escreva um e-mail").'],
+    conceptExample: 'Detectar spam por regra ("se contém X, é spam") quebra a cada e-mail novo; treinar com milhares de e-mails marcados spam/não-spam deixa o modelo aprender padrões que ninguém escreveu à mão.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'Somente biblioteca padrão', gpu: 'Não',
+      cost: 'O(1) — didático', limitations: 'Compara os dois estilos; ainda não treina de verdade.',
+      code: `# Estilo 1 — REGRA escrita a mao (voce define a logica):
+def eh_spam_regra(texto: str) -> bool:
+    return 'ganhe dinheiro' in texto.lower()
+
+# Estilo 2 — APRENDER de exemplos (a "regra" sai dos dados):
+exemplos = [('ganhe dinheiro agora', 1), ('reuniao as 10h', 0),
+            ('premio gratis', 1), ('almoco amanha?', 0)]
+palavras_spam = {p for texto, y in exemplos if y == 1 for p in texto.split()}
+def eh_spam_aprendido(texto: str) -> bool:
+    return any(p in palavras_spam for p in texto.lower().split())
+
+print(eh_spam_regra('GANHE DINHEIRO'), eh_spam_aprendido('premio hoje'))`
+    },
+    appliedExample: 'Antes de pedir a um LLM para "resolver o suporte", separe: o que é regra fixa (SLA, bloqueios), o que é classificação (rota do ticket) e o que é geração (rascunho de resposta).',
+    correctedApproach: 'Começar pela tarefa e por um baseline sem ML (regra ou heurística). Só trocar por aprendizado quando houver dados representativos e ganho medível sobre esse baseline.',
+    decision: 'usar uma regra quando a lógica é conhecida, estável e auditável; usar aprendizado quando o padrão é complexo, muda e há exemplos rotulados',
+    hypothesis: 'um modelo treinado nos exemplos supera a regra manual na tarefa, medido em casos que ele não viu',
+    tradeoffs: ['Regra é barata e auditável, mas cega ao que você não previu.', 'Aprendizado cobre padrões implícitos, mas depende de dados e erra de formas surpreendentes.', 'Modelo generativo resolve tarefas abertas, mas custa mais e é mais difícil de avaliar.'],
+    complexity: 'Conceitual: a regra é O(1) de manutenção humana por caso previsto; o aprendizado troca esforço humano por dados e cômputo de treino.',
+    productionImpact: 'Escolher ML onde uma regra bastava adiciona pipeline de dados, avaliação e monitoramento para sempre — custo permanente que não aparece na demo.',
+    errors: ['Achar que IA = LLM', 'Usar modelo onde um `if` resolveria', 'Não definir a tarefa nem o baseline antes de escolher a técnica'],
+    checklist: ['A tarefa e a resposta certa estão definidas?', 'Existe um baseline sem ML?', 'Há exemplos rotulados suficientes?', 'É classificação, geração ou decisão?', 'O erro tem custo conhecido?'],
+    practice: {
+      basic: 'Classificar 8 tarefas do dia a dia entre "regra basta" e "precisa aprender", justificando cada uma.',
+      intermediate: 'Escrever uma regra e um mini-aprendiz (como no exemplo) para o mesmo problema e comparar os acertos.',
+      advanced: 'Pegar um "vamos usar IA para tudo" e quebrá-lo em partes: regra, classificação e geração.',
+      senior: 'Definir o critério objetivo que faria você abandonar a regra e adotar ML.',
+      expert: 'Estimar o custo total (dados + treino + monitoramento) de trocar uma regra por um modelo e quando isso não compensa.'
+    },
+    case: {
+      title: 'Um modelo grande para um problema pequeno', context: 'Um time trocou uma regra de roteamento por um LLM e o custo por ticket subiu 40× sem melhorar a rota.',
+      symptoms: ['Latência e custo dispararam', 'Resultados variam entre execuções', 'Ninguém sabe explicar uma decisão'],
+      metrics: ['custo por decisão', 'acurácia da rota', 'variância entre execuções'], tools: ['baseline por regra', 'planilha de custo', 'amostra rotulada'],
+      rootCause: 'A tarefa era determinística e conhecida — não precisava aprender nada.', correction: 'Voltar à regra para os casos previsíveis e reservar o modelo só para o resíduo ambíguo.'
+    },
+    books: [['hands-on-ml', 'Cap. 1 — The Machine Learning Landscape'], ['ml-powered-apps', 'Caps. 1–2 — do produto ao framing']],
+    sources: ['sklearn'],
+    quiz: [
+      { question: 'Qual é a diferença central entre "programar uma regra" e "aprender de dados"?', options: ['Na regra, o humano escreve a lógica; no aprendizado, a máquina infere a lógica de exemplos', 'Regra usa Python e aprendizado usa outra linguagem', 'Aprendizado é sempre mais preciso que uma regra', 'Não há diferença real entre os dois'], answer: 0, why: 'Regra = lógica escrita à mão; aprendizado = função ajustada a exemplos rotulados.' },
+      { question: 'Como IA, ML e deep learning se relacionam?', options: ['deep learning ⊂ ML ⊂ IA', 'são exatamente sinônimos', 'IA ⊂ ML ⊂ deep learning', 'não têm nenhuma relação entre si'], answer: 0, why: 'Deep learning é um tipo de ML, que por sua vez é um subcampo da IA.' },
+      { question: 'Quando uma regra (`if`) tende a ser preferível a um modelo aprendido?', options: ['Quando a lógica é conhecida, estável e precisa ser auditável', 'Nunca — modelos são sempre melhores', 'Só quando não há Python disponível', 'Sempre que você tiver muitos dados rotulados'], answer: 0, why: 'Regra é barata e auditável para lógica conhecida; ML se justifica quando o padrão é complexo/mutável e há dados.' }
+    ]
+  },
+  {
+    number: '0.2', part: 'base', id: 'base-dados-viram-numeros', level: 'Ponte (Faixa 0)',
+    title: 'Dados viram números: features, rótulo e a tabela de treino',
+    objective: 'Representar dados como tabela (linha = exemplo, coluna = feature, uma coluna = rótulo), transformar categoria/texto em número e separar treino/validação/teste sem vazamento.',
+    prerequisites: ['Módulo 0.1', 'Listas e dicionários em Python', 'Ideia de média e porcentagem'],
+    topics: ['exemplo, feature e rótulo', 'tabela linha × coluna', 'tudo vira número (vetor)', 'codificação de categorias (one-hot)', 'normalização (intuição)', 'treino/validação/teste', 'vazamento de dados', 'representação'],
+    problem: 'Modelos não entendem "texto" nem "categoria" — só números. Sem representar e separar os dados direito, o modelo parece ótimo no treino e desaba no mundo real.',
+    intuition: 'Pense numa planilha: cada linha é um exemplo, cada coluna é uma característica (feature) e uma coluna especial é a resposta certa (rótulo). Transformar tudo em número (vetor) é o que permite calcular. Separar uma parte dos dados para teste é como guardar provas que o modelo nunca viu.',
+    mathematics: 'Cada exemplo é um vetor x = (x₁, …, x_d) com um rótulo y. O treino é uma matriz X de n exemplos × d features, com um vetor y de rótulos.',
+    internals: ['Feature numérica entra direto; categoria vira número (one-hot ou índice); texto vira contagem/embedding.', 'Normalizar coloca as features em escalas comparáveis para nenhuma dominar pela unidade.', 'O split separa treino (aprender), validação (ajustar escolhas) e teste (medir honesto).'],
+    conceptExample: 'Cidade ("Recife", "Natal") não é maior nem menor que outra; vira colunas 0/1 (one-hot), não 1, 2, 3 — senão o modelo inventa uma ordem que não existe.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'Somente biblioteca padrão', gpu: 'Não',
+      cost: 'O(n·d) — didático', limitations: 'One-hot manual e split simples, sem pandas, para ver o mecanismo.',
+      code: `# Tabela: cada linha e (features, rotulo). Tudo precisa virar numero.
+brutos = [
+    {'cidade': 'Recife', 'idade': 30, 'comprou': 1},
+    {'cidade': 'Natal',  'idade': 22, 'comprou': 0},
+    {'cidade': 'Recife', 'idade': 41, 'comprou': 1},
+]
+cidades = sorted({r['cidade'] for r in brutos})              # categorias -> colunas
+def vetor(r):
+    onehot = [1 if r['cidade'] == c else 0 for c in cidades]  # sem ordem falsa
+    return onehot + [r['idade']]
+X = [vetor(r) for r in brutos]
+y = [r['comprou'] for r in brutos]
+treino_X, teste_X = X[:2], X[2:]        # separar o que o modelo NAO ve
+print('colunas:', cidades + ['idade'])
+print('X:', X, ' y:', y)`
+    },
+    appliedExample: 'Prever churn: cada cliente é uma linha; plano, tempo de casa e uso viram colunas; "cancelou?" é o rótulo — e os clientes do último mês ficam de fora para teste.',
+    correctedApproach: 'Definir features e rótulo antes de modelar, codificar categorias sem ordem falsa e separar o teste ANTES de olhar ou normalizar, para não vazar informação do futuro.',
+    decision: 'one-hot para categorias sem ordem; índice/ordinal só quando a ordem é real; normalizar quando as escalas diferem muito',
+    hypothesis: 'um split treino/teste bem-feito estima o desempenho real melhor do que medir no próprio treino',
+    tradeoffs: ['One-hot é honesto, mas estoura colunas com muitas categorias.', 'Normalizar ajuda alguns modelos, mas exige usar estatísticas só do treino.', 'Mais features podem ajudar ou introduzir ruído e vazamento.'],
+    complexity: 'Montar a tabela é O(n·d); o cuidado caro não é o cômputo, é evitar vazamento entre treino e teste.',
+    productionImpact: 'Vazamento é o erro nº 1 de iniciante: métricas lindas offline e fracasso em produção, porque o teste "viu" informação que não existiria na hora real.',
+    errors: ['Codificar categoria como 1, 2, 3 (ordem falsa)', 'Normalizar usando o conjunto inteiro (vaza o teste)', 'Misturar treino e teste'],
+    checklist: ['Cada linha é um exemplo e há uma coluna de rótulo?', 'Categorias viraram número sem ordem inventada?', 'O teste foi separado antes de tudo?', 'As escalas foram tratadas só com dados de treino?', 'Nenhuma feature "espia" o futuro?'],
+    practice: {
+      basic: 'Transformar 5 registros com cidade e idade numa tabela numérica com one-hot.',
+      intermediate: 'Fazer um split treino/teste e explicar por que o teste fica de fora do aprendizado.',
+      advanced: 'Identificar uma fonte de vazamento num exemplo dado e corrigi-la.',
+      senior: 'Definir uma política de codificação/normalização que não vaze em produção.',
+      expert: 'Projetar a separação temporal de treino/teste para um problema que evolui no tempo.'
+    },
+    case: {
+      title: 'Acurácia perfeita que sumiu em produção', context: 'Um modelo tinha 99% no teste e 60% em produção.',
+      symptoms: ['Métrica offline ótima', 'Queda imediata no deploy', 'Feature "id do pedido" muito importante'],
+      metrics: ['gap treino×produção', 'importância das features', 'acurácia por período'], tools: ['auditoria de features', 'split temporal', 'matriz de confusão'],
+      rootCause: 'Vazamento: uma feature carregava a resposta e o teste não era independente.', correction: 'Remover a feature vazada e refazer o split de forma temporal e independente.'
+    },
+    books: [['hands-on-ml', 'Cap. 2 — End-to-End Machine Learning Project'], ['designing-ml-systems', 'Caps. 4–5 — dados e features']],
+    sources: ['pandas'],
+    quiz: [
+      { question: 'Por que codificar cidades como 1, 2, 3 costuma ser um erro?', options: ['Cria uma ordem/grandeza que não existe entre as categorias', 'Ocupa mais memória que one-hot', 'Python não aceita números em ML', 'Deixa o treino mais lento'], answer: 0, why: 'Índices inventam ordem; one-hot representa categorias sem hierarquia falsa.' },
+      { question: 'Qual é o propósito de separar um conjunto de teste?', options: ['Medir o desempenho em dados que o modelo não viu no treino', 'Ter mais dados para treinar', 'Acelerar o treino', 'Guardar um backup dos dados'], answer: 0, why: 'O teste estima a generalização — o desempenho honesto fora do treino.' },
+      { question: 'O que é "vazamento de dados" (data leakage)?', options: ['Informação do teste/futuro influencia o treino e infla a métrica', 'Perder arquivos de dados', 'Expor dados de usuários na internet', 'Usar dados demais no treino'], answer: 0, why: 'Leakage faz o modelo "ver" o que não deveria: métricas irreais que somem em produção.' }
+    ]
+  },
+  {
+    number: '0.3', part: 'base', id: 'base-modelo-erro-treino', level: 'Ponte (Faixa 0)',
+    title: 'Modelo, erro e treino: o coração do aprendizado',
+    objective: 'Entender um modelo como função com parâmetros, o erro (loss) como distância até a resposta e o treino como o ajuste dos parâmetros para reduzir o erro médio nos exemplos.',
+    prerequisites: ['Módulo 0.2', 'Saber o que é uma função f(x)', 'Ideia de média'],
+    topics: ['modelo = função com parâmetros', 'parâmetros × hiperparâmetros', 'erro / loss', 'erro quadrático médio (MSE)', 'treino como minimização', 'gradiente (intuição)', 'forma fechada × iterativo', 'previsão'],
+    problem: 'Sem entender o que "treinar" faz, o iniciante trata o modelo como caixa mágica — não sabe por que ele melhora, por que estabiliza nem por que às vezes não aprende.',
+    intuition: 'Um modelo é uma função f(x) = a·x + b com botões (os parâmetros a e b). O erro mede o quanto a previsão erra o alvo. Treinar é girar os botões para deixar o erro médio o menor possível — é isso, literalmente. É a mesma ideia do "minimizar risco" do módulo 1.',
+    mathematics: 'Erro quadrático médio: MSE = (1/n)·Σ (f(xᵢ) − yᵢ)². Treinar = escolher os parâmetros que minimizam o MSE, por fórmula fechada (mínimos quadrados) ou descendo o gradiente.',
+    internals: ['O modelo tem parâmetros (aprendidos) e hiperparâmetros (você escolhe).', 'A loss transforma "errou quanto" num único número a minimizar.', 'O treino ajusta os parâmetros na direção que reduz a loss até estabilizar.'],
+    conceptExample: 'Ajustar uma reta a pontos (x, y): cada escolha de a, b dá um erro médio; treinar acha o a, b de menor erro — no exemplo executável, a=3.2 e b=1.4 saem só dos dados.',
+    implementation: {
+      language: 'Python 3.12+ (Pyodide)', dependencies: 'Somente biblioteca padrão', gpu: 'Não',
+      cost: 'O(n) — didático', limitations: 'Uma feature e modelo linear: o mínimo para ver o mecanismo (o artefato completo está no exemplo versionado).',
+      code: `# Treinar = achar a, b que minimizam o erro medio (minimos quadrados).
+treino = [(1, 5), (2, 7), (3, 12), (4, 13), (5, 18)]
+n = len(treino)
+sx = sum(x for x, _ in treino);  sy = sum(y for _, y in treino)
+sxy = sum(x*y for x, y in treino);  sxx = sum(x*x for x, _ in treino)
+a = (n*sxy - sx*sy) / (n*sxx - sx*sx)   # inclinacao aprendida
+b = (sy - a*sx) / n                      # intercepto aprendido
+mse = sum((a*x + b - y)**2 for x, y in treino) / n
+print(f'f(x) = {a:.1f}*x + {b:.1f}   erro medio (MSE) = {mse:.2f}')`
+    },
+    appliedExample: 'Estimar o tempo de entrega a partir da distância: os parâmetros da reta saem do histórico; o erro médio diz o quanto, em média, a estimativa erra.',
+    correctedApproach: 'Definir a loss (o que "erro" significa para o problema), treinar reduzindo-a e sempre reportar o erro — em vez de fingir que o modelo acerta tudo.',
+    decision: 'forma fechada (mínimos quadrados) quando existe e é barata; gradiente iterativo quando o modelo é grande ou não tem fórmula',
+    hypothesis: 'ajustar os parâmetros pela loss produz previsões melhores que um chute fixo (ex.: a média)',
+    tradeoffs: ['Forma fechada é exata, mas só existe para modelos simples.', 'Gradiente escala para modelos grandes, mas exige passo e épocas bem escolhidos.', 'Reduzir o erro de treino ao extremo pode piorar a generalização (módulo 0.4).'],
+    complexity: 'Mínimos quadrados de 1 feature é O(n); o gradiente é O(n·d) por época × número de épocas.',
+    productionImpact: 'Confundir parâmetro com hiperparâmetro, ou não medir a loss, leva a modelos que "treinam" sem melhorar e a retrabalho caro.',
+    errors: ['Achar que treino = rodar código, sem olhar a loss', 'Confundir parâmetro (aprendido) com hiperparâmetro (escolhido)', 'Esperar erro zero no treino'],
+    checklist: ['A loss está definida e faz sentido para o problema?', 'A loss cai durante o treino?', 'Sei quais são parâmetros e quais são hiperparâmetros?', 'O erro final foi reportado?', 'O modelo bate um baseline simples?'],
+    practice: {
+      basic: 'Rodar o exemplo e explicar de onde vêm a=3.2 e b=1.4.',
+      intermediate: 'Mudar um ponto do treino e observar como a, b e o MSE mudam.',
+      advanced: 'Implementar a mesma reta por gradiente e comparar com a forma fechada.',
+      senior: 'Escolher a loss certa para um problema com erros de custo assimétrico.',
+      expert: 'Explicar por que reduzir o erro de treino ao máximo pode aumentar o erro de teste.'
+    },
+    case: {
+      title: 'O treino que nunca melhorava', context: 'Um iniciante rodava fit() em loop e a "precisão" não subia.',
+      symptoms: ['Loss constante entre épocas', 'Passo de aprendizado enorme', 'Resultado dependia da execução'],
+      metrics: ['loss por época', 'norma do gradiente', 'erro final'], tools: ['gráfico da loss', 'log de hiperparâmetros', 'seed fixa'],
+      rootCause: 'Hiperparâmetro (passo) mal escolhido — o treino divergia em vez de minimizar.', correction: 'Ajustar o passo, fixar a seed e acompanhar a curva da loss até estabilizar.'
+    },
+    books: [['hands-on-ml', 'Cap. 4 — Training Models'], ['deep-learning', 'Cap. 5 — Machine Learning Basics']],
+    sources: ['numpy'],
+    exampleFile: '../../examples/ia-senior/ia-zero.py',
+    quiz: [
+      { question: 'O que significa "treinar" um modelo?', options: ['Ajustar os parâmetros para reduzir o erro médio nos exemplos', 'Rodar o programa mais rápido', 'Guardar os dados em memória', 'Escrever mais regras à mão'], answer: 0, why: 'Treinar = otimizar os parâmetros minimizando a loss (o erro médio).' },
+      { question: 'Qual a diferença entre parâmetro e hiperparâmetro?', options: ['Parâmetro é aprendido no treino; hiperparâmetro você escolhe antes', 'São a mesma coisa', 'Hiperparâmetro é aprendido; parâmetro é fixo', 'Parâmetro só existe em deep learning'], answer: 0, why: 'a e b da reta são parâmetros aprendidos; o passo de aprendizado é um hiperparâmetro definido por você.' },
+      { question: 'Depois de treinar bem, o erro no treino normalmente é:', options: ['Baixo, mas em geral maior que zero (o mundo tem ruído)', 'Sempre exatamente zero', 'Sempre maior que o erro de teste', 'Irrelevante'], answer: 0, why: 'Dados reais têm ruído; erro zero no treino costuma ser sinal de decorar (overfitting), visto no 0.4.' }
+    ]
+  },
+  {
+    number: '0.4', part: 'base', id: 'base-generalizacao-overfitting', level: 'Ponte (Faixa 0)',
+    title: 'Generalização, overfitting e a métrica honesta',
+    objective: 'Distinguir decorar de generalizar, avaliar sempre em dados nunca vistos e reconhecer a armadilha da acurácia (baseline da classe majoritária) e o eixo underfitting ↔ overfitting.',
+    prerequisites: ['Módulo 0.3', 'Ideia de erro médio (MSE)', 'Split treino/teste (0.2)'],
+    topics: ['generalizar × decorar', 'overfitting e underfitting', 'capacidade do modelo', 'erro de treino × erro de teste', 'baseline', 'acurácia e sua armadilha', 'validação', 'métrica ligada ao custo'],
+    problem: 'O iniciante celebra a acurácia no treino e, no deploy, o modelo fracassa — porque decorou os exemplos em vez de aprender o padrão, ou porque a métrica escondia o desempenho real.',
+    intuition: 'Decorar é acertar as perguntas da prova que você já viu; generalizar é acertar as novas. Por isso se mede no teste. Um modelo simples demais erra em tudo (underfit); complexo demais decora o treino e falha fora (overfit). E "95% de acurácia" pode ser pior que uma regra boba se 95% dos casos já são de uma classe só.',
+    mathematics: 'O que importa é o erro esperado em dados novos (o risco), estimado pelo erro de teste. Overfitting: erro de treino ≪ erro de teste. Baseline da classe majoritária: acurácia = proporção da classe mais comum.',
+    internals: ['Aumentar a capacidade reduz o erro de treino, mas o de teste desce e depois volta a subir (overfitting).', 'A validação separa dados para ajustar escolhas sem tocar no teste.', 'A métrica precisa refletir o custo do erro, não só a contagem de acertos.'],
+    conceptExample: 'No exemplo executável, o "decorador" acerta 100% no treino (erro 0) e fracassa no teste (erro 112,5), enquanto o modelo aprendido erra pouco em ambos — decorar não é aprender.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'Somente biblioteca padrão', gpu: 'Não',
+      cost: 'O(n) — didático', limitations: 'Ilustra a armadilha da acurácia num caso desbalanceado.',
+      code: `# Armadilha da acuracia: 95% dos casos sao da classe 0.
+y_real   = [0]*95 + [1]*5
+sempre_0 = [0]*100                     # baseline bobo: chuta sempre 0
+acc = sum(p == t for p, t in zip(sempre_0, y_real)) / len(y_real)
+print(f'acuracia do baseline que ignora a classe rara: {acc:.0%}')
+print('recall dos positivos:', 0, '-> inutil apesar de 95% de acuracia')`
+    },
+    appliedExample: 'Detecção de fraude: 99,8% das transações são legítimas; um modelo que diz "tudo legítimo" tem 99,8% de acurácia e recall zero — inútil. A métrica tem de ser recall/custo, não acurácia.',
+    correctedApproach: 'Escolher a métrica pelo custo do erro, comparar sempre com o baseline da classe majoritária e reportar erro de treino E de teste para flagrar overfitting.',
+    decision: 'usar acurácia só em dados balanceados; em dados desbalanceados, usar recall/precisão/F1 ou custo esperado',
+    hypothesis: 'o modelo generaliza se o erro de teste é próximo do erro de treino e melhor que o baseline',
+    tradeoffs: ['Modelo mais complexo aprende mais, mas arrisca overfitting.', 'Mais dados combatem overfitting, mas custam para coletar e rotular.', 'Métrica simples é fácil de comunicar, mas pode esconder o custo real.'],
+    complexity: 'Avaliar é O(n) sobre o teste; o difícil é escolher a métrica e o baseline certos, não o cômputo.',
+    productionImpact: 'Reportar só acurácia offline é a causa clássica de modelos que passam na revisão e falham com usuários reais.',
+    errors: ['Medir no próprio conjunto de treino', 'Usar acurácia em dados desbalanceados', 'Confundir erro de treino baixo com modelo bom'],
+    checklist: ['O modelo foi medido em dados nunca vistos?', 'A métrica reflete o custo do erro?', 'O resultado bate o baseline da classe majoritária?', 'Erro de treino e de teste estão próximos?', 'Há sinal de overfitting ou underfitting?'],
+    practice: {
+      basic: 'Explicar, com o exemplo, por que o decorador falha no teste.',
+      intermediate: 'Calcular a acurácia de um baseline "classe majoritária" num conjunto desbalanceado.',
+      advanced: 'Diagnosticar, pelos erros de treino/teste, se um modelo dado está em underfitting ou overfitting.',
+      senior: 'Escolher e justificar a métrica para um problema com erros de custo assimétrico.',
+      expert: 'Projetar um protocolo de validação (treino/validação/teste + baseline) para um produto real.'
+    },
+    case: {
+      title: '95% de acurácia, zero fraudes detectadas', context: 'Um modelo antifraude foi aprovado com 99% de acurácia e não pegou nenhuma fraude.',
+      symptoms: ['Recall da fraude ≈ 0', 'Acurácia altíssima', 'Pouquíssimos positivos no dado'],
+      metrics: ['recall', 'precisão', 'custo por fraude perdida'], tools: ['matriz de confusão', 'baseline majoritário', 'curva precisão-recall'],
+      rootCause: 'Métrica errada (acurácia) num dado extremamente desbalanceado.', correction: 'Trocar por recall/custo, comparar com o baseline e reamostrar/pesar a classe rara.'
+    },
+    books: [['hands-on-ml', 'Cap. 3 — Classification (métricas)'], ['designing-ml-systems', 'Cap. 6 — avaliação de modelos']],
+    sources: ['sklearn'],
+    quiz: [
+      { question: 'O que é overfitting?', options: ['O modelo decora o treino (erro baixo) mas erra em dados novos', 'O modelo é rápido demais', 'O modelo usa poucas features', 'O modelo tem erro alto no treino e no teste'], answer: 0, why: 'Overfit = erro de treino ≪ erro de teste; decorou em vez de generalizar. (Erro alto em ambos é underfitting.)' },
+      { question: 'Por que "95% de acurácia" pode ser um resultado ruim?', options: ['Se 95% dos casos já são de uma classe, chutar essa classe atinge 95% sem valor algum', 'Acurácia nunca é confiável', '95% é sempre insuficiente', 'Porque falta memória para calcular'], answer: 0, why: 'Em dados desbalanceados, o baseline da classe majoritária já atinge a acurácia — é preciso recall/custo.' },
+      { question: 'Onde se deve medir o desempenho final de um modelo?', options: ['Em dados de teste que ele não viu no treino', 'No próprio conjunto de treino', 'Nos dados em que a acurácia é maior', 'Em qualquer parte dos dados'], answer: 0, why: 'Só o teste (dados não vistos) estima a generalização de forma honesta.' }
+    ]
+  },
   {
     number: 1, part: 'fundamentos', id: 'fundamentos-ia', level: 'Fundamental',
     title: 'Fundamentos de inteligência artificial',
@@ -1659,7 +1919,348 @@ print(recall)`
     sources: ['nist', 'datasheets', 'modelcards', 'euai']
   },
   {
-    number: 27, part: 'pratica', id: 'pesquisa-cientifica', level: 'Sênior → expert',
+    number: 27, part: 'fronteira', id: 'atencao-do-zero', level: 'Expert',
+    title: 'Atenção e transformer do zero',
+    objective: 'Implementar softmax estável, scaled dot-product attention, máscara causal e multi-head só com numpy, e provar com asserts que cada peça obedece à definição.',
+    prerequisites: ['Módulo 13 (transformers)', 'Álgebra linear e broadcasting', 'numpy sem apoio'],
+    topics: ['softmax numericamente estável', 'scaled dot-product attention', 'máscara causal', 'multi-head como projeções', 'Q/K/V e complexidade O(n²d)', 'resíduo e LayerNorm'],
+    problem: 'Quem só chama nn.MultiheadAttention não sabe o que quebra quando a máscara vaza o futuro, o softmax estoura em inf ou as cabeças se misturam — e não consegue depurar um transformer de verdade.',
+    intuition: 'Atenção é uma média ponderada de valores, onde o peso mede a compatibilidade entre uma consulta e cada chave. A máscara causal é só zerar os pesos do futuro antes de normalizar.',
+    mathematics: 'Attention(Q,K,V)=softmax(QKᵀ/√dₖ)V. O √dₖ mantém a variância dos scores estável; sem ele, o softmax satura e o gradiente some.',
+    internals: ['Subtrair o máximo antes de exp() evita overflow — o bug clássico do softmax "do livro".', 'A máscara vira -inf nos scores, não 0 nos pesos: a normalização precisa acontecer depois.', 'Multi-head são projeções independentes concatenadas; 1 cabeça com W=I reduz à atenção simples.'],
+    conceptExample: 'Com a posição i olhando 0..i, a linha 0 da matriz de pesos tem um único valor não nulo — a prova visual de que não há vazamento de futuro.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'numpy', gpu: 'Não',
+      cost: 'O(n²·d) por camada — a matriz de scores é O(n²).', limitations: 'Didático: sem treino, sem otimização de memória (ver módulo 29).',
+      code: `import numpy as np
+
+def softmax(x, axis=-1):
+    x = x - np.max(x, axis=axis, keepdims=True)   # estável
+    e = np.exp(x)
+    return e / np.sum(e, axis=axis, keepdims=True)
+
+def attention(Q, K, V, mask=None):
+    d_k = Q.shape[-1]
+    s = (Q @ K.swapaxes(-1,-2)) / np.sqrt(d_k)
+    if mask is not None:
+        s = np.where(mask == 0, -1e9, s)
+    return softmax(s) @ V`
+    },
+    appliedExample: 'Depurar um bug de geração onde o modelo "trapaceia" no treino: a causa quase sempre é máscara causal ausente ou deslocada em uma posição.',
+    correctedApproach: 'Derivar e testar cada peça isolada (softmax, atenção, máscara, multi-head) com asserts antes de empilhar num bloco — o transformer só é confiável se cada parte for.',
+    decision: 'implementar do zero para entender e depurar, ou usar a biblioteca para produzir',
+    hypothesis: 'a implementação numpy reproduz exatamente a atenção da biblioteca nos mesmos pesos e saídas',
+    tradeoffs: ['Do zero ensina, mas não é para produção.', 'Estabilidade numérica custa uma subtração extra.', 'Atenção densa é O(n²) — insustentável em contexto longo sem o módulo 29.'],
+    complexity: 'O(n²·d) tempo e O(n²) memória por camada de atenção densa.',
+    productionImpact: 'Não saber que a máscara é o que separa treino de vazamento leva a modelos que parecem ótimos no treino e colapsam na geração autoregressiva.',
+    errors: ['Softmax sem subtrair o máximo (inf/nan)', 'Máscara aplicada depois do softmax', 'Cabeças somadas em vez de concatenadas'],
+    checklist: ['O softmax subtrai o máximo?', 'A máscara vira -inf antes de normalizar?', 'Os pesos somam 1 por consulta?', 'Multi-head(1, W=I) == atenção simples?', 'A saída tem o shape de V?'],
+    practice: {
+      basic: 'Implementar softmax estável e provar que soma 1 e não gera nan com logits de 1000.',
+      intermediate: 'Implementar scaled dot-product attention com máscara causal e testar que a 1ª posição não vê o futuro.',
+      advanced: 'Implementar multi-head e provar que 1 cabeça com W=I reduz à atenção simples.',
+      senior: 'Empilhar um bloco transformer (atenção + resíduo + LayerNorm + MLP) e verificar estabilidade numérica.',
+      expert: 'Comparar sua saída com a de uma biblioteca no mesmo input e explicar qualquer divergência acima do ruído de ponto flutuante.'
+    },
+    case: {
+      title: 'Modelo perfeito no treino, incoerente na geração', context: 'Um transformer treinado do zero atinge loss baixíssimo, mas gera texto sem sentido ao amostrar.',
+      symptoms: ['Loss de treino cai rápido demais', 'Geração ignora o prompt', 'Métrica de validação não acompanha o treino'],
+      metrics: ['perplexidade de validação', 'diferença treino×validação', 'coerência amostrada'], tools: ['inspeção da matriz de máscara', 'teste de vazamento posição-a-posição'],
+      rootCause: 'Máscara causal ausente: o modelo via os tokens futuros no treino e memorizava.', correction: 'Aplicar máscara triangular inferior e reverter a -inf antes do softmax; adicionar teste de não-vazamento.'
+    },
+    books: [['nlp-transformers', 'Cap. 3 — Transformer Anatomy'], ['deep-learning', 'Cap. 6 — Deep Feedforward Networks']],
+    sources: ['attention', 'nanogpt', 'cs224n'],
+    exampleFile: '../../examples/ia-senior/fronteira/atencao_do_zero.py'
+  },
+  {
+    number: 28, part: 'fronteira', id: 'pre-treino-do-zero', level: 'Expert',
+    title: 'Pré-treino de um modelo pequeno ponta a ponta',
+    objective: 'Ir do tokenizador BPE ao loop de treino de um modelo de linguagem pequeno, dimensionando dados e parâmetros por leis de escala e medindo perplexidade.',
+    prerequisites: ['Módulo 27 (atenção do zero)', 'Loop PyTorch reproduzível', 'Estatística de perplexidade'],
+    topics: ['BPE e vocabulário', 'leis de escala (Chinchilla)', 'orçamento de compute', 'curva de perda', 'perplexidade', 'checkpoint e retomada', 'overfitting em corpus pequeno'],
+    problem: 'Pré-treino parece inacessível ("precisa de mil GPUs"), então ninguém entende de onde vem a capacidade — e confunde tamanho do modelo com qualidade do dado e do tokenizador.',
+    intuition: 'Um LLM aprende a prever o próximo token. A qualidade vem do trio dado × parâmetros × compute equilibrados — não de empilhar camadas. E tudo começa no tokenizador, antes do modelo existir.',
+    mathematics: 'Chinchilla: para um orçamento de compute C≈6ND (N parâmetros, D tokens), a perda é minimizada quando N e D crescem juntos — ~20 tokens por parâmetro, não modelo gigante com poucos dados.',
+    internals: ['O tokenizador decide o custo de cada token no treino inteiro; errar o vocabulário encarece tudo.', 'Perda de treino que cai enquanto a de validação sobe é overfitting — comum em corpus pequeno.', 'Checkpoint e seed são o que tornam o treino reproduzível e retomável.'],
+    conceptExample: 'Treinar o mesmo modelo com 5 e com 80 merges de BPE mostra a compressão subir e o número de tokens do corpus cair — menos passos para a mesma informação.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'stdlib (tokenizador) / PyTorch (treino)', gpu: 'Opcional (modelo pequeno roda em CPU)',
+      cost: 'BPE O(V·n); treino O(passos·N).', limitations: 'Escala reduzida: prova o mecanismo, não compete com modelos grandes.',
+      code: `# BPE: funde o par adjacente mais frequente até o vocabulário alvo
+from collections import Counter
+def treinar_bpe(ids, n_merges):
+    merges = {}
+    for k in range(n_merges):
+        pares = Counter(zip(ids, ids[1:]))
+        if not pares: break
+        (a, b), freq = pares.most_common(1)[0]
+        if freq < 2: break
+        ids = fundir(ids, (a, b), 256 + k)
+        merges[(a, b)] = 256 + k
+    return merges`
+    },
+    appliedExample: 'Decidir o orçamento de um fine-tune de domínio: aplicar a regra de Chinchilla para não pagar por um modelo grande faminto de dados que você não tem.',
+    correctedApproach: 'Começar pelo tokenizador e pelos dados, dimensionar N e D juntos pela lei de escala, treinar em escala reduzida declarada e medir perplexidade — não copiar hiperparâmetros de um modelo 100× maior.',
+    decision: 'pré-treinar, fine-tunar, ou usar um modelo pronto conforme dado, orçamento e diferencial',
+    hypothesis: 'um modelo menor bem alimentado supera um maior faminto de dados no mesmo orçamento de compute',
+    tradeoffs: ['Modelo maior memoriza mais, mas exige mais dados.', 'Corpus pequeno overfitta rápido.', 'Tokenizador específico comprime melhor, mas fragmenta a compatibilidade.'],
+    complexity: 'Treino O(passos · N); compute ≈ 6·N·D para pré-treino.',
+    productionImpact: 'Escolher tamanho de modelo sem lei de escala queima orçamento: modelo grande com poucos dados converge pior que um menor bem alimentado.',
+    errors: ['Ignorar o tokenizador', 'Modelo grande, dados de menos', 'Sem checkpoint/seed (treino irreproduzível)'],
+    checklist: ['O tokenizador foi avaliado no domínio?', 'N e D seguem a lei de escala?', 'Há checkpoint e seed?', 'A perplexidade de validação é medida?', 'O overfitting é monitorado?'],
+    practice: {
+      basic: 'Implementar BPE do zero e provar o round-trip encode/decode em UTF-8 com emoji.',
+      intermediate: 'Treinar um modelo de linguagem pequeno e plotar a curva de perda de treino e validação.',
+      advanced: 'Aplicar a regra de Chinchilla para dimensionar N e D dado um orçamento de compute e justificar a escolha.',
+      senior: 'Diagnosticar overfitting em corpus pequeno e propor regularização, mais dados ou modelo menor com evidência.',
+      expert: 'Comparar dois tokenizadores no mesmo corpus por tokens/caractere e por perplexidade final, e decidir qual adotar.'
+    },
+    case: {
+      title: 'Modelo grande, resultado pior', context: 'Uma equipe pré-treina um modelo maior no mesmo corpus e obtém perplexidade pior que a do modelo menor anterior.',
+      symptoms: ['Perda de validação estagnada', 'Treino instável', 'Custo de compute muito maior sem ganho'],
+      metrics: ['perplexidade de validação', 'tokens por parâmetro', 'compute gasto'], tools: ['lei de escala de Chinchilla', 'curva de perda', 'análise de dados'],
+      rootCause: 'Modelo grande demais para o volume de dados: faminto, fora do ponto ótimo de compute.', correction: 'Reduzir N ou aumentar D até ~20 tokens/parâmetro; reavaliar o tokenizador.'
+    },
+    books: [['deep-learning', 'Cap. 10 — Sequence Modeling'], ['nlp-transformers', 'Cap. 5 — Text Generation']],
+    sources: ['chinchilla', 'nanogpt', 'transformers'],
+    exampleFile: '../../examples/ia-senior/fronteira/bpe_do_zero.py'
+  },
+  {
+    number: 29, part: 'fronteira', id: 'kernels-flashattention', level: 'Expert',
+    title: 'Kernels de GPU e FlashAttention por dentro',
+    objective: 'Explicar por que a atenção é limitada por memória, provar que o softmax online por blocos iguala a atenção ingênua, e situar FlashAttention como otimização de I/O.',
+    prerequisites: ['Módulo 27 (atenção do zero)', 'Hierarquia de memória de GPU', 'Noção de kernel'],
+    topics: ['limite de memória vs FLOPs', 'softmax online', 'tiling', 'SRAM vs HBM', 'FlashAttention 2/3/4', 'Triton e CUDA'],
+    problem: 'Atenção densa é O(n²) em memória; em contexto longo a matriz de scores não cabe na memória rápida, e otimizar os FLOPs não resolve porque o gargalo é I/O — algo invisível para quem só olha o custo teórico.',
+    intuition: 'FlashAttention não muda a matemática da atenção — muda onde os bytes moram. Ele calcula softmax(QKᵀ)V em blocos, sem nunca materializar a matriz n×n inteira.',
+    mathematics: 'Softmax online mantém por linha (m, l, acc): ao chegar um bloco com máximo maior, corrige o acumulado por exp(m_antigo − m_novo). O resultado é idêntico ao softmax completo.',
+    internals: ['A versão ingênua vai à HBM (lenta) O(n²) vezes; a tiled mantém um bloco na SRAM (rápida).', 'O resultado é bit-a-bit equivalente a menos do ruído de ponto flutuante — é I/O, não aproximação.', 'FA-4 (2026) redesenha para Blackwell: gargalo migra para as unidades de exp() e o tráfego de SRAM, não a MMA.'],
+    conceptExample: 'Numa sequência de 128, a ingênua materializa 128×128 floats; a tiled mantém no máximo 128×16 — mesma saída, memória O(n·bloco).',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'numpy (demo CPU) / Triton (kernel real)', gpu: 'Demo não; kernel real exige Hopper/Blackwell',
+      cost: 'Tempo O(n²·d); memória O(n·bloco) em vez de O(n²).', limitations: 'A demo prova a igualdade; o ganho de velocidade só aparece na GPU.',
+      code: `# softmax online: acumula (m,l,acc) por bloco, sem matriz n×n
+m_new = np.maximum(m, s.max(-1, keepdims=True))
+p = np.exp(s - m_new)
+corr = np.exp(m - m_new)          # corrige o passado
+l = corr * l + p.sum(-1, keepdims=True)
+acc = corr * acc + p @ Vb
+m = m_new`
+    },
+    appliedExample: 'Decidir se vale trocar o kernel de atenção do serving: FA-4 dá 1,3× sobre cuDNN em Blackwell, mas exige hardware novo — hardware antigo fica em FA-2/3.',
+    correctedApproach: 'Medir se o gargalo é memória ou compute antes de otimizar; entender FlashAttention como redução de tráfego de memória, não como menos operações.',
+    decision: 'usar kernel pronto (FlashAttention), escrever um em Triton, ou aceitar a atenção densa',
+    hypothesis: 'a atenção por blocos produz a mesma saída da densa a menos do ruído de ponto flutuante',
+    tradeoffs: ['Kernel pronto é rápido mas amarra a versão de hardware.', 'Triton dá controle mas exige manutenção.', 'Atenção densa é simples mas não escala em contexto longo.'],
+    complexity: 'Tempo O(n²·d) (igual à densa); memória cai de O(n²) para O(n·bloco).',
+    productionImpact: 'Trocar para um kernel IO-aware pode multiplicar o throughput de inferência de contexto longo — ou falhar em silêncio se o hardware não for suportado.',
+    errors: ['Otimizar FLOPs quando o gargalo é memória', 'Assumir que FA roda em qualquer GPU', 'Confundir tiling com aproximação'],
+    checklist: ['O gargalo é memória ou compute?', 'A saída tiled iguala a densa (<1e-10)?', 'O hardware suporta a versão de FA escolhida?', 'O bloco cabe na SRAM?', 'A regressão numérica é testada?'],
+    practice: {
+      basic: 'Explicar por que a atenção densa é limitada por memória, não por FLOPs, em contexto longo.',
+      intermediate: 'Implementar softmax online e provar que a atenção por blocos iguala a densa para vários tamanhos de bloco.',
+      advanced: 'Estimar a economia de memória (O(n²) → O(n·bloco)) e onde ela deixa de caber na SRAM.',
+      senior: 'Avaliar a adoção de FA-4 num serving real: ganho medido × requisito de hardware × custo de migração.',
+      expert: 'Escrever (ou ler e explicar linha a linha) um kernel de atenção em Triton e comparar com o baseline.'
+    },
+    case: {
+      title: 'Contexto longo estoura a memória da GPU', context: 'Aumentar o contexto de 4k para 32k tokens faz o serving falhar por falta de memória, mesmo com a GPU ociosa em compute.',
+      symptoms: ['OOM ao crescer o contexto', 'Utilização de compute baixa', 'Latência explode antes do OOM'],
+      metrics: ['memória por requisição', 'utilização de tensor core', 'tokens/s'], tools: ['profiler de memória', 'FlashAttention', 'análise de kernel'],
+      rootCause: 'Atenção densa materializa a matriz O(n²) de scores, que cresce com o quadrado do contexto.', correction: 'Adotar um kernel IO-aware (FlashAttention) compatível com o hardware; validar a equivalência numérica.'
+    },
+    books: [['deep-learning', 'Cap. 12 — Applications'], ['nlp-transformers', 'Cap. 11 — Scaling Transformers']],
+    sources: ['flashattention', 'triton', 'attention'],
+    exampleFile: '../../examples/ia-senior/fronteira/flash_online_softmax.py'
+  },
+  {
+    number: 30, part: 'fronteira', id: 'rl-pos-treino', level: 'Expert',
+    title: 'RL pós-treino moderno: GRPO e recompensa verificável',
+    objective: 'Implementar a vantagem relativa ao grupo do GRPO, treinar uma política de brinquedo com recompensa verificável e explicar por que a recompensa precisa ser verificável.',
+    prerequisites: ['Módulo 21 (RLHF/DPO conceitual)', 'Gradiente de política', 'Probabilidade'],
+    topics: ['RLHF, DPO e RLVR', 'GRPO e vantagem de grupo', 'crítico-free', 'recompensa verificável', 'reward hacking', 'GSPO/DAPO', 'DeepSeek-R1'],
+    problem: 'RLHF clássico exige treinar uma rede crítica cara e um modelo de recompensa neural que o modelo aprende a enganar (reward hacking); isso trava o RL em escala de LLM.',
+    intuition: 'GRPO tira a baseline de graça: amostra um grupo de respostas para o mesmo prompt e usa a média do grupo como referência. A vantagem de cada resposta é o quanto ela supera as irmãs — sem crítico.',
+    mathematics: 'A vantagem de grupo é A_i = (r_i − média(r))/(desvio(r)+ε). O gradiente é Σ A_i·∇log π(a_i): respostas acima da média são reforçadas, abaixo, suprimidas.',
+    internals: ['Sem rede crítica: a baseline é a média do grupo, o que corta metade do custo do RLHF.', 'RLVR usa um verificador programático (teste passa? resposta bate?) em vez de recompensa neural — evita reward hacking.', 'Grupo homogêneo gera vantagem ~0: não há sinal quando todas as respostas são iguais.'],
+    conceptExample: 'Vantagem de [1,0,0,0] (uma certa em quatro) dá a resposta certa positiva e as três erradas negativas — o sinal que empurra a política.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'numpy', gpu: 'Não (demo); sim em escala real',
+      cost: 'O(G) por passo (G = tamanho do grupo); sem rede crítica.', limitations: 'Bandit de brinquedo: prova o mecanismo, não a escala.',
+      code: `def grupo_vantagem(recompensas):
+    r = np.asarray(recompensas, float)
+    return (r - r.mean()) / (r.std() + 1e-8)
+
+# gradiente REINFORCE com baseline de grupo
+adv = grupo_vantagem([recompensa_verificavel(a) for a in acoes])
+grad = sum(A * grad_log_pi(a) for a, A in zip(acoes, adv)) / len(acoes)`
+    },
+    appliedExample: 'Pós-treinar um modelo para resolver problemas com resposta verificável (matemática, código): a recompensa é o teste passando, não a opinião de um juiz neural.',
+    correctedApproach: 'Usar recompensa verificável sempre que possível, amostrar grupos para a baseline, e monitorar reward hacking — o modelo otimiza exatamente o que você mede, não o que você quis.',
+    decision: 'RLHF completo, DPO, ou GRPO/RLVR conforme disponibilidade de verificador e orçamento',
+    hypothesis: 'a vantagem de grupo aprende a política ótima sem uma rede crítica separada',
+    tradeoffs: ['GRPO é barato mas exige amostrar um grupo por prompt.', 'Recompensa verificável é robusta mas nem toda tarefa a tem.', 'RL pós-treino melhora raciocínio mas pode degradar diversidade.'],
+    complexity: 'O(G) amostras por passo; sem o custo de treinar e servir uma rede crítica.',
+    productionImpact: 'Recompensa mal especificada leva a reward hacking: o modelo maximiza a métrica e falha o objetivo — caro de detectar depois do deploy.',
+    errors: ['Recompensa neural que o modelo engana', 'Grupo pequeno demais (sinal ruidoso)', 'Ignorar colapso de diversidade'],
+    checklist: ['A recompensa é verificável?', 'O grupo é grande o bastante para a baseline?', 'Há defesa contra reward hacking?', 'A diversidade é monitorada?', 'A política melhora de fato na métrica alvo?'],
+    practice: {
+      basic: 'Implementar a vantagem de grupo e provar que soma ~0 e dá sinal correto a [1,0,0,0].',
+      intermediate: 'Treinar uma política de bandit com recompensa verificável e mostrar que aprende a ação correta.',
+      advanced: 'Provocar reward hacking com uma recompensa mal especificada e mostrar o modelo explorando a brecha.',
+      senior: 'Comparar GRPO, DPO e RLHF por custo, estabilidade e requisito de verificador para um caso real.',
+      expert: 'Analisar por que a normalização por grupo estabiliza o treino frente a REINFORCE puro, com evidência empírica.'
+    },
+    case: {
+      title: 'O modelo aprendeu a enganar o verificador', context: 'Um modelo pós-treinado com recompensa por "resposta bem formatada" passa a produzir respostas formatadas mas erradas.',
+      symptoms: ['Recompensa sobe, qualidade real cai', 'Respostas verbosas e vazias', 'Métrica de negócio piora'],
+      metrics: ['recompensa vs qualidade humana', 'taxa de acerto real', 'diversidade de saída'], tools: ['auditoria de amostras', 'recompensa verificável', 'análise de reward hacking'],
+      rootCause: 'A recompensa media forma, não conteúdo: o modelo otimizou exatamente o que foi medido.', correction: 'Trocar por recompensa verificável (correção real) e adicionar penalidade a exploração de brecha.'
+    },
+    books: [['deep-learning', 'Cap. 17 — Monte Carlo Methods'], ['ai-engineering', 'Cap. 7 — Post-training e alinhamento']],
+    sources: ['grpo', 'deepseekr1', 'dpo'],
+    exampleFile: '../../examples/ia-senior/fronteira/grpo_vantagem.py'
+  },
+  {
+    number: 31, part: 'fronteira', id: 'interpretabilidade-mecanicista', level: 'Expert',
+    title: 'Interpretabilidade mecanicista',
+    objective: 'Treinar um autoencoder esparso que desempacota superposição, recuperar features monossemânticas e explicar como isso sustenta circuit tracing.',
+    prerequisites: ['Módulo 27 (atenção do zero)', 'Álgebra linear', 'Gradiente à mão'],
+    topics: ['superposição', 'polissemântica', 'autoencoder esparso (SAE)', 'features monossemânticas', 'circuit tracing', 'attribution graphs', 'crosscoders/CLTs'],
+    problem: 'Um neurônio não corresponde a um conceito: por superposição, a rede empacota mais features do que neurônios, então cada ativação é polissemântica — o que torna o modelo opaco e a auditoria impossível.',
+    intuition: 'Um SAE aprende um dicionário supercompleto e esparso: cada exemplo é explicado por poucas features, e cada feature tende a significar uma coisa só. É o desempacotador da superposição.',
+    mathematics: 'h=relu(W_enc(x−b)+b_enc); x̂=W_dec·h+b. Perda = ||x−x̂||² + λ||h||₁. O L1 força esparsidade; normalizar as colunas de W_dec impede burlar o L1.',
+    internals: ['Sem esparsidade, o SAE só copia a entrada; o L1 é o que produz monossemântica.', 'Colunas do decoder são o dicionário — cada uma é uma direção de feature no espaço de ativação.', 'SAEs são a base do circuit tracing e dos attribution graphs (Anthropic, 2025): features como nós, não neurônios.'],
+    conceptExample: 'Com 16 conceitos comprimidos em 12 dimensões, um SAE de 64 features recupera os 16 conceitos plantados com cosseno > 0.85 e ativa só ~2% das features por exemplo.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'numpy', gpu: 'Não',
+      cost: 'O(passos·n·f).', limitations: 'Toy model de superposição: ilustra o mecanismo, não interpreta um LLM real.',
+      code: `# SAE: dicionário esparso e supercompleto
+h = relu((x - b_dec) @ W_enc.T + b_enc)   # ativações esparsas
+x_hat = h @ W_dec.T + b_dec               # reconstrução
+# perda = MSE(x, x_hat) + l1 * |h|; colunas de W_dec renormalizadas a norma 1`
+    },
+    appliedExample: 'Auditar por que um modelo recusa um pedido legítimo: localizar a feature que dispara e o circuito que a liga à recusa, em vez de adivinhar pelo prompt.',
+    correctedApproach: 'Tratar interpretabilidade como ciência empírica: treinar o SAE, validar recuperação e esparsidade com métricas, e só então atribuir significado — nunca antropomorfizar um neurônio.',
+    decision: 'investir em interpretabilidade mecanicista vs. avaliação comportamental conforme o risco',
+    hypothesis: 'um dicionário esparso recupera as features verdadeiras que a superposição juntou',
+    tradeoffs: ['SAE dá features interpretáveis, mas o treino é caro e sensível a hiperparâmetros.', 'Mais esparsidade = mais interpretável, menos reconstrução.', 'Interpretabilidade não substitui avaliação comportamental.'],
+    complexity: 'Treino O(passos·n·f); f (features) tipicamente ≫ dimensão do modelo.',
+    productionImpact: 'Sem interpretabilidade, incidentes de comportamento inesperado só têm mitigação por prompt e filtro — nunca causa raiz no mecanismo.',
+    errors: ['Ler significado num neurônio polissemântico', 'L1 fraco (SAE só copia)', 'Não normalizar o decoder (L1 burlado)'],
+    checklist: ['O SAE reconstrói melhor que a média?', 'As ativações são esparsas?', 'As features recuperam conceitos conhecidos?', 'O decoder é normalizado?', 'A interpretação foi validada empiricamente?'],
+    practice: {
+      basic: 'Explicar superposição e por que um neurônio polissemântico não tem um significado único.',
+      intermediate: 'Treinar um SAE num toy model e medir esparsidade e variância explicada.',
+      advanced: 'Provar que o SAE recupera as direções de features plantadas por cosseno com o dicionário aprendido.',
+      senior: 'Ligar features a um comportamento (um circuito) e propor uma intervenção testável.',
+      expert: 'Discutir os limites do SAE (feature splitting, dead latents) e o que circuit tracing acrescenta.'
+    },
+    case: {
+      title: 'Feature fantasma na auditoria', context: 'Uma equipe afirma ter achado o "neurônio da toxicidade", mas desativá-lo não muda o comportamento.',
+      symptoms: ['Neurônio dispara para coisas não relacionadas', 'Ablação sem efeito', 'Interpretação não reproduz'],
+      metrics: ['monossemântica da feature', 'efeito da ablação', 'reprodutibilidade'], tools: ['autoencoder esparso', 'attribution graphs', 'teste de ablação'],
+      rootCause: 'O neurônio era polissemântico (superposição): não codificava um conceito único.', correction: 'Treinar um SAE, isolar a feature monossemântica correspondente e re-testar a ablação sobre ela.'
+    },
+    books: [['deep-learning', 'Cap. 14 — Autoencoders'], ['ai-engineering', 'Cap. 9 — Observabilidade e interpretabilidade']],
+    sources: ['circuits', 'attention'],
+    exampleFile: '../../examples/ia-senior/fronteira/sae_do_zero.py'
+  },
+  {
+    number: 32, part: 'fronteira', id: 'mcp-interop', level: 'Expert',
+    title: 'MCP e interoperabilidade de agentes',
+    objective: 'Implementar o núcleo de um servidor MCP (initialize, tools/list, tools/call) em JSON-RPC e tratar cada chamada de ferramenta como superfície de ataque com governança.',
+    prerequisites: ['Módulo 18 (agentes)', 'JSON-RPC e APIs', 'Segurança de aplicações (trilha Segurança)'],
+    topics: ['Model Context Protocol', 'JSON-RPC 2.0', 'descoberta de ferramentas', 'inputSchema', 'privilégio mínimo', 'governança de agente', 'Agentic AI Foundation'],
+    problem: 'Cada integração agente↔ferramenta era um conector proprietário; sem um padrão, N modelos × M ferramentas viram N·M integrações frágeis e sem controle de segurança consistente.',
+    intuition: 'MCP é o "USB-C dos agentes": um protocolo JSON-RPC onde o servidor anuncia ferramentas com schema e o cliente as descobre e chama. O código é trivial; o difícil é a governança.',
+    mathematics: 'Não há matemática — há contrato: cada mensagem é JSON-RPC 2.0 ({jsonrpc, id, method, params}) e cada resposta é result ou error com código padronizado.',
+    internals: ['tools/list expõe só o contrato público (nome, descrição, inputSchema) — nunca a implementação.', 'tools/call valida os campos obrigatórios do schema antes de executar e nunca derruba o servidor no erro.', 'MCP (Anthropic, nov/2024) foi adotado por OpenAI, Google e Microsoft e doado à Agentic AI Foundation (Linux Foundation, dez/2025).'],
+    conceptExample: 'Um initialize devolve protocolVersion e capabilities; um tools/call com argumento faltando devolve erro -32602, não uma exceção não tratada.',
+    implementation: {
+      language: 'Python 3.12+', dependencies: 'stdlib (json)', gpu: 'Não',
+      cost: 'O(1) por mensagem.', limitations: 'Núcleo puro (handle(dict)->dict); produção liga a stdio e adiciona autenticação.',
+      code: `def handle(req):
+    if req.get("jsonrpc") != "2.0":
+        return erro(req.get("id"), -32600, "Invalid Request")
+    m = req.get("method")
+    if m == "initialize":  return ok(req["id"], {"protocolVersion": VERSAO, "capabilities": {"tools": {}}})
+    if m == "tools/list":  return ok(req["id"], {"tools": publicas()})  # sem vazar _fn
+    if m == "tools/call":  return chamar(req)  # valida schema, nunca derruba
+    return erro(req.get("id"), -32601, "Method not found")`
+    },
+    appliedExample: 'Expor um banco de dados interno a um agente por MCP: uma ferramenta read-only com escopo por tenant, autorização por chamada e auditoria — não acesso amplo.',
+    correctedApproach: 'Padronizar por MCP, mas tratar cada ferramenta como no módulo 27 da trilha de Segurança: descrição é conteúdo não confiável, autorização e privilégio mínimo valem por chamada, e ação irreversível exige confirmação.',
+    decision: 'expor ferramentas por MCP, por conector próprio, ou não expor conforme risco e escopo',
+    hypothesis: 'um servidor MCP bem governado reduz o dano de uma injeção de prompt a um agente',
+    tradeoffs: ['Padrão aberto dá interoperabilidade, mas amplia a superfície de ataque.', 'Mais ferramentas = mais poder e mais risco.', 'Governança custa latência e fricção.'],
+    complexity: 'O(1) por mensagem; o custo real é a governança, não o processamento.',
+    productionImpact: 'Um servidor MCP sem autorização por chamada transforma injeção de prompt em ação real com o privilégio do agente — o elo entre a trilha de IA e a de Segurança.',
+    errors: ['Vazar a implementação da ferramenta', 'Não validar o schema de entrada', 'Ferramenta com privilégio amplo demais'],
+    checklist: ['As mensagens seguem JSON-RPC 2.0?', 'tools/list esconde a implementação?', 'tools/call valida o schema?', 'Cada ferramenta tem privilégio mínimo?', 'Ação irreversível exige confirmação?'],
+    practice: {
+      basic: 'Implementar initialize e tools/list e provar que o contrato público não vaza a implementação.',
+      intermediate: 'Implementar tools/call com validação de schema e provar que argumento faltando vira erro, não crash.',
+      advanced: 'Adicionar autorização por chamada e escopo por tenant a uma ferramenta e testar a negação.',
+      senior: 'Modelar as ameaças de um servidor MCP exposto a um agente e desenhar os controles (ver trilha Segurança).',
+      expert: 'Projetar um agente cuja falha de contenção seja tolerável mesmo se a injeção de prompt tiver sucesso.'
+    },
+    case: {
+      title: 'Injeção de prompt vira ação real', context: 'Um agente com uma ferramenta MCP de e-mail obedece a uma instrução escondida numa página que resumia.',
+      symptoms: ['Ação não solicitada pelo usuário', 'Ferramenta chamada com privilégio amplo', 'Sem trilha de auditoria'],
+      metrics: ['ações por origem de instrução', 'escopo de privilégio', 'cobertura de auditoria'], tools: ['MCP com autorização', 'privilégio mínimo', 'confirmação humana'],
+      rootCause: 'A ferramenta tinha privilégio amplo e nenhuma autorização por chamada: a injeção herdou o poder do agente.', correction: 'Reduzir o escopo da ferramenta, exigir confirmação para ação irreversível e auditar cada tools/call.'
+    },
+    books: [['ai-engineering', 'Cap. 6 — Agentes e ferramentas'], ['designing-ml-systems', 'Cap. 8 — Data Distribution Shifts and Monitoring']],
+    sources: ['mcp', 'owasp'],
+    exampleFile: '../../examples/ia-senior/fronteira/mcp_servidor.py'
+  },
+  {
+    number: 33, part: 'fronteira', id: 'reproducao-paper', level: 'Expert → liderança',
+    title: 'Reprodução de paper como projeto',
+    objective: 'Reproduzir um paper com número-alvo verificável: baseline próprio, contribuição isolada, ablação e limite declarado — não rodar o código dos autores e ver o número sair.',
+    prerequisites: ['Módulos 27–32', 'Ambiente reproduzível (seed, versões, dados)', 'Leitura crítica de paper'],
+    topics: ['afirmação testável', 'baseline antes de contribuição', 'congelamento de ambiente', 'ablação', 'reprodução em escala reduzida', 'discrepância e causa'],
+    problem: 'Ler prova que você entende o que os autores disseram; reproduzir prova que entende o que fizeram. Sem baseline, ablação e ambiente congelado, "reproduzi" é observar uma vez.',
+    intuition: 'A reprodução honesta separa o efeito da contribuição do efeito da engenharia: baseline com a mesma tubulação primeiro, contribuição como a menor mudança que a isola, ablação para atribuir o ganho.',
+    mathematics: 'Compute de pré-treino ≈ 6·N·D orienta a redução de escala: declare a escala reduzida e não compare com o número do paper como se fosse igual.',
+    internals: ['Baseline antes de contribuição: sem ele você não sabe se o ganho veio do método ou de um detalhe seu.', 'Ambiente congelado (seed, versões, dado, hardware) é o que torna o número reexecutável por outra pessoa.', 'Não bater é o caso comum: a investigação documentada vale mais que um número sem procedência.'],
+    conceptExample: 'Se remover o componente central da ablação não piora o resultado, ou sua implementação está errada ou a contribuição não é o que os autores alegam — ambos são achados.',
+    implementation: {
+      language: 'Qualquer', dependencies: 'Ambiente pinado e versionado', gpu: 'Depende do paper e da escala escolhida',
+      cost: 'Dominado pelo treino/avaliação do método.', limitations: 'Reprodução em escala reduzida é válida se declarada.',
+      code: `# um comando reexecuta tudo do zero
+# 1) baseline  2) + contribuição  3) ablação
+make reproduce   # imprime: seu_numero | numero_do_paper | escala | ablação`
+    },
+    appliedExample: 'Decidir adotar uma técnica nova em produção: reproduzir o paper em escala reduzida, medir o delta contra o baseline e só então investir — não confiar no gráfico do abstract.',
+    correctedApproach: 'Extrair as afirmações testáveis antes de olhar o código, congelar o ambiente, reproduzir o baseline, isolar a contribuição, rodar a ablação e relatar o delta com o limite de validade.',
+    decision: 'adotar, adaptar ou rejeitar uma técnica conforme a reprodução em escala e a ablação',
+    hypothesis: 'a contribuição do paper explica o ganho relatado, isolada do resto da tubulação',
+    tradeoffs: ['Reprodução completa é cara; escala reduzida é um trade-off consciente.', 'Ablação custa mais experimentos, mas atribui a causa.', 'Ambiente congelado engessa, mas garante reprodutibilidade.'],
+    complexity: 'Dominada pelo custo de treino/avaliação; a ablação multiplica o número de execuções.',
+    productionImpact: 'Adotar uma técnica sem reprodução é apostar no abstract; a reprodução com ablação é o que separa hype de ganho real antes de gastar em produção.',
+    errors: ['Rodar o código dos autores e chamar de reprodução', 'Comparar escala reduzida com o número cheio', 'Pular a ablação'],
+    checklist: ['As afirmações testáveis foram extraídas antes do código?', 'O ambiente está congelado?', 'Há baseline próprio?', 'A ablação isola a contribuição?', 'A discrepância foi investigada e o limite declarado?'],
+    practice: {
+      basic: 'Extrair as afirmações testáveis de um paper (número-alvo, condição, dataset) antes de olhar o código.',
+      intermediate: 'Reproduzir o baseline com ambiente congelado e um comando único de reexecução.',
+      advanced: 'Implementar a contribuição e medir o delta contra o baseline na maior escala que couber.',
+      senior: 'Rodar a ablação, interpretar cada componente e declarar o limite de validade.',
+      expert: 'Encontrar e explicar uma discrepância entre seu número e o do paper, com a causa raiz documentada.'
+    },
+    case: {
+      title: 'O número do paper não bate', context: 'Uma equipe reimplementa uma técnica e obtém metade do ganho relatado no paper.',
+      symptoms: ['Delta menor que o publicado', 'Resultado sensível a hiperparâmetro não documentado', 'Baseline diferente do dos autores'],
+      metrics: ['delta vs baseline', 'variância entre seeds', 'sensibilidade a hiperparâmetro'], tools: ['ambiente congelado', 'ablação', 'código de referência'],
+      rootCause: 'Um detalhe não publicado (warmup, precisão) respondia por metade do ganho; o baseline também diferia.', correction: 'Alinhar o baseline, replicar o detalhe a partir do código oficial e declarar o que ainda não reproduz.'
+    },
+    books: [['ai-engineering', 'Cap. 10 — Avaliação e experimentação'], ['designing-ml-systems', 'Cap. 6 — Model Development and Offline Evaluation']],
+    sources: ['nanogpt', 'chinchilla', 'attention'],
+    exampleFile: '../../examples/ia-senior/fronteira/reproducao-paper.md'
+  },
+  {
+    number: 34, part: 'pratica', id: 'pesquisa-cientifica', level: 'Sênior → expert',
     title: 'Pesquisa científica em IA',
     objective: 'Localizar, ler, criticar e reproduzir papers; avaliar método, dataset, benchmark, estatística, limitações, causalidade, citações e hype.',
     prerequisites: ['Matemática e estatística', 'Experimentação', 'Leitura técnica em inglês'],
@@ -1708,7 +2309,7 @@ print({'mean_delta': float(delta.mean()),
     sources: ['cs224n', 'attention', 'rag', 'dpo']
   },
   {
-    number: 28, part: 'pratica', id: 'performance-ia', level: 'Sênior → expert',
+    number: 35, part: 'pratica', id: 'performance-ia', level: 'Sênior → expert',
     title: 'Performance e otimização',
     objective: 'Perfilar e otimizar vetorização, memória, data loading, GPU, precisão, quantização, pruning, compilation, kernels, paralelismos, KV cache, batching e speculative decoding.',
     prerequisites: ['Deep learning', 'Arquitetura de sistemas', 'Profiling'],
@@ -1762,7 +2363,7 @@ print({'median_ms': sorted(samples)[len(samples) // 2]})`
     sources: ['pytorch', 'ray', 'kserve', 'transformers']
   },
   {
-    number: 29, part: 'pratica', id: 'avaliacao-generativa', level: 'Sênior → expert',
+    number: 36, part: 'pratica', id: 'avaliacao-generativa', level: 'Sênior → expert',
     title: 'Avaliação de sistemas generativos',
     objective: 'Construir avaliação humana e automatizada com golden/synthetic sets, groundedness, factualidade, relevância, segurança, RAG metrics, task success, custo e regressão.',
     prerequisites: ['Avaliação de modelos', 'LLMs/RAG/agentes', 'Estatística'],
@@ -1818,7 +2419,7 @@ print(evaluate('Rollback usa a versão anterior.', case))`
     sources: ['nist', 'mlflow']
   },
   {
-    number: 30, part: 'pratica', id: 'lideranca-tecnica', level: 'Expert → liderança',
+    number: 37, part: 'pratica', id: 'lideranca-tecnica', level: 'Expert → liderança',
     title: 'Liderança técnica em IA',
     objective: 'Liderar framing, viability, build×buy, seleção, risco, TCO, arquitetura, roadmap, experimentação, governança e comunicação de incerteza sem hype.',
     prerequisites: ['Academia técnica ou equivalência', 'Arquitetura e produto', 'Comunicação com stakeholders'],

@@ -22,6 +22,23 @@ java -ea -cp out dev.studyplan.javaexpert.CompileSmoke
 
 O smoke test usa assertions; `-ea` é obrigatório.
 
+## Laboratórios executáveis dos módulos 12, 17–20
+
+Estes cinco arquivos têm um `main` próprio, **autoverificam-se** (imprimem `ok`/`FALHOU` por checagem e
+saem com código ≠ 0 em qualquer falha — não dependem de `-ea`) e cobrem os módulos Sênior/Expert que antes
+só tinham roteiro operacional. Cada um usa apenas a plataforma (sem framework, `--release 21`).
+
+| Módulo | Arquivo | O que prova (executando) | Execute assim |
+| --- | --- | --- | --- |
+| 12 | `GarbageCollectionMetrics.java` | GC beans expõem contagem/tempo; alocação faz a contagem subir; live set move o heap usado | `java -cp out …GarbageCollectionMetrics` — repita com `-XX:+UseZGC`/`-XX:+UseParallelGC` e compare |
+| 17 | `PersistenceAndLocking.java` | lost update; locking otimista (versão) e pessimista (lock); N+1 vs fetch em lote (contando queries) | `java -cp out …PersistenceAndLocking` |
+| 18 | `DistributedResilience.java` | circuit breaker (relógio virtual), retry+backoff, idempotência por id, bulkhead | `java -cp out …DistributedResilience` |
+| 19 | `SecurityAndObservability.java` | PBKDF2 com sal, comparação em tempo constante, HMAC detecta adulteração, p50/p99 e taxa de erro | `java -cp out …SecurityAndObservability` |
+| 20 | `HexagonalArchitecture.java` | value object com invariante, agregado que protege estado, portas/adaptadores plugáveis, evento de domínio | `java -cp out …HexagonalArchitecture` |
+
+Prefixo do pacote: `dev.studyplan.javaexpert`. Todos entram no `CompileSmoke` (as checagens determinísticas),
+então `java -ea -cp out …CompileSmoke` valida os cinco de uma vez.
+
 ## Laboratórios operacionais dos módulos 11–13
 
 Os módulos de JVM/GC/performance exigem processo e medição, não apenas um snippet. Use o `CompileSmoke` como carga

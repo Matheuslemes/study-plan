@@ -101,6 +101,64 @@ public final class CompileSmoke {
         assert ReadingTheJdk.iterationOrder().get("TreeMap (natural)")
             .equals(List.of("alpha", "bravo", "charlie", "delta"));
 
-        System.out.println("Java 21 academy examples: OK (módulos 1-26)");
+        // Módulo 12 — GC por métricas: os beans de coletor existem (o resto é medição, no main próprio).
+        assert !GarbageCollectionMetrics.collectorNames().isEmpty();
+
+        // Módulo 17 — locking e N+1 (determinístico).
+        assert PersistenceAndLocking.lostUpdate(1000, 100, 200) == 800;
+        assert PersistenceAndLocking.optimisticRetry(1000, 100, 200) == 700;
+        assert PersistenceAndLocking.naiveNPlusOne(50) == 51;
+        assert PersistenceAndLocking.batchedFetch(50) == 2;
+
+        // Módulo 18 — resiliência com relógio virtual.
+        final long[] virtualClock = {0L};
+        var breaker = new DistributedResilience.CircuitBreaker(3, 1000L, () -> virtualClock[0]);
+        for (int i = 0; i < 3; i++) {
+            try {
+                breaker.call(() -> {
+                    throw new RuntimeException("falha");
+                });
+            } catch (RuntimeException ignored) {
+                // esperado
+            }
+        }
+        assert breaker.state() == DistributedResilience.State.OPEN;
+        var attempts = new java.util.concurrent.atomic.AtomicInteger();
+        assert DistributedResilience.retry(5, () -> attempts.incrementAndGet() >= 3) == 3;
+        var consumer = new DistributedResilience.IdempotentConsumer();
+        consumer.handle("msg");
+        consumer.handle("msg");
+        assert consumer.effects() == 1;
+
+        // Módulo 19 — segurança e observabilidade.
+        byte[] salt = SecurityAndObservability.newSalt();
+        byte[] hash = SecurityAndObservability.hashPassword("pw".toCharArray(), salt);
+        assert SecurityAndObservability.verifyPassword("pw".toCharArray(), salt, hash);
+        assert !SecurityAndObservability.verifyPassword("bad".toCharArray(), salt, hash);
+        byte[] macKey = "key".getBytes(StandardCharsets.UTF_8);
+        byte[] payload = "amount=100".getBytes(StandardCharsets.UTF_8);
+        byte[] tag = SecurityAndObservability.hmac(macKey, payload);
+        assert SecurityAndObservability.verifyHmac(macKey, payload, tag);
+        assert !SecurityAndObservability.verifyHmac(macKey, "amount=999".getBytes(StandardCharsets.UTF_8), tag);
+
+        // Módulo 20 — hexagonal: mesmo domínio, portas plugáveis.
+        var orderRepo = new HexagonalArchitecture.InMemoryOrderRepository();
+        var events = new HexagonalArchitecture.CollectingEventPublisher();
+        var hexOrder = new HexagonalArchitecture.Order("o-1", "BRL");
+        hexOrder.addLine(new HexagonalArchitecture.OrderLine("A", 2, HexagonalArchitecture.Money.of("50.00", "BRL")));
+        orderRepo.save(hexOrder);
+        var orderService = new HexagonalArchitecture.OrderService(orderRepo, events);
+        assert orderService.shipOrder("o-1").amount().compareTo(new BigDecimal("100.00")) == 0;
+        assert events.events().size() == 1;
+
+        // Módulo 0 — ponte da Faixa 0 ao Java.
+        assert JavaZero.intOverflowWraps();
+        assert JavaZero.withoutOverflow() == 2_147_483_648L;
+        assert JavaZero.doubleIsApproximate();
+        assert JavaZero.stringIdentityVsValue();
+        assert JavaZero.sumTo(5) == 15;
+        assert JavaZero.nullThrowsNpe();
+
+        System.out.println("Java 21 academy examples: OK (Módulo 0 + módulos 1-26, com labs executáveis 12/17/18/19/20)");
     }
 }

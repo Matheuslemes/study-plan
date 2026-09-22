@@ -208,6 +208,16 @@ export const devopsAcademy = Object.freeze({
   baseline: `Pesquisa técnica: ${DEVOPS_RESEARCH_DATE} · evidência operacional acima de presença`,
   book: 'handbook',
   parts: {
+    base: {
+      index: '0/6',
+      range: 'Módulos 0.1-0.4',
+      page: 'base.html',
+      navLabel: 'Módulo 0',
+      title: 'Módulo 0 — da Faixa 0 ao DevOps',
+      subtitle: 'Ponte dos fundamentos: o que é DevOps, automação repetível, pipeline/CI com gate e medir com as métricas DORA.',
+      prerequisites: ['Concluir a Trilha 0 (Fundamentos) ou equivalente', 'Terminal e Git básico', 'Ter rodado um programa com testes localmente'],
+      objectives: ['Entender DevOps como cultura + automação para encurtar o caminho até produção', 'Ver por que passos manuais são o inimigo e o que é idempotência', 'Ler um pipeline como esteira automática com um gate que barra o quebrado', 'Medir entrega com as 4 métricas DORA e a ideia de error budget']
+    },
     fundamentos: {
       index: '1/6',
       range: 'Módulos 1-5',
@@ -288,6 +298,135 @@ function moduleOf(config) {
 }
 
 export const devopsModules = Object.freeze([
+  moduleOf({
+    number: '0.1', part: 'base', id: 'base-o-que-e-devops', title: 'O que é DevOps (e o que não é)', level: 'Ponte (Faixa 0)',
+    objective: 'Entender DevOps como cultura + automação para encurtar o tempo entre "escrevi" e "está em produção funcionando", com feedback rápido — e não como uma ferramenta ou um cargo.',
+    prerequisites: ['Trilha 0 (terminal, Git básico, como um programa roda)', 'Ter rodado um programa localmente', 'Nenhuma experiência prévia de operação'],
+    problem: 'Quem sai da Faixa 0 roda o código na própria máquina, mas nunca pensou em como levá-lo a produção de forma confiável e repetível. Sem isso, "DevOps" vira o nome de uma ferramenta ou de uma pessoa, e o abismo entre dev e operação continua.',
+    concepts: ['Cultura + automação', 'Silo Dev × Ops', 'Ciclo código→build→teste→deploy→operar→feedback', 'Feedback rápido', 'Velocidade E estabilidade (não é trade-off)'],
+    internals: ['DevOps encurta e automatiza o caminho do commit à produção, e realimenta com o que acontece lá.', 'O muro entre "quem escreve" e "quem opera" gera espera, retrabalho e culpa; a cultura DevOps derruba esse muro.', 'Segundo o DORA, times de elite entregam mais rápido E com menos falhas — velocidade e estabilidade andam juntas.'],
+    useWhen: ['Trate operar em produção como parte do trabalho de quem desenvolve.', 'Automatize o caminho até produção em vez de repetir passos manuais.', 'Meça o ciclo inteiro (do commit ao valor), não só a codificação.'],
+    avoidWhen: ['Não chame de "DevOps" só instalar uma ferramenta de CI.', 'Não crie um silo "time de DevOps" que vira mais um muro.', 'Não persiga velocidade jogando fora a estabilidade (ou vice-versa).'],
+    contrast: { bad: 'Dev "termina" e joga por cima do muro; Ops sobe manualmente à noite e reza para funcionar.', good: 'A mudança segue um caminho automático e testado até produção, e o time acompanha como ela se comporta lá.' },
+    tradeoffs: ['Cultura muda devagar; automação dá retorno rápido — os dois se reforçam.', 'Automatizar cedo custa tempo e paga em previsibilidade.', 'Mais autonomia para deployar exige mais guardrails automáticos.'],
+    production: 'Um deploy manual de sexta à noite quebra e ninguém sabe reverter. O exercício mapeia o caminho atual da mudança e aponta onde o manual vira automático.',
+    risks: ['Confundir DevOps com uma ferramenta', 'Criar um novo silo "DevOps"', 'Otimizar velocidade sem estabilidade', 'Ignorar o feedback de produção'],
+    checklist: ['Existe um caminho definido do commit à produção?', 'Ele é automático ou depende de passos manuais?', 'Dev acompanha o comportamento em produção?', 'O ciclo inteiro é medido?', 'Velocidade e estabilidade são tratadas juntas?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que é DevOps, em uma frase honesta?', expected: 'Cultura e automação para reduzir o tempo entre escrever código e tê-lo funcionando em produção, com feedback rápido — não é uma ferramenta nem um cargo.' },
+      { level: 'Sênior/Staff', question: 'Velocidade e estabilidade são um trade-off?', expected: 'Segundo o DORA, não: times de elite entregam mais rápido e com menor taxa de falha; automação e lotes pequenos melhoram os dois ao mesmo tempo.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Descrever o caminho que uma mudança sua percorre do commit até "no ar".', evidence: 'Lista de passos marcando manual vs automático.' },
+      { level: 'Aplicado', task: 'Apontar dois passos manuais que poderiam ser automatizados e o risco que cada um carrega.', evidence: 'Tabela passo → risco → automação proposta.' },
+      { level: 'Sênior', task: 'Explicar, com um exemplo, por que velocidade e estabilidade não precisam se opor.', evidence: 'Meia página citando lote pequeno e gate automático.' }
+    ],
+    challenge: 'Explicar, sem jargão, por que "temos uma ferramenta de CI" não significa "fazemos DevOps".',
+    book: 'The DevOps Handbook, introdução e parte I; Accelerate, parte I.',
+    complements: [official.dora],
+    quiz: [
+      { question: 'O que descreve melhor DevOps?', options: ['Cultura + automação para encurtar e dar feedback ao caminho até produção', 'Uma ferramenta de CI/CD específica', 'Um cargo que cuida dos servidores', 'Escrever mais testes'], answer: 0, why: 'DevOps é cultura e automação do ciclo commit→produção→feedback; não é uma ferramenta nem um cargo.' },
+      { question: 'Velocidade e estabilidade são necessariamente um trade-off?', options: ['Não — segundo o DORA, times de elite têm as duas juntas', 'Sim, sempre se troca uma pela outra', 'Só importa velocidade', 'Só importa estabilidade'], answer: 0, why: 'Automação e lotes pequenos melhoram entrega e confiabilidade ao mesmo tempo.' },
+      { question: 'Criar um "time de DevOps" separado costuma:', options: ['Virar mais um silo/muro, contra o próprio objetivo', 'Resolver todos os problemas', 'Ser a única forma correta', 'Eliminar a necessidade de automação'], answer: 0, why: 'DevOps busca derrubar o muro entre dev e ops; um silo novo recria o problema.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.2', part: 'base', id: 'base-automacao-idempotencia', title: 'Automação: do manual e repetível ao script idempotente', level: 'Ponte (Faixa 0)',
+    objective: 'Entender por que passos manuais são o inimigo (erro humano, irreproduzível) e o que torna a automação confiável: script determinístico, versionado e idempotente.',
+    prerequisites: ['Módulo 0.1', 'Rodar comandos no terminal', 'Saber o que é um script'],
+    problem: 'O iniciante configura o ambiente clicando e digitando comandos de memória. Funciona uma vez, na máquina dele — e falha quando outra pessoa, ou o servidor, tenta repetir.',
+    concepts: ['Passo manual vs automatizado', 'Determinismo', 'Idempotência (rodar 2x = mesmo estado)', 'Versionar a automação (é código)', '"Funciona na minha máquina"'],
+    internals: ['Um passo manual não é reproduzível nem auditável: cada execução pode ser diferente.', 'Automação boa é determinística (mesma entrada → mesmo resultado) e idempotente (rodar de novo não estraga).', 'Como a automação é código, ela é versionada, revisada e testada como qualquer código.'],
+    useWhen: ['Automatize o que é repetido e propenso a erro.', 'Faça o script idempotente: seguro de rodar de novo.', 'Versione a automação junto com o projeto.'],
+    avoidWhen: ['Não guarde passos críticos só na memória ou num doc solto.', 'Não escreva script que quebra se rodar duas vezes.', 'Não automatize algo raro e trivial só por automatizar.'],
+    contrast: { bad: 'Um "passo a passo" no wiki com 15 comandos que cada um roda de um jeito.', good: 'Um script versionado, idempotente, que qualquer pessoa (ou o CI) roda com o mesmo resultado.' },
+    tradeoffs: ['Escrever automação custa agora e paga a cada repetição.', 'Idempotência exige checar o estado antes de agir (mais código).', 'Automatizar o raro pode não compensar — priorize o repetido.'],
+    production: 'Um provisionamento manual esquece um passo e o ambiente de produção fica sutilmente diferente do de teste. O exercício converte o passo a passo num script idempotente e versionado.',
+    risks: ['Conhecimento só na cabeça de alguém', 'Script não idempotente (quebra na 2ª vez)', 'Ambiente irreproduzível ("drift")', 'Automação sem versionamento'],
+    checklist: ['O passo é repetido e arriscado?', 'Está em script, não em doc/memória?', 'Rodar 2x dá o mesmo resultado?', 'Está versionado?', 'Outra pessoa consegue rodar igual?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Por que passos manuais são um problema em operação?', expected: 'Não são reproduzíveis nem auditáveis; dependem da pessoa e do momento, causando erro humano e o clássico "funciona na minha máquina".' },
+      { level: 'Sênior/Staff', question: 'O que é idempotência e por que importa na automação?', expected: 'É a propriedade de rodar a operação várias vezes e chegar ao mesmo estado final; importa porque scripts de infra reexecutam (retry, convergência) e não podem estragar o que já está correto.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Pegar um "passo a passo" de setup e listar onde ele pode falhar entre pessoas.', evidence: 'Lista de pontos frágeis.' },
+      { level: 'Aplicado', task: 'Escrever um script que crie uma pasta/arquivo só se não existir (idempotente).', evidence: 'Script que roda 2x sem erro nem duplicação.' },
+      { level: 'Sênior', task: 'Tornar idempotente um script que hoje falha ao rodar de novo.', evidence: 'Antes/depois com verificação de estado.' }
+    ],
+    challenge: 'Defender qual passo manual da sua rotina daria mais retorno se fosse automatizado, e por quê.',
+    book: 'The DevOps Handbook, parte III (práticas técnicas); Infrastructure as Code (fundamentos).',
+    complements: [official.githubActions],
+    quiz: [
+      { question: 'Por que passos manuais são o "inimigo" em operação?', options: ['Não são reproduzíveis nem auditáveis e dependem da pessoa', 'São mais rápidos que scripts', 'Ocupam menos disco', 'Não têm problema algum'], answer: 0, why: 'Manual = irreproduzível e propenso a erro humano; o oposto do que operação confiável precisa.' },
+      { question: 'O que é uma operação idempotente?', options: ['Rodar várias vezes leva ao mesmo estado final', 'Roda só uma vez', 'É mais rápida na segunda vez', 'Nunca falha'], answer: 0, why: 'Idempotência garante que reexecutar (retry, convergência) não estraga o que já está correto.' },
+      { question: 'Por que tratar automação como código (versionada)?', options: ['Para revisar, testar e reproduzir a infraestrutura como qualquer código', 'Para ocupar o repositório', 'Porque é obrigatório por lei', 'Para deixar mais lento'], answer: 0, why: 'Automação versionada é auditável, revisável e reproduzível — a base de IaC e CI.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.3', part: 'base', id: 'base-pipeline-ci', title: 'Pipeline e CI: build, teste e o gate que barra o quebrado', level: 'Ponte (Faixa 0)',
+    objective: 'Ler um pipeline como uma esteira automática (build → teste → deploy), entender integração contínua e o gate que impede código quebrado de avançar (fail-fast), com lotes pequenos.',
+    prerequisites: ['Módulo 0.2', 'Saber rodar testes de um projeto', 'Ideia de commit e branch'],
+    problem: 'Sem uma esteira automática, cada integração é manual e arriscada; código quebrado chega longe antes de alguém perceber, e o "big bang" de juntar tudo no fim vira caos.',
+    concepts: ['Pipeline (esteira de estágios)', 'Integração contínua (integrar cedo e sempre)', 'Estágios: build, teste, deploy', 'Gate e fail-fast', 'Lotes pequenos'],
+    internals: ['O pipeline roda estágios em ordem e para no primeiro que falha (fail-fast): nada quebrado avança.', 'Integração contínua junta o trabalho cedo e frequentemente, com teste automático a cada mudança.', 'O gate de teste é o que protege a produção — automatizado, ele barra o defeito antes do deploy.'],
+    useWhen: ['Rode build e testes automáticos a cada commit.', 'Faça o pipeline falhar rápido no primeiro problema.', 'Integre em lotes pequenos e frequentes.'],
+    avoidWhen: ['Não deixe o deploy depender de um gate manual lento.', 'Não acumule mudanças enormes para integrar de uma vez.', 'Não pule o gate de teste "para ir mais rápido".'],
+    contrast: { bad: 'Juntar semanas de trabalho num merge gigante e testar só no fim, na mão.', good: 'Cada commit dispara build+teste; se o teste falha, a esteira para e nada quebrado vai a produção.' },
+    tradeoffs: ['Pipeline custa manutenção e devolve feedback rápido.', 'Gate rígido barra defeito mas pode bloquear se instável (flaky).', 'Lotes pequenos exigem disciplina e dão menos risco por deploy.'],
+    production: 'Um merge grande quebra produção e ninguém sabe qual mudança foi. O exercício mostra, no exemplo executável, o gate barrando o código quebrado antes do deploy. (Ver o exemplo versionado.)',
+    risks: ['Pular o gate de teste', 'Testes lentos/flaky que ninguém confia', 'Lotes gigantes', 'Deploy manual como gargalo'],
+    checklist: ['Cada commit dispara build e teste?', 'O pipeline para no primeiro erro (fail-fast)?', 'O gate barra código quebrado antes do deploy?', 'Os lotes são pequenos?', 'O feedback chega em minutos?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que é integração contínua?', expected: 'Integrar o trabalho no tronco cedo e com frequência, disparando build e testes automáticos a cada mudança para detectar problemas rápido.' },
+      { level: 'Sênior/Staff', question: 'Para que serve o gate do pipeline e o que significa fail-fast?', expected: 'O gate (build/testes) impede que código quebrado avance para produção; fail-fast é parar no primeiro estágio que falha, dando feedback imediato e barato.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Rodar o exemplo e explicar por que "feature-carrinho" não chegou a produção.', evidence: 'Saída do script + identificação do estágio que barrou.' },
+      { level: 'Aplicado', task: 'Desenhar um pipeline de 4 estágios para um projeto seu, marcando o gate.', evidence: 'Diagrama build→teste→deploy→smoke.' },
+      { level: 'Sênior', task: 'Explicar como lotes pequenos reduzem o risco de cada deploy.', evidence: 'Meia página ligando lote pequeno a fail-fast e recuperação.' }
+    ],
+    challenge: 'Defender por que um gate de teste automático vale mais que uma revisão manual demorada — e quando a revisão ainda é necessária.',
+    book: 'Continuous Delivery (Humble & Farley), caps. 1-5; The DevOps Handbook, parte III.',
+    complements: [official.githubActions, official.dora],
+    exampleFile: '../../examples/devops-senior/devops-zero.mjs',
+    quiz: [
+      { question: 'O que é um pipeline de CI/CD?', options: ['Uma esteira de estágios automáticos (build→teste→deploy) executados em ordem', 'Um servidor de produção', 'Um editor de código', 'Um tipo de banco de dados'], answer: 0, why: 'O pipeline automatiza a sequência do commit ao deploy, com feedback a cada estágio.' },
+      { question: 'O que significa "fail-fast" num pipeline?', options: ['Parar no primeiro estágio que falha, dando feedback imediato', 'Rodar tudo mesmo com erros', 'Falhar de propósito', 'Ir direto ao deploy'], answer: 0, why: 'Fail-fast evita gastar tempo e barra código quebrado o mais cedo possível.' },
+      { question: 'Qual é o papel do gate de teste?', options: ['Impedir que código quebrado avance para produção', 'Deixar o deploy mais lento', 'Substituir o build', 'Contar linhas de código'], answer: 0, why: 'O gate automatizado é o que protege a produção antes do deploy.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.4', part: 'base', id: 'base-metricas-dora', title: 'Medir para melhorar: as 4 métricas DORA e o error budget', level: 'Ponte (Faixa 0)',
+    objective: 'Conhecer as 4 métricas DORA (frequência de deploy, lead time, taxa de falha de mudança, tempo de restauração) e a ideia de SLO/error budget, para melhorar entrega com base em dado.',
+    prerequisites: ['Módulo 0.3', 'Ideia de porcentagem e média', 'Noção de deploy e incidente'],
+    problem: 'Times "acham" que estão melhorando sem medir nada; sem números, toda discussão de velocidade vs estabilidade é opinião, e ninguém sabe se um deploy está seguro.',
+    concepts: ['Você melhora o que mede', 'As 4 métricas DORA', 'Throughput (deploy freq, lead time) × estabilidade (CFR, MTTR)', 'SLO e error budget', 'Métrica vs meta (lei de Goodhart)'],
+    internals: ['DORA resume entrega em 4 números: dois de velocidade (frequência de deploy, lead time) e dois de estabilidade (taxa de falha de mudança, tempo de restauração).', 'Um SLO define o alvo (ex.: 99,9% de sucesso); o error budget é o quanto se pode falhar antes de frear releases.', 'Quando a métrica vira meta cega, ela deixa de medir (lei de Goodhart) — meça o sistema, não a pessoa.'],
+    useWhen: ['Meça as 4 métricas DORA antes de decidir onde melhorar.', 'Use o error budget para decidir entre lançar e estabilizar.', 'Compare antes/depois de uma mudança de processo.'],
+    avoidWhen: ['Não transforme uma métrica em meta individual.', 'Não otimize velocidade ignorando a taxa de falha.', 'Não meça só o que é fácil e ignore o feedback de produção.'],
+    contrast: { bad: 'Reportar "fizemos 200 deploys!" sem olhar quantos quebraram nem quanto demorou para restaurar.', good: 'Acompanhar as 4 métricas DORA juntas e usar o error budget para decidir o ritmo de release.' },
+    tradeoffs: ['Medir custa instrumentar eventos confiáveis.', 'Error budget dá autonomia mas exige acordo sobre o SLO.', 'Foco só em velocidade infla CFR; só em estabilidade trava a entrega.'],
+    production: 'Um time acelera deploys e a taxa de falha dispara sem ninguém notar. O exercício calcula as 4 métricas DORA de um log e classifica o desempenho.',
+    risks: ['Métrica vira meta (Goodhart)', 'Medir só velocidade', 'Ignorar MTTR', 'SLO sem acordo do time/negócio'],
+    checklist: ['As 4 métricas DORA estão sendo medidas?', 'Velocidade e estabilidade aparecem juntas?', 'Há um SLO e um error budget definidos?', 'As métricas medem o sistema, não pessoas?', 'A decisão de release usa o dado?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Quais são as 4 métricas DORA?', expected: 'Frequência de deploy e lead time para mudanças (velocidade), taxa de falha de mudança e tempo de restauração/MTTR (estabilidade).' },
+      { level: 'Sênior/Staff', question: 'O que é error budget e como ele orienta decisões?', expected: 'É a folga permitida pelo SLO (ex.: 0,1% de falhas): com budget disponível, prioriza-se lançar; esgotado, prioriza-se estabilizar antes de novos releases.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Dado um mês de deploys e incidentes, classificar cada métrica DORA como velocidade ou estabilidade.', evidence: 'Tabela com as 4 métricas rotuladas.' },
+      { level: 'Aplicado', task: 'Calcular a taxa de falha de mudança de um log de 10 deploys.', evidence: 'Cálculo CFR = deploys que quebraram / total.' },
+      { level: 'Sênior', task: 'Definir um SLO e o error budget correspondente para um serviço simples.', evidence: 'SLO em % e budget de falha derivado.' }
+    ],
+    challenge: 'Defender uma decisão de "congelar releases" usando o error budget, e o que faria você voltar a lançar.',
+    book: 'Accelerate (Forsgren, Humble & Kim), parte I; Site Reliability Engineering (Google), capítulos de SLO.',
+    complements: [official.dora, official.sre],
+    quiz: [
+      { question: 'Quais dimensões as 4 métricas DORA equilibram?', options: ['Velocidade (deploy freq, lead time) e estabilidade (taxa de falha, tempo de restauração)', 'Só velocidade', 'Só custo', 'Só número de linhas'], answer: 0, why: 'DORA mede throughput e estabilidade juntos — é o coração da avaliação de entrega.' },
+      { question: 'O que é um error budget?', options: ['A folga de falhas permitida pelo SLO antes de frear releases', 'O orçamento em dinheiro do time', 'O número de bugs no backlog', 'O tempo de build'], answer: 0, why: 'Com budget disponível, prioriza-se lançar; esgotado, prioriza-se estabilizar.' },
+      { question: 'Por que "métrica não deve virar meta cega" (lei de Goodhart)?', options: ['Ao virar meta, a métrica é gamificada e deixa de medir o que importa', 'Porque métricas são inúteis', 'Porque medir é proibido', 'Porque metas não existem'], answer: 0, why: 'Meça o sistema, não a pessoa; metas cegas corrompem a própria medição.' }
+    ]
+  }),
   moduleOf({
     number: 1, part: 'fundamentos', id: 'fluxo-valor', title: 'Fluxo de valor e os Three Ways', level: 'Base operacional',
     objective: 'Mapear uma mudança do pedido à produção e medir espera, retrabalho, handoffs e tempo de feedback.',

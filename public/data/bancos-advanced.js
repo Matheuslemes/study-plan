@@ -23,12 +23,12 @@ export const bancosBooks = Object.freeze({
   }),
   ddia: Object.freeze({
     title: 'Designing Data-Intensive Applications',
-    authors: 'Martin Kleppmann',
-    edition: '1ª edição',
-    year: 2017,
+    authors: 'Martin Kleppmann e Chris Riccomini',
+    edition: '2ª edição',
+    year: 2026,
     language: 'Inglês',
     pages: 898,
-    path: '/pdfs/livros-db/designing-data-intensive-applications.pdf',
+    path: '/pdfs/livros-db/designing-data-intensive-applications-2e.pdf',
     depth: 'Avançado',
     prerequisites: 'Bancos relacionais, redes e noções de sistemas distribuídos.',
     structure: 'Fundamentos, dados distribuídos e sistemas derivados.',
@@ -139,6 +139,25 @@ export const bancosAcademy = Object.freeze({
   baseline: 'PostgreSQL 18 · MongoDB 8.x · Valkey/Redis 8+ · DynamoDB · Hibernate ORM 7.x',
   book: 'database-internals',
   parts: Object.freeze({
+    base: Object.freeze({
+      index: '0/6',
+      page: 'base.html',
+      range: 'Módulos 0.1–0.4',
+      navLabel: 'Módulo 0',
+      title: 'Módulo 0 — da Faixa 0 aos bancos',
+      subtitle: 'Ponte dos fundamentos: por que um banco (vs arquivo), o modelo relacional, SQL essencial e integridade/transação.',
+      prerequisites: [
+        'Ter passado pela Faixa 0 (Fundamentos de Computação) ou equivalente.',
+        'Saber usar o terminal; nenhum conhecimento prévio de SQL.',
+        'Noção de que dados precisam ser guardados e consultados.'
+      ],
+      objectives: [
+        'Explicar por que um banco de dados resolve o que arquivo/planilha não resolvem.',
+        'Entender o modelo relacional: tabelas, linhas, colunas e chaves.',
+        'Escrever SQL essencial: SELECT/WHERE, INSERT/UPDATE/DELETE e JOIN.',
+        'Entender integridade (PK/UNIQUE/FK) e transação (tudo-ou-nada).'
+      ]
+    }),
     fundamentos: Object.freeze({
       index: '1/6',
       page: 'fundamentos.html',
@@ -262,6 +281,134 @@ const pgDocs = (label, page) => ({ label, url: `https://www.postgresql.org/docs/
 const defineModule = (module) => Object.freeze(module);
 
 export const bancosModules = Object.freeze([
+  defineModule({
+    number: '0.1', part: 'base', id: 'por-que-banco', title: 'Por que um banco de dados? (vs arquivo e planilha)', level: 'Introdução',
+    objective: 'Explicar o que um banco de dados resolve que um arquivo ou planilha não resolvem: consulta, concorrência, integridade e durabilidade.',
+    prerequisites: ['Faixa 0: arquivos e sistema de arquivos', 'Noção de que dados precisam ser guardados'],
+    problem: 'Quem vem da Faixa 0 sabe guardar dados num arquivo; não sabe por que isso falha com muitos dados, muitos usuários e regras a proteger.',
+    concepts: ['Persistência e durabilidade', 'Consulta declarativa (SQL)', 'Concorrência (muitos ao mesmo tempo)', 'Integridade (regras no dado)', 'SGBD como servidor de dados'],
+    internals: ['Um arquivo/planilha vira caótico com volume, acesso simultâneo e regras; o banco resolve os três de uma vez.', 'Você diz O QUE quer (SQL declarativo) e o banco decide COMO buscar (com índices) — não é você que percorre.', 'O banco arbitra escritas concorrentes e garante regras (chaves, constraints) que a aplicação sozinha não garante sob concorrência.'],
+    useWhen: ['Quando os dados precisam durar, ser consultados de formas variadas e acessados por muitos.', 'Quando há regras de integridade que não podem ser violadas.'],
+    avoidWhen: ['Não guarde dados relacionais críticos num CSV compartilhado.', 'Não reimplemente na aplicação o que o banco já garante (transação, unicidade).'],
+    contrast: { bad: 'Uma planilha compartilhada onde dois editam ao mesmo tempo e um sobrescreve o outro.', good: 'Um banco que arbitra as escritas, garante unicidade e permite consultar por qualquer critério.' },
+    tradeoffs: ['Um banco acrescenta uma peça de infraestrutura, em troca de integridade, concorrência e consulta.', 'SQL exige aprender, mas evita percorrer dados na mão.'],
+    production: 'Um controle em planilha compartilhada perdeu registros quando duas pessoas salvaram ao mesmo tempo — exatamente o que a concorrência do banco resolve.',
+    risks: ['Usar arquivo/planilha onde há concorrência e regras.', 'Colocar integridade só na aplicação.', 'Achar que "guardar" é o problema (o difícil é consultar e proteger).'],
+    checklist: ['Sei por que um arquivo falha com concorrência?', 'Sei o que é consulta declarativa?', 'Sei o que o banco garante que a aplicação não garante?', 'Sei o que significa durabilidade?'],
+    interview: [
+      { level: 'Introdução', question: 'Por que usar um banco de dados em vez de um arquivo?', expected: 'Consulta declarativa e rápida, acesso concorrente arbitrado, integridade garantida no dado e durabilidade — o que um arquivo/planilha não dá.' },
+      { level: 'Introdução', question: 'O que é SQL declarativo?', expected: 'Você descreve O QUE quer; o banco decide COMO obter (usando índices), em vez de você percorrer os dados.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Listar três problemas de guardar dados de clientes numa planilha compartilhada e como o banco resolve cada um.', evidence: 'Tabela problema → solução do banco.' },
+      { level: 'Aplicado', task: 'Instalar/abrir um banco (SQLite ou PostgreSQL) e criar sua primeira tabela.', evidence: 'O comando e a tabela criada.' }
+    ],
+    quiz: [
+      { question: 'O que um banco garante que um arquivo compartilhado NÃO garante?', options: ['cores bonitas', 'integridade e acesso concorrente seguro', 'menos memória', 'nada'], answer: 1, why: 'Concorrência arbitrada e regras no dado são a diferença central.' },
+      { question: 'SQL é uma linguagem:', options: ['imperativa (você percorre)', 'declarativa (você diz o quê)', 'de estilo', 'de marcação'], answer: 1, why: 'Você descreve o resultado; o banco decide como obtê-lo.' },
+      { question: 'Durabilidade significa que os dados:', options: ['são bonitos', 'sobrevivem a falhas depois de confirmados', 'são temporários', 'ficam só na memória'], answer: 1, why: 'Uma vez confirmados (commit), persistem mesmo após queda.' }
+    ],
+    challenge: 'Explicar para um leigo por que um sistema com muitos usuários não pode guardar tudo num único arquivo.',
+    book: 'SQL Antipatterns, introdução; The Art of PostgreSQL, por que um banco.',
+    complements: [pgDocs('PostgreSQL — Tutorial: a linguagem SQL', 'tutorial-sql.html')],
+    exampleFile: null
+  }),
+  defineModule({
+    number: '0.2', part: 'base', id: 'modelo-relacional-zero', title: 'O modelo relacional: tabelas, linhas, colunas e chaves', level: 'Introdução',
+    objective: 'Entender o modelo relacional — tabela (linhas × colunas), tipos, chave primária e chave estrangeira — o modelo mental antes da modelagem por invariantes.',
+    prerequisites: ['Módulo 0.1', 'Faixa 0: tipos de dado'],
+    problem: 'Sem o modelo relacional, "tabela", "chave" e "relacionamento" viram jargão, e o iniciante modela por tela em vez de por fato.',
+    concepts: ['Tabela = linhas × colunas', 'Coluna tem tipo', 'Chave primária (identifica a linha)', 'Chave estrangeira (liga tabelas)', 'NULL (ausência de valor)'],
+    internals: ['Uma tabela guarda um tipo de fato; cada linha é um registro, cada coluna um atributo com tipo.', 'A chave primária identifica unicamente cada linha; a chave estrangeira referencia a PK de outra tabela, ligando-as.', 'NULL significa "sem valor" — não é 0 nem "" — e exige cuidado nas comparações.'],
+    useWhen: ['Ao desenhar onde cada dado mora (uma tabela por tipo de fato).', 'Ao ligar dados relacionados por chave.'],
+    avoidWhen: ['Não crie uma tabela por tela do sistema.', 'Não guarde uma lista separada por vírgula numa coluna de texto.'],
+    contrast: { bad: 'Uma tabela "cadastro" com clientes, pedidos e itens misturados em colunas repetidas.', good: 'Tabelas clientes, pedidos e itens, ligadas por chave estrangeira.' },
+    tradeoffs: ['Separar em tabelas por fato reduz duplicação, ao custo de precisar juntar (JOIN) depois.', 'Chave estrangeira protege referências, mas exige ordem de carga.'],
+    production: 'Uma coluna "produtos" com nomes separados por vírgula impossibilitou relatórios por produto; separar em uma tabela de itens resolveu.',
+    risks: ['Modelar por tela, não por fato.', 'Lista dentro de uma coluna.', 'Confundir NULL com 0 ou "".', 'Chave primária mutável.'],
+    checklist: ['Cada tabela representa um tipo de fato?', 'Toda tabela tem chave primária?', 'As ligações usam chave estrangeira?', 'Sei o que NULL significa?'],
+    interview: [
+      { level: 'Introdução', question: 'O que é uma chave primária?', expected: 'Uma coluna (ou conjunto) que identifica unicamente cada linha da tabela; não se repete e não é nula.' },
+      { level: 'Introdução', question: 'Para que serve uma chave estrangeira?', expected: 'Referenciar a chave primária de outra tabela, ligando as duas e garantindo que a referência existe.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Modelar clientes e pedidos em duas tabelas, com PK em cada e FK ligando pedido→cliente.', evidence: 'O desenho das tabelas com PK/FK marcadas.' },
+      { level: 'Aplicado', task: 'Pegar uma planilha "achatada" e separá-la em tabelas por fato.', evidence: 'Antes (planilha) e depois (tabelas ligadas).' }
+    ],
+    quiz: [
+      { question: 'Numa tabela, uma linha representa:', options: ['uma coluna', 'um registro (uma ocorrência do fato)', 'um tipo', 'um banco'], answer: 1, why: 'Linha = registro; coluna = atributo.' },
+      { question: 'A chave primária:', options: ['pode repetir', 'identifica unicamente cada linha', 'é sempre texto', 'é opcional'], answer: 1, why: 'Única e não nula por linha.' },
+      { question: 'NULL significa:', options: ['zero', 'string vazia', 'ausência de valor', 'falso'], answer: 2, why: 'É "sem valor", diferente de 0 e de "".' }
+    ],
+    challenge: 'Transformar uma planilha de pedidos (com cliente repetido em cada linha) em tabelas relacionais ligadas por chave.',
+    book: 'SQL Antipatterns (modelagem); The Art of PostgreSQL (modelo de dados).',
+    complements: [pgDocs('PostgreSQL — Data Definition (tabelas e chaves)', 'ddl.html')],
+    exampleFile: null
+  }),
+  defineModule({
+    number: '0.3', part: 'base', id: 'sql-essencial', title: 'SQL essencial: SELECT, WHERE, CRUD e JOIN', level: 'Introdução',
+    objective: 'Escrever as operações essenciais — SELECT/WHERE para consultar, INSERT/UPDATE/DELETE para alterar e JOIN para combinar tabelas.',
+    prerequisites: ['Módulo 0.2', 'Um banco (SQLite ou PostgreSQL) para praticar'],
+    problem: 'Sem o SQL básico, o iniciante não consegue nem ler nem gravar; e sem JOIN, dados em tabelas separadas parecem inacessíveis juntos.',
+    concepts: ['SELECT e WHERE (consultar/filtrar)', 'INSERT, UPDATE, DELETE (CRUD)', 'JOIN (combinar tabelas por chave)', 'ORDER BY e agregação (COUNT/SUM)', 'GROUP BY'],
+    internals: ['SELECT ... WHERE filtra linhas; INSERT/UPDATE/DELETE completam o CRUD (criar, alterar, remover).', 'JOIN combina linhas de duas tabelas onde a chave estrangeira bate com a primária — é como se lê dados relacionados juntos.', 'COUNT, SUM e GROUP BY resumem: quantos, quanto, por grupo — em uma consulta, não num laço na aplicação.'],
+    useWhen: ['Sempre que ler ou gravar dados.', 'Ao juntar informações de tabelas relacionadas.'],
+    avoidWhen: ['Não traga a tabela inteira para filtrar/contar na aplicação (deixe o WHERE/agregação no banco).', 'Não faça UPDATE/DELETE sem WHERE (afeta tudo).'],
+    contrast: { bad: 'SELECT * e filtrar/contar no código da aplicação.', good: 'WHERE, JOIN e SUM/GROUP BY no banco, trazendo só o resultado.' },
+    tradeoffs: ['Deixar o trabalho no banco é mais rápido e simples, e exige aprender SQL.', 'JOIN junta dados normalizados ao custo de escrever a consulta.'],
+    production: 'Um relatório trazia todas as linhas e somava no código (lento e frágil); um SELECT com SUM/GROUP BY resolveu em uma consulta.',
+    risks: ['UPDATE/DELETE sem WHERE.', 'Trazer dados demais para processar na aplicação.', 'Esquecer a condição do JOIN (produto cartesiano).'],
+    checklist: ['Sei consultar com SELECT/WHERE?', 'Sei o CRUD completo?', 'Sei juntar tabelas com JOIN?', 'Sei resumir com COUNT/SUM/GROUP BY?'],
+    interview: [
+      { level: 'Introdução', question: 'Para que serve um JOIN?', expected: 'Combinar linhas de duas (ou mais) tabelas relacionadas, tipicamente ligando a chave estrangeira de uma à chave primária da outra.' },
+      { level: 'Introdução', question: 'Por que é melhor filtrar com WHERE do que trazer tudo e filtrar na aplicação?', expected: 'O banco filtra com índices e traz só o necessário; trazer tudo desperdiça rede, memória e tempo.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Rodar o exemplo bancos-zero e explicar cada consulta (WHERE, JOIN, GROUP BY, UPDATE, DELETE).', evidence: 'Notas ligando cada comando ao resultado.' },
+      { level: 'Aplicado', task: 'Escrever uma consulta que soma pedidos por cliente usando JOIN + GROUP BY.', evidence: 'A consulta e o resultado conferido.' }
+    ],
+    quiz: [
+      { question: 'Para combinar duas tabelas relacionadas use:', options: ['UNION', 'JOIN', 'GROUP BY', 'WHERE'], answer: 1, why: 'JOIN liga tabelas por chave.' },
+      { question: 'Um UPDATE sem WHERE:', options: ['não faz nada', 'altera TODAS as linhas', 'dá erro sempre', 'altera uma linha'], answer: 1, why: 'Sem filtro, afeta a tabela inteira — perigoso.' },
+      { question: 'Para contar quantos pedidos cada cliente tem, use:', options: ['SELECT *', 'COUNT + GROUP BY', 'DELETE', 'ORDER BY só'], answer: 1, why: 'Agregação (COUNT) por grupo (GROUP BY).' }
+    ],
+    challenge: 'Escrever, sobre bancos-zero, uma consulta que traga o cliente com maior total gasto — só com SQL.',
+    book: 'The Art of PostgreSQL (SQL); SQL Antipatterns (consultas).',
+    complements: [pgDocs('PostgreSQL — Queries (SELECT e JOIN)', 'queries.html')],
+    exampleFile: '../../examples/database-senior/bancos-zero.mjs'
+  }),
+  defineModule({
+    number: '0.4', part: 'base', id: 'integridade-transacao', title: 'Integridade e transação: PK/UNIQUE/FK e o básico de ACID', level: 'Introdução',
+    objective: 'Entender que constraints garantem regras no dado e que uma transação é tudo-ou-nada — a base para a modelagem por invariantes do módulo 1.',
+    prerequisites: ['Módulo 0.3', 'Faixa 0: ler erros; noção de "ao mesmo tempo"'],
+    problem: 'O módulo 1 já assume "regras de negócio como invariantes no banco" e concorrência; sem esta ponte, o iniciante confia na validação da aplicação e perde dados.',
+    concepts: ['Constraints: PRIMARY KEY, UNIQUE, NOT NULL, FOREIGN KEY, CHECK', 'Transação (BEGIN/COMMIT/ROLLBACK)', 'Atomicidade (tudo-ou-nada)', 'Concorrência: validar-antes-de-inserir falha', 'ACID em uma frase'],
+    internals: ['Constraints guardam a regra NO dado: UNIQUE impede duplicata mesmo com dois inserts simultâneos — algo que um SELECT-antes-do-INSERT na aplicação não garante.', 'Uma transação agrupa operações: ou todas confirmam (COMMIT) ou nenhuma vale (ROLLBACK) — a atomicidade que evita estados pela metade.', 'ACID = Atomicidade, Consistência, Isolamento e Durabilidade — as garantias que o banco dá e o arquivo não.'],
+    useWhen: ['Ao proteger uma regra que não pode ser violada (unicidade, referência).', 'Ao agrupar operações que só fazem sentido juntas (débito + crédito).'],
+    avoidWhen: ['Não confie só na validação da aplicação sob concorrência.', 'Não deixe operações relacionadas fora de uma transação.'],
+    contrast: { bad: 'SELECT para ver se o e-mail existe e depois INSERT (outra transação insere no meio).', good: 'Constraint UNIQUE no e-mail: o banco arbitra atomicamente e a aplicação trata a violação.' },
+    tradeoffs: ['Constraints e transações custam um pouco de desempenho e disciplina, em troca de integridade garantida.', 'Isolamento mais forte evita anomalias, mas reduz concorrência (assunto do módulo 1+).'],
+    production: 'Dois cadastros simultâneos do mesmo CPF passaram pela validação da aplicação e duplicaram o cliente; uma constraint UNIQUE teria bloqueado atomicamente.',
+    risks: ['Confiar em validação da aplicação sob concorrência.', 'Operações relacionadas sem transação.', 'Ignorar violação de constraint em vez de tratá-la.'],
+    checklist: ['Sei o que cada constraint (PK/UNIQUE/FK/NOT NULL/CHECK) garante?', 'Sei o que é uma transação atômica?', 'Entendo por que validar-antes-de-inserir falha sob concorrência?', 'Sei o que ACID significa em uma frase?'],
+    interview: [
+      { level: 'Introdução', question: 'Por que uma validação SELECT antes do INSERT não garante unicidade?', expected: 'Outra transação pode inserir entre o SELECT e o INSERT; só uma constraint UNIQUE arbitra de forma atômica.' },
+      { level: 'Introdução', question: 'O que é atomicidade numa transação?', expected: 'Ou todas as operações da transação são confirmadas (COMMIT) ou nenhuma vale (ROLLBACK) — nunca um meio-termo.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'No exemplo bancos-zero, observar a PK bloquear id duplicado e a transação reverter no erro.', evidence: 'Nota explicando a constraint e o ROLLBACK.' },
+      { level: 'Aplicado', task: 'Adicionar uma constraint UNIQUE e provar que ela impede a duplicata que a aplicação deixaria passar.', evidence: 'DDL da constraint e o erro de violação capturado.' }
+    ],
+    quiz: [
+      { question: 'Para impedir e-mail duplicado de forma confiável, use:', options: ['SELECT antes do INSERT', 'uma constraint UNIQUE', 'um comentário', 'ORDER BY'], answer: 1, why: 'A constraint arbitra atomicamente, mesmo sob concorrência.' },
+      { question: 'Uma transação garante que:', options: ['tudo roda mais rápido', 'ou tudo é confirmado ou nada vale', 'os dados ficam bonitos', 'não há erros'], answer: 1, why: 'Atomicidade: COMMIT tudo ou ROLLBACK nada.' },
+      { question: 'O "A" de ACID é:', options: ['Acesso', 'Atomicidade', 'Aprovação', 'Arquivo'], answer: 1, why: 'Atomicidade — tudo-ou-nada da transação.' }
+    ],
+    challenge: 'Ligar o que aprendeu ao módulo 1: modelar uma regra de negócio como invariante no banco (constraint), não como código na aplicação.',
+    book: 'SQL Antipatterns (integridade); depois siga para o módulo 1 (modelagem por invariantes).',
+    complements: [pgDocs('PostgreSQL — Constraints', 'ddl-constraints.html'), pgDocs('PostgreSQL — Transactions', 'tutorial-transactions.html')],
+    exampleFile: null
+  }),
   defineModule({
     number: 1,
     part: 'fundamentos',

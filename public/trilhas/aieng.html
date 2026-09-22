@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Engenharia Assistida por IA — a prática de 2026</title>
+  <meta name="description" content="Academia de Engenharia Assistida por IA: fazer engenharia sênior no ambiente onde agentes fazem parte do fluxo — prompting, spec executável, revisão de código gerado, evals, e governança sem dependência cega.">
+  <meta property="og:title" content="Engenharia Assistida por IA — a prática de 2026">
+  <meta property="og:description" content="Trabalhar COM IA como ferramenta de engenharia: spec, revisão, evals e adoção que amplifica sem criar dependência cega.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/aieng">
+  <meta name="twitter:card" content="summary">
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css?v=redesign-33" rel="stylesheet">
+
+  <link href="../assets/css/tracks-palette.css?v=redesign-33" rel="stylesheet" /><link href="../assets/css/base.css?v=redesign-33" rel="stylesheet">
+
+  <link href="../assets/css/hub.css?v=redesign-33" rel="stylesheet" /><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/aieng">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
+</head>
+<body class="track-page is-hub" data-track="aieng">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="track-hero-page ac-hub-hero">
+    <div class="container ac-hero-layout">
+      <div class="ac-hero-copy">
+        <div class="hero-label">Trilha transversal · Engenharia Assistida por IA · fluxo de 2026</div>
+        <h1 class="track-title"><span class="ac-title-nowrap">Engenharia</span> Assistida por IA</h1>
+        <p class="track-lead">Não é construir IA — isso é a trilha de IA. É fazer engenharia sênior NO AMBIENTE
+          onde agentes fazem parte do fluxo: com contexto, especificação, revisão, eval e governança, sem
+          dependência cega.</p>
+        <div class="track-badge-set" aria-label="Principais temas">
+          <span>IA como amplificador</span>
+          <span>Fluxo com agentes</span>
+          <span>Spec-driven dev</span>
+          <span>Revisão de código gerado</span>
+          <span>Evals</span>
+          <span>LLM-as-a-judge</span>
+          <span>Supply chain</span>
+        </div>
+      </div>
+
+      <aside class="ac-route-map" aria-label="Percurso da academia">
+        <div class="ac-route-map__header">
+          <span>Do fluxo à governança</span>
+          <strong>A IA amplifica a capacidade que já existe — para o bem e para o mal.</strong>
+        </div>
+        <ol>
+          <li><b>01</b><div><strong>A prática</strong><small>Amplificador, prompting, fluxo com agentes.</small></div></li>
+          <li><b>02</b><div><strong>Spec e revisão</strong><small>Spec executável, revisão, teste como oráculo.</small></div></li>
+          <li><b>03</b><div><strong>IA como feature</strong><small>Evals, regressão de prompt, juiz automatizado.</small></div></li>
+          <li><b>04</b><div><strong>Fronteira</strong><small>Deps alucinadas, agência, DORA, adoção.</small></div></li>
+        </ol>
+        <p>
+          <span><strong data-ac-count="modules">14</strong>módulos</span>
+          <span><strong data-ac-count="exercises">42</strong>exercícios</span>
+          <span><strong data-ac-count="projects">3</strong>entregas</span>
+        </p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="sitenav" aria-label="Navegação da trilha Engenharia Assistida por IA">
+    <div class="container">
+      <div class="sitenav-top">
+        <a class="sitenav-brand" href="./aieng.html">AI-Assisted Eng <span>a prática de 2026</span></a>
+        <a class="nav-back" href="../index.html">← Dashboard</a>
+        <div class="sitenav-top-right">
+          <input class="search-box" id="searchInput" type="search" aria-label="Buscar nesta trilha"
+            placeholder="Buscar nesta trilha...">
+        </div>
+      </div>
+    </div>
+    <div class="sitenav-bar-outer">
+      <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">‹</button>
+      <div class="sitenav-bar-inner" id="navSectionsBar">
+        <div class="nav-group">
+          <span class="nav-group-label">Contrato</span>
+          <a class="nav-link" href="#resumo">01 · Resumo Executivo</a>
+          <a class="nav-link" href="#contrato">02 · Entrada e saída</a>
+          <a class="nav-link" href="#academia-aieng">03 · Academia</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Engenharia</span>
+          <a class="nav-link" href="#perfil">04 · Perfil</a>
+          <a class="nav-link" href="#decisoes">05 · Decisões</a>
+          <a class="nav-link" href="#roadmap">06 · Roadmap</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Evidência</span>
+          <a class="nav-link" href="#projeto">07 · Projeto</a>
+          <a class="nav-link" href="#referencias">08 · Referências</a>
+          <a class="nav-link" href="#plano-global">09 · Plano global</a>
+        </div>
+      </div>
+      <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">›</button>
+    </div>
+  </nav>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="main">
+      <aside class="sidebar">
+        <div class="sidebar-group">
+          <div class="sidebar-label">Contrato</div>
+          <a href="#resumo">1. Resumo Executivo</a>
+          <a href="#contrato">2. Entrada, resultado e gate</a>
+          <a href="#academia-aieng">3. Academia em seis partes (com o Módulo 0)</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Engenharia</div>
+          <a href="#perfil">4. Perfil de saída</a>
+          <a href="#decisoes">5. Mapa de decisões</a>
+          <a href="#roadmap">6. Roadmap de execução</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Evidência</div>
+          <a href="#projeto">7. Produto evolutivo</a>
+          <a href="#referencias">8. Referências técnicas</a>
+          <a href="#plano-global">9. Roadmap das 12 fases</a>
+        </div>
+      </aside>
+
+      <div class="content" id="trackMain">
+        <section id="resumo" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Resumo Executivo</h2>
+              <p class="section-subtitle">O currículo ensina a fazer engenharia sênior; esta trilha ensina a fazê-la onde ela acontece em 2026.</p>
+            </div>
+            <span class="section-badge">Visão geral</span>
+          </div>
+          <div class="doc-hero-card">
+            <div>
+              <p class="lead">Você começa tratando a IA como amplificador e dominando o fluxo com agentes sem
+                dependência cega; escreve especificação executável e revisa o código gerado por intenção; mede
+                a feature de IA com evals e regressão; e termina na governança que amplifica sem criar dívida.</p>
+              <p>A tese do DORA 2025 organiza tudo: a IA <strong>amplifica a capacidade que já existe</strong> —
+                por isso o trabalho sênior migra para spec, revisão e medição, não para "aceitar o que saiu".</p>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-pill"><span data-ac-count="modules">14</span><small>Módulos técnicos</small></div>
+              <div class="metric-pill"><span data-ac-count="parts">5</span><small>Partes progressivas</small></div>
+              <div class="metric-pill"><span data-ac-count="exercises">42</span><small>Exercícios</small></div>
+              <div class="metric-pill"><span data-ac-count="projects">3</span><small>Entregas encadeadas</small></div>
+            </div>
+          </div>
+          <div class="doc-grid-4 mt-3">
+            <article class="mini-card"><strong>Amplificar</strong><span>IA como amplificador; medir impacto real, não percepção.</span></article>
+            <article class="mini-card"><strong>Especificar</strong><span>Spec executável como contrato; revisão por intenção.</span></article>
+            <article class="mini-card"><strong>Avaliar</strong><span>Golden datasets, regressão de prompt e juiz calibrado.</span></article>
+            <article class="mini-card"><strong>Governar</strong><span>Supply chain, agência contida e adoção por capacidade.</span></article>
+          </div>
+        </section>
+
+        <section id="contrato" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Contrato de entrada, resultado e conclusão</h2>
+              <p class="section-subtitle">Use esta régua antes de começar e antes de declarar domínio.</p>
+            </div>
+            <span class="section-badge">Perfil A</span>
+          </div>
+          <div class="doc-grid-2">
+            <article>
+              <span>01 · Entrada</span>
+              <h3>Pré-requisitos</h3>
+              <ul class="doc-list">
+                <li>Já saber fazer engenharia: código, testes, revisão e Git.</li>
+                <li>Usar uma IDE e um agente de código.</li>
+                <li>Aceitar a IA como ferramenta que amplifica, não como oráculo.</li>
+              </ul>
+            </article>
+            <article>
+              <span>02 · Resultado</span>
+              <h3>Objetivos</h3>
+              <ul class="doc-list">
+                <li>Dirigir agentes com contexto e verificação, sem dependência cega.</li>
+                <li>Especificar antes, revisar por intenção e medir com eval.</li>
+                <li>Proteger o supply chain e conduzir adoção por capacidade.</li>
+              </ul>
+            </article>
+            <article>
+              <span>03 · Gate</span>
+              <h3>Critérios de conclusão</h3>
+              <ul class="doc-list">
+                <li>Concluir 14 módulos e três entregas encadeadas.</li>
+                <li>Entregar uma feature de IA com spec, golden dataset e regressão no CI.</li>
+                <li>Definir política de uso e medir impacto por throughput e estabilidade.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="academia-aieng" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Academia de Engenharia Assistida por IA com o Módulo 0 de ponte e 14 módulos</h2>
+              <p class="section-subtitle">Quatro partes curriculares e uma avaliação ligam prática, especificação, evals e governança.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="modules">14</b> módulos</span>
+          </div>
+          <p class="lead">Cada módulo parte de um problema real do fluxo com IA, explica o mecanismo e o risco,
+            contrapõe uma abordagem frágil a uma defensável e termina com exercícios verificáveis e perguntas de entrevista.</p>
+          <div class="ac-part-grid" id="aiengAcademyGrid" aria-live="polite" data-academy-grid></div>
+        </section>
+
+        <section id="perfil" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Perfil de saída: engenheiro que dirige a IA</h2>
+              <p class="section-subtitle">Senioridade em 2026 é dirigir, especificar, revisar e medir — não aceitar o que a IA gerou.</p>
+            </div>
+            <span class="section-badge">Fundação → Liderança</span>
+          </div>
+          <div class="table-responsive">
+            <table class="doc-table">
+              <thead><tr><th>Capacidade</th><th>Resultado observável</th><th>Evidência</th></tr></thead>
+              <tbody>
+                <tr><td>Prática</td><td>Dirige o agente com contexto e verifica cada passo.</td><td>Diffs explicáveis e testados.</td></tr>
+                <tr><td>Especificação</td><td>Escreve a spec como contrato antes do código.</td><td>Spec executável e critérios de aceite.</td></tr>
+                <tr><td>Revisão</td><td>Revisa o gerado por intenção, borda e segurança.</td><td>Defeitos pegos e o oráculo humano.</td></tr>
+                <tr><td>Eval</td><td>Mede a feature de IA e detecta regressão por slice.</td><td>Golden dataset e gate no CI.</td></tr>
+                <tr><td>Segurança</td><td>Protege o supply chain e contém a agência do agente.</td><td>Verificação de deps e privilégio mínimo.</td></tr>
+                <tr><td>Liderança</td><td>Conduz adoção por capacidade e mede impacto real.</td><td>Política de uso e métricas DORA.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="decisoes" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Faça a pergunta antes de aceitar a saída</h2>
+              <p class="section-subtitle">O uso defensável da IA começa por contexto, verificação e medição.</p>
+            </div>
+            <span class="section-badge">Mapa de decisão</span>
+          </div>
+          <div class="ac-decision-list">
+            <article><span>Contexto</span><h3>O agente sabe o que precisa?</h3><p>Convenções, tipos, spec e restrições no contexto reduzem a alucinação; a saída ruim quase sempre é contexto ausente.</p></article>
+            <article><span>Verificação</span><h3>Você consegue explicar o diff?</h3><p>Nunca mescle o que não entende; passos pequenos e verificados batem gerações grandes e cegas.</p></article>
+            <article><span>Oráculo</span><h3>Quem define o correto?</h3><p>O teste/critério é humano; a mesma IA que escreve o código não deve escrever o oráculo que o valida.</p></article>
+            <article><span>Impacto</span><h3>Melhorou de fato?</h3><p>Meça por throughput E estabilidade (DORA), não por velocidade percebida nem por linhas geradas.</p></article>
+          </div>
+        </section>
+
+        <section id="roadmap" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Roadmap de execução</h2>
+              <p class="section-subtitle">Uma sequência real em que cada parte usa as garantias produzidas antes.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="modules">14</b> módulos</span>
+          </div>
+          <ol class="ac-roadmap">
+            <li><b>01–03</b><div><strong>A prática</strong><span>Amplificador, prompting/contexto e fluxo com agentes.</span></div></li>
+            <li><b>04–07</b><div><strong>Spec e revisão</strong><span>Spec executável, revisão do gerado, teste como oráculo e débito.</span></div></li>
+            <li><b>08–10</b><div><strong>IA como feature</strong><span>Evals, regressão de prompt e LLM-as-a-judge.</span></div></li>
+            <li><b>11–14</b><div><strong>Fronteira</strong><span>Deps alucinadas, agência, DORA AI Model e adoção.</span></div></li>
+            <li><b>Gate</b><div><strong>Defenda a evidência</strong><span>Casos, produto, referências e D30.</span></div></li>
+          </ol>
+        </section>
+
+        <section id="projeto" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Um produto, três garantias acumuladas</h2>
+              <p class="section-subtitle">Cada etapa evolui o mesmo repositório: fluxo, feature de IA avaliada e adoção governada.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="projects">3</b> entregas</span>
+          </div>
+          <div class="ac-project-list" aria-label="Encadeamento das entregas">
+            <article><b>01</b><strong>Fluxo verificável</strong><span>Diffs explicáveis e testados.</span></article>
+            <i aria-hidden="true">→</i>
+            <article><b>02</b><strong>Feature de IA avaliada</strong><span>Spec, golden dataset e regressão.</span></article>
+            <i aria-hidden="true">→</i>
+            <article><b>03</b><strong>Adoção governada</strong><span>Política, supply chain e impacto medido.</span></article>
+          </div>
+          <p class="ac-source-link"><a href="./aieng/avaliacao.html#projetos">Abrir entregas e critérios de aceite →</a></p>
+        </section>
+
+        <section id="referencias" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Referências técnicas</h2>
+              <p class="section-subtitle">Fontes abertas e canônicas de 2025–2026 em cada módulo.</p>
+            </div>
+            <span class="section-badge">Livre</span>
+          </div>
+          <div class="callout accent-orange">
+            <h3>A prática de 2026 se define em fontes vivas, não em livros de acervo</h3>
+            <p>O tema muda rápido; cada módulo cita fontes canônicas atuais — DORA, GitHub Spec Kit, Snyk e OWASP.</p>
+          </div>
+          <div class="ac-navigation">
+            <a href="https://dora.dev/research/2025/ai-capabilities-model/" target="_blank" rel="noopener noreferrer">DORA — AI Capabilities Model (2025) →</a>
+            <a href="https://github.github.com/spec-kit/" target="_blank" rel="noopener noreferrer">GitHub Spec Kit — spec-driven development →</a>
+            <a href="https://snyk.io/articles/slopsquatting-mitigation-strategies/" target="_blank" rel="noopener noreferrer">Snyk — Slopsquatting: mitigação →</a>
+            <a href="https://genai.owasp.org/llm-top-10/" target="_blank" rel="noopener noreferrer">OWASP Top 10 for LLM Applications →</a>
+          </div>
+          <p class="ac-source-link"><a href="./aieng/fronteira.html">Abrir a Fronteira e os exemplos executáveis →</a></p>
+        </section>
+
+        <section id="plano-global" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Engenharia assistida por IA nas 12 fases do plano</h2>
+              <p class="section-subtitle">Progresso, evidência e revisão usam o mesmo estado do dashboard.</p>
+            </div>
+            <span class="section-badge">Plano integrado</span>
+          </div>
+          <div id="phaseRoadmap"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="footer-row">
+      <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
+      <div class="footer-pills">
+        <span class="footer-pill green">Spec-driven</span>
+        <span class="footer-pill orange">Evals</span>
+        <span class="footer-pill blue">Revisão</span>
+        <span class="footer-pill pink">Governança</span>
+      </div>
+    </div>
+    <p><strong>Engenharia Assistida por IA</strong> · amplificar sem depender cegamente.</p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js?v=redesign-33"></script>
+  <script type="module" src="../assets/js/pages/hub.js?v=redesign-33"></script>
+</body>
+</html>

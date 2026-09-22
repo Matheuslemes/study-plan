@@ -58,11 +58,11 @@ export const arquiteturaBooks = Object.freeze({
   fundamentals: {
     title: 'Fundamentals of Software Architecture',
     authors: 'Mark Richards e Neal Ford',
-    edition: '1ª edição',
-    year: '2020',
+    edition: '2ª edição',
+    year: '2025',
     language: 'Inglês',
-    pages: 400,
-    path: '/pdfs/livros-arquitetura/fundamentals-of-software-architecture.pdf',
+    pages: 432,
+    path: '/pdfs/livros-arquitetura/fundamentals-of-software-architecture-2e.pdf',
     depth: 'Fundamental → sênior',
     prerequisites: 'Experiência com desenvolvimento e um sistema completo',
     structure: '24 capítulos: características arquiteturais, estilos, decisões, análise, diagramação e soft skills',
@@ -122,12 +122,12 @@ export const arquiteturaBooks = Object.freeze({
   },
   ddia: {
     title: 'Designing Data-Intensive Applications',
-    authors: 'Martin Kleppmann',
-    edition: '1ª edição',
-    year: '2017',
+    authors: 'Martin Kleppmann e Chris Riccomini',
+    edition: '2ª edição',
+    year: '2026',
     language: 'Inglês',
     pages: 616,
-    path: '/pdfs/livros-arquitetura/designing-data-intensive-applications.pdf',
+    path: '/pdfs/livros-arquitetura/designing-data-intensive-applications-2e.pdf',
     depth: 'Sênior → expert',
     prerequisites: 'Bancos, concorrência e sistemas distribuídos básicos',
     structure: '12 capítulos: modelos, storage, encoding, replicação, particionamento, transações e consenso',
@@ -240,6 +240,23 @@ export const arquiteturaAcademy = Object.freeze({
   baseline: 'Decisões agnósticas de fornecedor, com trade-offs explícitos e evidência auditável',
   book: 'Fundamentals of Software Architecture (Richards & Ford) como espinha dorsal; obras específicas por tema',
   parts: {
+    base: {
+      index: '0/6',
+      range: 'Módulos 0.1–0.4',
+      title: 'Módulo 0 — da Faixa 0 à arquitetura',
+      subtitle: 'Ponte dos fundamentos: o que é arquitetura, acoplamento e coesão, módulos/interfaces/direção de dependência e trade-off/ADR.',
+      prerequisites: [
+        'Concluir a Trilha 0 (Fundamentos) ou equivalente.',
+        'Ter escrito um programa com mais de um arquivo.',
+        'Nenhuma experiência prévia de arquitetura.'
+      ],
+      objectives: [
+        'Distinguir decisão estrutural (cara de reverter) de detalhe local.',
+        'Entender acoplamento e coesão e por que a meta é baixo acoplamento com alta coesão.',
+        'Ver um sistema como grafo de módulos, esconder o "como" atrás de interfaces e evitar ciclos.',
+        'Aceitar que toda decisão é um trade-off e registrá-la num ADR curto.'
+      ]
+    },
     fundamentos: {
       index: '1/6',
       range: 'Módulos 1–5',
@@ -350,6 +367,163 @@ export const arquiteturaAcademy = Object.freeze({
 
 export const arquiteturaModules = [
   {
+    number: '0.1',
+    part: 'base',
+    id: 'base-o-que-e-arquitetura',
+    title: 'O que é arquitetura (e o que não é)',
+    level: 'Ponte (Faixa 0)',
+    objective: 'Distinguir decisão estrutural (cara de reverter) de detalhe local (reversível) e entender por que a estrutura de um sistema — não o framework — decide o custo de mudá-lo.',
+    prerequisites: ['Trilha 0 (como um programa roda, funções, lógica)', 'Ter escrito um programa com mais de um arquivo', 'Nenhuma experiência prévia de arquitetura'],
+    problem: 'Quem sai da Faixa 0 sabe escrever funções, mas nunca pensou na FORMA do sistema. Sem isso, "arquitetura" vira escolher framework ou desenhar caixinhas bonitas — e o custo real (mudar sem quebrar tudo) fica invisível.',
+    concepts: ['Estrutura vs comportamento', 'Decisão estrutural vs detalhe de implementação', 'Custo de reversão', 'Por que a forma decide o custo de mudança', '"Não existe a melhor arquitetura"'],
+    internals: ['Comportamento é o que o sistema faz; estrutura é como as partes se conectam — e é a estrutura que decide o quão caro é mudar.', 'Uma decisão é arquitetural quando é cara de reverter ou cruza fronteiras de equipe; o resto é detalhe local.', 'Trocar a cor de um botão é detalhe; trocar "tudo num arquivo" por módulos separados é estrutural.'],
+    useWhen: ['Trate como arquitetural o que é caro de reverter (formato de dados, fronteiras entre partes).', 'Deixe como detalhe o que é local e trocável (nome de variável, biblioteca de formatação).', 'Pense na estrutura antes de escolher a ferramenta.'],
+    avoidWhen: ['Não confunda escolher um framework com definir a arquitetura.', 'Não desenhe caixinhas sem dizer quem depende de quem.', 'Não persiga a "arquitetura perfeita": ela não existe.'],
+    contrast: {
+      bad: 'Jogar todo o código num só arquivo gigante porque "funciona" — qualquer mudança arrisca quebrar o resto.',
+      good: 'Separar o programa em partes com responsabilidades claras, de modo que mudar uma quase nunca obrigue mexer nas outras.'
+    },
+    tradeoffs: ['Pensar a estrutura cedo custa tempo e evita reescrita depois.', 'Estrutura demais cedo demais (over-engineering) trava um projeto simples.', 'Nenhuma estrutura é grátis: toda escolha privilegia algo e sacrifica outro.'],
+    production: 'Um sistema nasce como um arquivo só e cresce; um dia toda alteração quebra algo distante. O exercício identifica quais decisões eram estruturais (e deviam ter sido explícitas) e quais eram detalhe.',
+    risks: ['Confundir arquitetura com framework', 'Arquitetura acidental (ninguém decidiu, virou assim)', 'Over-engineering num projeto simples', 'Ignorar o custo de reverter'],
+    checklist: ['Esta decisão é cara de reverter?', 'Ela cruza a fronteira entre partes ou times?', 'É estrutura ou detalhe local?', 'A forma do sistema está clara para quem vai mexer?', 'Estou escolhendo pela força certa, não pela moda?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre arquitetura e detalhe de implementação?', expected: 'Arquitetura são decisões estruturais caras de reverter (fronteiras, formato de dados); detalhe é local e reversível (nome, biblioteca trocável).' },
+      { level: 'Sênior/Expert', question: 'Por que se diz que "não existe a melhor arquitetura"?', expected: 'Porque toda estrutura privilegia certas forças (simplicidade, escala, velocidade) e sacrifica outras; a boa escolha depende das forças priorizadas e do custo de reversão.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Listar 8 decisões de um programa seu e marcar cada uma como "estrutural" ou "detalhe".', evidence: 'Tabela com justificativa de custo de reversão.' },
+      { level: 'Aplicado', task: 'Pegar um script de arquivo único e desenhar como você o separaria em 3 partes com responsabilidades.', evidence: 'Diagrama simples de partes e dependências.' },
+      { level: 'Expert', task: 'Explicar uma decisão estrutural que você tomaria hoje e a força que ela privilegia vs a que sacrifica.', evidence: 'Meia página com o trade-off explícito.' }
+    ],
+    challenge: 'Explicar, em 5 minutos e sem jargão, por que "está tudo num arquivo só" é uma decisão de arquitetura — e o que ela custa quando o sistema cresce.',
+    book: 'Fundamentals of Software Architecture, cap. 1–2 (o que é arquitetura e pensamento arquitetural).',
+    complements: [official.fowler, official.c4],
+    quiz: [
+      { question: 'O que caracteriza uma decisão ARQUITETURAL (vs um detalhe)?', options: ['Ser cara de reverter e/ou cruzar fronteiras entre partes/times', 'Usar uma linguagem de programação específica', 'Ter muitas linhas de código', 'Estar num arquivo grande'], answer: 0, why: 'Arquitetura = decisões estruturais caras de reverter; detalhe é local e reversível.' },
+      { question: 'Por que "não existe a melhor arquitetura"?', options: ['Toda estrutura privilegia certas forças e sacrifica outras', 'Porque todas são igualmente ruins', 'Porque falta uma ferramenta boa', 'Porque ninguém entende de arquitetura'], answer: 0, why: 'A escolha depende das forças priorizadas e das restrições — é sempre um trade-off.' },
+      { question: 'Estrutura vs comportamento: o que decide o custo de MUDAR um sistema?', options: ['A estrutura (como as partes se conectam)', 'A cor da interface', 'O nome das variáveis', 'A quantidade de comentários'], answer: 0, why: 'O comportamento é o que o sistema faz; a estrutura é o que torna a mudança barata ou cara.' }
+    ]
+  },
+  {
+    number: '0.2',
+    part: 'base',
+    id: 'base-acoplamento-coesao',
+    title: 'Acoplamento e coesão: o par que decide tudo',
+    level: 'Ponte (Faixa 0)',
+    objective: 'Entender acoplamento (o quanto um módulo depende de outros) e coesão (o quanto o que está junto pertence junto), e por que a meta é baixo acoplamento com alta coesão.',
+    prerequisites: ['Módulo 0.1', 'Saber separar código em funções/arquivos', 'Ideia de dependência (A usa B)'],
+    problem: 'Iniciante junta código por acaso: funções sem relação no mesmo arquivo e módulos que dependem de detalhes internos uns dos outros. Aí uma mudança pequena estoura em cascata pelo sistema.',
+    concepts: ['Acoplamento (dependência entre módulos)', 'Coesão (pertencimento interno)', 'Baixo acoplamento, alta coesão', 'Efeito cascata da mudança', 'Fan-in e fan-out (intuição)'],
+    internals: ['Acoplamento alto: mudar A obriga a mexer em B, C, D — a mudança se propaga.', 'Coesão alta: tudo dentro de um módulo serve ao mesmo propósito, então ele muda por um motivo só.', 'A meta prática é isolar o que muda junto e separar o que muda por razões diferentes.'],
+    useWhen: ['Agrupe (alta coesão) o que muda pela mesma razão.', 'Separe (baixo acoplamento) o que muda por razões diferentes.', 'Reduza o acoplamento escondendo detalhes atrás de um contrato (módulo 0.3).'],
+    avoidWhen: ['Não junte funções sem relação só porque "cabem" no mesmo arquivo.', 'Não deixe um módulo depender do interior de outro.', 'Não crie mil módulos minúsculos (baixa coesão também é ruim).'],
+    contrast: {
+      bad: 'Um módulo "utils" que faz de tudo (data, e-mail, imposto): baixa coesão, e meio sistema depende dele (acoplamento alto).',
+      good: 'Um módulo "imposto" coeso, usado por outros só através de uma função pública clara: alta coesão, baixo acoplamento.'
+    },
+    tradeoffs: ['Menos acoplamento custa mais interfaces/indireção.', 'Buscar coesão perfeita pode fragmentar demais o sistema.', 'Reduzir dependências às vezes duplica um pouco de código — e tudo bem se evita a cascata.'],
+    production: 'Uma mudança de regra de imposto obriga a alterar 12 arquivos porque a lógica estava espalhada (baixa coesão) e todo mundo chamava seus detalhes (alto acoplamento). O exercício reagrupa e reduz as dependências.',
+    risks: ['Módulo "faz-tudo" (God object / utils)', 'Dependência de detalhes internos alheios', 'Efeito cascata a cada mudança', 'Fragmentação excessiva'],
+    checklist: ['Cada módulo tem um propósito só (alta coesão)?', 'Quem depende deste módulo?', 'Uma mudança aqui vaza para quantos lugares?', 'As dependências passam por um contrato público?', 'Há um "utils" fazendo coisas demais?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que são acoplamento e coesão?', expected: 'Acoplamento é o grau de dependência entre módulos; coesão é o quanto os elementos de um módulo pertencem juntos. A meta é baixo acoplamento e alta coesão.' },
+      { level: 'Sênior/Expert', question: 'Por que baixo acoplamento importa na prática?', expected: 'Porque limita o alcance de uma mudança: com baixo acoplamento, alterar um módulo não obriga a mexer nos outros, reduzindo risco, retrabalho e regressões.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Dado um módulo "utils" que mistura 3 assuntos, propor como separá-lo por coesão.', evidence: 'Lista dos módulos coesos resultantes.' },
+      { level: 'Aplicado', task: 'Mapear as dependências (quem usa quem) de um mini-sistema e apontar o de maior acoplamento.', evidence: 'Grafo simples com fan-in/fan-out anotados.' },
+      { level: 'Expert', task: 'Reduzir o acoplamento de um módulo escondendo seus detalhes atrás de uma interface.', evidence: 'Antes/depois do grafo de dependências.' }
+    ],
+    challenge: 'Pegar um "utils" real e defender uma separação por coesão, mostrando como o acoplamento cai no grafo de dependências.',
+    book: 'Fundamentals of Software Architecture, cap. 3–4 (modularidade: acoplamento, coesão e conexão).',
+    complements: [official.fowler, official.archunit],
+    quiz: [
+      { question: 'Qual é a meta clássica de modularidade?', options: ['Baixo acoplamento e alta coesão', 'Alto acoplamento e baixa coesão', 'Muitos módulos minúsculos', 'Um único módulo grande'], answer: 0, why: 'Baixo acoplamento limita o alcance da mudança; alta coesão faz cada módulo mudar por um motivo só.' },
+      { question: 'Um módulo "utils" que faz data, e-mail e imposto sofre de:', options: ['Baixa coesão (assuntos sem relação juntos)', 'Alta coesão', 'Baixo acoplamento', 'Falta de comentários'], answer: 0, why: 'Coisas sem relação no mesmo módulo = baixa coesão; e, como todos o usam, o acoplamento sobe.' },
+      { question: 'Por que baixo acoplamento reduz risco?', options: ['Uma mudança num módulo não se propaga para os outros', 'Deixa o código mais bonito', 'Usa menos memória', 'Elimina a necessidade de testes'], answer: 0, why: 'Com baixo acoplamento, o alcance de uma alteração fica contido, reduzindo regressões.' }
+    ]
+  },
+  {
+    number: '0.3',
+    part: 'base',
+    id: 'base-modulos-interfaces',
+    title: 'Dividir para conquistar: módulos, interfaces e direção de dependência',
+    level: 'Ponte (Faixa 0)',
+    objective: 'Ver um sistema como um grafo de módulos, esconder o "como" atrás de uma interface (contrato) e fazer as dependências apontarem para um núcleo estável, sem ciclos.',
+    prerequisites: ['Módulo 0.2', 'Ideia de função pública vs detalhe interno', 'Saber ler um grafo simples'],
+    problem: 'Sem fronteiras, tudo conhece tudo: o sistema vira um novelo onde qualquer fio puxa os outros. Faltam interfaces (contratos) e uma direção clara para as dependências.',
+    concepts: ['Módulo e fronteira', 'Interface/contrato esconde o "como"', 'Grafo de dependências', 'Ciclo de dependência (o inimigo)', 'Direção de dependência para um núcleo estável'],
+    internals: ['Uma interface separa o QUE um módulo oferece do COMO ele faz; quem usa depende do contrato, não do detalhe.', 'Dependências formam um grafo; um ciclo (A→B→A) acopla os dois para sempre.', 'Apontar as dependências para um núcleo estável (que não depende de ninguém) deixa cada camada mudar sozinha.'],
+    useWhen: ['Exponha cada módulo por uma interface e esconda o resto.', 'Mantenha o grafo de dependências acíclico.', 'Faça o que muda muito depender do que muda pouco (o núcleo estável).'],
+    avoidWhen: ['Não deixe um módulo alcançar o interior de outro.', 'Não crie ciclos de dependência.', 'Não faça o núcleo estável depender de detalhes de UI ou infraestrutura.'],
+    contrast: {
+      bad: 'Pagamento chama pedidos e pedidos chama pagamento: um ciclo em que mudar um obriga mexer no outro.',
+      good: 'Pagamento publica um evento; o núcleo (domínio) não depende de ninguém e todos apontam para ele — grafo acíclico.'
+    },
+    tradeoffs: ['Interfaces custam indireção, mas compram liberdade de mudar o "como".', 'Inverter dependências (apontar para o núcleo) adiciona abstração, mas remove ciclos.', 'Mais fronteiras dão isolamento e cobram um pouco de cerimônia.'],
+    production: 'Um ciclo entre módulos impede testar ou dar deploy de um sem o outro. O exercício quebra o ciclo com um evento/interface e prova, no grafo, que a mudança volta a ser local. (Ver o exemplo executável.)',
+    risks: ['Ciclos de dependência', 'Vazamento de detalhes internos', 'Núcleo dependendo de UI/infra', 'Interface que só repassa (indireção inútil)'],
+    checklist: ['Cada módulo é usado só pela sua interface?', 'O grafo de dependências é acíclico?', 'As dependências apontam para um núcleo estável?', 'O núcleo depende de alguém? (não deveria)', 'Dá para testar/mudar um módulo isolado?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Para que serve uma interface entre módulos?', expected: 'Ela separa o que o módulo oferece do como ele faz; quem usa depende do contrato, permitindo trocar a implementação sem afetar os outros.' },
+      { level: 'Sênior/Expert', question: 'Por que ciclos de dependência são um problema e como removê-los?', expected: 'Ciclos acoplam módulos permanentemente (não dá para mudar/testar/deployar um sem o outro); removem-se invertendo a dependência — por exemplo, um evento ou uma interface no núcleo estável.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Rodar o exemplo e explicar por que o design "ruim" tem ciclo e o "bom" não.', evidence: 'Saída do script + explicação do ciclo.' },
+      { level: 'Aplicado', task: 'Desenhar o grafo de um mini-sistema e apontar a direção das dependências para um núcleo.', evidence: 'Grafo acíclico com o núcleo identificado.' },
+      { level: 'Expert', task: 'Quebrar um ciclo real invertendo a dependência (interface ou evento) e mostrar o grafo antes/depois.', evidence: 'Diff do grafo + justificativa.' }
+    ],
+    challenge: 'Dado um grafo com ciclo, quebrar o ciclo por inversão de dependência e provar, medindo fan-in/fan-out, que o acoplamento caiu.',
+    book: 'Fundamentals of Software Architecture, cap. 3–5; Software Architecture: The Hard Parts (fronteiras e acoplamento).',
+    complements: [official.c4, official.modulith],
+    exampleFile: '../../examples/arquitetura-senior/arquitetura-zero.mjs',
+    quiz: [
+      { question: 'Para que serve uma interface (contrato) entre módulos?', options: ['Separar o QUE o módulo oferece do COMO ele faz, escondendo detalhes', 'Deixar o código mais longo', 'Aumentar o acoplamento', 'Substituir os testes'], answer: 0, why: 'Quem usa depende do contrato, não do detalhe — a implementação pode mudar sem afetar os outros.' },
+      { question: 'Por que um ciclo de dependência (A→B→A) é ruim?', options: ['Acopla os módulos: não dá para mudar/testar/deployar um sem o outro', 'Usa mais disco', 'Deixa o grafo mais bonito', 'Não é ruim'], answer: 0, why: 'O ciclo torna os módulos inseparáveis; quebra-se invertendo a dependência (evento/interface).' },
+      { question: 'Num bom design, as dependências devem apontar para:', options: ['Um núcleo estável, que não depende de ninguém', 'A interface do usuário', 'O banco de dados', 'O módulo mais novo'], answer: 0, why: 'O núcleo estável (fan-out 0, fan-in alto) deixa as camadas externas mudarem sem arrastar o resto.' }
+    ]
+  },
+  {
+    number: '0.4',
+    part: 'base',
+    id: 'base-tradeoff-adr',
+    title: 'Trade-off e ADR: toda decisão custa algo — registre',
+    level: 'Ponte (Faixa 0)',
+    objective: 'Aceitar que toda decisão de arquitetura é um trade-off (nada é grátis) e aprender a registrar a decisão, a alternativa descartada e o porquê num ADR curto.',
+    prerequisites: ['Módulo 0.3', 'Ter tomado ao menos uma decisão técnica', 'Saber escrever um parágrafo claro'],
+    problem: 'Iniciante decide por hábito ou hype ("todo mundo usa X") e não anota nada. Meses depois ninguém lembra por que foi assim, e a discussão recomeça do zero a cada nova pessoa.',
+    concepts: ['Trade-off: privilegiar uma força sacrificando outra', 'Decisão por evidência vs por moda', 'ADR (Architecture Decision Record)', 'Alternativas consideradas', 'Contexto e consequência da decisão'],
+    internals: ['Toda escolha estrutural ganha algo e perde algo; o trabalho é tornar essa troca explícita.', 'Um ADR registra contexto, decisão, alternativas descartadas e consequências — em uma página.', 'A alternativa descartada, escrita, é o que impede refazer a mesma discussão depois.'],
+    useWhen: ['Escreva um ADR quando a decisão for cara de reverter ou afetar outros times.', 'Liste a força privilegiada e a sacrificada.', 'Registre a alternativa que você NÃO escolheu e por quê.'],
+    avoidWhen: ['Não decida por "todo mundo usa" sem mapear a força relevante.', 'Não escreva um ADR de 20 páginas — ele morre sem leitura.', 'Não deixe decisões estruturais sem registro algum.'],
+    contrast: {
+      bad: 'Adotar microsserviços "porque é moderno", sem escala nem time, e não registrar nada.',
+      good: 'Registrar em ADR: "monólito modular escolhido por simplicidade operacional; microsserviços descartados por falta de escala; revisar se a carga passar de X".'
+    },
+    tradeoffs: ['Escrever o ADR custa minutos e economiza horas de rediscussão.', 'ADR longo demais não é lido; curto demais perde o contexto.', 'Registrar a alternativa descartada expõe o raciocínio — e é justamente isso que dá valor.'],
+    production: 'Uma decisão importante foi tomada num chat e se perdeu; seis meses depois o time reabre a mesma briga. O exercício reconstrói a decisão como ADR com contexto, alternativas e consequências.',
+    risks: ['Decidir por hype (resume-driven development)', 'Decisão sem registro', 'ADR que ninguém lê', 'Esconder o trade-off ("é só vantagem")'],
+    checklist: ['Qual força esta decisão privilegia e qual sacrifica?', 'Qual alternativa foi descartada e por quê?', 'O contexto está registrado?', 'A consequência (o que fica mais difícil) está clara?', 'O ADR cabe em uma página?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que é um trade-off em arquitetura?', expected: 'É a troca inevitável de uma escolha: privilegiar uma qualidade (ex.: simplicidade) custa outra (ex.: escala). Não existe decisão só com vantagens.' },
+      { level: 'Sênior/Expert', question: 'Para que serve um ADR e o que não pode faltar nele?', expected: 'Registrar uma decisão arquitetural com contexto, a decisão, as alternativas descartadas e as consequências — para que a escolha seja rastreável e não se rediscuta sem informação nova.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Escrever um ADR de uma página para uma decisão real (ex.: SQL vs planilha), com a alternativa descartada.', evidence: 'ADR no formato contexto/decisão/consequências.' },
+      { level: 'Aplicado', task: 'Pegar uma decisão tomada "por moda" e reescrevê-la explicitando o trade-off.', evidence: 'ADR com a força privilegiada e a sacrificada.' },
+      { level: 'Expert', task: 'Escrever um ADR de superseção que reverte uma decisão antiga com base em nova restrição.', evidence: 'ADR de superseção com gatilho medido.' }
+    ],
+    challenge: 'Defender uma decisão técnica sua em 5 minutos usando um ADR: contexto, trade-off, alternativa descartada e quando reconsiderar.',
+    book: 'Fundamentals of Software Architecture, cap. 19 (decisões de arquitetura e ADR).',
+    complements: [official.adr, official.fowler],
+    quiz: [
+      { question: 'O que é um trade-off em arquitetura?', options: ['Privilegiar uma qualidade sacrificando outra — nada é só vantagem', 'Um bug que aparece em produção', 'Uma técnica de otimização', 'Escolher a melhor opção sem custo algum'], answer: 0, why: 'Toda decisão estrutural ganha algo e perde algo; o trabalho é tornar a troca explícita.' },
+      { question: 'O que um ADR precisa conter?', options: ['Contexto, a decisão, alternativas descartadas e consequências', 'Só o nome do framework escolhido', 'O código completo do sistema', 'A lista de bugs'], answer: 0, why: 'O ADR torna a decisão rastreável; a alternativa descartada evita rediscutir sem informação nova.' },
+      { question: 'Por que registrar a alternativa que você NÃO escolheu?', options: ['Para não refazer a mesma discussão quando alguém novo chegar', 'Para deixar o documento maior', 'Porque a alternativa é a certa', 'Não há motivo'], answer: 0, why: 'O raciocínio registrado (por que descartamos X) é o que dá valor ao ADR ao longo do tempo.' }
+    ]
+  },
+  {
     number: 1,
     part: 'fundamentos',
     id: 'natureza-arquitetura',
@@ -382,7 +556,7 @@ export const arquiteturaModules = [
     challenge: 'Conduzir um architecture review de 30 minutos defendendo por que NÃO distribuir um módulo, com trade-offs e critérios de reconsideração.',
     book: 'Fundamentals of Software Architecture, cap. 1–3 (definição, pensamento arquitetural e trade-offs).',
     complements: [official.fowler, official.adr],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/natureza-decisao.mjs'
   },
   {
     number: 2,
@@ -452,7 +626,7 @@ export const arquiteturaModules = [
     challenge: 'Fazer uma análise de trade-offs comparando três estilos para um mesmo requisito e defender a escolha em uma página.',
     book: 'Fundamentals of Software Architecture, cap. 9–18 (estilos arquiteturais).',
     complements: [official.reactive, official.microservices],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/estilos-fit.mjs'
   },
   {
     number: 4,
@@ -487,7 +661,7 @@ export const arquiteturaModules = [
     challenge: 'Adicionar ao pipeline um conjunto de fitness functions que trave build ao violar camadas, ciclos e limites de tamanho de módulo.',
     book: 'Fundamentals of Software Architecture, cap. 3 e 6–8 (modularidade, acoplamento, componentes).',
     complements: [official.fowler, official.twelvefactor],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/fitness-acoplamento.mjs'
   },
   {
     number: 5,
@@ -557,7 +731,7 @@ export const arquiteturaModules = [
     challenge: 'Facilitar um event storming e produzir o context map com core/supporting/generic e a estratégia de integração de cada fronteira.',
     book: 'Domain-Driven Design (Evans), parte IV (design estratégico); Implementing DDD, cap. 2–3.',
     complements: [official.ddd, official.fowler],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/context-mapping.mjs'
   },
   {
     number: 7,
@@ -592,7 +766,7 @@ export const arquiteturaModules = [
     challenge: 'Modelar um domínio de pedidos com três agregados, invariantes explícitas e um fluxo de eventos entre eles, provando a consistência por testes.',
     book: 'Domain-Driven Design (Evans), parte II; Implementing DDD (Vernon), cap. 5–8 e 10.',
     complements: [official.ddd, official.microservices],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/agregado-invariante.mjs'
   },
   {
     number: 8,
@@ -662,7 +836,7 @@ export const arquiteturaModules = [
     challenge: 'Projetar a integração de um pedido entre quatro sistemas usando padrões EIP, contratos versionados e um plano de compatibilidade.',
     book: 'Enterprise Integration Patterns, introdução e cap. 2–7; Building Microservices, cap. 4.',
     complements: [official.eip, official.asyncapi, official.cloudevents, official.openapi],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/mensageria-idempotencia.mjs'
   },
   {
     number: 10,
@@ -697,7 +871,7 @@ export const arquiteturaModules = [
     challenge: 'Escrever um documento de garantias distribuídas de um sistema: o que é forte, o que é eventual, como se ordena e o que acontece sob partição.',
     book: 'Designing Data-Intensive Applications, cap. 8–9 (problemas distribuídos e consistência/consenso).',
     complements: [official.raft, official.fowler],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/cap-particao.mjs'
   },
   {
     number: 11,
@@ -732,7 +906,7 @@ export const arquiteturaModules = [
     challenge: 'Projetar o esquema de dados de um sistema de alto volume definindo storage, replicação, particionamento e o comportamento sob lag.',
     book: 'Designing Data-Intensive Applications, cap. 3, 5 e 6 (storage, replicação, particionamento).',
     complements: [official.fowler, official.awswa],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/particionamento-hash.mjs'
   },
   {
     number: 12,
@@ -802,7 +976,7 @@ export const arquiteturaModules = [
     challenge: 'Aplicar os padrões de estabilidade a um fluxo crítico e comprovar, sob injeção de falha, que a queda de um dependente não derruba o sistema inteiro.',
     book: 'Release It! (Nygard), parte I (antipadrões de estabilidade e padrões).',
     complements: [official.reactive, official.sre],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/circuit-breaker.mjs'
   },
   {
     number: 14,
@@ -837,7 +1011,7 @@ export const arquiteturaModules = [
     challenge: 'Fazer o system design de um serviço de alto tráfego (feed, encurtador ou notificações) partindo de estimativas de capacidade e justificando cada mecanismo de escala.',
     book: 'System Design Interview Vol. 1, cap. 1–5; Vol. 2 (casos avançados); DDIA cap. 1.',
     complements: [official.awswa, official.sre],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/cache-little.mjs'
   },
   {
     number: 15,
@@ -907,7 +1081,7 @@ export const arquiteturaModules = [
     challenge: 'Levar um serviço a prontidão operacional: SLOs por jornada, três sinais correlacionados, alertas por budget, runbook e um game day executado.',
     book: 'Release It! (Nygard), parte sobre transparência e operação; complemento Google SRE.',
     complements: [official.sre, official.otel],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/slo-error-budget.mjs'
   },
   {
     number: 17,
@@ -942,7 +1116,7 @@ export const arquiteturaModules = [
     challenge: 'Produzir a arquitetura de segurança de um sistema multi-tenant: threat model, fronteiras de confiança, propagação de identidade e teste de isolamento.',
     book: 'Building Microservices (Newman), cap. sobre segurança; complementos AWS Well-Architected (pilar de segurança).',
     complements: [official.awswa, official.twelvefactor],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/zero-trust-authz.mjs'
   },
   {
     number: 18,
@@ -977,7 +1151,7 @@ export const arquiteturaModules = [
     challenge: 'Propor a topologia de times e o modelo de governança que sustentam uma arquitetura-alvo, com princípios, ADRs, plataforma e fitness functions.',
     book: 'Team Topologies (Skelton & Pais); Fundamentals of Software Architecture, cap. sobre soft skills e efetividade.',
     complements: [official.teamtopologies, official.fowler, official.adr],
-    exampleFile: '../../examples/arquitetura-senior/README.md'
+    exampleFile: '../../examples/arquitetura-senior/conway-fitness.mjs'
   },
   {
     number: 19,

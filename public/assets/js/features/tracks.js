@@ -98,6 +98,8 @@ export function renderBibliografia() {
         <div class="biblio-main">
           <span class="biblio-title">${escapeHtml(l.titulo)}${l.gratis ? ' <span class="biblio-free" title="Gratuito/oficial">🆓</span>' : ''}</span>
           <span class="biblio-author">${escapeHtml(l.autor)}${l.ano ? ` · ${escapeHtml(l.ano)}` : ''}</span>
+          ${l.nota ? `<span class="biblio-nota">${escapeHtml(l.nota)}</span>` : ''}
+          ${l.alerta ? `<span class="biblio-alerta" role="alert">${escapeHtml(l.alerta)}</span>` : ''}
         </div>
         <div class="biblio-meta">
           <span class="biblio-phase">${escapeHtml(l.fase)}</span>

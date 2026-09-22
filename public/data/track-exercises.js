@@ -21,6 +21,11 @@ export const EXERCICIOS_TRILHA = {
     { tipo: 'ORM', titulo: 'N+1 reproduzível', tarefa: 'Crie um N+1 proposital, prove pelo log SQL e corrija sem trocar o contrato da API.', evidencia: 'Teste de regressão e contagem de queries.' },
     { tipo: 'Operação', titulo: 'Restore e réplica', tarefa: 'Restaure um backup em ambiente limpo e simule promoção de réplica.', evidencia: 'Runbook executado, RTO/RPO e validação de consistência.' }
   ],
+  dsa: [
+    { tipo: 'Padrão', titulo: 'Do enunciado ao padrão', tarefa: 'Classifique 5 problemas por padrão (dois ponteiros, janela deslizante, BFS/DFS, programação dinâmica, guloso) antes de codificar e justifique a estrutura de dados escolhida.', evidencia: 'Tabela problema → padrão → estrutura, com o custo esperado.' },
+    { tipo: 'Implementação', titulo: 'Resolver sob tempo', tarefa: 'Resolva um problema de dificuldade média em até 40 min, declarando as complexidades de tempo e espaço antes de rodar.', evidencia: 'Solução testada e análise Big O confirmada por medição.' },
+    { tipo: 'Trade-off', titulo: 'Contraexemplo do guloso', tarefa: 'Mostre um caso em que uma solução gulosa falha e corrija com programação dinâmica ou outra abordagem.', evidencia: 'Contraexemplo, solução correta e comparação de custo.' }
+  ],
   git: [
     { tipo: 'Fluxo', titulo: 'Histórico revisável', tarefa: 'Transforme uma mudança grande em commits pequenos, convencionais e independentes.', evidencia: 'Pull Request com histórico que pode ser revisado por commit.' },
     { tipo: 'Recuperação', titulo: 'Regressão com bisect', tarefa: 'Plante uma regressão entre dez commits e encontre o primeiro commit ruim com bisect.', evidencia: 'Transcrição dos comandos e commit corretivo.' },
@@ -57,6 +62,11 @@ export const EXERCICIOS_TRILHA = {
     { tipo: 'RAG', titulo: 'Recuperação avaliada', tarefa: 'Versione corpus e perguntas; meça recuperação, citação e resposta final.', evidencia: 'Dataset, métricas e análise dos cinco piores erros.' },
     { tipo: 'Red team', titulo: 'Ataque ao contexto', tarefa: 'Tente injetar instruções, cruzar tenant e acionar ferramenta não autorizada.', evidencia: 'Casos adversariais automatizados e controles aplicados.' }
   ],
+  aieng: [
+    { tipo: 'Verificação', titulo: 'Saída sob spec', tarefa: 'Gere uma função com IA, escreva você mesmo a spec/testes (o oráculo) e prove que uma versão plausível-porém-errada é reprovada.', evidencia: 'Testes que falham na versão errada e passam na correta.' },
+    { tipo: 'Supply chain', titulo: 'Dependência alucinada', tarefa: 'Verifique os imports sugeridos pela IA contra o registro real e bloqueie os inexistentes (slopsquatting).', evidencia: 'Checagem que flagra o pacote alucinado antes de instalar.' },
+    { tipo: 'Eval', titulo: 'Regressão de prompt', tarefa: 'Monte um golden dataset e um juiz automatizado; versione o prompt e detecte uma regressão por slice.', evidencia: 'Dataset, métrica por slice e diff que reprova a regressão.' }
+  ],
   matematica: [
     { tipo: 'Complexidade', titulo: 'Recorrência aplicada', tarefa: 'Resolva três recorrências e confronte a previsão com medições do algoritmo.', evidencia: 'Cálculo, gráfico e explicação da divergência.' },
     { tipo: 'Capacidade', titulo: 'Estimativa de sistema', tarefa: 'Estime QPS, armazenamento, banda e pico de um caso de System Design.', evidencia: 'Planilha ou notebook com premissas explícitas.' },
@@ -76,6 +86,11 @@ export const EXERCICIOS_TRILHA = {
     { tipo: 'Fluxo', titulo: 'Fechamento mensal', tarefa: 'Classifique todas as entradas e saídas sem categoria desconhecida.', evidencia: 'Resumo mensal conciliado com extratos.' },
     { tipo: 'Risco', titulo: 'Reserva com cenário', tarefa: 'Simule perda de renda e defina reserva, liquidez e prazo de recomposição.', evidencia: 'Plano com três cenários e gatilhos de ação.' },
     { tipo: 'Transição', titulo: 'Decisão profissional', tarefa: 'Calcule runway para mudança de trabalho ou contratação própria.', evidencia: 'Orçamento, margem de segurança e data de revisão.' }
+  ],
+  fundamentos: [
+    { tipo: 'A máquina', titulo: 'Bit, byte e float', tarefa: 'Converta números entre decimal, binário e hex e mostre por que 0.1 + 0.2 não dá 0.3.', evidencia: 'Tabela de conversões + saída do exemplo executável comentada.' },
+    { tipo: 'Lógica', titulo: 'Rastreio na mão', tarefa: 'Decomponha um problema em passos e rastreie a execução de um laço numa mesa de execução.', evidencia: 'Pseudocódigo + tabela iteração→variável→valor.' },
+    { tipo: 'Ferramental', titulo: 'Debug e versão', tarefa: 'Ache um bug com o debugger (breakpoint, não print) e versione a correção em Git.', evidencia: 'Sessão de debug descrita + commit com boa mensagem.' }
   ],
   treino: [
     { tipo: 'Técnica', titulo: 'Série filmada', tarefa: 'Registre uma série de exercício composto e avalie amplitude, estabilidade e esforço.', evidencia: 'Vídeo privado ou anotação técnica comparativa.' },

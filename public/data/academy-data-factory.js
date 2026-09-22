@@ -99,7 +99,8 @@ function buildModules(moduleSpecs) {
       // Campos opcionais do schema §8.3 repassados quando presentes no spec:
       ...(module.internals ? { internals: module.internals } : {}),
       ...(module.books ? { books: module.books } : {}),
-      ...(module.complements ? { complements: module.complements } : {})
+      ...(module.complements ? { complements: module.complements } : {}),
+      ...(module.exampleFile ? { exampleFile: module.exampleFile } : {})
     };
   });
 }

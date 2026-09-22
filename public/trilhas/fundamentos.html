@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fundamentos de Computação — a Faixa 0, o básico como conteúdo</title>
+  <meta name="description" content="Academia de Fundamentos (Faixa 0): como a máquina funciona (binário, encoding, ponto flutuante, memória, processo), da URL à página, lógica e resolução de problemas, e o ferramental do dev — terminal, IDE, debugger e Git — com quiz de resposta objetiva.">
+  <meta property="og:title" content="Fundamentos de Computação — a Faixa 0">
+  <meta property="og:description" content="O básico tratado como conteúdo, não como pré-requisito: da máquina ao ferramental, com quiz objetivo e exemplos que rodam.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://study-plan.vercel.app/trilhas/fundamentos">
+  <meta name="twitter:card" content="summary">
+  <link href="../assets/vendor/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/fonts/fonts.css" rel="stylesheet">
+  <link href="../assets/css/tokens.css?v=redesign-33" rel="stylesheet">
+
+  <link href="../assets/css/tracks-palette.css?v=redesign-33" rel="stylesheet" /><link href="../assets/css/base.css?v=redesign-33" rel="stylesheet">
+
+  <link href="../assets/css/hub.css?v=redesign-33" rel="stylesheet" /><link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="canonical" href="https://study-plan.vercel.app/trilhas/fundamentos">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <meta name="theme-color" content="#0d1117">
+</head>
+<body class="track-page is-hub" data-track="fundamentos">
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="track-hero-page ac-hub-hero">
+    <div class="container ac-hero-layout">
+      <div class="ac-hero-copy">
+        <div class="hero-label">Faixa 0 · Fundamentos · comece por aqui</div>
+        <h1 class="track-title"><span class="ac-title-nowrap">Fundamentos de</span> Computação</h1>
+        <p class="track-lead">A faixa que todas as outras trilhas assumem como pré-requisito — aqui ela é
+          conteúdo. Do bit ao debugger: como a máquina funciona, o que acontece de digitar a URL até a
+          página, como pensar um problema em passos e o ferramental que todo dev usa.</p>
+        <div class="track-badge-set" aria-label="Principais temas">
+          <span>Binário e bytes</span>
+          <span>Ponto flutuante</span>
+          <span>Memória</span>
+          <span>Processo e SO</span>
+          <span>Rede e HTTP</span>
+          <span>Lógica</span>
+          <span>Terminal</span>
+          <span>Debugger</span>
+          <span>Git</span>
+        </div>
+      </div>
+
+      <aside class="ac-route-map" aria-label="Percurso da faixa 0">
+        <div class="ac-route-map__header">
+          <span>Do zero absoluto</span>
+          <strong>Cada parte tira uma suposição que as outras trilhas fariam por você.</strong>
+        </div>
+        <ol>
+          <li><b>01</b><div><strong>A máquina</strong><small>Binário, encoding, float, memória, processo.</small></div></li>
+          <li><b>02</b><div><strong>Da URL à página</strong><small>DNS, TCP, HTTP, cliente/servidor, API.</small></div></li>
+          <li><b>03</b><div><strong>Lógica</strong><small>Decompor, rastrear na mão, ler erros.</small></div></li>
+          <li><b>04</b><div><strong>Ferramental</strong><small>Terminal, IDE, debugger, Git.</small></div></li>
+        </ol>
+        <p>
+          <span><strong data-ac-count="modules">14</strong>módulos</span>
+          <span><strong data-ac-count="exercises">28</strong>exercícios</span>
+          <span><strong data-ac-count="projects">2</strong>entregas</span>
+        </p>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="sitenav" aria-label="Navegação da trilha Fundamentos">
+    <div class="container">
+      <div class="sitenav-top">
+        <a class="sitenav-brand" href="./fundamentos.html">Fundamentos <span>a faixa 0</span></a>
+        <a class="nav-back" href="../index.html">← Dashboard</a>
+        <div class="sitenav-top-right">
+          <input class="search-box" id="searchInput" type="search" aria-label="Buscar nesta trilha"
+            placeholder="Buscar nesta trilha...">
+        </div>
+      </div>
+    </div>
+    <div class="sitenav-bar-outer">
+      <button class="nav-scroll-btn left" id="navScrollLeft" aria-label="Rolar para esquerda">‹</button>
+      <div class="sitenav-bar-inner" id="navSectionsBar">
+        <div class="nav-group">
+          <span class="nav-group-label">Contrato</span>
+          <a class="nav-link" href="#resumo">01 · Resumo Executivo</a>
+          <a class="nav-link" href="#contrato">02 · Entrada e saída</a>
+          <a class="nav-link" href="#academia-fundamentos">03 · Academia</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Aprendizado</span>
+          <a class="nav-link" href="#perfil">04 · Perfil</a>
+          <a class="nav-link" href="#destrava">05 · O que destrava</a>
+          <a class="nav-link" href="#roadmap">06 · Roadmap</a>
+        </div>
+        <div class="nav-group">
+          <span class="nav-group-label">Evidência</span>
+          <a class="nav-link" href="#projeto">07 · Projeto</a>
+          <a class="nav-link" href="#referencias">08 · Referências</a>
+          <a class="nav-link" href="#plano-global">09 · Plano global</a>
+        </div>
+      </div>
+      <button class="nav-scroll-btn right" id="navScrollRight" aria-label="Rolar para direita">›</button>
+    </div>
+  </nav>
+
+  <main id="conteudo" tabindex="-1">
+    <div class="main">
+      <aside class="sidebar">
+        <div class="sidebar-group">
+          <div class="sidebar-label">Contrato</div>
+          <a href="#resumo">1. Resumo Executivo</a>
+          <a href="#contrato">2. Entrada, resultado e gate</a>
+          <a href="#academia-fundamentos">3. Academia em cinco partes</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Aprendizado</div>
+          <a href="#perfil">4. Perfil de saída</a>
+          <a href="#destrava">5. O que a faixa 0 destrava</a>
+          <a href="#roadmap">6. Roadmap de execução</a>
+        </div>
+        <div class="sidebar-group">
+          <div class="sidebar-label">Evidência</div>
+          <a href="#projeto">7. Produto evolutivo</a>
+          <a href="#referencias">8. Referências abertas</a>
+          <a href="#plano-global">9. Roadmap das 12 fases</a>
+        </div>
+      </aside>
+
+      <div class="content" id="trackMain">
+        <section id="resumo" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Resumo Executivo</h2>
+              <p class="section-subtitle">Toda trilha técnica começa no "módulo 1" assumindo que você já sabe o básico. Esta trilha ensina esse básico.</p>
+            </div>
+            <span class="section-badge">Visão geral</span>
+          </div>
+          <div class="doc-hero-card">
+            <div>
+              <p class="lead">Você entende como o computador conta (bit, byte, hex), por que texto é byte + encoding
+                e por que 0.1 + 0.2 não dá 0.3; onde os dados vivem (pilha, heap) e o que é um processo; o caminho
+                de um clique da URL à página; como quebrar um problema em passos e rastrear a execução na mão; e o
+                ferramental que todo dev usa — terminal, IDE, <strong>debugger</strong> e Git.</p>
+              <p>Diferente das outras trilhas, aqui os exercícios têm <strong>resposta objetiva</strong> (certo/errado):
+                na faixa 0, o que importa é fixar o conceito sem ambiguidade.</p>
+            </div>
+            <div class="metrics-grid">
+              <div class="metric-pill"><span data-ac-count="modules">14</span><small>Módulos</small></div>
+              <div class="metric-pill"><span data-ac-count="parts">5</span><small>Partes</small></div>
+              <div class="metric-pill"><span data-ac-count="exercises">28</span><small>Exercícios</small></div>
+              <div class="metric-pill"><span data-ac-count="projects">2</span><small>Entregas</small></div>
+            </div>
+          </div>
+          <div class="doc-grid-4 mt-3">
+            <article class="mini-card"><strong>A máquina</strong><span>Bit, byte, encoding, float, memória, processo — o que roda por baixo.</span></article>
+            <article class="mini-card"><strong>A rede</strong><span>Da URL à página: DNS, HTTP, cliente/servidor e API.</span></article>
+            <article class="mini-card"><strong>A lógica</strong><span>Decompor, rastrear na mão, ler o erro e pensar em casos.</span></article>
+            <article class="mini-card"><strong>O ferramental</strong><span>Terminal, rodar código, debugger e o mínimo de Git.</span></article>
+          </div>
+        </section>
+
+        <section id="contrato" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Contrato de entrada, resultado e conclusão</h2>
+              <p class="section-subtitle">A faixa 0 não pede nada além de saber usar um computador.</p>
+            </div>
+            <span class="section-badge">Faixa 0</span>
+          </div>
+          <div class="doc-grid-2">
+            <article>
+              <span>01 · Entrada</span>
+              <h3>Pré-requisitos</h3>
+              <ul class="doc-list">
+                <li>Saber ligar o computador, abrir programas e arquivos.</li>
+                <li>Aritmética escolar.</li>
+                <li>Nenhuma programação prévia — de verdade.</li>
+              </ul>
+            </article>
+            <article>
+              <span>02 · Resultado</span>
+              <h3>Objetivos</h3>
+              <ul class="doc-list">
+                <li>Explicar como a máquina conta, guarda dados e roda programas.</li>
+                <li>Pensar um problema em passos e depurar com método (não com pânico).</li>
+                <li>Operar terminal, IDE, debugger e Git básico.</li>
+              </ul>
+            </article>
+            <article>
+              <span>03 · Gate</span>
+              <h3>Critérios de conclusão</h3>
+              <ul class="doc-list">
+                <li>Acertar o quiz objetivo dos 14 módulos.</li>
+                <li>Entregar um artefato mínimo por módulo, versionado em Git.</li>
+                <li>Explicar cinco conceitos sem jargão antes de subir para a faixa 1.</li>
+              </ul>
+            </article>
+          </div>
+        </section>
+
+        <section id="academia-fundamentos" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Academia de Fundamentos em 14 módulos</h2>
+              <p class="section-subtitle">Cinco partes: a máquina, a rede, a lógica, o ferramental e a avaliação.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="modules">14</b> módulos</span>
+          </div>
+          <p class="lead">Cada módulo parte de uma pergunta que o iniciante realmente faz ("por que 0.1 + 0.2 não dá 0.3?",
+            "por que aparece Ã©?", "o site não abre, e agora?"), explica o mecanismo em linguagem simples e fecha com
+            um <strong>quiz de resposta objetiva</strong> e um exercício com evidência.</p>
+          <div class="ac-part-grid" id="fundamentosAcademyGrid" aria-live="polite" data-academy-grid></div>
+        </section>
+
+        <section id="perfil" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Perfil de saída: pronto para começar sem magia</h2>
+              <p class="section-subtitle">O objetivo não é virar especialista — é parar de tratar o básico como caixa-preta.</p>
+            </div>
+            <span class="section-badge">Zero → Faixa 1</span>
+          </div>
+          <div class="table-responsive">
+            <table class="doc-table">
+              <thead><tr><th>Capacidade</th><th>Resultado observável</th><th>Evidência</th></tr></thead>
+              <tbody>
+                <tr><td>A máquina</td><td>Explica bit/byte, encoding, float e memória sem jargão.</td><td>Quiz correto + conversões e trace.</td></tr>
+                <tr><td>A rede</td><td>Narra o caminho da URL à página e isola onde falha.</td><td>Etapas descritas + aba de rede lida.</td></tr>
+                <tr><td>A lógica</td><td>Quebra um problema em passos e rastreia a execução.</td><td>Pseudocódigo + mesa de execução.</td></tr>
+                <tr><td>O ferramental</td><td>Roda código pelo terminal, depura com breakpoint e versiona.</td><td>Sessão de debug + primeiro repositório.</td></tr>
+                <tr><td>Depuração</td><td>Lê a mensagem de erro e cobre caso normal, borda e inválido.</td><td>Erro explicado + casos testados.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="destrava" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>O que a faixa 0 destrava</h2>
+              <p class="section-subtitle">Cada conceito aqui é uma pergunta que, sem resposta, trava o iniciante nas outras trilhas.</p>
+            </div>
+            <span class="section-badge">Por que importa</span>
+          </div>
+          <div class="ac-decision-list">
+            <article><span>Float</span><h3>"Por que a conta deu 0.30000000000000004?"</h3><p>Sem ponto flutuante, todo cálculo com decimais vira um bug intermitente inexplicável.</p></article>
+            <article><span>Encoding</span><h3>"Por que o acento virou Ã©?"</h3><p>Sem entender bytes + codificação, o bug some e volta sem padrão.</p></article>
+            <article><span>Memória</span><h3>"Por que mudar uma lista mudou a outra?"</h3><p>Sem valor vs referência, alias e cópia são pura sorte.</p></article>
+            <article><span>Debugger</span><h3>"Como acho o bug sem encher de print?"</h3><p>Sem breakpoint e inspeção, depurar é tentativa e erro no escuro.</p></article>
+          </div>
+        </section>
+
+        <section id="roadmap" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Roadmap de execução</h2>
+              <p class="section-subtitle">Uma ordem em que cada parte remove uma suposição da anterior.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="modules">14</b> módulos</span>
+          </div>
+          <ol class="ac-roadmap">
+            <li><b>01–05</b><div><strong>A máquina</strong><span>Binário, encoding, ponto flutuante, memória e processo/SO.</span></div></li>
+            <li><b>06–07</b><div><strong>Da URL à página</strong><span>DNS, TCP, HTTP, renderização e cliente/servidor.</span></div></li>
+            <li><b>08–10</b><div><strong>Lógica</strong><span>Decompor, rastrear na mão e ler erros pensando em casos.</span></div></li>
+            <li><b>11–14</b><div><strong>Ferramental</strong><span>Terminal, rodar código, debugger e Git básico.</span></div></li>
+          </ol>
+        </section>
+
+        <section id="projeto" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Um caderno, duas entregas</h2>
+              <p class="section-subtitle">A evidência da faixa 0 é pequena, mas real e versionada desde o primeiro dia.</p>
+            </div>
+            <span class="section-badge"><b data-ac-count="projects">2</b> entregas</span>
+          </div>
+          <div class="ac-project-list" aria-label="Encadeamento das entregas">
+            <article><b>01</b><strong>Caderno de fundamentos</strong><span>Um artefato mínimo por módulo, versionado.</span></article>
+            <i aria-hidden="true">→</i>
+            <article><b>02</b><strong>Explique para alguém</strong><span>Cinco conceitos sem jargão, com exemplo próprio.</span></article>
+          </div>
+          <p class="ac-source-link"><a href="./fundamentos/avaliacao.html#projetos">Abrir entregas e critérios de aceite →</a></p>
+        </section>
+
+        <section id="referencias" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Referências abertas</h2>
+              <p class="section-subtitle">Tudo gratuito e canônico — nada de dependência para começar.</p>
+            </div>
+            <span class="section-badge">Livre</span>
+          </div>
+          <div class="ac-navigation">
+            <a href="https://missing.csail.mit.edu/" target="_blank" rel="noopener noreferrer">MIT — The Missing Semester (terminal, debugger, Git) →</a>
+            <a href="https://pages.cs.wisc.edu/~remzi/OSTEP/" target="_blank" rel="noopener noreferrer">Operating Systems: Three Easy Pieces →</a>
+            <a href="https://www.joelonsoftware.com/2003/10/08/the-absolute-minimum-every-software-developer-absolutely-positively-must-know-about-unicode-and-character-sets-no-excuses/" target="_blank" rel="noopener noreferrer">Spolsky — The Absolute Minimum About Unicode →</a>
+            <a href="https://git-scm.com/book" target="_blank" rel="noopener noreferrer">Pro Git (livre, oficial) →</a>
+          </div>
+          <p class="ac-source-link"><a href="./fundamentos/maquina.html">Abrir a primeira parte e os exemplos executáveis →</a></p>
+        </section>
+
+        <section id="plano-global" class="doc-section searchable-section" data-search-section>
+          <div class="doc-section-heading">
+            <div>
+              <h2>Fundamentos nas 12 fases do plano</h2>
+              <p class="section-subtitle">Progresso, evidência e revisão usam o mesmo estado do dashboard.</p>
+            </div>
+            <span class="section-badge">Plano integrado</span>
+          </div>
+          <div id="phaseRoadmap"></div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="footer-row">
+      <a class="footer-link" href="../index.html">← Voltar ao dashboard principal</a>
+      <div class="footer-pills">
+        <span class="footer-pill green">A máquina</span>
+        <span class="footer-pill blue">A rede</span>
+        <span class="footer-pill orange">A lógica</span>
+        <span class="footer-pill pink">O ferramental</span>
+      </div>
+    </div>
+    <p><strong>Fundamentos de Computação</strong> · o básico como conteúdo, não como suposição.</p>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Voltar ao topo">↑</button>
+  <script src="../assets/vendor/bootstrap.bundle.min.js"></script>
+  <script type="module" src="../assets/js/pages/trilha.js?v=redesign-33"></script>
+  <script type="module" src="../assets/js/pages/hub.js?v=redesign-33"></script>
+</body>
+</html>

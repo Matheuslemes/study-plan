@@ -1,0 +1,15 @@
+{
+  "name": "study-plan",
+  "//": "Ambiente reprodutível com os três runtimes dos exemplos autoverificáveis (Node, Python, JDK).",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" },
+    "ghcr.io/devcontainers/features/java:1": { "version": "21" }
+  },
+  "postCreateCommand": "node --version && python3 --version && java -version",
+  "customizations": {
+    "vscode": {
+      "extensions": ["dbaeumer.vscode-eslint", "ms-python.python", "vscjava.vscode-java-pack"]
+    }
+  }
+}

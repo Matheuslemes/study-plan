@@ -1,0 +1,39 @@
+# CI único — roda todos os exemplos autoverificáveis de uma vez.
+# Instala os três runtimes (Node, Python, JDK) para que .mjs, .py e .java
+# sejam TODOS executados de fato (nada é pulado por falta de runtime na CI).
+name: verify-examples
+
+on:
+  push:
+    paths:
+      - 'public/examples/**'
+      - 'public/data/**'
+      - 'scripts/verify-examples.mjs'
+      - '.github/workflows/verify-examples.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Rodar a suíte de exemplos autoverificáveis
+        run: node scripts/verify-examples.mjs

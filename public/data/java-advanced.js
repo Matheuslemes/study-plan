@@ -283,6 +283,22 @@ export const javaAcademy = Object.freeze({
   baseline: 'Exemplos em Java 21 LTS · LTS corrente 25 · baseline completo na avaliação',
   book: 'OCP (Deshmukh) sustenta a linguagem; Effective Java, Java Concurrency in Practice, Optimizing Java, Spring in Action e mais 11 obras aprofundam cada tema por área',
   parts: {
+    base: {
+      index: '0/5',
+      title: 'Módulo 0 — da Faixa 0 ao Java',
+      subtitle: 'Módulos 0.1–0.4 · ponte dos fundamentos (memória, ponto flutuante, erros) para JVM, tipos, fluxo e stack traces.',
+      prerequisites: [
+        'Ter passado pela Faixa 0 (Fundamentos de Computação) ou equivalente.',
+        'Saber usar o terminal e editar arquivos de texto.',
+        'Nenhum conhecimento prévio de Java.'
+      ],
+      objectives: [
+        'Explicar o que a JVM faz e compilar/executar um programa Java pela linha de comando.',
+        'Distinguir tipos primitivos de referências e entender a tipagem estática.',
+        'Escrever controle de fluxo, métodos e a estrutura de uma classe.',
+        'Ler um stack trace e diferenciar erro de compilação de erro de execução.'
+      ]
+    },
     fundamentos: {
       index: '1/5',
       title: 'Linguagem, contratos e modelagem',
@@ -369,6 +385,138 @@ export const javaAcademy = Object.freeze({
 });
 
 export const javaModules = [
+  {
+    number: '0.1', part: 'base', id: 'jvm-compilar-rodar',
+    title: 'Da máquina ao Java: JVM, javac e bytecode', level: 'Introdução',
+    objective: 'Explicar o que a JVM faz e compilar e executar um programa Java pela linha de comando, entendendo o caminho .java → .class → execução.',
+    prerequisites: ['Faixa 0: como um programa roda (compilar × interpretar)', 'Terminal básico', 'JDK instalado'],
+    problem: 'Quem vem da Faixa 0 sabe que "compilar traduz e interpretar executa", mas não sabe onde o Java se encaixa — nem por que existe .class, JVM e "write once, run anywhere".',
+    concepts: ['JDK vs JRE vs JVM', 'javac compila para bytecode (.class)', 'A JVM executa o bytecode', 'Portabilidade (write once, run anywhere)', 'main como ponto de entrada'],
+    internals: ['javac traduz .java para bytecode .class — um código intermediário, não binário da máquina.', 'A JVM interpreta e depois compila (JIT) o bytecode para a CPU; por isso o mesmo .class roda em qualquer SO com JVM.', 'O JDK contém o compilador (javac) e a JVM (java); o JRE só executa.'],
+    useWhen: ['Ao rodar qualquer programa Java fora da IDE.', 'Ao entender erros de versão de bytecode e "class not found".'],
+    avoidWhen: ['Não confunda compilar (javac) com executar (java).', 'Não dependa só do botão Run da IDE sem saber o comando.'],
+    contrast: { bad: 'Só clicar em Run e não saber o que aconteceu.', good: 'javac Ola.java gera Ola.class; java Ola executa — e você sabe cada passo.' },
+    tradeoffs: ['Bytecode + JVM dá portabilidade ao custo de uma camada de execução.', 'O JIT troca um startup mais lento por execução rápida depois do aquecimento.'],
+    production: 'Um "funciona na minha máquina" era diferença de versão do JDK: bytecode compilado num JDK novo não rodava numa JVM antiga (UnsupportedClassVersionError).',
+    risks: ['Confundir JDK e JRE.', 'Misturar versão de compilação e de execução.', 'Achar que .class é binário nativo.'],
+    checklist: ['Sei a diferença entre javac e java?', 'Sei o que é bytecode?', 'Sei por que o mesmo .class roda em vários SOs?', 'Sei rodar pela linha de comando, não só pela IDE?'],
+    interview: [
+      { level: 'Introdução', question: 'O que a JVM faz?', expected: 'Executa o bytecode (.class): interpreta e compila (JIT) para a CPU, dando portabilidade entre sistemas.' },
+      { level: 'Introdução', question: 'Qual a diferença entre javac e java?', expected: 'javac compila .java em bytecode .class; java executa esse .class na JVM.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Escrever um Ola.java, compilar com javac e executar com java pela linha de comando.', evidence: 'Os comandos usados e a saída "olá".' },
+      { level: 'Aplicado', task: 'Inspecionar o .class gerado e explicar por que ele roda em outro SO.', evidence: 'Nota curta sobre bytecode e portabilidade.' }
+    ],
+    quiz: [
+      { question: 'javac produz:', options: ['um executável nativo', 'bytecode (.class)', 'código de máquina da CPU', 'sempre um .jar'], answer: 1, why: 'O compilador gera bytecode, executado pela JVM.' },
+      { question: 'O que dá ao Java o "write once, run anywhere"?', options: ['o JIT', 'o bytecode rodando em qualquer JVM', 'o Git', 'o Maven'], answer: 1, why: 'O mesmo .class roda em qualquer SO com JVM.' },
+      { question: 'O JRE, ao contrário do JDK:', options: ['compila código', 'só executa (não tem javac)', 'é mais novo', 'não tem JVM'], answer: 1, why: 'O compilador javac vem no JDK; o JRE só executa.' }
+    ],
+    challenge: 'Explicar, para quem só viu a Faixa 0, por que Java precisa de um passo de compilação e o que a JVM acrescenta.',
+    book: 'OCP cap. 1 (estrutura de classe e execução).',
+    complements: [official.jls, official.api],
+    exampleFile: null
+  },
+  {
+    number: '0.2', part: 'base', id: 'tipos-variaveis',
+    title: 'Tipos, variáveis e o sistema de tipos estático', level: 'Introdução',
+    objective: 'Declarar variáveis distinguindo tipos primitivos de referências e entender que o Java verifica os tipos em tempo de compilação.',
+    prerequisites: ['Módulo 0.1', 'Faixa 0: memória (valor vs referência) e ponto flutuante'],
+    problem: 'Da Faixa 0 vem "valor vs referência" e "float é aproximado"; em Java isso vira primitivo vs objeto, int vs long, double vs BigDecimal — e errar aqui gera overflow e NPE.',
+    concepts: ['Primitivos (int, long, double, boolean, char)', 'Referências e objetos (String, wrappers)', 'Tipagem estática (checada na compilação)', 'Declaração e var', 'null'],
+    internals: ['Primitivos guardam o valor direto; referências guardam um "endereço" para um objeto (como na Faixa 0).', 'O tipo é fixado na compilação: o compilador recusa uma atribuição incompatível antes de rodar.', 'int tem 32 bits (transborda), long tem 64, double é aproximado — os mesmos limites da Faixa 0, com nomes de Java.'],
+    useWhen: ['Ao escolher o tipo de cada variável e parâmetro.', 'Ao decidir entre int/long e double/BigDecimal.'],
+    avoidWhen: ['Não use double para dinheiro (use BigDecimal ou centavos em long).', 'Não confie em == para comparar o conteúdo de objetos.'],
+    contrast: { bad: 'int total para somar valores que passam de 2 bilhões.', good: 'long (ou BigDecimal para dinheiro), escolhido pelo alcance necessário.' },
+    tradeoffs: ['Tipagem estática pega erros cedo, ao custo de mais declarações.', 'var reduz ruído, mas pode esconder o tipo.'],
+    production: 'Um contador de eventos em int transbordou ao passar de ~2,1 bilhões e virou negativo, quebrando um relatório — era só usar long.',
+    risks: ['Overflow de int silencioso.', 'NPE ao usar referência null.', 'Usar double para dinheiro.', 'Comparar String com ==.'],
+    checklist: ['Sei distinguir primitivo de referência?', 'Escolhi o tipo pelo alcance (int vs long)?', 'Evitei double para dinheiro?', 'Comparo conteúdo com equals, não ==?'],
+    interview: [
+      { level: 'Introdução', question: 'Qual a diferença entre um tipo primitivo e uma referência?', expected: 'Primitivo guarda o valor direto; referência guarda um endereço para um objeto (pode ser null).' },
+      { level: 'Introdução', question: 'Por que não usar double para dinheiro?', expected: 'double é aproximado (Faixa 0) e acumula erro; use BigDecimal ou inteiro de centavos.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Rodar o exemplo JavaZero e explicar o overflow do int, a imprecisão do double e == vs equals.', evidence: 'Notas ligando cada saída ao conceito da Faixa 0.' },
+      { level: 'Aplicado', task: 'Reescrever uma soma de dinheiro trocando double por long de centavos.', evidence: 'Antes/depois com o total correto.' }
+    ],
+    quiz: [
+      { question: 'int em Java tem:', options: ['16 bits', '32 bits', '64 bits', 'tamanho variável'], answer: 1, why: 'int é 32 bits; long é 64.' },
+      { question: 'Para comparar o conteúdo de duas Strings use:', options: ['==', 'equals()', 'is', 'apenas compareTo'], answer: 1, why: '== compara referência; equals compara valor.' },
+      { question: 'Uma variável de referência pode valer:', options: ['só objetos', 'null também', 'só primitivos', 'nunca null'], answer: 1, why: 'Referências podem ser null (e usar null lança NPE).' }
+    ],
+    challenge: 'Mapear os três conceitos da Faixa 0 (memória, float, overflow) para os nomes que eles têm em Java.',
+    book: 'OCP cap. 1–2 (tipos e operadores); Effective Java, item 6.',
+    complements: [official.jls, official.api],
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/JavaZero.java'
+  },
+  {
+    number: '0.3', part: 'base', id: 'fluxo-metodos-classe',
+    title: 'Controle de fluxo, métodos e a anatomia de uma classe', level: 'Introdução',
+    objective: 'Escrever condicionais, laços e métodos dentro de uma classe, traduzindo os "passos" da Faixa 0 em código Java.',
+    prerequisites: ['Módulo 0.2', 'Faixa 0: decompor um problema em passos e rastrear a execução'],
+    problem: 'A Faixa 0 ensina a pensar em passos; falta a forma Java — onde vai o main, o que é um método, como escrever if/for sem decorar.',
+    concepts: ['class e main', 'if/else e switch', 'for, while e for-each', 'Métodos: parâmetros e retorno', 'Escopo de bloco'],
+    internals: ['Todo código Java vive dentro de uma classe; a execução começa em public static void main(String[]).', 'Um método recebe parâmetros e devolve um valor (ou void) — a decomposição da Faixa 0 virando unidade reutilizável.', 'Variáveis declaradas num bloco só existem nele (escopo).'],
+    useWhen: ['Ao transformar um algoritmo (passos) em código.', 'Ao extrair um trecho repetido para um método.'],
+    avoidWhen: ['Não repita lógica; extraia um método.', 'Não escreva um main gigante — quebre em métodos.'],
+    contrast: { bad: 'Todo o programa dentro do main, copiando trechos.', good: 'main curto que chama métodos pequenos e nomeados.' },
+    tradeoffs: ['Métodos pequenos são mais legíveis e testáveis, ao custo de mais nomes.', 'switch é claro para muitos casos; if encadeado para poucos.'],
+    production: 'Um cálculo repetido em cinco lugares divergiu quando só quatro foram corrigidos; extrair um método teria evitado — a duplicação é a raiz do bug.',
+    risks: ['Off-by-one em laços (começar/terminar no índice errado).', 'main monolítico.', 'Esquecer o return.', 'Confundir escopo de variável.'],
+    checklist: ['Meu main chama métodos em vez de fazer tudo?', 'Cada método tem uma responsabilidade?', 'Meus laços cobrem o intervalo certo (sem off-by-one)?', 'As variáveis estão no escopo certo?'],
+    interview: [
+      { level: 'Introdução', question: 'Onde a execução de um programa Java começa?', expected: 'No método public static void main(String[] args) da classe executada.' },
+      { level: 'Introdução', question: 'Por que extrair um método?', expected: 'Reuso, legibilidade e testabilidade; evita duplicação, uma fonte comum de bugs.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Escrever um método que soma 1..n com um laço e testá-lo para n=5 (deve dar 15).', evidence: 'O método e a saída conferida (como em JavaZero.sumTo).' },
+      { level: 'Aplicado', task: 'Decompor um cálculo em 3 métodos nomeados chamados a partir de um main curto.', evidence: 'Código com main enxuto e métodos de responsabilidade única.' }
+    ],
+    quiz: [
+      { question: 'A execução de um programa Java começa em:', options: ['no primeiro método da classe', 'em main(String[])', 'no construtor', 'na primeira linha do arquivo'], answer: 1, why: 'main(String[]) é o ponto de entrada.' },
+      { question: 'O laço "for (int i=1; i<=5; i++)" executa o corpo:', options: ['4 vezes', '5 vezes', '6 vezes', '1 vez'], answer: 1, why: 'i vai de 1 a 5 inclusive → 5 iterações.' },
+      { question: 'Extrair um método serve principalmente para:', options: ['deixar mais rápido', 'reúso e evitar duplicação', 'usar menos memória', 'compilar'], answer: 1, why: 'Reuso/legibilidade; duplicação gera bugs.' }
+    ],
+    challenge: 'Pegar um algoritmo que você rastreou na mão na Faixa 0 e implementá-lo como um método Java testável.',
+    book: 'OCP cap. 2–3 (operadores, controle de fluxo e métodos).',
+    complements: [official.jls, official.api],
+    exampleFile: null
+  },
+  {
+    number: '0.4', part: 'base', id: 'erros-stacktrace-debug',
+    title: 'Ler stack traces, erros de compilação e o debugger', level: 'Introdução',
+    objective: 'Diferenciar erro de compilação de erro de execução, ler um stack trace até a linha culpada e depurar com breakpoint — chegando ao ponto onde o módulo 1 começa.',
+    prerequisites: ['Módulo 0.3', 'Faixa 0: ler mensagens de erro e usar o debugger'],
+    problem: 'O módulo 1 do Java já assume "leitura de stack traces"; sem esta ponte, o iniciante entra em pânico com o textão vermelho e depura no chute.',
+    concepts: ['Erro de compilação vs de execução', 'Exception e stack trace', 'Ler o trace (topo = onde estourou)', 'NullPointerException', 'Breakpoint e inspeção na IDE'],
+    internals: ['Erro de compilação é detectado por javac antes de rodar; a exceção ocorre durante a execução.', 'O stack trace mostra a cadeia de chamadas; a exceção no topo diz o quê, e a linha "sua" mais ao topo diz onde começar a investigar.', 'O debugger da Faixa 0 vale aqui: breakpoint na linha suspeita e inspeção do estado, melhor que System.out.println.'],
+    useWhen: ['Sempre que algo não compila ou lança exceção.', 'Ao investigar um NPE ou um valor errado.'],
+    avoidWhen: ['Não confunda erro de compilação com exceção.', 'Não depure só com println quando o debugger resolve.'],
+    contrast: { bad: 'Ver o stack trace, entrar em pânico e mudar código no chute.', good: 'Ler a exceção e a linha, pôr um breakpoint ali e inspecionar o estado.' },
+    tradeoffs: ['Debugger é preciso, mas exige aprender a ferramenta.', 'println é rápido para casos triviais, some no ruído em casos grandes.'],
+    production: 'Um NPE em produção foi resolvido em minutos lendo a linha exata no stack trace e pondo um breakpoint condicional — impossível no chute.',
+    risks: ['Ignorar a mensagem/linha do erro.', 'Confundir compilação com execução.', 'Depender só de println.', 'Não reproduzir o erro antes de "corrigir".'],
+    checklist: ['Sei diferenciar erro de compilação de exceção?', 'Sei achar a linha culpada no stack trace?', 'Sei pôr um breakpoint e inspecionar variáveis?', 'Reproduzo o erro antes de corrigir?'],
+    interview: [
+      { level: 'Introdução', question: 'Qual a diferença entre erro de compilação e exceção?', expected: 'Compilação é detectada por javac antes de rodar; a exceção ocorre durante a execução.' },
+      { level: 'Introdução', question: 'Como você lê um stack trace?', expected: 'A exceção no topo diz o quê; a primeira linha do seu código no trace diz onde começar a investigar.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Provocar um erro de compilação e depois um NullPointerException, e diferenciar os dois.', evidence: 'Os dois erros com a explicação de quando cada um ocorre.' },
+      { level: 'Aplicado', task: 'Achar um NPE com o debugger (breakpoint, não println) e apontar a linha culpada no stack trace.', evidence: 'Relato do breakpoint, do valor null observado e da correção.' }
+    ],
+    quiz: [
+      { question: 'Um NullPointerException é:', options: ['erro de compilação', 'erro de execução (exception)', 'aviso do editor', 'erro do SO'], answer: 1, why: 'Ocorre ao rodar, ao usar uma referência null.' },
+      { question: 'No stack trace, para começar a investigar você olha:', options: ['a última linha', 'a exceção no topo e a primeira linha do seu código', 'a cor', 'o horário'], answer: 1, why: 'O topo diz o quê; a sua linha mais alta diz onde.' },
+      { question: 'Para achar por que uma variável está null, o melhor é:', options: ['encher de println', 'pôr um breakpoint e inspecionar', 'reescrever tudo', 'ignorar'], answer: 1, why: 'O debugger mostra o estado real no ponto exato.' }
+    ],
+    challenge: 'Ligar o que aprendeu na Faixa 0 (ler erros + debugger) ao módulo 1 do Java: reproduzir um bug de tipo/overload e depurá-lo.',
+    book: 'OCP cap. 3 (exceptions); depois siga para o módulo 1.',
+    complements: [official.jls, official.api, official.jcmd],
+    exampleFile: null
+  },
   {
     number: 1,
     part: 'fundamentos',
@@ -787,7 +935,7 @@ export const javaModules = [
     challenge: 'Produzir recomendação de GC com budget de memória/CPU, p99 e plano de rollback.',
     book: 'Optimizing Java, cap. 6–8 (modelo de memória, coletores de GC e tuning orientado por métricas).',
     complements: [official.gc, official.jfr, official.jcmd],
-    exampleFile: '../../examples/java21-senior/README.md'
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/GarbageCollectionMetrics.java'
   },
   {
     number: 13,
@@ -962,7 +1110,7 @@ export const javaModules = [
     challenge: 'Projetar checkout consistente sem transação distribuída, documentando garantias e compensações.',
     book: 'Java Persistence with Spring Data and Hibernate (mapeamento, transações, Spring Data); High-Performance Java Persistence (fetching, N+1, locking e tuning).',
     complements: [official.api],
-    exampleFile: '../../examples/java21-senior/README.md'
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/PersistenceAndLocking.java'
   },
   {
     number: 18,
@@ -997,7 +1145,7 @@ export const javaModules = [
     challenge: 'Conduzir game day com atraso, duplicação e indisponibilidade, preservando invariantes e SLO.',
     book: 'Spring in Action (6ª ed), integração e mensageria; Spring Boot: Up and Running (serviços cloud-native e resiliência).',
     complements: [official.jep444, official.otel],
-    exampleFile: '../../examples/java21-senior/README.md'
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/DistributedResilience.java'
   },
   {
     number: 19,
@@ -1032,7 +1180,7 @@ export const javaModules = [
     challenge: 'Responder a incidente simulado com timeline, evidência, mitigação, correção e postmortem sem culpabilização.',
     book: 'Spring Security in Action (2ª ed), autenticação e autorização; Spring Boot: Up and Running (Actuator e observabilidade).',
     complements: [official.secure, official.owasp, official.otel, official.jfr],
-    exampleFile: '../../examples/java21-senior/README.md'
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/SecurityAndObservability.java'
   },
   {
     number: 20,
@@ -1067,7 +1215,7 @@ export const javaModules = [
     challenge: 'Defender em architecture review a evolução de um monólito modular com opções explícitas de não extrair.',
     book: 'Refactoring (2ª ed) e Clean Code (fronteiras e arquitetura limpa); DDD e microsserviços aprofundam na trilha de Arquitetura.',
     complements: [official.jls, official.otel],
-    exampleFile: '../../examples/java21-senior/README.md'
+    exampleFile: '../../examples/java21-senior/src/dev/studyplan/javaexpert/HexagonalArchitecture.java'
   },
   {
     number: 21,

@@ -235,6 +235,16 @@ export const awsAcademy = Object.freeze({
   baseline: `Pesquisa técnica: ${AWS_RESEARCH_DATE} · evidência acima de console e certificação`,
   book: 'action',
   parts: {
+    base: {
+      index: '0/6',
+      range: 'Módulos 0.1–0.4',
+      page: 'base.html',
+      navLabel: 'Módulo 0',
+      title: 'Módulo 0 — da Faixa 0 à AWS',
+      subtitle: 'Ponte dos fundamentos: o que é a nuvem e a responsabilidade compartilhada, identidade e menor privilégio (IAM), serviços essenciais e elasticidade/pay-as-you-go.',
+      prerequisites: ['Concluir a Trilha 0 (Fundamentos) ou equivalente', 'Terminal, DNS/HTTP e a ideia de servidor', 'Nenhuma experiência prévia de nuvem'],
+      objectives: ['Entender a nuvem sob demanda e o modelo de responsabilidade compartilhada', 'Aplicar identidade e menor privilégio (IAM: default deny, Deny vence Allow)', 'Reconhecer os serviços essenciais (computar, guardar, conectar) e região/AZ', 'Entender elasticidade, pay-as-you-go e o custo que surpreende']
+    },
     fundamentos: {
       index: '1/6',
       range: 'Módulos 1–5',
@@ -320,6 +330,135 @@ function moduleOf(config) {
 
 export const awsModules = Object.freeze([
   moduleOf({
+    number: '0.1', part: 'base', id: 'base-o-que-e-nuvem', title: 'O que é a nuvem (e a responsabilidade compartilhada)', level: 'Ponte (Faixa 0)',
+    objective: 'Entender a nuvem como computação e serviços alugados sob demanda por API, situar região/zona/conta e saber o que é responsabilidade da AWS e o que é sua (modelo de responsabilidade compartilhada).',
+    prerequisites: ['Trilha 0 (DNS, HTTP, o que é um servidor)', 'Terminal básico', 'Nenhuma experiência prévia de nuvem'],
+    problem: 'Quem sai da Faixa 0 sabe rodar um servidor local, mas acha que "a nuvem" é mágica ou que "a AWS cuida de tudo". Sem entender o que é seu para proteger, deixa dados e configuração sem dono — a causa nº 1 de vazamentos.',
+    concepts: ['Nuvem sob demanda via API', 'IaaS/PaaS/SaaS', 'Região e zona de disponibilidade (AZ)', 'Conta como limite', 'Responsabilidade compartilhada (da nuvem × na nuvem)'],
+    internals: ['A nuvem é o computador de outra pessoa que você aluga por API e paga pelo uso — sem comprar hardware.', 'A AWS é responsável pela segurança DA nuvem (data centers, hardware); você, pela segurança NA nuvem (seus dados, acessos e configuração).', 'Região é uma área geográfica; dentro dela há várias zonas (AZs) isoladas — a base para tolerar falhas.'],
+    useWhen: ['Use a nuvem quando precisar elasticidade, alcance global ou serviços gerenciados sem operar hardware.', 'Defina desde o início o que é responsabilidade sua vs da AWS.', 'Escolha a região por latência, custo e requisito legal de dados.'],
+    avoidWhen: ['Não trate a nuvem como "datacenter de outro" onde a AWS protege seus dados.', 'Não assuma que um serviço gerenciado transfere a responsabilidade sobre a sua configuração.', 'Não espalhe recursos sem saber em que conta/região estão.'],
+    contrast: { bad: 'Subir um serviço e presumir que "a AWS cuida da segurança", deixando um bucket público sem dono.', good: 'Mapear o que a AWS protege e o que é seu, e tratar dados, acessos e configuração como responsabilidade sua.' },
+    tradeoffs: ['A nuvem troca CAPEX (comprar) por OPEX (alugar) e conveniência por dependência do provedor.', 'Serviço gerenciado reduz operação e cede algum controle.', 'Mais regiões dão resiliência e alcance, e aumentam custo e complexidade.'],
+    production: 'Um time acredita que "está na nuvem, então está seguro" e expõe dados por configuração aberta. O exercício separa, item a item, o que é responsabilidade da AWS e o que é do cliente.',
+    risks: ['Achar que a AWS protege seus dados/config', 'Recurso na região errada (latência/lei)', 'Conta raiz no dia a dia', 'Não saber onde os recursos estão'],
+    checklist: ['Sei o que é responsabilidade da AWS e o que é minha?', 'Escolhi a região por latência/custo/lei?', 'Sei em que conta e região cada recurso está?', 'Dados e acessos têm dono?', 'Estou evitando a conta raiz no cotidiano?'],
+    interview: [
+      ['Júnior/Pleno', 'O que é o modelo de responsabilidade compartilhada?', 'A AWS cuida da segurança DA nuvem (infraestrutura); o cliente, da segurança NA nuvem (dados, identidade e configuração). O limite muda conforme o serviço (IaaS→SaaS).'],
+      ['Sênior/Staff', 'Um serviço gerenciado transfere a responsabilidade sobre os dados?', 'Não: ele reduz tarefas operacionais, mas dados, permissões e configuração continuam responsabilidade do cliente.']
+    ],
+    exercises: [
+      ['Básico', 'Listar 8 itens (patch do host, criptografia dos dados, senha do usuário…) e marcar "AWS" ou "cliente".', 'Tabela de responsabilidade compartilhada preenchida.'],
+      ['Aplicado', 'Escolher uma região para um app brasileiro e justificar por latência, custo e lei.', 'Decisão registrada com os três critérios.'],
+      ['Sênior', 'Explicar como o limite de responsabilidade muda de EC2 (IaaS) para S3/Lambda (mais gerenciado).', 'Meia página comparando os limites.']
+    ],
+    challenge: 'Explicar, sem jargão, por que "está na nuvem" não é o mesmo que "está seguro".',
+    book: 'Amazon Web Services in Action, cap. 1; AWS Well-Architected (pilar de segurança).',
+    complements: [official.sharedResponsibility],
+    quiz: [
+      { question: 'No modelo de responsabilidade compartilhada, quem protege os SEUS dados e configurações?', options: ['Você (o cliente) — segurança NA nuvem', 'A AWS — sempre', 'Ninguém precisa', 'O provedor de internet'], answer: 0, why: 'A AWS cuida da segurança DA nuvem; o cliente cuida da segurança NA nuvem (dados, acessos, config).' },
+      { question: 'O que é uma zona de disponibilidade (AZ)?', options: ['Um data center isolado dentro de uma região, base para tolerar falhas', 'Um tipo de servidor', 'Uma conta AWS', 'Um serviço de banco de dados'], answer: 0, why: 'Uma região tem várias AZs isoladas; distribuir entre elas é o que dá alta disponibilidade.' },
+      { question: 'O que melhor define "a nuvem"?', options: ['Computação e serviços alugados sob demanda por API, pagando pelo uso', 'Um HD na internet', 'Um datacenter que a AWS opera e protege inteiramente por você', 'Um software de backup'], answer: 0, why: 'Nuvem = recursos sob demanda via API, modelo pay-as-you-go — sem comprar hardware.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.2', part: 'base', id: 'base-identidade-iam', title: 'Conta, identidade e menor privilégio (IAM)', level: 'Ponte (Faixa 0)',
+    objective: 'Entender identidade como o centro da segurança na nuvem: usuários, papéis e políticas; negação por padrão; Deny vence Allow; e o menor privilégio como regra de ouro.',
+    prerequisites: ['Módulo 0.1', 'Ideia de usuário e permissão', 'Saber ler um JSON simples'],
+    problem: 'O iniciante usa a conta raiz para tudo, cola credenciais no código e dá permissão "*" para "funcionar logo". É assim que uma chave vazada vira um incidente que apaga ou expõe tudo.',
+    concepts: ['Conta como fronteira', 'Usuário, papel (role) e política', 'Credenciais temporárias vs raiz', 'Negação por padrão (default deny)', 'Menor privilégio; Deny vence Allow'],
+    internals: ['Toda requisição é avaliada: sem um Allow que case, o acesso é negado (default deny).', 'Um Deny explícito sempre vence qualquer Allow — é o freio de segurança.', 'Menor privilégio = conceder só a ação e o recurso necessários; papéis dão credenciais temporárias em vez de chaves fixas.'],
+    useWhen: ['Conceda o mínimo necessário e negue o resto por padrão.', 'Use papéis (credenciais temporárias) no lugar de chaves no código.', 'Proteja a conta raiz com MFA e não a use no dia a dia.'],
+    avoidWhen: ['Não use a conta raiz para tarefas cotidianas.', 'Não conceda Action "*" em Resource "*" por conveniência.', 'Não coloque credenciais em código ou repositório.'],
+    contrast: { bad: 'Uma política com Action "*" e Resource "*" para "resolver rápido", e a chave no código.', good: 'Uma política mínima (só s3:GetObject no bucket X), papel temporário e MFA na raiz.' },
+    tradeoffs: ['Menor privilégio dá segurança e custa mais políticas para manter.', 'Credenciais temporárias somem sozinhas (bom) e exigem entender papéis.', 'Um Deny amplo protege e pode bloquear demais se mal escrito.'],
+    production: 'Uma chave com permissão "*" vaza num repositório público e alguém apaga recursos. O exercício reescreve a política para o mínimo e mostra, no avaliador, que o Deny explícito protege o recurso sensível.',
+    risks: ['Conta raiz no cotidiano', 'Política "*:*"', 'Credenciais no código/repo', 'Sem MFA'],
+    checklist: ['A política concede só o necessário (menor privilégio)?', 'Há Allow explícito, com o resto negado por padrão?', 'Recursos sensíveis têm Deny explícito?', 'Uso papéis em vez de chaves fixas?', 'A raiz tem MFA e fica fora do dia a dia?'],
+    interview: [
+      ['Júnior/Pleno', 'O que é o menor privilégio e por que importa?', 'Conceder apenas as ações e recursos necessários; limita o estrago de uma credencial comprometida ou de um erro.'],
+      ['Sênior/Staff', 'Na avaliação IAM, o que acontece se um Allow e um Deny casam com a mesma requisição?', 'O Deny explícito sempre vence; e, sem nenhum Allow, o padrão já é negar (default deny).']
+    ],
+    exercises: [
+      ['Básico', 'Rodar o exemplo e explicar por que o papel de leitura não consegue apagar objetos.', 'Saída do avaliador + explicação do default deny.'],
+      ['Aplicado', 'Reescrever uma política "*:*" para o mínimo de uma tarefa (só ler um bucket).', 'Política mínima em JSON com Action/Resource específicos.'],
+      ['Sênior', 'Adicionar um Deny explícito para um recurso sensível e provar que ele vence o Allow.', 'Antes/depois com a decisão do avaliador.']
+    ],
+    challenge: 'Defender por que credenciais temporárias (papéis) são melhores que chaves fixas — e o que fazer se uma chave vazar.',
+    book: 'AWS Well-Architected (pilar de segurança); Amazon Web Services in Action (IAM).',
+    complements: [official.iam],
+    exampleFile: '../../examples/aws-senior/aws-zero.mjs',
+    quiz: [
+      { question: 'O que é "negação por padrão" (default deny) no IAM?', options: ['Sem uma permissão explícita que case, o acesso é negado', 'Tudo é permitido até você negar', 'Só a conta raiz é negada', 'Nada é avaliado'], answer: 0, why: 'IAM nega por padrão; é preciso um Allow explícito que case com a requisição.' },
+      { question: 'Se um Allow e um Deny se aplicam à mesma requisição, o que vence?', options: ['O Deny explícito sempre vence', 'O Allow, porque é mais específico', 'O último escrito', 'Depende da região'], answer: 0, why: 'Deny explícito tem precedência sobre qualquer Allow — é o freio de segurança do IAM.' },
+      { question: 'Por que evitar uma política com Action "*" e Resource "*"?', options: ['Viola o menor privilégio: uma credencial vazada faz estrago total', 'Ocupa mais espaço', 'A AWS proíbe por padrão', 'Deixa o app lento'], answer: 0, why: 'Menor privilégio limita o dano; "*:*" dá acesso a tudo, o oposto do desejável.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.3', part: 'base', id: 'base-servicos-essenciais', title: 'Serviços essenciais: computar, guardar e conectar', level: 'Ponte (Faixa 0)',
+    objective: 'Reconhecer os três blocos de qualquer sistema na nuvem — computação (EC2/Lambda), armazenamento (S3/EBS) e rede (VPC) — e a diferença entre gerenciar você mesmo e usar um serviço gerenciado.',
+    prerequisites: ['Módulo 0.2', 'Ideia de servidor, arquivo e rede', 'Noção de HTTP'],
+    problem: 'O catálogo da AWS tem centenas de serviços com nomes opacos; o iniciante se perde e escolhe pelo hype, sem enxergar que quase tudo se reduz a computar, guardar e conectar.',
+    concepts: ['Computação (EC2, Lambda, containers)', 'Armazenamento (S3, EBS)', 'Rede (VPC, sub-redes)', 'Serviço gerenciado vs autogerenciado', 'Escolher pelo requisito'],
+    internals: ['Quase todo sistema é: algo que executa código (compute), algo que guarda dados (storage) e algo que os conecta (rede).', 'EC2 é uma máquina que você administra; Lambda roda seu código sob demanda sem servidor para gerir; S3 guarda objetos; VPC é a sua rede privada.', 'Serviço gerenciado troca controle por menos operação — escolha pelo que o trabalho exige, não pela moda.'],
+    useWhen: ['Comece mapeando o sistema em computar/guardar/conectar.', 'Prefira serviço gerenciado quando a operação não for seu diferencial.', 'Escolha o serviço pelo padrão de acesso e carga, não pelo nome.'],
+    avoidWhen: ['Não escolha serviços pelo catálogo/hype sem requisito.', 'Não gerencie você mesmo o que um serviço gerenciado resolve melhor.', 'Não exponha armazenamento à internet sem necessidade.'],
+    contrast: { bad: 'Adotar cinco serviços da moda sem saber qual é compute, qual é storage e qual é rede.', good: 'Mapear o sistema em computar/guardar/conectar e escolher um serviço para cada por requisito.' },
+    tradeoffs: ['EC2 dá controle total e mais trabalho de operação; Lambda, menos controle e quase nenhuma operação.', 'S3 é barato e durável para objetos; um disco (EBS) serve outro padrão de acesso.', 'Serviço gerenciado acelera e cria dependência do provedor.'],
+    production: 'Um time roda um servidor 24/7 para uma tarefa que acontece 1x por dia; o exercício reescreve como função sob demanda e separa compute, storage e rede.',
+    risks: ['Escolher por hype', 'Storage exposto à internet', 'Operar você mesmo o que era para ser gerenciado', 'Ignorar o padrão de acesso'],
+    checklist: ['Consigo mapear o sistema em computar/guardar/conectar?', 'Cada peça usa o serviço certo para o requisito?', 'O que não é diferencial está em serviço gerenciado?', 'O armazenamento está privado por padrão?', 'A rede (VPC) isola o que precisa?'],
+    interview: [
+      ['Júnior/Pleno', 'Quais são os três blocos essenciais de um sistema na nuvem?', 'Computação (executar código), armazenamento (guardar dados) e rede (conectar) — quase todo serviço cai numa dessas categorias.'],
+      ['Sênior/Staff', 'Quando escolher Lambda em vez de EC2?', 'Quando a carga é intermitente/orientada a evento e não se quer operar servidor; EC2 quando é preciso controle do host, processos longos ou ajuste fino.']
+    ],
+    exercises: [
+      ['Básico', 'Classificar 9 serviços/recursos em computar, guardar ou conectar.', 'Tabela com a categoria de cada um.'],
+      ['Aplicado', 'Desenhar um app simples (API + banco + arquivos) mapeando compute, storage e rede.', 'Diagrama com um serviço por bloco.'],
+      ['Sênior', 'Justificar EC2 vs Lambda para dois workloads diferentes.', 'Decisão com requisito de carga e operação.']
+    ],
+    challenge: 'Explicar por que "quase tudo na AWS é computar, guardar ou conectar" ajuda a não se perder no catálogo.',
+    book: 'Amazon Web Services in Action, caps. 2–4; AWS Cookbook (compute, storage e rede).',
+    complements: [official.ec2, official.vpc],
+    quiz: [
+      { question: 'Quais são os três blocos essenciais de quase todo sistema na nuvem?', options: ['Computar, guardar e conectar', 'Frontend, backend e mobile', 'Dev, teste e produção', 'CPU, RAM e disco'], answer: 0, why: 'Compute (executar), storage (guardar) e rede (conectar) — o mapa para não se perder no catálogo.' },
+      { question: 'A principal diferença entre EC2 e Lambda é:', options: ['EC2 é uma máquina que você administra; Lambda roda seu código sob demanda sem servidor para gerir', 'Lambda é mais caro sempre', 'EC2 só serve para banco de dados', 'Não há diferença'], answer: 0, why: 'EC2 = controle e operação do host; Lambda = execução sob demanda sem gerenciar servidor.' },
+      { question: 'O que é um "serviço gerenciado"?', options: ['A AWS opera boa parte da infraestrutura por você, em troca de menos controle', 'Um serviço que você mesmo instala no seu PC', 'Um serviço gratuito', 'Um serviço só para administradores'], answer: 0, why: 'Serviço gerenciado reduz operação e cede controle — escolha pelo que o trabalho exige.' }
+    ]
+  }),
+  moduleOf({
+    number: '0.4', part: 'base', id: 'base-elasticidade-custo', title: 'Elasticidade, pay-as-you-go e o custo que você não vê', level: 'Ponte (Faixa 0)',
+    objective: 'Entender elasticidade (subir e descer capacidade sob demanda), o modelo pay-as-you-go e as fontes de custo invisível, usando o Well-Architected como bússola.',
+    prerequisites: ['Módulo 0.3', 'Ideia de porcentagem e média', 'Noção de uso variável ao longo do dia'],
+    problem: 'Vindo do "servidor sempre ligado", o iniciante provisiona para o pico e paga por capacidade ociosa — ou esquece recursos rodando, e a fatura surpreende no fim do mês.',
+    concepts: ['Elasticidade (escala sob demanda)', 'Pay-as-you-go', 'Provisionar para o pico vs autoescala', 'Custo invisível (egress, recursos esquecidos)', 'Well-Architected como bússola'],
+    internals: ['Na nuvem você paga pelo que usa; capacidade sobe e desce conforme a demanda em vez de ficar fixa.', 'Provisionar para o pico desperdiça nos vales; autoescala acompanha a carga e corta o ocioso.', 'Custos "invisíveis" (transferência de dados/egress, recursos esquecidos, snapshots) somam mais que a computação em muitos casos.'],
+    useWhen: ['Use autoescala quando a carga varia bastante ao longo do tempo.', 'Desligue/reduza o que não está em uso.', 'Estime custo por unidade (por requisição, por usuário) antes de crescer.'],
+    avoidWhen: ['Não provisione sempre para o pico "por segurança".', 'Não deixe recursos ligados sem dono nem alarme de custo.', 'Não ignore transferência de dados ao desenhar a arquitetura.'],
+    contrast: { bad: 'Manter 10 servidores 24/7 para um pico que dura 1 hora por dia.', good: 'Autoescalar de 2 a 10 conforme a demanda e pagar só o que rodou — o mesmo trabalho por uma fração do custo.' },
+    tradeoffs: ['Autoescala corta custo e adiciona complexidade de configuração.', 'Reservar capacidade barateia o previsível e trava flexibilidade.', 'Multi-região melhora resiliência e aumenta egress e custo.'],
+    production: 'Uma fatura triplica por causa de egress e de um ambiente de teste esquecido ligado. O exercício compara o custo de "sempre ligado" com o de autoescala para uma carga com picos.',
+    risks: ['Provisionar para o pico', 'Recurso esquecido ligado', 'Egress ignorado', 'Sem alarme de orçamento'],
+    checklist: ['A capacidade acompanha a demanda (elástica)?', 'Pago só pelo que uso?', 'Há alarme de orçamento?', 'Considerei egress e recursos esquecidos?', 'Sei o custo por unidade (requisição/usuário)?'],
+    interview: [
+      ['Júnior/Pleno', 'O que é elasticidade e por que ela economiza?', 'Ajustar a capacidade para cima e para baixo conforme a demanda; evita pagar por recurso ocioso do pico durante os vales.'],
+      ['Sênior/Staff', 'Quais custos costumam surpreender quem vem de servidor fixo?', 'Transferência de dados (egress), recursos esquecidos rodando, snapshots/armazenamento acumulado — muitas vezes maiores que a própria computação.']
+    ],
+    exercises: [
+      ['Básico', 'Calcular o custo de 10 servidores 24/7 vs autoescala para uma carga com pico de 1h/dia.', 'Comparação de custo com a conta feita.'],
+      ['Aplicado', 'Identificar três fontes de custo invisível num cenário dado.', 'Lista com egress, ocioso e esquecidos.'],
+      ['Sênior', 'Propor um alarme de orçamento e uma política de desligamento de ambientes de teste.', 'Plano com gatilho e responsável.']
+    ],
+    challenge: 'Defender quando "sempre ligado" ainda faz sentido — e quando a autoescala claramente ganha.',
+    book: 'AWS Well-Architected (pilar de otimização de custo); Cloud FinOps (fundamentos).',
+    complements: [official.reliability],
+    quiz: [
+      { question: 'O que é elasticidade na nuvem?', options: ['Ajustar a capacidade para cima e para baixo conforme a demanda', 'Deixar tudo sempre ligado', 'Um tipo de banco de dados', 'Um desconto da AWS'], answer: 0, why: 'Elasticidade acompanha a carga; com pay-as-you-go, você não paga pelo ocioso do pico nos vales.' },
+      { question: 'Qual é um custo "invisível" clássico na nuvem?', options: ['Transferência de dados (egress) e recursos esquecidos ligados', 'O preço da CPU', 'O custo do código-fonte', 'A licença do navegador'], answer: 0, why: 'Egress, ambientes esquecidos e armazenamento acumulado muitas vezes superam o custo de computação.' },
+      { question: 'Por que provisionar sempre para o pico costuma desperdiçar?', options: ['Você paga a capacidade máxima mesmo nos vales de baixa demanda', 'O pico nunca acontece', 'A AWS não permite', 'Deixa o sistema inseguro'], answer: 0, why: 'Sem elasticidade, a capacidade fica fixa no pico e fica ociosa (paga) no resto do tempo.' }
+    ]
+  }),
+  moduleOf({
     number: 1, part: 'fundamentos', id: 'limites-cloud', title: 'Cloud, regiões e responsabilidade compartilhada', level: 'Fundação',
     objective: 'Explicar quais riscos pertencem à AWS, ao cliente ou aos dois e localizar cada recurso em conta, região e zona.',
     prerequisites: ['Linux e redes básicas', 'Conceito de virtualização', 'Uma conta sandbox'],
@@ -397,7 +536,7 @@ export const awsModules = Object.freeze([
     exercises: [['Básico', 'Publicar serviço atrás de ALB.', 'Health check e acesso sem porta direta.'], ['Aplicado', 'Testar scale-out e scale-in.', 'Gráfico de carga, capacidade e latência.'], ['Sênior', 'Combinar On-Demand e Spot.', 'Política, interrupção simulada e impacto medido.']],
     challenge: 'Defender quando manter EC2 é melhor que migrar imediatamente para serverless ou containers.',
     book: 'Amazon Web Services in Action, EC2 e alta disponibilidade; The Good Parts of AWS, EC2, ELB e Auto Scaling.',
-    complements: [official.ec2], exampleFile: '../../examples/aws-senior/fundacao-segura.md'
+    complements: [official.ec2], exampleFile: '../../examples/aws-senior/elasticidade-autoscaling.mjs'
   }),
   moduleOf({
     number: 5, part: 'fundamentos', id: 'storage-dados', title: 'S3, EBS e EFS por semântica de acesso', level: 'Aplicado',
@@ -457,7 +596,7 @@ export const awsModules = Object.freeze([
     exercises: [['Básico', 'Modelar três consultas em uma tabela.', 'Itens e expressões de chave.'], ['Aplicado', 'Comparar on-demand e provisionado.', 'Carga, custo e throttling.'], ['Sênior', 'Produzir e corrigir uma hot key.', 'Métricas e desenho antes/depois.']],
     challenge: 'Planejar migração de chave sem parada e sem dual-write inconsistente.',
     book: 'The Good Parts of AWS, DynamoDB; Amazon Web Services in Action, DynamoDB.',
-    complements: [official.dynamodb], exampleFile: '../../examples/aws-senior/workload-evolutivo.md'
+    complements: [official.dynamodb], exampleFile: '../../examples/aws-senior/dynamo-particao.mjs'
   }),
   moduleOf({
     number: 8, part: 'plataforma', id: 'serverless-execucao', title: 'Lambda, API Gateway e orquestração', level: 'Aplicado',
@@ -497,7 +636,7 @@ export const awsModules = Object.freeze([
     exercises: [['Básico', 'Criar fila com DLQ.', 'Falha encaminhada e alarme.'], ['Aplicado', 'Implementar fan-out com dois consumidores.', 'Contratos e traces correlacionados.'], ['Sênior', 'Controlar backlog sob pico.', 'Teste de carga, escala e custo.']],
     challenge: 'Escolher entre EventBridge e Kinesis para auditoria reproduzível e defender a retenção.',
     book: 'Amazon Web Services in Action, desacoplamento; SAA-C02 Study Guide, cap. 9.',
-    complements: [official.events], exampleFile: '../../examples/aws-senior/workload-evolutivo.md'
+    complements: [official.events], exampleFile: '../../examples/aws-senior/sqs-idempotencia-dlq.mjs'
   }),
   moduleOf({
     number: 10, part: 'plataforma', id: 'containers-aws', title: 'ECS, Fargate e EKS sem dogma', level: 'Avançado',
@@ -557,7 +696,7 @@ export const awsModules = Object.freeze([
     exercises: [['Básico', 'Calcular disponibilidade composta.', 'Planilha com dependências.'], ['Aplicado', 'Testar perda de uma zona.', 'Gráficos e impacto no SLO.'], ['Sênior', 'Implementar load shedding.', 'Teste de saturação e função preservada.']],
     challenge: 'Escolher entre capacidade ociosa e recuperação rápida com premissas econômicas explícitas.',
     book: 'Amazon Web Services in Action, alta disponibilidade e fault tolerance; AWS Well-Architected Framework local.',
-    complements: [official.reliability], exampleFile: '../../examples/aws-senior/confiabilidade-game-day.md'
+    complements: [official.reliability], exampleFile: '../../examples/aws-senior/quota-throttling.mjs'
   }),
   moduleOf({
     number: 13, part: 'confiabilidade', id: 'backup-dr', title: 'Backup, restore e disaster recovery', level: 'Avançado',
@@ -577,7 +716,7 @@ export const awsModules = Object.freeze([
     exercises: [['Básico', 'Restaurar backup em ambiente limpo.', 'Integridade e tempo medidos.'], ['Aplicado', 'Executar failover e failback.', 'Timeline e inconsistências.'], ['Sênior', 'Conduzir game day regional.', 'Runbook, decisões e ações corretivas.']],
     challenge: 'Demonstrar que o RTO declarado é incompatível com a cadeia real de autorização e DNS.',
     book: 'AWS Cookbook, backup e replicação; AWS Well-Architected Framework local, Reliability.',
-    complements: [official.disasterRecovery], exampleFile: '../../examples/aws-senior/confiabilidade-game-day.md'
+    complements: [official.disasterRecovery], exampleFile: '../../examples/aws-senior/dr-rto-rpo.mjs'
   }),
   moduleOf({
     number: 14, part: 'confiabilidade', id: 'infraestrutura-codigo', title: 'CloudFormation, CDK e entrega de infraestrutura', level: 'Avançado',
@@ -677,7 +816,7 @@ export const awsModules = Object.freeze([
     exercises: [['Básico', 'Alocar custo por ambiente.', 'Relatório sem gasto relevante órfão.'], ['Aplicado', 'Calcular custo por transação.', 'Dashboard e premissas.'], ['Sênior', 'Comparar compromisso e flexibilidade.', 'Cenários de demanda e risco.']],
     challenge: 'Defender conscientemente um aumento de custo quando ele melhora valor ou reduz risco.',
     book: 'Cloud FinOps, partes I–IV; AWS Well-Architected Framework local, Cost Optimization.',
-    complements: [official.cost], exampleFile: '../../examples/aws-senior/governanca-well-architected.md'
+    complements: [official.cost], exampleFile: '../../examples/aws-senior/finops-custo.mjs'
   }),
   moduleOf({
     number: 19, part: 'arquitetura', id: 'well-architected', title: 'Well-Architected e os seis pilares', level: 'Sênior',
@@ -834,7 +973,7 @@ export const awsModules = Object.freeze([
     ],
     challenge: 'Executar o failover do seu ambiente mais crítico que você puder e comparar o RTO medido com o prometido no documento.',
     book: 'Amazon Web Services in Action (disponibilidade e recuperação); Cloud FinOps (o custo de cada topologia em regime).',
-    complements: [frontier.multiRegion, frontier.arc, frontier.staticStability], exampleFile: '../../examples/aws-senior/fronteira/multi-regiao.md'
+    complements: [frontier.multiRegion, frontier.arc, frontier.staticStability], exampleFile: '../../examples/aws-senior/multi-regiao-failover.mjs'
   }),
   moduleOf({
     number: 24,
@@ -873,7 +1012,7 @@ export const awsModules = Object.freeze([
     ],
     challenge: 'Calcular o pior caso de chamadas que uma requisição de usuário gera na sua dependência mais crítica, somando todas as camadas de retry.',
     book: 'Amazon Web Services in Action (limites e operação); Cloud FinOps (o custo de carga desperdiçada).',
-    complements: [frontier.timeouts, frontier.quotas, frontier.throttling, frontier.constantWork], exampleFile: '../../examples/aws-senior/fronteira/quotas-e-retry.md'
+    complements: [frontier.timeouts, frontier.quotas, frontier.throttling, frontier.constantWork], exampleFile: '../../examples/aws-senior/retry-backoff-jitter.mjs'
   }),
   moduleOf({
     number: 25,

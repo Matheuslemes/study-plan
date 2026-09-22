@@ -17,6 +17,8 @@ export const CK = {
   arquitetura: { t: 'var(--track-arquitetura)', b: 'color-mix(in srgb, var(--track-arquitetura) 10%, transparent)' },
   frontend: { t: 'var(--track-frontend)', b: 'color-mix(in srgb, var(--track-frontend) 10%, transparent)' },
   dsa: { t: 'var(--state-recovery)', b: 'color-mix(in srgb, var(--state-recovery) 10%, transparent)' },
+  aieng: { t: 'var(--state-validated)', b: 'color-mix(in srgb, var(--state-validated) 10%, transparent)' },
+  fundamentos: { t: 'var(--state-info)', b: 'color-mix(in srgb, var(--state-info) 10%, transparent)' },
   pratica: { t: 'var(--state-validated)', b: 'color-mix(in srgb, var(--state-validated) 10%, transparent)' },
   aws: { t: 'var(--track-aws)', b: 'color-mix(in srgb, var(--track-aws) 10%, transparent)' },
   py: { t: 'var(--track-python)', b: 'color-mix(in srgb, var(--track-python) 10%, transparent)' },
@@ -142,6 +144,50 @@ export const quickTracks = [
       { label: "CODEOWNERS" },
       { label: "Monorepo" },
       { label: "GitOps" }
+    ]
+  },
+
+  {
+    key: "dsa",
+    label: "Algoritmos e Estruturas de Dados",
+    href: "./trilhas/dsa.html",
+    badge: "Fundamentos",
+    desc: "Do básico ao extremo: complexidade, estruturas lineares e hierárquicas, grafos, os quatro paradigmas (backtracking, D&C, guloso, DP) e a fronteira (randomizados, streaming, NP-completude, aproximação e geometria).",
+    extraBadges: [
+      { label: "Big O · amortizado" },
+      { label: "Hashing · heaps" },
+      { label: "Árvores · BST" },
+      { label: "Union-Find" },
+      { label: "Grafos · Dijkstra" },
+      { label: "Fluxo · matching" },
+      { label: "Backtracking" },
+      { label: "Programação dinâmica" },
+      { label: "Randomizados" },
+      { label: "Streaming · sketching" },
+      { label: "NP-completude" },
+      { label: "Aproximação" }
+    ]
+  },
+
+  {
+    key: "aieng",
+    label: "Engenharia Assistida por IA",
+    href: "./trilhas/aieng.html",
+    badge: "Prática de 2026",
+    desc: "Fazer engenharia sênior no ambiente onde agentes fazem parte do fluxo: prompting de engenharia, spec executável, revisão de código gerado, evals e golden datasets, e a governança que amplifica a IA sem dependência cega.",
+    extraBadges: [
+      { label: "IA como amplificador" },
+      { label: "Context engineering" },
+      { label: "Fluxo com agentes" },
+      { label: "Spec-driven dev" },
+      { label: "Revisão de código gerado" },
+      { label: "Teste como oráculo" },
+      { label: "Evals · golden datasets" },
+      { label: "Regressão de prompt" },
+      { label: "LLM-as-a-judge" },
+      { label: "Slopsquatting" },
+      { label: "DORA AI Model" },
+      { label: "Adoção governada" }
     ]
   },
 
@@ -397,8 +443,9 @@ export const ARQUIVO_TRILHA = {
   java: 'java', db: 'bancos', git: 'git', arquitetura: 'arquitetura',
   devops: 'devops', sec: 'sec', frontend: 'frontend', py: 'python',
   ia: 'ia', math: 'matematica', ingles: 'ingles', aws: 'aws',
-  fin: 'financeiro', treino: 'treino'
-  // dsa e pratica não têm página própria
+  fin: 'financeiro', treino: 'treino', dsa: 'dsa', aieng: 'aieng',
+  fundamentos: 'fundamentos'
+  // pratica não tem página própria
 };
 
 /** Nome legível curto de cada trilha. */
@@ -406,7 +453,8 @@ export const NOME_TRILHA = {
   java: 'Java + Spring', db: 'Banco de Dados', git: 'Git', arquitetura: 'Arquitetura',
   devops: 'DevOps / CI-CD', sec: 'Segurança', frontend: 'Frontend', py: 'Python',
   ia: 'IA Engineering', math: 'Matemática', ingles: 'Inglês', aws: 'AWS',
-  fin: 'Financeiro', treino: 'Treino'
+  fin: 'Financeiro', treino: 'Treino', dsa: 'Algoritmos e ED', aieng: 'Engenharia Assistida por IA',
+  fundamentos: 'Fundamentos'
 };
 
 /** Grafo de dependência/afinidade: de cada trilha, as mais próximas no plano. */
@@ -421,9 +469,12 @@ export const trilhasRelacionadas = {
   ingles: ['java', 'arquitetura', 'ia'],
   frontend: ['java', 'py', 'ia'],
   py: ['ia', 'frontend', 'db', 'math'],
-  ia: ['py', 'math', 'frontend'],
-  math: ['ia', 'py', 'db'],
+  ia: ['py', 'math', 'dsa'],
+  math: ['ia', 'py', 'dsa'],
+  dsa: ['java', 'ia', 'math'],
+  aieng: ['ia', 'sec', 'devops'],
   fin: ['ingles'],
+  fundamentos: ['py', 'java', 'git'],
   treino: []
 };
 
@@ -569,7 +620,31 @@ export const TRACK_REGISTRY = Object.freeze({
     shortLabel: 'Git',
     brand: 'Git Track',
     dataFile: 'git-advanced.js',
-    exports: { academy: 'gitAcademy', modules: 'gitModules', books: 'gitBooks', assessment: 'gitAssessment' },
+    exports: { academy: 'gitAcademy', modules: 'gitModules', books: 'gitBooks', assessment: 'gitAssessment', answerKey: 'gitAnswerKey' },
+    academy: true
+  },
+  dsa: {
+    label: 'Algoritmos e Estruturas de Dados',
+    shortLabel: 'Algoritmos',
+    brand: 'DSA Academy',
+    dataFile: 'dsa-advanced.js',
+    exports: { academy: 'dsaAcademy', modules: 'dsaModules', books: 'dsaBooks', assessment: 'dsaAssessment', answerKey: 'dsaAnswerKey' },
+    academy: true
+  },
+  aieng: {
+    label: 'Engenharia Assistida por IA',
+    shortLabel: 'Eng+IA',
+    brand: 'AI-Assisted Eng',
+    dataFile: 'aieng-advanced.js',
+    exports: { academy: 'aiengAcademy', modules: 'aiengModules', books: 'aiengBooks', assessment: 'aiengAssessment', answerKey: 'aiengAnswerKey' },
+    academy: true
+  },
+  fundamentos: {
+    label: 'Fundamentos de Computação',
+    shortLabel: 'Fundamentos',
+    brand: 'Fundamentos (Faixa 0)',
+    dataFile: 'fundamentos-advanced.js',
+    exports: { academy: 'fundamentosAcademy', modules: 'fundamentosModules', books: 'fundamentosBooks', assessment: 'fundamentosAssessment', answerKey: 'fundamentosAnswerKey' },
     academy: true
   },
   ingles: {
@@ -581,7 +656,8 @@ export const TRACK_REGISTRY = Object.freeze({
       academy: 'inglesAcademy',
       modules: 'inglesModules',
       books: 'inglesBooks',
-      assessment: 'inglesAssessment'
+      assessment: 'inglesAssessment',
+      answerKey: 'inglesAnswerKey'
     },
     academy: true
   },
@@ -594,7 +670,8 @@ export const TRACK_REGISTRY = Object.freeze({
       academy: 'matematicaAcademy',
       modules: 'matematicaModules',
       books: 'matematicaBooks',
-      assessment: 'matematicaAssessment'
+      assessment: 'matematicaAssessment',
+      answerKey: 'matematicaAnswerKey'
     },
     academy: true
   },
@@ -622,7 +699,8 @@ export const TRACK_REGISTRY = Object.freeze({
       academy: 'financeiroAcademy',
       modules: 'financeiroModules',
       books: 'financeiroBooks',
-      assessment: 'financeiroAssessment'
+      assessment: 'financeiroAssessment',
+      answerKey: 'financeiroAnswerKey'
     },
     academy: true
   },
