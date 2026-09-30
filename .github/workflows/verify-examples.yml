@@ -1,6 +1,8 @@
 # CI único — roda todos os exemplos autoverificáveis de uma vez.
 # Instala os três runtimes (Node, Python, JDK) para que .mjs, .py e .java
 # sejam TODOS executados de fato (nada é pulado por falta de runtime na CI).
+# numpy é a única dependência externa dos exemplos .py (fronteira de IA e
+# matemática); é instalada abaixo para que esses exemplos rodem de verdade.
 name: verify-examples
 
 on:
@@ -28,6 +30,9 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+
+      - name: Dependências Python dos exemplos (numpy)
+        run: python -m pip install --upgrade pip "numpy<3"
 
       - name: JDK 21
         uses: actions/setup-java@v4
