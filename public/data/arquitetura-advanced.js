@@ -237,7 +237,7 @@ export const arquiteturaTechnologyBaseline = [
 
 export const arquiteturaAcademy = Object.freeze({
   title: 'Academia de Arquitetura',
-  baseline: 'Decisões agnósticas de fornecedor, com trade-offs explícitos e evidência auditável',
+  baseline: 'Trilha conceitual: fundamentos, decisões e trade-offs em primeiro lugar — a prática só verifica o entendimento. Agnóstica de fornecedor, com evidência auditável.',
   book: 'Fundamentals of Software Architecture (Richards & Ford) como espinha dorsal; obras específicas por tema',
   parts: {
     base: {

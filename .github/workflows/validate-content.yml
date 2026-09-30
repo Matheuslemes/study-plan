@@ -1,0 +1,28 @@
+# Gate de CONTEÚDO/estrutura do site.
+# Valida o registro de trilhas, as 12 fases, os labs encadeados, os hubs e as
+# academias (módulos em sequência, objetivos mensuráveis, PDFs existentes),
+# a paleta/tokens e a integridade dos links locais. Só precisa de Node.
+name: validate-content
+
+on:
+  push:
+    paths:
+      - 'public/**'
+      - 'scripts/validate-content.mjs'
+      - '.github/workflows/validate-content.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Validar conteúdo e estrutura
+        run: node scripts/validate-content.mjs

@@ -8,7 +8,7 @@
    Usa exportarTudo/importarTudo de core/storage.js.
 ═══════════════════════════════════════════════ */
 
-import { exportarTudo, importarTudo, chaves } from '../core/storage.js';
+import { exportarTudo, restaurarBackup, chaves, flushProgress } from '../core/storage.js';
 import { escapeHtml } from '../core/render.js';
 
 const NOME_ARQUIVO = () => `plano-estudos-${new Date().toISOString().slice(0, 10)}.json`;
@@ -38,7 +38,7 @@ export function importarArquivo(file) {
           resolve({ ok: false, msg: 'Arquivo sem dados reconhecíveis.' });
           return;
         }
-        const n = importarTudo(payload);
+        const n = restaurarBackup(payload);
         resolve({ ok: true, msg: `${n} item(ns) restaurado(s). Recarregue para ver o progresso.` });
       } catch {
         resolve({ ok: false, msg: 'Arquivo inválido: não é um JSON legível.' });
@@ -87,6 +87,6 @@ export function renderBackup(containerId) {
     const r = await importarArquivo(file);
     msg(r.msg, r.ok);
     e.target.value = '';
-    if (r.ok) document.dispatchEvent(new CustomEvent('progress:change'));
+    if (r.ok) { await flushProgress(); location.reload(); }
   });
 }

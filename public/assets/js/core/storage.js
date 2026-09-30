@@ -105,6 +105,21 @@ export function importarTudo(objeto) {
   return Object.entries(objeto).reduce((n, [k, v]) => n + (gravar(k, v) ? 1 : 0), 0);
 }
 
+/** Restauração manual preserva objetivos exclusivos do outro percurso. */
+export function restaurarBackup(payload) {
+  if (!payload || typeof payload !== 'object' || Array.isArray(payload)) return 0;
+  const dados = { ...payload };
+  const mapa = (value) => value && typeof value === 'object' && !Array.isArray(value) ? value : {};
+  if (!dados.progressoTopicos && Array.isArray(dados.topicosConcluidos)) {
+    dados.progressoTopicos = Object.fromEntries(dados.topicosConcluidos.map(id => [id, { estado: 'praticado' }]));
+  }
+  for (const key of ['progressoTopicos', 'filaRevisao']) {
+    if (dados[key]) dados[key] = { ...mapa(ler(key, {})), ...mapa(dados[key]) };
+  }
+  if (!dados.sequenciaAtual) dados.sequenciaAtual = 'backend';
+  return importarTudo(dados);
+}
+
 /** Indica se o storage está utilizável neste navegador. */
 export function disponivel() {
   try {
@@ -126,6 +141,22 @@ export function disponivel() {
 const CHAVE_SAVED = PREFIXO + '__savedAt';
 let syncTimer = null;
 
+/** Persiste o snapshot antes de navegar; falha de rede mantém o cache local. */
+export async function flushProgress() {
+  clearTimeout(syncTimer);
+  const savedAt = Date.now();
+  try { localStorage.setItem(CHAVE_SAVED, String(savedAt)); } catch { /* indisponível */ }
+  if (typeof fetch !== 'function') return false;
+  try {
+    const response = await fetch('/progress', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ savedAt, schemaVersion, dados: exportarTudo() }),
+      signal: AbortSignal.timeout(3000)
+    });
+    return response.ok;
+  } catch { return false; }
+}
+
 function lerSavedAtLocal() {
   try { return Number(localStorage.getItem(CHAVE_SAVED) || 0); } catch { return 0; }
 }
@@ -134,13 +165,9 @@ function lerSavedAtLocal() {
 function agendarSync() {
   if (typeof fetch !== 'function') return;
   clearTimeout(syncTimer);
-  syncTimer = setTimeout(() => {
-    const savedAt = Date.now();
-    const payload = JSON.stringify({ savedAt, schemaVersion, dados: exportarTudo() });
-    fetch('/progress', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: payload })
-      .then((r) => { if (r.ok) { try { localStorage.setItem(CHAVE_SAVED, String(savedAt)); } catch { /* ignore */ } } })
-      .catch(() => { /* sem servidor: mantém só o localStorage */ });
-  }, 800);
+  // Marca alterações locais imediatamente para não hidratar um snapshot antigo.
+  try { localStorage.setItem(CHAVE_SAVED, String(Date.now())); } catch { /* indisponível */ }
+  syncTimer = setTimeout(flushProgress, 800);
 }
 
 /**

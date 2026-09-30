@@ -1,15 +1,15 @@
+import { sequenceKey, isArchitecture, SIMULADOS_ENTREVISTA } from '../core/study-context.js';
 /*
  * FEATURES / INTERVIEWS — simulados com resultado verificável (DIDATIC-024)
  */
 
-import { SIMULADOS_ENTREVISTA } from '../../../data/interviews.js';
 import { ler, gravar } from '../core/storage.js';
 import { escapeHtml } from '../core/render.js';
 
 const CHAVE = 'simuladosEntrevista';
 
 function registros() {
-  const valor = ler(CHAVE, {});
+  const valor = ler(sequenceKey(CHAVE), {});
   return valor && typeof valor === 'object' && !Array.isArray(valor) ? valor : {};
 }
 
@@ -41,12 +41,12 @@ export function renderInterviewSimulations(containerId) {
     <section class="interview-panel" aria-labelledby="interview-title">
       <header class="interview-panel__header">
         <div>
-          <span class="interview-panel__eyebrow">DIDATIC-024 · 12 checkpoints</span>
+          <span class="interview-panel__eyebrow">${SIMULADOS_ENTREVISTA.length} checkpoints</span>
           <h5 id="interview-title">Simulados progressivos de entrevista</h5>
           <p>Um formato por fase: fundamentos, debugging, arquitetura, operação e defesa do DevCore.</p>
         </div>
         <div class="interview-panel__score">
-          <strong>${totais.realizados}/12</strong>
+          <strong>${totais.realizados}/${SIMULADOS_ENTREVISTA.length}</strong>
           <span>realizados · média ${totais.media}/4</span>
         </div>
       </header>
@@ -56,7 +56,7 @@ export function renderInterviewSimulations(containerId) {
           const realizado = salvo.status === 'realizado';
           return `<details class="interview-card${realizado ? ' is-done' : ''}">
             <summary>
-              <span class="interview-card__phase">F${simulado.fase}</span>
+              <span class="interview-card__phase">${isArchitecture() ? 'A' : 'F'}${simulado.fase}</span>
               <span><b>${escapeHtml(simulado.titulo)}</b><small>${escapeHtml(simulado.tipo)} · ${simulado.duracao} min</small></span>
               <em>${realizado ? `${salvo.nota}/4` : 'Pendente'}</em>
             </summary>
@@ -108,7 +108,7 @@ export function renderInterviewSimulations(containerId) {
         evidencia: status === 'realizado' ? evidencia : '',
         atualizadoEm: new Date().toISOString()
       };
-      gravar(CHAVE, atual);
+      gravar(sequenceKey(CHAVE), atual);
       renderInterviewSimulations(containerId);
     });
   });

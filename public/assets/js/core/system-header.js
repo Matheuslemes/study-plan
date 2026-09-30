@@ -7,6 +7,8 @@
 
 import { escapeHtml } from './render.js';
 import { TRACK_REGISTRY } from '../../../data/tracks.js';
+import { sequence, SEQUENCES, setSequence } from './study-context.js';
+import { flushProgress } from './storage.js';
 
 const VIEW_LABELS = {
   system: 'O Sistema',
@@ -64,6 +66,16 @@ export function renderSystemHeader({ config, firstPage = '', view, depth }) {
   `;
 
   const skipLink = document.querySelector('.skip-link');
+  if (!isSystem) {
+    const control = document.createElement('div');
+    control.className = 'sequence-header-control';
+    control.innerHTML = `<label for="headerSequence">Sequência</label><select id="headerSequence">${Object.values(SEQUENCES).map(s => `<option value="${s.id}"${s.id === sequence.id ? ' selected' : ''}>${escapeHtml(s.name)}</option>`).join('')}</select><a href="${rootPath}index.html">Retomar percurso →</a><span role="status"></span>`;
+    header.append(control);
+    control.querySelector('select').addEventListener('change', async e => {
+      if (!setSequence(e.target.value)) { control.querySelector('[role="status"]').textContent = 'Não foi possível salvar a seleção.'; return; }
+      await flushProgress(); location.reload();
+    });
+  }
   if (skipLink) skipLink.insertAdjacentElement('afterend', header);
   else document.body.prepend(header);
 }

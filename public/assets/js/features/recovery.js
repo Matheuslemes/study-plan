@@ -1,9 +1,9 @@
+import { isArchitecture, sequenceKey, MODOS_ROTINA } from '../core/study-context.js';
 /*
  * FEATURES / RECOVERY — modos Ideal, Mínima e Recuperação (DIDATIC-022)
  */
 
-import { MODOS_ROTINA } from '../../../data/routine.js';
-import { ler, gravar } from '../core/storage.js';
+import { ler, gravar, flushProgress } from '../core/storage.js';
 
 const CHAVE_MODO = 'modoRotina';
 const CHAVE_HISTORICO = 'historicoModoRotina';
@@ -19,12 +19,12 @@ function inicioDaSemana(data = new Date()) {
 const semanaAtual = () => inicioDaSemana().toISOString().slice(0, 10);
 
 export function modoRotinaAtual() {
-  const modo = ler(CHAVE_MODO, 'ideal');
+  const modo = ler(sequenceKey(CHAVE_MODO), 'ideal');
   return MODOS_ROTINA[modo] ? modo : 'ideal';
 }
 
 function historico() {
-  const valor = ler(CHAVE_HISTORICO, []);
+  const valor = ler(sequenceKey(CHAVE_HISTORICO), []);
   return Array.isArray(valor) ? valor : [];
 }
 
@@ -33,8 +33,8 @@ function registrarModo(modo) {
   const semana = semanaAtual();
   const atualizado = historico().filter((item) => item.semana !== semana);
   atualizado.push({ semana, modo, registradoEm: new Date().toISOString() });
-  gravar(CHAVE_MODO, modo);
-  gravar(CHAVE_HISTORICO, atualizado.slice(-52));
+  gravar(sequenceKey(CHAVE_MODO), modo);
+  gravar(sequenceKey(CHAVE_HISTORICO), atualizado.slice(-52));
   document.dispatchEvent(new CustomEvent('routine-mode:change', { detail: { modo } }));
   return true;
 }
@@ -89,8 +89,9 @@ export function renderRecoveryProtocol(containerId) {
     </section>`;
 
   el.querySelectorAll('[data-routine-mode]').forEach((botao) => {
-    botao.addEventListener('click', () => {
+    botao.addEventListener('click', async () => {
       registrarModo(botao.dataset.routineMode);
+      if (isArchitecture()) { await flushProgress(); location.reload(); return; }
       renderRecoveryProtocol(containerId);
     });
   });

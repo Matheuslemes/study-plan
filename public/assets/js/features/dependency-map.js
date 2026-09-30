@@ -1,8 +1,8 @@
+import { DEPENDENCIAS_CURRICULO, TRILHAS_TRANSVERSAIS } from '../core/study-context.js';
 /*
  * FEATURES / DEPENDENCY MAP — mapa visual do encadeamento (DIDATIC-023)
  */
 
-import { DEPENDENCIAS_CURRICULO, TRILHAS_TRANSVERSAIS } from '../../../data/learning-path.js';
 import { escapeHtml } from '../core/render.js';
 
 export function renderDependencyMap(containerId) {
@@ -30,7 +30,7 @@ export function renderDependencyMap(containerId) {
           </article>`).join('')}
       </div>
       <div class="dependency-map__transversal">
-        <span>F1 → F12 · transversais</span>
+        <span>Transversais da sequência</span>
         <div>${TRILHAS_TRANSVERSAIS.map((item) => `<b>${escapeHtml(item)}</b>`).join('')}</div>
       </div>
     </section>`;

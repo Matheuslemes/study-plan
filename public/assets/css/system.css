@@ -522,6 +522,31 @@ a.biblio-item.is-linked:hover .biblio-open { color: var(--accent, var(--mastery-
   color: var(--text2);
 }
 
+/* Selo em modo lista: mostra TODO o conteúdo da trilha na fase (o que estudar). */
+.phase-slot--list {
+  flex-direction: column;
+  align-items: stretch;
+  gap: .4rem;
+}
+
+.phase-slot-list {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+
+.phase-slot-list li {
+  font-size: .78rem;
+  line-height: 1.55;
+  color: var(--text2);
+}
+
+.phase-slot-list li::marker {
+  color: var(--accent);
+}
+
 /* ── ciclo mensal ───────────────────── */
 .cycle-card {
   background: var(--surface);

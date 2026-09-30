@@ -15,6 +15,44 @@
   box-sizing: border-box
 }
 
+.sequence-header-control {
+  display: flex; align-items: center; flex-wrap: wrap; gap: .75rem;
+  padding: .75rem 1.5rem; border-top: 1px solid var(--border);
+  font-size: .8rem; color: var(--text2); background: var(--bg);
+}
+.sequence-header-control select, .sequence-settings select, .sequence-settings input {
+  background: var(--surface-soft); color: var(--text1); border: 1px solid var(--border);
+  border-radius: 6px; padding: .55rem; max-width: 100%;
+}
+.sequence-panel { margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-soft); }
+.sequence-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; margin-bottom: 1rem; }
+.sequence-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
+.sequence-option { text-align: left; padding: 1rem; border: 1px solid var(--border); border-radius: 8px; background: var(--bg); color: var(--text1); }
+.sequence-option strong, .sequence-option span { display: block; }
+.sequence-option span { color: var(--text2); font-size: .8rem; margin-top: .4rem; }
+.sequence-option.is-active { border-color: var(--accent); box-shadow: inset 3px 0 var(--accent); }
+.sequence-option:focus-visible, .sequence-settings :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.sequence-description { color: var(--text2); font-size: .85rem; margin: 1rem 0; }
+.sequence-settings { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem; font-size: .8rem; margin-top: .75rem; }
+.sequence-settings input { width: 5rem; }
+.sequence-settings small { flex-basis: 100%; color: var(--text2); }
+.sequence-settings button { border: 1px solid var(--border); border-radius: 6px; padding: .5rem .8rem; color: var(--text1); background: var(--bg); }
+.sequence-stage { margin-top: 1.5rem; }
+.sequence-stage h3 { font-size: 1.2rem; margin-top: .4rem; }
+.sequence-module-links { display: grid; gap: .5rem; margin: 1rem 0; }
+.sequence-module-links a { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .75rem; background: var(--surface-soft); border: 1px solid var(--border); border-radius: 6px; font-size: .85rem; color: var(--text1); text-decoration: none; transition: border-color .15s ease, color .15s ease; }
+.sequence-module-links a:hover, .sequence-module-links a:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.sequence-module-links .ml-arrow { flex: 0 0 auto; color: var(--accent); }
+.sequence-diagnostic { padding: 1rem; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1.5rem; }
+.sequence-diagnostic p { font-size: .8rem; color: var(--text2); margin-top: .75rem; }
+.sequence-diagnostic-row { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin: .75rem 0; font-size: .85rem; }
+.sequence-diagnostic-row a { white-space: nowrap; color: var(--accent); text-decoration: none; }
+.sequence-diagnostic-row a:hover, .sequence-diagnostic-row a:focus-visible { text-decoration: underline; }
+.sequence-support a { color: var(--accent); text-decoration: none; white-space: nowrap; }
+.sequence-support a:hover, .sequence-support a:focus-visible { text-decoration: underline; }
+.sequence-stage summary { cursor: pointer; }
+@media (max-width: 600px) { .sequence-options { grid-template-columns: 1fr; } .sequence-settings select { width: 100%; } .sequence-diagnostic-row { flex-wrap: wrap; } }
+
 html {
   scroll-behavior: smooth
 }

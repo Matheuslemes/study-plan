@@ -1,11 +1,10 @@
+import { weekDays, weeklyFocusByDay, dailyPlansByDay, monthlyCycle } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / ROUTINE — rotina diária, semanal e mensal
 ═══════════════════════════════════════════════ */
 
 import { CK } from '../../../data/tracks.js';
-import { weekDays, weeklyFocusByDay, dailyPlansByDay } from '../../../data/routine.js';
-import { monthlyCycle } from '../../../data/config.js';
-import { faseAtual, seloDaFase } from './active-phase.js';
+import { faseAtual, seloDaFase, fatiaDoBloco } from './active-phase.js';
 
 export function getDailyColor(block) {
   return CK[block.k] || CK[block.type] || CK.n;
@@ -41,7 +40,7 @@ export function renderDailySchedule(dayKey) {
   const scheduleEl = document.getElementById('dailySchedule');
   if (!scheduleEl) return;
   const blocks = dailyPlansByDay[dayKey] || dailyPlansByDay.segunda;
-  scheduleEl.innerHTML = blocks.map(b => {
+  scheduleEl.innerHTML = blocks.map((b, i) => {
     const c = getDailyColor(b);
     const type = b.type || 'study';
     const isBreak = type === 'break';
@@ -49,7 +48,7 @@ export function renderDailySchedule(dayKey) {
       ? `<div class="daily-track-row">${b.tracks.map(t => `<span class="daily-track-tag">${t}</span>`).join('')}</div>`
       : '';
     const priority = b.priority ? `<span class="daily-priority">${b.priority}</span>` : '';
-    const selo = seloDaFase(b, fase);
+    const selo = seloDaFase(b, fase, fatiaDoBloco(blocks, i, fase));
     return `<article class="daily-block daily-block-${type}" style="--daily-kind-color:${c.t};--daily-kind-bg:${c.b};${isBreak ? 'opacity:.88' : ''}">
   <div class="daily-time" style="background:${c.b}">
     <span class="mono small" style="color:${c.t};font-weight:600;font-size:.72rem">${b.time}</span>

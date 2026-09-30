@@ -1,3 +1,4 @@
+import { sequence, refreshContext, isArchitecture, heroTagsData, tracks, PC, PBG, P, rules, awsMilestones } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    PAGES / DASHBOARD — ponto de entrada do index.html
 
@@ -5,10 +6,8 @@
    Dados vêm de /data, comportamento de /features.
 ═══════════════════════════════════════════════ */
 
-import { CK, heroTagsData, tracks } from '../../../data/tracks.js';
-import { PC, PBG } from '../../../data/config.js';
-import { P } from '../../../data/phases.js';
-import { rules, awsMilestones } from '../../../data/milestones.js';
+import { renderSequencePanel, renderSequenceStage, adaptSequenceCopy } from '../features/sequence-picker.js';
+import { CK } from '../../../data/tracks.js';
 
 import { renderDailyDayTabs, setActiveDay, renderMonthlyCycle } from '../features/routine.js';
 import { renderQuickTrackCards, setupNavbarTrackSearch, setupPdfSearch, renderBibliografia } from '../features/tracks.js';
@@ -69,14 +68,18 @@ function renderPainelProgresso() {
   renderBackup('backupPanel');
 }
 
-function init() {
+async function init() {
+  await sincronizarProgresso();
+  refreshContext();
+  renderSequencePanel();
   registrarServiceWorker();
   renderSystemHeader({
-    config: getTrackConfig('java'),
+    config: getTrackConfig(sequence.mainTrack),
     firstPage: 'fundamentos.html',
     view: 'system',
     depth: 'system'
   });
+  adaptSequenceCopy();
   // Hero tags
   document.getElementById('heroTags').innerHTML =
     heroTagsData.map(t => `<span class="htag ${t.cls}">${t.label}</span>`).join('');
@@ -128,9 +131,6 @@ function init() {
 
   // Opção B: hidrata o progresso de progresso.json (fonte durável no Git) se for
   // mais novo que o cache local. O auto-save para o arquivo é feito pelo storage.js.
-  sincronizarProgresso().then((r) => {
-    if (r.importou) { renderPainelProgresso(); renderHoje('todayView'); atualizarPilulaFase(); }
-  });
 
   // Painel de progresso, revisão e certificações (Etapa 8)
   renderPainelProgresso();
@@ -152,7 +152,21 @@ function init() {
     renderProgressoGlobal('globalProgress', faseId);
     renderPhaseCards(faseId); // move o destaque "FASE ATUAL"
     renderHoje('todayView');  // "Hoje" reflete o conteúdo da nova fase
+    renderSequenceStage();
+    const topPicker = document.getElementById('sequenceStage');
+    if (topPicker) topPicker.value = String(faseId);
     atualizarPilulaFase();    // atualiza a pílula da barra de comando
+  });
+  renderSequenceStage();
+  document.addEventListener('progress:change', () => {
+    const stage = document.getElementById('architectureStage');
+    if (stage && isArchitecture()) {
+      const current = P.find(p => p.id === getFaseAtual());
+      const status = stage.querySelector('.sequence-heading .htag');
+      import('../features/progress.js').then(({ estadoDoTopico, idTopico }) => {
+        if (status) status.textContent = ['validado', 'dominado'].includes(estadoDoTopico(idTopico('pratica', current.id, 0))) ? 'Entrega validada' : 'Evidência pendente';
+      });
+    }
   });
   renderRecoveryProtocol('routineModes');
 
@@ -192,7 +206,7 @@ function init() {
     if (btn) filterTrack(btn.dataset.trackFilter);
   });
 
-  filterTrack('java');
+  filterTrack(sequence.mainTrack);
 
   renderSync();
 
@@ -218,3 +232,6 @@ function init() {
 /* ─── Quick track cards ──────────────────── */
 
 document.addEventListener('DOMContentLoaded', init);
+window.addEventListener('storage', (event) => {
+  if (event.key && ['studyplan:sequenciaAtual', 'studyplan:faseAtual', 'studyplan:faseAtual:arquitetura', 'studyplan:cargaSemanal:arquitetura'].includes(event.key)) location.reload();
+});

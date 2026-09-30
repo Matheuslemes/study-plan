@@ -7,6 +7,7 @@
 ═══════════════════════════════════════════════ */
 
 import { ler, gravar } from '../core/storage.js';
+import { isArchitecture } from '../core/study-context.js';
 
 const CHAVE = 'certificacoes';
 
@@ -50,6 +51,11 @@ function progressoCert(cert) {
 /* ─── render ─────────────────────────────────── */
 
 export function renderCertificacoes(containerId) {
+  if (isArchitecture()) {
+    const target = document.getElementById(containerId);
+    if (target) target.innerHTML = '<div class="review-empty"><strong>Certificação como consolidação</strong><p>Escolha uma certificação AWS após os laboratórios de A5, se ela apoiar seu objetivo profissional. Não é requisito de avanço nem tem prazo obrigatório. Os registros de certificação do percurso Backend permanecem preservados.</p></div>';
+    return;
+  }
   const el = document.getElementById(containerId);
   if (!el) return;
 

@@ -1,0 +1,29 @@
+# Gate das SEQUÊNCIAS de estudo (Backend e Arquitetura).
+# Valida as amarras da sequência de Arquitetura com o resto do conteúdo:
+# module ids × arquitetura-advanced.js, unicidade e reversibilidade dos
+# objetivos, hrefs do diagnóstico e equivalências. Só precisa de Node.
+name: validate-sequences
+
+on:
+  push:
+    paths:
+      - 'public/data/**'
+      - 'public/trilhas/**'
+      - 'scripts/validate-sequences.mjs'
+      - '.github/workflows/validate-sequences.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Validar as sequências (Backend e Arquitetura)
+        run: node scripts/validate-sequences.mjs

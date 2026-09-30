@@ -1,3 +1,4 @@
+import { sequence, describeObjective, P, conteudoDaFase, trilhaAtiva, faseDeEntrada, chaveTrilha, PC } from '../core/study-context.js';
 /*
  * FEATURES / TRACK-ROADMAP — objetivos, evidências e domínio por trilha
  *
@@ -6,9 +7,7 @@
  * sem transformar 295 objetivos em um formulário permanentemente aberto.
  */
 
-import { P, conteudoDaFase, trilhaAtiva, faseDeEntrada, chaveTrilha } from '../../../data/phases.js';
 import { CK, trilhasRelacionadas, ARQUIVO_TRILHA, NOME_TRILHA } from '../../../data/tracks.js';
-import { PC } from '../../../data/config.js';
 import { escapeHtml } from '../core/render.js';
 import {
   ESTADOS,
@@ -165,6 +164,10 @@ export function renderTrackRoadmap(containerId, trilha) {
   const k = chaveTrilha(trilha);
   const cor = (CK[k] || CK.n).t;
   const entrada = faseDeEntrada(k);
+  if (sequence.id === 'arquitetura') {
+    const heading = el.closest('section')?.querySelector('h2');
+    if (heading) heading.textContent = 'Roadmap da sequência de Arquitetura';
+  }
 
   const cards = P.map((p, i) => {
     const ativa = trilhaAtiva(p, k);
@@ -183,7 +186,7 @@ export function renderTrackRoadmap(containerId, trilha) {
     return `<article class="roadmap-card${ativa ? '' : ' is-off'}" style="--roadmap-color:${corFase}">
       <header class="roadmap-head">
         <div>
-          <span class="roadmap-phase">Fase ${p.id}</span>
+          <span class="roadmap-phase">${p.l}</span>
           <span class="roadmap-weeks">${escapeHtml(p.w)}</span>
         </div>
         <span class="roadmap-hours">${p.h}h</span>
@@ -198,7 +201,7 @@ export function renderTrackRoadmap(containerId, trilha) {
 
   el.innerHTML = `
     <p class="roadmap-intro">
-      Progressão de <strong>${escapeHtml(NOMES[k] || k)}</strong> ao longo das 12 fases.
+      Progressão de <strong>${escapeHtml(NOMES[k] || k)}</strong> na sequência ${escapeHtml(sequence.name)} (${P.length} etapas).
       Cada item é um objetivo com critério observável e percorre uma escada de domínio baseada em prática, evidência e retenção.
       ${entrada && entrada > 1 ? `<br><strong>Esta trilha entra na Fase ${entrada}.</strong> Antes disso ela não ocupa espaço na rotina diária.` : ''}
     </p>
@@ -232,10 +235,7 @@ function mostrarFeedback(el, mensagem, tipo = 'info') {
 }
 
 function substituirTopico(el, id, trilha) {
-  const [,, idx] = id.split(':');
-  const faseId = Number(id.split(':')[1]);
-  const fase = P.find((p) => p.id === faseId);
-  const texto = conteudoDaFase(fase, trilha)[Number(idx)];
+  const texto = describeObjective(id).texto;
   const item = el.querySelector(`[data-topic-item="${id}"]`);
   if (item && texto) item.outerHTML = htmlTopico(texto, id);
 }

@@ -1,3 +1,4 @@
+import { topicId, P, conteudoDaFase, trilhaAtiva } from '../core/study-context.js';
 /*
  * FEATURES / PROGRESS — domínio por tópico (DIDATIC-002/003)
  *
@@ -11,7 +12,6 @@
  * - o checklist binário legado é migrado para Praticado, sem atribuir validação.
  */
 
-import { P, conteudoDaFase, trilhaAtiva } from '../../../data/phases.js';
 import { ler, gravar, remover } from '../core/storage.js';
 import { registrarTopico } from './history.js';
 
@@ -63,7 +63,7 @@ const emDocumento = () => typeof document !== 'undefined';
 export const rotuloTrilha = (k) => ROTULOS[k] || k;
 
 /** id estável de um tópico. */
-export const idTopico = (trilha, faseId, indice) => `${trilha}:${faseId}:${indice}`;
+export const idTopico = topicId;
 
 function registroVazio() {
   return {
@@ -372,7 +372,7 @@ export function renderProgressoGlobal(containerId, faseAtualId) {
       <div class="global-prog-info">
         <div class="global-prog-title">Domínio geral do plano</div>
         <div class="global-prog-sub">${g.dominados} dominados · ${g.validados} validados · ${g.praticados} praticados · ${g.emEstudo} em estudo</div>
-        ${fase ? `<div class="global-prog-phase">Fase atual: <strong>${fase.id} · ${fase.t}</strong> <span class="mono">(${fase.w})</span></div>` : ''}
+        ${fase ? `<div class="global-prog-phase">Etapa atual: <strong>${fase.l} · ${fase.t}</strong> <span class="mono">(${fase.w})</span></div>` : ''}
       </div>
     </div>`;
 }

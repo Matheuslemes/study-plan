@@ -1,5 +1,36 @@
 # Plano Integrado de Estudos — site estático
 
+## Duas sequências de estudos
+
+O seletor no dashboard alterna entre **Formação Backend Java** (as 12 fases originais) e
+**Arquitetura de Soluções e Integração** (6 etapas, 56 objetivos e 6 entregas no mesmo DevCore).
+Os hubs e Academias também mostram a sequência selecionada no cabeçalho.
+
+Arquitetura começa com um diagnóstico de API, dados, entrega e segurança. O ciclo tem
+480h estimadas: 24 semanas a 20h/semana, com carga ajustável de 5 a 40h. A rotina,
+os módulos recomendados, projetos, simulados e requisitos do progresso acompanham o percurso.
+Certificações e aprofundamentos de fronteira são opcionais. Os modos Mínima e Recuperação
+reduzem a grade de Arquitetura sem colocar conteúdo novo no plano.
+
+`data/sequences.js` registra os percursos; `data/sequences/backend.js` adapta os dados
+originais e `data/sequences/arquitetura.js` contém os novos objetivos e referências.
+`data/sequences/architecture-plan.js` deriva a rotina e as demais visões de planejamento.
+`assets/js/core/study-context.js` fornece o contexto aos renderers existentes.
+A troca salva o snapshot e recarrega a página para atualizar todos os consumidores de forma coerente.
+
+Persistência: os IDs e chaves legados são preservados. Arquitetura usa objetivos com IDs
+editoriais (`trilha:arquitetura:etapa:objetivo`) e fase, rotina, histórico e simulados próprios.
+A fila de revisão é compartilhada e identifica a origem de cada objetivo. Não há equivalência
+automática entre objetivos parecidos; `OBJECTIVE_EQUIVALENCES` só deve receber mapeamentos
+revisados. Validado continua exigindo evidência HTTP(S), e Dominado exige D30.
+Backups incluem as duas sequências; backups antigos retomam Backend sem apagar Arquitetura.
+
+Validação: `node scripts/validate-sequences.mjs` e `node scripts/validate-content.mjs`.
+Para testar a interface sem alterar `progresso.json`, execute
+`node scripts/serve.mjs 5607 --preview` (persistência do servidor apenas em memória).
+
+## Sequência original — Backend
+
 Plano sequencial de 36 meses para Desenvolvedor Backend Java sênior: **12 fases · 156 semanas · ~6.000h**.
 
 O princípio que organiza tudo: **a fase define o conteúdo ativo, e o conteúdo ativo define a rotina** — nunca o contrário. Uma trilha marcada como inativa na fase corrente não ocupa nenhum bloco da rotina diária.

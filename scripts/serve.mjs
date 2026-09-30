@@ -6,6 +6,9 @@ const porta = Number(process.argv[2] || 5599);
 const raiz = join(import.meta.dirname, '..', 'public');
 // Progresso de estudo persistido em arquivo (fonte durável, versionável no Git).
 const PROGRESSO = join(import.meta.dirname, '..', 'progresso.json');
+// Preview isolado: testes de interface não alteram o progresso pessoal.
+const preview = process.argv.includes('--preview');
+let previewProgress = '{}';
 const tipos = {
   '.css': 'text/css; charset=utf-8',
   '.html': 'text/html; charset=utf-8',
@@ -28,7 +31,8 @@ createServer((req, res) => {
       req.on('end', () => {
         try {
           JSON.parse(corpo); // valida antes de gravar
-          writeFileSync(PROGRESSO, corpo);
+          if (preview) previewProgress = corpo;
+          else writeFileSync(PROGRESSO, corpo);
           res.writeHead(200, cab).end('{"ok":true}');
         } catch {
           res.writeHead(400, cab).end('{"ok":false}');
@@ -36,7 +40,7 @@ createServer((req, res) => {
       });
       return;
     }
-    res.writeHead(200, cab).end(existsSync(PROGRESSO) ? readFileSync(PROGRESSO) : '{}');
+    res.writeHead(200, cab).end(preview ? previewProgress : existsSync(PROGRESSO) ? readFileSync(PROGRESSO) : '{}');
     return;
   }
 

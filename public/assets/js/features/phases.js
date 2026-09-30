@@ -1,10 +1,9 @@
+import { PC, PBG, P } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / PHASES — detalhe por fase e progressão por trilha
 ═══════════════════════════════════════════════ */
 
 import { CK } from '../../../data/tracks.js';
-import { PC, PBG } from '../../../data/config.js';
-import { P } from '../../../data/phases.js';
 import { escapeHtml } from '../core/render.js';
 
 export function renderPhaseDetails(filterId) {
@@ -28,7 +27,7 @@ export function renderPhaseDetails(filterId) {
   <div class="phase-detail-body">
     ${p.lab ? `<div class="phase-lab-chain" style="--lab-color:${PC[i]}">
       <div class="phase-lab-step">
-        <span class="phase-lab-index">DevCore · F${p.id}/12</span>
+        <span class="phase-lab-index">DevCore · ${p.l}/${P.length}</span>
         <strong>${escapeHtml(p.lab.titulo)}</strong>
       </div>
       <div class="phase-lab-flow">

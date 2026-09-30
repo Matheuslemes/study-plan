@@ -1,3 +1,4 @@
+import { P, trilhaAtiva, conteudoDaFase } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / GLOBAL-SEARCH — busca global (STUDY-060/061)
 
@@ -10,7 +11,6 @@
    destino. A tecla "/" foca o campo de qualquer lugar.
 ═══════════════════════════════════════════════ */
 
-import { P, trilhaAtiva, conteudoDaFase } from '../../../data/phases.js';
 import { biblioteca } from '../../../data/biblioteca.js';
 import { ARQUIVO_TRILHA, NOME_TRILHA, CK } from '../../../data/tracks.js';
 import { normalizar, escapeHtml } from '../core/render.js';

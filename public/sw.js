@@ -3,7 +3,7 @@
  * HTML usa network-first; assets versionados usam cache-first com revalidação.
  */
 
-const VERSAO = 'v83-treino-ficha-ios-descanso-90s';
+const VERSAO = 'v85-study-sequences';
 const CACHE = `plano-estudos-${VERSAO}`;
 
 const PARTES_ACADEMIA = {
@@ -56,6 +56,11 @@ const ESSENCIAIS = [
   './assets/vendor/fonts/fonts.css',
 
   // Dados
+  './data/sequences.js',
+  './data/sequences/backend.js',
+  './data/sequences/arquitetura.js',
+  './data/sequences/architecture-plan.js',
+  './data/projetos.js',
   './data/config.js',
   './data/tracks.js',
   './data/phases.js',
@@ -82,6 +87,8 @@ const ESSENCIAIS = [
   './data/sec-advanced.js',
 
   // Núcleo
+  './assets/js/core/study-context.js',
+  './assets/js/features/sequence-picker.js',
   './assets/js/core/render.js',
   './assets/js/core/search.js',
   './assets/js/core/nav.js',
@@ -141,6 +148,8 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+  // Progresso é um snapshot mutável; nunca servir nem armazenar no cache offline.
+  if (url.pathname === '/progress') return;
 
   if (request.mode === 'navigate' || request.destination === 'document') {
     event.respondWith(

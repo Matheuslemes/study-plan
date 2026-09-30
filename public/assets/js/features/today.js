@@ -1,3 +1,4 @@
+import { P, conteudoDaFase, chaveTrilha, weeklyFocusByDay, dailyPlansByDay, weekDays } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / TODAY — a view "Hoje" (STUDY-046)
 
@@ -10,8 +11,6 @@
    Transforma o dashboard de enciclopédia em painel de execução.
 ═══════════════════════════════════════════════ */
 
-import { P, conteudoDaFase, chaveTrilha } from '../../../data/phases.js';
-import { weeklyFocusByDay, dailyPlansByDay, weekDays } from '../../../data/routine.js';
 import { CK } from '../../../data/tracks.js';
 import { escapeHtml } from '../core/render.js';
 import { getFaseAtual } from './active-phase.js';
@@ -24,17 +23,17 @@ const CHAVE_DIA = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', '
 const cor = (k) => (CK[chaveTrilha(k)] || CK.n).t;
 
 /** Primeiro conteúdo da trilha `k` na fase, ou null se inativa. */
-function conteudoAtivo(fase, k) {
+function conteudoAtivo(fase, k, index = 0) {
   const itens = conteudoDaFase(fase, chaveTrilha(k));
   if (!itens.length) return null;
   if (/^Trilha inativa/.test(itens[0])) return null;
-  return itens[0];
+  return itens[index] || itens[0];
 }
 
 /** Bloco de destaque: rótulo, domínio, conteúdo da fase. */
 function blocoInfo(bloco, fase, rotulo) {
   if (!bloco) return null;
-  const conteudo = conteudoAtivo(fase, bloco.k);
+  const conteudo = conteudoAtivo(fase, bloco.k, bloco.topicIndex || 0);
   return {
     rotulo,
     dominio: bloco.block,
@@ -79,7 +78,7 @@ export function renderHoje(containerId) {
         <h2 class="today-day">${diaLabel}</h2>
       </div>
       ${fase ? `<div class="today-phase" style="--phase-color:${cor('java')}">
-        <span class="today-phase-tag">Fase ${fase.id}</span>
+        <span class="today-phase-tag">${fase.l}</span>
         <span class="today-phase-title">${escapeHtml(fase.t)}</span>
         <span class="today-phase-week mono">${escapeHtml(fase.w)}</span>
       </div>` : ''}

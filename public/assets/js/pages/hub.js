@@ -9,6 +9,7 @@ import { initNav } from '../core/nav.js';
 import { registrarServiceWorker } from '../core/pwa.js';
 import { renderSystemHeader } from '../core/system-header.js';
 import { getTrackConfig } from '../../../data/tracks.js';
+import { renderTrackSequenceNote } from '../features/sequence-context.js';
 
 function setDerivedCounters(root, counts) {
   root.querySelectorAll('*').forEach((element) => {
@@ -196,6 +197,7 @@ async function start() {
       renderTrackPagesNav(config, model.academy);
       renderAcademyGrid(config, model.academy);
     }
+    renderTrackSequenceNote(config.id);
     initNav();
     registrarServiceWorker();
   } catch (error) {

@@ -1,3 +1,4 @@
+import { describeObjective, P, conteudoDaFase } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / REVIEW — revisão espaçada D0/D1/D7/D30 (STUDY-022/049)
 
@@ -11,7 +12,6 @@
    SM-2. Consistência importa mais que sofisticação.
 ═══════════════════════════════════════════════ */
 
-import { P, conteudoDaFase } from '../../../data/phases.js';
 import { ler, gravar } from '../core/storage.js';
 import { registrarRevisao } from './history.js';
 import { registrarD30Concluida, temD30Concluida } from './progress.js';
@@ -103,7 +103,7 @@ export function concluirRevisao(id) {
   if (!item) return;
   const marcoConcluido = MARCOS[item.etapa]?.nome;
   if (!marcoConcluido) return;
-  registrarRevisao();
+  registrarRevisao(describeObjective(id).sequenceId);
   item.etapa += 1;
   if (item.etapa >= MARCOS.length) {
     delete f[id];
@@ -129,13 +129,7 @@ export function situacaoRevisao(id) {
 }
 
 /** Texto legível de um tópico a partir do id `trilha:fase:indice`. */
-function descreverTopico(id) {
-  const [trilha, faseStr, idxStr] = id.split(':');
-  const fase = P.find((p) => p.id === Number(faseStr));
-  const itens = fase ? conteudoDaFase(fase, trilha) : [];
-  const texto = itens[Number(idxStr)] || id;
-  return { trilha, faseId: Number(faseStr), texto };
-}
+function descreverTopico(id) { return describeObjective(id); }
 
 /** Revisões que vencem hoje ou estão atrasadas, mais antigas primeiro. */
 export function revisoesDeHoje() {
@@ -193,7 +187,7 @@ export function renderRevisoesDeHoje(containerId, corDe) {
           </div>
           <span class="review-text">${escapeHtml(i.texto)}</span>
           <span class="review-action">${escapeHtml(i.instrucao)}</span>
-          <span class="review-meta">Fase ${i.faseId} · ${i.atrasada ? 'atrasada desde ' : 'vence '}${i.venceu}</span>
+          <span class="review-meta">${escapeHtml(i.sequenceName)} · ${escapeHtml(i.label)} · ${i.atrasada ? 'atrasada desde ' : 'vence '}${i.venceu}</span>
         </div>
       </div>`;
     }).join('')}`;

@@ -1,3 +1,4 @@
+import { sequenceKey } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / HISTORY — histórico diário (STUDY-056)
 
@@ -20,10 +21,11 @@ export function hojeIso(d = new Date()) {
   return new Date(d.getTime() - off * 60000).toISOString().slice(0, 10);
 }
 
-export const historico = () => ler(CHAVE, {});
+export const historico = () => ler(sequenceKey(CHAVE), {});
 
-function registrar(campo, delta, trilha) {
-  const h = historico();
+function registrar(campo, delta, trilha, sequenceId) {
+  const key = sequenceKey(CHAVE, sequenceId);
+  const h = ler(key, {});
   const dia = hojeIso();
   const reg = h[dia] || { topicos: 0, revisoes: 0, trilhas: {} };
   reg[campo] = Math.max(0, (reg[campo] || 0) + delta);
@@ -31,7 +33,7 @@ function registrar(campo, delta, trilha) {
     reg.trilhas[trilha] = Math.max(0, (reg.trilhas[trilha] || 0) + delta);
   }
   h[dia] = reg;
-  gravar(CHAVE, h);
+  gravar(key, h);
   document.dispatchEvent(new CustomEvent('history:change'));
 }
 
@@ -39,7 +41,7 @@ function registrar(campo, delta, trilha) {
 export const registrarTopico = (delta, trilha) => registrar('topicos', delta, trilha);
 
 /** Uma revisão foi concluída. */
-export const registrarRevisao = () => registrar('revisoes', 1);
+export const registrarRevisao = (sequenceId) => registrar('revisoes', 1, undefined, sequenceId);
 
 /**
  * Série dos últimos `n` dias, em ordem cronológica.

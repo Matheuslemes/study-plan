@@ -1,11 +1,9 @@
+import { isArchitecture, PC, syncCycles, P, awsMilestones, syncDependencies, syncCheckpoints } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / SYNC — ciclos, dependências e matriz fase × trilhas
 ═══════════════════════════════════════════════ */
 
 import { CK } from '../../../data/tracks.js';
-import { PC, syncCycles } from '../../../data/config.js';
-import { P } from '../../../data/phases.js';
-import { awsMilestones, syncDependencies, syncCheckpoints } from '../../../data/milestones.js';
 
 export function syncShort(text, max = 92) {
   const clean = (text || '').replace(/\s+/g, ' ').trim();
@@ -29,6 +27,10 @@ export function renderSync() {
     { label: 'Prática', value: 'Exercícios e labs', text: 'Cada fase fecha com exercícios resolvidos e labs isolados que comprovam o domínio do conteúdo daquela fase.' },
     { label: 'Validação', value: '80% para avançar', text: 'A fase só fecha quando houver entregável, evidência, revisão, correção e explicação técnica.' }
   ];
+  if (isArchitecture()) {
+    kpis[0] = { label: 'Estrutura', value: '6 etapas', text: 'Diagnóstico, decisões e entregas encadeadas no DevCore.' };
+    kpis[3] = { label: 'Validação', value: 'Entregável validado', text: 'Conferir o critério e registrar evidência. D30 continua na fila de revisão.' };
+  }
   const kpiEl = document.getElementById('syncKpis');
   if (kpiEl) {
     kpiEl.innerHTML = kpis.map(k => `<div class="col-12 col-sm-6 col-lg-3">

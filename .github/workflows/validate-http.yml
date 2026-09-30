@@ -1,0 +1,42 @@
+# Gate de DISPONIBILIDADE HTTP.
+# Sobe o servidor estático do projeto (scripts/serve.mjs) e confere que todos os
+# recursos de public/ (.html, .css, .js, .pdf, .svg, .webmanifest) respondem 200.
+# Pega link/arquivo que existe no repo mas não é servido (e vice-versa). Só Node.
+name: validate-http
+
+on:
+  push:
+    paths:
+      - 'public/**'
+      - 'scripts/serve.mjs'
+      - 'scripts/validate-http.mjs'
+      - '.github/workflows/validate-http.yml'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # O servidor precisa viver durante a validação: subir, esperar responder,
+      # rodar o gate e só então encerrar — tudo no mesmo passo (cada step é um
+      # shell próprio, então um "&" solto morreria antes da validação).
+      - name: Servir public/ e validar HTTP 200
+        run: |
+          node scripts/serve.mjs 4173 &
+          server=$!
+          for i in $(seq 1 40); do
+            curl -sf -o /dev/null "http://127.0.0.1:4173/index.html" && break
+            sleep 0.25
+          done
+          node scripts/validate-http.mjs http://127.0.0.1:4173/
+          status=$?
+          kill "$server" 2>/dev/null || true
+          exit $status

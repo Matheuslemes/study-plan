@@ -1,9 +1,9 @@
+import { isArchitecture, projetos } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / PROJETOS — projetos de portfólio por trilha × fase.
    Cada projeto é autocontido; agrupados por fase.
 ═══════════════════════════════════════════════ */
 
-import { projetos } from '../../../data/projetos.js';
 import { escapeHtml } from '../core/render.js';
 
 export function renderProjetos(alvoId = 'projetosView') {
@@ -39,8 +39,8 @@ export function renderProjetos(alvoId = 'projetosView') {
     </article>`;
 
   el.innerHTML = `
-    <p class="proj-intro text-muted small">Um projeto independente por trilha curricular, na sua fase de foco.
-      Cada um é um repositório separado, com evidência própria — não dependem uns dos outros. Transversais
+    <p class="proj-intro text-muted small">${isArchitecture() ? 'Seis entregas encadeadas no mesmo DevCore.' : 'Um projeto independente por trilha curricular, na sua fase de foco.'}
+      ${isArchitecture() ? 'Cada entrega usa a evidência da etapa anterior. Transversais' : 'Cada um é um repositório separado, com evidência própria — não dependem uns dos outros. Transversais'}
       (Git, Inglês, Matemática, Financeiro, DSA) seguem como prática diária, sem projeto por fase.</p>
     ${fases.map((f) => `
       <section class="proj-fase">
