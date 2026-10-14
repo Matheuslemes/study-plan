@@ -1,0 +1,1020 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Conteúdo do projeto e preparação para o mercado: júnior forte, pleno médio, pleno forte e sênior inicial.">
+<title>Mapa de senioridade e mercado</title>
+<style>
+:root{color-scheme:dark;--paper:#151d26;--ink:#e3eaf1;--muted:#a8b7c5;--line:#344251;--accent:#75d8c5}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:#0d131b;color:var(--ink);font:17px/1.75 system-ui,-apple-system,"Segoe UI",sans-serif}.layout{display:grid;grid-template-columns:255px minmax(0,1fr);gap:42px;max-width:1450px;margin:auto;padding:40px 32px}aside{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto;font-size:14px}aside .label{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--muted);font-weight:700}nav ul{list-style:none;padding:0}nav li{margin:0 0 7px}nav a{display:block;padding:6px 10px;border-left:2px solid var(--line);text-decoration:none;color:var(--muted)}nav a:hover{border-color:var(--accent);color:var(--accent)}.source{display:inline-block;margin-top:16px;font-size:13px}main{min-width:0;background:var(--paper);padding:44px 52px;border:1px solid var(--line);border-radius:8px}h1,h2,h3{line-height:1.25;letter-spacing:-.025em}h1{font-size:clamp(2rem,3.5vw,3rem);margin:0 0 28px;max-width:850px}h2{font-size:1.7rem;margin:52px 0 24px;padding-top:28px;border-top:1px solid var(--line)}h3{font-size:1.2rem;margin:32px 0 16px;color:var(--accent)}p{margin:0 0 20px}a{color:var(--accent);text-underline-offset:3px}a:focus-visible,.table-scroll:focus-visible{outline:3px solid #cf933a;outline-offset:4px}li{margin-bottom:8px}strong{font-weight:650}.table-scroll{overflow:auto;margin:24px 0 30px;border:1px solid var(--line);border-radius:5px}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.6;min-width:640px}th,td{padding:13px 15px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}th{background:#20322f;font-weight:650}tr:last-child td{border-bottom:0}tbody tr:nth-child(even){background:#19232e}code{font:0.86em/1.6 ui-monospace,Consolas,monospace;background:#202d3b;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre{background:#202d3b;border:1px solid var(--line);padding:22px;overflow:auto;border-radius:5px;white-space:pre-wrap}pre code{padding:0;background:none}input[type=checkbox]{accent-color:var(--accent);margin-right:7px}.skip{position:absolute;left:16px;top:-100px;background:var(--paper);padding:8px}.skip:focus{top:10px}
+@media(max-width:1050px){.layout{grid-template-columns:205px minmax(0,1fr);gap:22px;padding:24px 18px}main{padding:32px 28px}}
+@media(max-width:760px){body{font-size:16px}.layout{display:block;padding:16px 12px}aside{position:static;max-height:none;margin-bottom:24px}nav ul{columns:2;column-gap:15px}nav li{break-inside:avoid}main{padding:26px 18px}h2{font-size:1.45rem}.table-scroll{margin-left:0;margin-right:0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+@media print{:root{color-scheme:light;--paper:#fff;--ink:#202b35;--muted:#53626e;--line:#dce3e7;--accent:#16605c}th{background:#eaf1ee}tbody tr:nth-child(even){background:#fafcfb}code,pre{background:#eef2f3}pre code{background:none}body{background:white;font-size:10pt}.layout{display:block;padding:0;max-width:none}aside,.skip{display:none}main{border:0;padding:0}h1{font-size:24pt}h2{font-size:18pt;break-after:avoid}h3{break-after:avoid}.table-scroll{overflow:visible;border:0}table{min-width:0;font-size:8pt}th,td{padding:6px;overflow-wrap:anywhere}tr{break-inside:avoid}a{color:inherit}pre{white-space:pre-wrap}@page{margin:16mm}}
+.study-sequence{margin:36px 0;padding:26px;border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--paper) 94%,var(--accent))}.study-sequence>h3{margin-top:0}.learning-steps{padding-left:25px}.learning-steps>li{padding:18px 0 22px 8px;border-bottom:1px solid var(--line)}.learning-steps>li:last-child{border-bottom:0;padding-bottom:0}.learning-steps>li::marker{color:var(--accent);font-weight:700}.learning-steps h4{font-size:1.1rem;line-height:1.4;margin:0 0 16px;color:var(--ink)}.learning-steps p:last-child{margin-bottom:0}.sequence-links{display:flex;flex-wrap:wrap;gap:8px 18px;margin:22px 0;font-size:14px}@media(max-width:760px){.study-sequence{padding:18px 14px}.learning-steps{padding-left:22px}}@media print{.study-sequence{background:white;padding:12px;border-color:#dce3e7}.learning-steps h4{break-after:avoid}.sequence-links{display:none}}
+
+.seniority-detail{min-width:850px;table-layout:fixed}.seniority-detail th:first-child{width:16%}.seniority-detail th[scope="row"]{background:transparent;font-weight:650}.seniority-detail td{width:28%}.evidence-checklist li{margin-bottom:20px}.evidence-note{display:block;margin:8px 0 0 22px;color:var(--muted)}@media print{.seniority-detail{min-width:0;table-layout:auto}.seniority-detail th:first-child,.seniority-detail td{width:auto}.seniority-detail tr{break-inside:auto}.evidence-note{color:inherit}}
+</style>
+</head>
+<body>
+<a class="skip" href="#conteudo">Ir para o conteúdo</a>
+<div class="layout">
+<aside aria-label="Navegação do documento"><span class="label">Guia de leitura</span><nav aria-label="Sumário"><ul><li><a href="#secao-1">Como consultar este documento</a></li><li><a href="#secao-2">1. Diagnóstico principal</a></li><li><a href="#secao-3">2. Como foi feita a comparação</a></li><li><a href="#secao-4">3. Vagas consultadas e sinais concretos</a></li><li><a href="#secao-5">4. O que está efetivamente presente no projeto</a></li><li><a href="#secao-6">5. Júnior forte</a></li><li><a href="#secao-7">6. Pleno médio</a></li><li><a href="#secao-8">7. Pleno forte</a></li><li><a href="#secao-9">8. Sênior inicial</a></li><li><a href="#secao-10">9. Ajustes de prioridade e lacunas</a></li><li><a href="#secao-11">10. Como usar o projeto sem dispersar o estudo</a></li></ul></nav><a class="source" href="MAPA-SENIORIDADE-E-MERCADO.md">Abrir versão Markdown (análise-base)</a></aside>
+<main id="conteudo"><h1>Conteúdo do projeto e preparação para o mercado por senioridade</h1>
+<p>Data da análise e consulta às vagas: <strong>13 de outubro de 2026</strong>.</p>
+<p>Escopo: formação para <strong>desenvolvimento backend Java/Spring no mercado brasileiro</strong>, com observações sobre vagas full stack e ambientes corporativos. Esse recorte acompanha o eixo principal do projeto; não representa todas as especialidades de desenvolvimento.</p>
+<p>Esta versão detalha a análise original. Os exercícios, critérios e exemplos acrescentados são <strong>propostas de preparação</strong>, não exigências adicionais atribuídas às empresas. A pesquisa de vagas permanece a fotografia de 13/10/2026 registrada abaixo; esta ampliação não constitui uma nova verificação de inscrições.</p>
+<h2 id="secao-1">Como consultar este documento</h2>
+<ul>
+<li>Para entender o diagnóstico e os limites da comparação, leia as seções 1–3.</li>
+<li>Para localizar assuntos e entender sua aplicação profissional, use a seção 4.</li>
+<li>Para montar uma preparação por senioridade, escolha uma das seções 5–8, mantendo os fundamentos dos níveis anteriores.</li>
+<li>Para transformar lacunas em trabalho executável, use a seção 9.</li>
+<li>Para organizar ciclos de estudo e revisar suas evidências, siga a seção 10.</li>
+</ul>
+<h2 id="secao-2">1. Diagnóstico principal</h2>
+<p>O projeto tem cobertura curricular ampla para <strong>júnior forte</strong>, uma base consistente para <strong>pleno médio</strong>, conteúdo técnico relevante para <strong>pleno forte</strong> e fundamentos de arquitetura, operação e influência necessários à preparação de um <strong>sênior inicial</strong>.</p>
+<p>O principal limite não é a quantidade de assuntos. É transformar o material em entregas próprias, revisadas por outras pessoas, e em experiência de manutenção, colaboração e operação. A presença de um tema no plano não demonstra que o estudante o domina.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Perfil pretendido</th>
+<th>Parecer sobre o conteúdo disponível</th>
+<th>Condição para sustentar o nível</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Júnior forte</td>
+<td>O núcleo das fases 1–3 é bem alinhado; segurança selecionada da fase 4 complementa a base.</td>
+<td>Implementar e explicar uma API pequena, testar regras, corrigir bugs e incorporar revisão com orientação.</td>
+</tr>
+<tr>
+<td>Pleno médio</td>
+<td>Fases 1–6 oferecem boa base de entrega, qualidade, dados e diagnóstico; algumas vagas exigem antecipar integração e cloud.</td>
+<td>Entregar uma funcionalidade completa com autonomia dentro de uma arquitetura existente.</td>
+</tr>
+<tr>
+<td>Pleno forte</td>
+<td>Fases 5–9, com tópicos selecionados da 10 e comunicação, cobrem problemas relevantes de integração e operação.</td>
+<td>Conduzir entregas com dependências e falhas, comparar alternativas e ajudar outros desenvolvedores.</td>
+</tr>
+<tr>
+<td>Sênior inicial</td>
+<td>Fases 6–10 e 12, junto à Academia de Arquitetura, oferecem preparação técnica pertinente.</td>
+<td>Assumir um serviço ou domínio, decidir sob restrições, responder por resultados e elevar a capacidade do time.</td>
+</tr>
+</tbody></table></div>
+<p><strong>Este mapeamento é uma interpretação desta análise, não uma equivalência oficial do projeto nem uma promessa de promoção por concluir fases.</strong> “Forte”, “médio” e “inicial” são subdivisões operacionais adotadas aqui; as vagas consultadas normalmente anunciam apenas júnior, pleno ou sênior.</p>
+<h3>1.1. O que muda de um nível para outro</h3>
+<p>O avanço não depende apenas de conhecer mais ferramentas. Ele aparece na capacidade de assumir problemas menos definidos, perceber consequências e entregar com a ajuda apropriada. Pedir revisão continua sendo desejável em todos os níveis; o que muda é o tipo de orientação necessária.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Dimensão</th>
+<th>Júnior forte</th>
+<th>Pleno médio</th>
+<th>Pleno forte</th>
+<th>Sênior inicial</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Escopo</td>
+<td>Tarefa delimitada ou endpoint.</td>
+<td>Funcionalidade completa em um serviço.</td>
+<td>Fluxo com integrações e dependências.</td>
+<td>Evolução de um serviço ou domínio ao longo do tempo.</td>
+</tr>
+<tr>
+<td>Ambiguidade</td>
+<td>Identifica dúvidas e pede esclarecimento.</td>
+<td>Completa critérios de aceite com o time.</td>
+<td>Expõe alternativas e dependências pouco claras.</td>
+<td>Ajuda a definir o problema e negociar restrições.</td>
+</tr>
+<tr>
+<td>Autonomia</td>
+<td>Executa com orientação e checkpoints.</td>
+<td>Planeja e executa dentro de padrões existentes.</td>
+<td>Conduz a solução e envolve especialistas quando necessário.</td>
+<td>Estabelece direção técnica para seu escopo e distribui decisões.</td>
+</tr>
+<tr>
+<td>Qualidade</td>
+<td>Testa o comportamento da mudança.</td>
+<td>Considera regressão, dados, segurança e deploy.</td>
+<td>Considera contratos, falhas e manutenção entre componentes.</td>
+<td>Equilibra qualidade, prazo, custo e risco ao longo de várias entregas.</td>
+</tr>
+<tr>
+<td>Operação</td>
+<td>Lê logs e ajuda a reproduzir problemas.</td>
+<td>Diagnostica falhas conhecidas e aplica procedimentos.</td>
+<td>Investiga falhas menos evidentes e melhora procedimentos.</td>
+<td>Organiza prevenção, resposta e aprendizado dentro do domínio.</td>
+</tr>
+<tr>
+<td>Influência</td>
+<td>Recebe e incorpora feedback.</td>
+<td>Revisa e compartilha conhecimento.</td>
+<td>Ajuda colegas a resolver problemas com mais autonomia.</td>
+<td>Melhora decisões e capacidade de entrega do time.</td>
+</tr>
+</tbody></table></div>
+<p>As colunas descrevem a rubrica deste documento. Uma pessoa pode apresentar desempenho de pleno em backend e ainda ser iniciante em cloud. O diagnóstico deve registrar essa distribuição, em vez de transformar um ponto forte em avaliação de todas as competências.</p>
+<h3>1.2. Como interpretar “conteúdo suficiente”</h3>
+<p>Cobertura curricular significa que existe material relevante para aprender o assunto. Prontidão exige conseguir utilizá-lo em uma situação nova. Uma boa verificação é alterar uma condição do exercício: aumentar o volume de dados, introduzir um erro, mudar uma regra ou pedir que outra pessoa execute o projeto.</p>
+<p>Se a solução depende de seguir os mesmos passos do exemplo, a habilidade ainda está em consolidação. Se o estudante explica as escolhas, adapta o código e verifica o resultado, há uma evidência mais forte. Para os níveis superiores, também importa sustentar essas decisões durante a evolução do sistema.</p>
+<h2 id="secao-3">2. Como foi feita a comparação</h2>
+<ul>
+<li>Inspeção das fontes atuais de conteúdo em <code>public/data/</code>, dos laboratórios encadeados, das propostas de portfólio, dos simulados e de exemplos do repositório.</li>
+<li>Pesquisa e leitura de páginas de recrutamento publicadas pelas empresas na Gupy, sem usar relatos de fóruns como evidência de requisito.</li>
+<li>Comparação qualitativa entre requisitos, responsabilidades e conteúdo. Não foram calculados percentuais de aderência: uma amostra pequena e direcionada não permite estimar o mercado inteiro.</li>
+<li>Separação entre <strong>conteúdo descrito</strong>, <strong>exemplo didático disponível</strong> e <strong>evidência profissional que o estudante precisa produzir</strong>.</li>
+</ul>
+<p>Foram usadas seis páginas principais, de dois anúncios júnior, dois pleno e dois sênior. Duas referências complementares ajudam a mostrar variações de função. Há concentração em consultorias e no setor financeiro; isso influencia os requisitos observados.</p>
+<p>“Página com candidatura” significa que o conteúdo consultado apresentava o link de inscrição e não mostrava aviso de encerramento. Isso não confirma que a empresa continue entrevistando. Datas de rastreamento do buscador não foram tratadas como datas de publicação. Quando a página não informa a data, ela permanece desconhecida.</p>
+<p>Esta análise não executou os laboratórios nem auditou o desempenho pessoal do estudante. Os relatórios anteriores do repositório serviram de contexto, mas o mapeamento usa os arquivos de conteúdo atuais. A sequência de Arquitetura foi considerada conforme seu estado local, orientado ao estudo teórico.</p>
+<h3>2.1. Escala de evidência usada para ler o projeto</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Situação</th>
+<th>O que permite afirmar</th>
+<th>O que ainda precisa ser verificado</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Assunto listado</td>
+<td>O currículo prevê o tema.</td>
+<td>Profundidade, compreensão e capacidade de aplicação.</td>
+</tr>
+<tr>
+<td>Explicação e exercício</td>
+<td>Existe apoio para aprender e praticar.</td>
+<td>Se o estudante consegue resolver sem copiar a resposta.</td>
+</tr>
+<tr>
+<td>Exemplo executável</td>
+<td>Existe uma implementação didática que pode ser examinada.</td>
+<td>Se ela roda no ambiente e representa o cenário profissional desejado.</td>
+</tr>
+<tr>
+<td>Entrega própria reproduzível</td>
+<td>O estudante implementou uma solução e registrou como verificá-la.</td>
+<td>Qualidade, autoria, limites e comportamento sob variações.</td>
+</tr>
+<tr>
+<td>Entrega revisada e mantida</td>
+<td>Outras pessoas avaliaram e a solução evoluiu.</td>
+<td>Continuidade da autonomia e impacto em situações mais complexas.</td>
+</tr>
+<tr>
+<td>Resultado em uso</td>
+<td>Há efeitos observados em consumidores, operação ou trabalho do time.</td>
+<td>Contexto, contribuição individual e capacidade de repetir o resultado.</td>
+</tr>
+</tbody></table></div>
+<p>Esta escala orienta a coleta de evidências; não atribui automaticamente um cargo. Um projeto pessoal em uso tem valor, mas o contexto deve ser descrito como projeto pessoal.</p>
+<h3>2.2. Como comparar uma nova vaga com o plano</h3>
+<p>Leia primeiro as responsabilidades e depois as ferramentas. Separe requisitos obrigatórios, desejáveis e condições de contratação. Em seguida, registre cada exigência em uma destas situações: já demonstrada, estudada sem prática suficiente, transferível de outra tecnologia ou ainda não estudada.</p>
+<p>Por exemplo, ter desenvolvido com PostgreSQL ajuda a aprender outro banco relacional, mas não comprova experiência em Oracle. Da mesma forma, ter criado um pipeline ajuda a entender outro sistema de CI/CD, sem significar familiaridade com sua administração.</p>
+<p>Uma comparação útil termina em uma decisão: candidatar-se com as evidências existentes, complementar um ponto específico ou escolher uma oportunidade de escopo mais adequado. Não deve gerar uma lista ilimitada de ferramentas para estudar antes de qualquer candidatura.</p>
+<h2 id="secao-4">3. Vagas consultadas e sinais concretos</h2>
+<p>As descrições abaixo são sínteses, não transcrições integrais. Todas as fontes foram consultadas em 13/10/2026.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Empresa e anúncio</th>
+<th>Requisitos e responsabilidades relevantes</th>
+<th>Situação observada</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>V1</td>
+<td><a href="https://fcamara.gupy.io/jobs/12692056">FCamara — Desenvolvedor Full Stack Java Junior</a></td>
+<td>Java/Spring, REST/JPA, SQL, Git, testes básicos, frontend e uso de IA. Trabalho orientado por profissionais mais experientes.</td>
+<td>Página com candidatura; data de publicação não exibida no texto aberto.</td>
+</tr>
+<tr>
+<td>V2</td>
+<td><a href="https://confidencial.gupy.io/jobs/12639994">Empresa confidencial — Pessoa Engenheira de Software Júnior (Java)</a></td>
+<td>Java/Spring, APIs, SQL, JUnit/Mockito, Docker e CI/CD; noções de Kafka/Kubernetes e familiaridade com cloud. Apoio a logs e operação.</td>
+<td>Página com candidatura. O resultado indexado informa publicação em 08/10/2026 e inscrições até 18/10/2026; essas datas não apareceram no texto da página aberta.</td>
+</tr>
+<tr>
+<td>V3</td>
+<td><a href="https://deliverit.gupy.io/jobs/12545946?jobBoardSource=gupy_public_page">Deliver IT — Desenvolvedor Java Pleno</a></td>
+<td>Spring/REST, Oracle, mensageria, containers e integração contínua; autonomia, estimativas com especificação incompleta, revisão e apoio a menos experientes. Superior completo exigido.</td>
+<td>Página com candidatura; publicação não informada no conteúdo consultado.</td>
+</tr>
+<tr>
+<td>V4</td>
+<td><a href="https://stefanini.gupy.io/jobs/12439849?jobBoardSource=gupy_public_page">Stefanini — Desenvolvedor Java Pleno</a></td>
+<td>Desenvolvimento e operação, Spring, testes, pipelines, Docker/Kubernetes e cloud. Inclui tecnologias corporativas como WebSphere, JBoss, SQL Server e Jenkins. Superior completo exigido.</td>
+<td>Página com candidatura; publicação não informada no conteúdo consultado.</td>
+</tr>
+<tr>
+<td>V5</td>
+<td><a href="https://softdesign.gupy.io/jobs/12302707">SoftDesign — Software Engineer (Java), descrito como Backend Senior</a></td>
+<td>Java 17+/Spring, SQL/MongoDB, JPA, testes, domínio de negócio, manutenção e revisão. Observabilidade, microsserviços e CI/CD aparecem como desejáveis.</td>
+<td>Página com candidatura; publicação não informada no conteúdo consultado.</td>
+</tr>
+<tr>
+<td>V6</td>
+<td><a href="https://porto.gupy.io/jobs/11849267">Porto — Analista de Engenharia de Software Sênior — Java</a></td>
+<td>Referência técnica, mentoria, AWS, arquitetura, segurança, custos e incidentes críticos; exige experiência financeira e liderança técnica comprovada.</td>
+<td>Página com candidatura; publicação não informada no conteúdo consultado.</td>
+</tr>
+</tbody></table></div>
+<p>Referências complementares:</p>
+<ul>
+<li><strong>V7 — <a href="https://compass.gupy.io/jobs/11733312">Compass — Spring Boot Back-End Developer, Pleno</a>: inscrições encerradas.</strong> Usada apenas como comparação complementar de escopo: autonomia, revisão, mensageria, observabilidade e integração com IA. Não é contada como oportunidade aberta.</li>
+<li><strong>V8 — <a href="https://deliverit.gupy.io/jobs/12262692">Deliver IT — Analista Desenvolvedor Java Pleno com IA</a>:</strong> atuação inicialmente analítica e consultiva, sem implementação/refatoração nessa etapa. Pede entendimento de Java 8/11, Oracle, aplicações existentes, entrevistas com usuários e validação de material gerado por IA. Não foi usada como modelo de vaga de implementação backend.</li>
+</ul>
+<h3>O que a amostra permite concluir</h3>
+<ol>
+<li><strong>A lista de tecnologias não separa os níveis sozinha.</strong> Kafka e Kubernetes aparecem já em V2 como noções; em V3 e V4 estão ligados a entregas mais autônomas. A profundidade e a responsabilidade mudam. <a href="https://confidencial.gupy.io/jobs/12639994">V2</a>, <a href="https://deliverit.gupy.io/jobs/12545946?jobBoardSource=gupy_public_page">V3</a>, <a href="https://stefanini.gupy.io/jobs/12439849?jobBoardSource=gupy_public_page">V4</a>.</li>
+<li><strong>Pleno já pode apoiar colegas e estimar trabalho pouco detalhado.</strong> Portanto, mentoria básica e refinamento não deveriam ficar reservados ao último estágio da preparação. <a href="https://deliverit.gupy.io/jobs/12545946?jobBoardSource=gupy_public_page">V3</a>.</li>
+<li><strong>O título sênior cobre escopos diferentes.</strong> V5 enfatiza engenharia de aplicações; V6 inclui liderança e operação bancária crítica. A segunda é uma referência de maior exigência, não um piso universal para sênior inicial. <a href="https://softdesign.gupy.io/jobs/12302707">V5</a>, <a href="https://porto.gupy.io/jobs/11849267">V6</a>.</li>
+<li><strong>IA aparece em algumas funções, mas não autoriza exigir especialização em ML de todo backend.</strong> Há diferença entre usar assistência na programação e integrar produtos com LLMs. <a href="https://fcamara.gupy.io/jobs/12692056">V1</a>, <a href="https://compass.gupy.io/jobs/11733312">V7, encerrada</a>, <a href="https://deliverit.gupy.io/jobs/12262692">V8</a>.</li>
+</ol>
+<h3>3.1. Como transformar os sinais das vagas em preparação</h3>
+<p>Os itens abaixo são implicações pedagógicas da amostra já descrita, e não novas afirmações sobre o mercado.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Sinal observado</th>
+<th>Interpretação para estudar</th>
+<th>Exercício proposto</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>A mesma tecnologia aparece em níveis diferentes.</td>
+<td>Distinguir vocabulário, implementação e responsabilidade operacional.</td>
+<td>Explicar um fluxo de mensagens; depois implementá-lo; por fim investigar uma falha. Registrar separadamente cada capacidade.</td>
+</tr>
+<tr>
+<td>Autonomia aparece junto de manutenção e estimativas.</td>
+<td>Praticar descoberta e planejamento, além da escrita de código.</td>
+<td>Receber uma solicitação curta e produzir perguntas, critérios de aceite, etapas e riscos antes de implementar.</td>
+</tr>
+<tr>
+<td>Apoio a colegas aparece no pleno.</td>
+<td>Antecipar comunicação técnica e revisão.</td>
+<td>Revisar uma mudança de outra pessoa, justificar os pontos relevantes e verificar o resultado após os ajustes.</td>
+</tr>
+<tr>
+<td>Vagas sênior apresentam amplitudes diferentes.</td>
+<td>Escolher um escopo de responsabilidade coerente com a experiência.</td>
+<td>Comparar duas descrições de cargo e apontar quais resultados próprios sustentam cada responsabilidade.</td>
+</tr>
+<tr>
+<td>IA aparece em usos distintos.</td>
+<td>Separar assistência à programação de desenvolvimento de uma funcionalidade com IA.</td>
+<td>Em assistência, explicar e testar o código gerado; em produto, definir casos de avaliação e limites de uso.</td>
+</tr>
+<tr>
+<td>Há requisitos específicos de stack e formação.</td>
+<td>Tratar critérios de seleção separadamente da base técnica geral.</td>
+<td>Montar uma ficha de aderência e declarar experiência transferível sem apresentá-la como experiência direta.</td>
+</tr>
+</tbody></table></div>
+<h3>3.2. Ficha para avaliar uma oportunidade</h3>
+<p>Para cada candidatura, registre: empresa, cargo, URL, data da consulta, responsabilidades principais, requisitos obrigatórios, diferenciais e condições de contratação. Acrescente uma evidência própria para cada responsabilidade importante e uma ação curta para a lacuna mais relevante.</p>
+<p>Exemplo de registro: “Revisão de código: participei de dois PRs de um projeto colaborativo; identifiquei um caso de erro sem teste e acompanhei a correção”. Esse relato é mais informativo que escrever apenas “conhecimento de code review”. A quantidade citada é ilustrativa, não um mínimo obrigatório.</p>
+<h2 id="secao-5">4. O que está efetivamente presente no projeto</h2>
+<p>Os caminhos abaixo partem da raiz do repositório e permitem localizar as evidências da análise.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Conteúdo localizado</th>
+<th>Fonte interna</th>
+<th>Natureza da cobertura</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java e fundamentos</td>
+<td>OO, tipos, collections, contratos, exceptions, generics, streams, concorrência, JVM e diagnóstico.</td>
+<td><code>public/data/phases.js</code>, <code>public/data/java-advanced.js</code>, <code>public/data/fundamentos-advanced.js</code></td>
+<td>Objetivos e material didático; exemplos Java disponíveis.</td>
+</tr>
+<tr>
+<td>Backend</td>
+<td>Spring Boot, REST, DTOs, validação, erros, OpenAPI, JPA, paginação e transações.</td>
+<td><code>public/data/phases.js</code> — F2; <code>public/data/java-advanced.js</code></td>
+<td>Conteúdo, exercícios e entregas propostas.</td>
+</tr>
+<tr>
+<td>Dados</td>
+<td>SQL, modelagem, PostgreSQL, migrations, índices, N+1, EXPLAIN, locks e cache.</td>
+<td><code>public/data/phases.js</code> — F1/F2/F5; <code>public/data/bancos-advanced.js</code></td>
+<td>Conteúdo e experimentos; uso real precisa ser demonstrado.</td>
+</tr>
+<tr>
+<td>Qualidade e entrega</td>
+<td>JUnit, Mockito, AssertJ, Testcontainers, Docker Compose e pipeline com checks.</td>
+<td><code>public/data/phases.js</code> — F3; <code>public/data/devops-advanced.js</code></td>
+<td>Objetivos de implementação e operação.</td>
+</tr>
+<tr>
+<td>Segurança</td>
+<td>Autenticação/autorização, JWT, OAuth2/OIDC, OWASP e menor privilégio.</td>
+<td><code>public/data/phases.js</code> — F1/F4; <code>public/data/sec-advanced.js</code></td>
+<td>Conteúdo e cenários de validação.</td>
+</tr>
+<tr>
+<td>Produção</td>
+<td>Logs, métricas, tracing, SLO, alertas, dumps, runbook e postmortem.</td>
+<td><code>public/data/phases.js</code> — F6; <code>public/examples/devops-senior/</code></td>
+<td>Roteiros e exemplos; incidente simulado não equivale a histórico em produção.</td>
+</tr>
+<tr>
+<td>Arquitetura e integração</td>
+<td>Camadas, monólito modular, DDD, arquitetura hexagonal, C4, ADRs, Kafka, outbox, idempotência e DLQ.</td>
+<td><code>public/data/phases.js</code> — F7/F8; <code>public/data/arquitetura-advanced.js</code></td>
+<td>Conteúdo, exercícios e artefatos didáticos.</td>
+</tr>
+<tr>
+<td>Cloud e escala</td>
+<td>AWS, Terraform, Kubernetes, rollback, custos, capacidade e testes de carga.</td>
+<td><code>public/data/phases.js</code> — F9/F10; <code>public/data/aws-advanced.js</code></td>
+<td>Preparação técnica; execução e resultado não inferidos.</td>
+</tr>
+<tr>
+<td>Comunicação e colaboração</td>
+<td>PRs, revisão, RFC, mentoria, defesa de decisões, stakeholders e inglês técnico.</td>
+<td><code>public/data/phases.js</code> — Git, inglês e F12; <code>public/data/arquitetura-advanced.js</code></td>
+<td>Assuntos presentes; colaboração recorrente precisa acontecer com outras pessoas.</td>
+</tr>
+<tr>
+<td>Complementos</td>
+<td>Frontend/React, Python, IA, matemática, algoritmos e engenharia assistida por IA.</td>
+<td><code>public/data/frontend-advanced.js</code>, <code>python-advanced.js</code>, <code>ia-advanced.js</code>, <code>aieng-advanced.js</code>, <code>dsa-advanced.js</code>, <code>matematica-advanced.js</code></td>
+<td>Conteúdo adicional; selecionar conforme a função desejada.</td>
+</tr>
+<tr>
+<td>Prática e avaliação</td>
+<td>DevCore em 12 entregas encadeadas, projetos independentes por trilha, entrevistas progressivas e revisões.</td>
+<td><code>public/data/phases.js</code> — <code>LABS_ENCADEADOS</code>; <code>public/data/projetos.js</code>; <code>public/data/interviews.js</code></td>
+<td>Propostas e mecanismos de acompanhamento, não comprovação de conclusão.</td>
+</tr>
+</tbody></table></div>
+<h3>4.1. Java e fundamentos: escrever código que você consegue explicar</h3>
+<p>OO envolve representar responsabilidades e regras, não apenas criar classes e herança. Collections exigem escolher estruturas adequadas ao problema; contratos de igualdade influenciam o comportamento dessas estruturas. Exceptions precisam representar falhas compreensíveis para quem chama o código. Generics, streams e recursos da linguagem devem tornar a solução mais clara, sem esconder a regra de negócio.</p>
+<p>No início, priorize modelagem pequena, leitura de código, depuração e testes. Para avançar, use concorrência e diagnóstico de runtime em problemas concretos do projeto. O material profundo de JVM ganha utilidade quando ajuda a investigar uma hipótese, como contenção, alocação excessiva ou comportamento inesperado sob carga.</p>
+<p><strong>Prática proposta:</strong> implementar regras de um pedido, rejeitar transições inválidas e explicar as estruturas escolhidas. Depois introduzir um defeito e investigá-lo pelo debugger. <strong>Evidência:</strong> código, testes, passos de reprodução e explicação da correção. <strong>Sinal de fragilidade:</strong> conhecer nomes de recursos, mas não prever o comportamento de um trecho pequeno.</p>
+<h3>4.2. Backend: acompanhar uma requisição de ponta a ponta</h3>
+<p>O núcleo Spring/REST do plano deve permitir acompanhar entrada, validação, regra de negócio, persistência e resposta. DTOs ajudam a explicitar o contrato externo; organização em camadas ajuda a localizar responsabilidades. JPA facilita acesso a dados, mas o estudante precisa compreender as consultas e os limites transacionais envolvidos.</p>
+<p><strong>Prática proposta:</strong> criar e consultar pedidos, com paginação, validação de entrada e resposta consistente para recurso inexistente. Alterar uma regra sem modificar desnecessariamente o contrato da API. <strong>Evidência:</strong> contrato OpenAPI, exemplos de requisição, testes e justificativa da organização do código. <strong>Sinal de fragilidade:</strong> API que funciona apenas no caminho feliz ou cuja regra fica distribuída sem critério entre controller e persistência.</p>
+<h3>4.3. Dados: garantir integridade e investigar desempenho</h3>
+<p>Modelagem descreve entidades, relações e restrições do domínio. SQL permite consultar e modificar essas informações; migrations registram sua evolução. Os tópicos de índices, planos de execução e N+1 devem ser exercitados com dados e medições, para distinguir uma melhoria comprovada de uma mudança intuitiva.</p>
+<p><strong>Prática proposta:</strong> modelar pedidos e itens, preparar dados reproduzíveis, investigar uma consulta lenta e comparar alternativas. Acrescentar uma mudança de schema e documentar seu efeito sobre dados existentes. <strong>Evidência:</strong> scripts, volume de dados, consultas, planos e resultados antes/depois. <strong>Sinal de fragilidade:</strong> depender apenas do ORM, sem conseguir explicar o SQL relevante ou as regras protegidas pelo banco.</p>
+<h3>4.4. Qualidade e entrega: reduzir o risco de mudar</h3>
+<p>Testes unitários verificam comportamentos delimitados; testes de integração verificam a colaboração entre partes reais. O valor de JUnit, Mockito e Testcontainers está na confiança que os testes oferecem ao alterar o sistema. Docker e pipeline devem permitir repetir a execução e descobrir problemas antes da entrega.</p>
+<p><strong>Prática proposta:</strong> selecionar uma regra, escrever um teste que detecte sua violação e executar uma integração com banco. Fazer uma alteração deliberadamente errada para confirmar que a verificação falha. <strong>Evidência:</strong> execução automatizada, instruções reproduzíveis e descrição do risco coberto. <strong>Sinal de fragilidade:</strong> muitos testes que continuam verdes mesmo quando a regra principal está incorreta.</p>
+<h3>4.5. Segurança: verificar quem pode fazer o quê</h3>
+<p>O plano cobre identidade, permissões, credenciais e riscos de aplicação. Para o desenvolvedor, isso precisa virar comportamento verificável: reconhecer o usuário não basta para decidir se ele pode acessar um recurso. Regras de autorização devem ser exercitadas em situações permitidas e negadas.</p>
+<p><strong>Prática proposta:</strong> demonstrar que um usuário pode consultar seu próprio pedido e recebe a resposta definida pelo contrato ao tentar acessar o pedido de outra pessoa. <strong>Evidência:</strong> matriz de permissões, testes positivos/negativos e decisão documentada. <strong>Sinal de fragilidade:</strong> autenticação funcionando, mas nenhuma verificação de acesso ao recurso. Exercícios devem usar ambiente de teste e dados fictícios.</p>
+<h3>4.6. Produção: observar, diagnosticar e recuperar</h3>
+<p>Logs registram acontecimentos; métricas acompanham comportamento agregado; traces ajudam a acompanhar o percurso de uma operação. O estudo de SLO, alertas, runbooks e postmortems conecta esses sinais à confiabilidade esperada do serviço.</p>
+<p><strong>Prática proposta:</strong> provocar uma falha controlada no ambiente de laboratório, detectar o efeito, registrar hipóteses e testar uma recuperação. <strong>Evidência:</strong> linha do tempo, sinais usados, decisão tomada, resultado e ação preventiva. <strong>Sinal de fragilidade:</strong> dashboards visualmente completos sem relação com uma pergunta operacional. Um postmortem útil explica fatores contribuintes e melhorias verificáveis, evitando atribuir tudo a “erro humano”.</p>
+<h3>4.7. Arquitetura e integração: justificar fronteiras e consequências</h3>
+<p>Camadas, módulos, DDD e arquitetura hexagonal ajudam a organizar responsabilidades e dependências. C4 comunica estrutura; ADR registra o contexto e as consequências de uma decisão. Mensageria acrescenta questões de entrega, repetição, ordem, recuperação e evolução de contratos.</p>
+<p><strong>Prática proposta:</strong> separar responsabilidades de pedidos e notificações, justificar se precisam ou não de serviços distintos e testar o comportamento quando uma integração falha. <strong>Evidência:</strong> diagrama simples, ADR, contrato e testes das situações relevantes. <strong>Sinal de fragilidade:</strong> adotar microsserviços por prestígio ou desenhar componentes sem explicar como o sistema se recupera de falhas.</p>
+<h3>4.8. Cloud e escala: relacionar infraestrutura a uma necessidade</h3>
+<p>AWS, Terraform e Kubernetes devem ser estudados a partir da aplicação que precisa ser entregue. Infraestrutura reproduzível, configuração, diagnóstico, atualização e recuperação têm valor antes de uma topologia sofisticada. Capacidade e custo dependem de premissas explícitas sobre carga e uso.</p>
+<p><strong>Prática proposta:</strong> descrever o ambiente de um serviço, automatizar sua preparação e registrar como verificar uma atualização. Medir uma carga de teste e declarar seus limites. <strong>Evidência:</strong> configuração versionada sem segredos, procedimento de entrega/recuperação e relatório de uso. <strong>Sinal de fragilidade:</strong> afirmar escalabilidade sem informar carga, recursos disponíveis e comportamento observado. Os exercícios não exigem contratação de serviços pagos.</p>
+<h3>4.9. Comunicação, colaboração e inglês</h3>
+<p>Um PR precisa explicar o problema, o comportamento resultante e a validação. Uma revisão deve distinguir defeito, risco, dúvida e preferência. RFCs, ADRs e conversas com stakeholders ajudam a tornar decisões compreensíveis para quem não participou da implementação.</p>
+<p><strong>Prática proposta:</strong> apresentar a mesma mudança para um desenvolvedor e para alguém interessado no resultado do produto. Em inglês, começar pela leitura de documentação e uma explicação curta de uma decisão. <strong>Evidência:</strong> texto, feedback recebido e versão revisada. <strong>Sinal de fragilidade:</strong> usar termos técnicos sem conseguir explicar o efeito da mudança para o usuário ou para o time.</p>
+<h3>4.10. Complementos: selecionar pela utilidade</h3>
+<p>Frontend ajuda a construir uma experiência de uso e entender a integração com a API. Python pode apoiar automação e funcionalidades específicas. Algoritmos e matemática ajudam a raciocinar sobre custo e comportamento. IA e engenharia assistida por IA atendem objetivos diferentes: criar funcionalidades inteligentes e melhorar o processo de desenvolvimento com verificação.</p>
+<p><strong>Prática proposta:</strong> escolher um complemento que resolva uma necessidade do produto atual. <strong>Evidência:</strong> benefício e limites demonstrados. <strong>Sinal de fragilidade:</strong> iniciar várias trilhas sem concluir o backend essencial. A trilha financeira e a rotina pessoal podem sustentar a continuidade dos estudos, mas não foram usadas como evidência de competência técnica nas vagas.</p>
+<h3>4.11. Prática e avaliação: usar os mecanismos do plano</h3>
+<p>Os labs encadeados permitem observar evolução; os projetos independentes permitem isolar competências; os simulados verificam explicação e raciocínio; as revisões ajudam a retornar aos assuntos. Cada mecanismo deve produzir uma informação útil sobre o aprendizado.</p>
+<p><strong>Prática proposta:</strong> depois de concluir uma entrega, realizar o simulado correspondente e registrar uma dificuldade específica. Revisitar essa dificuldade em um novo caso, em vez de apenas reler o exemplo. <strong>Evidência:</strong> entrega, feedback e resolução posterior. <strong>Sinal de fragilidade:</strong> marcar progresso porque o material foi consumido, sem executar a ação descrita no objetivo.</p>
+<h3>4.12. Três distinções que afetam a avaliação</h3>
+<p><strong>O site de estudos não é o produto backend do portfólio.</strong> A aplicação deste repositório é um site estático. Os labs DevCore descrevem um produto a ser construído; a existência da descrição não comprova que todas as suas entregas tenham sido implementadas.</p>
+<p><strong>Os exemplos Java têm escopo didático explícito.</strong> O arquivo <code>public/examples/java21-senior/README.md</code> descreve exemplos pequenos, sem framework e sem dependências externas. Eles ajudam a estudar mecanismos, mas não comprovam integração real com Spring, Hibernate, banco e mensageria em conjunto.</p>
+<p><strong>A sequência alternativa de Arquitetura é teórica.</strong> <code>public/data/sequences/arquitetura.js</code> declara esse perfil e cobra explicação, comparação e projeto no papel. É útil para raciocínio e comunicação; precisa ser combinada com implementação e operação para sustentar experiência prática.</p>
+<p>O progresso também não é certificação externa: <code>public/assets/js/features/progress.js</code> exige evidência para validação e D30 para domínio, mas uma URL e uma revisão registrada não garantem qualidade técnica ou autoria. A evidência deve receber avaliação humana.</p>
+<h2 id="secao-6">5. Júnior forte</h2>
+<div class="sequence-links" aria-label="Sequências detalhadas"><a href="#junior-sequencia">Sequência: júnior forte</a><a href="#pleno-medio-sequencia">Sequência: pleno médio</a><a href="#pleno-forte-sequencia">Sequência: pleno forte</a><a href="#senior-inicial-sequencia">Sequência: sênior inicial</a></div>
+<p><strong>Definição usada:</strong> resolve tarefas delimitadas, entende o código que entrega, reconhece quando precisa de ajuda e incorpora feedback sem depender de um tutorial para cada passo.</p>
+<p>A unidade de trabalho é uma tarefa pequena, com objetivo e limites combinados. O estudante precisa compreender entrada, regra, persistência e saída, executar testes e mostrar onde encontrou uma dificuldade. A orientação pode ajudar a escolher o caminho; a explicação final deve ser do próprio autor.</p>
+<h3>Conteúdo prioritário já presente</h3>
+<p>Organize o conteúdo nas prioridades abaixo. Os desdobramentos explicitam a profundidade proposta para este nível; complementações não significam que todo subtópico tenha módulo próprio no repositório.</p>
+<ol><li><strong>F1 — linguagem e ambiente:</strong> Terminal e arquivos → JDK/JVM e compilação → tipos, métodos e controle de fluxo → OO e collections → exceptions e debugger → Git → build com Maven ou Gradle. Entender referências, igualdade e escolha entre List, Set e Map.</li>
+<li><strong>F1 — SQL:</strong> Tipos e tabelas → PK/FK e cardinalidade → constraints → consultas e filtros → JOIN e agregações → transação → scripts de schema e seed. Relacionar o modelo às regras que impedem dados inválidos.</li>
+<li><strong>F2 — API e persistência:</strong> HTTP e JSON → contrato REST → DTO e validação → controller/serviço/repositório → entidade JPA → consultas e paginação → transação → migrations → tratamento de erros e OpenAPI.</li>
+<li><strong>F3 — qualidade e execução:</strong> Comportamento esperado → JUnit/assertions → casos de limite → Mockito quando necessário → integração com banco/Testcontainers → configuração → Docker/Compose → pipeline de build e testes.</li>
+<li><strong>F4 — segurança selecionada:</strong> Identidade → autenticação versus autorização → propriedade do recurso → permissões → validação de entrada → credenciais por ambiente → testes permitidos e negados.</li>
+<li><strong>Inglês e leitura:</strong> Vocabulário de erro e documentação → localizar exemplo oficial pertinente → entender parâmetros e pré-requisitos → aplicar → explicar com palavras próprias. Acrescentar leitura de código e revisão de sugestões de IA.</li></ol>
+<p><strong>Comparação:</strong> a cobertura do núcleo backend é adequada aos requisitos de V1. Para V2, é necessário antecipar noções de mensageria, Kubernetes e cloud hoje aprofundadas nas fases posteriores. Para a parte full stack de V1, frontend só na F11 é tarde se esse for o alvo imediato. <a href="https://fcamara.gupy.io/jobs/12692056">V1</a>, <a href="https://confidencial.gupy.io/jobs/12639994">V2</a>.</p>
+<p><strong>Como usar a comparação:</strong> Para aplicar essa comparação, separe o núcleo backend dos complementos da candidatura. Primeiro prove Java, SQL, API e testes; depois identifique se a descrição exige interface web ou contato introdutório com infraestrutura. A ordem de estudo deve atender à oportunidade escolhida sem transformar todo diferencial em pré-requisito universal.</p>
+<h3>Evidência recomendada para candidatura</h3>
+<ul class="evidence-checklist"><li><input disabled type="checkbox" aria-label="API própria"><strong>API própria.</strong> Contrato HTTP, regras, validação, transação e persistência.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Repositório com fluxo de criação/consulta, migration, seed e exemplos de respostas de sucesso e erro. Documentar uma regra que vá além de salvar campos.</span></li>
+<li><input disabled type="checkbox" aria-label="Testes"><strong>Testes.</strong> Casos positivos, negativos e de limite; isolamento e integração real.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Suíte com teste de regra e teste com banco. Identificar qual regressão cada um protege e registrar como executá-los.</span></li>
+<li><input disabled type="checkbox" aria-label="Reprodutibilidade"><strong>Reprodutibilidade.</strong> Build, configuração, dependências, containers e comandos.<br><span class="evidence-note"><strong>Material a apresentar:</strong> README com pré-requisitos, variáveis exemplificadas sem segredos, comandos, dados de teste e saída esperada. Pipeline executando a mesma base de verificações.</span></li>
+<li><input disabled type="checkbox" aria-label="Bug corrigido"><strong>Bug corrigido.</strong> Reprodução mínima, leitura de stack trace, hipótese e regressão.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Issue com sintoma e passos; commit com correção delimitada; teste que evidencia o problema anterior. Separar causa encontrada de hipóteses descartadas.</span></li>
+<li><input disabled type="checkbox" aria-label="PR revisado"><strong>PR revisado.</strong> Escopo pequeno, descrição, diff, feedback e justificativa.<br><span class="evidence-note"><strong>Material a apresentar:</strong> PR com problema, mudança e validação; comentários recebidos e resposta a cada ponto relevante. Mostrar a versão após os ajustes.</span></li>
+<li><input disabled type="checkbox" aria-label="Explicação do código"><strong>Explicação do código.</strong> Fluxo de dados, responsabilidades, escolhas e limites.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Demonstração de uma requisição e leitura de um trecho escolhido pelo revisor. Identificar ajuda de ferramentas e quais verificações foram feitas.</span></li></ul>
+<p>Esses itens são uma rubrica proposta, não requisitos literais de todas as vagas. Não é necessário concluir toda a formação, dominar JVM internamente ou construir sistemas distribuídos complexos para começar a concorrer a vagas júnior compatíveis.</p>
+<h3>5.1. Profundidade esperada em cada prioridade</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Prioridade / frente</th><th scope="col">Conteúdos a aprofundar, em ordem</th><th scope="col">Aplicação e artefato</th><th scope="col">Profundidade e critério de domínio</th></tr></thead><tbody><tr><th scope="row">F1 — linguagem e ambiente</th><td>Terminal e arquivos → JDK/JVM e compilação → tipos, métodos e controle de fluxo → OO e collections → exceptions e debugger → Git → build com Maven ou Gradle. Entender referências, igualdade e escolha entre List, Set e Map.</td><td>Implementar uma regra em Java, depurar entrada inválida, versionar a correção e executar testes pela linha de comando. Registrar comandos e configuração necessária.</td><td>Explicar o caminho do código até a execução e corrigir um erro sem depender de configuração oculta da IDE. Justificar a estrutura usada e prever o resultado de um trecho pequeno.</td></tr>
+<tr><th scope="row">F1 — SQL</th><td>Tipos e tabelas → PK/FK e cardinalidade → constraints → consultas e filtros → JOIN e agregações → transação → scripts de schema e seed. Relacionar o modelo às regras que impedem dados inválidos.</td><td>Modelar pedidos e itens, calcular total por pedido e demonstrar uma operação rejeitada por constraint. Preparar dados que incluam casos válidos, vazios e inválidos.</td><td>Prever as linhas retornadas e explicar uma junção. Recriar o banco do zero e identificar o que é protegido pelo banco e o que depende da aplicação.</td></tr>
+<tr><th scope="row">F2 — API e persistência</th><td>HTTP e JSON → contrato REST → DTO e validação → controller/serviço/repositório → entidade JPA → consultas e paginação → transação → migrations → tratamento de erros e OpenAPI.</td><td>Criar e consultar pedidos, com erros documentados. Acompanhar uma requisição e observar o SQL executado; identificar responsabilidade de cada camada.</td><td>Uma entrada inválida não produz gravação indevida. O autor explica o limite transacional, a resposta HTTP e por que não expõe indiscriminadamente a entidade no contrato.</td></tr>
+<tr><th scope="row">F3 — qualidade e execução</th><td>Comportamento esperado → JUnit/assertions → casos de limite → Mockito quando necessário → integração com banco/Testcontainers → configuração → Docker/Compose → pipeline de build e testes.</td><td>Proteger uma regra com teste, quebrá-la deliberadamente e verificar a falha. Executar a integração com banco e repetir o procedimento em uma pasta limpa.</td><td>Os testes detectam a regressão escolhida e o README permite repetir a execução. Explicar quais falhas ainda não são cobertas, sem usar quantidade de testes como prova suficiente.</td></tr>
+<tr><th scope="row">F4 — segurança selecionada</th><td>Identidade → autenticação versus autorização → propriedade do recurso → permissões → validação de entrada → credenciais por ambiente → testes permitidos e negados.</td><td>Criar dois usuários fictícios e verificar consulta ao próprio pedido, ao pedido alheio e sem autenticação. Registrar a política de acesso combinada.</td><td>A decisão de acesso ocorre no backend e corresponde à regra documentada. O autor identifica onde as permissões são verificadas e evita expor credenciais no repositório.</td></tr>
+<tr><th scope="row">Inglês e leitura</th><td>Vocabulário de erro e documentação → localizar exemplo oficial pertinente → entender parâmetros e pré-requisitos → aplicar → explicar com palavras próprias. Acrescentar leitura de código e revisão de sugestões de IA.</td><td>Resolver uma dúvida consultando documentação e registrar o que mudou. Explicar uma função, seus casos de erro e uma alteração simples sem repetir uma resposta pronta.</td><td>A leitura resulta em uma ação correta e verificável. Identificar o que não entendeu, formular uma pergunta precisa e explicar limites da solução.</td></tr></tbody></table></div>
+<h3>5.2. O que cada item do checklist precisa conter</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Evidência</th><th scope="col">Conhecimentos necessários</th><th scope="col">Detalhamento da entrega</th><th scope="col">Como revisar e identificar insuficiência</th></tr></thead><tbody><tr><th scope="row">API própria</th><td>Contrato HTTP, regras, validação, transação e persistência.</td><td>Repositório com fluxo de criação/consulta, migration, seed e exemplos de respostas de sucesso e erro. Documentar uma regra que vá além de salvar campos.</td><td>O revisor executa o fluxo e confirma que entrada inválida não deixa dados incorretos. O autor localiza a regra e explica suas decisões.</td></tr>
+<tr><th scope="row">Testes</th><td>Casos positivos, negativos e de limite; isolamento e integração real.</td><td>Suíte com teste de regra e teste com banco. Identificar qual regressão cada um protege e registrar como executá-los.</td><td>Uma alteração deliberada na regra faz a verificação falhar. O teste não depende de uma ordem casual de execução nem apenas de mocks que repetem a implementação.</td></tr>
+<tr><th scope="row">Reprodutibilidade</th><td>Build, configuração, dependências, containers e comandos.</td><td>README com pré-requisitos, variáveis exemplificadas sem segredos, comandos, dados de teste e saída esperada. Pipeline executando a mesma base de verificações.</td><td>Outra pessoa executa sem receber arquivos locais extras. Se falhar, a documentação permite identificar a etapa e o autor consegue diagnosticar.</td></tr>
+<tr><th scope="row">Bug corrigido</th><td>Reprodução mínima, leitura de stack trace, hipótese e regressão.</td><td>Issue com sintoma e passos; commit com correção delimitada; teste que evidencia o problema anterior. Separar causa encontrada de hipóteses descartadas.</td><td>O teste falha antes e passa depois. A explicação conecta o sintoma à causa e não apenas informa que uma linha foi trocada.</td></tr>
+<tr><th scope="row">PR revisado</th><td>Escopo pequeno, descrição, diff, feedback e justificativa.</td><td>PR com problema, mudança e validação; comentários recebidos e resposta a cada ponto relevante. Mostrar a versão após os ajustes.</td><td>O autor compreende o feedback, corrige ou discute uma alternativa com argumento. O revisor consegue avaliar sem reconstruir todo o histórico do projeto.</td></tr>
+<tr><th scope="row">Explicação do código</th><td>Fluxo de dados, responsabilidades, escolhas e limites.</td><td>Demonstração de uma requisição e leitura de um trecho escolhido pelo revisor. Identificar ajuda de ferramentas e quais verificações foram feitas.</td><td>Conseguir adaptar uma condição e prever o efeito nos testes. Se houver dúvida, delimitar o desconhecido em vez de atribuir correção automática à ferramenta.</td></tr></tbody></table></div>
+<h3>5.3. Caso prático: cadastro e consulta de pedidos</h3>
+<p><strong>Roteiro de execução e conteúdos associados:</strong></p><ol><li>Definir pedido e item, campos obrigatórios e regras de quantidade. Escrever exemplos de entrada aceita e rejeitada antes da implementação.</li>
+<li>Criar schema, constraints, migration e seed. Consultar os dados com SQL antes de conectar o ORM.</li>
+<li>Definir criação e consulta no contrato HTTP. Implementar DTO, validação, regra, persistência e erros coerentes.</li>
+<li>Testar regra e integração, inserir um defeito controlado e documentar reprodução/correção. Acrescentar a política simples de acesso quando prevista no escopo.</li>
+<li>Entregar README, pipeline e PR. Pedir que outra pessoa execute, anotar obstáculos e corrigir a documentação. Explicar o fluxo sem depender do roteiro original.</li></ol>
+<p>Construa um fluxo pequeno para cadastrar e consultar um pedido. Defina quais campos são obrigatórios, quais valores são inválidos e qual resposta será dada quando o pedido não existir. Use um banco, uma migration e testes das regras escolhidas.</p>
+<p>O exercício termina quando outra pessoa consegue executá-lo, provocar um erro previsto e compreender a correção de um defeito. Login complexo, mensageria e várias aplicações separadas não são necessários para esse primeiro recorte. Se a vaga-alvo pedir Kafka ou Kubernetes, faça um exercício introdutório separado antes de aumentar a complexidade do produto.</p>
+<h3>5.4. Limites saudáveis de autonomia e sinais de evolução</h3>
+<p><strong>O que observar na prática:</strong></p><ul><li>Ao pedir ajuda: informar resultado esperado, resultado obtido, entrada usada, erro completo e tentativa realizada. Isso demonstra investigação inicial e permite receber orientação útil.</li>
+<li>Ao receber revisão: distinguir defeito, risco e preferência de estilo. Aplicar o ajuste entendendo o motivo e repetir o teste relacionado.</li>
+<li>Ao avaliar evolução: observar se testes de erro, documentação e cuidados com dados passam a aparecer espontaneamente em novas tarefas. Uma única demonstração não prova consistência.</li></ul>
+<p>É adequado pedir ajuda sobre uma regra ambígua, uma falha de ambiente ou uma decisão fora do escopo. Antes de pedir, registre o que esperava, o que ocorreu e o que tentou. Isso permite ao colega orientar o raciocínio.</p>
+<p>Um sinal de preparação para o próximo nível é começar a antecipar tarefas normalmente lembradas pelo revisor: teste de erro, atualização de documentação, migration e impacto sobre quem consome a API. A evolução deve aparecer em mais de uma entrega, não apenas em um projeto cuidadosamente ensaiado.</p>
+<section class="study-sequence" aria-labelledby="junior-sequencia">
+<h3 id="junior-sequencia">5.5. Sequência detalhada de conteúdos — júnior forte</h3>
+<p>Comece pelos fundamentos e avance até uma API reproduzível. Esta sequência aprofunda os pontos anteriores e propõe complementações de prática; não significa que cada subtópico abaixo já tenha um módulo dedicado no projeto. Os critérios de avanço são referências de aprendizado, não requisitos adicionais atribuídos às vagas.</p>
+<p><strong>Ordem sugerida:</strong> ambiente → linguagem → modelagem → dados → HTTP → Spring/JPA → testes → segurança → entrega e colaboração. Testes, Git e leitura de documentação devem acompanhar todo o percurso; sua etapa específica serve para consolidar o aprendizado.</p>
+<ol class="learning-steps">
+<li><h4>Preparar o ambiente e entender como o código vira aplicação</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> arquivos e diretórios no terminal; variáveis de ambiente e PATH; diferença entre JDK, compilador e JVM; compilação e execução; estrutura de pacotes; Maven ou Gradle, wrapper, dependências e comandos de teste; leitura de erro de compilação e stack trace.</p>
+<p><strong>Profundidade:</strong> saber executar pela linha de comando, localizar o arquivo de configuração e distinguir erro de código, dependência, porta ou ambiente. Não é necessário estudar internamente o compilador.</p>
+<p><strong>Prática e avanço:</strong> clonar uma aplicação pequena em outra pasta, compilar, testar e executar sem configuração oculta da IDE. Produzir um README e corrigir uma falha de ambiente explicando sua causa. <strong>Base no plano:</strong> F1; build como complemento explícito.</p></li>
+<li><h4>Consolidar linguagem, estruturas de dados e depuração</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> tipos primitivos e referências; operadores e conversões; condicionais e laços; métodos e parâmetros; escopo; strings e tratamento de valores ausentes; arrays; List, Set e Map; generics básicos; exceptions; debugger, breakpoints e inspeção de variáveis. Depois, lambdas e streams com operações simples.</p>
+<p><strong>Profundidade:</strong> escolher uma estrutura pela necessidade e explicar o custo aproximado de busca e inserção. Usar um laço ou stream porque a solução fica clara. Distinguir igualdade de referência e de valor antes de implementar objetos usados como chave.</p>
+<p><strong>Prática e avanço:</strong> agrupar itens de pedidos, identificar duplicatas e localizar um defeito pelo debugger. Explicar o fluxo e adaptar uma regra sem reescrever tudo. <strong>Base:</strong> F1/F2, Java e DSA.</p></li>
+<li><h4>Modelar regras com orientação a objetos e código legível</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> estado e comportamento; encapsulamento; construtores e invariantes; composição; interfaces e polimorfismo; imutabilidade; records; enum para estados; equals/hashCode; responsabilidade única e dependências. Estudar refatoração em pequenos passos, com nomes claros e métodos coesos.</p>
+<p><strong>Profundidade:</strong> representar regras de negócio no código sem permitir estados inválidos. Entender SOLID por exemplos pequenos; decorar definições não substitui justificar uma separação de responsabilidades.</p>
+<p><strong>Prática e avanço:</strong> modelar pedido e item, rejeitar quantidade inválida e impedir uma transição de estado proibida. Acrescentar testes desde aqui. Explicar por que cada regra está naquela classe. <strong>Base:</strong> F1 e Academia Java.</p></li>
+<li><h4>Aprender SQL e modelagem antes de depender do ORM</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> tabela, linha e tipos; chave primária e estrangeira; cardinalidade; NOT NULL, UNIQUE e outras constraints; INSERT, UPDATE e DELETE; SELECT, filtros e ordenação; JOIN; agregações e GROUP BY; transação com commit/rollback; normalização básica; scripts de criação, seed e migration.</p>
+<p><strong>Profundidade:</strong> prever quais dados uma consulta retorna e quais regras o banco protege. Ter noção de índice sem tentar otimizar tudo antecipadamente. Entender o efeito de alterar ou excluir registros relacionados.</p>
+<p><strong>Prática e avanço:</strong> criar pedidos e itens em PostgreSQL, consultar totais e recriar o banco com dados fictícios. Demonstrar uma alteração atômica e uma violação de constraint. <strong>Base:</strong> F1/F2 e Bancos.</p></li>
+<li><h4>Compreender HTTP e desenhar um contrato REST pequeno</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> cliente e servidor; URL, rota e query string; requisição e resposta; métodos HTTP; headers; JSON; códigos de resposta; validação sintática e regra de negócio; paginação; formato de erro; documentação OpenAPI. Aprender a investigar uma requisição com curl ou cliente de API.</p>
+<p><strong>Profundidade:</strong> distinguir entrada inválida, recurso inexistente, falta de permissão e falha inesperada. Explicar o contrato que o cliente enxerga sem expor desnecessariamente detalhes internos da persistência.</p>
+<p><strong>Prática e avanço:</strong> documentar criação e consulta de pedido, incluindo exemplos de erro. Outra pessoa deve conseguir consumir a API apenas com o contrato. <strong>Base:</strong> F2.</p></li>
+<li><h4>Integrar Spring Boot, regras de negócio e persistência</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> configuração da aplicação; injeção de dependência por construtor; controller, serviço e repositório; DTOs; Bean Validation; tratamento centralizado de erros; entidade JPA e identificador; relacionamentos; repository; paginação; limite transacional; migrations. Em seguida, observar o SQL e reconhecer uma consulta N+1.</p>
+<p><strong>Profundidade:</strong> acompanhar a requisição até o banco e explicar cada camada. Anotações devem representar decisões compreendidas, não uma combinação copiada até funcionar.</p>
+<p><strong>Prática e avanço:</strong> implementar o contrato da etapa anterior, persistir corretamente e tratar entrada inválida. Explicar o que ocorre quando a operação falha antes de concluir. <strong>Base:</strong> F2.</p></li>
+<li><h4>Consolidar testes de comportamento e integração</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> caso de teste e resultado esperado; organização preparação/ação/verificação; JUnit e assertions; casos de limite; exceptions esperadas; testes parametrizados; uso seletivo de Mockito; teste de integração com PostgreSQL/Testcontainers; dados de teste; isolamento; teste de regressão.</p>
+<p><strong>Profundidade:</strong> distinguir o que precisa ser substituído por um dublê do que deve ser verificado com um componente real. Saber explicar qual defeito cada teste pode detectar e o que permanece sem cobertura.</p>
+<p><strong>Prática e avanço:</strong> alterar uma regra propositalmente e observar o teste falhar. Demonstrar persistência com banco real de laboratório e corrigir um bug com teste de regressão. <strong>Base:</strong> F3.</p></li>
+<li><h4>Aplicar uma base de segurança compreensível</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> autenticação versus autorização; identidade e papéis; permissões por operação e recurso; tratamento de entrada; credenciais fora do código; configuração por ambiente; noções de sessão e token; Spring Security no escopo da aplicação; respostas de acesso negado. Aprofundar OAuth2/OIDC posteriormente conforme a função.</p>
+<p><strong>Profundidade:</strong> saber que identificar o usuário não prova que ele pode acessar qualquer pedido. Usar mecanismos de segurança mantidos pelo ecossistema, compreendendo sua configuração, sem inventar criptografia.</p>
+<p><strong>Prática e avanço:</strong> verificar acesso ao próprio pedido, tentativa de acesso a pedido alheio e falta de autenticação. Registrar as regras e testes em ambiente fictício. <strong>Base:</strong> F1/F4.</p></li>
+<li><h4>Entregar, receber revisão e explicar o resultado</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> Git e commits pequenos; branch e PR; resolução de conflito; README; Dockerfile, imagem e container; Compose para aplicação e banco; configuração e logs; pipeline de build/testes; descrição do problema e da validação; leitura de documentação em inglês. Na assistência por IA, revisar diffs e verificar o código sugerido.</p>
+<p><strong>Profundidade:</strong> não é necessário administrar uma plataforma. É necessário entregar algo reproduzível, identificar falha de execução e incorporar feedback com compreensão.</p>
+<p><strong>Prática e avanço:</strong> entregar o cadastro/consulta do checklist, obter revisão e explicar uma decisão e um bug corrigido. Para vagas específicas, adicionar noções de Kafka/Kubernetes ou um cliente frontend pequeno. <strong>Base:</strong> F1–F3, inglês e complementos condicionais.</p></li>
+</ol>
+<p><strong>Fechamento do nível:</strong> reexecute as seis evidências da seção 5.2. Se uma delas ainda depende de copiar instruções sem compreender, retorne à etapa correspondente. A prioridade é uma API pequena confiável, não acrescentar infraestrutura avançada.</p>
+</section>
+<h2 id="secao-7">6. Pleno médio</h2>
+<p><strong>Definição usada:</strong> entrega uma funcionalidade de complexidade moderada do entendimento ao deploy, seguindo a arquitetura existente e pedindo ajuda em decisões de maior risco.</p>
+<p>A unidade de trabalho é uma funcionalidade completa em um serviço conhecido. Espera-se esclarecer regras, planejar a alteração, implementar, testar, entregar e acompanhar. Autonomia inclui reconhecer uma decisão de alto risco e levá-la ao time com opções e evidências.</p>
+<h3>Conteúdo prioritário já presente</h3>
+<p>Organize o conteúdo nas prioridades abaixo. Os desdobramentos explicitam a profundidade proposta para este nível; complementações não significam que todo subtópico tenha módulo próprio no repositório.</p>
+<ol><li><strong>Segurança:</strong> Permissões por operação → propriedade do recurso → estados em que a ação é permitida → integração de identidade → testes de regressão de acesso → registros de auditoria adequados ao fluxo.</li>
+<li><strong>Dados e desempenho:</strong> Invariantes → transações → concorrência e locks → SQL emitido → N+1 → plano de execução → índices → migration e backfill. Estudar o efeito da mudança sobre dados existentes.</li>
+<li><strong>Observabilidade:</strong> Fluxo da operação → logs estruturados → correlação de requisição → métricas de volume, erro e duração → leitura de trace → hipóteses e diagnóstico.</li>
+<li><strong>Organização:</strong> Leitura do código existente → testes de caracterização → responsabilidades → dependências → limite transacional → refatoração incremental → compatibilidade.</li>
+<li><strong>Integração:</strong> Contrato → resposta esperada → erro de negócio versus falha temporária → timeout → resultado incerto → repetição e idempotência → testes de falha.</li>
+<li><strong>Entrega:</strong> Artefato → configuração → migration → ordem de implantação → verificação de saúde → teste após deploy → critérios de interrupção → recuperação.</li></ol>
+<p><strong>Comparação:</strong> o plano cobre boa parte da base técnica das vagas pleno. Entretanto, V3 e V4 mostram que F1–F6 não bastam para toda posição: há stacks com mensageria, orquestração e tecnologias corporativas específicas. V3 também exige estimar e implementar com menos detalhamento. <a href="https://deliverit.gupy.io/jobs/12545946?jobBoardSource=gupy_public_page">V3</a>, <a href="https://stefanini.gupy.io/jobs/12439849?jobBoardSource=gupy_public_page">V4</a>.</p>
+<p><strong>Como usar a comparação:</strong> Use a vaga para escolher os complementos de stack. Conhecer PostgreSQL ou um pipeline oferece base transferível, mas não comprova domínio de Oracle ou de outra ferramenta. A preparação deve combinar profundidade no ciclo de entrega com um laboratório direcionado ao requisito ainda não demonstrado.</p>
+<h3>Evidência recomendada</h3>
+<ul class="evidence-checklist"><li><input disabled type="checkbox" aria-label="Refinamento"><strong>Refinamento.</strong> Critérios de aceite, exemplos, dependências, premissas e estimativa com incerteza.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Documento curto com perguntas respondidas, dúvidas abertas, casos negados e divisão em etapas revisáveis. Registrar quem decide os pontos pendentes.</span></li>
+<li><input disabled type="checkbox" aria-label="Funcionalidade completa"><strong>Funcionalidade completa.</strong> Regra, contrato, dados, autorização, testes e observação.<br><span class="evidence-note"><strong>Material a apresentar:</strong> PRs coerentes com o refinamento, migration, testes, exemplos de uso e instruções para acompanhar comportamento após entrega.</span></li>
+<li><input disabled type="checkbox" aria-label="Deploy e recuperação"><strong>Deploy e recuperação.</strong> Compatibilidade, ordem de passos, dados e condições de reversão.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Plano com preparação, execução, validação, interrupção e retomada. Registrar qual parte pode ser revertida e qual precisa de correção adiante.</span></li>
+<li><input disabled type="checkbox" aria-label="Investigação"><strong>Investigação.</strong> Reprodução, hipótese, medição, experimento e conclusão.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Registro com sintoma, evidência inicial, hipóteses consideradas, alteração testada e resultado. Incluir volume/ambiente se o problema for desempenho.</span></li>
+<li><input disabled type="checkbox" aria-label="Comunicação de risco"><strong>Comunicação de risco.</strong> Impacto, urgência, opções de escopo e decisão necessária.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Mensagem que descreve o impedimento, consequência para a entrega, alternativas e recomendação. Atualizar quando uma premissa mudar.</span></li>
+<li><input disabled type="checkbox" aria-label="Revisão e acompanhamento"><strong>Revisão e acompanhamento.</strong> Revisão de comportamento, sinais após implantação e resposta a feedback.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Comentários em PR com justificativa; resposta aos ajustes; registro de erros ou retorno de uso após a entrega e encaminhamento das correções.</span></li></ul>
+<p><strong>Lacuna principal:</strong> transformar exercícios técnicos em um fluxo completo de trabalho com refinamento, revisão, entrega e acompanhamento. O projeto fornece muitos componentes desse fluxo; é preciso praticá-los juntos e com feedback externo.</p>
+<p><strong>Como trabalhar essa lacuna:</strong> selecione uma evidência da tabela seguinte, produza o artefato, peça revisão externa e repita com uma condição diferente. Registre o apoio necessário, os erros encontrados e o que passou a fazer com autonomia. A correção deve aparecer em outra entrega, não apenas na revisão do mesmo exercício.</p>
+<h3>6.1. Como aprofundar o núcleo já aprendido</h3>
+<p>No pleno médio, a questão deixa de ser apenas “como implementar o endpoint”. É preciso entender como a mudança entra em um sistema existente, quais dados altera, quem pode utilizá-la e como saber se funcionou depois da entrega.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Prioridade / frente</th><th scope="col">Conteúdos a aprofundar, em ordem</th><th scope="col">Aplicação e artefato</th><th scope="col">Profundidade e critério de domínio</th></tr></thead><tbody><tr><th scope="row">Segurança</th><td>Permissões por operação → propriedade do recurso → estados em que a ação é permitida → integração de identidade → testes de regressão de acesso → registros de auditoria adequados ao fluxo.</td><td>Construir matriz ator × operação × estado do pedido. Testar acesso próprio, alheio, administrativo e sem identidade, de acordo com o contrato escolhido.</td><td>A nova funcionalidade não amplia permissões por acidente. Cada negação importante tem motivo documentado e verificação automatizada; o log não expõe dados desnecessários.</td></tr>
+<tr><th scope="row">Dados e desempenho</th><td>Invariantes → transações → concorrência e locks → SQL emitido → N+1 → plano de execução → índices → migration e backfill. Estudar o efeito da mudança sobre dados existentes.</td><td>Reproduzir duas alterações concorrentes e uma consulta lenta com volume conhecido. Propor correção e comparar resultado antes/depois.</td><td>A regra permanece correta sob a concorrência testada. A melhoria é medida em condições comparáveis e o autor explica custo de escrita, armazenamento ou manutenção introduzido.</td></tr>
+<tr><th scope="row">Observabilidade</th><td>Fluxo da operação → logs estruturados → correlação de requisição → métricas de volume, erro e duração → leitura de trace → hipóteses e diagnóstico.</td><td>Instrumentar cancelamento e uma dependência externa. Provocar timeout ou lentidão e mostrar quais sinais permitem localizar a etapa problemática.</td><td>O diagnóstico cita evidência, não apenas uma suspeita. Os sinais ajudam a decidir o próximo passo e não se resumem a registrar toda informação disponível.</td></tr>
+<tr><th scope="row">Organização</th><td>Leitura do código existente → testes de caracterização → responsabilidades → dependências → limite transacional → refatoração incremental → compatibilidade.</td><td>Mapear os pontos afetados e mudar a funcionalidade preservando regras existentes. Separar refatoração de alteração de comportamento quando isso facilitar a revisão.</td><td>A mudança respeita fronteiras e não espalha a regra em múltiplos lugares sem justificativa. O autor explica o que manteve e o que precisou alterar.</td></tr>
+<tr><th scope="row">Integração</th><td>Contrato → resposta esperada → erro de negócio versus falha temporária → timeout → resultado incerto → repetição e idempotência → testes de falha.</td><td>Simular sucesso, recusa e indisponibilidade de uma dependência. Definir o estado final do pedido e a ação disponível ao usuário em cada caso.</td><td>A solução não repete cegamente uma operação com efeito. O comportamento está acordado, testado e documentado, incluindo o que exige intervenção.</td></tr>
+<tr><th scope="row">Entrega</th><td>Artefato → configuração → migration → ordem de implantação → verificação de saúde → teste após deploy → critérios de interrupção → recuperação.</td><td>Ensaiar a mudança sobre dados existentes em laboratório. Registrar os passos e verificar uma recuperação após falha controlada.</td><td>Outra pessoa consegue seguir o plano. O procedimento considera compatibilidade de dados e aplicação e não confunde rollback de código com restauração de informação.</td></tr></tbody></table></div>
+<h3>6.2. O que cada item do checklist precisa conter</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Evidência</th><th scope="col">Conhecimentos necessários</th><th scope="col">Detalhamento da entrega</th><th scope="col">Como revisar e identificar insuficiência</th></tr></thead><tbody><tr><th scope="row">Refinamento</th><td>Critérios de aceite, exemplos, dependências, premissas e estimativa com incerteza.</td><td>Documento curto com perguntas respondidas, dúvidas abertas, casos negados e divisão em etapas revisáveis. Registrar quem decide os pontos pendentes.</td><td>O time consegue identificar o que está dentro/fora da entrega antes do código. A estimativa informa riscos e dependências em vez de apresentar certeza artificial.</td></tr>
+<tr><th scope="row">Funcionalidade completa</th><td>Regra, contrato, dados, autorização, testes e observação.</td><td>PRs coerentes com o refinamento, migration, testes, exemplos de uso e instruções para acompanhar comportamento após entrega.</td><td>Os critérios de aceite têm verificações correspondentes. O revisor acompanha um caso de sucesso e os erros relevantes sem descobrir requisitos ocultos.</td></tr>
+<tr><th scope="row">Deploy e recuperação</th><td>Compatibilidade, ordem de passos, dados e condições de reversão.</td><td>Plano com preparação, execução, validação, interrupção e retomada. Registrar qual parte pode ser revertida e qual precisa de correção adiante.</td><td>O ensaio cobre uma falha concreta. O autor explica o estado intermediário do sistema e como evitar perda ou incoerência de dados.</td></tr>
+<tr><th scope="row">Investigação</th><td>Reprodução, hipótese, medição, experimento e conclusão.</td><td>Registro com sintoma, evidência inicial, hipóteses consideradas, alteração testada e resultado. Incluir volume/ambiente se o problema for desempenho.</td><td>A conclusão decorre do experimento. O relato informa incertezas e permite repetir a investigação; a correção inclui proteção contra regressão quando cabível.</td></tr>
+<tr><th scope="row">Comunicação de risco</th><td>Impacto, urgência, opções de escopo e decisão necessária.</td><td>Mensagem que descreve o impedimento, consequência para a entrega, alternativas e recomendação. Atualizar quando uma premissa mudar.</td><td>O destinatário consegue agir: escolher opção, obter informação ou aceitar risco. A comunicação ocorre antes de o bloqueio inviabilizar silenciosamente o prazo.</td></tr>
+<tr><th scope="row">Revisão e acompanhamento</th><td>Revisão de comportamento, sinais após implantação e resposta a feedback.</td><td>Comentários em PR com justificativa; resposta aos ajustes; registro de erros ou retorno de uso após a entrega e encaminhamento das correções.</td><td>O autor participa do ciclo após o merge, diferencia prioridade de preferência e fecha o retorno com quem relatou o problema.</td></tr></tbody></table></div>
+<h3>6.3. Caso prático: permitir cancelamento de pedido</h3>
+<p><strong>Roteiro de execução e conteúdos associados:</strong></p><ol><li>Mapear os estados do pedido e decidir quando o cancelamento é válido, quem pode solicitar e o que acontece se já houve pagamento ou processamento.</li>
+<li>Escrever exemplos de aceite e decompor a mudança. Identificar dependência externa e explicitar o que será simulado ou ficará fora do escopo.</li>
+<li>Proteger a transição de estado e testar solicitação repetida/concorrente conforme a regra acordada. Incluir migration apenas se necessária e analisar dados existentes.</li>
+<li>Verificar autorização, erros e comportamento da dependência indisponível. Usar logs e métricas para acompanhar o fluxo e reproduzir um problema.</li>
+<li>Ensaiar entrega e recuperação. Obter revisão e observar uso/execução de terceiros; comparar a estimativa inicial com as dificuldades reais.</li></ol>
+<p>Receba a solicitação “o cliente precisa cancelar um pedido”. Descubra quais estados permitem cancelamento, quem tem permissão e quais efeitos já podem ter ocorrido. Registre as respostas como critérios de aceite antes de alterar o código.</p>
+<p>Implemente a regra respeitando a organização atual, evolua dados se necessário, verifique os casos permitidos e negados e documente como acompanhar a funcionalidade. Se existir pagamento externo, delimite o que será feito nesta entrega e o que depende de outra decisão. Uma boa solução pode reduzir o escopo explicitamente, desde que preserve a regra acordada.</p>
+<h3>6.4. Como avaliar autonomia sem confundi-la com isolamento</h3>
+<p><strong>O que observar na prática:</strong></p><ul><li>Decisão que pode conduzir: detalhes de uma implementação dentro de padrões acordados, acompanhados de testes e explicação. Manter o time informado sobre efeitos relevantes.</li>
+<li>Decisão que deve alinhar: mudança de contrato consumido por terceiros, migração de alto impacto ou alteração de requisito de segurança. Levar contexto, alternativas e risco.</li>
+<li>Sinal de evolução: antecipar dependências e falhas, ajudar a revisar uma integração e acompanhar o resultado sem depender de lembretes do revisor.</li></ul>
+<p>Autonomia significa levar uma proposta fundamentada à revisão e conduzir os próximos passos. Decisões de alto impacto continuam precisando de alinhamento. Um pleno pode executar bem uma mudança e ainda precisar de apoio em disponibilidade, segurança especializada ou migração de grande volume.</p>
+<p>Para evoluir a pleno forte, procure evidências de que você identifica dependências antes que virem bloqueios, resolve problemas que atravessam componentes e melhora a execução de colegas. Se toda decisão ainda precisa ser detalhada por outra pessoa, fortaleça primeiro o ciclo completo de entrega.</p>
+<section class="study-sequence" aria-labelledby="pleno-medio-sequencia">
+<h3 id="pleno-medio-sequencia">6.5. Sequência detalhada de conteúdos — pleno médio</h3>
+<p><strong>Pré-requisito:</strong> conseguir executar o ciclo de júnior forte sem orientação passo a passo. O foco agora é uma funcionalidade dentro de uma aplicação existente, incluindo refinamento, dados, segurança, diagnóstico e entrega.</p>
+<p><strong>Ordem sugerida:</strong> refinamento → manutenção e desenho → dados → segurança → testes e integrações → observabilidade → deploy → acompanhamento. Use a funcionalidade de cancelamento da seção 6.3 para integrar as etapas.</p>
+<ol class="learning-steps">
+<li><h4>Refinar a necessidade e decompor a entrega</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> problema do usuário; regra de negócio; critérios de aceite; exemplos e contraexemplos; estados do fluxo; dependências externas; premissas; divisão em tarefas; estimativa com incerteza; registro de decisão e comunicação de impedimento.</p>
+<p><strong>Profundidade:</strong> transformar “permitir cancelamento” em perguntas sobre estados, permissões, efeitos e exceções. Separar a necessidade de negócio de uma solução técnica sugerida prematuramente.</p>
+<p><strong>Prática e avanço:</strong> produzir um escopo revisável com casos aceitos/negados, etapas e pontos em aberto. Outra pessoa deve conseguir avaliar o que será entregue. <strong>Conexão:</strong> evidência de refinamento; prática colaborativa complementar aos objetivos técnicos.</p></li>
+<li><h4>Ler o sistema existente e escolher onde alterar</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> navegação pelo repositório; fluxo de chamadas; regras existentes; testes de caracterização; coesão e acoplamento; responsabilidades das camadas; fronteiras transacionais; injeção de dependência; refatoração incremental; compatibilidade do contrato.</p>
+<p><strong>Profundidade:</strong> modificar sem reescrever o sistema por preferência pessoal. Entender comportamento antes de melhorar a estrutura. Reconhecer quando uma decisão depende do time ou extrapola o escopo da tarefa.</p>
+<p><strong>Prática e avanço:</strong> mapear o fluxo de cancelamento e apresentar uma mudança pequena com comportamento anterior protegido. Explicar os arquivos afetados e as dependências preservadas. <strong>Base:</strong> F2/F7 e Java.</p></li>
+<li><h4>Tratar transações, concorrência e evolução de dados</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> atomicidade e invariantes; limites de transação; níveis de isolamento por cenário; atualizações concorrentes; locking otimista e pessimista; constraints; N+1 e estratégias de consulta; EXPLAIN e índices; migrations aditivas; backfill; compatibilidade com a versão anterior.</p>
+<p><strong>Profundidade:</strong> escolher um mecanismo conforme o risco demonstrado. Antes de adicionar cache, entender consulta e volume. Perceber que voltar a versão da aplicação não desfaz automaticamente uma alteração de dados.</p>
+<p><strong>Prática e avanço:</strong> testar duas tentativas concorrentes de alteração de pedido e proteger a regra definida. Aplicar uma migration em uma cópia do banco de laboratório com dados existentes. <strong>Base:</strong> F2/F3/F5.</p></li>
+<li><h4>Aprofundar autorização e integração de identidade</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> matriz de permissões; propriedade do recurso; perfis administrativos; fluxo de autenticação adotado; papel do provedor de identidade; fundamentos de OAuth2/OIDC; validação de tokens pela biblioteca; configuração de acesso; registro de eventos sem dados sensíveis; testes negativos de autorização.</p>
+<p><strong>Profundidade:</strong> distinguir a identidade recebida da decisão de negócio sobre o recurso. Entender qual parte da integração é responsabilidade da aplicação e qual pertence ao provedor.</p>
+<p><strong>Prática e avanço:</strong> definir quem pode cancelar e em quais condições; verificar acesso indevido e mudanças de estado. Documentar limitações e configurações necessárias. <strong>Base:</strong> F4 e Segurança.</p></li>
+<li><h4>Projetar testes e integrações para falhas previsíveis</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> testes de regras, integração e API; cenários de regressão; contratos externos; simulação de respostas; timeout; erro temporário versus permanente; repetição de requisição e idempotência; dados de teste; testes instáveis e sua investigação. Estudar mensageria introdutória se ela fizer parte do fluxo.</p>
+<p><strong>Profundidade:</strong> escolher os testes pelo risco, evitando depender apenas de mocks. Reconhecer que uma resposta incerta de uma integração exige cuidado antes de repetir uma operação com efeito.</p>
+<p><strong>Prática e avanço:</strong> testar cancelamento quando a dependência responde, recusa ou fica indisponível. Explicar qual comportamento foi acordado em cada situação. <strong>Base:</strong> F3/F4 e seleção da F8.</p></li>
+<li><h4>Investigar problemas por sinais e hipóteses</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> logs úteis por operação; identificação de requisições; métricas de erros, duração e volume; leitura de traces; saúde das dependências; pool de conexões; consultas lentas; leitura inicial de thread dump; formulação e descarte de hipóteses.</p>
+<p><strong>Profundidade:</strong> começar por uma pergunta e escolher o sinal necessário. Diferenciar sintoma, correlação e causa provável. Saber escalar a investigação quando faltam dados ou o risco é maior que a autonomia disponível.</p>
+<p><strong>Prática e avanço:</strong> provocar lentidão no laboratório, registrar hipótese e evidência, corrigir e repetir a medição. Produzir um roteiro curto de diagnóstico. <strong>Base:</strong> F5/F6.</p></li>
+<li><h4>Planejar implantação, validação e recuperação</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> artefato e configuração por ambiente; pipeline; ordem entre migration e aplicação; verificações de saúde; smoke test após implantação; observação do novo fluxo; critérios de interromper a entrega; rollback de aplicação e estratégias de recuperação de dados; noções do ambiente cloud usado.</p>
+<p><strong>Profundidade:</strong> conseguir entregar dentro de uma infraestrutura existente sem pressupor administração completa dela. Relacionar cada passo de recuperação a um estado possível do sistema.</p>
+<p><strong>Prática e avanço:</strong> ensaiar uma atualização no laboratório e uma falha controlada de implantação. Registrar quando reverter e quando uma correção adiante é necessária. <strong>Base:</strong> F3/F6 e seleção da F9.</p></li>
+<li><h4>Revisar, acompanhar e responder pela funcionalidade</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> revisão orientada a comportamento e risco; comunicação assíncrona; documentação de decisões; acompanhamento de erros após a entrega; retorno do usuário; priorização de ajustes; retrospectiva da estimativa; apoio pontual a colegas; explicação técnica em inglês.</p>
+<p><strong>Profundidade:</strong> completar o ciclo da funcionalidade. Comunicar o que foi observado, o que é hipótese e o que precisa ser decidido. Usar feedback para melhorar a próxima entrega.</p>
+<p><strong>Prática e avanço:</strong> apresentar o cancelamento completo com PR, testes, plano de implantação e resultado de acompanhamento. Explicar um risco comunicado e uma revisão feita em código de outra pessoa. <strong>Conexão:</strong> todas as evidências da seção 6.2.</p></li>
+</ol>
+<p><strong>Fechamento do nível:</strong> receber outra solicitação de escopo parecido e repetir o ciclo. Se a implementação funcionar, mas refinamento, migration ou acompanhamento precisarem ser sempre lembrados pelo revisor, concentre a próxima prática nesses pontos.</p>
+</section>
+<h2 id="secao-8">7. Pleno forte</h2>
+<p><strong>Definição usada:</strong> conduz entregas mais ambíguas, integra componentes, considera falhas e manutenção futura e funciona como apoio técnico frequente dentro do time.</p>
+<p>A unidade de trabalho é um fluxo que atravessa componentes e exige decisões coordenadas. O profissional precisa modelar falhas, manter contratos, justificar escolhas e ajudar colegas a executar. A dificuldade está também na consistência entre partes e na manutenção posterior.</p>
+<h3>Conteúdo prioritário já presente</h3>
+<p>Organize o conteúdo nas prioridades abaixo. Os desdobramentos explicitam a profundidade proposta para este nível; complementações não significam que todo subtópico tenha módulo próprio no repositório.</p>
+<ol><li><strong>Medição e diagnóstico:</strong> Baseline → carga e volume → percentis e throughput → saturação → CPU/memória/pools → SQL e contenção → hipótese → experimento. Separar fatores de aplicação, banco e dependências.</li>
+<li><strong>Fronteiras de domínio:</strong> Linguagem de negócio → invariantes → agregados → bounded contexts → ownership dos dados → dependências → monólito modular versus serviço.</li>
+<li><strong>Mensageria e contratos:</strong> Eventos/comandos → tópico/partição → consumidor e offset → duplicação → ordem → schema → compatibilidade → DLQ → reprocessamento e lag.</li>
+<li><strong>Infraestrutura e operação:</strong> Configuração → IaC → dependências do ambiente → pipeline → rollout → sinais de saúde → runbook → recuperação → verificação dos dados.</li>
+<li><strong>Capacidade e custo:</strong> Premissas de tráfego → tamanho de dados → limites das dependências → filas e saturação → projeção de recursos → custo por componente → teste e revisão.</li>
+<li><strong>Apoio ao time:</strong> Contrato de trabalho → revisão por risco → feedback específico → documentação → execução pelo colega → retorno e redução de dependência.</li></ol>
+<p><strong>Comparação:</strong> V3 cobra apoio a menos experientes e autonomia; V4 combina desenvolvimento com operação. Como referência complementar, V7 explicita uma combinação ainda mais ampla de engenharia de produção, mas está encerrada. Esse recorte sustenta uma preparação de pleno forte; não cria uma categoria oficial das empresas. <a href="https://deliverit.gupy.io/jobs/12545946?jobBoardSource=gupy_public_page">V3</a>, <a href="https://stefanini.gupy.io/jobs/12439849?jobBoardSource=gupy_public_page">V4</a>, <a href="https://compass.gupy.io/jobs/11733312">V7</a>.</p>
+<p><strong>Como usar a comparação:</strong> O estudo deve associar ferramentas ao problema: mensageria precisa de um motivo, orquestração precisa de um procedimento operacional e revisão precisa de efeito no trabalho coletivo. A referência de vaga encerrada permanece apenas como comparação de escopo, não oportunidade de candidatura.</p>
+<h3>Evidência recomendada</h3>
+<ul class="evidence-checklist"><li><input disabled type="checkbox" aria-label="Fluxo assíncrono"><strong>Fluxo assíncrono.</strong> Falha parcial, idempotência, transação local, outbox, repetição e recuperação.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Código e testes com pontos de interrupção definidos. Registrar identificador da operação, estado esperado e procedimento de reprocessamento.</span></li>
+<li><input disabled type="checkbox" aria-label="Decisão técnica"><strong>Decisão técnica.</strong> Requisito, alternativas, custo, risco, reversibilidade e condição de revisão.<br><span class="evidence-note"><strong>Material a apresentar:</strong> ADR comparando opções, incluindo manter solução mais simples. Vincular a escolha a uma restrição ou experimento, não a preferência.</span></li>
+<li><input disabled type="checkbox" aria-label="Melhoria medida"><strong>Melhoria medida.</strong> Baseline, dados equivalentes, métricas, repetição e efeitos colaterais.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Relatório antes/depois com ambiente, carga, comportamento observado e custo adicional. Registrar regressões ou casos sem ganho.</span></li>
+<li><input disabled type="checkbox" aria-label="Prevenção de falha"><strong>Prevenção de falha.</strong> Linha do tempo, fatores contribuintes, mitigação, ação preventiva e validação.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Postmortem de laboratório ou caso real identificado como tal; ações com responsável e critério de fechamento. Repetir a falha quando viável.</span></li>
+<li><input disabled type="checkbox" aria-label="Coordenação"><strong>Coordenação.</strong> Ownership, contratos, dependências, sequência de implantação e comunicação.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Plano conjunto com produtor/consumidor, mudanças compatíveis, pontos de revisão e condição de retirada da versão anterior.</span></li>
+<li><input disabled type="checkbox" aria-label="Orientação"><strong>Orientação.</strong> Diagnóstico da dificuldade, explicação do raciocínio, prática guiada e nova tentativa.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Registro do problema, ajuda oferecida, feedback do colega e tarefa posterior executada com menor apoio.</span></li></ul>
+<p><strong>Lacuna principal:</strong> constância. Um laboratório bem executado demonstra uma habilidade; a atuação repetida em mudanças, falhas e revisões demonstra confiabilidade profissional.</p>
+<p><strong>Como trabalhar essa lacuna:</strong> selecione uma evidência da tabela seguinte, produza o artefato, peça revisão externa e repita com uma condição diferente. Registre o apoio necessário, os erros encontrados e o que passou a fazer com autonomia. A correção deve aparecer em outra entrega, não apenas na revisão do mesmo exercício.</p>
+<h3>7.1. Como conectar os conteúdos avançados</h3>
+<p>Performance, arquitetura, mensageria e cloud devem responder ao mesmo problema. Por exemplo, um fluxo de notificação pode exigir desacoplamento, acompanhamento de atraso e recuperação de falhas; isso dá contexto aos tópicos de integração e observabilidade.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Prioridade / frente</th><th scope="col">Conteúdos a aprofundar, em ordem</th><th scope="col">Aplicação e artefato</th><th scope="col">Profundidade e critério de domínio</th></tr></thead><tbody><tr><th scope="row">Medição e diagnóstico</th><td>Baseline → carga e volume → percentis e throughput → saturação → CPU/memória/pools → SQL e contenção → hipótese → experimento. Separar fatores de aplicação, banco e dependências.</td><td>Criar relatório com ambiente, dados, ferramenta, resultados e limitações. Investigar um gargalo e repetir o teste com a alteração isolada.</td><td>O relatório responde qual hipótese foi testada e por que o resultado a sustenta ou não. Inclui efeitos colaterais e não extrapola automaticamente o laboratório para produção.</td></tr>
+<tr><th scope="row">Fronteiras de domínio</th><td>Linguagem de negócio → invariantes → agregados → bounded contexts → ownership dos dados → dependências → monólito modular versus serviço.</td><td>Mapear pedidos, pagamentos e notificações, indicando responsabilidades e quais alterações podem atravessar a fronteira. Registrar uma regra de dependência.</td><td>Cada regra e dado tem um responsável claro. A separação é justificada por necessidade de evolução, não por criar um serviço para cada tabela.</td></tr>
+<tr><th scope="row">Mensageria e contratos</th><td>Eventos/comandos → tópico/partição → consumidor e offset → duplicação → ordem → schema → compatibilidade → DLQ → reprocessamento e lag.</td><td>Produzir contrato e executar sucesso, interrupção e repetição. Fazer outro consumidor usar o evento e documentar como evoluir seu formato.</td><td>O estado final e a recuperação são explicáveis. O contrato informa semântica e não apenas campos; uma mudança é avaliada pelo efeito nos consumidores existentes.</td></tr>
+<tr><th scope="row">Infraestrutura e operação</th><td>Configuração → IaC → dependências do ambiente → pipeline → rollout → sinais de saúde → runbook → recuperação → verificação dos dados.</td><td>Preparar ambiente reproduzível e pedir que outra pessoa siga o procedimento para investigar falha e recuperar o fluxo em laboratório.</td><td>O runbook leva a decisões observáveis e informa quando escalar. Recuperação inclui conferir o resultado de negócio, não apenas processos ativos.</td></tr>
+<tr><th scope="row">Capacidade e custo</th><td>Premissas de tráfego → tamanho de dados → limites das dependências → filas e saturação → projeção de recursos → custo por componente → teste e revisão.</td><td>Comparar carga prevista e observada. Registrar onde o sistema deixa de atender à meta e qual alternativa de dimensionamento será avaliada.</td><td>As unidades e premissas são explícitas. A estimativa apresenta limites e permite explicar por que um aumento de recurso pode ou não resolver o gargalo.</td></tr>
+<tr><th scope="row">Apoio ao time</th><td>Contrato de trabalho → revisão por risco → feedback específico → documentação → execução pelo colega → retorno e redução de dependência.</td><td>Dividir produtor/consumidor com outra pessoa, revisar a integração e acompanhar o uso do runbook. Registrar dúvidas recorrentes e melhorar o material.</td><td>O colega consegue resolver um caso semelhante com menos orientação. O autor não precisa reassumir toda a implementação para garantir qualidade.</td></tr></tbody></table></div>
+<h3>7.2. O que cada item do checklist precisa conter</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Evidência</th><th scope="col">Conhecimentos necessários</th><th scope="col">Detalhamento da entrega</th><th scope="col">Como revisar e identificar insuficiência</th></tr></thead><tbody><tr><th scope="row">Fluxo assíncrono</th><td>Falha parcial, idempotência, transação local, outbox, repetição e recuperação.</td><td>Código e testes com pontos de interrupção definidos. Registrar identificador da operação, estado esperado e procedimento de reprocessamento.</td><td>Duplicações e interrupções previstas preservam a invariante declarada. Explicar as garantias reais e os casos que exigem reconciliação.</td></tr>
+<tr><th scope="row">Decisão técnica</th><td>Requisito, alternativas, custo, risco, reversibilidade e condição de revisão.</td><td>ADR comparando opções, incluindo manter solução mais simples. Vincular a escolha a uma restrição ou experimento, não a preferência.</td><td>Um revisor consegue contestar premissas e entender quando a escolha deixará de ser adequada. Custos de operação e manutenção aparecem na análise.</td></tr>
+<tr><th scope="row">Melhoria medida</th><td>Baseline, dados equivalentes, métricas, repetição e efeitos colaterais.</td><td>Relatório antes/depois com ambiente, carga, comportamento observado e custo adicional. Registrar regressões ou casos sem ganho.</td><td>A comparação não muda várias condições sem controle. O autor explica que parte do resultado é confiável e o que exige nova medição.</td></tr>
+<tr><th scope="row">Prevenção de falha</th><td>Linha do tempo, fatores contribuintes, mitigação, ação preventiva e validação.</td><td>Postmortem de laboratório ou caso real identificado como tal; ações com responsável e critério de fechamento. Repetir a falha quando viável.</td><td>A ação aborda um fator concreto e tem verificação. Evitar encerrar com promessas genéricas como melhorar testes sem cenário e responsabilidade definidos.</td></tr>
+<tr><th scope="row">Coordenação</th><td>Ownership, contratos, dependências, sequência de implantação e comunicação.</td><td>Plano conjunto com produtor/consumidor, mudanças compatíveis, pontos de revisão e condição de retirada da versão anterior.</td><td>Uma pessoa externa ao código consegue integrar. Dependências, estados intermediários e decisão em caso de atraso estão explícitos.</td></tr>
+<tr><th scope="row">Orientação</th><td>Diagnóstico da dificuldade, explicação do raciocínio, prática guiada e nova tentativa.</td><td>Registro do problema, ajuda oferecida, feedback do colega e tarefa posterior executada com menor apoio.</td><td>A evidência mostra aprendizado e autonomia, não apenas volume de comentários. O colega participa das decisões e compreende as verificações.</td></tr></tbody></table></div>
+<h3>7.3. Caso prático: confirmação assíncrona e notificações</h3>
+<p><strong>Roteiro de execução e conteúdos associados:</strong></p><ol><li>Definir o evento de confirmação e a regra que deve permanecer verdadeira. Decidir o que precisa ser imediato e o que pode ocorrer depois; justificar a comunicação.</li>
+<li>Definir produtor, consumidor, propriedade dos dados e contrato. Explicar o significado de cada campo e a estratégia de evolução para quem já consome.</li>
+<li>Implementar e testar os pontos de falha relevantes: antes/depois de persistir, publicação e processamento. Verificar repetição e efeito final de negócio.</li>
+<li>Adicionar sinais de atraso/erro e roteiro de recuperação. Executar reprocessamento controlado e documentar limites da garantia oferecida.</li>
+<li>Fazer outra pessoa consumir ou alterar o contrato, revisar a integração e executar o runbook. Produzir ADR, relatório de falha e melhoria verificada.</li></ol>
+<p>Evolua o produto para produzir uma notificação após a confirmação do pedido. Justifique a comunicação escolhida e defina qual informação o consumidor precisa receber. No laboratório, provoque entrega repetida e indisponibilidade temporária; registre o estado final e o que o operador faria para recuperar o fluxo.</p>
+<p>Os tópicos de outbox, idempotência e DLQ da F8 podem apoiar o exercício. A avaliação deve perguntar se a regra continua correta e se a recuperação é compreensível. A presença dos nomes desses padrões no diagrama não basta para validar a solução.</p>
+<p>Peça que outra pessoa altere ou consuma o contrato. Isso cria uma oportunidade de praticar compatibilidade, comunicação e revisão de uma mudança que ultrapassa o seu próprio código.</p>
+<h3>7.4. O que costuma faltar na passagem para sênior inicial</h3>
+<p><strong>O que observar na prática:</strong></p><ul><li>Responsabilidade contínua: voltar ao fluxo após mudanças e verificar se contratos, sinais e documentação continuam válidos. Relacionar correções recorrentes a causas comuns.</li>
+<li>Decisão compartilhada: envolver consumidores e operação antes de impor uma alteração. Apresentar alternativa mais simples e condição que justificaria maior complexidade.</li>
+<li>Passagem para sênior inicial: demonstrar que o time mantém o domínio e toma decisões melhores com sua contribuição, inclusive quando você não implementa pessoalmente cada parte.</li></ul>
+<p>Uma entrega difícil isolada pode demonstrar competência técnica elevada. O passo seguinte é assumir continuidade: acompanhar consequências, priorizar correções, evitar recorrência e ajudar o time a tomar decisões mesmo sem sua participação direta.</p>
+<p>Avalie se suas decisões consideram o prazo e o problema de negócio, se você consegue negociar uma solução menor e se a documentação reduz dependências. Se o time só avança quando você implementa tudo, há capacidade individual, mas a influência ainda precisa amadurecer.</p>
+<section class="study-sequence" aria-labelledby="pleno-forte-sequencia">
+<h3 id="pleno-forte-sequencia">7.5. Sequência detalhada de conteúdos — pleno forte</h3>
+<p><strong>Pré-requisito:</strong> entregar e acompanhar uma funcionalidade com autonomia dentro de um serviço. Agora o foco passa a ser um fluxo com dependências, contratos, falhas e colaboração entre pessoas.</p>
+<p><strong>Ordem sugerida:</strong> diagnóstico → domínio e fronteiras → contratos → mensageria → consistência e recuperação → operação e capacidade → decisão técnica → coordenação e mentoria. Use o fluxo assíncrono da seção 7.3 como exercício integrador.</p>
+<ol class="learning-steps">
+<li><h4>Construir um diagnóstico de desempenho reproduzível</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> desenho de experimento; baseline; dados e carga de teste; throughput e percentis de latência; saturação; uso de CPU e memória; pools e filas; planos SQL; contenção; introdução a JFR, dumps e sinais de GC; comparação de resultados em condições equivalentes.</p>
+<p><strong>Profundidade:</strong> separar efeito do banco, runtime e dependências. Não concluir que a solução escala apenas porque um teste curto passou. Declarar limites do ambiente e quais hipóteses o teste não avaliou.</p>
+<p><strong>Prática e avanço:</strong> investigar um gargalo, comparar alternativas e apresentar ganho, custo e possível regressão. Outra pessoa deve conseguir repetir o experimento. <strong>Base:</strong> F5/F6 e Academia Java.</p></li>
+<li><h4>Definir domínio, módulos e ownership de dados</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> linguagem do domínio; capacidades de negócio; invariantes; entidades e objetos de valor; agregados; bounded contexts; mapa de relações; coesão e acoplamento; portas e adaptadores; dependências entre módulos; ownership de dados; monólito modular versus extração de serviço.</p>
+<p><strong>Profundidade:</strong> relacionar fronteiras a regras e necessidades de mudança, sem criar um serviço por entidade. Saber explicar o custo de uma separação em entrega, operação e consistência.</p>
+<p><strong>Prática e avanço:</strong> modelar pedidos e notificações, registrar quem decide e altera cada dado e detectar dependência proibida com uma verificação adequada. <strong>Base:</strong> F7 e Arquitetura.</p></li>
+<li><h4>Projetar contratos e sua evolução entre componentes</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> contrato externo versus modelo interno; formatos e semântica; mudanças aditivas e quebrantes; versionamento; consumidores conhecidos; compatibilidade durante transição; testes de contrato; documentação OpenAPI/AsyncAPI; erros e limites do serviço; retirada de comportamento antigo.</p>
+<p><strong>Profundidade:</strong> avaliar o efeito sobre quem consome, incluindo consumidores que não são atualizados ao mesmo tempo. Negociar a mudança antes de disponibilizar um contrato que transfere complexidade ao outro time.</p>
+<p><strong>Prática e avanço:</strong> acrescentar um campo ou comportamento e fazer um consumidor antigo continuar funcionando no cenário declarado. Registrar a sequência de migração. <strong>Base:</strong> F4/F7/F8.</p></li>
+<li><h4>Entender mensageria além de enviar e receber mensagens</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> comunicação síncrona e assíncrona; eventos e comandos; produtor e consumidor; tópicos e partições; grupos de consumidores; offsets; ordem e concorrência; serialização; tratamento de erro; repetição de entrega; DLQ; consumer lag; reprocessamento e acompanhamento operacional.</p>
+<p><strong>Profundidade:</strong> explicar o que acontece quando o consumidor falha em etapas diferentes. Distinguir “mensagem recebida” de “efeito de negócio concluído”. Relacionar o mecanismo escolhido às garantias necessárias para o caso.</p>
+<p><strong>Prática e avanço:</strong> executar o fluxo, interromper um consumidor e observar recuperação e estado final. Documentar como identificar atraso e mensagem problemática. <strong>Base:</strong> F8.</p></li>
+<li><h4>Preservar invariantes diante de falhas e duplicação</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> falha parcial; resultado incerto de chamada; chave de idempotência; deduplicação e sua persistência; transação local; outbox; publicação e processamento; retries com limites; backoff; timeout; circuit breaker; compensação e saga quando justificadas; reconciliação de estados.</p>
+<p><strong>Profundidade:</strong> analisar os pontos de interrupção do fluxo e o efeito de repetir cada passo. Não prometer ausência de duplicação apenas por usar uma ferramenta. Definir qual regra precisa permanecer verdadeira e como será verificada.</p>
+<p><strong>Prática e avanço:</strong> duplicar uma solicitação e uma mensagem, interromper o processamento e reexecutar. Demonstrar o efeito final esperado e um procedimento para tratar divergência. <strong>Base:</strong> F8 e casos de Java/Arquitetura.</p></li>
+<li><h4>Operar o fluxo com metas, capacidade e recuperação</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> sinais do fluxo ponta a ponta; SLI, SLO e orçamento de erro; alerta acionável; runbook; infraestrutura como código; estado e mudança de configuração; atualização e recuperação; capacidade das dependências; limites e quotas; custo por componente; teste de carga e teste de falha.</p>
+<p><strong>Profundidade:</strong> relacionar a infraestrutura ao comportamento esperado. Distinguir disponibilidade da aplicação de conclusão útil do fluxo. Saber que recuperação exige verificar dados e consumidores, além de processos em execução.</p>
+<p><strong>Prática e avanço:</strong> outra pessoa deve conseguir detectar e recuperar uma falha simulada pelo runbook. Confrontar uma estimativa de capacidade com o laboratório e explicar as limitações. <strong>Base:</strong> F6/F9 e seleção da F10.</p></li>
+<li><h4>Defender uma decisão e transformar falhas em melhorias</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> requisito funcional e atributo de qualidade; restrição; alternativa; trade-off; ADR; evidência experimental; reversibilidade; condição de revisão; postmortem; fatores contribuintes; ações preventivas e verificação de resultado.</p>
+<p><strong>Profundidade:</strong> propor a solução suficiente para o problema, mostrando o que ela não atende. Vincular uma ação preventiva à causa ou ao fator que pretende reduzir, em vez de concluir apenas “melhorar monitoramento”.</p>
+<p><strong>Prática e avanço:</strong> produzir um ADR sobre comunicação do fluxo e um postmortem de falha simulada. Implementar uma melhoria e provocar novamente a situação para verificar o efeito. <strong>Base:</strong> F6/F7 e Arquitetura.</p></li>
+<li><h4>Coordenar mudanças e ampliar a autonomia de colegas</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> dependências de entrega; divisão de trabalho; contrato acordado; revisão orientada a risco; feedback específico; explicação do raciocínio; documentação para consumidores; acompanhamento de quem executa; facilitação de desacordo técnico; comunicação de risco e decisão.</p>
+<p><strong>Profundidade:</strong> ajudar sem assumir toda a implementação. Permitir que um colega tome parte das decisões, explicando limites e verificando os resultados. Coordenar uma mudança exige mais que distribuir tarefas.</p>
+<p><strong>Prática e avanço:</strong> implementar produtor e consumidor com outra pessoa, revisar contratos e acompanhar a recuperação de falha. Registrar o que o colega passou a executar com menos ajuda. <strong>Base:</strong> Git, comunicação da Arquitetura e seleção da F12.</p></li>
+</ol>
+<p><strong>Fechamento do nível:</strong> reunir as seis evidências da seção 7.2 no mesmo fluxo. É importante conseguir sustentar as escolhas depois de uma mudança de requisito ou de uma falha, sem depender apenas da demonstração ensaiada.</p>
+</section>
+<h2 id="secao-9">8. Sênior inicial</h2>
+<p><strong>Definição usada:</strong> assume responsabilidade técnica por um serviço ou domínio delimitado, administra incerteza e risco, conecta decisões ao negócio e melhora o trabalho de outras pessoas. Não pressupõe atuar como arquiteto corporativo ou liderar toda a engenharia.</p>
+<p>A unidade de responsabilidade é um serviço ou domínio ao longo de várias entregas. É necessário conectar metas, riscos, decisões, execução e desenvolvimento do time. A pessoa não precisa saber tudo: precisa identificar a especialidade necessária, envolver responsáveis e conduzir decisões sustentáveis.</p>
+<h3>Conteúdo prioritário já presente</h3>
+<p>Organize o conteúdo nas prioridades abaixo. Os desdobramentos explicitam a profundidade proposta para este nível; complementações não significam que todo subtópico tenha módulo próprio no repositório.</p>
+<ol><li><strong>Arquitetura:</strong> Problema e atributos de qualidade → restrições → fronteiras → alternativas → capacidade do time → custos operacionais → ADR/RFC → condição de revisão. Conectar organização do software à forma como ele será mantido.</li>
+<li><strong>Operação:</strong> Jornada crítica → SLI/SLO → alertas → papéis e escalonamento → mitigação → recuperação → postmortem → ação preventiva. Definir o que é sucesso do fluxo para o usuário.</li>
+<li><strong>Entrega:</strong> Consumidores → compatibilidade → mudanças aditivas → migração de dados → coexistência de versões → implantação gradual → verificação → recuperação e retirada do comportamento antigo.</li>
+<li><strong>Negócio:</strong> Resultado esperado → urgência → prazo e orçamento → impacto ao usuário → opções de escopo → risco aceito → acompanhamento das premissas.</li>
+<li><strong>Pessoas:</strong> Dificuldade do time → divisão de responsabilidade → limites de decisão → revisão e feedback → onboarding → prática acompanhada → autonomia observada.</li></ol>
+<p><strong>Comparação:</strong> V5 oferece uma referência compatível com o núcleo de engenharia de aplicações coberto pelo plano, mas pede experiência sólida. V6 exige trajetória de liderança e domínio financeiro além do conteúdo técnico; concluir o plano não comprova esses requisitos. <a href="https://softdesign.gupy.io/jobs/12302707">V5</a>, <a href="https://porto.gupy.io/jobs/11849267">V6</a>.</p>
+<p><strong>Como usar a comparação:</strong> Ao usar as referências sênior, compare responsabilidade e contexto com seu histórico. Experiência de engenharia de aplicações, liderança técnica e domínio financeiro são dimensões distintas. Use o portfólio para mostrar competências e identifique separadamente o que depende de trajetória em uma organização.</p>
+<h3>Evidência recomendada</h3>
+<ul class="evidence-checklist"><li><input disabled type="checkbox" aria-label="Mudança de domínio"><strong>Mudança de domínio.</strong> Contexto, invariantes, alternativas, restrições e acompanhamento.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Case com problema, escopo, decisões, execução incremental e resultado. Vincular artefatos técnicos às regras e necessidades que os motivaram.</span></li>
+<li><input disabled type="checkbox" aria-label="Evolução compatível"><strong>Evolução compatível.</strong> Inventário de consumidores, contrato, migração e coexistência.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Plano de transição com dependências, testes de versões relevantes, alteração de dados e condição de retirada do comportamento antigo.</span></li>
+<li><input disabled type="checkbox" aria-label="Confiabilidade"><strong>Confiabilidade.</strong> Meta, indicador, janela, fonte de dados, alertas e decisão.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Definição do fluxo crítico, meta justificada e acompanhamento. Mostrar qual ação será tomada quando o resultado piorar.</span></li>
+<li><input disabled type="checkbox" aria-label="Incidente"><strong>Incidente.</strong> Impacto, papéis, linha do tempo, evidências, mitigação e prevenção.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Relato com fatos e hipóteses separados; comunicação; procedimento de recuperação; ações posteriores verificadas. Identificar se o cenário foi simulado.</span></li>
+<li><input disabled type="checkbox" aria-label="Negociação"><strong>Negociação.</strong> Escopo, alternativas, prazo, dívida técnica, risco e responsáveis.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Registro de opções, recomendação, risco aceito e condição de revisão. Indicar o efeito de reduzir ou adiar uma parte da entrega.</span></li>
+<li><input disabled type="checkbox" aria-label="Desenvolvimento do time"><strong>Desenvolvimento do time.</strong> Feedback, mentoria, distribuição de decisão e autonomia.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Exemplo de intervenção com contexto, prática do colega e resultado posterior. Incluir feedback de quem recebeu a orientação.</span></li>
+<li><input disabled type="checkbox" aria-label="Resultado verificável"><strong>Resultado verificável.</strong> Baseline, indicadores, fatores externos, limites e contribuição individual.<br><span class="evidence-note"><strong>Material a apresentar:</strong> Case com dados comparáveis, links de artefatos e separação de responsabilidades. Registrar o que melhorou, piorou ou não pôde ser concluído.</span></li></ul>
+<p><strong>Lacuna principal:</strong> experiência situada. Ambiguidade real, usuários, sistemas legados, conflitos de prioridade e consequências de decisões não são substituídos pela leitura de conteúdos avançados. Projetos colaborativos e operação de um produto ajudam a construir evidência, mas não devem ser apresentados como experiência empregatícia inexistente.</p>
+<p><strong>Como trabalhar essa lacuna:</strong> selecione uma evidência da tabela seguinte, produza o artefato, peça revisão externa e repita com uma condição diferente. Registre o apoio necessário, os erros encontrados e o que passou a fazer com autonomia. A correção deve aparecer em outra entrega, não apenas na revisão do mesmo exercício.</p>
+<h3>8.1. Escopo de responsabilidade proposto</h3>
+<p>Um escopo possível é a evolução do domínio de pedidos: integridade das regras, contratos com consumidores, confiabilidade do serviço e capacidade do time de mantê-lo. Isso não significa assumir sozinho todas as decisões de produto, infraestrutura e segurança. Significa identificar quem precisa participar e conduzir o trabalho até uma decisão verificável.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Prioridade / frente</th><th scope="col">Conteúdos a aprofundar, em ordem</th><th scope="col">Aplicação e artefato</th><th scope="col">Profundidade e critério de domínio</th></tr></thead><tbody><tr><th scope="row">Arquitetura</th><td>Problema e atributos de qualidade → restrições → fronteiras → alternativas → capacidade do time → custos operacionais → ADR/RFC → condição de revisão. Conectar organização do software à forma como ele será mantido.</td><td>Apresentar contexto e containers, comparar opções e vincular uma decisão a um requisito mensurável. Definir como observar uma violação da regra arquitetural.</td><td>Explicar por que a estrutura atende ao cenário atual, qual custo introduz e qual mudança de contexto motivaria revisá-la. Não usar quantidade de componentes como sinal de maturidade.</td></tr>
+<tr><th scope="row">Operação</th><td>Jornada crítica → SLI/SLO → alertas → papéis e escalonamento → mitigação → recuperação → postmortem → ação preventiva. Definir o que é sucesso do fluxo para o usuário.</td><td>Conduzir exercício com mais de uma pessoa, registrar decisões e verificar dados após recuperação. Revisar um runbook usando os obstáculos observados.</td><td>O time detecta, comunica e reduz impacto sem depender de uma única pessoa. A meta de confiabilidade tem origem e influencia decisões de prioridade.</td></tr>
+<tr><th scope="row">Entrega</th><td>Consumidores → compatibilidade → mudanças aditivas → migração de dados → coexistência de versões → implantação gradual → verificação → recuperação e retirada do comportamento antigo.</td><td>Planejar uma mudança de domínio com marcos pequenos, teste de consumidor antigo e ensaio de interrupção de uma etapa.</td><td>A transição é parte explícita da solução. O plano explica estados intermediários e condição de seguir, parar ou corrigir, incluindo dados já alterados.</td></tr>
+<tr><th scope="row">Negócio</th><td>Resultado esperado → urgência → prazo e orçamento → impacto ao usuário → opções de escopo → risco aceito → acompanhamento das premissas.</td><td>Preparar proposta curta para públicos técnico e de produto, com alternativa de menor escopo e efeito de adiar cada parte.</td><td>O trabalho tem justificativa compreensível e não depende de preferência tecnológica. A decisão informa responsáveis, consequências e quando será revista.</td></tr>
+<tr><th scope="row">Pessoas</th><td>Dificuldade do time → divisão de responsabilidade → limites de decisão → revisão e feedback → onboarding → prática acompanhada → autonomia observada.</td><td>Delegar parte de uma evolução com contexto suficiente, acompanhar uma decisão e melhorar documentação com o feedback de quem executou.</td><td>Outras pessoas conseguem manter e evoluir o domínio. A liderança técnica não se manifesta como centralização permanente de todas as decisões.</td></tr></tbody></table></div>
+<h3>8.2. O que cada item do checklist precisa conter</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela detalhada com rolagem horizontal"><table class="seniority-detail"><thead><tr><th scope="col">Evidência</th><th scope="col">Conhecimentos necessários</th><th scope="col">Detalhamento da entrega</th><th scope="col">Como revisar e identificar insuficiência</th></tr></thead><tbody><tr><th scope="row">Mudança de domínio</th><td>Contexto, invariantes, alternativas, restrições e acompanhamento.</td><td>Case com problema, escopo, decisões, execução incremental e resultado. Vincular artefatos técnicos às regras e necessidades que os motivaram.</td><td>A solução pode ser avaliada em relação ao problema original. O relato informa limitações, decisões coletivas e efeitos não previstos.</td></tr>
+<tr><th scope="row">Evolução compatível</th><td>Inventário de consumidores, contrato, migração e coexistência.</td><td>Plano de transição com dependências, testes de versões relevantes, alteração de dados e condição de retirada do comportamento antigo.</td><td>Um consumidor anterior continua funcionando no cenário declarado. O autor explica interrupções e retomada, não apenas o estado final ideal.</td></tr>
+<tr><th scope="row">Confiabilidade</th><td>Meta, indicador, janela, fonte de dados, alertas e decisão.</td><td>Definição do fluxo crítico, meta justificada e acompanhamento. Mostrar qual ação será tomada quando o resultado piorar.</td><td>A meta corresponde a uma necessidade real ou premissa explícita do laboratório. Sua medição influencia operação ou planejamento e tem limitações conhecidas.</td></tr>
+<tr><th scope="row">Incidente</th><td>Impacto, papéis, linha do tempo, evidências, mitigação e prevenção.</td><td>Relato com fatos e hipóteses separados; comunicação; procedimento de recuperação; ações posteriores verificadas. Identificar se o cenário foi simulado.</td><td>A resposta prioriza impacto e preserva aprendizado. O revisor entende por que cada decisão foi tomada com a informação disponível naquele momento.</td></tr>
+<tr><th scope="row">Negociação</th><td>Escopo, alternativas, prazo, dívida técnica, risco e responsáveis.</td><td>Registro de opções, recomendação, risco aceito e condição de revisão. Indicar o efeito de reduzir ou adiar uma parte da entrega.</td><td>As partes compreendem a escolha e suas consequências. Dívida técnica é descrita pelo efeito, não apenas por desagrado com a estrutura.</td></tr>
+<tr><th scope="row">Desenvolvimento do time</th><td>Feedback, mentoria, distribuição de decisão e autonomia.</td><td>Exemplo de intervenção com contexto, prática do colega e resultado posterior. Incluir feedback de quem recebeu a orientação.</td><td>O resultado aparece no trabalho do time: menos bloqueio, melhor revisão ou maior capacidade de manutenção. Não inferir sucesso apenas de reuniões realizadas.</td></tr>
+<tr><th scope="row">Resultado verificável</th><td>Baseline, indicadores, fatores externos, limites e contribuição individual.</td><td>Case com dados comparáveis, links de artefatos e separação de responsabilidades. Registrar o que melhorou, piorou ou não pôde ser concluído.</td><td>Não atribuir causalidade sem base nem trabalho coletivo a uma pessoa. A explicação permite avaliar o impacto no contexto em que ocorreu.</td></tr></tbody></table></div>
+<h3>8.3. Caso prático: evoluir um serviço com consumidores existentes</h3>
+<p><strong>Roteiro de execução e conteúdos associados:</strong></p><ol><li>Identificar consumidores do serviço e a necessidade que motiva a mudança. Registrar regras que não podem ser violadas, responsáveis e limites de prazo/recursos.</li>
+<li>Comparar alternativas de evolução e seus efeitos sobre contrato, dados e operação. Registrar a decisão, objeções e condição que exigiria reavaliação.</li>
+<li>Decompor a transição em etapas compatíveis. Distribuir parte do trabalho, combinar verificações e ensaiar um consumidor anterior durante a coexistência.</li>
+<li>Definir sinais, metas e critérios de interrupção. Simular falha intermediária e coordenar recuperação com outra pessoa, conferindo dados e comportamento do usuário.</li>
+<li>Avaliar resultado, feedback e manutenção após a entrega. Atualizar decisões e procedimentos e demonstrar o que o time passou a fazer com mais autonomia.</li></ol>
+<p>Suponha que o modelo de pedido precise mudar e já exista um cliente usando a API. Levante quem depende do comportamento atual, identifique o que precisa continuar funcionando e proponha uma sequência de mudanças. Defina como observar os resultados e qual condição exige interromper a implantação.</p>
+<p>Divida o trabalho em partes revisáveis e envolva outra pessoa em uma delas. Registre uma alternativa descartada, o motivo da escolha e a condição que faria rever a decisão. Ao final, avalie o efeito sobre a manutenção e o uso do sistema, além do funcionamento da nova regra.</p>
+<p>Quando tudo ocorrer em laboratório, descreva consumidores e incidentes como simulados. O exercício demonstra raciocínio e capacidade de execução; o histórico profissional exigido por uma empresa continua sendo uma dimensão separada.</p>
+<h3>8.4. Evidências que não bastam isoladamente</h3>
+<p><strong>O que observar na prática:</strong></p><ul><li>Certificação: complementá-la com uma aplicação e uma decisão que utilizem os conceitos estudados. Explicar limites do laboratório e experiência operacional ainda não adquirida.</li>
+<li>Diagrama ou desafio técnico: acrescentar sequência de implantação, comportamento sob falha, manutenção e feedback de quem usa ou consome. A demonstração isolada não cobre continuidade.</li>
+<li>Correção rápida de bug: documentar diagnóstico, prevenção e compartilhamento do conhecimento. Avaliar se o time consegue responder ao problema seguinte com menos dependência.</li>
+<li>Conjunto convincente: apresentar decisões em situações diferentes, com resultados verificáveis, participação de outras pessoas e escopo de responsabilidade declarado sem exagero.</li></ul>
+<p>Certificações, diagramas, quantidade de tecnologias e um excelente desafio técnico podem apoiar a avaliação, mas não demonstram sozinhos responsabilidade continuada. Da mesma forma, ser a pessoa mais rápida para corrigir bugs não demonstra necessariamente capacidade de prevenir problemas e desenvolver colegas.</p>
+<p>Procure um conjunto coerente: problema relevante, decisões justificadas, execução acompanhada, efeitos observados e aprendizado compartilhado. A avaliação de sênior inicial fica mais convincente quando esse padrão aparece em situações diferentes, respeitando o escopo real de atuação.</p>
+<section class="study-sequence" aria-labelledby="senior-inicial-sequencia">
+<h3 id="senior-inicial-sequencia">8.5. Sequência detalhada de conteúdos — sênior inicial</h3>
+<p><strong>Pré-requisito:</strong> conduzir fluxos com dependências e falhas, documentar decisões e colaborar de forma recorrente. O foco agora é sustentar a evolução de um domínio, conectando decisões técnicas, consequências de negócio e capacidade do time.</p>
+<p><strong>Ordem sugerida:</strong> contexto e objetivos → arquitetura e alternativas → transição compatível → confiabilidade e incidentes → dados, segurança e custos → negociação → mentoria e distribuição de responsabilidade → avaliação dos resultados. Essas frentes são revisitadas ao longo da execução; a ordem organiza o primeiro estudo.</p>
+<ol class="learning-steps">
+<li><h4>Enquadrar o problema e definir resultados observáveis</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> resultado para o usuário; fluxo e domínio de negócio; stakeholders; dependências organizacionais; restrições de prazo, pessoas e orçamento; atributos de qualidade; cenários de risco; premissas; metas mensuráveis; critérios de sucesso e limites da responsabilidade.</p>
+<p><strong>Profundidade:</strong> distinguir uma solicitação de tecnologia de uma necessidade real. Descobrir quem decide, quem opera e quem sofre os efeitos da mudança. Negociar metas que possam ser observadas, sem inventar precisão onde faltam dados.</p>
+<p><strong>Prática e avanço:</strong> escrever um documento curto com problema, escopo, restrições, métricas e dúvidas. Obter revisão de alguém representando negócio e de alguém representando operação. <strong>Base:</strong> Arquitetura e F10/F12.</p></li>
+<li><h4>Comparar arquiteturas e conduzir uma decisão sustentável</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> atributos de qualidade e cenários; contexto e containers no C4; fronteiras de domínio; dependências; monólito modular e serviços; comunicação e consistência; disponibilidade e capacidade; alternativas gerenciadas; custo operacional; reversibilidade; ADR/RFC e mecanismos de verificação da arquitetura.</p>
+<p><strong>Profundidade:</strong> avaliar uma alternativa pelo contexto e pela capacidade do time de mantê-la. Mostrar custos de transição e operação. Saber adiar uma extração ou uma tecnologia quando o benefício ainda não compensa a complexidade.</p>
+<p><strong>Prática e avanço:</strong> comparar alternativas para a evolução do serviço, registrar a escolha e uma condição concreta que exigiria revisão. Transformar uma regra arquitetural em verificação executável quando fizer sentido. <strong>Base:</strong> F7/F10 e Academia de Arquitetura.</p></li>
+<li><h4>Planejar evolução compatível de aplicação, dados e consumidores</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> inventário de consumidores; contrato e dependências; compatibilidade; etapas aditivas de mudança; migração/backfill; coexistência de versões; feature flags quando úteis; implantação gradual; verificação de adoção; critérios de interromper; rollback ou correção adiante; retirada segura do comportamento antigo.</p>
+<p><strong>Profundidade:</strong> tratar a transição como parte da solução. Considerar o estado intermediário, inclusive quando um consumidor não migra no prazo ou uma etapa precisa ser repetida.</p>
+<p><strong>Prática e avanço:</strong> alterar o modelo de pedido mantendo um consumidor antigo no laboratório. Ensaiar interrupção de uma etapa e explicar como retomar sem perder a regra de negócio. <strong>Base:</strong> F3/F4/F7 e casos da Academia Java.</p></li>
+<li><h4>Organizar confiabilidade e resposta a incidentes</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> jornada crítica; SLI/SLO e janela de observação; orçamento de erro; alerta e escalonamento; papéis em incidente; triagem por impacto; mitigação; comunicação durante a falha; preservação de evidências; recuperação; postmortem; ações preventivas; exercícios de recuperação e continuidade.</p>
+<p><strong>Profundidade:</strong> separar a necessidade de reduzir impacto da investigação completa da causa. Organizar a participação do time e registrar incertezas. Entender quais compromissos de recuperação são realistas para o sistema e sua operação.</p>
+<p><strong>Prática e avanço:</strong> conduzir um incidente simulado com outra pessoa, verificar o tempo e os obstáculos da recuperação e atualizar o procedimento. Identificar a origem da meta adotada. <strong>Base:</strong> F6/F9, DevOps e AWS.</p></li>
+<li><h4>Conectar integridade, segurança, capacidade e custo</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> invariantes e reconciliação de dados; classificação de dados; fronteiras de confiança; ameaça e caso de abuso; acesso mínimo; segredos e dependências; recuperação de dados; pontos de saturação; orçamento de recursos; custos de operação; cenários de crescimento e degradação.</p>
+<p><strong>Profundidade:</strong> saber quando envolver especialistas. Evitar melhorar uma dimensão sem considerar outra: um ganho de desempenho pode aumentar custo ou dificultar consistência. Requisitos regulatórios de uma empresa precisam de interpretação e validação pelas áreas responsáveis.</p>
+<p><strong>Prática e avanço:</strong> apresentar riscos e alternativas do domínio de pedidos, com testes de integridade, acesso e recuperação no laboratório. Explicar uma decisão de capacidade e seu efeito esperado no custo. <strong>Base:</strong> Bancos, Segurança, F8–F10 e AWS.</p></li>
+<li><h4>Negociar escopo, dívida técnica e sequência de trabalho</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> valor e urgência; custo de adiar; dependências; tamanho de lote; entrega incremental; risco acumulado; dívida técnica e efeito concreto; opções de escopo; condição de aceite; responsáveis pela decisão; comunicação para públicos diferentes; acompanhamento de premissas.</p>
+<p><strong>Profundidade:</strong> tornar as escolhas compreensíveis para além da engenharia. Propor uma entrega menor que preserve segurança e regras essenciais. Justificar dívida técnica por consequências, evitando tratar toda preferência de estrutura como urgência.</p>
+<p><strong>Prática e avanço:</strong> apresentar duas opções de entrega e seus riscos, acordar uma e registrar quando a decisão será revisada. Ao final, confrontar as premissas com o que ocorreu. <strong>Base:</strong> comunicação e governança da Arquitetura, F12.</p></li>
+<li><h4>Desenvolver pessoas e distribuir decisões técnicas</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> diagnóstico da dificuldade de um colega; feedback específico; revisão proporcional ao risco; pairing com participação ativa; objetivos de aprendizado; delegação com contexto; limites de decisão; documentação de onboarding; compartilhamento de conhecimento; facilitação de divergência; acompanhamento da autonomia.</p>
+<p><strong>Profundidade:</strong> criar condições para que outras pessoas decidam e executem com qualidade. Não usar quantidade de comentários ou reuniões como prova de mentoria. Observar se o colega consegue aplicar o raciocínio em uma tarefa nova.</p>
+<p><strong>Prática e avanço:</strong> dividir uma mudança de domínio, acompanhar uma decisão tomada pelo colega e colher feedback. Demonstrar o que deixou de depender exclusivamente de você. <strong>Base:</strong> F12, Git e comunicação da Arquitetura.</p></li>
+<li><h4>Avaliar o resultado e sustentar a evolução do domínio</h4>
+<p><strong>Conteúdos, nesta ordem:</strong> baseline; indicadores técnicos e de uso; qualidade dos dados de medição; comparação antes/depois; fatores externos; feedback de consumidores; custo de manutenção; revisão de ADRs; prioridades seguintes; narrativa de decisão e resultado; delimitação da contribuição individual.</p>
+<p><strong>Profundidade:</strong> explicar o que melhorou, o que piorou e o que ainda não pode ser concluído. Acompanhar consequências em vez de encerrar a responsabilidade no deploy. Tornar o aprendizado acessível ao time.</p>
+<p><strong>Prática e avanço:</strong> produzir um case com contexto, alternativas, execução, resultado e limitações. Revisitar o serviço após uma mudança posterior e avaliar se as decisões continuam adequadas. <strong>Conexão:</strong> sete evidências da seção 8.2 e portfólio da F12.</p></li>
+</ol>
+<p><strong>Fechamento do nível:</strong> reunir evidências técnicas, de decisão e de colaboração em um escopo delimitado. Os exercícios ajudam a preparar e avaliar competências; quando a vaga exige histórico profissional, identifique com honestidade quais situações foram reais e quais foram simuladas.</p>
+</section>
+<h2 id="secao-10">9. Ajustes de prioridade e lacunas</h2>
+<p>“Lacuna” aqui pode significar assunto pouco explícito, conteúdo que chega tarde para uma vaga ou falta de prática comprovada. Não significa necessariamente ausência em todo o repositório.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Prioridade</th>
+<th>Ponto observado</th>
+<th>Ajuste recomendado</th>
+<th>Quem mais se beneficia</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Alta</td>
+<td>Entregas DevCore estão definidas, mas descrições não provam execução.</td>
+<td>Priorizar um produto coerente com histórico de evolução, testes, deploy e revisão externa.</td>
+<td>Todos.</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>O percurso aprofunda mensageria e Kubernetes em F8/F9; V2 já pede noções.</td>
+<td>Criar uma introdução curta conforme a vaga, preservando o aprofundamento posterior.</td>
+<td>Júnior forte e pleno médio.</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Liderança aparece explicitamente em F12, mas V3 cobra apoio e revisão no pleno.</td>
+<td>Antecipar revisão entre pares, refinamento, estimativas e comunicação de risco.</td>
+<td>Plenos.</td>
+</tr>
+<tr>
+<td>Alta</td>
+<td>Exemplos Java inspecionados são sem framework.</td>
+<td>Produzir integração real Spring + banco + testes + pipeline, com falhas reproduzíveis.</td>
+<td>Júnior e plenos.</td>
+</tr>
+<tr>
+<td>Média</td>
+<td>Java moderno/PostgreSQL não demonstram prática em todo ambiente corporativo.</td>
+<td>Se a vaga exigir, adicionar um exercício de manutenção/migração e a tecnologia específica: Oracle, SQL Server, JBoss ou WebSphere.</td>
+<td>Plenos e sênior inicial; V3/V4/V8.</td>
+</tr>
+<tr>
+<td>Média</td>
+<td>Build Java não aparece como objetivo forte nos arquivos centrais inspecionados.</td>
+<td>Tornar explícito Maven ou Gradle: wrapper, dependências, testes, empacotamento e diagnóstico de build.</td>
+<td>Júnior forte e pleno médio.</td>
+</tr>
+<tr>
+<td>Média</td>
+<td>A cobertura de CI/CD é conceitualmente transferível, mas não comprova Jenkins/Azure DevOps.</td>
+<td>Reproduzir um pipeline na ferramenta da vaga quando necessário.</td>
+<td>Plenos; V3/V4.</td>
+</tr>
+<tr>
+<td>Condicional</td>
+<td>Frontend entra em F11 no percurso backend.</td>
+<td>Antecipar um cliente web pequeno se a candidatura for full stack.</td>
+<td>V1; dispensável como bloqueio para backend puro.</td>
+</tr>
+<tr>
+<td>Condicional</td>
+<td>Engenharia assistida por IA já tem academia própria.</td>
+<td>Selecionar uso verificável de assistência e revisão; evitar estudar toda a especialização para atender a uma exigência básica.</td>
+<td>V1 e funções com IA.</td>
+</tr>
+<tr>
+<td>Contínua</td>
+<td>Estudos e simulados não reproduzem completamente trabalho coletivo.</td>
+<td>Buscar revisão externa, contribuições colaborativas e acompanhamento de usuários/consumidores.</td>
+<td>Principalmente pleno forte e sênior inicial.</td>
+</tr>
+</tbody></table></div>
+<p>A existência de <code>public/data/aieng-advanced.js</code> é relevante: há fluxo assistido verificável, segurança do código gerado, avaliação e adoção. A lacuna não é simplesmente “falta IA”; é escolher o uso apropriado e comprovar que o desenvolvedor continua responsável pela correção.</p>
+<p>Certificação e formação acadêmica também devem ser separadas de competência prática. V3 e V4 exigem superior completo, algo que este plano não substitui. Em V6, certificações AWS aparecem como diferencial, não como substituto de experiência. <a href="https://deliverit.gupy.io/jobs/12545946?jobBoardSource=gupy_public_page">V3</a>, <a href="https://stefanini.gupy.io/jobs/12439849?jobBoardSource=gupy_public_page">V4</a>, <a href="https://porto.gupy.io/jobs/11849267">V6</a>.</p>
+<h3>9.1. Transformar o DevCore em evidência própria</h3>
+<p>Escolha um fluxo de negócio e mantenha um histórico de sua evolução. Em cada entrega, registre problema, mudança, testes e limitações. Evite iniciar outro produto apenas para adicionar uma tecnologia ao currículo quando o atual ainda não pode ser executado por terceiros.</p>
+<p><strong>Ação concreta:</strong> concluir uma versão pequena, pedir execução externa e corrigir os obstáculos encontrados. <strong>Condição de fechamento:</strong> outra pessoa consegue reproduzir o fluxo sem instruções adicionais do autor. Para níveis superiores, acrescentar manutenção e acompanhamento ao longo de novas mudanças.</p>
+<h3>9.2. Antecipar noções de mensageria e Kubernetes</h3>
+<p>Para uma vaga que pede noções, a introdução pode focar em entender o papel dos componentes e acompanhar uma execução simples. Isso não precisa antecipar todo o conteúdo avançado de sistemas distribuídos ou operação de clusters.</p>
+<p><strong>Ação concreta:</strong> preparar um laboratório introdutório com objetivos separados: explicar um produtor/consumidor e explicar como uma aplicação é executada e observada em um ambiente orquestrado. <strong>Condição de fechamento:</strong> conseguir descrever o fluxo e uma falha simples. Não declarar domínio operacional a partir desse contato inicial.</p>
+<h3>9.3. Antecipar colaboração, refinamento e estimativas</h3>
+<p>O treino pode começar com uma solicitação curta: identificar dúvidas, decompor atividades e registrar dependências. Após a execução, comparar o que foi previsto com o que aconteceu. O propósito é melhorar a capacidade de reconhecer incerteza, não acertar uma duração exata desde o início.</p>
+<p><strong>Ação concreta:</strong> conduzir uma entrega colaborativa com revisão intermediária e final. <strong>Condição de fechamento:</strong> apresentar quais premissas mudaram, como o risco foi comunicado e como o plano foi ajustado. Essa prática complementa PRs e conteúdos de comunicação já previstos no projeto.</p>
+<h3>9.4. Integrar os exemplos didáticos em uma aplicação real</h3>
+<p>Um exemplo de mecanismo isolado ajuda a entender o assunto; a integração revela configuração, dependências, dados e comportamento entre partes. Preserve ambos os tipos de prática, com propósitos explícitos.</p>
+<p><strong>Ação concreta:</strong> levar uma regra para uma aplicação Spring com persistência e teste de integração. <strong>Condição de fechamento:</strong> executar o fluxo e um caso de erro com os componentes reais do laboratório. Documentar o que o exemplo isolado não demonstrava e o que a integração passou a verificar.</p>
+<h3>9.5. Preparar manutenção e tecnologias corporativas</h3>
+<p>Selecione uma tecnologia adicional apenas quando ela estiver relacionada às candidaturas pretendidas. Antes de uma migração, aprenda a reproduzir o comportamento existente e proteger regras com testes. A capacidade de trabalhar com restrições é tão relevante quanto a adoção da versão mais nova.</p>
+<p><strong>Ação concreta:</strong> criar uma tarefa delimitada de manutenção em uma aplicação ou banco escolhido. <strong>Condição de fechamento:</strong> explicar compatibilidades, passos e riscos encontrados. Rotular esse contato como laboratório quando não houver experiência profissional direta.</p>
+<h3>9.6. Tornar o build parte explícita da formação</h3>
+<p>Escolha Maven ou Gradle inicialmente e entenda o caminho entre fonte, dependências, testes e artefato. Investigue falhas de configuração e diferenças entre executar pela IDE e pela linha de comando.</p>
+<p><strong>Ação concreta:</strong> documentar a execução por wrapper e usá-la no pipeline. <strong>Condição de fechamento:</strong> outra pessoa consegue compilar e testar, e o autor explica uma dependência relevante e uma falha de build. Essa é uma complementação proposta, não uma afirmação de que o tema inexiste em todos os arquivos do repositório.</p>
+<h3>9.7. Transferir conhecimentos entre ferramentas de CI/CD</h3>
+<p>Comece pelos estágios e pelas informações que passam entre eles: código, testes, artefato, configuração e resultado de entrega. Depois estude como a ferramenta solicitada representa esses conceitos.</p>
+<p><strong>Ação concreta:</strong> reproduzir um pipeline pequeno na ferramenta pertinente à vaga, se houver acesso. <strong>Condição de fechamento:</strong> demonstrar uma execução bem-sucedida, uma falha compreensível e o caminho até o artefato produzido. Se só houver estudo conceitual, declarar essa limitação.</p>
+<h3>9.8. Antecipar frontend quando o alvo for full stack</h3>
+<p>Um cliente simples ajuda a exercitar formulários, consumo da API e estados de carregamento, sucesso e erro. Ele deve atender ao fluxo do produto, sem exigir concluir toda a academia de frontend.</p>
+<p><strong>Ação concreta:</strong> criar uma tela que cadastre e consulte o recurso do backend. <strong>Condição de fechamento:</strong> o usuário consegue completar a ação e recebe mensagens úteis quando algo falha. O frontend não deve ser a única camada que verifica as regras de acesso e negócio.</p>
+<h3>9.9. Usar IA com verificação</h3>
+<p>Para assistência à programação, registre o objetivo, revise a alteração sugerida e teste seu comportamento. Para uma funcionalidade com IA, o escopo é outro: definir exemplos de entrada, resultados aceitáveis e situações em que o sistema não deve prosseguir automaticamente.</p>
+<p><strong>Ação concreta:</strong> documentar uma tarefa assistida e as verificações feitas pelo autor. <strong>Condição de fechamento:</strong> explicar o código, identificar uma limitação e alterar a solução sem depender da mesma sugestão. A complexidade do estudo deve acompanhar o uso pretendido.</p>
+<h3>9.10. Construir experiência coletiva e de acompanhamento</h3>
+<p>Procure oportunidades de revisar código, atender uma necessidade de outra pessoa e manter algo depois da primeira entrega. Isso pode ocorrer em projeto colaborativo, contribuição aberta ou produto próprio com usuários, respeitando o contexto de cada experiência.</p>
+<p><strong>Ação concreta:</strong> combinar uma entrega com outra pessoa e realizar uma revisão após o uso. <strong>Condição de fechamento:</strong> registrar feedback, correção e aprendizado. Para pleno forte e sênior inicial, observar também se o trabalho reduziu a dependência do time em relação a uma única pessoa.</p>
+<h3>9.11. Formação e certificações no planejamento</h3>
+<p>Registre requisitos formais em uma coluna separada da ficha técnica. Se uma vaga exige graduação concluída e isso ainda não foi atendido, o plano de estudos não altera essa condição. Uma certificação pode organizar a revisão de um assunto, mas não substitui evidência de implementação ou operação.</p>
+<p><strong>Ação concreta:</strong> decidir se uma certificação atende a uma necessidade concreta das candidaturas escolhidas. <strong>Condição de fechamento:</strong> conhecer o papel dela nessa estratégia e preservar tempo para prática. Este documento não define certificações como passagem obrigatória entre os quatro níveis.</p>
+<h2 id="secao-11">10. Como usar o projeto sem dispersar o estudo</h2>
+<ol>
+<li><strong>Para júnior forte:</strong> priorize Java + SQL + Spring + Git + testes e uma entrega utilizável. Adicione noções específicas da vaga, sem esperar completar 36 meses de plano.</li>
+<li><strong>Para pleno médio:</strong> evolua o mesmo produto com segurança, diagnóstico, migrations e entrega autônoma. Registre decisões e feedback.</li>
+<li><strong>Para pleno forte:</strong> introduza integração, falhas, reprocessamento e operação com justificativa. Trabalhe com outra pessoa e acompanhe consequências das mudanças.</li>
+<li><strong>Para sênior inicial:</strong> assuma um escopo de responsabilidade contínua, com decisões, resultados, comunicação de risco e desenvolvimento de colegas.</li>
+</ol>
+<p>Conteúdos de fronteira — por exemplo, instrumentação de bytecode/JIT, mecanismos profundos de plataforma ou especializações avançadas de IA — podem enriquecer a formação, mas não devem bloquear esses marcos. Sua prioridade depende do problema e da especialidade pretendida.</p>
+<h3>10.1. Ciclo sugerido de estudo e entrega</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Etapa</th>
+<th>Ação</th>
+<th>Resultado verificável</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Escolher</td>
+<td>Selecionar uma competência e um problema pequeno relacionado ao nível pretendido.</td>
+<td>Uma frase descrevendo o comportamento que será implementado ou investigado.</td>
+</tr>
+<tr>
+<td>Estudar</td>
+<td>Ler o material necessário e anotar as dúvidas que afetam a solução.</td>
+<td>Explicação breve dos conceitos que serão usados.</td>
+</tr>
+<tr>
+<td>Implementar</td>
+<td>Construir a solução e registrar decisões relevantes.</td>
+<td>Mudança executável e limitada ao problema escolhido.</td>
+</tr>
+<tr>
+<td>Verificar</td>
+<td>Exercitar sucesso, erro e uma variação importante.</td>
+<td>Testes ou procedimento reproduzível com resultado registrado.</td>
+</tr>
+<tr>
+<td>Revisar</td>
+<td>Pedir feedback sobre código, raciocínio e documentação.</td>
+<td>Comentários e ajustes rastreáveis.</td>
+</tr>
+<tr>
+<td>Reaplicar</td>
+<td>Resolver um caso parecido com uma condição diferente.</td>
+<td>Evidência de transferência do aprendizado.</td>
+</tr>
+<tr>
+<td>Registrar</td>
+<td>Atualizar o progresso com o artefato e os limites do resultado.</td>
+<td>Histórico que distingue estudo, prática e validação.</td>
+</tr>
+</tbody></table></div>
+<p>O ciclo pode ocupar vários dias ou semanas conforme disponibilidade e complexidade. A duração não é um indicador de senioridade. Se a tarefa estiver grande demais para receber feedback, divida-a em entregas menores sem perder a regra que deseja verificar.</p>
+<h3>10.2. Um mesmo produto, quatro recortes de responsabilidade</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Recorte</th>
+<th>Pergunta central</th>
+<th>Entrega proposta</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Júnior forte</td>
+<td>Consigo implementar e explicar uma regra delimitada?</td>
+<td>Cadastro/consulta com banco, testes e execução reproduzível.</td>
+</tr>
+<tr>
+<td>Pleno médio</td>
+<td>Consigo levar uma funcionalidade do refinamento ao acompanhamento?</td>
+<td>Cancelamento com regras, autorização, testes e plano de entrega.</td>
+</tr>
+<tr>
+<td>Pleno forte</td>
+<td>Consigo coordenar um fluxo com dependências e recuperação?</td>
+<td>Integração assíncrona com contrato, cenários de falha e procedimento operacional.</td>
+</tr>
+<tr>
+<td>Sênior inicial</td>
+<td>Consigo conduzir a evolução do domínio e melhorar o trabalho do time?</td>
+<td>Mudança compatível, decisão negociada, acompanhamento e participação de outros.</td>
+</tr>
+</tbody></table></div>
+<p>Esses recortes são propostas de prática. Um produto pequeno permite observar comportamentos importantes, mas não reproduz automaticamente o volume, a criticidade e a organização de uma empresa.</p>
+<h3>10.3. Modelo de registro de evidência</h3>
+<p>Use um registro curto para cada entrega relevante:</p>
+<pre><code class="language-text">Competência e nível de profundidade pretendido:
+Problema e quem precisa da solução:
+Contexto: laboratório, projeto pessoal, colaboração ou trabalho:
+Regras e restrições:
+Minha contribuição e contribuição de outras pessoas:
+Decisões e alternativas consideradas:
+Artefatos: código, PR, testes, relatório ou demonstração:
+Como reproduzir e verificar o resultado:
+Feedback recebido e ajustes realizados:
+Resultado observado e limitações:
+Próximo caso em que vou reaplicar o aprendizado:
+</code></pre>
+<p>Não é necessário produzir um relatório longo para cada exercício. Reserve o registro completo para entregas que pretende usar em entrevistas ou revisão de evolução. Para exercícios menores, problema, solução, teste e dificuldade encontrada costumam ser suficientes.</p>
+<h3>10.4. Rubrica de autoavaliação sem pontuação artificial</h3>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Tabela com rolagem horizontal"><table>
+<thead>
+<tr>
+<th>Situação atual</th>
+<th>Sinal observável</th>
+<th>Próxima ação</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Conheço o assunto</td>
+<td>Consigo explicá-lo, mas ainda não implementei.</td>
+<td>Fazer um exercício delimitado.</td>
+</tr>
+<tr>
+<td>Reproduzo com orientação</td>
+<td>Consigo seguir o exemplo e executar.</td>
+<td>Alterar uma condição e resolver sem a mesma sequência de passos.</td>
+</tr>
+<tr>
+<td>Aplico com autonomia</td>
+<td>Consigo implementar, verificar e explicar as escolhas.</td>
+<td>Pedir revisão e trabalhar uma falha ou evolução.</td>
+</tr>
+<tr>
+<td>Sustento e compartilho</td>
+<td>Consigo manter a solução, lidar com consequências e ajudar outra pessoa.</td>
+<td>Ampliar o escopo de responsabilidade conforme a necessidade real.</td>
+</tr>
+</tbody></table></div>
+<p>Não some essas linhas como se produzissem um cargo. Procure consistência nas competências centrais da função escolhida. Uma deficiência importante em regras de negócio, testes ou colaboração pode exigir atenção mesmo quando há domínio de assuntos avançados.</p>
+<h3>10.5. Quando revisar a prioridade dos estudos</h3>
+<p>Revise o plano quando uma entrevista trouxer uma dificuldade concreta, uma vaga-alvo exigir uma competência recorrente ou uma entrega revelar um problema de base. Escolha a menor ação que ajude a resolver essa lacuna e retome o produto principal.</p>
+<p>Se o problema for explicar o próprio código, priorize leitura e comunicação. Se for executar a aplicação, priorize ambiente e build. Se for manter uma funcionalidade após a entrega, priorize testes, observabilidade e acompanhamento. Se for coordenar mudanças, priorize contratos, planejamento e trabalho com outras pessoas.</p>
+<p>Antes de adicionar outra tecnologia, responda: qual problema ela resolve, qual vaga ou entrega justifica estudá-la agora e qual evidência mostrará que o estudo deu resultado? Sem essas respostas, ela pode permanecer como aprofundamento posterior.</p>
+<p>Os quatro perfis devem ser avaliados pela qualidade e autonomia da atuação. O projeto fornece bastante material para essa evolução; o próximo ganho mais importante vem de <strong>construir, revisar, operar e explicar evidências do trabalho realizado</strong>.</p>
+</main>
+</div>
+</body>
+</html>

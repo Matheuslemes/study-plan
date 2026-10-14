@@ -83,7 +83,7 @@ export const tracks = [
   { "key": "ia", "label": "IA Engineering", "h": "fase 11", "suffix": "" },
   { "key": "math", "label": "Matemática aplicada", "h": "acoplada a DB e IA", "suffix": "" },
   { "key": "fin", "label": "Financeiro", "h": "revisão mensal · 1h", "suffix": "" },
-  { "key": "treino", "label": "Treino Híbrido", "h": "5x força · cardio 2 turnos", "suffix": "" }
+  { "key": "treino", "label": "Treino Híbrido", "h": "7 dias · cardio 2 turnos", "suffix": "" }
 ];
 
 export const quickTracks = [
@@ -416,17 +416,17 @@ export const quickTracks = [
     label: "Treino Híbrido",
     href: "./trilhas/treino.html",
     badge: "Saúde + Cardio",
-    desc: "Plano de treino híbrido reconstruído: musculação 5x/semana com um grupo por dia (peito, pernas, costas, ombros, braços), cardio em dois turnos diários (Zona 2 em jejum e 4x4 norueguês), volume semanal auditado, progressão dupla, nutrição e avaliação em números.",
+    desc: "Plano de treino híbrido em 7 dias com um grupo por dia (peito, pernas A, costas, ombros, pernas B, braços e manutenção), 215 séries semanais com todos os grupos no teto da faixa, cardio em dois turnos diários (Zona 2 em jejum e 4x4 norueguês), progressão dupla, nutrição e avaliação em números.",
     extraBadges: [
       { label: "110 kg" },
       { label: "1,80 m" },
-      { label: "Split por grupo" },
+      { label: "7 dias" },
+      { label: "215 séries/semana" },
+      { label: "20 séries por grupo" },
       { label: "Cardio 2 turnos" },
       { label: "4x4 norueguês" },
-      { label: "10–18 séries" },
       { label: "Progressão dupla" },
-      { label: "Braço 2x" },
-      { label: "Abdômen 3x · Panturrilha 2x" }
+      { label: "Deload 4–5 sem" }
     ]
   }
 ];

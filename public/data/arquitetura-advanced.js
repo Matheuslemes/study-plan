@@ -13,6 +13,13 @@ const official = {
   arc42: { label: 'arc42 — template de documentação', url: 'https://arc42.org/overview' },
   adr: { label: 'Architecture Decision Records (adr.github.io)', url: 'https://adr.github.io/' },
   fowler: { label: 'martinfowler.com — Software Architecture Guide', url: 'https://martinfowler.com/architecture/' },
+  solid: { label: 'SOLID — princípios de design orientado a objetos', url: 'https://en.wikipedia.org/wiki/SOLID' },
+  cleanArch: { label: 'The Clean Architecture — Robert C. Martin', url: 'https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html' },
+  hexagonal: { label: 'Hexagonal Architecture (Ports & Adapters) — Alistair Cockburn', url: 'https://alistair.cockburn.us/hexagonal-architecture/' },
+  finops: { label: 'FinOps Foundation — Framework', url: 'https://www.finops.org/framework/' },
+  togaf: { label: 'The Open Group — TOGAF Standard', url: 'https://www.opengroup.org/togaf' },
+  datamesh: { label: 'Data Mesh — princípios (Zhamak Dehghani, martinfowler.com)', url: 'https://martinfowler.com/articles/data-mesh-principles.html' },
+  slsa: { label: 'SLSA — Supply-chain Levels for Software Artifacts', url: 'https://slsa.dev/' },
   microservices: { label: 'microservices.io — Chris Richardson', url: 'https://microservices.io/patterns/index.html' },
   eip: { label: 'Enterprise Integration Patterns (catálogo)', url: 'https://www.enterpriseintegrationpatterns.com/patterns/messaging/' },
   twelvefactor: { label: 'The Twelve-Factor App', url: 'https://12factor.net/' },
@@ -231,8 +238,8 @@ export const arquiteturaTechnologyBaseline = [
   { technology: 'OpenTelemetry — convenções semânticas', baseline: 'estáveis para HTTP e parciais para o resto', status: 'Em evolução', note: 'Sinal de observabilidade é contrato arquitetural. Fixe a versão da convenção usada.' },
   { technology: 'Monólito modular como padrão', baseline: 'consenso revisado (2026)', status: 'Corrente', note: 'Parte das organizações que adotaram microsserviços está reconsolidando. Módulos 8 e 15 já tratam; a decisão é por acoplamento e capacidade, não por moda.' },
   { technology: 'Fitness functions executáveis', baseline: 'ArchUnit · Spring Modulith', status: 'Estável', note: 'Fronteira que não é verificada por build não é fronteira. Módulo 4.' },
-  { technology: 'TLA+ / Alloy', baseline: 'maduros', status: 'Nicho de alto valor', note: 'Usados em produção por AWS e outros para protocolos distribuídos. Módulo 20.' },
-  { technology: 'Agentes de IA como componente', baseline: 'MCP (padrão de fato, 2026)', status: 'Emergente', note: 'Componente não determinístico dentro da arquitetura, com custo e latência variáveis. Módulo 25.' }
+  { technology: 'TLA+ / Alloy', baseline: 'maduros', status: 'Nicho de alto valor', note: 'Usados em produção por AWS e outros para protocolos distribuídos. Módulo 27.' },
+  { technology: 'Agentes de IA como componente', baseline: 'MCP (padrão de fato, 2026)', status: 'Emergente', note: 'Componente não determinístico dentro da arquitetura, com custo e latência variáveis. Módulo 32.' }
 ];
 
 export const arquiteturaAcademy = Object.freeze({
@@ -310,9 +317,9 @@ export const arquiteturaAcademy = Object.freeze({
     },
     evolucao: {
       index: '4/6',
-      range: 'Módulos 15–18',
+      range: 'Módulos 15–25',
       title: 'Evolução, operação e organização',
-      subtitle: 'Migração incremental, observabilidade, segurança arquitetural e topologias de time.',
+      subtitle: 'Migração incremental, observabilidade, segurança arquitetural, topologias de time, a solução em nuvem, a orquestração de contêineres, a entrega contínua, a comunicação de arquitetura, o panorama de arquitetura corporativa, a engenharia de plataforma e a arquitetura de dados.',
       prerequisites: [
         'Dominar dados distribuídos e resiliência da parte anterior.',
         'Ter operado ou acompanhado um incidente real de produção.',
@@ -327,7 +334,7 @@ export const arquiteturaAcademy = Object.freeze({
     },
     fronteira: {
       index: '5/6',
-      range: 'Módulos 19–25',
+      range: 'Módulos 26–32',
       title: 'Fronteira: provar a arquitetura',
       subtitle: 'Event sourcing, especificação formal, simulação determinística, caos, células e os papers que definiram a área.',
       prerequisites: [
@@ -602,9 +609,9 @@ export const arquiteturaModules = [
     objective: 'Escolher um estilo arquitetural pela combinação de forças que ele privilegia e comparar alternativas com uma análise de trade-offs, não por familiaridade.',
     prerequisites: ['Módulos 1–2', 'Atributos de qualidade priorizados', 'Camadas e componentes'],
     problem: 'Estilos viram rótulo: "usamos camadas", "somos event-driven". Sem entender o que cada estilo otimiza e cobra, a equipe herda dores estruturais que poderiam ter sido previstas.',
-    concepts: ['Monolítico em camadas e modular monolith', 'Pipeline e microkernel (plugin)', 'Baseado em serviços vs microsserviços', 'Event-driven (broker e mediator)', 'Space-based e orientado a espaço para escala extrema'],
-    internals: ['Cada estilo é um conjunto de decisões pré-empacotadas: define fluxo de controle, granularidade de deploy e topologia de dados.', 'Estilos monolíticos privilegiam simplicidade e cobram escalabilidade granular; distribuídos invertem isso.', 'Event-driven melhora desacoplamento e responsividade e cobra rastreabilidade, ordenação e complexidade de fluxo.'],
-    useWhen: ['Camadas/modular monolith como default para domínio em descoberta e time único.', 'Event-driven quando responsividade, desacoplamento temporal e picos irregulares dominam.', 'Microkernel quando o núcleo é estável e a variação vive em plugins.'],
+    concepts: ['Monolítico em camadas e modular monolith', 'Pipeline e microkernel (plugin)', 'Baseado em serviços vs microsserviços', 'Event-driven (broker e mediator)', 'Space-based e orientado a espaço para escala extrema', 'Clean Architecture: camadas concêntricas e a regra de dependência (para dentro)', 'Hexagonal (Ports & Adapters): domínio isolado de I/O por portas e adaptadores'],
+    internals: ['Cada estilo é um conjunto de decisões pré-empacotadas: define fluxo de controle, granularidade de deploy e topologia de dados.', 'Estilos monolíticos privilegiam simplicidade e cobram escalabilidade granular; distribuídos invertem isso.', 'Event-driven melhora desacoplamento e responsividade e cobra rastreabilidade, ordenação e complexidade de fluxo.', 'Clean Architecture e Hexagonal (Ports & Adapters) são o mesmo princípio em formas diferentes: o domínio no centro não depende de framework, banco ou UI; a dependência aponta para dentro e a infraestrutura entra por portas (interfaces) e adaptadores. São organização interna da aplicação, ortogonais à escolha de monólito ou microsserviços.'],
+    useWhen: ['Camadas/modular monolith como default para domínio em descoberta e time único.', 'Event-driven quando responsividade, desacoplamento temporal e picos irregulares dominam.', 'Microkernel quando o núcleo é estável e a variação vive em plugins.', 'Clean Architecture/Hexagonal (domínio no centro, infraestrutura nas bordas) quando quiser trocar banco, framework ou UI sem tocar nas regras de negócio.'],
     avoidWhen: ['Não adote microsserviços sem escala, autonomia de time e capacidade operacional.', 'Não use event-driven onde o fluxo é essencialmente síncrono e transacional.', 'Não misture estilos sem uma fronteira clara entre eles.'],
     contrast: {
       bad: 'Escolher microsserviços "para escalar" um sistema com dez usuários e um time de quatro pessoas.',
@@ -625,7 +632,7 @@ export const arquiteturaModules = [
     ],
     challenge: 'Fazer uma análise de trade-offs comparando três estilos para um mesmo requisito e defender a escolha em uma página.',
     book: 'Fundamentals of Software Architecture, cap. 9–18 (estilos arquiteturais).',
-    complements: [official.reactive, official.microservices],
+    complements: [official.reactive, official.microservices, official.cleanArch, official.hexagonal],
     exampleFile: '../../examples/arquitetura-senior/estilos-fit.mjs'
   },
   {
@@ -637,9 +644,9 @@ export const arquiteturaModules = [
     objective: 'Medir acoplamento e coesão de forma explícita e proteger as fronteiras arquiteturais com fitness functions automatizadas, transformando arquitetura em algo verificável.',
     prerequisites: ['Módulos 1–3', 'Componentes e dependências', 'Testes automatizados'],
     problem: 'Fronteiras arquiteturais existem só no diagrama. No código, tudo importa tudo, e a arquitetura apodrece sem que ninguém perceba até a próxima grande dor.',
-    concepts: ['Acoplamento aferente e eferente e a métrica de instabilidade', 'Coesão funcional vs coincidental', 'Conectância e efeito dominó', 'Arquitetura evolutiva e fitness functions', 'Fronteiras verificáveis em build/CI'],
-    internals: ['Acoplamento não é bom nem ruim; é dívida direcional que deve apontar para abstrações estáveis.', 'Uma fitness function é um teste que falha o build quando uma característica arquitetural é violada.', 'Coesão alta reduz a superfície de mudança; baixa coesão espalha uma alteração por muitos módulos.'],
-    useWhen: ['Meça dependências entre módulos e imponha a direção permitida em CI.', 'Crie fitness function para regras que você não quer descobrir violadas em produção.', 'Refatore em direção a coesão funcional quando uma mudança tocar módulos demais.'],
+    concepts: ['Acoplamento aferente e eferente e a métrica de instabilidade', 'Coesão funcional vs coincidental', 'Conectância e efeito dominó', 'SOLID: cinco princípios de design (SRP, OCP, LSP, ISP, DIP)', 'Arquitetura evolutiva e fitness functions', 'Fronteiras verificáveis em build/CI'],
+    internals: ['Acoplamento não é bom nem ruim; é dívida direcional que deve apontar para abstrações estáveis.', 'Uma fitness function é um teste que falha o build quando uma característica arquitetural é violada.', 'Coesão alta reduz a superfície de mudança; baixa coesão espalha uma alteração por muitos módulos.', 'SOLID é o vocabulário clássico por trás de baixo acoplamento e alta coesão: Single Responsibility (SRP) dá coesão, e Dependency Inversion (DIP) inverte a direção da dependência para apontar a abstrações estáveis — exatamente a regra que uma fitness function protege no build.'],
+    useWhen: ['Meça dependências entre módulos e imponha a direção permitida em CI.', 'Crie fitness function para regras que você não quer descobrir violadas em produção.', 'Refatore em direção a coesão funcional quando uma mudança tocar módulos demais.', 'Aplique SOLID (sobretudo Dependency Inversion) para que módulos de alto nível não dependam de detalhes, e verifique a direção resultante com uma fitness function.'],
     avoidWhen: ['Não crie abstração sem um eixo real de variação.', 'Não confie em revisão manual para preservar fronteira que muda toda semana.', 'Não persiga acoplamento zero: integração exige alguma dependência.'],
     contrast: {
       bad: 'Documento diz "camada de domínio não depende de infraestrutura" e o código importa o cliente de banco direto no domínio.',
@@ -660,7 +667,7 @@ export const arquiteturaModules = [
     ],
     challenge: 'Adicionar ao pipeline um conjunto de fitness functions que trave build ao violar camadas, ciclos e limites de tamanho de módulo.',
     book: 'Fundamentals of Software Architecture, cap. 3 e 6–8 (modularidade, acoplamento, componentes).',
-    complements: [official.fowler, official.twelvefactor],
+    complements: [official.fowler, official.twelvefactor, official.solid],
     exampleFile: '../../examples/arquitetura-senior/fitness-acoplamento.mjs'
   },
   {
@@ -742,9 +749,9 @@ export const arquiteturaModules = [
     objective: 'Modelar um domínio com agregados como limites de consistência, proteger invariantes na fronteira do agregado e comunicar mudanças com eventos de domínio.',
     prerequisites: ['Módulo 6', 'OO e imutabilidade', 'Transações básicas'],
     problem: 'Modelos anêmicos jogam regras para services; agregados gigantes forçam transações enormes; invariantes de negócio ficam espalhadas e são violadas por qualquer caminho de escrita.',
-    concepts: ['Entidade vs value object', 'Agregado, raiz e limite de consistência', 'Invariantes e regra de transação por agregado', 'Domain events e desacoplamento', 'Repositórios e fábricas'],
-    internals: ['O agregado é a menor unidade que precisa ser consistente em uma transação, não uma árvore de objetos do banco.', 'Referências entre agregados devem ser por identidade, não por objeto, para preservar limites.', 'Eventos de domínio permitem reagir a uma mudança sem acoplar o agregado a quem consome.'],
-    useWhen: ['Desenhe um agregado por invariante que precisa ser mantida atomicamente.', 'Use value object para conceitos definidos por valor, como Money ou Endereço.', 'Emita domain event quando outros contextos precisam reagir a uma mudança.'],
+    concepts: ['Entidade vs value object', 'Agregado, raiz e limite de consistência', 'Invariantes e regra de transação por agregado', 'Domain events e desacoplamento', 'Repositórios e fábricas', 'Hexagonal (Ports & Adapters): repositório como porta, infraestrutura como adaptador'],
+    internals: ['O agregado é a menor unidade que precisa ser consistente em uma transação, não uma árvore de objetos do banco.', 'Referências entre agregados devem ser por identidade, não por objeto, para preservar limites.', 'Eventos de domínio permitem reagir a uma mudança sem acoplar o agregado a quem consome.', 'A arquitetura Hexagonal (Ports & Adapters) é como o modelo tático se mantém puro: o agregado e a regra de negócio ficam no centro, o repositório é uma porta (interface definida pelo domínio) e o banco é um adaptador — o domínio nunca importa infraestrutura.'],
+    useWhen: ['Desenhe um agregado por invariante que precisa ser mantida atomicamente.', 'Use value object para conceitos definidos por valor, como Money ou Endereço.', 'Emita domain event quando outros contextos precisam reagir a uma mudança.', 'Isole o domínio com Hexagonal (Ports & Adapters): defina o repositório como porta no domínio e implemente o adaptador na infraestrutura.'],
     avoidWhen: ['Não crie agregados grandes que forçam locking e contenção.', 'Não referencie outro agregado por objeto dentro de uma transação.', 'Não transforme domain event em RPC síncrono disfarçado.'],
     contrast: {
       bad: 'Um agregado Pedido que carrega Cliente, Estoque e Pagamento inteiros e trava tudo numa transação única.',
@@ -765,7 +772,7 @@ export const arquiteturaModules = [
     ],
     challenge: 'Modelar um domínio de pedidos com três agregados, invariantes explícitas e um fluxo de eventos entre eles, provando a consistência por testes.',
     book: 'Domain-Driven Design (Evans), parte II; Implementing DDD (Vernon), cap. 5–8 e 10.',
-    complements: [official.ddd, official.microservices],
+    complements: [official.ddd, official.microservices, official.hexagonal],
     exampleFile: '../../examples/arquitetura-senior/agregado-invariante.mjs'
   },
   {
@@ -1092,8 +1099,8 @@ export const arquiteturaModules = [
     objective: 'Incorporar segurança na estrutura do sistema — modelagem de ameaças, isolamento, identidade e multi-tenancy — em vez de tratá-la como verniz aplicado no fim.',
     prerequisites: ['Módulos 9, 13 e 16', 'AuthN/AuthZ básicos', 'Redes'],
     problem: 'Segurança é deixada para o final e vira lista de correções. A arquitetura confia na rede interna, mistura dados de tenants e não tem fronteira de confiança clara, criando risco sistêmico.',
-    concepts: ['Threat modeling (STRIDE) e superfície de ataque', 'Zero trust e fronteiras de confiança', 'Identidade, tokens, escopos e propagação', 'Isolamento e estratégias de multi-tenancy', 'Defesa em profundidade e menor privilégio'],
-    internals: ['Zero trust assume que a rede é hostil: cada requisição prova identidade e autorização, não a localização.', 'Multi-tenancy é uma decisão arquitetural: silo, pool ou híbrido definem isolamento, custo e blast radius.', 'Modelar ameaças cedo é mais barato que remediar; a fronteira de confiança precisa ser explícita no diagrama.'],
+    concepts: ['Threat modeling (STRIDE) e superfície de ataque', 'Zero trust e fronteiras de confiança', 'Identidade, tokens, escopos e propagação', 'Isolamento e estratégias de multi-tenancy', 'Defesa em profundidade e menor privilégio', 'Segurança da cadeia de suprimentos: dependências vulneráveis, SBOM e proveniência'],
+    internals: ['Zero trust assume que a rede é hostil: cada requisição prova identidade e autorização, não a localização.', 'Multi-tenancy é uma decisão arquitetural: silo, pool ou híbrido definem isolamento, custo e blast radius.', 'Modelar ameaças cedo é mais barato que remediar; a fronteira de confiança precisa ser explícita no diagrama.', 'A cadeia de suprimentos de software é superfície de ataque: dependências vulneráveis e build comprometido entram no artefato. Os controles são SBOM (inventário de componentes), proveniência/atestação (SLSA) e assinatura — quem construiu, de qual fonte — com o enforcement no pipeline (mód. 21).'],
     useWhen: ['Faça threat modeling na fase de desenho de fluxos sensíveis.', 'Aplique menor privilégio e defesa em profundidade em cada camada.', 'Escolha a estratégia de multi-tenancy pelo isolamento e blast radius exigidos.'],
     avoidWhen: ['Não confie em rede interna como fronteira de segurança.', 'Não misture dados de tenants sem isolamento e escopo verificados.', 'Não deixe segurança para uma fase de hardening no final.'],
     contrast: {
@@ -1102,8 +1109,8 @@ export const arquiteturaModules = [
     },
     tradeoffs: ['Isolamento por silo dá segurança forte e cobra custo e operação por tenant.', 'Zero trust reduz risco e adiciona latência e complexidade de identidade.', 'Defesa em profundidade aumenta resiliência e o número de controles a manter.'],
     production: 'Um bug de autorização expõe dados de um tenant a outro porque o isolamento era só lógico e não testado. O exercício modela ameaças e reforça a fronteira e o isolamento.',
-    risks: ['Segurança no final', 'Confiança na rede interna', 'Vazamento entre tenants', 'Privilégio excessivo', 'Superfície de ataque não mapeada'],
-    checklist: ['Qual a fronteira de confiança deste fluxo?', 'As ameaças (STRIDE) foram modeladas?', 'Cada chamada prova identidade e escopo?', 'O isolamento entre tenants é testado?', 'O princípio de menor privilégio é aplicado?'],
+    risks: ['Segurança no final', 'Confiança na rede interna', 'Vazamento entre tenants', 'Privilégio excessivo', 'Superfície de ataque não mapeada', 'Dependência vulnerável ou build comprometido (cadeia de suprimentos)'],
+    checklist: ['Qual a fronteira de confiança deste fluxo?', 'As ameaças (STRIDE) foram modeladas?', 'Cada chamada prova identidade e escopo?', 'O isolamento entre tenants é testado?', 'O princípio de menor privilégio é aplicado?', 'A cadeia de suprimentos (dependências, build, artefato) tem SBOM e proveniência?'],
     interview: [
       { level: 'Júnior/Pleno', question: 'O que significa zero trust na arquitetura?', expected: 'Não confiar na localização de rede como garantia; toda requisição autentica e autoriza explicitamente, tratando a rede interna como potencialmente hostil.' },
       { level: 'Sênior/Expert', question: 'Quais são as estratégias de isolamento em multi-tenancy e como escolher?', expected: 'Silo (recursos dedicados), pool (compartilhado com isolamento lógico) e híbrido; escolhe-se pelo isolamento exigido, blast radius, custo, conformidade e capacidade de operação.' }
@@ -1115,7 +1122,7 @@ export const arquiteturaModules = [
     ],
     challenge: 'Produzir a arquitetura de segurança de um sistema multi-tenant: threat model, fronteiras de confiança, propagação de identidade e teste de isolamento.',
     book: 'Building Microservices (Newman), cap. sobre segurança; complementos AWS Well-Architected (pilar de segurança).',
-    complements: [official.awswa, official.twelvefactor],
+    complements: [official.awswa, official.twelvefactor, official.slsa],
     exampleFile: '../../examples/arquitetura-senior/zero-trust-authz.mjs'
   },
   {
@@ -1155,6 +1162,244 @@ export const arquiteturaModules = [
   },
   {
     number: 19,
+    part: 'evolucao',
+    id: 'arquitetura-nuvem',
+    title: 'Arquitetura em nuvem: topologias, serviços gerenciados e custo',
+    level: 'Sênior',
+    objective: 'Decidir a topologia de implantação em nuvem e o grau de serviços gerenciados pelos atributos de qualidade e pelo custo, de forma agnóstica de fornecedor, e saber onde o concreto de cada provedor entra.',
+    prerequisites: ['Módulo 2 (atributos de qualidade)', 'Módulo 13 (resiliência)', 'Módulo 14 (escala e performance)'],
+    problem: 'Nuvem vira "o datacenter de outro" com a mesma arquitetura de antes, ou um amontoado de serviços gerenciados escolhidos por moda. Sem decidir topologia, modelo de responsabilidade e custo, a conta explode e a disponibilidade prometida não aparece.',
+    concepts: ['Modelo de responsabilidade compartilhada', 'Regiões e zonas de disponibilidade; multi-AZ e multi-região', 'Serviços gerenciados vs self-managed; serverless, contêiner e VM', 'Frameworks de boa arquitetura (ex.: Well-Architected) e seus pilares', 'Landing zone, isolamento por conta/projeto e rede', 'Custo como atributo de arquitetura: egress, por-requisição e FinOps', 'FinOps: unit economics (custo por requisição/tenant) e o ciclo informar → otimizar → operar', 'Portabilidade vs lock-in e estratégia de saída'],
+    internals: ['Nuvem é um atributo de implantação, não um estilo: as decisões dos módulos 1–18 continuam valendo; o que muda é quem opera o quê, pelo modelo de responsabilidade compartilhada.', 'Disponibilidade vem de redundância entre zonas e regiões, não de "estar na nuvem": multi-AZ protege contra falha de uma zona, multi-região contra falha regional — e cada nível cobra custo e complexidade de consistência.', 'Serviço gerenciado troca controle e portabilidade por menos operação; é um trade-off explícito, não um default.', 'Custo é requisito arquitetural: egress entre zonas/regiões, cobrança por requisição e armazenamento mudam a melhor topologia tanto quanto latência e disponibilidade.', 'FinOps trata custo como responsabilidade de engenharia, não só de finanças: visibilidade e alocação (showback/chargeback), unit economics (custo por requisição ou por tenant) e rightsizing guiam a decisão num ciclo de informar, otimizar e operar; em cargas de IA, o custo por token ou por GPU costuma virar o atributo dominante (tratado no módulo de agentes de IA).'],
+    useWhen: ['Comece agnóstico: decida topologia, redundância e modelo de dados pelos atributos de qualidade antes de escolher provedor ou serviço.', 'Prefira serviço gerenciado quando operar aquilo não é seu diferencial e o lock-in é aceitável — e declare a estratégia de saída.', 'Trate custo como um SLO: estime antes, meça depois e defina orçamento com alerta.', 'Para o concreto (provedor, serviços, IaC, FinOps), aprofunde na trilha AWS; aqui a decisão é agnóstica.'],
+    avoidWhen: ['Não faça lift-and-shift esperando benefícios de nuvem sem mudar a arquitetura.', 'Não adote multi-região "por segurança" sem um requisito de disponibilidade que pague o custo e a complexidade.', 'Não encha a solução de serviços gerenciados sem avaliar lock-in e custo em escala.'],
+    contrast: {
+      bad: 'Migrar as VMs como estão para a nuvem, manter um único nó por serviço e descobrir a conta de egress no fim do mês.',
+      good: 'Topologia multi-AZ justificada por um SLO, serviços gerenciados escolhidos por trade-off explícito e um orçamento de custo com alerta.'
+    },
+    tradeoffs: ['Serviço gerenciado reduz operação e aumenta lock-in e custo variável.', 'Multi-região eleva disponibilidade e multiplica custo, latência de escrita e complexidade de consistência.', 'Ser agnóstico protege contra lock-in e cobra abrir mão de recursos nativos mais produtivos.'],
+    production: 'Um serviço "na nuvem" cai junto com uma zona porque roda em um nó só, e a transferência entre regiões dobra o custo previsto. O exercício redesenha a topologia por um SLO e reestima o custo.',
+    risks: ['Lift-and-shift sem rearquitetura', 'Ponto único de falha dentro de uma zona', 'Lock-in não declarado', 'Custo de egress/por-requisição ignorado', 'Multi-região sem requisito'],
+    checklist: ['Qual SLO justifica a redundância escolhida?', 'O que é responsabilidade do provedor e o que é minha?', 'Cada serviço gerenciado tem lock-in e saída avaliados?', 'O custo foi estimado (egress, requisição, storage) e tem orçamento?', 'A decisão continua válida se eu trocar de provedor?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que é o modelo de responsabilidade compartilhada?', expected: 'A divisão entre o que o provedor opera e protege (infraestrutura física, parte da plataforma) e o que continua sendo do cliente (configuração, dados, identidade, aplicação); a fronteira se move conforme o serviço é IaaS, PaaS ou serverless.' },
+      { level: 'Sênior/Expert', question: 'Quando multi-região se justifica e o que ela custa?', expected: 'Quando há requisito de disponibilidade, proximidade ou soberania que uma região só não atende; custa dinheiro, latência de escrita e complexidade de consistência (replicação, failover, conciliação), então exige um SLO que pague esse preço.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Desenhar a fronteira de responsabilidade compartilhada para três modelos (VM, contêiner gerenciado, serverless) de um mesmo caso.', evidence: 'Tabela responsabilidade provedor × cliente por modelo.' },
+      { level: 'Aplicado', task: 'Comparar duas topologias (single-AZ vs multi-AZ e, opcionalmente, multi-região) para um SLO dado, por disponibilidade, custo e operação.', evidence: 'ADR com a recomendação justificada pelos três eixos.' },
+      { level: 'Expert', task: 'Estimar o custo de um workload (computação, armazenamento, egress) e propor duas reduções sem violar o SLO, calculando o custo por requisição (unit economics).', evidence: 'Planilha de estimativa com premissas, custo por requisição e orçamento com alerta.' }
+    ],
+    challenge: 'Para o seu sistema, produzir a arquitetura-alvo em nuvem de forma agnóstica: topologia por SLO, mapa de serviços gerenciados com lock-in e saída, e estimativa de custo com orçamento — apontando o que da trilha AWS tornaria cada decisão concreta.',
+    book: 'Fundamentals of Software Architecture (estilos e características); AWS Well-Architected Framework (pilares, lidos de forma agnóstica); The Twelve-Factor App.',
+    complements: [official.awswa, official.finops, official.twelvefactor, { title: 'Trilha AWS — cloud concreto (provedor, serviços gerenciados, IaC, FinOps)', url: '../aws.html' }]
+  },
+  {
+    number: 20,
+    part: 'evolucao',
+    id: 'conteineres-orquestracao',
+    title: 'Contêineres e orquestração como decisão de arquitetura',
+    level: 'Sênior',
+    objective: 'Decidir quando contêineres e orquestração por estado desejado melhoram a arquitetura, e desenhar o uso de sidecar/service mesh pelos seus trade-offs, de forma agnóstica, sem transformar a trilha num tutorial de ferramenta.',
+    prerequisites: ['Módulo 8 (decomposição e unidade de deploy)', 'Módulo 13 (bulkhead e isolamento)', 'Módulo 19 (arquitetura em nuvem)'],
+    problem: 'Kubernetes entra "porque todo mundo usa" e vira uma plataforma que o time não sabe operar; ou o contêiner é tratado como uma VM pequena, com estado dentro e sem health check. A pergunta de arquitetura — o que a orquestração muda na forma do sistema — não é feita.',
+    concepts: ['Contêiner como unidade de deploy imutável e independente', 'Processo efêmero e stateless; configuração externa (12-factor)', 'Orquestração por estado desejado: reconciliação e self-healing', 'Liveness e readiness como contrato operacional', 'Isolamento de recursos (requests/limits) como bulkhead', 'Sidecar e service mesh: cross-cutting fora do código', 'Orquestrar vs plataforma gerenciada/serverless'],
+    internals: ['Orquestração é um laço de controle: você declara o estado desejado e o sistema reconcilia o estado real com ele; self-healing é consequência disso, não mágica.', 'O contêiner empacota a aplicação como artefato imutável, mas a independência de deploy que ele promete só existe se a aplicação for stateless e com configuração externa (12-factor).', 'O service mesh move resiliência, mTLS e telemetria do código para um sidecar na malha: ganha consistência entre serviços poliglotas e paga latência por salto, recursos e complexidade operacional.', 'Liveness e readiness são contratos distintos: liveness diz "me reinicie se eu travei", readiness diz "só me mande tráfego quando eu puder atender"; trocá-los derruba o serviço ou vaza requisições para instâncias não prontas.'],
+    useWhen: ['Use orquestração quando há muitos serviços, necessidade de self-healing e escala horizontal frequente — e o time consegue operá-la.', 'Adote service mesh quando resiliência, mTLS e telemetria precisam ser uniformes entre serviços de linguagens diferentes.', 'Trate o contêiner como processo stateless e descartável; empurre o estado para fora (banco, cache, armazenamento de objeto).', 'Para o concreto (Docker, Kubernetes, Helm, operadores), aprofunde na trilha DevOps; aqui a decisão é conceitual.'],
+    avoidWhen: ['Não adote Kubernetes por moda num sistema pequeno que uma plataforma gerenciada ou serverless resolveria com menos operação.', 'Não trate o contêiner como VM: estado dentro, sem health check e sem limite de recursos.', 'Não coloque um service mesh antes de ter observabilidade e um problema real que ele resolva.'],
+    contrast: {
+      bad: 'Subir Kubernetes para três serviços, guardar estado no contêiner e sem readiness — cada deploy derruba usuários e ninguém sabe operar o cluster.',
+      good: 'Serviços stateless com liveness/readiness, limites de recursos como bulkhead e service mesh adicionado só quando a resiliência precisou ser uniforme.'
+    },
+    tradeoffs: ['Orquestração dá self-healing e escala e cobra uma plataforma para operar.', 'Service mesh uniformiza cross-cutting e cobra latência, recursos e mais peças para depurar.', 'Plataforma gerenciada/serverless reduz operação e aumenta lock-in e limites de execução.'],
+    production: 'Um serviço sem readiness recebe tráfego antes de conectar ao banco e erra a cada deploy; outro guarda sessão no contêiner e perde dados ao reescalar. O exercício torna os serviços stateless e define as probes corretas.',
+    risks: ['Kubernetes por moda (complexidade sem necessidade)', 'Estado dentro do contêiner', 'Probes ausentes ou trocadas', 'Service mesh prematuro', 'Sem limites de recursos (vizinho barulhento)'],
+    checklist: ['O serviço é stateless e com configuração externa?', 'Liveness e readiness estão definidas e corretas?', 'Há requests/limits de recursos como bulkhead?', 'A orquestração se justifica ou uma plataforma gerenciada bastaria?', 'O service mesh resolve um problema real que já temos?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre liveness e readiness?', expected: 'Liveness indica se o processo precisa ser reiniciado (travou); readiness indica se ele pode receber tráfego agora (dependências prontas). Confundi-las causa reinícios desnecessários ou tráfego para instâncias que ainda não atendem.' },
+      { level: 'Sênior/Expert', question: 'O que um service mesh resolve e o que ele custa?', expected: 'Move cross-cutting (mTLS, retries, timeouts, telemetria, traffic shifting) do código para sidecars, uniformizando entre serviços poliglotas; custa latência por salto, consumo de recursos dos sidecars e complexidade operacional e de depuração.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Classificar um serviço como stateless ou não e listar o que precisaria sair do contêiner para escalá-lo horizontalmente.', evidence: 'Lista do estado a externalizar e o destino (banco/cache/objeto).' },
+      { level: 'Aplicado', task: 'Definir liveness, readiness e requests/limits de um serviço e justificar cada escolha.', evidence: 'Especificação das probes e limites com a justificativa.' },
+      { level: 'Expert', task: 'Decidir, para um caso dado, entre orquestração própria, plataforma gerenciada e serverless, e quando introduzir service mesh.', evidence: 'ADR com trade-offs de operação, custo e lock-in.' }
+    ],
+    challenge: 'Para o seu sistema, escrever o ADR que decide o modelo de empacotamento e orquestração (ou a ausência dele), com probes, isolamento de recursos e o gatilho objetivo para adotar service mesh — apontando o que da trilha DevOps torna isso concreto.',
+    book: 'Building Microservices (Newman), cap. de build e deploy; The Twelve-Factor App; Release It! (estabilidade e bulkhead).',
+    complements: [official.twelvefactor, official.microservices, { title: 'Trilha DevOps — contêineres, Kubernetes e CI/CD concretos', url: '../devops.html' }]
+  },
+  {
+    number: 21,
+    part: 'evolucao',
+    id: 'cicd-iac',
+    title: 'Entrega contínua, IaC e o pipeline como enforcement de arquitetura',
+    level: 'Sênior',
+    objective: 'Projetar o pipeline de entrega e a infraestrutura como código de modo que eles imponham as decisões arquiteturais e tornem o ambiente reproduzível, decidindo o que automatizar e o que barrar.',
+    prerequisites: ['Módulo 4 (fitness functions)', 'Módulo 16 (observabilidade e readiness)', 'Módulo 20 (contêineres e orquestração)'],
+    problem: 'O deploy é manual e cada ambiente é um floco de neve: "funciona na minha máquina", drift silencioso entre homologação e produção, e nenhuma regra de arquitetura é verificada antes de ir ao ar. Quando quebra, ninguém sabe reproduzir.',
+    concepts: ['CI vs CD: integração contínua, entrega e deploy contínuos', 'Pipeline como enforcement: fitness functions, testes e gates de qualidade', 'Infraestrutura como código: estado declarativo, idempotência e drift', 'Policy-as-code e guardrails de segurança e custo', 'Progressive delivery: blue-green, canário e feature flags', 'Imutabilidade e paridade de ambientes (12-factor)', 'Rollback e reversibilidade como requisito', 'Cadeia de suprimentos no pipeline: SBOM, SLSA/proveniência, assinatura e admission control'],
+    internals: ['O pipeline é onde a arquitetura deixa de ser intenção e vira regra: fitness functions, testes de contrato e políticas barram o que viola a decisão antes de chegar à produção.', 'IaC descreve o estado desejado da infraestrutura; o valor está na reprodutibilidade e na detecção de drift (quando o real diverge do declarado), não em "escrever infra em arquivo".', 'Progressive delivery troca o deploy big-bang por exposição gradual (canário/blue-green) com métrica de saúde e rollback automático — a liberação vira um experimento controlado.', 'Policy-as-code move guardrails de segurança e custo para o pipeline, onde falham cedo e de forma uniforme, em vez de depender de revisão humana caso a caso.', 'A cadeia de suprimentos vira gate: gerar SBOM, assinar o artefato e emitir a atestação de proveniência (SLSA) no build; o admission control então só admite em produção o que está assinado e atestado — policy-as-code aplicada à procedência, não só ao conteúdo.'],
+    useWhen: ['Coloque no pipeline toda regra de arquitetura que você não quer descobrir violada em produção (dependências, contratos, limites, segurança).', 'Use IaC para qualquer ambiente que precise ser recriado de forma idêntica e auditável; trate drift como incidente.', 'Adote progressive delivery quando o risco de uma liberação justifica exposição gradual e rollback automático.', 'Para o concreto (Terraform, pipelines, GitOps, ferramentas de policy), aprofunde na trilha DevOps; aqui a decisão é o que automatizar e o que barrar.', 'Gere SBOM, assine o artefato e exija proveniência (SLSA) no pipeline; use admission control para só implantar o que está assinado e atestado.'],
+    avoidWhen: ['Não trate o pipeline como mero empacotador: se ele não barra violação de arquitetura, a fronteira não existe.', 'Não misture mudança de infraestrutura e mudança de aplicação no mesmo passo sem rollback separado.', 'Não adote canário sem métrica de saúde e critério de rollback — vira um big-bang lento.'],
+    contrast: {
+      bad: 'Deploy manual por SSH, infraestrutura clicada no console e nenhum teste de arquitetura; a produção diverge da homologação e ninguém reproduz o ambiente.',
+      good: 'Pipeline que roda fitness functions e testes de contrato, IaC versionada com drift detectado, e liberação canário com rollback automático por métrica.'
+    },
+    tradeoffs: ['Mais gates no pipeline dão garantia e aumentam o tempo de ciclo e a manutenção dos testes.', 'IaC dá reprodutibilidade e cobra disciplina de estado e versionamento.', 'Progressive delivery reduz raio de impacto e adiciona complexidade de roteamento e observabilidade.'],
+    production: 'Uma mudança de infra feita à mão derruba produção e não há como recriar o ambiente anterior; uma regra de dependência violada só aparece semanas depois. O exercício move a infra para IaC e a regra para o pipeline.',
+    risks: ['Snowflake servers e drift', 'Pipeline que não barra nada', 'Mudança de infra sem rollback', 'Canário sem métrica ou critério', 'Segredos no pipeline sem cofre', 'Artefato sem SBOM/assinatura/proveniência em produção'],
+    checklist: ['O pipeline barra as violações de arquitetura que importam?', 'Todo ambiente é recriável por IaC e o drift é detectado?', 'Há rollback testado para a aplicação e para a infraestrutura?', 'As liberações arriscadas são graduais e observáveis?', 'Guardrails de segurança e custo são policy-as-code?', 'O pipeline gera SBOM, assina o artefato e exige proveniência (admission control)?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre entrega contínua e deploy contínuo?', expected: 'Entrega contínua mantém o artefato sempre pronto para ir a produção (o passo final é uma decisão humana); deploy contínuo automatiza também esse passo, publicando cada mudança aprovada sem intervenção manual.' },
+      { level: 'Sênior/Expert', question: 'Como o pipeline impõe arquitetura?', expected: 'Executando fitness functions, testes de contrato e policy-as-code que reprovam o build quando uma decisão (direção de dependência, contrato, limite, segurança, custo) é violada — transformando regra de fronteira em gate automático e uniforme.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Listar três regras de arquitetura do seu sistema e como cada uma viraria um gate no pipeline.', evidence: 'Tabela regra → verificação automatizada.' },
+      { level: 'Aplicado', task: 'Descrever a IaC de um ambiente e como o drift seria detectado e corrigido.', evidence: 'Especificação do estado desejado e do processo de detecção de drift.' },
+      { level: 'Expert', task: 'Desenhar uma liberação canário com métrica de saúde, critério de promoção e rollback automático.', evidence: 'ADR da estratégia de progressive delivery com os gatilhos.' }
+    ],
+    challenge: 'Para o seu sistema, desenhar o pipeline de entrega que impõe as decisões de arquitetura (fitness functions, contratos, policy-as-code) e a IaC que torna o ambiente reproduzível, com estratégia de rollback — apontando o que da trilha DevOps torna isso concreto.',
+    book: 'Continuous Delivery (Humble & Farley) como referência de conceito; Fundamentals of Software Architecture (fitness functions e arquitetura evolutiva); The Twelve-Factor App.',
+    complements: [official.twelvefactor, official.archunit, official.slsa, { title: 'Trilha DevOps — CI/CD, Terraform/IaC e GitOps concretos', url: '../devops.html' }]
+  },
+  {
+    number: 22,
+    part: 'evolucao',
+    id: 'comunicacao-arquitetura',
+    title: 'Comunicação, influência e defesa de arquitetura',
+    level: 'Sênior',
+    objective: 'Comunicar e defender decisões de arquitetura adaptando a mensagem ao público, mapear os stakeholders e conduzir alinhamento e dissenso até uma decisão sustentável.',
+    prerequisites: ['Módulo 5 (C4, ADR e views por audiência)', 'Módulo 18 (Team Topologies e governança)', 'Ter proposto ao menos uma decisão técnica a outras pessoas'],
+    problem: 'A melhor arquitetura morre numa reunião: o arquiteto mostra diagramas que o negócio não entende, não mapeia quem decide, não trata a objeção legítima e tenta impor em vez de convencer. Sem comunicação, a decisão certa não é adotada.',
+    concepts: ['Mapa de stakeholders: quem decide, quem influencia, quem é afetado', 'Adaptar a mensagem: técnico, gestão e executivo', 'Influência sem autoridade', 'RFC e ADR como instrumentos de persuasão e registro', 'Facilitação: event storming, workshops e decisão em grupo', 'Dissenso produtivo e disagree-and-commit', 'Comunicação escrita vs verbal: o documento que sobrevive à reunião'],
+    internals: ['Comunicar arquitetura é traduzir trade-off no interesse de cada público: risco e prazo para a gestão, valor e custo para o executivo, consequência técnica para a engenharia.', 'Influência sem autoridade vem de evidência, consistência e de envolver quem decide cedo — não do cargo; a decisão imposta é sabotada na execução.', 'O documento (RFC/ADR) é o que sobrevive à reunião: registra contexto, alternativas e a objeção respondida, e deixa quem não estava na sala contestar pelos trade-offs.', 'Dissenso é insumo: trazer a objeção mais forte à mesa e respondê-la fortalece a decisão; disagree-and-commit evita que o desacordo vire bloqueio permanente.'],
+    useWhen: ['Mapeie os stakeholders antes de propor: quem decide, quem influencia e quem será afetado.', 'Adapte o nível de abstração e o vocabulário ao público (C4 de contexto para o negócio, detalhe para a engenharia).', 'Registre a decisão e a objeção respondida em ADR/RFC para quem não estava na sala.', 'Facilite a decisão (event storming, workshop) quando o entendimento do domínio é compartilhado e disputado.'],
+    avoidWhen: ['Não apresente o diagrama mais detalhado para a audiência executiva.', 'Não tente impor por autoridade uma decisão que depende da adesão de quem executa.', 'Não trate a objeção como ataque: a objeção forte não respondida volta como retrabalho.'],
+    contrast: {
+      bad: 'Levar um C4 de componentes a uma reunião de diretoria, ignorar a objeção do time de dados e sair "com a decisão aprovada" que ninguém implementa.',
+      good: 'Um one-pager por público, stakeholders envolvidos antes, a objeção mais forte respondida no ADR e um disagree-and-commit explícito.'
+    },
+    tradeoffs: ['Envolver stakeholders cedo melhora adesão e custa tempo de alinhamento.', 'Documentar a persuasão (RFC) dá durabilidade e cobra disciplina de escrita.', 'Buscar consenso aumenta adesão e pode travar a decisão; disagree-and-commit troca consenso por progresso.'],
+    production: 'Uma decisão tecnicamente correta é revertida porque o time afetado não foi ouvido e o executivo não viu o valor. O exercício refaz a comunicação por público e registra a objeção respondida.',
+    risks: ['Mensagem no nível errado para o público', 'Decisão imposta sem adesão', 'Objeção legítima ignorada', 'Decisão sem registro (morre com quem sai)', 'Consenso eterno (análise sem decisão)'],
+    checklist: ['Sei quem decide, quem influencia e quem é afetado?', 'A mensagem está no nível certo para cada público?', 'A objeção mais forte foi trazida e respondida?', 'A decisão e o seu porquê estão registrados em ADR/RFC?', 'Há um caminho de disagree-and-commit em vez de bloqueio?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Como apresentar a mesma arquitetura para o time técnico e para a diretoria?', expected: 'Mudando o nível de abstração e o vocabulário: para a diretoria, valor, risco, custo e prazo com C4 de contexto; para o time, as consequências técnicas e os trade-offs no nível de contêiner e componente.' },
+      { level: 'Sênior/Expert', question: 'Como conduzir uma decisão de arquitetura com desacordo forte no time?', expected: 'Mapeando stakeholders, trazendo a objeção mais forte à mesa, respondendo-a com evidência num ADR/RFC, envolvendo quem decide cedo e, se o desacordo persistir, usando disagree-and-commit para não travar a execução.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Escrever um one-pager da mesma decisão para dois públicos (executivo e engenharia).', evidence: 'Dois resumos com nível de abstração e vocabulário adaptados.' },
+      { level: 'Aplicado', task: 'Mapear os stakeholders de uma decisão real (decide/influencia/afetado) e o plano de alinhamento.', evidence: 'Mapa de stakeholders com a estratégia de envolvimento.' },
+      { level: 'Expert', task: 'Escrever um ADR/RFC que inclua a objeção mais forte e a resposta a ela, e conduzir um disagree-and-commit.', evidence: 'ADR/RFC com a objeção respondida e a decisão registrada.' }
+    ],
+    challenge: 'Defender uma decisão de arquitetura do seu sistema para dois públicos (técnico e executivo), com stakeholders mapeados, a objeção mais forte respondida por escrito e um disagree-and-commit registrado.',
+    book: 'Fundamentals of Software Architecture (parte de soft skills, negociação e apresentação); Team Topologies (modos de interação entre times).',
+    complements: [official.fowler, official.teamtopologies, official.adr]
+  },
+  {
+    number: 23,
+    part: 'evolucao',
+    id: 'niveis-ea-togaf',
+    title: 'Níveis de arquitetura e o panorama de EA (TOGAF e além)',
+    level: 'Sênior',
+    objective: 'Relacionar a arquitetura de solução aos níveis de arquitetura (aplicação, solução, corporativa) e aos frameworks de EA (TOGAF, Zachman), distinguindo quando a governança corporativa agrega e quando vira burocracia.',
+    prerequisites: ['Módulo 5 (documentação e ADR)', 'Módulo 18 (Team Topologies e governança)', 'Módulo 22 (comunicação e defesa)'],
+    problem: 'A vaga sênior/enterprise fala em "arquitetura corporativa", "TOGAF" e "níveis de arquitetura", e o profissional de solução ou não conhece o vocabulário, ou confunde governança corporativa com burocracia de comitê. Falta situar o que ele faz no mapa maior — e saber quando um framework pesado ajuda.',
+    concepts: ['Níveis de arquitetura: aplicação, solução, corporativa (e de domínio)', 'Enterprise Architecture: alinhar TI à estratégia do negócio', 'TOGAF: ciclo ADM e os domínios negócio, dados, aplicação e tecnologia', 'Zachman e outros frameworks como taxonomias', 'Arquitetura de solução vs corporativa: escopo e horizonte', 'Governança: princípios e padrões corporativos vs autonomia de time', 'Quando EA agrega e quando vira ivory tower'],
+    internals: ['Os níveis diferem por escopo e horizonte: aplicação (um sistema), solução (um problema de negócio ponta a ponta, vários sistemas) e corporativa (o portfólio e a estratégia da organização); o mesmo princípio de trade-off vale em todos.', 'EA tenta alinhar TI à estratégia e reduzir duplicação e risco no portfólio; TOGAF organiza isso num ciclo (ADM) e em quatro domínios (negócio, dados, aplicação, tecnologia), mais um repositório de padrões.', 'Frameworks como TOGAF e Zachman são taxonomias e processos — úteis como vocabulário comum e checklist, perigosos quando viram fim em si (documentação que ninguém usa, comitê que atrasa).', 'A abordagem deste curso (C4, ADRs, fitness functions, Team Topologies) é governança evolutiva e leve: entrega os resultados que a EA busca — alinhamento, consistência, rastreabilidade — sem o peso de um processo central de aprovação.'],
+    useWhen: ['Use o vocabulário de níveis para situar seu trabalho numa conversa sênior/enterprise e numa entrevista.', 'Adote partes de TOGAF (ADM, domínios) como checklist quando a organização é grande e o alinhamento de portfólio é um problema real.', 'Prefira governança evolutiva (princípios + ADRs + fitness functions) para manter agilidade, escalando o rigor conforme o tamanho e o risco.', 'Para a certificação formal (TOGAF) exigida por vagas de governo ou grande empresa, trate como trilha à parte — aqui o objetivo é o entendimento, não a prova.'],
+    avoidWhen: ['Não confunda arquitetura de solução (seu escopo usual) com arquitetura corporativa (portfólio e estratégia).', 'Não adote TOGAF inteiro num contexto pequeno: o peso do processo não se paga.', 'Não deixe a governança virar um comitê central de aprovação que atrasa todo deploy (ver módulo 18).'],
+    contrast: {
+      bad: 'Montar um comitê de arquitetura corporativa que produz documentos TOGAF que ninguém lê, enquanto os times decidem por fora.',
+      good: 'Reconhecer os níveis e o vocabulário de EA, adotar o que agrega (princípios, repositório de decisões) e governar por ADRs e fitness functions.'
+    },
+    tradeoffs: ['Frameworks de EA dão vocabulário comum e alinhamento de portfólio e cobram processo e documentação.', 'Governança central dá consistência e vira gargalo se for manual.', 'Certificação (TOGAF) abre portas em enterprise/governo e não substitui a prática de decidir sob restrição.'],
+    production: 'Uma iniciativa corporativa duplica três vezes a mesma capacidade porque não havia visão de portfólio; noutra, um comitê TOGAF atrasa cada entrega. O exercício situa o caso no nível certo e escolhe o peso de governança adequado.',
+    risks: ['Confundir solução com corporativa', 'TOGAF como fim em si (ivory tower)', 'Governança-gargalo', 'Ignorar o vocabulário numa entrevista sênior/enterprise', 'Adotar framework pesado em contexto pequeno'],
+    checklist: ['Em que nível (aplicação/solução/corporativa) este problema está?', 'Qual parte de um framework de EA agrega aqui?', 'A governança escolhida é proporcional ao tamanho e ao risco?', 'Consigo explicar TOGAF/ADM e os quatro domínios numa entrevista?', 'A documentação de EA é usada ou é só ritual?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre arquitetura de aplicação, de solução e corporativa?', expected: 'Escopo e horizonte: aplicação é um sistema; solução é um problema de negócio ponta a ponta envolvendo vários sistemas; corporativa é o portfólio e o alinhamento com a estratégia da organização.' },
+      { level: 'Sênior/Expert', question: 'O que é TOGAF e quando ele ajuda ou atrapalha?', expected: 'Um framework de EA com um ciclo (ADM) e quatro domínios (negócio, dados, aplicação, tecnologia) e um repositório de padrões; ajuda como vocabulário e checklist em organizações grandes com problema de alinhamento de portfólio, e atrapalha quando vira documentação e comitê que não se pagam, substituíveis por governança evolutiva leve.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Classificar três decisões reais no nível correto (aplicação, solução ou corporativa) e justificar.', evidence: 'Tabela decisão → nível com justificativa de escopo.' },
+      { level: 'Aplicado', task: 'Mapear uma iniciativa aos quatro domínios do TOGAF (negócio, dados, aplicação, tecnologia) e indicar o que de fato agrega.', evidence: 'Quadro dos quatro domínios com o que é útil e o que seria ritual.' },
+      { level: 'Expert', task: 'Propor o nível de governança (leve vs framework formal) para uma organização dada e justificar pelo tamanho e risco.', evidence: 'ADR de governança comparando a abordagem evolutiva com a adoção de TOGAF.' }
+    ],
+    challenge: 'Numa página, situar a arquitetura do seu sistema nos níveis (aplicação/solução/corporativa), traduzir suas decisões para o vocabulário de EA/TOGAF e defender por que a governança evolutiva (C4/ADR/fitness functions) entrega o que a EA busca com menos peso — ou onde um framework formal seria necessário.',
+    book: 'The Open Group — TOGAF Standard (referência do framework); Fundamentals of Software Architecture (níveis e papel do arquiteto); roadmap.sh — Software Architect (níveis de arquitetura).',
+    complements: [official.togaf, official.fowler, official.teamtopologies]
+  },
+  {
+    number: 24,
+    part: 'evolucao',
+    id: 'platform-engineering',
+    title: 'Platform Engineering e Internal Developer Platform como arquitetura',
+    level: 'Sênior',
+    objective: 'Projetar uma plataforma interna como produto (IDP): golden paths, self-service e developer experience, decidindo o que abstrair e o que expor para reduzir carga cognitiva sem virar gargalo.',
+    prerequisites: ['Módulo 18 (Team Topologies e carga cognitiva)', 'Módulo 20 (contêineres e orquestração)', 'Módulo 21 (entrega contínua e IaC)'],
+    problem: 'Cada time reinventa deploy, observabilidade e segurança do zero, copiando YAML entre repositórios; ou um time central vira gargalo aprovando tudo. Sem uma plataforma pensada como produto, a carga cognitiva explode e a velocidade de entrega despenca.',
+    concepts: ['Plataforma como produto (não projeto nem comitê)', 'Internal Developer Platform (IDP) e portal do desenvolvedor', 'Golden paths: o caminho pavimentado e opinativo', 'Self-service e autonomia com guardrails', 'Developer experience (DX) como requisito; métricas DORA e carga cognitiva', 'Platform team e enabling team (Team Topologies)', 'Abstração vs vazamento: esconder complexidade sem prender o time'],
+    internals: ['Plataforma é produto: tem clientes internos (os times de produto), roadmap, adoção opcional e métricas de uso — não é um projeto que termina nem um comitê que aprova.', 'O golden path é o caminho pavimentado: a forma recomendada e opinativa de criar, entregar e operar um serviço, com guardrails embutidos; quem sai dele pode, mas assume o custo.', 'O valor da plataforma é reduzir a carga cognitiva extrínseca (deploy, infra, compliance) para o time focar no domínio; medir isso (lead time, frequência de deploy, tempo até o primeiro deploy) é o que prova o retorno.', 'A fronteira difícil é a abstração: esconder complexidade sem prender o time numa jaula — toda abstração vaza, então o self-service precisa de uma saída de emergência.'],
+    useWhen: ['Considere uma plataforma quando há muitos times (tipicamente 100+ devs) repetindo as mesmas decisões de infra, deploy e segurança.', 'Comece pelo golden path do caso mais comum, com adoção opcional, e deixe o uso — não o mandato — provar o valor.', 'Trate a plataforma como produto: dono, roadmap, feedback dos times e métricas de DX.', 'Para o concreto (portais tipo Backstage, IDP, GitOps, operadores), aprofunde na trilha DevOps; aqui a decisão é o que abstrair e o que expor.'],
+    avoidWhen: ['Não construa uma plataforma para três times: o custo do produto não se paga; padronize com templates e pare aí.', 'Não torne a plataforma obrigatória antes de ela ser melhor que o caminho atual — adoção forçada mascara um produto ruim.', 'Não transforme o platform team num comitê de aprovação (volta a ser o gargalo que Team Topologies evita).'],
+    contrast: {
+      bad: 'Um time central obrigatório que aprova cada deploy e distribui YAML copiado; vira gargalo e os times o contornam por fora.',
+      good: 'Uma plataforma como produto com golden paths opcionais, self-service com guardrails e métricas de adoção e DX que provam o valor.'
+    },
+    tradeoffs: ['Plataforma reduz a carga cognitiva dos times de produto e cobra investimento contínuo e tratamento como produto.', 'Golden path acelera o caso comum e precisa de uma saída para o caso atípico, senão vira camisa de força.', 'Padronização dá consistência e, levada longe demais, mata a autonomia que justifica times stream-aligned.'],
+    production: 'Dez times mantêm dez pipelines quase iguais e uma falha de segurança precisa ser corrigida dez vezes. O exercício extrai o golden path para uma plataforma e mede a queda de carga cognitiva e de lead time.',
+    risks: ['Plataforma como projeto (sem dono nem roadmap)', 'Adoção forçada mascarando produto ruim', 'Platform team virando comitê/gargalo', 'Abstração que vaza e prende o time', 'Plataforma cara demais para poucos times'],
+    checklist: ['Há repetição suficiente entre times para justificar a plataforma?', 'A plataforma tem dono, roadmap e métricas como um produto?', 'O golden path é opcional e tem saída de emergência?', 'Estou medindo DX (lead time, frequência de deploy, carga cognitiva)?', 'O platform team habilita (não aprova), sem virar gargalo?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'O que é um golden path (caminho pavimentado)?', expected: 'A forma recomendada e opinativa de criar, entregar e operar um serviço, com guardrails embutidos e self-service; acelera o caso comum e reduz carga cognitiva, permanecendo opcional para quem tem um caso que não se encaixa.' },
+      { level: 'Sênior/Expert', question: 'Quando uma plataforma interna se justifica e como evitar que o platform team vire gargalo?', expected: 'Quando muitos times repetem as mesmas decisões de infra/deploy/segurança (escala típica de 100+ devs); evita-se o gargalo tratando a plataforma como produto de adoção opcional (enabling team, não comitê de aprovação), com golden paths, self-service com guardrails e métricas de adoção e DX que provam o valor em vez de mandato.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Listar as decisões de infra/deploy/segurança que seus times repetem e marcar quais caberiam num golden path.', evidence: 'Lista de repetições → candidatos a self-service.' },
+      { level: 'Aplicado', task: 'Desenhar o golden path de criação-a-produção de um serviço, com os guardrails embutidos e a saída de emergência.', evidence: 'Fluxo do caminho pavimentado com os pontos de guardrail.' },
+      { level: 'Expert', task: 'Definir as métricas de sucesso da plataforma (DX/DORA) e o critério que diria para NÃO construí-la.', evidence: 'ADR da plataforma com métricas de adoção e o gatilho de não-construir.' }
+    ],
+    challenge: 'Para a sua organização, decidir se uma plataforma interna se justifica, desenhar um golden path como produto (opcional, com guardrails e métricas de DX) e definir o critério objetivo que invalidaria a decisão — apontando o que da trilha DevOps a tornaria concreta.',
+    book: 'Team Topologies (Skelton & Pais) — plataforma como produto e enabling teams; Fundamentals of Software Architecture (fronteiras e soft skills); material DORA sobre capacidades e métricas.',
+    complements: [official.teamtopologies, official.fowler, { title: 'Trilha DevOps — IDP, portal do dev e GitOps concretos', url: '../devops.html' }]
+  },
+  {
+    number: 25,
+    part: 'evolucao',
+    id: 'arquitetura-dados',
+    title: 'Arquitetura de dados: data mesh, data products e data contracts',
+    level: 'Sênior',
+    objective: 'Projetar a arquitetura de dados analíticos tratando dado como produto (data mesh), definindo data contracts e o modelo de streaming, e distinguir ownership por domínio de um data lake ou warehouse centralizado.',
+    prerequisites: ['Módulo 6 (bounded contexts e ownership)', 'Módulo 9 (contratos e schema evolution)', 'Módulo 11 (dados intensivos: replicação e particionamento)'],
+    problem: 'Os dados analíticos viram um pântano: um data lake central que ninguém é dono, pipelines frágeis que quebram quando o time de origem muda um campo, e consumidores que descobrem a quebra em produção. Falta tratar dado como produto, com dono, contrato e qualidade.',
+    concepts: ['Operacional (OLTP) vs analítico (OLAP); o plano de dados', 'Data warehouse, data lake e lakehouse (formatos abertos: Iceberg/Delta)', 'Data mesh: ownership de dados por domínio', 'Data as a product: dono, SLA, descoberta e qualidade', 'Data contract: schema, semântica e compatibilidade entre produtor e consumidor', 'Arquitetura de streaming: ingestão, schema registry, processamento stateful', 'Batch vs streaming; CDC (change data capture)', 'Governança federada e catálogo'],
+    internals: ['O plano operacional (OLTP, baixa latência, por transação) e o analítico (OLAP, grandes varreduras) têm padrões de acesso opostos; misturá-los no mesmo banco degrada os dois — a arquitetura de dados os separa e os liga por contrato.', 'Data mesh aplica ownership por domínio (a mesma lei de Conway do mód. 18) aos dados: cada domínio publica seus dados como produto, em vez de um time central de dados virar gargalo.', 'O data contract é a fronteira que impede a quebra silenciosa: produtor e consumidor acordam schema, semântica e compatibilidade, e a violação falha no pipeline (como uma fitness function de dados).', 'Streaming troca o lote periódico por fluxo contínuo: o schema registry versiona o evento, o processamento stateful mantém janelas e agregações, e o CDC transforma mudanças do banco em eventos.'],
+    useWhen: ['Separe o plano analítico do operacional assim que relatórios pesados começarem a competir com a carga transacional.', 'Considere data mesh quando vários domínios produzem dados e um time central virou gargalo — e há maturidade de plataforma para o self-service.', 'Defina data contracts nas fronteiras onde a quebra de schema de dados já causou (ou causaria) incidente.', 'Para o concreto (SQL/NoSQL, modelagem, engines, ferramentas), aprofunde na trilha Bancos; aqui a decisão é de fronteira, ownership e contrato.'],
+    avoidWhen: ['Não adote data mesh num time só: sem múltiplos domínios e sem plataforma de dados, é complexidade sem retorno — um warehouse bem modelado basta.', 'Não deixe o data lake virar pântano (dados sem dono, sem schema, sem qualidade).', 'Não acople o consumidor analítico direto na tabela do serviço operacional: é um contrato implícito que quebra no primeiro refactor.'],
+    contrast: {
+      bad: 'Todos os times leem direto do banco de produção de cada serviço; qualquer refactor de schema quebra dashboards e ninguém sabe quem depende do quê.',
+      good: 'Cada domínio publica um data product versionado com data contract; o consumidor depende do contrato, e a quebra falha no pipeline, não em produção.'
+    },
+    tradeoffs: ['Data mesh dá autonomia e escala organizacional e cobra plataforma de dados e disciplina de contrato.', 'Streaming dá frescor (tempo quase real) e cobra complexidade de estado, ordenação e reprocessamento.', 'Data contract dá estabilidade e adiciona cerimônia de versionamento entre produtor e consumidor.'],
+    production: 'Um time de origem renomeia uma coluna e, no dia seguinte, dez dashboards e um modelo de ML silenciosamente produzem números errados. O exercício introduz um data contract que falha o pipeline na mudança incompatível.',
+    risks: ['Data lake virando pântano (sem dono/schema/qualidade)', 'Acoplamento direto na tabela do serviço de origem', 'Data mesh prematuro (sem domínios nem plataforma)', 'Streaming sem schema registry nem reprocessamento', 'Governança central virando gargalo'],
+    checklist: ['O plano analítico está separado do operacional?', 'Cada conjunto de dados tem dono, contrato e qualidade (data product)?', 'As fronteiras críticas têm data contract que falha na incompatibilidade?', 'Preciso de streaming (frescor) ou o lote basta?', 'A governança é federada, sem virar gargalo central?'],
+    interview: [
+      { level: 'Júnior/Pleno', question: 'Qual a diferença entre o plano operacional (OLTP) e o analítico (OLAP)?', expected: 'OLTP serve transações de baixa latência por registro; OLAP serve consultas analíticas de grande varredura e agregação. Têm padrões de acesso opostos, então se separam (banco transacional vs warehouse/lake) e se ligam por pipeline e contrato.' },
+      { level: 'Sênior/Expert', question: 'O que é data mesh e quando ele se justifica?', expected: 'Um modelo de ownership descentralizado em que cada domínio publica seus dados como produto (com dono, SLA, contrato e descoberta), em vez de um time central de dados; justifica-se com múltiplos domínios produtores, um time central virando gargalo e maturidade de plataforma para self-service — não num time só.' }
+    ],
+    exercises: [
+      { level: 'Básico', task: 'Separar, para um sistema, o que é acesso operacional e o que é analítico, e como os dois se ligam.', evidence: 'Diagrama operacional × analítico com o ponto de ligação.' },
+      { level: 'Aplicado', task: 'Especificar um data contract (schema, semântica, compatibilidade) para uma fronteira produtor→consumidor.', evidence: 'Contrato de dados com a regra que falha na mudança incompatível.' },
+      { level: 'Expert', task: 'Decidir, para uma organização dada, entre warehouse central e data mesh, e definir o gatilho da escolha.', evidence: 'ADR comparando os dois pelo número de domínios, gargalo e maturidade de plataforma.' }
+    ],
+    challenge: 'Para o seu sistema, desenhar a arquitetura de dados: separar operacional de analítico, definir ao menos um data product com data contract e decidir batch vs streaming — apontando o que da trilha Bancos torna isso concreto.',
+    book: 'Designing Data-Intensive Applications (Kleppmann) — fundamentos de dados; Data Mesh (Zhamak Dehghani); Fundamentals of Software Architecture (fronteiras e ownership).',
+    complements: [official.datamesh, official.kafkaPaper, { title: 'Trilha Bancos — modelagem, SQL/NoSQL e engines concretos', url: '../bancos.html' }]
+  },
+  {
+    number: 26,
     part: 'fronteira',
     id: 'event-sourcing-cqrs',
     title: 'Event sourcing e CQRS: o log como modelo de escrita',
@@ -1194,7 +1439,7 @@ export const arquiteturaModules = [
     exampleFile: '../../examples/arquitetura-senior/adr/0006-event-sourcing-scope.md'
   },
   {
-    number: 20,
+    number: 27,
     part: 'fronteira',
     id: 'metodos-formais',
     title: 'Especificação formal: TLA+, Alloy e verificação de protocolos',
@@ -1234,13 +1479,13 @@ export const arquiteturaModules = [
     exampleFile: '../../examples/arquitetura-senior/formal/OrderSaga.tla'
   },
   {
-    number: 21,
+    number: 28,
     part: 'fronteira',
     id: 'simulacao-deterministica',
     title: 'Testar o distribuído: simulação determinística e injeção de falha',
     level: 'Expert',
     objective: 'Projetar um regime de teste em que falhas raras se tornam frequentes e reprodutíveis por semente, em vez de esperar que a produção as encontre.',
-    prerequisites: ['Módulo 10', 'Módulo 13 (resiliência)', 'Módulo 20 ajuda, mas não é obrigatório'],
+    prerequisites: ['Módulo 10', 'Módulo 13 (resiliência)', 'Módulo 27 ajuda, mas não é obrigatório'],
     problem: 'Teste de integração comum exercita o caminho feliz com a rede funcionando. As falhas que derrubam sistemas distribuídos — partição no meio de um commit, relógio andando para trás, disco devolvendo dado antigo, mensagem duplicada dez minutos depois — não acontecem em CI, acontecem às três da manhã. E quando acontecem, não se reproduzem.',
     concepts: ['Determinismo como propriedade de projeto: tempo, aleatoriedade e I/O injetáveis', 'Simulação determinística e reprodução por semente', 'Injeção de falha: partição, atraso, duplicação, reordenação, perda, crash', 'Relógio lógico versus relógio de parede no teste', 'Property-based testing aplicado a protocolo', 'Verificação de linearizabilidade (abordagem Jepsen)', 'Custo de tornar o sistema determinístico'],
     internals: [
@@ -1274,7 +1519,7 @@ export const arquiteturaModules = [
     exampleFile: '../../examples/arquitetura-senior/testing/deterministic-simulation.md'
   },
   {
-    number: 22,
+    number: 29,
     part: 'fronteira',
     id: 'chaos-engineering',
     title: 'Chaos engineering como disciplina experimental',
@@ -1314,7 +1559,7 @@ export const arquiteturaModules = [
     exampleFile: '../../examples/arquitetura-senior/testing/game-day-runbook.md'
   },
   {
-    number: 23,
+    number: 30,
     part: 'fronteira',
     id: 'celulas-isolamento',
     title: 'Isolamento em escala: células, shuffle sharding e raio de impacto',
@@ -1354,7 +1599,7 @@ export const arquiteturaModules = [
     exampleFile: '../../examples/arquitetura-senior/cells/cell-topology.md'
   },
   {
-    number: 24,
+    number: 31,
     part: 'fronteira',
     id: 'papers-fundadores',
     title: 'Ler os papers que definiram a área',
@@ -1394,7 +1639,7 @@ export const arquiteturaModules = [
     exampleFile: '../../examples/arquitetura-senior/papers/reading-list.md'
   },
   {
-    number: 25,
+    number: 32,
     part: 'fronteira',
     id: 'agentes-componente',
     title: 'Agentes de IA como componente arquitetural',
@@ -1537,13 +1782,13 @@ export const arquiteturaAssessment = Object.freeze({
     }
   ],
   completion: [
-    'Os 18 objetivos dos módulos 1–18 foram demonstrados por evidência (C4, ADR, contrato, teste ou métrica), não por leitura.',
+    'Os 25 objetivos dos módulos 1–25 foram demonstrados por evidência (C4, ADR, contrato, teste ou métrica), não por leitura.',
     'Cada decisão estrutural relevante tem um ADR com contexto, alternativas e consequências.',
-    'Ao menos 36 exercícios foram concluídos, incluindo 18 aplicados e 5 de nível expert.',
+    'Ao menos 36 exercícios foram concluídos, incluindo 25 aplicados e 5 de nível expert.',
     'Os cinco casos foram defendidos com trade-offs, riscos, plano de rollback e sinais de senioridade.',
     'Um capstone atende aos critérios; o projeto Expert exige também impacto e governança entre times.',
     'Nenhum módulo é marcado como Dominado antes de evidência validada em architecture review.',
-    'Fronteira (módulos 19–25) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
+    'Fronteira (módulos 26–32) é opcional para o gate sênior e obrigatória para reivindicar nível expert.',
     'Fronteira concluída exige: um ADR que recusa event sourcing com alternativa defendida, uma especificação formal cujo verificador encontrou um contraexemplo, um defeito que "não reproduzia" travado por semente, um game day executado com hipótese escrita antes, o raio de impacto do sistema calculado em número de clientes, um paper fundador que mudou uma decisão sua, e a fronteira de permissão de um componente de IA desenhada e testada contra injeção.'
   ]
 });
