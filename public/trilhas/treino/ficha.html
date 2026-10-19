@@ -785,7 +785,7 @@
       <summary>Regras rápidas</summary>
       <div class="ref-body">
         <ul>
-          <li><strong>Descanso:</strong> 90 s de teto; o <strong>exercício 1</strong> de segunda a sexta recebe
+          <li><strong>Descanso:</strong> 90 s de teto; o <strong>exercício 1</strong> de segunda a sábado recebe
             <strong>2,5 min</strong>. Isoladores 45–75 s.</li>
           <li><strong>Ordem:</strong> composto pesado → volume → isolador. Sempre.</li>
           <li><strong>RIR:</strong> 2 nos compostos, 1–2 nos acessórios, 0–1 só em máquina e isolador.</li>
@@ -839,12 +839,12 @@
           ex: [
             { n: 'Supino reto', v: 'barra ou halteres', s: 4, r: '5–8', rir: '2', d: 150, o: 'Escápulas retraídas e fixas, pés no chão' },
             { n: 'Supino inclinado', v: 'halteres, banco a 30°', s: 4, r: '8–12', rir: '2', d: 90, o: 'Acima de 30° vira desenvolvimento' },
-            { n: 'Paralelas assistidas', v: 'ou supino máquina', s: 4, r: '8–12', rir: '1–2', d: 90, o: 'Tronco inclinado à frente joga a carga no peito' },
+            { n: 'Supino máquina', v: 'ou paralelas assistidas', s: 4, r: '8–12', rir: '1–2', d: 90, o: 'Terceiro ângulo de empurrar do dia' },
             { n: 'Crossover', v: 'ou crucifixo na máquina', s: 4, r: '12–15', rir: '1', d: 75, o: 'Busque alongamento, não carga' },
             { n: 'Crucifixo inclinado', v: 'halteres', s: 4, r: '12–15', rir: '0–1', d: 60, o: 'Finalizador em alongamento, carga leve' },
             { n: 'Tríceps francês', v: 'complementar · overhead, halter ou barra W', s: 4, r: '10–15', rir: '1', d: 75, o: 'Braço acima da cabeça alonga a cabeça longa' },
             { n: 'Tríceps pulley', v: 'complementar · pega pronada', s: 2, r: '12–15', rir: '0–1', d: 60, o: 'Finalizador — pode ir à falha' },
-            { n: 'Abdominal máquina', v: 'abdômen · carga progressiva', s: 4, r: '10–15', rir: '1', d: 60, o: 'Progrida a carga como nos outros exercícios' },
+            { n: 'Abdômen na polia', v: 'abdômen · ajoelhado, corda na polia alta', s: 4, r: '10–15', rir: '1', d: 60, o: 'Flexione a coluna levando o cotovelo ao joelho — não puxe com o quadril. Progrida a carga' },
             { n: 'Prancha frontal', v: 'abdômen', s: 2, r: '30–45 s', rir: '—', d: 45, o: 'Glúteo contraído, quadril alinhado' }
           ]
         },
@@ -859,8 +859,8 @@
             { n: 'Hack machine', v: '', s: 4, r: '8–12', rir: '1–2', d: 90, o: 'Terceiro ângulo de agachamento do dia' },
             { n: 'Cadeira extensora', v: '', s: 4, r: '12–15', rir: '0–1', d: 75, o: 'Pausa de 1 s no topo' },
             { n: 'Cadeira abdutora', v: 'glúteo médio', s: 6, r: '12–15', rir: '0–1', d: 60, o: 'Tronco levemente à frente ativa mais o glúteo' },
-            { n: 'Panturrilha em pé', v: 'gastrocnêmio · pausa 2 s', s: 4, r: '8–12', rir: '0–1', d: 60, o: 'Joelho estendido, pausa no alongamento' },
-            { n: 'Panturrilha no leg press', v: '', s: 3, r: '12–20', rir: '0–1', d: 45, o: 'Amplitude completa, sem bater a carga' }
+            { n: 'Panturrilha em pé', v: 'gastrocnêmio · pausa 2 s', s: 5, r: '8–12', rir: '0–1', d: 60, o: 'Joelho estendido, pausa no alongamento' },
+            { n: 'Panturrilha no leg press', v: '', s: 5, r: '12–20', rir: '0–1', d: 45, o: 'Amplitude completa, sem bater a carga' }
           ]
         },
         qua: {
@@ -882,20 +882,19 @@
           ]
         },
         qui: {
-          nome: 'Ombros completo', foco: 'Deltoide anterior, lateral e posterior + antebraço',
+          nome: 'Ombros', foco: 'Deltoide completo + antebraço + abdômen',
           manha: '4x4 norueguês · 40 min · comer algo leve 30–45 min antes',
           pos: 'Zona 2 · 15 min',
           aq: AQ_UPPER,
           ex: [
-            { n: 'Desenvolvimento sentado', v: 'halteres', s: 6, r: '6–10', rir: '2', d: 150, o: 'Com encosto. Em pé só com core mais forte' },
-            { n: 'Desenvolvimento na máquina', v: '', s: 4, r: '8–12', rir: '1–2', d: 90, o: 'Segundo padrão de empurrar vertical' },
+            { n: 'Desenvolvimento na máquina', v: 'composto do dia', s: 6, r: '8–12', rir: '1–2', d: 150, o: 'Estabilização resolvida pela máquina. Abre a sessão' },
             { n: 'Elevação lateral', v: 'halteres', s: 5, r: '12–20', rir: '0–1', d: 60, o: 'Carga leve, sem impulso de tronco' },
-            { n: 'Elevação lateral no cabo', v: 'unilateral', s: 4, r: '12–15', rir: '0–1', d: 60, o: 'Mantém tensão na parte baixa do movimento' },
-            { n: 'Crucifixo inverso', v: 'deltoide posterior', s: 6, r: '15–20', rir: '1', d: 60, o: 'Cotovelo levemente flexionado e fixo' },
-            { n: 'Face pull no cabo', v: 'deltoide posterior', s: 4, r: '15–20', rir: '1', d: 60, o: 'Puxe na direção da testa, cotovelo alto' },
+            { n: 'Crucifixo inverso', v: 'deltoide posterior', s: 4, r: '15–20', rir: '1', d: 60, o: 'Cotovelo levemente flexionado e fixo' },
             { n: 'Elevação frontal', v: 'cabo ou anilha', s: 4, r: '12–15', rir: '1', d: 60, o: 'Até a altura dos olhos, sem balanço' },
-            { n: 'Rosca de punho', v: 'complementar · flexores', s: 4, r: '12–20', rir: '0–1', d: 45, o: 'Antebraço apoiado, deixe a barra rolar até os dedos' },
-            { n: 'Rosca de punho inversa', v: 'complementar · extensores', s: 4, r: '15–20', rir: '0–1', d: 45, o: 'Carga bem menor. É o lado que ninguém treina' }
+            { n: 'Rosca de punho', v: 'complementar · flexores', s: 6, r: '12–20', rir: '0–1', d: 45, o: 'Antebraço apoiado, deixe a barra rolar até os dedos' },
+            { n: 'Rosca de punho inversa', v: 'complementar · extensores', s: 4, r: '15–20', rir: '0–1', d: 45, o: 'Carga bem menor. É o lado que ninguém treina' },
+            { n: 'Abdômen na polia', v: 'abdômen · ajoelhado, corda na polia alta', s: 4, r: '12–15', rir: '1', d: 60, o: 'Controle na volta, sem deixar a carga bater' },
+            { n: 'Prancha lateral', v: 'abdômen', s: 3, r: '25–40 s / lado', rir: '—', d: 45, o: 'Fecha o volume semanal de oblíquo' }
           ]
         },
         sex: {
@@ -905,24 +904,26 @@
           aq: AQ_LOWER,
           ex: [
             { n: 'Elevação pélvica', v: 'hip thrust', s: 4, r: '8–12', rir: '1–2', d: 150, o: 'Pausa de 1 s no topo, queixo no peito' },
-            { n: 'Hiperextensão 45°', v: 'banco romano', s: 4, r: '10–15', rir: '1–2', d: 90, o: 'Desça até sentir o isquiotibial, suba sem hiperestender' },
+            { n: 'Stiff', v: 'barra ou halteres', s: 4, r: '8–12', rir: '2', d: 90, o: 'Joelho quase estendido, coluna neutra. Desça até sentir o isquiotibial, não até o chão' },
             { n: 'Cadeira flexora sentada', v: 'principal dos isquiotibiais', s: 4, r: '10–15', rir: '1', d: 90, o: 'Quadril a 90° alonga mais os biarticulares' },
             { n: 'Mesa flexora deitada', v: 'secundária', s: 4, r: '10–15', rir: '1', d: 90, o: '2 s de controle na volta' },
             { n: 'Flexora em pé unilateral', v: '', s: 4, r: '12–15', rir: '1', d: 75, o: 'Terceiro ângulo de flexão de joelho' },
             { n: 'Cadeira extensora', v: 'complementar · quadríceps', s: 4, r: '12–15', rir: '0–1', d: 75, o: 'Segundo estímulo semanal de quadríceps' },
-            { n: 'Panturrilha sentado', v: 'sóleo · pausa 2 s', s: 4, r: '12–20', rir: '0–1', d: 45, o: 'Joelho a 90°, mais repetições que o gastrocnêmio' },
-            { n: 'Panturrilha em pé', v: '', s: 3, r: '12–20', rir: '0–1', d: 45, o: 'Fecha o volume semanal do gastrocnêmio' }
+            { n: 'Panturrilha sentado', v: 'sóleo · pausa 2 s', s: 5, r: '12–20', rir: '0–1', d: 45, o: 'Joelho a 90°, mais repetições que o gastrocnêmio' },
+            { n: 'Panturrilha em pé', v: '', s: 5, r: '12–20', rir: '0–1', d: 45, o: 'Fecha o volume semanal do gastrocnêmio' }
           ]
         },
         sab: {
-          nome: 'Braços + deltoide lateral', foco: 'Bíceps e tríceps alternados + lateral complementar',
+          nome: 'Ombro + braços', foco: 'Bloco de ombro primeiro, depois bíceps e tríceps alternados',
           manha: 'Zona 2 · 40 min · em jejum',
           pos: 'Zona 2 · 20 min',
           aq: AQ_UPPER,
           ex: [
+            { n: 'Desenvolvimento sentado', v: 'ombro · halteres · composto do dia', s: 4, r: '6–10', rir: '2', d: 150, o: 'Com encosto. Em pé só com core mais forte' },
+            { n: 'Elevação lateral sentado', v: 'ombro · halteres, banco a 90°', s: 6, r: '12–20', rir: '0–1', d: 45, o: 'Sentado elimina o impulso de tronco — carga menor, execução mais estrita' },
+            { n: 'Face pull', v: 'ombro · deltoide posterior', s: 4, r: '15–20', rir: '1', d: 60, o: 'Puxe na direção da testa, cotovelo alto' },
             { n: 'Rosca direta', v: 'barra W ou reta', s: 4, r: '8–12', rir: '1–2', d: 90, o: 'Cotovelo parado, sem balanço de lombar' },
             { n: 'Tríceps pulley', v: 'barra reta', s: 4, r: '10–15', rir: '1', d: 75, o: 'Cotovelo fixo, sem travar a articulação' },
-            { n: 'Elevação lateral', v: 'complementar · halteres', s: 6, r: '12–20', rir: '0–1', d: 45, o: 'Segundo estímulo semanal do deltoide lateral' },
             { n: 'Rosca inclinada', v: 'halteres, banco a 45°', s: 4, r: '10–12', rir: '1', d: 75, o: 'Bíceps em alongamento' },
             { n: 'Tríceps testa', v: 'barra W ou halteres', s: 4, r: '10–12', rir: '1', d: 75, o: 'Cabeça longa: cotovelo levemente à frente' },
             { n: 'Rosca martelo', v: 'pega neutra', s: 4, r: '10–15', rir: '0–1', d: 60, o: 'Braquial e braquiorradial' },
@@ -930,16 +931,10 @@
           ]
         },
         dom: {
-          nome: 'Manutenção', foco: 'Abdômen, panturrilha, antebraço e mobilidade',
+          nome: 'Descanso ativo', foco: 'Zona 2 longo e mobilidade — sem musculação',
           manha: 'Zona 2 longo · 40–50 min · caminhada, bike ou elíptico',
-          pos: '—',
-          aq: 'Mobilidade: 90/90 de quadril 8×/lado · rotação torácica 8×/lado · tornozelo na parede 10×/lado · gato-camelo 10×.',
-          ex: [
-            { n: 'Abdominal máquina', v: 'abdômen · carga progressiva', s: 4, r: '12–15', rir: '1', d: 60, o: 'Controle na volta' },
-            { n: 'Prancha lateral', v: 'abdômen', s: 3, r: '25–40 s / lado', rir: '—', d: 45, o: 'Fecha o volume semanal de oblíquo' },
-            { n: 'Panturrilha', v: 'variante livre · pausa 2 s', s: 6, r: '15–20', rir: '0–1', d: 45, o: 'Use a variante que não entrou na terça nem na sexta' },
-            { n: 'Rosca de punho', v: 'antebraço', s: 2, r: '15–20', rir: '0–1', d: 45, o: 'Carga leve, dia de manutenção' }
-          ]
+          pos: '—', aq: '', ex: [],
+          livre: 'As séries que ficavam aqui foram distribuídas: panturrilha para terça e sexta, abdômen e antebraço para quinta. O volume semanal de cada grupo não mudou — mudou o dia. Faça 8 min de mobilidade (90/90 de quadril, rotação torácica, tornozelo na parede, gato-camelo), durma 7 a 9 horas e prepare a semana: comida, roupa de treino e horário do turno da manhã.'
         }
       };
 
@@ -947,15 +942,16 @@
       var ROTULO = { seg: 'SEG', ter: 'TER', qua: 'QUA', qui: 'QUI', sex: 'SEX', sab: 'SÁB', dom: 'DOM' };
       var CURTO = {
         seg: 'Peito', ter: 'Pernas A', qua: 'Costas', qui: 'Ombros',
-        sex: 'Pernas B', sab: 'Braços', dom: 'Manut.'
+        sex: 'Pernas B', sab: 'Omb+Braço', dom: 'Descanso'
       };
 
       /* ─── papel do exercício, derivado dos dados ─── */
       function papel(e, i) {
         var v = (e.v || '').toLowerCase();
         if (v.indexOf('abdômen') >= 0) return 'core';
-        if (v.indexOf('complementar') >= 0) return 'compl';
         if (i === 0) return 'main';
+        if (v.indexOf('ombro') >= 0) return 'compl';
+        if (v.indexOf('complementar') >= 0) return 'compl';
         if ((e.rir === '0–1' || e.rir === '—') && e.d <= 60) return 'iso';
         return 'volume';
       }
