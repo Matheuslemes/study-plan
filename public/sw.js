@@ -3,7 +3,7 @@
  * HTML usa network-first; assets versionados usam cache-first com revalidação.
  */
 
-const VERSAO = 'v85-study-sequences';
+const VERSAO = 'v89-project-card-links';
 const CACHE = `plano-estudos-${VERSAO}`;
 
 const PARTES_ACADEMIA = {
@@ -40,6 +40,17 @@ const PAGINAS_TRILHAS = [
 const ESSENCIAIS = [
   './',
   './index.html',
+  './projetos/acessibilidade-digital-continua.html',
+  './projetos/governanca-observabilidade-ia.html',
+  './projetos/conciliacao-cobranca-caixa-pme.html',
+  './projetos/contratos-e-compliance-pme.html',
+  './projetos/marketplace-b2b-regional.html',
+  './projetos/sistema-operacional-vertical-whatsapp.html',
+  './projetos/dados-de-mercado-e-risco-pequeno-produtor.html',
+  './projetos/rastreabilidade-agro-offline-first.html',
+  './projetos/resiliencia-climatica-operacional.html',
+  './projetos/lemes-code-lab.html',
+  './projetos/preparacao-entrevistas-dev.html',
   ...PAGINAS_TRILHAS,
   './manifest.webmanifest',
   './favicon.svg',
@@ -51,6 +62,8 @@ const ESSENCIAIS = [
   './assets/css/system.css',
   './assets/css/hub.css',
   './assets/css/academy.css',
+  './assets/css/project-guide.css',
+  './assets/js/pages/project-guide.js',
   './assets/vendor/bootstrap.min.css',
   './assets/vendor/bootstrap.bundle.min.js',
   './assets/vendor/fonts/fonts.css',
@@ -61,10 +74,13 @@ const ESSENCIAIS = [
   './data/sequences/arquitetura.js',
   './data/sequences/architecture-plan.js',
   './data/projetos.js',
+  './data/projetos.js?v=portfolio-11',
+  './assets/js/features/projetos.js?v=portfolio-11',
   './data/config.js',
   './data/tracks.js',
   './data/phases.js',
   './data/routine.js',
+  './data/conteudo-semanal.js',
   './data/pdfs.js',
   './data/milestones.js',
   './data/track-guides.js',
@@ -199,3 +215,4 @@ self.addEventListener('fetch', (event) => {
     })
   );
 });
+

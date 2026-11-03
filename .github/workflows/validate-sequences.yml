@@ -10,6 +10,7 @@ on:
       - 'public/data/**'
       - 'public/trilhas/**'
       - 'scripts/validate-sequences.mjs'
+      - 'scripts/verificar-grade.mjs'
       - '.github/workflows/validate-sequences.yml'
   pull_request:
   workflow_dispatch:

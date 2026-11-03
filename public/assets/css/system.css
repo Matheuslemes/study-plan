@@ -461,21 +461,8 @@ a.biblio-item.is-linked:hover .biblio-open { color: var(--accent, var(--mastery-
 }
 
 .phase-picker-select {
-  background: var(--surface-2);
-  color: var(--text1);
-  border: 1px solid var(--border-strong);
-  border-radius: 8px;
-  padding: .38rem .7rem;
-  font-family: 'Inter', sans-serif;
-  font-size: .85rem;
+  min-width: 24rem;
   font-weight: 600;
-  min-width: 18rem;
-  max-width: 100%;
-}
-
-.phase-picker-select:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
 }
 
 .phase-picker-hint {
@@ -484,7 +471,61 @@ a.biblio-item.is-linked:hover .biblio-open { color: var(--accent, var(--mastery-
   color: var(--text3);
 }
 
+.routine-profile-warning {
+  flex-basis: 100%;
+  margin: 0;
+  padding: .55rem .7rem;
+  border: 1px solid color-mix(in srgb, var(--state-warning) 35%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--state-warning) 8%, transparent);
+  color: var(--text2);
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
 /* ── selo do conteúdo da fase nos blocos ── */
+/* Foco do dia na fase ativa, no topo da grade da rotina. */
+.daily-phase-focus {
+  padding: .85rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in srgb, var(--accent) 5%, transparent);
+}
+
+.daily-phase-focus-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .25rem .6rem;
+}
+
+.daily-phase-focus-theme {
+  margin: .3rem 0 0;
+  font-family: 'Syne', sans-serif;
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.daily-phase-focus-note {
+  margin: .25rem 0 0;
+  font-size: .78rem;
+  color: var(--text2);
+}
+
+.daily-phase-focus-path {
+  margin: .45rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: .75rem;
+  line-height: 1.5;
+  color: var(--text3);
+}
+
+.daily-phase-focus-path .mono {
+  font-weight: 700;
+  margin-right: .25rem;
+}
+
 .phase-slot {
   margin-top: .55rem;
   padding: .45rem .6rem;
@@ -1709,7 +1750,7 @@ footer p {
 }
 
 /* ── responsive ─────────────────────── */
-@media(max-width:992px) {
+@media(max-width:900px) {
   .navbar-track-search {
     min-width: 100%;
     max-width: none;
@@ -2083,14 +2124,19 @@ footer p {
   gap: .15rem;
 }
 
-.cert-alvo input,
-.cert-status-sel select {
+.cert-alvo input {
   min-height: 2.25rem;
   background: var(--surface-2);
   color: var(--text1);
   border: 1px solid var(--border-strong);
   border-radius: 6px;
   padding: .25rem .4rem;
+  font-size: .76rem;
+}
+
+.cert-status-sel select {
+  min-height: 2.25rem;
+  padding-block: .25rem;
   font-size: .76rem;
 }
 
@@ -2749,14 +2795,13 @@ li.is-done .topic-check span,
 
 .interview-card form {
   display: grid;
-  grid-template-columns: 120px 90px minmax(12rem, 1fr) auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: .5rem;
   align-items: end;
 }
 
 .interview-card label { display: grid; gap: .25rem; color: var(--text3); font-size: .62rem; }
 
-.interview-card select,
 .interview-card input {
   min-width: 0;
   height: 34px;
@@ -2768,6 +2813,14 @@ li.is-done .topic-check span,
   padding: .35rem .5rem;
 }
 
+.interview-card select {
+  min-width: 0;
+  min-height: 34px;
+  padding-block: .2rem;
+  border-radius: 7px;
+  font-size: .72rem;
+}
+
 .interview-card button {
   height: 34px;
   border: 1px solid var(--accent);
@@ -2777,6 +2830,7 @@ li.is-done .topic-check span,
   font-family: 'IBM Plex Mono', monospace;
   font-size: .65rem;
   font-weight: 700;
+  white-space: nowrap;
   cursor: pointer;
 }
 
@@ -2790,8 +2844,6 @@ li.is-done .topic-check span,
 @media (max-width: 900px) {
   .interview-list { grid-template-columns: 1fr; }
   .interview-card { border-right: 0; }
-  .interview-card form { grid-template-columns: 1fr 1fr; }
-  .interview-card__evidence { grid-column: 1 / -1; }
 }
 
 @media (max-width: 700px) {
@@ -2822,7 +2874,6 @@ li.is-done .topic-check span,
   }
 
   .interview-card form { grid-template-columns: 1fr; }
-  .interview-card__evidence,
   .interview-card__error { grid-column: auto; }
 }
 
@@ -3011,3 +3062,10 @@ li.is-done .topic-check span,
   font: 600 .62rem/1 var(--font-mono); color: var(--text2);
   border: 1px solid var(--border); border-radius: 999px; padding: .22rem .5rem; background: var(--surface-2);
 }
+
+.proj-guide-link { display: inline-block; margin-top: 1rem; color: var(--accent); font-size: .85rem; text-underline-offset: .2em; }
+.proj-guide-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.proj-card { position: relative; }
+.proj-guide-link::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+.proj-card:has(.proj-guide-link):hover { border-color: var(--accent); }
+.proj-card:has(.proj-guide-link):focus-within { outline: 2px solid var(--accent); outline-offset: 4px; }

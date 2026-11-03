@@ -9,6 +9,7 @@ on:
     paths:
       - 'public/**'
       - 'scripts/validate-content.mjs'
+      - 'scripts/verificar-grade.mjs'
       - '.github/workflows/validate-content.yml'
   pull_request:
   workflow_dispatch:

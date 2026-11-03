@@ -49,12 +49,14 @@ export const faseAtual = () => P.find((p) => p.id === getFaseAtual());
  * Retorna null quando o bloco não pertence a uma trilha (sono, pausa, treino).
  */
 export function contextoDoBloco(bloco, fase) {
-  const NAO_TRILHA = ['sleep', 'break', 'cardio', 'strength', 'dinner', 'buffer', 'closing', 'review'];
+  const NAO_TRILHA = ['sleep', 'break', 'cardio', 'strength', 'dinner', 'buffer', 'closing', 'review', 'work'];
   if (!bloco || NAO_TRILHA.includes(bloco.type)) return null;
 
   const k = chaveTrilha(bloco.k);
   const ativa = trilhaAtiva(fase, k);
-  const itens = conteudoDaFase(fase, k);
+  const todos = conteudoDaFase(fase, k);
+  // `topicos` aponta quais itens da trilha este bloco estuda; sem ele, são todos.
+  const itens = bloco.topicos ? bloco.topicos.map((i) => todos[i]).filter(Boolean) : todos;
 
   return {
     trilha: k,
@@ -62,7 +64,7 @@ export function contextoDoBloco(bloco, fase) {
     // Todo o conteúdo da trilha nesta fase (o horário mostra a lista inteira),
     // mais o item "primário" do bloco por compatibilidade com quem só usa um.
     conteudos: ativa ? itens : [],
-    conteudo: ativa && itens.length ? (itens[bloco.topicIndex || 0] || itens[0]) : null,
+    conteudo: ativa && itens.length ? (bloco.topicos ? itens[0] : (itens[bloco.topicIndex || 0] || itens[0])) : null,
     entraNaFase: ativa ? null : faseDeEntrada(k)
   };
 }
@@ -72,13 +74,17 @@ export function contextoDoBloco(bloco, fase) {
  * bloco no dia. Retorna { index, total } — a posição do bloco entre os da mesma
  * trilha e quantos são — ou null se o bloco não tem conteúdo de trilha ativa.
  * Assim os itens da fase são DIVIDIDOS entre os blocos, sem repetir a lista.
+ * Ficam fora da divisão a janela condicional (o que depende de folga no expediente
+ * não pode tirar conteúdo de um bloco garantido) e o bloco com `topicos` (já diz
+ * exatamente o que estuda).
  */
 export function fatiaDoBloco(blocos, i, fase) {
+  const foraDaDivisao = (b) => b.condicional || b.topicos;
   const alvo = contextoDoBloco(blocos[i], fase);
-  if (!alvo || !alvo.ativa || !alvo.conteudos.length) return null;
+  if (!alvo || !alvo.ativa || !alvo.conteudos.length || foraDaDivisao(blocos[i])) return null;
   const mesmos = blocos
-    .map((b, idx) => ({ idx, ctx: contextoDoBloco(b, fase) }))
-    .filter((x) => x.ctx && x.ctx.ativa && x.ctx.conteudos.length && x.ctx.trilha === alvo.trilha)
+    .map((b, idx) => ({ idx, bloco: b, ctx: contextoDoBloco(b, fase) }))
+    .filter((x) => !foraDaDivisao(x.bloco) && x.ctx && x.ctx.ativa && x.ctx.conteudos.length && x.ctx.trilha === alvo.trilha)
     .map((x) => x.idx);
   return { index: mesmos.indexOf(i), total: mesmos.length };
 }
@@ -118,7 +124,7 @@ export function seloDaFase(bloco, fase, fatia = null) {
   }
   const nome = NOME_TRILHA[ctx.trilha] || ctx.trilha;
   return `<div class="phase-slot phase-slot--list">
-    <span class="phase-slot-tag">${escapeHtml(fase.l)} · ${escapeHtml(nome)} — o que estudar neste horário${parte}</span>
+    <span class="phase-slot-tag">${escapeHtml(fase.l)} · ${escapeHtml(nome)} — ${escapeHtml(bloco.seloRotulo || 'o que estudar neste horário')}${parte}</span>
     <ul class="phase-slot-list">${itens.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>
   </div>`;
 }

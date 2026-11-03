@@ -12,7 +12,7 @@
   <link href="./assets/css/tokens.css" rel="stylesheet">
   <link href="./assets/css/tracks-palette.css" rel="stylesheet">
   <link href="./assets/css/base.css" rel="stylesheet">
-  <link href="./assets/css/system.css" rel="stylesheet">
+  <link href="./assets/css/system.css?v=portfolio-11" rel="stylesheet">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://study-plan.vercel.app/">
   <meta property="og:type" content="website">
@@ -76,9 +76,9 @@
       <div class="tab-pane fade show active" id="tabHoje" role="tabpanel" aria-labelledby="btn-tabHoje">
         <!-- HERO — apresentação do plano; aparece apenas nesta aba -->
         <header class="cc-hero">
-          <span class="hero-eyebrow">12 fases sequenciais · 36 meses · 156 semanas · ~6.000h</span>
+          <span class="hero-eyebrow">12 fases sequenciais · <span data-duracao>36 meses</span> · <span data-semanas>156 semanas</span> · ~6.000h</span>
           <h1>Plano Integrado de Estudos</h1>
-          <p class="hero-sub">Plano sequencial para Desenvolvedor Backend Java sênior. <strong>A fase define o conteúdo ativo; o conteúdo ativo define a rotina</strong> — nunca o contrário. Java/Spring é a âncora com 45% do foco; SQL, testes, Docker, CI/CD, segurança, performance, observabilidade, arquitetura, Kafka, AWS e System Design entram na ordem em que se sustentam. Algoritmos, Git e inglês são transversais aos 36 meses. Frontend, Python e IA entram na Fase 11, sobre base consolidada. Rotina de <strong>36–40h/semana</strong>, com 7h30 de sono fixo e domingo de descanso real.</p>
+          <p class="hero-sub">Plano sequencial para Desenvolvedor Backend Java sênior. <strong>A fase define o conteúdo ativo; o conteúdo ativo define a rotina</strong> — nunca o contrário. Java/Spring é a âncora com 45% do foco; SQL, testes, Docker, CI/CD, segurança, performance, observabilidade, arquitetura, Kafka, AWS e System Design entram na ordem em que se sustentam. Algoritmos, Git e inglês são transversais aos <span data-duracao>36 meses</span>. Frontend, Python e IA entram na Fase 11, sobre base consolidada. <span data-carga="rotinaHero">Rotina de <strong>36–40h/semana</strong>, com 7h30 de sono fixo e domingo de descanso real.</span></p>
           <div class="hero-tags" id="heroTags"></div>
           <div id="trackBadges"></div>
         </header>
@@ -87,29 +87,29 @@
 
       <!-- TAB FASES -->
       <div class="tab-pane fade" id="tabFases" role="tabpanel" aria-labelledby="btn-tabFases">
-        <h4 class="mb-1">12 Fases · 156 Semanas (domínio real)</h4>
-        <p class="text-muted small mb-3"><strong>As 12 fases são a fonte única de verdade do plano.</strong> Cada fase é um
-          trimestre técnico: 12 semanas de execução + 1 de checkpoint. A ordem não é arbitrária — cada fase depende da
+        <h4 class="mb-1">12 Fases · <span data-semanas>156 Semanas</span> (domínio real)</h4>
+        <p class="text-muted small mb-3"><strong>As 12 fases são a fonte única de verdade do plano.</strong> <span data-carga="faseIntro">Cada fase é um
+          trimestre técnico: 12 semanas de execução + 1 de checkpoint.</span> A ordem não é arbitrária — cada fase depende da
           anterior. CI/CD vem antes de arquitetura porque refatorar sem pipeline é apostar; segurança é transversal desde
           a Fase 1 porque autenticação aparece na Fase 2; Frontend, Python e IA entram na Fase 11 porque só fazem sentido
           sobre uma base backend consolidada. <strong>Uma trilha marcada como inativa em uma fase não ocupa nenhum bloco
           da rotina diária.</strong></p>
         <div class="hours-margin-note mb-3">
           <strong>Como as horas foram recalculadas:</strong>
-          A carga do plano é <span class="mono">36–40h/semana de foco técnico</span>, <span class="mono">~500h por fase</span> e
+          <span data-carga="notaHoras">A carga do plano é <span class="mono">36–40h/semana de foco técnico</span>, <span class="mono">~500h por fase</span> e
           <span class="mono">~6.000h totais</span> em 36 meses. Esses números substituem os anteriores
           (<span class="mono">65–75h/semana</span>, <span class="mono">910h/fase</span>, <span class="mono">10.920h</span>), que eram
           incompatíveis com a grade diária real e não deixavam espaço para sono. A grade atual entrega
           <span class="mono">6h25 de foco por dia útil</span>, <span class="mono">5h no sábado</span> e <span class="mono">1h no domingo</span> —
           38h05 por semana, com <span class="mono">7h30 de sono todos os dias</span>. Considere margem de
           <span class="mono">±10%</span>: bugs, revisões e imprevistos fazem parte. Checkpoint mensal na semana 4 e critério
-          mínimo de 80% para avançar de fase.
+          mínimo de 80% para avançar de fase.</span>
         </div>
         <section class="mb-4">
           <div class="row g-3">
             <div class="col-12 col-lg-4">
               <div class="metric-card h-100">
-                <span class="val">36 meses</span>
+                <span class="val" data-duracao>36 meses</span>
                 <span class="lbl">tempo correto para domínio real</span>
                 <p class="text-muted small mt-2 mb-0">O plano agora considera estudo, revisão, prática, refatoração,
                   bugs, deploy, documentação, simulação de produção e maturação arquitetural.</p>
@@ -117,17 +117,17 @@
             </div>
             <div class="col-12 col-lg-4">
               <div class="metric-card h-100">
-                <span class="val">156 semanas</span>
+                <span class="val" data-semanas>156 semanas</span>
                 <span class="lbl">12 fases + checkpoints</span>
-                <p class="text-muted small mt-2 mb-0">Cada trimestre combina 12 semanas de execução com 1 semana de
+                <p class="text-muted small mt-2 mb-0" data-carga="metricaSemanas">Cada trimestre combina 12 semanas de execução com 1 semana de
                   checkpoint, validação, correções, revisão e ajuste de rota.</p>
               </div>
             </div>
             <div class="col-12 col-lg-4">
               <div class="metric-card h-100">
-                <span class="val">36–40h/sem</span>
-                <span class="lbl">foco técnico sustentável</span>
-                <p class="text-muted small mt-2 mb-0">38h05 de foco por semana, com 7h30 de sono diário e domingo livre. Menos horas teóricas e mais horas efetivamente cumpridas: consistência por 156 semanas vale mais que intensidade por 3.</p>
+                <span class="val" data-carga="metricaCarga">36–40h/sem</span>
+                <span class="lbl" data-carga="metricaCargaRotulo">foco técnico sustentável</span>
+                <p class="text-muted small mt-2 mb-0" data-carga="metricaCargaTexto">38h05 de foco por semana, com 7h30 de sono diário e domingo livre. Menos horas teóricas e mais horas efetivamente cumpridas: consistência por 156 semanas vale mais que intensidade por 3.</p>
               </div>
             </div>
           </div>
@@ -143,32 +143,32 @@
               <tbody>
                 <tr>
                   <td>Ciclo 1</td>
-                  <td>Meses 1–6 · Fases 1–2</td>
+                  <td data-ciclo="0">Meses 1–6 · Fases 1–2</td>
                   <td>Base de engenharia: Java Core, SQL, Java avançado, Spring Boot, REST e JPA. Nada compete com a base.</td>
                 </tr>
                 <tr>
                   <td>Ciclo 2</td>
-                  <td>Meses 7–12 · Fases 3–4</td>
+                  <td data-ciclo="1">Meses 7–12 · Fases 3–4</td>
                   <td>Qualidade e entrega: testes profissionais, Docker, CI/CD (antecipado do mês 22) e módulo forte de segurança.</td>
                 </tr>
                 <tr>
                   <td>Ciclo 3</td>
-                  <td>Meses 13–18 · Fases 5–6</td>
+                  <td data-ciclo="2">Meses 13–18 · Fases 5–6</td>
                   <td>Produção: performance medida, Redis e observabilidade completa. Operar o próprio software antes de distribuí-lo.</td>
                 </tr>
                 <tr>
                   <td>Ciclo 4</td>
-                  <td>Meses 19–24 · Fases 7–8</td>
+                  <td data-ciclo="3">Meses 19–24 · Fases 7–8</td>
                   <td>Arquitetura hexagonal e DDD, depois sistemas distribuídos com Kafka integrado — mensageria é meio, não fase isolada.</td>
                 </tr>
                 <tr>
                   <td>Ciclo 5</td>
-                  <td>Meses 25–30 · Fases 9–10</td>
+                  <td data-ciclo="4">Meses 25–30 · Fases 9–10</td>
                   <td>Cloud e escala: AWS, Terraform, Kubernetes, SAA-C03 e System Design praticado semanalmente.</td>
                 </tr>
                 <tr>
                   <td>Ciclo 6</td>
-                  <td>Meses 31–36 · Fases 11–12</td>
+                  <td data-ciclo="5">Meses 31–36 · Fases 11–12</td>
                   <td>Complementares sobre base sólida: Frontend, Python e IA aplicada. Depois portfólio, entrevistas e senioridade.</td>
                 </tr>
               </tbody>
@@ -228,12 +228,14 @@
         </div>
         <div class="hours-margin-note mb-3">
           <strong>Sequência da semana:</strong>
-          <span class="mono">SEG</span> backend (construir) → <span class="mono">TER</span> backend (testar e refinar) →
-          <span class="mono">QUA</span> banco e ambiente reproduzível → <span class="mono">QUI</span> integração e segurança →
-          <span class="mono">SEX</span> operação, deploy e ADR da semana → <span class="mono">SÁB</span> 4h de exercícios e labs + 1h de
+          <span class="mono">SEG</span> construir → <span class="mono">TER</span> testar e refatorar →
+          <span class="mono">QUA</span> dados → <span class="mono">QUI</span> integrar e proteger →
+          <span class="mono">SEX</span> operar e decidir → <span class="mono">SÁB</span> 4h de exercícios e labs + 1h de
           System Design → <span class="mono">DOM</span> descanso real, com no máximo 1h de revisão leve.
+          A intenção de cada dia é fixa e o tema vem da etapa escolhida abaixo.
           Construir e testar em dias consecutivos no mesmo domínio consolida mais que alternar assuntos.
         </div>
+        <div id="perfilRotinaPicker" class="mb-3"></div>
         <div id="faseAtualPicker" class="mb-3"></div>
         <div id="routineModes" class="mb-4"></div>
 
@@ -323,8 +325,7 @@
       <!-- TAB PROJETOS -->
       <div class="tab-pane fade" id="tabProjetos" role="tabpanel" aria-labelledby="btn-tabProjetos">
         <h4 class="mb-1">Projetos de portfólio</h4>
-        <p class="text-muted small mb-3">15 projetos independentes — um por trilha curricular na sua fase de foco.
-          Cada um vira um repositório e um item do portfólio.</p>
+        <p class="text-muted small mb-3">Catálogo de projetos de portfólio com objetivos, entregáveis previstos e competências.</p>
         <div id="projetosView"></div>
       </div>
 
@@ -359,11 +360,11 @@
         <div class="d-flex justify-content-between align-items-start gap-3 flex-wrap mb-2">
           <div>
             <h4 class="mb-1">Sincronização do Plano — fases, trilhas e entregáveis</h4>
-            <p class="text-muted small mb-3">Como as trilhas se encadeiam ao longo das 12 fases, 6 ciclos e 36 meses.
+            <p class="text-muted small mb-3">Como as trilhas se encadeiam ao longo das 12 fases, 6 ciclos e <span data-duracao>36 meses</span>.
               Mostra as dependências que justificam a ordem das fases, os checkpoints de cada nível e os dois marcos de
               certificação AWS que restaram no plano.</p>
           </div>
-          <span class="pdf-counter">12 fases · 6 ciclos · 36 meses</span>
+          <span class="pdf-counter">12 fases · 6 ciclos · <span data-duracao>36 meses</span></span>
         </div>
 
         <div class="hours-margin-note mb-3">
@@ -431,7 +432,7 @@
       </div>
       <p class="mb-0">Java/Spring · Banco SQL/NoSQL · Algoritmos e Estruturas de Dados · Testes · Docker e CI/CD ·
         Segurança · Performance e Redis · Observabilidade · Arquitetura e DDD · Kafka e Sistemas Distribuídos · AWS e IaC ·
-        System Design · Frontend · Python · IA aplicada · Git e Inglês transversais · 12 fases · 36 meses · ~6.000h</p>
+        System Design · Frontend · Python · IA aplicada · Git e Inglês transversais · 12 fases · <span data-duracao>36 meses</span> · ~6.000h</p>
     </div>
   </footer>
 
@@ -439,7 +440,8 @@
   <!-- Arquitetura modular (STUDY-025..031): dados em /data, comportamento em /assets/js.
        ES Modules exigem servir por HTTP — abrir o arquivo direto (file://) não funciona.
        Use `npx http-server public` ou o deploy da Vercel. -->
-  <script type="module" src="./assets/js/pages/dashboard.js?redesign-34"></script>
+  <script type="module" src="./assets/js/pages/dashboard.js?portfolio-11"></script>
 </body>
 
 </html>
+

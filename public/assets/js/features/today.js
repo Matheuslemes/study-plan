@@ -60,12 +60,15 @@ export function renderHoje(containerId) {
   const principal = blocos.find((b) => b.kind === 'foco profundo' && b.type !== 'testing')
     || blocos.find((b) => b.kind === 'foco profundo');
   const complementar = blocos.find((b) => b.kind === 'complementar');
-  const transversal = blocos.find((b) => b.type === 'dsa') || blocos.find((b) => b.type === 'english');
+  // Na Fase 12, DSA e inglês também ocupam blocos profundos: o transversal é o bloco próprio.
+  const ehTransversal = (b) => b.type === 'dsa' || b.type === 'english';
+  const transversal = blocos.find((b) => b.kind === 'transversal' && ehTransversal(b)) || blocos.find(ehTransversal);
 
+  const seHouverJanela = (bloco, rotulo) => (bloco?.condicional ? `${rotulo} · se houver janela` : rotulo);
   const destaques = [
     blocoInfo(principal, fase, 'Principal'),
-    blocoInfo(complementar, fase, 'Complementar'),
-    blocoInfo(transversal, fase, transversal?.type === 'dsa' ? 'Algoritmos (DSA)' : 'Inglês')
+    blocoInfo(complementar, fase, seHouverJanela(complementar, 'Complementar')),
+    blocoInfo(transversal, fase, seHouverJanela(transversal, transversal?.type === 'dsa' ? 'Algoritmos (DSA)' : 'Inglês'))
   ].filter(Boolean);
 
   const revisoes = revisoesDeHoje().length;

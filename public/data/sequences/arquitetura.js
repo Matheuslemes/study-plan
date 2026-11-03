@@ -1,5 +1,9 @@
 // Objetivos possuem IDs editoriais: mudar a ordem não muda o progresso.
 const objective = (id, text) => ({ id, text });
+// Cadência do perfil trabalho-9-18. Cada dia aponta o que estudar pelo id estável:
+// um objetivo ocupa os dois blocos da manhã (estudar e produzir); dois objetivos
+// ficam um em cada bloco. `apoio` é a trilha da janela das 13h, se houver folga.
+const dia = (temas, objetivos, modulos, apoio) => ({ temas, objetivos, modulos, apoio });
 /*
  * Sequência de perfil TEÓRICO e orientada ao ESTUDO. Cada objetivo começa
  * nomeando o TEMA/FUNDAMENTO a estudar e seus subconceitos, depois a ação
@@ -17,7 +21,14 @@ const definitions = [
     db: [objective('invariantes', 'Invariantes de negócio e transações: o que é uma invariante, como constraints e transações ACID a protegem e a diferença entre garantir no código e no banco. Modelar pedidos e pagamentos. critério observável: uma invariante que o banco (constraint/transação) impede de violar')],
     sec: [objective('dados-sensiveis', 'Classificação de dados e menor privilégio: o que é dado sensível (PII, financeiro), atores/papéis e o princípio do menor privilégio. Mapear a superfície do DevCore. critério observável: uma matriz dado × ator × permissão com o menor privilégio justificado')],
     delivery: 'Dossiê de contexto, requisitos mensuráveis, C4 e três ADRs.',
-    proof: 'Relacionar cada decisão a um requisito e justificar a estrutura da API sem depender de execução.'
+    proof: 'Relacionar cada decisão a um requisito e justificar a estrutura da API sem depender de execução.',
+    cadencia: {
+      segunda: dia(['Atributos de qualidade'], ['arquitetura:requisitos'], ['natureza-arquitetura', 'atributos-qualidade'], 'db'),
+      terca: dia(['Modelo C4', 'ADRs e alternativas'], ['arquitetura:c4', 'arquitetura:decisoes'], ['documentacao-c4-adr', 'estilos-arquiteturais'], 'sec'),
+      quarta: dia(['API em camadas', 'Invariantes e transações'], ['java:api-base', 'db:invariantes'], ['ddd-tatico'], 'sec'),
+      quinta: dia(['Dados sensíveis e menor privilégio'], ['sec:dados-sensiveis'], ['seguranca-arquitetural'], 'db'),
+      sexta: dia(['Dossiê da etapa', 'Defesa em inglês'], ['pratica:fundamentos-entrega', 'ingles:fundamentos-apresentacao'], ['comunicacao-arquitetura'], 'git')
+    }
   },
   {
     slug: 'dominio', title: 'Domínio, modularidade e contratos',
@@ -27,7 +38,14 @@ const definitions = [
     db: [objective('ownership', 'Ownership de dados por módulo: cada módulo dono do seu schema, por que a escrita cruzada quebra a fronteira e a ideia de banco por serviço. Definir o ownership no DevCore. critério observável: um mapa dado → dono e o argumento de integridade que a proíbe')],
     sec: [objective('autorizacao', 'Autorização e controle de acesso: autenticação vs autorização, RBAC/ABAC e o risco de IDOR (acessar recurso de outro usuário). Modelar as regras do DevCore. critério observável: uma matriz operação × papel e o caso de abuso que ela nega')],
     delivery: 'Monólito modular (desenho), mapa de contextos e contrato versionado.',
-    proof: 'Explicar como o pipeline detectaria uma quebra de contrato e uma violação de fronteira, e por que cada uma é barrada.'
+    proof: 'Explicar como o pipeline detectaria uma quebra de contrato e uma violação de fronteira, e por que cada uma é barrada.',
+    cadencia: {
+      segunda: dia(['Bounded contexts'], ['arquitetura:contextos'], ['ddd-estrategico'], 'db'),
+      terca: dia(['Fronteiras do monólito modular', 'Contrato versionado'], ['arquitetura:fronteiras', 'arquitetura:contratos'], ['modularidade-acoplamento', 'integracao-mensageria'], 'sec'),
+      quarta: dia(['DDD tático e fitness functions', 'Ownership de dados'], ['java:modulos', 'db:ownership'], ['ddd-tatico', 'decomposicao-servicos'], 'sec'),
+      quinta: dia(['Autorização e controle de acesso'], ['sec:autorizacao'], ['seguranca-arquitetural'], 'db'),
+      sexta: dia(['Desenho do monólito modular', 'Defesa em inglês'], ['pratica:dominio-entrega', 'ingles:dominio-apresentacao'], ['comunicacao-arquitetura'], 'git')
+    }
   },
   {
     slug: 'integracao', title: 'Integração e consistência distribuída',
@@ -37,7 +55,14 @@ const definitions = [
     db: [objective('atomicidade', 'Atomicidade entre estado e evento: o problema do dual-write, por que negócio e outbox ficam na mesma transação e os limites da garantia (entrega ao menos uma vez). Explicar no DevCore. critério observável: o argumento de por que estado e evento saem juntos ou não saem, com o cenário de falha')],
     devops: [objective('dlq', 'Retry, dead-letter queue e reprocessamento: retry com backoff, quando mandar para a DLQ, poison messages e rastreabilidade. Projetar a política do DevCore. critério observável: um fluxo de uma mensagem que falha, vai para a DLQ e é reprocessada com trilha')],
     delivery: 'Desenho do fluxo de pagamento assíncrono com outbox, idempotência e conciliação.',
-    proof: 'Explicar, passo a passo, por que repetir a mensagem e reiniciar o consumidor não gera cobrança duplicada.'
+    proof: 'Explicar, passo a passo, por que repetir a mensagem e reiniciar o consumidor não gera cobrança duplicada.',
+    cadencia: {
+      segunda: dia(['Integração síncrona × eventos'], ['arquitetura:sincrono-eventos'], ['integracao-mensageria', 'fundamentos-distribuidos'], 'db'),
+      terca: dia(['Saga', 'Contrato de evento'], ['arquitetura:saga', 'arquitetura:contrato-evento'], ['consistencia-transacoes'], 'devops'),
+      quarta: dia(['Outbox e idempotência', 'Atomicidade e dados'], ['java:outbox', 'db:atomicidade'], ['consistencia-transacoes', 'dados-intensivos', 'arquitetura-dados'], 'devops'),
+      quinta: dia(['Retry, DLQ e reprocessamento'], ['devops:dlq'], ['resiliencia-estabilidade'], 'db'),
+      sexta: dia(['Fluxo de pagamento assíncrono', 'Defesa em inglês'], ['pratica:integracao-entrega', 'ingles:integracao-apresentacao'], ['comunicacao-arquitetura'], 'git')
+    }
   },
   {
     slug: 'operacao', title: 'Segurança, resiliência e operação',
@@ -48,7 +73,14 @@ const definitions = [
     java: [objective('falhas', 'Degradação graciosa e teste de falha de dependência: fallback, timeout e o que "degradar em vez de cair" significa. Explicar como testar a indisponibilidade de uma dependência do DevCore. critério observável: a descrição do comportamento degradado em vez de queda')],
     db: [objective('carga', 'Performance de consulta sob carga: plano de execução, índices, problema N+1 e como medir latência/throughput. Analisar o gargalo provável de uma consulta do DevCore. critério observável: a métrica-alvo (latência ou throughput) e o efeito esperado da correção')],
     delivery: 'SLOs, threat model, desenho de tracing e runbook.',
-    proof: 'Relatório que argumenta hipótese, falha esperada, métricas a observar e caminho de recuperação.'
+    proof: 'Relatório que argumenta hipótese, falha esperada, métricas a observar e caminho de recuperação.',
+    cadencia: {
+      segunda: dia(['SLI, SLO e error budget'], ['arquitetura:slo'], ['observabilidade-operacao'], 'db'),
+      terca: dia(['Padrões de estabilidade'], ['arquitetura:resiliencia'], ['resiliencia-estabilidade'], 'sec'),
+      quarta: dia(['Degradação graciosa', 'Carga e escala'], ['java:falhas', 'db:carga'], ['escala-performance'], 'sec'),
+      quinta: dia(['Threat model', 'Tracing distribuído'], ['sec:threat-model', 'devops:tracing'], ['seguranca-arquitetural', 'observabilidade-operacao', 'conteineres-orquestracao', 'cicd-iac', 'platform-engineering'], 'db'),
+      sexta: dia(['Runbook e game day', 'Defesa em inglês'], ['devops:runbook', 'ingles:operacao-apresentacao'], ['observabilidade-operacao', 'comunicacao-arquitetura'], 'git')
+    }
   },
   {
     slug: 'cloud', title: 'Solução cloud, capacidade e custo',
@@ -59,7 +91,14 @@ const definitions = [
     db: [objective('recuperacao', 'Recuperação de desastre: backup vs restore, RTO (tempo) e RPO (perda), réplica e failover. Definir a estratégia do DevCore. critério observável: o RTO/RPO alvo e o procedimento que os atingiria')],
     sec: [objective('segredos', 'Gestão de segredos e criptografia: cofre de segredos, criptografia em trânsito e em repouso e isolamento de rede. Especificar para o ambiente do DevCore. critério observável: a regra que garante nenhum segredo em texto puro e acesso negado fora do escopo')],
     delivery: 'Arquitetura cloud, IaC de referência, estimativa de custo e plano de recuperação.',
-    proof: 'Justificar como recriar o ambiente e restaurar dados dentro das metas de tempo e perda.'
+    proof: 'Justificar como recriar o ambiente e restaurar dados dentro das metas de tempo e perda.',
+    cadencia: {
+      segunda: dia(['Topologias de implantação', 'Estimativa de capacidade'], ['arquitetura:topologia', 'arquitetura:capacidade'], ['arquitetura-nuvem', 'escala-performance'], 'db'),
+      terca: dia(['Ambiente AWS', 'Infraestrutura como código'], ['aws:implantacao', 'devops:iac'], ['arquitetura-nuvem', 'cicd-iac'], 'sec'),
+      quarta: dia(['Recuperação de desastre'], ['db:recuperacao'], ['dados-intensivos'], 'sec'),
+      quinta: dia(['Segredos e criptografia'], ['sec:segredos'], ['seguranca-arquitetural'], 'db'),
+      sexta: dia(['FinOps', 'Defesa em inglês'], ['aws:custo', 'ingles:cloud-apresentacao'], ['arquitetura-nuvem', 'comunicacao-arquitetura'], 'git')
+    }
   },
   {
     slug: 'evolucao', title: 'Evolução, governança e comunicação',
@@ -68,7 +107,14 @@ const definitions = [
     java: [objective('fitness', 'Fitness functions no CI: como automatizar uma verificação que protege uma decisão arquitetural (ArchUnit / testes de arquitetura). Explicar uma para o DevCore. critério observável: a decisão protegida e a mudança que o CI reprovaria')],
     devops: [objective('rollout', 'Estratégias de rollout: blue-green, canário e rollback de uma mudança compatível de contrato. Planejar para o DevCore. critério observável: o passo a passo de promover e reverter sem quebrar o consumidor')],
     delivery: 'RFC, plano de migração, portfólio de evidências e defesa do DevCore.',
-    proof: 'Explicar quando manter o monólito e qual evidência justificaria extrair um serviço.'
+    proof: 'Explicar quando manter o monólito e qual evidência justificaria extrair um serviço.',
+    cadencia: {
+      segunda: dia(['RFC de evolução'], ['arquitetura:rfc'], ['evolucao-migracao'], 'java'),
+      terca: dia(['Strangler fig', 'Governança e níveis de arquitetura'], ['arquitetura:migracao', 'arquitetura:governanca'], ['evolucao-migracao', 'topologias-governanca', 'niveis-ea-togaf'], 'devops'),
+      quarta: dia(['Decomposição e dados na migração'], ['arquitetura:migracao'], ['decomposicao-servicos'], 'devops'),
+      quinta: dia(['Fitness functions no CI', 'Rollout e rollback'], ['java:fitness', 'devops:rollout'], ['modularidade-acoplamento', 'cicd-iac'], 'git'),
+      sexta: dia(['Defesa técnica e executiva', 'Defesa em inglês'], ['arquitetura:defesa', 'ingles:evolucao-apresentacao'], ['comunicacao-arquitetura'], 'git')
+    }
   }
 ];
 
@@ -78,7 +124,7 @@ export const architecturePhases = definitions.map((d, i) => {
   objectives.ingles = [objective(`${d.slug}-apresentacao`, 'Apresentar a decisão desta etapa em inglês por cinco minutos e revisar clareza, termos e argumentos. critério observável: gravar a fala e revisar com um checklist de comunicação técnica')];
   objectives.git = [objective(`${d.slug}-evidencias`, 'Versionar código, documentos e evidências desta etapa em commits reproduzíveis. critério observável: um histórico que reconstrói a decisão e a evidência da etapa')];
   objectives.pratica = [objective(`${d.slug}-entrega`, `${d.delivery} critério observável: ${d.proof}`)];
-  const p = { id: i + 1, slug: d.slug, l: `A${i + 1}`, t: d.title, w: `Sem ${i * 4 + 1}–${i * 4 + 4} · referência a 20h/sem`, h: 80, cand: false, cn: '', modules: d.modules, objectives,
+  const p = { id: i + 1, slug: d.slug, l: `A${i + 1}`, t: d.title, w: `Sem ${i * 4 + 1}–${i * 4 + 4} · referência a 20h/sem`, h: 80, cand: false, cn: '', modules: d.modules, objectives, cadencia: d.cadencia,
     lab: { titulo: d.title, entrega: d.delivery, dependeDe: i ? `arquitetura-a${i}` : null }, proof: d.proof };
   for (const key of ['java', 'dsa', 'db', 'git', 'arquitetura', 'devops', 'sec', 'pratica', 'frontend', 'py', 'ia', 'math', 'fin', 'ingles']) p[key] = (objectives[key] || []).map(o => o.text);
   p.aws = { cert: objectives.aws.length ? 'AWS aplicada · certificação opcional' : 'Sem AWS nesta etapa', exam: '', topics: objectives.aws.map(o => o.text) };

@@ -15,15 +15,198 @@
   box-sizing: border-box
 }
 
+/*
+ * Caixa de seleção: componente único do projeto. Aqui fica toda a aparência; as
+ * regras de cada tela só ajustam largura e densidade. O fundo precisa ser opaco:
+ * translúcido, a lista nativa compõe sobre branco e o texto claro some.
+ */
+select {
+  appearance: none;
+  max-width: 100%;
+  min-height: 2.5rem;
+  padding: .45rem 2.1rem .45rem .7rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  background-color: var(--surface-2);
+  background-image:
+    linear-gradient(45deg, transparent 50%, currentColor 50%),
+    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right .98rem center, right .68rem center;
+  background-size: .3rem .3rem;
+  background-repeat: no-repeat;
+  font: 500 .84rem/1.35 var(--font-body);
+  letter-spacing: normal;
+  text-transform: none;
+  cursor: pointer;
+  transition: var(--transition-interactive);
+}
+
+select:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border-strong));
+  background-color: var(--surface-3);
+}
+
+select:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+select option {
+  color: var(--text-1);
+  background-color: var(--surface-2);
+}
+
+select option:disabled {
+  color: var(--text-3);
+}
+
+/* Onde o navegador permite, a lista aberta também segue o tema. */
+@supports (appearance: base-select) {
+  select,
+  select::picker(select) {
+    appearance: base-select;
+  }
+
+  select {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    padding-right: .75rem;
+    background-image: none;
+  }
+
+  select:open {
+    border-color: var(--accent);
+    background-color: var(--surface-3);
+  }
+
+  select::picker-icon {
+    content: "";
+    flex: none;
+    width: .42rem;
+    height: .42rem;
+    border: solid currentColor;
+    border-width: 0 1.5px 1.5px 0;
+    opacity: .7;
+    transform: translateY(-20%) rotate(45deg);
+    transition: transform var(--duration-fast) var(--ease-standard);
+  }
+
+  select:open::picker-icon {
+    transform: translateY(20%) rotate(225deg);
+  }
+
+  select::picker(select) {
+    /* Abre para baixo sempre que couber; só inverte quando não há espaço. */
+    position-try-order: normal;
+    margin-block: .35rem;
+    padding: .3rem;
+    max-block-size: min(28rem, 70dvh);
+    max-inline-size: min(34rem, calc(100vw - 1.5rem));
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    box-shadow: var(--shadow);
+    scrollbar-color: var(--border-strong) transparent;
+    scrollbar-width: thin;
+    opacity: 0;
+    transform: translateY(-.25rem);
+    transition:
+      opacity var(--duration-fast) var(--ease-standard),
+      transform var(--duration-fast) var(--ease-standard),
+      overlay var(--duration-fast) allow-discrete,
+      display var(--duration-fast) allow-discrete;
+  }
+
+  select:open::picker(select) {
+    opacity: 1;
+    transform: none;
+  }
+
+  @starting-style {
+    select:open::picker(select) {
+      opacity: 0;
+      transform: translateY(-.25rem);
+    }
+  }
+
+  select option {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    min-block-size: 2.25rem;
+    padding: .4rem .6rem;
+    border-radius: var(--radius-xs);
+    color: var(--text-2);
+    background-color: transparent;
+    font: 500 .82rem/1.35 var(--font-body);
+    letter-spacing: normal;
+    text-transform: none;
+    white-space: normal;
+    cursor: pointer;
+    transition: var(--transition-interactive);
+  }
+
+  select option::checkmark {
+    order: 1;
+    flex: none;
+    margin-inline-start: auto;
+    color: var(--accent);
+    content: "✓";
+    font-weight: 700;
+  }
+
+  select option:hover,
+  select option:focus-visible {
+    color: var(--text-1);
+    background-color: var(--surface-hover);
+  }
+
+  select option:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+
+  select option:checked {
+    color: var(--text-1);
+    background-color: color-mix(in srgb, var(--accent) 12%, transparent);
+    font-weight: 600;
+  }
+
+  select option:disabled {
+    color: var(--text-3);
+    background-color: transparent;
+    cursor: not-allowed;
+  }
+
+  /* No celular a lista acompanha a caixa, sem encostar na borda da tela. */
+  @media (max-width: 480px) {
+    select::picker(select) {
+      inline-size: anchor-size(inline);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    select::picker(select),
+    select::picker-icon {
+      transition: none;
+    }
+  }
+}
+
 .sequence-header-control {
   display: flex; align-items: center; flex-wrap: wrap; gap: .75rem;
   padding: .75rem 1.5rem; border-top: 1px solid var(--border);
   font-size: .8rem; color: var(--text2); background: var(--bg);
 }
-.sequence-header-control select, .sequence-settings select, .sequence-settings input {
-  background: var(--surface-soft); color: var(--text1); border: 1px solid var(--border);
-  border-radius: 6px; padding: .55rem; max-width: 100%;
+.sequence-settings input {
+  background: var(--surface-2); color: var(--text1); border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm); min-height: 2.5rem; padding: .45rem .7rem; max-width: 100%;
 }
+.sequence-header-control select { min-width: min(20rem, 100%); }
+.sequence-settings select { min-width: min(27rem, 100%); }
 .sequence-panel { margin-bottom: 1.5rem; padding: 1.25rem; border: 1px solid var(--border); border-radius: 10px; background: var(--surface-soft); }
 .sequence-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; margin-bottom: 1rem; }
 .sequence-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; }
@@ -360,8 +543,12 @@ body {
   padding: 0;
 }
 
-.roadmap-list.roadmap-objectives > .topic-item {
+/* Padrão em especificidade baixa: as classes .is-state-* precisam poder trocá-lo. */
+.topic-item {
   --topic-state-color: #8592a6;
+}
+
+.roadmap-list.roadmap-objectives > .topic-item {
   position: relative;
   margin: 0 0 .7rem;
   padding: .72rem;
@@ -443,23 +630,11 @@ body {
 
 .topic-state-field select {
   min-width: 9.5rem;
-  min-height: 2.5rem;
-  max-width: 100%;
-  padding: .3rem 1.6rem .3rem .48rem;
   color: var(--topic-state-color);
-  background-color: var(--surface-2);
-  border: 1px solid color-mix(in srgb, var(--topic-state-color) 45%, transparent);
-  border-radius: 6px;
+  border-color: color-mix(in srgb, var(--topic-state-color) 45%, transparent);
   font-family: 'IBM Plex Mono', monospace;
-  font-size: .66rem;
+  font-size: .7rem;
   font-weight: 700;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-.topic-state-field select option {
-  color: var(--text1, #e2e8f0);
-  background: var(--surface-2);
 }
 
 .topic-proof-row {
@@ -720,7 +895,6 @@ body {
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
-select:focus-visible,
 textarea:focus-visible,
 [tabindex]:focus-visible,
 .nav-link:focus-visible,

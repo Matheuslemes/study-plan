@@ -6,12 +6,12 @@ import { sequence, refreshContext, isArchitecture, heroTagsData, tracks, PC, PBG
    Dados vêm de /data, comportamento de /features.
 ═══════════════════════════════════════════════ */
 
-import { renderSequencePanel, renderSequenceStage, adaptSequenceCopy } from '../features/sequence-picker.js';
+import { renderSequencePanel, renderSequenceStage, adaptSequenceCopy, adaptProfileCopy } from '../features/sequence-picker.js';
 import { CK } from '../../../data/tracks.js';
 
-import { renderDailyDayTabs, setActiveDay, renderMonthlyCycle } from '../features/routine.js';
+import { renderDailyDayTabs, setActiveDay, renderMonthlyCycle, renderSeletorDePerfil } from '../features/routine.js';
 import { renderQuickTrackCards, setupNavbarTrackSearch, setupPdfSearch, renderBibliografia } from '../features/tracks.js';
-import { renderProjetos } from '../features/projetos.js';
+import { renderProjetos } from '../features/projetos.js?v=portfolio-11';
 import { renderPhaseDetails, filterPhase, filterTrack } from '../features/phases.js';
 import { renderSync } from '../features/sync.js';
 import { renderSeletorDeFase, getFaseAtual } from '../features/active-phase.js';
@@ -80,9 +80,13 @@ async function init() {
     depth: 'system'
   });
   adaptSequenceCopy();
+  adaptProfileCopy();
   // Hero tags
-  document.getElementById('heroTags').innerHTML =
-    heroTagsData.map(t => `<span class="htag ${t.cls}">${t.label}</span>`).join('');
+  const renderHeroTags = () => {
+    document.getElementById('heroTags').innerHTML =
+      heroTagsData.map(t => `<span class="htag ${t.cls}">${t.label}</span>`).join('');
+  };
+  renderHeroTags();
 
   // Track badges
   document.getElementById('trackBadges').innerHTML =
@@ -144,6 +148,14 @@ async function init() {
   document.getElementById('mainTabs')?.addEventListener('shown.bs.tab', (e) => {
     document.querySelectorAll('#mainTabs [role="tab"]').forEach((t) => t.setAttribute('aria-selected', String(t === e.target)));
   });
+  // Retorno dos guias de projeto e troca de perfil na Arquitetura abrem a aba de origem.
+  if (location.hash === '#tabProjetos' || location.hash === '#tabDaily') {
+    const originTab = document.getElementById(`btn-${location.hash.slice(1)}`);
+    if (originTab && window.bootstrap?.Tab) window.bootstrap.Tab.getOrCreateInstance(originTab).show();
+  }
+
+  // Perfil de horário: troca a grade diária sem mudar temas nem progresso
+  renderSeletorDePerfil('perfilRotinaPicker');
 
   // Fase ativa: comanda o conteúdo da rotina (STUDY-020) e o painel de progresso
   renderSeletorDeFase('faseAtualPicker', (faseId) => {
@@ -233,5 +245,5 @@ async function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 window.addEventListener('storage', (event) => {
-  if (event.key && ['studyplan:sequenciaAtual', 'studyplan:faseAtual', 'studyplan:faseAtual:arquitetura', 'studyplan:cargaSemanal:arquitetura'].includes(event.key)) location.reload();
+  if (event.key && ['studyplan:sequenciaAtual', 'studyplan:faseAtual', 'studyplan:faseAtual:arquitetura', 'studyplan:cargaSemanal:arquitetura', 'studyplan:perfilRotina'].includes(event.key)) location.reload();
 });

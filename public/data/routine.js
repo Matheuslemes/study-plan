@@ -2,12 +2,18 @@
    ROUTINE — rotina diária e semanal (STUDY-019/021/023)
 
    Blocos são SLOTS: o conteúdo vem da fase ativa.
-   Sono 7h30 fixo · zero estudo 01:00–05:00 ·
-   máx. 2 domínios técnicos/dia · domingo de descanso.
+   Máx. 2 domínios técnicos/dia · domingo de descanso.
+
+   Perfil trabalho-9-18 (padrão): grade 05:30–01:00 em torno do expediente,
+   definida pelo usuário. Ela desvia da regra de sono e declara isso em PERFIS_ROTINA.
+   Perfil estudo-integral: sono 7h30 fixo · zero estudo 01:00–05:00.
 
    Fonte única de verdade — não duplicar estes dados
    em nenhuma página. Importe deste módulo.
 ═══════════════════════════════════════════════ */
+
+import { CONTEUDO_SEMANAL, DSA_CRONOMETRADO_DESDE, REGRAS_DE_FLEX, SLOTS_SEMANA, degrauDaSexta } from "./conteudo-semanal.js";
+import { NOME_TRILHA } from "./tracks.js";
 
 export const weekDays = [
   { key: "segunda", label: "Segunda", short: "SEG" },
@@ -133,6 +139,8 @@ export const weeklyFocusByDay = {
    buildDailyPlan  → segunda a sexta (~6h30 de foco)
    buildSaturday   → prática: exercícios e labs da fase (~5h)
    buildSunday     → descanso (máx. 1h)
+   buildWorkDayPlan → segunda a sexta do perfil trabalho-9-18 (3h50 de foco
+                      garantido + janelas do expediente)
 ───────────────────────────────────────────────── */
 export function buildDailyPlan(cfg) {
   return [
@@ -186,8 +194,99 @@ export function buildSunday() {
   ];
 }
 
-export const dailyPlansByDay = {
-  segunda: buildDailyPlan({
+/* ─── Perfil trabalho-9-18 ──────────────────────
+   Mesmos temas da semana, em torno do expediente das 09h às 18h.
+   Manhã: núcleo garantido. Expediente: bônus condicionado à demanda, nunca
+   dívida. Noite: consolidação de escopo limitado. A janela das 18h às 23h não é
+   subdividida porque a duração do treino e do deslocamento varia.
+───────────────────────────────────────────────── */
+const pausaDoExpediente = (time) => ({ time, dur: "15min", block: "Pausa", k: "break", type: "break", priority: "Se houver folga", kind: "pausa", tracks: ["Pausa", "Água"], d: "Pausa conforme a demanda do trabalho. Se houver folga, sem tela." });
+
+const janelaDeTrabalho = (time, dur, [titulo, semDemanda], observacao = "") => ({ time, dur, block: `Trabalho · janela livre: ${titulo}`, k: "work", type: "work", priority: "Condicional", kind: "expediente", condicional: true, tracks: ["Trabalho", "Janela livre"], d: `Com demanda: trabalho. Sem demanda: ${semDemanda}${observacao}` });
+
+const janelaDeConteudo = (cfg, time, dur, kind) => ({ ...cfg, time, dur, kind, priority: "Condicional", condicional: true, seloRotulo: "se houver janela livre", d: `Com demanda: trabalho. Sem demanda: estudar este bloco. ${cfg.d}` });
+
+/* Textos dos horários fixos. Cada sequência pode trocá-los por `cfg.textos`. */
+const TEXTOS_TRABALHO = {
+  estudo: "Combinar leitura e pequenos exemplos e terminar com algo que consiga explicar ou aplicar.",
+  pratica: "Resolver ou implementar antes de consultar a solução.",
+  fechamentoManha: "Testar o que fez, salvar o progresso e anotar o próximo passo. A meta da manhã é uma entrega pequena e verificável, como \"implementar validação de pedido e testar os casos de erro\", nunca \"estudar Java\".",
+  janelas: [
+    ["continuar a prática", "continuar a prática iniciada pela manhã."],
+    ["exercícios e testes", "exercícios, testes e correção de dificuldades."],
+    ["aplicação prática", "aplicação prática no exercício ou laboratório da semana."],
+    ["testes e documentação", "testes, documentação e conclusão do que estiver aberto."]
+  ],
+  fechamentoTrabalho: "Salvar o progresso e deixar a nota de retomada: o que estou fazendo, o que falta e qual é a próxima ação.",
+  recuperacao: "Escrever ou explicar o que aprendeu, antes de abrir as anotações.",
+  registro: "Salvar código, fazer commit quando couber e registrar dificuldades.",
+  preparacao: "Escolher a tarefa das 06:00, separar o material e encerrar."
+};
+
+export function buildWorkDayPlan(cfg, sono = { desde: "01:00", dur: "4h30" }) {
+  const t = { ...TEXTOS_TRABALHO, ...cfg.textos };
+  const limiteTransversal = cfg.extra.type === "dsa" ? "até 40min" : "até 30min";
+  const consolidacao = cfg.consolidacao || { ...cfg.extra, block: "Consolidação prática", priority: "Núcleo", kind: "consolidação", seloRotulo: `se não houve janela no expediente · ${limiteTransversal}`, d: `${cfg.focoNoite} Refazer um exercício, corrigir um erro ou concluir uma tarefa pequena. Nada de laboratório grande: se não terminar, registrar o próximo passo.` };
+  return [
+    { time: `${sono.desde} – 05:30`, dur: sono.dur, block: "Sono — noite curta deste perfil", k: "sleep", type: "sleep", priority: "Abaixo de 7h30", kind: "sono", tracks: ["Sono", "Recuperação"], d: `${sono.dur} de sono, abaixo das 7h30 do perfil integral. O horário foi escolhido para caber no expediente; não é uma recomendação do plano. Se a retenção cair, encerre a noite mais cedo e preserve a manhã.` },
+    { time: "05:30 – 06:00", dur: "30min", block: "Preparação", k: "break", type: "break", priority: "FIXO", kind: "preparação", tracks: ["Higiene", "Café", "Mesa"], d: "Higiene, café e organização da mesa. O material já fica escolhido na noite anterior." },
+    { ...cfg.deep1, time: "06:00 – 07:30", dur: "1h30", kind: "foco profundo", intensity: "alta", d: `${cfg.deep1.d} ${t.estudo}` },
+    { time: "07:30 – 07:45", dur: "15min", block: "Pausa", k: "break", type: "break", priority: "FIXO", kind: "pausa", tracks: ["Pausa", "Água"], d: "Levantar, beber água e descansar da tela." },
+    { ...cfg.deep2, time: "07:45 – 08:45", dur: "1h", kind: "foco profundo", intensity: "alta", d: `${cfg.deep2.d} ${t.pratica}`.trim() },
+    { time: "08:45 – 09:00", dur: "15min", block: "Fechamento da manhã e transição", k: "closing", type: "closing", priority: "FIXO", kind: "fechamento", tracks: ["Teste", "Progresso", "Próximo passo"], d: t.fechamentoManha },
+    janelaDeTrabalho("09:00 – 10:30", "1h30", t.janelas[0], " Estas horas não entram na meta obrigatória: se o trabalho ocupar o expediente, não fica dívida para a madrugada."),
+    pausaDoExpediente("10:30 – 10:45"),
+    janelaDeTrabalho("10:45 – 12:00", "1h15", t.janelas[1]),
+    { time: "12:00 – 13:00", dur: "1h", block: "Almoço e descanso", k: "break", type: "break", priority: "FIXO", kind: "pausa real", tracks: ["Almoço", "Descanso"], d: "Preservado com ou sem demanda de trabalho." },
+    janelaDeConteudo(cfg.complement, "13:00 – 14:00", "1h", "complementar"),
+    pausaDoExpediente("14:00 – 14:15"),
+    janelaDeConteudo(cfg.extra, "14:15 – 15:00", "45min", "transversal"),
+    janelaDeTrabalho("15:00 – 16:30", "1h30", t.janelas[2]),
+    pausaDoExpediente("16:30 – 16:45"),
+    janelaDeTrabalho("16:45 – 17:45", "1h", t.janelas[3]),
+    { time: "17:45 – 18:00", dur: "15min", block: "Fechamento do trabalho", k: "closing", type: "closing", priority: "FIXO", kind: "fechamento", tracks: ["Progresso", "Retomada"], d: t.fechamentoTrabalho },
+    { time: "18:00 – 23:00", dur: "5h", block: "Academia e rotina pessoal", k: "treino", type: "strength", priority: "FIXO", kind: "vida", tracks: ["Deslocamento", "Treino", "Banho", "Jantar"], d: "Deslocamento, academia, banho e jantar, com tudo concluído antes das 23:00. Se terminar antes, descanse ou antecipe o fechamento da noite." },
+    { time: "23:00 – 23:15", dur: "15min", block: "Recuperação de memória", k: "review", type: "review", priority: "Recall", kind: "revisão ativa", tracks: ["Active Recall"], d: t.recuperacao },
+    { ...consolidacao, time: "23:15 – 00:00", dur: "45min" },
+    { time: "00:00 – 00:10", dur: "10min", block: "Pausa", k: "break", type: "break", priority: "FIXO", kind: "pausa", tracks: ["Pausa"], d: "Descansar da tela." },
+    { ...cfg.night, time: "00:10 – 00:30", dur: "20min", kind: "revisão ativa", intensity: "média" },
+    { time: "00:30 – 00:45", dur: "15min", block: "Registro", k: "closing", type: "closing", priority: "FIXO", kind: "fechamento", tracks: ["Git", "Notas"], d: t.registro },
+    { time: "00:45 – 01:00", dur: "15min", block: "Preparação do próximo dia", k: "closing", type: "closing", priority: "FIXO", kind: "fechamento", tracks: ["Planejamento"], d: t.preparacao }
+  ];
+}
+
+/* Sexta termina à 01:00 neste perfil; o resto do sábado é a grade padrão. */
+function buildSaturdayAfterWork() {
+  const [sono, ...resto] = buildSaturday();
+  return [{ ...sono, time: "01:00 – 07:00", dur: "6h", block: "Sono — depois da sexta até 01:00", d: "Seis horas de sono: neste perfil, a sexta termina à 01:00. O restante do sábado mantém a grade padrão." }, ...resto];
+}
+
+const FOCO_DA_NOITE = {
+  segunda: "Revisar a implementação e as decisões tomadas.",
+  terca: "Refazer testes ou exercícios que apresentaram dificuldade.",
+  quarta: "Revisar consultas, transações e erros encontrados.",
+  quinta: "Revisar o fluxo completo e os pontos de segurança.",
+  sexta: "Fazer o balanço da semana e preparar a prática de sábado."
+};
+
+/* Domingo encerra às 23:00, então a noite que antecede a segunda é mais longa. */
+const SONO_APOS_DOMINGO = { desde: "23:00", dur: "6h30" };
+
+/* Semana completa do perfil: cada sequência fornece só o conteúdo dos dias úteis. */
+export function buildWorkWeekPlan(configDias) {
+  return {
+    ...Object.fromEntries(Object.entries(configDias).map(([dia, cfg]) => [
+      dia,
+      buildWorkDayPlan(cfg, dia === "segunda" ? SONO_APOS_DOMINGO : undefined)
+    ])),
+    sabado: buildSaturdayAfterWork(),
+    domingo: buildSunday()
+  };
+}
+
+/* Temas da semana: o mesmo conteúdo alimenta as grades dos dois perfis. */
+const CONFIG_DIAS = {
+  segunda: {
     deep1: {
       block: "Domínio principal da fase — construção",
       k: "java",
@@ -228,8 +327,8 @@ export const dailyPlansByDay = {
       tracks: ["Active Recall", "D1", "D7", "D30"],
       d: "Responder sem consultar as perguntas registradas ontem (D1) e as que vencem hoje (D7/D30). O que não sair volta para a fila."
     }
-  }),
-  terca: buildDailyPlan({
+  },
+  terca: {
     deep1: {
       block: "Testes do que foi construído na segunda",
       k: "java",
@@ -270,8 +369,8 @@ export const dailyPlansByDay = {
       tracks: ["Active Recall", "D1", "D7", "D30"],
       d: "Recuperação ativa do conteúdo de ontem e das revisões que vencem hoje."
     }
-  }),
-  quarta: buildDailyPlan({
+  },
+  quarta: {
     deep1: {
       block: "Banco de dados — modelagem e consulta",
       k: "db",
@@ -312,8 +411,8 @@ export const dailyPlansByDay = {
       tracks: ["Active Recall", "D1", "D7", "D30"],
       d: "Recuperação ativa do conteúdo de ontem e das revisões que vencem hoje."
     }
-  }),
-  quinta: buildDailyPlan({
+  },
+  quinta: {
     deep1: {
       block: "Domínio principal da fase — integração",
       k: "java",
@@ -354,8 +453,8 @@ export const dailyPlansByDay = {
       tracks: ["Active Recall", "D1", "D7", "D30"],
       d: "Recuperação ativa do conteúdo de ontem e das revisões que vencem hoje."
     }
-  }),
-  sexta: buildDailyPlan({
+  },
+  sexta: {
     deep1: {
       block: "Operação: executar, publicar e observar",
       k: "devops",
@@ -396,7 +495,159 @@ export const dailyPlansByDay = {
       tracks: ["Active Recall", "D1", "D7", "D30", "Semana"],
       d: "Revisão ativa e balanço da semana: o que foi dominado, o que ficou frágil e o que entra na fila de revisão."
     }
-  }),
+  }
+};
+
+const planejarDiasUteis = (construir) => Object.fromEntries(
+  Object.entries(CONFIG_DIAS).map(([dia, cfg]) => [dia, construir(cfg, dia)])
+);
+
+export const dailyPlansByDay = {
+  ...planejarDiasUteis((cfg) => buildDailyPlan(cfg)),
   sabado: buildSaturday(),
   domingo: buildSunday()
 };
+
+/*
+ * Perfil de rotina: quando o estudo cabe no dia. É separado de MODOS_ROTINA, que
+ * define a carga da semana; os dois eixos são independentes.
+ * PERFIL_PADRAO é o horário com que o site abre; PERFIL_INTEGRAL é a grade base,
+ * a única sem horário fixo de expediente.
+ */
+export const PERFIL_INTEGRAL = "estudo-integral";
+export const PERFIL_PADRAO = "trabalho-9-18";
+
+export const PERFIS_ROTINA = {
+  "estudo-integral": {
+    nome: "Estudo integral",
+    resumo: "38h05 de foco por semana · sono 7h30",
+    aviso: null,
+    horasSemanais: null,
+    heroTags: {}
+  },
+  "trabalho-9-18": {
+    nome: "Trabalho 09–18",
+    resumo: "25h10 de foco garantido por semana + janelas livres do expediente",
+    aviso: "Este perfil reduz o sono de 54h para 39h por semana, com 4h30 nas noites de terça a sexta. O horário foi escolhido para caber no expediente; não é uma recomendação do plano. Se a retenção cair, encerre a noite mais cedo e preserve a manhã.",
+    // 25h10 arredondadas: base das estimativas em semanas das duas sequências.
+    horasSemanais: 25,
+    cargaIdeal: "25h",
+    // As ~6.000h do Backend: 240 semanas a 25h garantidas, 171 a 35h com todas as janelas.
+    duracao: "39 a 55 meses",
+    semanas: "171 a 240 semanas",
+    heroTags: {
+      "36 meses": "39 a 55 meses",
+      "156 semanas": "171 a 240 semanas",
+      "sono 7h30 fixo": "sono 4h30 de ter a sex",
+      "36–40h/semana": "25h10/semana + janelas"
+    },
+    // Trechos de index.html marcados com data-carga, que descrevem a grade integral.
+    textos: {
+      rotinaHero: "Rotina de <strong>25h10/semana garantidas</strong>, mais as janelas livres do expediente, com 4h30 de sono de terça a sexta e domingo de descanso real.",
+      faseIntro: "Cada fase leva de 14 a 20 semanas nesta carga, incluindo o checkpoint.",
+      notaHoras: 'A carga do perfil Trabalho 09–18 é <span class="mono">25h10/semana de foco garantido</span>: <span class="mono">3h50 por dia útil</span>, <span class="mono">5h no sábado</span> e <span class="mono">1h no domingo</span>. As janelas livres do expediente podem levar a semana a cerca de <span class="mono">35h</span>, sem virar dívida. O conteúdo continua em <span class="mono">~500h por fase</span> e <span class="mono">~6.000h totais</span>, o que dá <span class="mono">39 a 55 meses</span> nesta carga: 55 no ritmo garantido e 39 com todas as janelas aproveitadas. O sono fica em <span class="mono">39h por semana</span>, com 4h30 de terça a sexta. Considere margem de <span class="mono">±10%</span>: bugs, revisões e imprevistos fazem parte. Checkpoint mensal na semana 4 e critério mínimo de 80% para avançar de fase.',
+      metricaSemanas: "Cada fase de ~500h leva de 14 a 20 semanas, incluindo checkpoint, validação, correções, revisão e ajuste de rota.",
+      metricaCarga: "25h10/sem",
+      metricaCargaRotulo: "foco garantido em torno do expediente",
+      metricaCargaTexto: "3h50 por dia útil, 5h no sábado e 1h no domingo. As janelas livres do expediente são bônus e podem levar a semana a cerca de 35h; se o trabalho ocupar o expediente, não fica dívida."
+    },
+    // Regras do plano que citam o sono da grade integral.
+    textosDoPlano: {
+      regraSono: "STUDY-016 — O perfil Trabalho 09–18 reserva 4h30 de sono de terça a sexta e 39h na semana, abaixo das 7h30 diárias que o plano recomenda. É durante o sono que o estudo do dia vira memória de longo prazo: se a retenção cair, encerre a noite mais cedo e preserve a manhã. Nada de estudo depois da 01:00.",
+      alicerceSono: "Sem dormir o bloco previsto e sem o domingo livre, nenhuma das dependências abaixo se sustenta até o fim do plano. Este é o alicerce de todo o resto.",
+      checkpointSono: "Dormiu o bloco previsto? Não estudou depois da 01:00? Registrou as 3 perguntas D0 no bloco de fechamento? Se a resposta for não por três dias seguidos, a rotina precisa de ajuste, não de esforço."
+    }
+  }
+};
+
+export const dailyPlansByPerfil = {
+  "estudo-integral": dailyPlansByDay,
+  "trabalho-9-18": buildWorkWeekPlan(planejarDiasUteis((cfg, dia) => ({ ...cfg, focoNoite: FOCO_DA_NOITE[dia] })))
+};
+
+/* ─── Semana da fase ────────────────────────────
+   Os slots de CONFIG_DIAS continuam fixos; conteudo-semanal.js diz o que cada um
+   estuda em cada fase. Os construtores são os mesmos, então horários, sono e
+   carga ficam iguais em todas as fases.
+───────────────────────────────────────────────── */
+const TIPO_DA_TRILHA = {
+  java: "deep-work", frontend: "deep-work", py: "deep-work", ia: "deep-work",
+  db: "database", sec: "security", devops: "devops", aws: "devops",
+  arquitetura: "architecture", dsa: "dsa", ingles: "english", pratica: "project"
+};
+
+const textoDoTransversal = (k, faseId) => {
+  if (k === "ingles") return "Produzir em inglês sobre o trabalho da semana: o item abaixo define o artefato, escrito ou falado.";
+  return faseId >= DSA_CRONOMETRADO_DESDE
+    ? "Resolver cronometrado, em formato de entrevista, explicando o raciocínio em voz alta."
+    : "Resolver, explicar em voz alta e reimplementar sem consultar. Manter o ritmo importa mais que o volume.";
+};
+
+function configDaFase(cfg, dia, faseId) {
+  const conteudo = CONTEUDO_SEMANAL[faseId][dia];
+  const { metodo } = SLOTS_SEMANA[dia];
+  const intencao = conteudo.intencao || SLOTS_SEMANA[dia].intencao;
+  const blocoDoSlot = (slot) => {
+    const [k, topicos, tema, metodoProprio] = conteudo[slot];
+    return {
+      ...cfg[slot],
+      k,
+      type: k === cfg[slot].k ? cfg[slot].type : TIPO_DA_TRILHA[k],
+      block: tema,
+      priority: conteudo.pico ? "Pico da fase" : intencao,
+      tracks: [],
+      topicos,
+      topicIndex: topicos[0],
+      d: metodoProprio || metodo[slot]
+    };
+  };
+  return {
+    ...cfg,
+    deep1: blocoDoSlot("deep1"),
+    deep2: blocoDoSlot("deep2"),
+    complement: blocoDoSlot("complement"),
+    extra: { ...cfg.extra, topicos: conteudo.extra, topicIndex: conteudo.extra[0], d: textoDoTransversal(cfg.extra.k, faseId) },
+    focoNoite: conteudo.noite || FOCO_DA_NOITE[dia]
+  };
+}
+
+/* Grade da semana do perfil com o conteúdo da fase. */
+export function dailyPlansDaFase(perfil, faseId) {
+  const daFase = (cfg, dia) => configDaFase(cfg, dia, faseId);
+  if (perfil !== PERFIL_INTEGRAL) return buildWorkWeekPlan(planejarDiasUteis(daFase));
+  return {
+    ...planejarDiasUteis((cfg, dia) => buildDailyPlan(daFase(cfg, dia))),
+    sabado: dailyPlansByDay.sabado,
+    domingo: dailyPlansByDay.domingo
+  };
+}
+
+/* Resumo de cada dia na fase. `nestaFase` é o que muda e de onde veio. */
+export function weeklyFocusDaFase(faseId) {
+  const focoDoDia = (id, dia) => CONTEUDO_SEMANAL[id]?.[dia]?.foco || null;
+  const diasDaFase = Object.entries(CONTEUDO_SEMANAL[faseId]).map(([dia, conteudo]) => {
+    const slot = SLOTS_SEMANA[dia];
+    const intencao = conteudo.intencao || slot.intencao;
+    const trilhas = [...new Set([conteudo.deep1[0], conteudo.deep2[0], conteudo.complement[0], CONFIG_DIAS[dia].extra.k])];
+    return [dia, {
+      ...weeklyFocusByDay[dia],
+      focus: conteudo.foco,
+      priority: conteudo.pico ? `${intencao} · pico da fase` : intencao,
+      k: conteudo.deep1[0],
+      tracks: trilhas.map((k) => k === "pratica" ? "Prática" : NOME_TRILHA[k]),
+      practice: conteudo.practice || slot.practice,
+      review: conteudo.review || slot.review,
+      connection: conteudo.papel || slot.papel,
+      strategy: REGRAS_DE_FLEX[faseId] || slot.strategy,
+      nestaFase: {
+        intencao,
+        foco: conteudo.foco,
+        pico: Boolean(conteudo.pico),
+        degrau: dia === "sexta" ? degrauDaSexta(faseId) : null,
+        anterior: focoDoDia(faseId - 1, dia),
+        proxima: focoDoDia(faseId + 1, dia)
+      }
+    }];
+  });
+  return { ...weeklyFocusByDay, ...Object.fromEntries(diasDaFase) };
+}

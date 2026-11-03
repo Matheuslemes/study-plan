@@ -1,167 +1,105 @@
-/*
- * PROJETOS DE PORTFÓLIO — um projeto independente por trilha curricular na sua
- * fase de foco. São mini-produtos AUTOCONTIDOS (não evoluem entre si): cada um é
- * um repositório separado, com evidência própria (código + testes + doc).
- *
- * Fonte única — importe deste módulo. `track` usa o slug canônico da trilha
- * (a cor vem de var(--track-<track>) via tracks-palette.css).
+/* Catálogo de project-ideias/portfolio, revisado em 26/10/2026.
+ * Fontes: README.md de cada pasta e suas notas normativas.
+ * Entregáveis e competências descrevem o escopo planejado, não resultados obtidos.
  */
-
 export const projetos = [
-  // ── Fase 1 · Fundamentos, Java Core e SQL ──
   {
-    track: 'java', trackLabel: 'Java', fase: 1, faseLabel: 'Fundamentos, Java Core e SQL',
-    titulo: 'Gerenciador de biblioteca (CLI)',
-    resumo: 'Aplicação de console em Java puro, com persistência SQL, para gerenciar livros, sócios e empréstimos.',
-    descricao: 'Sem framework: exercita o núcleo da linguagem (tipos, OO, records, collections, streams, exceptions) e a base de SQL relacional. O domínio tem regras reais — não emprestar livro indisponível, não permitir sócio com pendência — que viram invariantes testáveis.',
-    entregaveis: ['Modelo de domínio com invariantes (ex.: empréstimo só se houver exemplar disponível)', 'Camada de persistência SQL (SELECT/INSERT/UPDATE) versionada', 'Ao menos 1 teste automatizado verde por regra de negócio', 'README com como rodar e 50 exercícios de Java resolvidos'],
-    evidencia: 'Repositório Git com código compilável, testes verdes e README.',
-    competencias: ['OO e records', 'collections e streams', 'SQL relacional', 'testes']
+    id: 'o08', pasta: 'acessibilidade digital contínua', categoria: 'Qualidade e governança', track: 'devops', trackLabel: 'Acessibilidade',
+    titulo: 'Acessibilidade digital contínua',
+    pagina: 'projetos/acessibilidade-digital-continua.html',
+    resumo: 'Controle contínuo de acessibilidade integrado aos pull requests.',
+    descricao: 'Executa jornadas sintéticas em um e-commerce próprio, compara achados com um baseline e publica um gate explicável com política versionada.',
+    entregaveis: ['Demo e-commerce e portal de acompanhamento', 'Executor com Playwright e axe-core', 'Baseline, regressões e política de gate', 'Evidências e status check no GitHub Actions'],
+    competencias: ['Java / Spring Boot', 'Next.js', 'Playwright / axe-core', 'PostgreSQL', 'CI'],
   },
   {
-    track: 'bancos', trackLabel: 'Bancos', fase: 1, faseLabel: 'Fundamentos, Java Core e SQL',
-    titulo: 'Modelagem de uma locadora de filmes',
-    resumo: 'Banco relacional normalizado (3FN) de uma locadora, com consultas analíticas.',
-    descricao: 'Modela clientes, filmes, cópias e locações com PK/FK, cardinalidade e constraints. As consultas exigem SQL de verdade: filmes mais alugados, clientes inadimplentes e faturamento por mês usando JOIN, GROUP BY, CTE e window functions.',
-    entregaveis: ['DER e schema em 3FN com constraints', 'Seed controlado de dados de teste', '5+ consultas analíticas (CTE/window) com resultado esperado documentado', 'Script versionado e reprodutível em PostgreSQL local'],
-    evidencia: 'Script SQL versionado + documento com o resultado esperado de cada consulta.',
-    competencias: ['modelagem e normalização', 'JOIN/GROUP BY/HAVING', 'CTE e window functions', 'PostgreSQL']
-  },
-
-  // ── Fase 2 · Java avançado, Spring Boot, REST e JPA ──
-  {
-    track: 'java', trackLabel: 'Java', fase: 2, faseLabel: 'Java avançado, Spring Boot, REST e JPA',
-    titulo: 'API de encurtador de URL',
-    resumo: 'Serviço REST com Spring Boot + JPA que encurta URLs, redireciona e conta acessos.',
-    descricao: 'Sobe um degrau para o backend profissional: API REST com Spring Boot, persistência via JPA/Hibernate em PostgreSQL, geração de código curto, redirecionamento HTTP e contagem de cliques. Inclui tratamento de erros, validação de entrada e testes de integração.',
-    entregaveis: ['Endpoints REST (criar link, redirecionar, estatísticas) com códigos HTTP corretos', 'Entidades JPA e repositórios com migração de schema', 'Validação de URL e tratamento de erros consistente', 'Testes de integração com Testcontainers (banco real)'],
-    evidencia: 'Repositório + coleção de requests (Postman/HTTP file) + testes de integração verdes.',
-    competencias: ['Spring Boot', 'JPA/Hibernate', 'REST', 'Testcontainers']
-  },
-
-  // ── Fase 3 · Testes, Docker e CI/CD ──
-  {
-    track: 'devops', trackLabel: 'DevOps', fase: 3, faseLabel: 'Testes, Docker e CI/CD',
-    titulo: 'Pipeline CI/CD de uma aplicação demo',
-    resumo: 'Fábrica de entrega completa: contêiner, testes automatizados e deploy contínuo com gate de qualidade.',
-    descricao: 'Pega uma app simples (pode ser a API da F2 ou uma app de exemplo) e monta a esteira: Dockerfile enxuto, pipeline de CI (lint, testes, build, scan de segurança), publicação da imagem em um registry e um status check obrigatório que bloqueia merge sem pipeline verde.',
-    entregaveis: ['Dockerfile multi-stage e imagem publicada em registry', 'Pipeline de CI com testes + scan de dependências', 'Branch protegido com status check obrigatório', 'Demonstração de um PR barrado por teste falho e liberado após correção'],
-    evidencia: 'Link do PR bloqueado pelo check + execução verde do pipeline.',
-    competencias: ['Docker', 'GitHub Actions/CI', 'quality gate', 'segurança de dependências']
-  },
-
-  // ── Fase 4 · Segurança aplicada e qualidade de código ──
-  {
-    track: 'sec', trackLabel: 'Segurança', fase: 4, faseLabel: 'Segurança aplicada e qualidade de código',
-    titulo: 'Auditar e endurecer uma aplicação vulnerável',
-    resumo: 'Encontrar, explorar e corrigir vulnerabilidades OWASP Top 10 em uma app deliberadamente insegura.',
-    descricao: 'Usa uma aplicação-alvo propositalmente vulnerável (ex.: OWASP Juice Shop ou DVWA), em laboratório autorizado. Identifica falhas do OWASP Top 10 (injeção, quebra de autenticação, XSS, exposição de dados), demonstra o impacto, corrige com prática segura (prepared statements, AuthN/Z, validação, headers) e prova a correção.',
-    entregaveis: ['Relatório de auditoria com OWASP Top 10 encontrados e evidência', 'Correção de ao menos 3 vulnerabilidades com o antes/depois', 'Teste que reproduz a falha e confirma a correção', 'Checklist de hardening (headers, segredos, dependências)'],
-    evidencia: 'Relatório + PRs das correções + testes de regressão de segurança.',
-    competencias: ['OWASP Top 10', 'AppSec', 'AuthN/AuthZ', 'correção de vulnerabilidade']
-  },
-
-  // ── Fase 5 · Performance, banco avançado e Redis ──
-  {
-    track: 'bancos', trackLabel: 'Bancos', fase: 5, faseLabel: 'Performance, banco avançado e Redis',
-    titulo: 'Otimização de um catálogo de e-commerce',
-    resumo: 'Diagnosticar e acelerar consultas lentas em um catálogo grande, com índices e cache Redis.',
-    descricao: 'Parte de um dataset grande de produtos com buscas e filtros lentos. Usa EXPLAIN/ANALYZE para achar gargalos, cria índices adequados, elimina o problema de N+1 e adiciona cache Redis para os resultados mais quentes, com estratégia de invalidação. Mede e comprova o ganho.',
-    entregaveis: ['Diagnóstico com EXPLAIN antes/depois', 'Índices e reescrita das consultas críticas', 'Cache Redis com política de invalidação', 'Relatório de latência (p95) antes vs depois'],
-    evidencia: 'Relatório de performance com números antes/depois e o script versionado.',
-    competencias: ['tuning de query', 'EXPLAIN/índices', 'N+1', 'cache com Redis']
-  },
-
-  // ── Fase 6 · Observabilidade e operação em produção ──
-  {
-    track: 'devops', trackLabel: 'DevOps', fase: 6, faseLabel: 'Observabilidade e operação em produção',
-    titulo: 'Stack de observabilidade para um serviço demo',
-    resumo: 'Instrumentar um serviço com métricas, logs e tracing, com dashboard, SLO e runbook.',
-    descricao: 'Escolhe um serviço demo (ex.: uma API pública de clima) e o torna operável: logs estruturados com correlação, métricas no Prometheus (latência, throughput, erros), tracing distribuído com OpenTelemetry, dashboards no Grafana, alertas por SLO e um runbook para um incidente típico.',
-    entregaveis: ['Logs estruturados com traceId e correlação', 'Métricas RED/USE no Prometheus + dashboard Grafana', 'Tracing OTel ponta a ponta de uma requisição', 'SLO definido + alerta + runbook de um incidente'],
-    evidencia: 'Dashboard exportado + runbook versionado.',
-    competencias: ['métricas (Prometheus)', 'logs', 'tracing (OTel)', 'SLO e runbook']
-  },
-
-  // ── Fase 7 · Arquitetura de software e DDD ──
-  {
-    track: 'arquitetura', trackLabel: 'Arquitetura', fase: 7, faseLabel: 'Arquitetura de software e DDD',
-    titulo: 'Sistema de reservas de restaurante (hexagonal + DDD)',
-    resumo: 'Modelar um domínio de reservas com arquitetura hexagonal, bounded contexts e decisões registradas.',
-    descricao: 'Aplica DDD tático e arquitetura hexagonal (ports & adapters) a um domínio de reservas: contextos de Reservas, Mesas e Clientes, com regras de negócio isoladas do framework e da persistência. Documenta as decisões (ADRs) e a estrutura (diagrama C4 de contexto e contêiner).',
-    entregaveis: ['Bounded contexts com linguagem ubíqua', 'Núcleo de domínio isolado por ports/adapters', 'ADRs justificando as decisões (ex.: por que hexagonal)', 'Diagrama C4 (contexto + contêiner)'],
-    evidencia: 'Repositório com o domínio isolado, ADRs e diagramas C4.',
-    competencias: ['DDD tático', 'hexagonal/ports&adapters', 'ADR', 'C4']
-  },
-
-  // ── Fase 8 · Sistemas distribuídos, mensageria e Kafka ──
-  {
-    track: 'arquitetura', trackLabel: 'Arquitetura', fase: 8, faseLabel: 'Sistemas distribuídos, mensageria e Kafka',
-    titulo: 'Sistema de pedidos orientado a eventos',
-    resumo: 'Serviços de pedido, estoque e pagamento comunicando por Kafka, com consistência via saga.',
-    descricao: 'Constrói um fluxo distribuído: um pedido dispara eventos em Kafka consumidos por estoque e pagamento. Trata os problemas reais de sistemas distribuídos — entrega ao menos uma vez com idempotência, padrão Outbox para não perder eventos, saga de compensação para estorno e DLQ para falhas.',
-    entregaveis: ['Produção e consumo de eventos via Kafka', 'Padrão Outbox garantindo publicação atômica', 'Consumidores idempotentes (chave de deduplicação)', 'Saga de compensação + DLQ para mensagens com falha'],
-    evidencia: 'Lab com o fluxo de eventos + teste que prova idempotência e compensação.',
-    competencias: ['Kafka', 'Outbox', 'idempotência', 'saga e DLQ']
-  },
-
-  // ── Fase 9 · Cloud AWS, IaC e Kubernetes ──
-  {
-    track: 'devops', trackLabel: 'DevOps', fase: 9, faseLabel: 'Cloud AWS, IaC e Kubernetes',
-    titulo: 'Deploy de um app open-source em Kubernetes por IaC',
-    resumo: 'Provisionar infraestrutura com Terraform e implantar uma aplicação real em Kubernetes.',
-    descricao: 'Provisiona um cluster gerenciado e recursos (rede, banco, secrets) totalmente por Terraform, e implanta um app open-source (ex.: Ghost/WordPress) em Kubernetes com Deployment, Service, Ingress, HPA e Secrets. Foca em reprodutibilidade: destruir e recriar tudo pelo código.',
-    entregaveis: ['Infra provisionada 100% por Terraform (sem clique manual)', 'Manifests Kubernetes (Deployment/Service/Ingress/HPA)', 'Segredos e configuração fora do código', 'Ambiente destruível e recriável pelo IaC'],
-    evidencia: 'Repositório de IaC + manifests + evidência do app rodando no cluster.',
-    competencias: ['Terraform (IaC)', 'Kubernetes', 'autoescala (HPA)', 'reprodutibilidade']
+    id: 'o03', pasta: 'governança e observabilidade de IA', categoria: 'Qualidade e governança', track: 'devops', trackLabel: 'IA e observabilidade',
+    titulo: 'Governança, avaliação e observabilidade de IA',
+    pagina: 'projetos/governanca-observabilidade-ia.html',
+    resumo: 'Gate de release auditável para aplicações de inteligência artificial.',
+    descricao: 'Avalia versões de um assistente sintético de e-commerce com datasets e suites versionados, avaliações determinísticas e evidências reproduzíveis.',
+    entregaveis: ['Ingestão de traces com deduplicação e redação', 'Datasets, avaliações e baselines versionados', 'Gate de release integrado ao CI', 'Pacote de evidências com manifesto e hashes'],
+    competencias: ['Java / Spring Boot', 'Next.js', 'OpenTelemetry', 'Avaliação de IA', 'PostgreSQL'],
   },
   {
-    track: 'aws', trackLabel: 'AWS', fase: 9, faseLabel: 'Cloud AWS, IaC e Kubernetes',
-    titulo: 'API serverless de tarefas na AWS',
-    resumo: 'API serverless (API Gateway + Lambda + DynamoDB) provisionada por IaC, segura e com custo medido.',
-    descricao: 'Constrói uma API de tarefas sem servidor: API Gateway → Lambda → DynamoDB, tudo por IaC (Terraform ou SAM/CDK). Aplica IAM de menor privilégio, autenticação, observabilidade (CloudWatch/X-Ray) e revisa a solução contra os pilares do Well-Architected, medindo o custo por mil requisições (FinOps).',
-    entregaveis: ['API Gateway + Lambda + DynamoDB por IaC', 'IAM de menor privilégio e autenticação', 'Observabilidade (CloudWatch/X-Ray)', 'Revisão Well-Architected + custo por 1k requisições'],
-    evidencia: 'IaC versionada + relatório dos pilares Well-Architected e do custo.',
-    competencias: ['serverless', 'IaC na AWS', 'IAM/segurança', 'Well-Architected e FinOps']
-  },
-
-  // ── Fase 10 · System Design e escalabilidade ──
-  {
-    track: 'arquitetura', trackLabel: 'Arquitetura', fase: 10, faseLabel: 'System Design e escalabilidade',
-    titulo: 'System Design de um feed de rede social em escala',
-    resumo: 'Documento de projeto de um feed (timeline) para milhões de usuários, com trade-offs e capacidade.',
-    descricao: 'Um clássico de entrevista sênior, entregue como documento. Projeta um feed de rede social para grande escala: fan-out on write vs on read, particionamento, cache, filas, replicação e CDN. Estima capacidade (usuários, QPS, armazenamento) e explicita os trade-offs de cada decisão.',
-    entregaveis: ['Requisitos funcionais e não-funcionais + estimativa de capacidade', 'Arquitetura com particionamento, cache e filas', 'Trade-offs (ex.: fan-out on write vs on read; consistência forte vs eventual)', 'Diagramas e pontos de falha/mitigação'],
-    evidencia: 'Documento de System Design com diagramas e números de capacidade.',
-    competencias: ['System Design', 'escalabilidade', 'trade-offs', 'estimativa de capacidade']
-  },
-
-  // ── Fase 11 · Frontend, Python e IA aplicada ──
-  {
-    track: 'frontend', trackLabel: 'Frontend', fase: 11, faseLabel: 'Frontend, Python e IA aplicada',
-    titulo: 'Dashboard de finanças pessoais em React/TypeScript',
-    resumo: 'SPA React tipada que consome uma API pública, com estados, acessibilidade e responsividade.',
-    descricao: 'Um frontend real e contido: aplicação React com TypeScript que consome uma API (pública ou própria), exibe dados em gráficos/tabelas, com tratamento explícito de loading, erro e vazio. Acessível (navegação por teclado, ARIA, contraste) e responsiva até 390px.',
-    entregaveis: ['SPA React + TypeScript consumindo uma API', 'Estados de loading, erro e vazio tratados', 'Acessibilidade (teclado, ARIA, contraste AA)', 'Responsivo a 390px e app publicado'],
-    evidencia: 'App publicado + relatório Lighthouse (performance/acessibilidade).',
-    competencias: ['React + TypeScript', 'estados e consumo de API', 'acessibilidade', 'responsividade']
+    id: 'o06', pasta: 'conciliação, cobrança e caixa para PME', categoria: 'Operação e negócios', track: 'bancos', trackLabel: 'Finanças para PME',
+    titulo: 'Conciliação, cobrança e caixa para PME',
+    pagina: 'projetos/conciliacao-cobranca-caixa-pme.html',
+    resumo: 'Ingestão financeira, conciliação explicável e projeção de caixa.',
+    descricao: 'Usa academias e um escritório contábil fictícios para demonstrar importação idempotente, tratamento de exceções e cobrança com aprovação humana em sandbox.',
+    entregaveis: ['Importação e conciliação com evidência', 'Tratamento de exceções e aprovação de cobrança', 'Projeção de caixa e fechamento de competência', 'Isolamento por empresa e auditoria'],
+    competencias: ['Java / Spring Boot', 'Next.js', 'PostgreSQL / RLS', 'Idempotência', 'Outbox'],
   },
   {
-    track: 'python', trackLabel: 'Python', fase: 11, faseLabel: 'Frontend, Python e IA aplicada',
-    titulo: 'Serviço de análise de dados abertos',
-    resumo: 'API FastAPI que ingere um dataset público real e expõe agregações e insights.',
-    descricao: 'Python idiomático aplicado a dados: um serviço FastAPI que carrega um dataset público real (ex.: dados abertos do IBGE/gov.br), limpa e agrega com pandas, e expõe endpoints de consulta. Com tipagem, testes pytest e documentação automática da API.',
-    entregaveis: ['Pipeline de ingestão e limpeza do dataset (pandas)', 'Endpoints FastAPI de agregação com validação (pydantic)', 'Testes pytest cobrindo as regras de agregação', 'Documentação automática (OpenAPI) da API'],
-    evidencia: 'Serviço publicado/rodável + notebook de análise + testes verdes.',
-    competencias: ['FastAPI', 'pandas/pipeline de dados', 'pytest', 'tipagem']
+    id: 'o13', pasta: 'contratos-e-compliance-pme', categoria: 'Operação e negócios', track: 'sec', trackLabel: 'Contratos e compliance',
+    pagina: 'projetos/contratos-e-compliance-pme.html',
+    titulo: 'Contratos e compliance operacional para PME',
+    resumo: 'Calendário de obrigações contratuais com responsáveis e prova de cumprimento.',
+    descricao: 'O Âncora Prazos começa por locações comerciais: reajuste, fim de vigência e janela renovatória, com avisos, escalonamento, aprovação e evidência verificável.',
+    entregaveis: ['Cadastro de contratos e regras de recorrência', 'Calendário, avisos e escalonamento', 'Comprovantes com aprovação segregada', 'Log de Merkle e verificação por CLI offline'],
+    competencias: ['Modelagem de domínio', 'Recorrência e fusos', 'Auditoria', 'Isolamento por empresa'],
   },
   {
-    track: 'ia', trackLabel: 'IA', fase: 11, faseLabel: 'Frontend, Python e IA aplicada',
-    titulo: 'Chatbot RAG sobre uma base de documentos',
-    resumo: 'Assistente com RAG sobre documentos próprios, com avaliação de qualidade, guardrails e custo.',
-    descricao: 'IA aplicada de verdade: um chatbot que responde perguntas sobre uma base de documentos (ex.: FAQ de um produto, manuais ou papers) usando RAG — embeddings, busca semântica e um LLM (ex.: via Amazon Bedrock). O diferencial sênior é a avaliação: um conjunto de perguntas-gabarito mede a qualidade e o retrieval, com guardrails contra alucinação e controle de custo por consulta.',
-    entregaveis: ['Ingestão e indexação dos documentos (embeddings + vetor)', 'Pipeline RAG (recuperação + geração) com fontes citadas', 'Avaliação com conjunto de perguntas-gabarito (precisão/recall de retrieval)', 'Guardrails anti-alucinação e custo medido por consulta'],
-    evidencia: 'Demo funcional + notebook de avaliação com as métricas.',
-    competencias: ['RAG e embeddings', 'LLM/Bedrock', 'avaliação de LLM', 'guardrails e custo']
-  }
+    id: 'o20', pasta: 'marketplace-b2b-regional', categoria: 'Operação e negócios', track: 'arquitetura', trackLabel: 'Marketplace B2B',
+    pagina: 'projetos/marketplace-b2b-regional.html',
+    titulo: 'Marketplace B2B regional especializado',
+    resumo: 'Catálogo fechado entre uma rede supermercadista e fornecedores regionais.',
+    descricao: 'Conecta um comprador âncora em Belém e no nordeste paraense a produtores e cooperativas. A demonstração prevê dados sintéticos e pagamentos em sandbox, sem custódia.',
+    entregaveis: ['Catálogo e pedidos com resposta por linha', 'Conferência com divergências e rastreabilidade por lote', 'Vínculo entre pedido, pagamento e nota fiscal', 'Split via PSP e eventos para parceiro de crédito'],
+    competencias: ['Java / Spring Boot', 'Next.js', 'PostgreSQL', 'Máquinas de estados', 'Webhooks'],
+  },
+  {
+    id: 'o07', pasta: 'sistema operacional vertical pelo WhatsApp', categoria: 'Operação e negócios', track: 'java', trackLabel: 'Automação de agenda',
+    pagina: 'projetos/sistema-operacional-vertical-whatsapp.html',
+    titulo: 'Sistema operacional vertical pelo WhatsApp',
+    resumo: 'Conversas transformadas em tarefas de agendamento verificáveis.',
+    descricao: 'Voltado a barbearias e salões, usa simuladores locais de mensagens e agenda. Uma reserva só é concluída depois da verificação do efeito, com handoff humano e opt-out.',
+    entregaveis: ['Simuladores de mensagens e agenda', 'Máquina de estados com inbox e outbox', 'Verificação de reservas e evidência terminal', 'Painel Thymeleaf + htmx com sessão e autorização'],
+    competencias: ['Java / Spring Boot', 'Thymeleaf / htmx', 'PostgreSQL', 'Idempotência', 'Máquinas de estados'],
+  },
+  {
+    id: 'o25', pasta: 'dados-de-mercado-e-risco-pequeno-produtor', categoria: 'Agro e clima', track: 'bancos', trackLabel: 'Dados e análise',
+    pagina: 'projetos/dados-de-mercado-e-risco-pequeno-produtor.html',
+    titulo: 'Dados de mercado e risco para pequeno produtor',
+    resumo: 'Relatório explicável que cruza preço, clima e operação agrícola.',
+    descricao: 'O Safra Explicada atende uma cooperativa de grãos do Paraná, com soja e milho e consentimento dos produtores. Cada número deve preservar sua origem; o relatório não é usado para crédito.',
+    entregaveis: ['Consentimento e rastreabilidade das fontes', 'Processamento em lote de clima e cenários', 'Relatório explicável por produtor', 'Portal com mapas e gráficos'],
+    competencias: ['Java / Spring Boot', 'Python', 'Next.js', 'PostgreSQL / PostGIS', 'Explicabilidade'],
+  },
+  {
+    id: 'o10', pasta: 'rastreabilidade-agro-offline-first', categoria: 'Agro e clima', track: 'arquitetura', trackLabel: 'Offline-first',
+    pagina: 'projetos/rastreabilidade-agro-offline-first.html',
+    titulo: 'Rastreabilidade agro offline-first',
+    resumo: 'Eventos e evidências agrícolas registrados mesmo sem conexão.',
+    descricao: 'Usa a cadeia do café em uma cooperativa fictícia para preservar autoria, integridade e cadeia de custódia. A sincronização trata conflitos e mantém eventos e correções imutáveis.',
+    entregaveis: ['Aplicativo de campo com SQLite e outbox local', 'Sincronização idempotente com confirmação por item', 'Genealogia de lotes e resolução de conflitos', 'Pacote auditável com verificador por CLI'],
+    competencias: ['React Native / SQLite', 'Java / Spring Boot', 'PostgreSQL', 'Sincronização', 'Assinaturas digitais'],
+  },
+  {
+    id: 'o27', pasta: 'resiliencia-climatica-operacional', categoria: 'Agro e clima', track: 'arquitetura', trackLabel: 'Operações e clima',
+    pagina: 'projetos/resiliencia-climatica-operacional.html',
+    titulo: 'Resiliência climática operacional',
+    resumo: 'Alertas oficiais transformados em acompanhamento de ações por instalação.',
+    descricao: 'O Prontidão Local prevê empresas de armazenagem e distribuição com 3 a 20 instalações no Rio Grande do Sul. Começa por chuva intensa e inundação, com responsáveis e checklists aprovados.',
+    entregaveis: ['Cadastro de instalações, responsáveis e planos', 'Ingestão de avisos com origem e revisões', 'Associação geográfica explicável por local', 'Registro de entrega, ciência, execução e pós-evento'],
+    competencias: ['Java / Spring Boot', 'Next.js', 'PostgreSQL / PostGIS', 'Geoprocessamento', 'Auditoria'],
+  },
+  {
+    id: 'lemes-code-lab', pasta: 'leet-code', categoria: 'Aprendizado e carreira', track: 'java', trackLabel: 'Prática de desenvolvimento',
+    pagina: 'projetos/lemes-code-lab.html',
+    titulo: 'Lemes Code Lab',
+    resumo: 'Plataforma pessoal de prática multidomínio, hospedada pelo próprio usuário.',
+    descricao: 'Trata conteúdo como dado versionado e utiliza avaliadores específicos para código, SQL, frontend, arquitetura, segurança defensiva e projetos.',
+    entregaveis: ['Catálogo de exercícios versionados', 'Avaliadores por domínio', 'Workspace local com execução e preview isolados', 'Showcase público separado do ambiente privado'],
+    competencias: ['Modelagem de conteúdo', 'Avaliadores', 'Isolamento de execução', 'Segurança de preview'],
+  },
+  {
+    id: 'o11', pasta: 'preparacao-entrevistas-dev', categoria: 'Aprendizado e carreira', track: 'arquitetura', trackLabel: 'Preparação profissional',
+    pagina: 'projetos/preparacao-entrevistas-dev.html',
+    titulo: 'Preparação de entrevistas dev',
+    resumo: 'Plano personalizado de preparação orientado pela vaga e pelo prazo.',
+    descricao: 'Combina currículo, vaga, senioridade e dias disponíveis para diagnosticar lacunas, priorizar estudo e avaliar simulações com rubricas versionadas e prontidão explicável.',
+    entregaveis: ['Diagnóstico de lacunas por vaga-alvo', 'Plano diário priorizado pelo prazo', 'Simulações com rubricas e evidências', 'Indicador de prontidão determinístico'],
+    competencias: ['Java / Spring Boot', 'Next.js', 'PostgreSQL', 'Rubricas versionadas', 'Priorização'],
+  },
 ];

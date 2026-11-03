@@ -1,13 +1,55 @@
-import { weekDays, weeklyFocusByDay, dailyPlansByDay, monthlyCycle } from '../core/study-context.js';
+import { weekDays, weeklyFocusByDay, dailyPlansByDay, monthlyCycle, PERFIS_ROTINA, perfilRotina, setPerfilRotina, isArchitecture, weeklyHours } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / ROUTINE — rotina diária, semanal e mensal
 ═══════════════════════════════════════════════ */
 
 import { CK } from '../../../data/tracks.js';
 import { faseAtual, seloDaFase, fatiaDoBloco } from './active-phase.js';
+import { escapeHtml } from '../core/render.js';
+import { flushProgress } from '../core/storage.js';
+import { resolvePublicUrl } from '../core/public-url.js';
+import { arquiteturaModules } from '../../../data/arquitetura-advanced.js';
 
 export function getDailyColor(block) {
   return CK[block.k] || CK[block.type] || CK.n;
+}
+
+/** Seletor do perfil de horário. */
+export function renderSeletorDePerfil(containerId) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+
+  const atual = perfilRotina();
+  el.innerHTML = `
+    <div class="phase-picker">
+      <label class="phase-picker-label" for="perfilRotinaSelect">Perfil de horário</label>
+      <select id="perfilRotinaSelect" class="phase-picker-select">
+        ${Object.entries(PERFIS_ROTINA).map(([id, perfil]) => `<option value="${id}"${id === atual ? ' selected' : ''}>${escapeHtml(perfil.nome)}</option>`).join('')}
+      </select>
+      <span class="phase-picker-hint" id="perfilRotinaHint"></span>
+      <p class="routine-profile-warning" id="perfilRotinaAviso" role="note" hidden></p>
+    </div>`;
+
+  const atualizarDetalhes = () => {
+    const perfil = PERFIS_ROTINA[perfilRotina()];
+    // Sem horário fixo, a Arquitetura usa a carga escolhida, não as horas do Backend.
+    document.getElementById('perfilRotinaHint').textContent = isArchitecture() && !perfil.horasSemanais
+      ? `${weeklyHours()}h por semana em blocos flexíveis · sono 7h30`
+      : perfil.resumo;
+    const aviso = document.getElementById('perfilRotinaAviso');
+    aviso.textContent = perfil.aviso || '';
+    aviso.hidden = !perfil.aviso;
+  };
+
+  atualizarDetalhes();
+  document.getElementById('perfilRotinaSelect').addEventListener('change', async (e) => {
+    setPerfilRotina(e.target.value);
+    // Estimativas e textos dependem da carga do perfil e só são montados no
+    // carregamento; a recarga volta para a aba da rotina.
+    await flushProgress();
+    location.hash = 'tabDaily';
+    location.reload();
+  });
 }
 
 export function renderDailyDayTabs() {
@@ -35,12 +77,41 @@ export function setActiveDay(dayKey) {
   renderWeeklyFocus(selected);
 }
 
+/** Links para as seções da academia que o bloco manda estudar. */
+function linksDeModulos(ids = []) {
+  const links = ids
+    .map((id) => arquiteturaModules.find((m) => m.id === id))
+    .filter(Boolean)
+    .map((m) => `<a href="${resolvePublicUrl(`trilhas/arquitetura/${m.part}.html`)}#${escapeHtml(m.id)}">Módulo ${escapeHtml(m.number)} · ${escapeHtml(m.title)} <span class="ml-arrow" aria-hidden="true">↗</span></a>`);
+  return links.length ? `<div class="sequence-module-links" role="group" aria-label="Módulos da academia">${links.join('')}</div>` : '';
+}
+
+/** O que este dia significa na fase ativa, de onde veio e para onde vai. */
+function focoDoDiaNaFase(dayKey, fase) {
+  const foco = weeklyFocusByDay[dayKey];
+  if (!foco?.nestaFase) return '';
+  const { intencao, foco: tema, pico, degrau, anterior, proxima } = foco.nestaFase;
+  const caminho = [
+    anterior && `<li><span class="mono">Antes · F${fase.id - 1}</span> ${escapeHtml(anterior)}</li>`,
+    proxima && `<li><span class="mono">Depois · F${fase.id + 1}</span> ${escapeHtml(proxima)}</li>`
+  ].filter(Boolean).join('');
+  return `<section class="daily-phase-focus" aria-label="Foco de ${escapeHtml(foco.day)} na ${escapeHtml(fase.l)}">
+    <div class="daily-phase-focus-head">
+      <span class="phase-slot-tag">${escapeHtml(fase.l)} · ${escapeHtml(foco.day)} · ${escapeHtml(intencao)}</span>
+      ${pico ? '<span class="daily-priority">Pico da fase</span>' : ''}
+    </div>
+    <p class="daily-phase-focus-theme">${escapeHtml(tema)}</p>
+    ${degrau ? `<p class="daily-phase-focus-note">Degrau da operação: ${escapeHtml(degrau)}</p>` : ''}
+    <ul class="daily-phase-focus-path" aria-label="Este mesmo dia nas fases vizinhas">${caminho}</ul>
+  </section>`;
+}
+
 export function renderDailySchedule(dayKey) {
   const fase = faseAtual();
   const scheduleEl = document.getElementById('dailySchedule');
   if (!scheduleEl) return;
   const blocks = dailyPlansByDay[dayKey] || dailyPlansByDay.segunda;
-  scheduleEl.innerHTML = blocks.map((b, i) => {
+  scheduleEl.innerHTML = focoDoDiaNaFase(dayKey, fase) + blocks.map((b, i) => {
     const c = getDailyColor(b);
     const type = b.type || 'study';
     const isBreak = type === 'break';
@@ -60,6 +131,7 @@ export function renderDailySchedule(dayKey) {
     <p>${b.d}</p>
     ${tracks}
     ${selo}
+    ${linksDeModulos(b.modulos)}
   </div>
 </article>`;
   }).join('');

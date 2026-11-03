@@ -11,6 +11,7 @@
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { verificarGradeDaSemana } from './verificar-grade.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const publicDir = join(root, 'public');
@@ -22,6 +23,8 @@ const check = (cond, msg) => { if (!cond) failures.push(msg); };
 const { SEQUENCES, OBJECTIVE_EQUIVALENCES, objectiveId, describeObjective } = await imp('data/sequences.js');
 const { arquiteturaModules } = await imp('data/arquitetura-advanced.js');
 const { CONFIG } = await imp('data/config.js');
+const { createArchitecturePlan } = await imp('data/sequences/architecture-plan.js');
+const { weekDays } = await imp('data/routine.js');
 
 // ── Registro das sequências ────────────────────────────────
 check(Boolean(SEQUENCES.backend) && Boolean(SEQUENCES.arquitetura),
@@ -87,6 +90,56 @@ for (const p of arch.phases) {
   }
 }
 
+// ── Cadência do perfil trabalho-9-18 ───────────────────────
+// Cada dia útil aponta objetivos pelo id estável. Renomear um id ou um módulo não
+// pode esvaziar um horário em silêncio, e nenhum objetivo pode ficar sem horário.
+const DIAS_UTEIS = ['segunda', 'terca', 'quarta', 'quinta', 'sexta'];
+let cadenciaRefs = 0;
+for (const p of arch.phases) {
+  const objetivosVistos = new Set();
+  const modulosVistos = new Set();
+  const apoios = new Set();
+  DIAS_UTEIS.forEach((dia) => {
+    const plano = p.cadencia?.[dia];
+    if (!plano) { failures.push(`Arquitetura ${p.l}: cadência sem ${dia}.`); return; }
+    check([1, 2].includes(plano.objetivos.length), `Arquitetura ${p.l}/${dia}: a manhã comporta 1 ou 2 objetivos.`);
+    check(plano.temas.length === plano.objetivos.length, `Arquitetura ${p.l}/${dia}: temas e objetivos não correspondem.`);
+    check(plano.modulos.length > 0, `Arquitetura ${p.l}/${dia}: nenhum módulo indicado.`);
+    check(p.objectives[plano.apoio]?.length > 0, `Arquitetura ${p.l}/${dia}: trilha de apoio "${plano.apoio}" sem conteúdo.`);
+    apoios.add(plano.apoio);
+    plano.objetivos.forEach((ref) => {
+      cadenciaRefs += 1;
+      const [track, id] = ref.split(':');
+      check(p.objectives[track]?.some((o) => o.id === id), `Arquitetura ${p.l}/${dia}: objetivo inexistente "${ref}".`);
+      check(track !== 'dsa', `Arquitetura ${p.l}/${dia}: DSA é opcional e não entra no núcleo.`);
+      objetivosVistos.add(ref);
+    });
+    plano.modulos.forEach((id) => {
+      check(known.has(id), `Arquitetura ${p.l}/${dia}: módulo inexistente "${id}".`);
+      modulosVistos.add(id);
+    });
+  });
+  // Git aparece na janela de apoio e a entrega, na consolidação das noites e no sábado.
+  for (const [track, objetivos] of Object.entries(p.objectives)) {
+    if (track === 'git' || track === 'pratica') continue;
+    objetivos.forEach((o) => check(objetivosVistos.has(`${track}:${o.id}`), `Arquitetura ${p.l}: objetivo sem horário na semana "${track}:${o.id}".`));
+  }
+  p.modules.forEach((id) => check(modulosVistos.has(id), `Arquitetura ${p.l}: módulo da etapa sem horário na semana "${id}".`));
+  check(apoios.has('git'), `Arquitetura ${p.l}: evidências (git) sem janela na semana.`);
+  check(p.cadencia?.sexta?.objetivos.some((ref) => ref.startsWith('ingles:')), `Arquitetura ${p.l}: sexta sem defesa em inglês.`);
+
+  for (const mode of ['ideal', 'minima', 'recuperacao']) {
+    const rotulo = `Arquitetura ${p.l}/${mode}`;
+    const { dailyPlansByDay } = createArchitecturePlan(arch, { hours: 25, phaseId: p.id, mode, perfil: 'trabalho-9-18' });
+    verificarGradeDaSemana(dailyPlansByDay, weekDays, rotulo, check);
+    DIAS_UTEIS.forEach((dia) => {
+      const horarios = dailyPlansByDay[dia].map((b) => b.time);
+      check(horarios.includes('06:00 – 07:30') && horarios.includes('00:45 – 01:00'), `${rotulo}/${dia}: fora da grade 06:00–01:00.`);
+      dailyPlansByDay[dia].forEach((b) => (b.topicos || []).forEach((i) => check(i >= 0, `${rotulo}/${dia} ${b.time}: tópico não resolvido.`)));
+    });
+  }
+}
+
 // ── Diagnóstico de entrada ─────────────────────────────────
 check(Array.isArray(arch.diagnostic) && arch.diagnostic.length > 0, 'Arquitetura sem diagnóstico de entrada.');
 (arch.diagnostic || []).forEach((d) => {
@@ -104,6 +157,7 @@ for (const [from, to] of Object.entries(OBJECTIVE_EQUIVALENCES || {})) {
 evidence.push(`2 sequências (backend 12 fases · arquitetura 6 etapas)`);
 evidence.push(`${moduleRefs} referências de módulo válidas em ${partPagesChecked.size} páginas de parte`);
 evidence.push(`${objectiveCount} objetivos com id único e reversível (describeObjective)`);
+evidence.push(`${cadenciaRefs} horários da cadência com objetivo válido, em 6 etapas × 3 modos de grade 06:00–01:00`);
 evidence.push(`${arch.diagnostic.length} itens de diagnóstico com href válido`);
 evidence.push(`${Object.keys(OBJECTIVE_EQUIVALENCES || {}).length} equivalências declaradas`);
 

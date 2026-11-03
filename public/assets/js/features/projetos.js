@@ -1,7 +1,6 @@
-import { isArchitecture, projetos } from '../core/study-context.js';
+import { projetos } from '../../../data/projetos.js?v=portfolio-11';
 /* ═══════════════════════════════════════════════
-   FEATURES / PROJETOS — projetos de portfólio por trilha × fase.
-   Cada projeto é autocontido; agrupados por fase.
+   FEATURES / PROJETOS — catálogo compartilhado pelas sequências de estudo.
 ═══════════════════════════════════════════════ */
 
 import { escapeHtml } from '../core/render.js';
@@ -10,42 +9,40 @@ export function renderProjetos(alvoId = 'projetosView') {
   const el = document.getElementById(alvoId);
   if (!el) return;
 
-  // Agrupa por fase preservando a ordem do arquivo.
-  const fases = [];
-  let atual = null;
+  const categorias = new Map();
   for (const p of projetos) {
-    if (!atual || atual.fase !== p.fase) { atual = { fase: p.fase, faseLabel: p.faseLabel, itens: [] }; fases.push(atual); }
-    atual.itens.push(p);
+    if (!categorias.has(p.categoria)) categorias.set(p.categoria, []);
+    categorias.get(p.categoria).push(p);
   }
 
   const card = (p) => `
     <article class="proj-card" data-track="${escapeHtml(p.track)}">
       <div class="proj-card-top">
         <span class="proj-track">${escapeHtml(p.trackLabel)}</span>
-        <span class="proj-fase-chip">Fase ${p.fase}</span>
+        <span class="proj-fase-chip">Implementação não iniciada</span>
       </div>
       <h6 class="proj-titulo">${escapeHtml(p.titulo)}</h6>
       <p class="proj-resumo">${escapeHtml(p.resumo)}</p>
       <p class="proj-desc">${escapeHtml(p.descricao)}</p>
       <div class="proj-bloco">
-        <span class="proj-bloco-lab">Entregáveis</span>
+        <span class="proj-bloco-lab">Entregáveis previstos</span>
         <ul>${p.entregaveis.map((e) => `<li>${escapeHtml(e)}</li>`).join('')}</ul>
       </div>
       <div class="proj-bloco">
-        <span class="proj-bloco-lab">Evidência</span>
-        <p>${escapeHtml(p.evidencia)}</p>
+        <span class="proj-bloco-lab">Pasta de origem</span>
+        <p>${escapeHtml(p.pasta)}</p>
       </div>
       <div class="proj-tags">${p.competencias.map((c) => `<span class="proj-tag">${escapeHtml(c)}</span>`).join('')}</div>
+      ${p.pagina ? `<a class="proj-guide-link" href="${escapeHtml(p.pagina)}" aria-label="Abrir documentação: ${escapeHtml(p.titulo)}">Abrir documentação →</a>` : ''}
     </article>`;
 
   el.innerHTML = `
-    <p class="proj-intro text-muted small">${isArchitecture() ? 'Seis entregas encadeadas no mesmo DevCore.' : 'Um projeto independente por trilha curricular, na sua fase de foco.'}
-      ${isArchitecture() ? 'Cada entrega usa a evidência da etapa anterior. Transversais' : 'Cada um é um repositório separado, com evidência própria — não dependem uns dos outros. Transversais'}
-      (Git, Inglês, Matemática, Financeiro, DSA) seguem como prática diária, sem projeto por fase.</p>
-    ${fases.map((f) => `
+    <p class="proj-intro text-muted small">${projetos.length} projetos da pasta project-ideias/portfolio, organizados por área.
+      A documentação descreve o escopo planejado; os entregáveis ainda serão implementados.</p>
+    ${[...categorias].map(([categoria, itens]) => `
       <section class="proj-fase">
-        <h5 class="proj-fase-titulo"><span class="proj-fase-num">Fase ${f.fase}</span> ${escapeHtml(f.faseLabel)}
-          <span class="proj-fase-count">${f.itens.length}</span></h5>
-        <div class="proj-grid">${f.itens.map(card).join('')}</div>
+        <h5 class="proj-fase-titulo">${escapeHtml(categoria)}
+          <span class="proj-fase-count">${itens.length}</span></h5>
+        <div class="proj-grid">${itens.map(card).join('')}</div>
       </section>`).join('')}`;
 }
