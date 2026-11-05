@@ -399,7 +399,10 @@ check(SIMULADOS_ENTREVISTA.length === 12, `Esperados 12 simulados; encontrados $
 
 const allHtml = recursiveFiles(publicDir, (file) => extname(file) === '.html');
 for (const file of allHtml) {
-  const html = readFileSync(file, 'utf8');
+  // Strings de templates JavaScript não são atributos do HTML estático.
+  // Preserva a tag de abertura para continuar validando scripts com src.
+  const html = readFileSync(file, 'utf8')
+    .replace(/(<script\b[^>]*>)[\s\S]*?<\/script\s*>/gi, '$1</script>');
   const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]));
   const references = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)].map((match) => match[1]);
   references.forEach((reference) => {
