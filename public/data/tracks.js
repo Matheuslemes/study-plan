@@ -50,13 +50,13 @@ export const CK = {
 };
 
 export const heroTagsData = [
-  { "label": "36 meses", "cls": "htag-b" },
-  { "label": "156 semanas", "cls": "htag-b" },
+  { "label": "~55 meses", "cls": "htag-b" },
+  { "label": "~240 semanas", "cls": "htag-b" },
   { "label": "12 fases sequenciais", "cls": "htag-g" },
-  { "label": "36–40h/semana", "cls": "htag-g" },
+  { "label": "25h10/semana + janelas", "cls": "htag-g" },
   { "label": "~500h por fase", "cls": "htag-b" },
   { "label": "~6.000h totais", "cls": "htag-b" },
-  { "label": "sono 7h30 fixo", "cls": "htag-p" },
+  { "label": "sono 4h30 de seg a sex", "cls": "htag-p" },
   { "label": "domingo de descanso", "cls": "htag-p" },
   { "label": "Backend Java/Spring 45%", "cls": "htag-g" },
   { "label": "Banco/SQL 12%", "cls": "htag-b" },
@@ -83,7 +83,7 @@ export const tracks = [
   { "key": "ia", "label": "IA Engineering", "h": "fase 11", "suffix": "" },
   { "key": "math", "label": "Matemática aplicada", "h": "acoplada a DB e IA", "suffix": "" },
   { "key": "fin", "label": "Financeiro", "h": "revisão mensal · 1h", "suffix": "" },
-  { "key": "treino", "label": "Treino Híbrido", "h": "7 dias · cardio 2 turnos", "suffix": "" }
+  { "key": "treino", "label": "Treino Híbrido", "h": "7 dias · cardio na academia", "suffix": "" }
 ];
 
 export const quickTracks = [
@@ -350,7 +350,6 @@ export const quickTracks = [
     desc: "Matemática aplicada à programação e IA: lógica, Big O, grafos, álgebra linear com NumPy, probabilidade, estatística, cálculo, otimização, métricas ML/RAG, embeddings, attention e entregáveis por fase.",
     extraBadges: [
       { label: "3x/semana" },
-      { label: "156 semanas" },
       { label: "12 fases" },
       { label: "Programação" },
       { label: "Algoritmos" },
@@ -398,7 +397,7 @@ export const quickTracks = [
     extraBadges: [
       { label: "31 módulos" },
       { label: "5 macroáreas" },
-      { label: "12 fases / 156 semanas" },
+      { label: "12 fases" },
       { label: "3x/semana" },
       { label: "70/20/10" },
       { label: "Orçamento" },
@@ -416,14 +415,14 @@ export const quickTracks = [
     label: "Treino Híbrido",
     href: "./trilhas/treino.html",
     badge: "Saúde + Cardio",
-    desc: "Plano de treino híbrido em 7 dias com um grupo por dia (peito, pernas A, costas, ombros, pernas B, braços e manutenção), 215 séries semanais com todos os grupos no teto da faixa, cardio em dois turnos diários (Zona 2 em jejum e 4x4 norueguês), progressão dupla, nutrição e avaliação em números.",
+    desc: "Plano de treino híbrido em 7 dias com um grupo por dia (peito, pernas A, costas, ombros, pernas B, braços e manutenção), 215 séries semanais com todos os grupos no teto da faixa, cardio na mesma sessão da academia (Zona 2 e 4x4 norueguês), progressão dupla, nutrição e avaliação em números.",
     extraBadges: [
       { label: "110 kg" },
       { label: "1,80 m" },
       { label: "7 dias" },
       { label: "215 séries/semana" },
       { label: "20 séries por grupo" },
-      { label: "Cardio 2 turnos" },
+      { label: "Cardio na academia" },
       { label: "4x4 norueguês" },
       { label: "Progressão dupla" },
       { label: "Deload 4–5 sem" }

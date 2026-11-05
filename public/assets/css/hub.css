@@ -736,7 +736,8 @@ body.is-hub .section-subtitle {
 
 body.is-hub .section-badge,
 body.is-hub .tag,
-body.is-hub .metric-pill {
+body.is-hub .metric-pill,
+body.is-hub .metric {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -755,23 +756,47 @@ body.is-hub .ac-stat-grid {
   gap: var(--space-2);
 }
 
-body.is-hub .metric-pill {
+body.is-hub .metric-pill,
+body.is-hub .metric {
   min-height: 5.5rem;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
 }
 
+/* Em .metric, span é o rótulo, small é o valor em destaque e em é a nota. */
 body.is-hub .metric-pill span,
-body.is-hub .metric-pill strong {
+body.is-hub .metric-pill strong,
+body.is-hub .metric small {
   max-width: 100%;
   color: var(--accent);
   font: 800 clamp(1rem, 1.4vw, var(--step-2))/1.1 var(--font-display);
   overflow-wrap: anywhere;
 }
 
-body.is-hub .metric-pill small {
+body.is-hub .metric-pill small,
+body.is-hub .metric em {
   color: var(--text-3);
+}
+
+body.is-hub .metric {
+  min-width: 0;
+  justify-content: flex-start;
+  padding: var(--space-3);
+}
+
+body.is-hub .metric small {
+  font-size: clamp(.94rem, 1.3vw, var(--step-1));
+}
+
+body.is-hub .metric em {
+  font-style: normal;
+  font-weight: 500;
+}
+
+body.is-hub .doc-section > .metrics-grid:has(> .metric),
+body.is-hub .doc-section > .doc-hero-card:has(> .metrics-grid > .metric) {
+  margin-block: var(--space-4);
 }
 
 body.is-hub .ac-part-grid {
@@ -867,6 +892,12 @@ body.is-hub :where(.doc-grid-3, .project-grid, .ref-grid, .ref-grid-books) {
 
 body.is-hub :where(.doc-grid-4, .metrics-grid) {
   grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* :where mantém a especificidade baixa para o breakpoint de 48rem ainda valer. */
+body.is-hub :where(.doc-hero-card > .metrics-grid:has(> .metric)) {
+  align-self: start;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 body.is-hub :where(.phase-doc-grid, .roadmap-grid) {
@@ -1014,6 +1045,21 @@ body.is-hub .footer-row {
   gap: var(--space-4);
 }
 
+body.is-hub .footer-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+body.is-hub .footer-pill {
+  padding: .32rem .6rem;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--radius-pill);
+  color: var(--accent-strong);
+  background: var(--accent-soft);
+  font: 700 .68rem/1.3 var(--font-mono);
+}
+
 body.is-hub .back-to-top {
   position: fixed;
   z-index: var(--z-sticky);
@@ -1049,6 +1095,9 @@ body.is-hub :where(a, button, input, summary):focus-visible {
     padding-block: var(--space-3);
   }
 
+  body.is-hub :where(.metrics-grid:has(> .metric)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 64rem) {

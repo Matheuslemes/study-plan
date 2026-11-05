@@ -154,7 +154,8 @@ async function init() {
     if (originTab && window.bootstrap?.Tab) window.bootstrap.Tab.getOrCreateInstance(originTab).show();
   }
 
-  // Perfil de horário: troca a grade diária sem mudar temas nem progresso
+
+  // Perfil de horário: troca a distribuição do dia sem mudar temas nem progresso
   renderSeletorDePerfil('perfilRotinaPicker');
 
   // Fase ativa: comanda o conteúdo da rotina (STUDY-020) e o painel de progresso
@@ -245,5 +246,5 @@ async function init() {
 
 document.addEventListener('DOMContentLoaded', init);
 window.addEventListener('storage', (event) => {
-  if (event.key && ['studyplan:sequenciaAtual', 'studyplan:faseAtual', 'studyplan:faseAtual:arquitetura', 'studyplan:cargaSemanal:arquitetura', 'studyplan:perfilRotina'].includes(event.key)) location.reload();
+  if (event.key && ['studyplan:sequenciaAtual', 'studyplan:faseAtual', 'studyplan:faseAtual:arquitetura', 'studyplan:perfilRotina'].includes(event.key)) location.reload();
 });

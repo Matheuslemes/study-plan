@@ -90,7 +90,7 @@ export function renderHoje(containerId) {
     ${ehDescanso ? `
       <div class="today-rest">
         <strong>🌴 Domingo é descanso real.</strong>
-        <p>${escapeHtml(foco?.strategy || 'Máximo 1h de revisão leve. Sem conteúdo novo, sem projeto. A folga semanal é o que torna 156 semanas possíveis.')}</p>
+        <p>${escapeHtml(foco?.strategy || 'Máximo 1h de revisão leve. Sem conteúdo novo, sem projeto. A folga semanal é o que torna o plano possível.')}</p>
       </div>` : `
       <div class="today-focus">${escapeHtml(foco?.focus || '')}</div>
       <div class="today-grid">

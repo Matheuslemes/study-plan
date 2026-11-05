@@ -471,18 +471,6 @@ a.biblio-item.is-linked:hover .biblio-open { color: var(--accent, var(--mastery-
   color: var(--text3);
 }
 
-.routine-profile-warning {
-  flex-basis: 100%;
-  margin: 0;
-  padding: .55rem .7rem;
-  border: 1px solid color-mix(in srgb, var(--state-warning) 35%, transparent);
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--state-warning) 8%, transparent);
-  color: var(--text2);
-  font-size: .8rem;
-  line-height: 1.5;
-}
-
 /* ── selo do conteúdo da fase nos blocos ── */
 /* Foco do dia na fase ativa, no topo da grade da rotina. */
 .daily-phase-focus {

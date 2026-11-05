@@ -118,6 +118,43 @@ export function verificarConteudoSemanal({ conteudo, escada, fases, conteudoDaFa
   }
 }
 
+/* Todo dia termina à 01:00, sem cardio fora do horário de academia; no fim de semana, o estudo só começa às 13:00. */
+export function verificarLimitesDaSemana(plano, weekDays, rotuloDaGrade, check) {
+  const inicioDe = (bloco) => paraMinutos(bloco.time.split(' – ')[0]);
+  weekDays.forEach(({ key }) => {
+    const fim = (plano[key] || []).at(-1)?.time.split(' – ')[1];
+    check(fim === '01:00', `${rotuloDaGrade}/${key}: termina às ${fim}, não à 01:00.`);
+    check(!(plano[key] || []).some((b) => b.type === 'cardio'), `${rotuloDaGrade}/${key}: cardio fora do horário de academia.`);
+  });
+  ['sabado', 'domingo'].forEach((dia) => {
+    const blocos = plano[dia] || [];
+    check(blocos.some((b) => b.time.startsWith('13:00 – ')), `${rotuloDaGrade}/${dia}: nenhum bloco começa às 13:00.`);
+    blocos.filter((b) => inicioDe(b) >= paraMinutos('01:00') && inicioDe(b) < paraMinutos('13:00')).forEach((b) => check(
+      ['sleep', 'break', 'strength'].includes(b.type),
+      `${rotuloDaGrade}/${dia} ${b.time}: bloco de estudo antes das 13:00.`
+    ));
+  });
+}
+
+/* As rotinas acordam, começam a estudar e terminam o dia nos mesmos horários; o fim de semana é igual. */
+const FORA_DO_ESTUDO = ['sleep', 'break', 'cardio', 'strength', 'dinner', 'buffer', 'closing', 'work'];
+
+export function verificarMesmoInicioEFim(plano, planoBase, weekDays, rotuloDaGrade, check) {
+  const inicio = (blocos) => blocos[0]?.time;
+  const primeiroEstudo = (blocos) => blocos.find((b) => !FORA_DO_ESTUDO.includes(b.type))?.time.split(' – ')[0];
+  const fim = (blocos) => blocos.at(-1)?.time.split(' – ')[1];
+  weekDays.forEach(({ key }) => {
+    const [dia, base] = [plano[key] || [], planoBase[key] || []];
+    check(inicio(dia) === inicio(base), `${rotuloDaGrade}/${key}: sono em ${inicio(dia)}, diferente de ${inicio(base)}.`);
+    check(primeiroEstudo(dia) === primeiroEstudo(base), `${rotuloDaGrade}/${key}: estudo começa às ${primeiroEstudo(dia)}, não às ${primeiroEstudo(base)}.`);
+    check(fim(dia) === fim(base), `${rotuloDaGrade}/${key}: termina às ${fim(dia)}, não às ${fim(base)}.`);
+  });
+  ['sabado', 'domingo'].forEach((dia) => check(
+    (plano[dia] || []).map((b) => b.time).join() === (planoBase[dia] || []).map((b) => b.time).join(),
+    `${rotuloDaGrade}/${dia}: horários diferentes entre as rotinas.`
+  ));
+}
+
 /* A fase só troca o conteúdo: a sequência de horários é a mesma da grade base. */
 export function verificarHorariosDaFase(plano, planoBase, weekDays, rotulo, check) {
   const assinatura = (grade, dia) => (grade[dia] || []).map((b) => `${b.time}|${b.dur}|${b.kind}|${Boolean(b.condicional)}`).join('\n');

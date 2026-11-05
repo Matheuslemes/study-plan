@@ -9,14 +9,15 @@
 ═══════════════════════════════════════════════ */
 
 export const CONFIG = {
-  meses: 36,
-  semanas: 156,
+  // Perfil padrão, no ritmo garantido de 25h/semana. O perfil integral dá ~102 semanas e ~23 meses.
+  meses: 55,
+  semanas: 240,
   fases: 12,
   horasPorFase: 500,
   horasTotais: 6000,
-  focoSemanalHoras: '36–40h',
-  focoDiaUtil: '6h25',
-  sonoDiario: '7h30',
+  focoSemanalHoras: '25h10',
+  focoDiaUtil: '3h50',
+  sonoDiaUtil: '4h30',
   bufferSemanalHoras: 3,
   criterioAvanco: 0.8
 };
@@ -54,37 +55,37 @@ export const PBG = [
 
 export const syncCycles = [
   {
-    title: 'Ciclo 1 — Base de engenharia', period: 'Meses 1–6', phases: 'Fases 1–2', color: 'var(--ui-blue)',
+    title: 'Ciclo 1 — Base de engenharia', period: 'Sem 1–40 · estimativa', phases: 'Fases 1–2', color: 'var(--ui-blue)',
     goal: 'Consolidar Java, SQL, Git, Spring Boot, REST e JPA. Nenhuma tecnologia complementar compete por espaço nesta base.',
     tracks: ['Java 21', 'SQL/PostgreSQL', 'Spring Boot', 'JPA', 'Git', 'DSA', 'Inglês'],
     output: 'API REST autenticada e documentada + 50 exercícios de Java e 30 de SQL resolvidos.'
   },
   {
-    title: 'Ciclo 2 — Qualidade e entrega', period: 'Meses 7–12', phases: 'Fases 3–4', color: 'var(--ui-teal)',
-    goal: 'Testes profissionais, Docker, CI/CD (antecipado do mês 22) e módulo forte de segurança. É aqui que o código vira entrega confiável.',
+    title: 'Ciclo 2 — Qualidade e entrega', period: 'Sem 41–80 · estimativa', phases: 'Fases 3–4', color: 'var(--ui-teal)',
+    goal: 'Testes profissionais, Docker, CI/CD (antecipado) e módulo forte de segurança. É aqui que o código vira entrega confiável.',
     tracks: ['JUnit/Testcontainers', 'Docker', 'GitHub Actions', 'OWASP', 'OAuth2', 'CLF-C02'],
-    output: 'Lab de Docker e CI com pipeline verde, suíte de testes escrita do zero, checklist OWASP aplicado e CLF-C02 no mês 8.'
+    output: 'Lab de Docker e CI com pipeline verde, suíte de testes escrita do zero, checklist OWASP aplicado e CLF-C02 na Fase 3.'
   },
   {
-    title: 'Ciclo 3 — Produção e operação', period: 'Meses 13–18', phases: 'Fases 5–6', color: 'var(--track-ia)',
+    title: 'Ciclo 3 — Produção e operação', period: 'Sem 81–120 · estimativa', phases: 'Fases 5–6', color: 'var(--track-ia)',
     goal: 'Performance medida, cache com Redis e observabilidade completa. Aprender a operar o próprio software antes de distribuí-lo.',
     tracks: ['EXPLAIN/Índices', 'Redis', 'OpenTelemetry', 'Prometheus/Grafana', 'SLO', 'Resiliência'],
     output: 'Relatório de performance antes/depois, lab de cache com Redis e lab de observabilidade com dashboard e runbook.'
   },
   {
-    title: 'Ciclo 4 — Arquitetura e sistemas distribuídos', period: 'Meses 19–24', phases: 'Fases 7–8', color: 'var(--track-git)',
+    title: 'Ciclo 4 — Arquitetura e sistemas distribuídos', period: 'Sem 121–160 · estimativa', phases: 'Fases 7–8', color: 'var(--track-git)',
     goal: 'Arquitetura hexagonal, DDD e, em seguida, mensageria integrada à arquitetura distribuída — Kafka como meio, nunca como fase isolada.',
     tracks: ['Hexagonal', 'DDD', 'C4', 'ADR/RFC', 'Kafka', 'Outbox/Saga', 'CQRS'],
     output: 'Exercício de refatoração para hexagonal, lab de Kafka com outbox e DLQ, e 5 ADRs completos.'
   },
   {
-    title: 'Ciclo 5 — Cloud e escala', period: 'Meses 25–30', phases: 'Fases 9–10', color: 'var(--ui-sky)',
-    goal: 'Deploy real em AWS com Terraform e Kubernetes, SAA-C03 no mês 26, e System Design praticado semanalmente.',
+    title: 'Ciclo 5 — Cloud e escala', period: 'Sem 161–200 · estimativa', phases: 'Fases 9–10', color: 'var(--ui-sky)',
+    goal: 'Deploy real em AWS com Terraform e Kubernetes, SAA-C03 na Fase 9, e System Design praticado semanalmente.',
     tracks: ['AWS', 'Terraform', 'Kubernetes', 'Well-Architected', 'System Design', 'SAA-C03'],
     output: 'Ambiente cloud provisionado por Terraform com custo medido, lab de Kubernetes e 12 documentos de system design.'
   },
   {
-    title: 'Ciclo 6 — Complementares e senioridade', period: 'Meses 31–36', phases: 'Fases 11–12', color: 'var(--track-sec)',
+    title: 'Ciclo 6 — Complementares e senioridade', period: 'Sem 201–240 · estimativa', phases: 'Fases 11–12', color: 'var(--track-sec)',
     goal: 'Só agora entram Frontend, Python e IA aplicada — sobre uma base backend consolidada. Depois, portfólio e entrevistas.',
     tracks: ['React/TypeScript', 'Python/FastAPI', 'LLMs/RAG', 'Matemática aplicada', 'Portfólio', 'Entrevistas'],
     output: 'DevCore ampliado com React, FastAPI e RAG avaliado no mesmo produto, portfólio publicado e prontidão para entrevista sênior.'

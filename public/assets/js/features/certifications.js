@@ -15,12 +15,12 @@ const CHAVE = 'certificacoes';
 const CERTS = [
   {
     id: 'clf', nome: 'CLF-C02', titulo: 'AWS Cloud Practitioner',
-    fase: 3, mesAlvo: 8, cor: '#22d3b0',
+    fase: 3, cor: '#22d3b0',
     passos: ['Cloud concepts, regiões e AZs', 'IAM, S3, EC2, RDS, VPC', 'Billing, budgets e Free Tier', 'Simulado ≥ 80%']
   },
   {
     id: 'saa', nome: 'SAA-C03', titulo: 'AWS Solutions Architect Associate',
-    fase: 9, mesAlvo: 26, cor: '#38bdf8',
+    fase: 9, cor: '#38bdf8',
     passos: ['Arquiteturas resilientes e multi-AZ', 'Compute, storage e rede', 'Segurança, IAM e KMS', 'Custo e Well-Architected', 'Simulados ≥ 80%']
   }
 ];
@@ -71,7 +71,7 @@ export function renderCertificacoes(containerId) {
         <span class="cert-status cert-status-${d.status}">${STATUS[d.status]}</span>
       </div>
       <div class="cert-meta">
-        <span>Fase ${c.fase} · alvo mês ${c.mesAlvo}</span>
+        <span>Fase ${c.fase}</span>
         <label class="cert-alvo">data-alvo
           <input type="date" data-cert-alvo="${c.id}" value="${d.alvo}">
         </label>

@@ -1,4 +1,4 @@
-import { weekDays, weeklyFocusByDay, dailyPlansByDay, monthlyCycle, PERFIS_ROTINA, perfilRotina, setPerfilRotina, isArchitecture, weeklyHours } from '../core/study-context.js';
+import { weekDays, weeklyFocusByDay, dailyPlansByDay, monthlyCycle, PERFIS_ROTINA, perfilRotina, setPerfilRotina } from '../core/study-context.js';
 /* ═══════════════════════════════════════════════
    FEATURES / ROUTINE — rotina diária, semanal e mensal
 ═══════════════════════════════════════════════ */
@@ -18,7 +18,6 @@ export function getDailyColor(block) {
 export function renderSeletorDePerfil(containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
-
   const atual = perfilRotina();
   el.innerHTML = `
     <div class="phase-picker">
@@ -26,26 +25,12 @@ export function renderSeletorDePerfil(containerId) {
       <select id="perfilRotinaSelect" class="phase-picker-select">
         ${Object.entries(PERFIS_ROTINA).map(([id, perfil]) => `<option value="${id}"${id === atual ? ' selected' : ''}>${escapeHtml(perfil.nome)}</option>`).join('')}
       </select>
-      <span class="phase-picker-hint" id="perfilRotinaHint"></span>
-      <p class="routine-profile-warning" id="perfilRotinaAviso" role="note" hidden></p>
+      <span class="phase-picker-hint">${escapeHtml(PERFIS_ROTINA[atual].resumo)} · dias úteis das 05:30 à 01:00</span>
     </div>`;
-
-  const atualizarDetalhes = () => {
-    const perfil = PERFIS_ROTINA[perfilRotina()];
-    // Sem horário fixo, a Arquitetura usa a carga escolhida, não as horas do Backend.
-    document.getElementById('perfilRotinaHint').textContent = isArchitecture() && !perfil.horasSemanais
-      ? `${weeklyHours()}h por semana em blocos flexíveis · sono 7h30`
-      : perfil.resumo;
-    const aviso = document.getElementById('perfilRotinaAviso');
-    aviso.textContent = perfil.aviso || '';
-    aviso.hidden = !perfil.aviso;
-  };
-
-  atualizarDetalhes();
   document.getElementById('perfilRotinaSelect').addEventListener('change', async (e) => {
     setPerfilRotina(e.target.value);
-    // Estimativas e textos dependem da carga do perfil e só são montados no
-    // carregamento; a recarga volta para a aba da rotina.
+    // Carga, prazos e textos dependem do perfil e só são montados no carregamento;
+    // a recarga volta para a aba da rotina.
     await flushProgress();
     location.hash = 'tabDaily';
     location.reload();

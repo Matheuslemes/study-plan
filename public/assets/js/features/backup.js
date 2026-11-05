@@ -2,7 +2,7 @@
    FEATURES / BACKUP — exportar e importar progresso (STUDY-054)
 
    Todo o estado vive em localStorage, que é por navegador e some
-   se o cache for limpo. Um plano de 36 meses precisa de saída:
+   se o cache for limpo. Um plano longo precisa de saída:
    baixar um JSON e restaurá-lo em outra máquina.
 
    Usa exportarTudo/importarTudo de core/storage.js.

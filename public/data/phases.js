@@ -17,7 +17,7 @@ export const P = [
   {
     "id": 1,
     "l": "Fase 1",
-    "w": "Sem 1–13 · Meses 1–3",
+    "w": "Sem 1–20 · estimativa",
     "h": 500,
     "t": "Fundamentos, Java Core e SQL",
     "cand": false,
@@ -33,7 +33,7 @@ export const P = [
       "Collections Framework em Java: escolher entre List, Set, Map, Queue e Deque pela complexidade e pela semântica, não por hábito. critério observável: justificar por Big O a estrutura escolhida em um problema real",
       "Contrato de equals em entidades e value objects: reflexividade, simetria, transitividade, consistência e comparação com null. critério observável: escrever um equals correto e um teste que quebre se o contrato for violado",
       "Contrato de hashCode: coerência com equals, boa distribuição e efeito prático em HashMap e HashSet. critério observável: demonstrar o bug de usar um objeto mutável mal implementado como chave de HashMap",
-      "Rotina fixa 3×/semana, 40min, do mês 1 ao 36 sem interrupção — consistência vence volume. critério observável: manter a sequência de sessões registrada",
+      "Rotina fixa 3×/semana, 40min, do início ao fim do plano, sem interrupção — consistência vence volume. critério observável: manter a sequência de sessões registrada",
       "Método: resolver, explicar em voz alta e reimplementar sem consultar a solução. critério observável: reimplementar de memória o problema do dia anterior",
       "Meta da fase: 60 problemas fáceis resolvidos E explicados. critério observável: cada solução tem a análise de complexidade escrita"
     ],
@@ -81,13 +81,13 @@ export const P = [
     ],
     "fin": [
       "Revisão financeira mensal de 1h, fora do cronograma técnico semanal — cria o hábito sem competir com o estudo. critério observável: 12 revisões mensais registradas ao longo do ano",
-      "Orçamento, reserva de emergência e controle de gastos: montar o básico que sustenta 36 meses de estudo. critério observável: um orçamento escrito e uma reserva-alvo definida"
+      "Orçamento, reserva de emergência e controle de gastos: montar o básico que sustenta o plano de estudo. critério observável: um orçamento escrito e uma reserva-alvo definida"
     ]
   },
   {
     "id": 2,
     "l": "Fase 2",
-    "w": "Sem 14–26 · Meses 4–6",
+    "w": "Sem 21–40 · estimativa",
     "h": 500,
     "t": "Java avançado, Spring Boot, REST e JPA",
     "cand": false,
@@ -119,7 +119,7 @@ export const P = [
       "Primeiros ADRs formais: escolha de banco, estratégia de autenticação e padrão de erro da API. critério observável: um ADR versionado com contexto, alternativas, decisão e trade-off"
     ],
     "devops": [
-      "Introdução ao Docker (mês 6): Dockerfile da aplicação e container do PostgreSQL, entendendo camadas e cache de build. critério observável: subir app + banco com um comando e explicar cada camada do Dockerfile",
+      "Introdução ao Docker: Dockerfile da aplicação e container do PostgreSQL, entendendo camadas e cache de build. critério observável: subir app + banco com um comando e explicar cada camada do Dockerfile",
       "Preparação para CI/CD — o pipeline completo é o núcleo da Fase 3; aqui, automatizar build e testes localmente. critério observável: um script que builda e testa do zero, sem passos manuais"
     ],
     "sec": [
@@ -151,7 +151,7 @@ export const P = [
   {
     "id": 3,
     "l": "Fase 3",
-    "w": "Sem 27–39 · Meses 7–9",
+    "w": "Sem 41–60 · estimativa",
     "h": 500,
     "t": "Testes, Docker e CI/CD",
     "cand": false,
@@ -183,11 +183,11 @@ export const P = [
     "devops": [
       "Docker de produção: Dockerfile multi-stage, imagem enxuta, .dockerignore e ordem de camadas para aproveitar o cache. critério observável: reduzir o tamanho da imagem final e explicar o ganho de cada etapa",
       "Docker Compose real: app + banco + cache, healthchecks, logs e variáveis por ambiente. critério observável: subir a stack inteira com um comando, com healthcheck verde antes de aceitar tráfego",
-      "CI/CD (antecipado — antes era mês 22): GitHub Actions com build, testes, lint e validação de PR. critério observável: um pipeline que roda em cada PR e bloqueia o merge se algo falha",
+      "CI/CD (antecipado): GitHub Actions com build, testes, lint e validação de PR. critério observável: um pipeline que roda em cada PR e bloqueia o merge se algo falha",
       "Pipeline verde obrigatório antes de qualquer merge — a partir daqui é regra permanente. critério observável: a branch principal só recebe merge com todos os checks verdes"
     ],
     "sec": [
-      "Segurança no pipeline (início do módulo forte, mês 8): SAST, SCA e verificação de dependências vulneráveis no CI. critério observável: o pipeline sinaliza uma dependência vulnerável e barra o merge",
+      "Segurança no pipeline (início do módulo forte): SAST, SCA e verificação de dependências vulneráveis no CI. critério observável: o pipeline sinaliza uma dependência vulnerável e barra o merge",
       "Gestão de secrets em CI: variáveis protegidas, mascaradas no log e nunca em código. critério observável: demonstrar que um secret usado no pipeline não aparece no log nem no repositório"
     ],
     "pratica": [
@@ -202,7 +202,7 @@ export const P = [
     "ia": ["Trilha inativa nesta fase — entra na Fase 11."],
     "aws": {
       "cert": "CLF-C02 — AWS Cloud Practitioner",
-      "exam": "Prova no mês 8",
+      "exam": "Prova na Fase 3",
       "topics": [
         "Cloud concepts: regiões, AZs, modelos IaaS/PaaS/SaaS e o modelo de responsabilidade compartilhada. critério observável: explicar o que é responsabilidade do provedor e o que é sua num cenário dado",
         "IAM, S3, EC2, RDS, VPC e CloudWatch em visão geral — o que cada serviço resolve. critério observável: mapear um serviço a um problema real da sua aplicação",
@@ -220,7 +220,7 @@ export const P = [
   {
     "id": 4,
     "l": "Fase 4",
-    "w": "Sem 40–52 · Meses 10–12",
+    "w": "Sem 61–80 · estimativa",
     "h": 500,
     "t": "Segurança aplicada e qualidade de código",
     "cand": false,
@@ -251,7 +251,7 @@ export const P = [
       "Ambientes separados com configuração por ambiente e nenhum segredo no repositório. critério observável: promover a mesma imagem entre ambientes trocando só a configuração, sem rebuild"
     ],
     "sec": [
-      "MÓDULO FORTE (antecipado — antes era mês 25): OWASP Top 10 aplicado endpoint a endpoint, com teste que prova a mitigação. critério observável: para cada risco relevante, um teste que falha antes e passa depois da correção",
+      "MÓDULO FORTE (antecipado): OWASP Top 10 aplicado endpoint a endpoint, com teste que prova a mitigação. critério observável: para cada risco relevante, um teste que falha antes e passa depois da correção",
       "OAuth2 e OpenID Connect: fluxos (authorization code, client credentials), escopos, tokens, expiração e revogação. critério observável: proteger a API com OAuth2 e demonstrar acesso negado com token expirado ou sem escopo",
       "Proteções de borda: rate limiting, CORS correto, headers de segurança, CSRF e validação em profundidade. critério observável: comprovar cada proteção com uma requisição que deveria ser bloqueada e é",
       "Checklist de segurança obrigatório por release — a partir daqui, permanente e transversal. critério observável: nenhuma release sem o checklist preenchido e revisável"
@@ -282,7 +282,7 @@ export const P = [
   {
     "id": 5,
     "l": "Fase 5",
-    "w": "Sem 53–65 · Meses 13–15",
+    "w": "Sem 81–100 · estimativa",
     "h": 500,
     "t": "Performance, banco avançado e Redis",
     "cand": false,
@@ -340,7 +340,7 @@ export const P = [
   {
     "id": 6,
     "l": "Fase 6",
-    "w": "Sem 66–78 · Meses 16–18",
+    "w": "Sem 101–120 · estimativa",
     "h": 500,
     "t": "Observabilidade e operação em produção",
     "cand": false,
@@ -397,7 +397,7 @@ export const P = [
   {
     "id": 7,
     "l": "Fase 7",
-    "w": "Sem 79–91 · Meses 19–21",
+    "w": "Sem 121–140 · estimativa",
     "h": 500,
     "t": "Arquitetura de software e DDD",
     "cand": false,
@@ -455,7 +455,7 @@ export const P = [
   {
     "id": 8,
     "l": "Fase 8",
-    "w": "Sem 92–104 · Meses 22–24",
+    "w": "Sem 141–160 · estimativa",
     "h": 500,
     "t": "Sistemas distribuídos, mensageria e Kafka",
     "cand": false,
@@ -499,7 +499,7 @@ export const P = [
     "ia": ["Trilha inativa nesta fase — entra na Fase 11."],
     "aws": {
       "cert": "Preparação SAA-C03 inicia",
-      "exam": "Estudo dirigido a partir do mês 24",
+      "exam": "Estudo dirigido a partir da Fase 8",
       "topics": [
         "SQS, SNS, EventBridge e Kinesis comparados ao Kafka estudado — quando o gerenciado vence o auto-hospedado. critério observável: escolher entre Kafka e um serviço AWS para um caso, justificando por custo e operação",
         "Início da preparação estruturada para a prova SAA-C03 da Fase 9. critério observável: um plano de estudo da SAA-C03 com marcos até a data da prova"
@@ -515,7 +515,7 @@ export const P = [
   {
     "id": 9,
     "l": "Fase 9",
-    "w": "Sem 105–117 · Meses 25–27",
+    "w": "Sem 161–180 · estimativa",
     "h": 500,
     "t": "Cloud AWS, IaC e Kubernetes",
     "cand": false,
@@ -558,7 +558,7 @@ export const P = [
     "ia": ["Trilha inativa nesta fase — entra na Fase 11."],
     "aws": {
       "cert": "SAA-C03 — Solutions Architect Associate",
-      "exam": "Prova no mês 26",
+      "exam": "Prova na Fase 9",
       "topics": [
         "Desenho de arquiteturas resilientes, performáticas, seguras e com custo otimizado (os pilares da SAA-C03). critério observável: resolver uma questão de desenho justificando a escolha pelos quatro eixos",
         "Compute, storage, rede, banco, identidade e monitoramento em profundidade. critério observável: escolher o serviço certo por categoria para um requisito e defender a decisão",
@@ -576,7 +576,7 @@ export const P = [
   {
     "id": 10,
     "l": "Fase 10",
-    "w": "Sem 118–130 · Meses 28–30",
+    "w": "Sem 181–200 · estimativa",
     "h": 500,
     "t": "System Design e escalabilidade",
     "cand": false,
@@ -634,7 +634,7 @@ export const P = [
   {
     "id": 11,
     "l": "Fase 11",
-    "w": "Sem 131–143 · Meses 31–33",
+    "w": "Sem 201–220 · estimativa",
     "h": 500,
     "t": "Frontend, Python e IA aplicada",
     "cand": false,
@@ -718,7 +718,7 @@ export const P = [
   {
     "id": 12,
     "l": "Fase 12",
-    "w": "Sem 144–156 · Meses 34–36",
+    "w": "Sem 221–240 · estimativa",
     "h": 500,
     "t": "Portfólio, entrevistas e senioridade",
     "cand": true,
@@ -729,7 +729,7 @@ export const P = [
     ],
     "dsa": [
       "Reta final: simulados cronometrados, problemas resolvidos em voz alta e comunicação do raciocínio. critério observável: verbalizar a abordagem e a complexidade antes de codar, dentro do tempo",
-      "Fecho do ciclo: ~720 problemas resolvidos ao longo dos 36 meses. critério observável: revisitar sem consulta os padrões-chave e reconhecê-los em problemas novos"
+      "Fecho do ciclo: ~720 problemas resolvidos ao longo de todo o plano. critério observável: revisitar sem consulta os padrões-chave e reconhecê-los em problemas novos"
     ],
     "db": [
       "Revisão de modelagem, performance e decisões de dados para entrevista. critério observável: justificar índice, normalização e escolha SQL/NoSQL em um caso apresentado na hora"
@@ -802,7 +802,7 @@ export const LABS_ENCADEADOS = [
 
 P.forEach((fase, indice) => { fase.lab = LABS_ENCADEADOS[indice]; });
 
-/* ─── Inglês por fase — transversal aos 36 meses ─── */
+/* ─── Inglês por fase — transversal a todo o plano ─── */
 
 export const englishByPhase = {
   1: ["Ler documentação oficial de Java, PostgreSQL e Git sem tradução automática e resumir cinco decisões", "Escrever commits no imperativo e explicar um erro usando root cause e edge case"],

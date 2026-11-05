@@ -11,7 +11,7 @@
 import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { verificarGradeDaSemana } from './verificar-grade.mjs';
+import { verificarGradeDaSemana, verificarLimitesDaSemana, verificarMesmoInicioEFim } from './verificar-grade.mjs';
 
 const root = dirname(dirname(fileURLToPath(import.meta.url)));
 const publicDir = join(root, 'public');
@@ -24,7 +24,7 @@ const { SEQUENCES, OBJECTIVE_EQUIVALENCES, objectiveId, describeObjective } = aw
 const { arquiteturaModules } = await imp('data/arquitetura-advanced.js');
 const { CONFIG } = await imp('data/config.js');
 const { createArchitecturePlan } = await imp('data/sequences/architecture-plan.js');
-const { weekDays } = await imp('data/routine.js');
+const { weekDays, PERFIS_ROTINA, PERFIL_PADRAO } = await imp('data/routine.js');
 
 // ── Registro das sequências ────────────────────────────────
 check(Boolean(SEQUENCES.backend) && Boolean(SEQUENCES.arquitetura),
@@ -46,7 +46,7 @@ const partOf = new Map(arquiteturaModules.map((m) => [m.id, m.part]));
 
 check(Array.isArray(arch.phases) && arch.phases.length === 6,
   `Arquitetura deveria ter 6 etapas; tem ${arch.phases?.length}.`);
-check(arch.weeks === 24 && arch.hours === 480, 'Arquitetura deveria declarar 24 semanas / 480h.');
+check(arch.weeks === 20 && arch.hours === 480, 'Arquitetura deveria declarar 20 semanas / 480h.');
 check(Array.isArray(arch.optional) && arch.optional.length > 0, 'Arquitetura sem aprofundamentos opcionais.');
 
 let moduleRefs = 0;
@@ -90,7 +90,7 @@ for (const p of arch.phases) {
   }
 }
 
-// ── Cadência do perfil trabalho-9-18 ───────────────────────
+// ── Cadência da semana ─────────────────────────────────────
 // Cada dia útil aponta objetivos pelo id estável. Renomear um id ou um módulo não
 // pode esvaziar um horário em silêncio, e nenhum objetivo pode ficar sem horário.
 const DIAS_UTEIS = ['segunda', 'terca', 'quarta', 'quinta', 'sexta'];
@@ -128,15 +128,19 @@ for (const p of arch.phases) {
   check(apoios.has('git'), `Arquitetura ${p.l}: evidências (git) sem janela na semana.`);
   check(p.cadencia?.sexta?.objetivos.some((ref) => ref.startsWith('ingles:')), `Arquitetura ${p.l}: sexta sem defesa em inglês.`);
 
-  for (const mode of ['ideal', 'minima', 'recuperacao']) {
-    const rotulo = `Arquitetura ${p.l}/${mode}`;
-    const { dailyPlansByDay } = createArchitecturePlan(arch, { hours: 25, phaseId: p.id, mode, perfil: 'trabalho-9-18' });
-    verificarGradeDaSemana(dailyPlansByDay, weekDays, rotulo, check);
-    DIAS_UTEIS.forEach((dia) => {
-      const horarios = dailyPlansByDay[dia].map((b) => b.time);
-      check(horarios.includes('06:00 – 07:30') && horarios.includes('00:45 – 01:00'), `${rotulo}/${dia}: fora da grade 06:00–01:00.`);
-      dailyPlansByDay[dia].forEach((b) => (b.topicos || []).forEach((i) => check(i >= 0, `${rotulo}/${dia} ${b.time}: tópico não resolvido.`)));
-    });
+  for (const [perfil, { horasSemanais }] of Object.entries(PERFIS_ROTINA)) {
+    for (const mode of ['ideal', 'minima', 'recuperacao']) {
+      const rotulo = `Arquitetura ${p.l}/${perfil}/${mode}`;
+      const { dailyPlansByDay } = createArchitecturePlan(arch, { hours: horasSemanais, phaseId: p.id, mode, perfil });
+      const { dailyPlansByDay: padrao } = createArchitecturePlan(arch, { hours: PERFIS_ROTINA[PERFIL_PADRAO].horasSemanais, phaseId: p.id, mode });
+      verificarGradeDaSemana(dailyPlansByDay, weekDays, rotulo, check);
+      verificarLimitesDaSemana(dailyPlansByDay, weekDays, rotulo, check);
+      verificarMesmoInicioEFim(dailyPlansByDay, padrao, weekDays, rotulo, check);
+      DIAS_UTEIS.forEach((dia) => {
+        check(dailyPlansByDay[dia].some((b) => b.time.startsWith('06:00 – ')), `${rotulo}/${dia}: estudo não começa às 06:00.`);
+        dailyPlansByDay[dia].forEach((b) => (b.topicos || []).forEach((i) => check(i >= 0, `${rotulo}/${dia} ${b.time}: tópico não resolvido.`)));
+      });
+    }
   }
 }
 
@@ -157,7 +161,7 @@ for (const [from, to] of Object.entries(OBJECTIVE_EQUIVALENCES || {})) {
 evidence.push(`2 sequências (backend 12 fases · arquitetura 6 etapas)`);
 evidence.push(`${moduleRefs} referências de módulo válidas em ${partPagesChecked.size} páginas de parte`);
 evidence.push(`${objectiveCount} objetivos com id único e reversível (describeObjective)`);
-evidence.push(`${cadenciaRefs} horários da cadência com objetivo válido, em 6 etapas × 3 modos de grade 06:00–01:00`);
+evidence.push(`${cadenciaRefs} horários da cadência com objetivo válido, em 6 etapas × 2 perfis × 3 modos, das 06:00 à 01:00`);
 evidence.push(`${arch.diagnostic.length} itens de diagnóstico com href válido`);
 evidence.push(`${Object.keys(OBJECTIVE_EQUIVALENCES || {}).length} equivalências declaradas`);
 

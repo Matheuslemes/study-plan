@@ -1,14 +1,15 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, extname, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { verificarConteudoSemanal, verificarGradeDaSemana, verificarHorariosDaFase } from './verificar-grade.mjs';
+import { verificarConteudoSemanal, verificarGradeDaSemana, verificarHorariosDaFase, verificarLimitesDaSemana, verificarMesmoInicioEFim } from './verificar-grade.mjs';
+import { CONFIG } from '../public/data/config.js';
 import { LABS_ENCADEADOS, P, conteudoDaFase, trilhaAtiva, trilhasAtivas } from '../public/data/phases.js';
 import { CONTEUDO_SEMANAL, ESCADA_DA_SEXTA } from '../public/data/conteudo-semanal.js';
 import { GUIAS_TRILHA } from '../public/data/track-guides.js';
 import { EXERCICIOS_TRILHA } from '../public/data/track-exercises.js';
 import {
   MODOS_ROTINA,
-  PERFIL_INTEGRAL,
+  PERFIL_PADRAO,
   PERFIS_ROTINA,
   dailyPlansByDay,
   dailyPlansByPerfil,
@@ -341,32 +342,46 @@ const javaHub = readFileSync(join(trailsDir, 'java.html'), 'utf8').toLocaleLower
 ));
 check(Object.keys(MODOS_ROTINA).join(',') === 'ideal,minima,recuperacao', 'Protocolo de recuperação incompleto.');
 
-// Perfis de rotina: cada semana cobre 168h, sem buraco nem sobreposição, e cada
-// bloco declara a duração que o seu intervalo realmente tem.
-check(dailyPlansByPerfil[PERFIL_INTEGRAL] === dailyPlansByDay, 'O perfil integral precisa ser a grade de dailyPlansByDay.');
-
-// Perfil com horário fixo: cada trecho marcado no index.html tem texto próprio, e a
-// duração declarada precisa bater com as horas do plano nessa carga.
-const indexHtml = readFileSync(join(publicDir, 'index.html'), 'utf8');
-const trechosDeCarga = [...indexHtml.matchAll(/data-carga="([^"]+)"/g)].map((match) => match[1]);
-const horasDoPlano = P.reduce((total, fase) => total + fase.h, 0);
-Object.values(PERFIS_ROTINA).filter((perfil) => perfil.horasSemanais).forEach((perfil) => {
-  trechosDeCarga.forEach((chave) => check(Boolean(perfil.textos?.[chave]), `Perfil ${perfil.nome}: sem texto para data-carga="${chave}".`));
-  Object.keys(perfil.textos || {}).forEach((chave) => check(trechosDeCarga.includes(chave), `Perfil ${perfil.nome}: texto "${chave}" sem trecho no index.html.`));
-  const semanas = Math.round(horasDoPlano / perfil.horasSemanais);
-  check(perfil.semanas?.endsWith(`${semanas} semanas`), `Perfil ${perfil.nome}: "${perfil.semanas}" não bate com ${semanas} semanas a ${perfil.horasSemanais}h.`);
-  check(perfil.duracao?.endsWith(`${Math.round(semanas / 4.345)} meses`), `Perfil ${perfil.nome}: "${perfil.duracao}" não bate com ${semanas} semanas.`);
-});
+// Perfis de rotina: cada semana cobre 168h, sem buraco nem sobreposição, cada bloco declara
+// a duração que o seu intervalo realmente tem e os dois têm o mesmo início e fim do dia.
+check(dailyPlansByPerfil[PERFIL_PADRAO] === dailyPlansByDay, 'dailyPlansByDay precisa ser a grade do perfil padrão.');
 check(JSON.stringify(Object.keys(PERFIS_ROTINA).sort()) === JSON.stringify(Object.keys(dailyPlansByPerfil).sort()),
   'PERFIS_ROTINA e dailyPlansByPerfil precisam declarar os mesmos perfis.');
 for (const [perfil, plano] of Object.entries(dailyPlansByPerfil)) {
   verificarGradeDaSemana(plano, weekDays, `Rotina ${perfil}`, check);
+  verificarLimitesDaSemana(plano, weekDays, `Rotina ${perfil}`, check);
+  verificarMesmoInicioEFim(plano, dailyPlansByDay, weekDays, `Rotina ${perfil}`, check);
   P.forEach((fase) => {
     const daFase = dailyPlansDaFase(perfil, fase.id);
     verificarGradeDaSemana(daFase, weekDays, `Rotina ${perfil}/${fase.l}`, check);
+    verificarLimitesDaSemana(daFase, weekDays, `Rotina ${perfil}/${fase.l}`, check);
     verificarHorariosDaFase(daFase, plano, weekDays, `Rotina ${perfil}/${fase.l}`, check);
   });
 }
+
+// O prazo de cada perfil precisa bater com as horas do plano, e cada trecho marcado no
+// index.html precisa de texto nos perfis que não são o padrão.
+const indexHtml = readFileSync(join(publicDir, 'index.html'), 'utf8');
+const trechosDeCarga = [...indexHtml.matchAll(/data-carga="([^"]+)"/g)].map((match) => match[1]);
+for (const [id, perfil] of Object.entries(PERFIS_ROTINA)) {
+  const semanas = Math.ceil(CONFIG.horasTotais / perfil.horasSemanais);
+  check(perfil.semanas.endsWith(`${semanas} semanas`), `Perfil ${perfil.nome}: "${perfil.semanas}" não bate com ${semanas} semanas a ${perfil.horasSemanais}h.`);
+  check(perfil.duracao.endsWith(`${Math.round(semanas / 4.345)} meses`), `Perfil ${perfil.nome}: "${perfil.duracao}" não bate com ${semanas} semanas.`);
+  Object.keys(perfil.heroTags).forEach((label) => check(heroTagsData.some((tag) => tag.label === label), `Perfil ${perfil.nome}: a tag "${label}" não existe mais em heroTagsData.`));
+  if (id === PERFIL_PADRAO) continue;
+  trechosDeCarga.forEach((chave) => check(Boolean(perfil.textos?.[chave]), `Perfil ${perfil.nome}: sem texto para data-carga="${chave}".`));
+  Object.keys(perfil.textos || {}).forEach((chave) => check(trechosDeCarga.includes(chave), `Perfil ${perfil.nome}: texto "${chave}" sem trecho no index.html.`));
+}
+const padrao = PERFIS_ROTINA[PERFIL_PADRAO];
+check(padrao.semanas.endsWith(`${CONFIG.semanas} semanas`) && padrao.duracao.endsWith(`${CONFIG.meses} meses`), 'CONFIG precisa declarar o prazo do perfil padrão.');
+check(heroTagsData.some((tag) => tag.label === padrao.duracao) && heroTagsData.some((tag) => tag.label === padrao.semanas), 'Hero sem o prazo do perfil padrão.');
+check(indexHtml.includes(`data-duracao>${padrao.duracao}<`) && indexHtml.includes(`data-semanas>${padrao.semanas}<`), 'index.html precisa descrever o prazo do perfil padrão.');
+
+// O cardio da trilha de Treino fica no horário de academia: nada de segundo turno.
+['treino.html', 'treino/cardio.html', 'treino/execucao.html', 'treino/avaliacao.html', 'treino/ficha.html'].forEach((pagina) => {
+  const conteudo = readFileSync(join(trailsDir, pagina), 'utf8');
+  check(!/dois turnos|2 turnos|turno da manhã|turnos? manhã|turno noite/i.test(conteudo), `${pagina}: ainda prescreve cardio fora do horário de academia.`);
+});
 
 // Semana de cada fase: o mapa aponta para itens reais e cobre todos eles.
 verificarConteudoSemanal({ conteudo: CONTEUDO_SEMANAL, escada: ESCADA_DA_SEXTA, fases: P, conteudoDaFase, trilhaAtiva, trilhasAtivas }, check);
@@ -378,10 +393,6 @@ P.forEach((fase) => {
   ));
 });
 
-Object.values(PERFIS_ROTINA).forEach((perfil) => Object.keys(perfil.heroTags).forEach((label) => check(
-  heroTagsData.some((tag) => tag.label === label),
-  `Perfil ${perfil.nome}: a tag "${label}" não existe mais em heroTagsData.`
-)));
 check(DEPENDENCIAS_CURRICULO.length === 8, `Mapa deveria ter 8 etapas; possui ${DEPENDENCIAS_CURRICULO.length}.`);
 check(TRILHAS_TRANSVERSAIS.length >= 5, 'Mapa não declara trilhas transversais suficientes.');
 check(SIMULADOS_ENTREVISTA.length === 12, `Esperados 12 simulados; encontrados ${SIMULADOS_ENTREVISTA.length}.`);

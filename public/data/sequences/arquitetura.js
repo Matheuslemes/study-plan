@@ -124,7 +124,7 @@ export const architecturePhases = definitions.map((d, i) => {
   objectives.ingles = [objective(`${d.slug}-apresentacao`, 'Apresentar a decisão desta etapa em inglês por cinco minutos e revisar clareza, termos e argumentos. critério observável: gravar a fala e revisar com um checklist de comunicação técnica')];
   objectives.git = [objective(`${d.slug}-evidencias`, 'Versionar código, documentos e evidências desta etapa em commits reproduzíveis. critério observável: um histórico que reconstrói a decisão e a evidência da etapa')];
   objectives.pratica = [objective(`${d.slug}-entrega`, `${d.delivery} critério observável: ${d.proof}`)];
-  const p = { id: i + 1, slug: d.slug, l: `A${i + 1}`, t: d.title, w: `Sem ${i * 4 + 1}–${i * 4 + 4} · referência a 20h/sem`, h: 80, cand: false, cn: '', modules: d.modules, objectives, cadencia: d.cadencia,
+  const p = { id: i + 1, slug: d.slug, l: `A${i + 1}`, t: d.title, w: `Sem ${Math.floor(i * 3.2) + 1}–${Math.ceil((i + 1) * 3.2)} · estimativa`, h: 80, cand: false, cn: '', modules: d.modules, objectives, cadencia: d.cadencia,
     lab: { titulo: d.title, entrega: d.delivery, dependeDe: i ? `arquitetura-a${i}` : null }, proof: d.proof };
   for (const key of ['java', 'dsa', 'db', 'git', 'arquitetura', 'devops', 'sec', 'pratica', 'frontend', 'py', 'ia', 'math', 'fin', 'ingles']) p[key] = (objectives[key] || []).map(o => o.text);
   p.aws = { cert: objectives.aws.length ? 'AWS aplicada · certificação opcional' : 'Sem AWS nesta etapa', exam: '', topics: objectives.aws.map(o => o.text) };
@@ -141,7 +141,7 @@ export const architectureDiagnostic = [
 export const architectureSequence = {
   id: 'arquitetura', name: 'Arquitetura de Soluções e Integração', shortName: 'Arquitetura',
   description: 'Aprofundamento para quem já constrói APIs e opera aplicações. Decisões, contratos e evidências no DevCore de pedidos, pagamentos e conciliação.',
-  phases: architecturePhases, weeks: 24, hours: 480, weeklyHours: 20, mainTrack: 'arquitetura',
+  phases: architecturePhases, weeks: 20, hours: 480, weeklyHours: 25, mainTrack: 'arquitetura',
   optional: ['Frontend', 'Python e IA', 'DSA para entrevistas', 'Métodos formais', 'Simulação determinística', 'Células e papers'],
   diagnostic: architectureDiagnostic
 };

@@ -736,7 +736,7 @@
   <header class="top">
     <div class="wrap">
       <div class="top-row">
-        <div class="brand">Ficha de treino<small>7 dias · split por grupo · cardio 2 turnos</small></div>
+        <div class="brand">Ficha de treino<small>7 dias · split por grupo · cardio na academia</small></div>
         <button class="ghost-btn" id="resetBtn" type="button">Zerar</button>
       </div>
       <div class="days" id="days" role="tablist" aria-label="Dia da semana"></div>
@@ -774,9 +774,9 @@
         <p><strong>8–10 min</strong> aquecimento em Zona 2 → <strong>4 × 4 min</strong> a 85–95% FC máx, com
           <strong>3 min</strong> de recuperação ativa a 60–70% entre eles → <strong>5 min</strong> de volta à calma.</p>
         <ul>
-          <li>Somente <strong>segunda e quinta de manhã</strong> — 34 h antes de cada dia de perna (terça e sexta).</li>
+          <li>Somente <strong>segunda e quinta, depois da musculação</strong> — 24 h antes de cada dia de perna (terça e sexta).</li>
           <li>Bicicleta, elíptico ou remo. <strong>Sem corrida.</strong></li>
-          <li>Coma 20–30 g de carboidrato 30–45 min antes — este turno não é em jejum.</li>
+          <li>Coma 20–30 g de carboidrato 30–45 min antes da academia.</li>
         </ul>
       </div>
     </details>
@@ -833,8 +833,7 @@
       var PROGRAMA = {
         seg: {
           nome: 'Peito + tríceps', foco: 'Peito 20 séries + tríceps complementar + abdômen',
-          manha: '4x4 norueguês · 40 min · comer algo leve 30–45 min antes',
-          pos: 'Zona 2 · 15 min · bike leve',
+          cardio: '4x4 norueguês · 40 min, depois Zona 2 15 min · bike · comer algo leve 30–45 min antes da academia',
           aq: AQ_UPPER,
           ex: [
             { n: 'Supino reto', v: 'barra ou halteres', s: 4, r: '5–8', rir: '2', d: 150, o: 'Escápulas retraídas e fixas, pés no chão' },
@@ -850,8 +849,7 @@
         },
         ter: {
           nome: 'Pernas A — quadríceps', foco: 'Quadríceps 16 + glúteo + panturrilha',
-          manha: 'Zona 2 · 35 min · em jejum · bike ou esteira inclinada',
-          pos: 'Zona 1 · 10 min · bike leve — nada além disso',
+          cardio: 'Zona 1–2 · 45 min · bike leve ou esteira inclinada — nada além disso',
           aq: AQ_LOWER,
           ex: [
             { n: 'Agachamento', v: 'livre ou no Smith', s: 4, r: '5–8', rir: '2', d: 150, o: 'Coxa paralela, lombar neutra' },
@@ -865,8 +863,7 @@
         },
         qua: {
           nome: 'Costas + bíceps', foco: 'Costas 20 séries + bíceps complementar + abdômen',
-          manha: 'Zona 2 · 40 min · em jejum',
-          pos: 'Zona 2 · 15 min',
+          cardio: 'Zona 2 · 55 min',
           aq: AQ_UPPER,
           ex: [
             { n: 'Puxada alta', v: 'ou barra fixa assistida', s: 4, r: '6–10', rir: '2', d: 150, o: 'Peito para cima, cotovelo em direção ao bolso' },
@@ -883,8 +880,7 @@
         },
         qui: {
           nome: 'Ombros', foco: 'Deltoide completo + antebraço + abdômen',
-          manha: '4x4 norueguês · 40 min · comer algo leve 30–45 min antes',
-          pos: 'Zona 2 · 15 min',
+          cardio: '4x4 norueguês · 40 min, depois Zona 2 15 min · bike · comer algo leve 30–45 min antes da academia',
           aq: AQ_UPPER,
           ex: [
             { n: 'Desenvolvimento na máquina', v: 'composto do dia', s: 6, r: '8–12', rir: '1–2', d: 150, o: 'Estabilização resolvida pela máquina. Abre a sessão' },
@@ -899,8 +895,7 @@
         },
         sex: {
           nome: 'Pernas B — posterior', foco: 'Isquiotibiais, glúteo + quadríceps complementar',
-          manha: 'Zona 2 · 30 min · em jejum',
-          pos: 'Zona 1 · 10 min · bike leve — nada além disso',
+          cardio: 'Zona 1–2 · 40 min · bike leve — nada além disso',
           aq: AQ_LOWER,
           ex: [
             { n: 'Elevação pélvica', v: 'hip thrust', s: 4, r: '8–12', rir: '1–2', d: 150, o: 'Pausa de 1 s no topo, queixo no peito' },
@@ -915,8 +910,7 @@
         },
         sab: {
           nome: 'Ombro + braços', foco: 'Bloco de ombro primeiro, depois bíceps e tríceps alternados',
-          manha: 'Zona 2 · 40 min · em jejum',
-          pos: 'Zona 2 · 20 min',
+          cardio: 'Zona 2 · 60 min',
           aq: AQ_UPPER,
           ex: [
             { n: 'Desenvolvimento sentado', v: 'ombro · halteres · composto do dia', s: 4, r: '6–10', rir: '2', d: 150, o: 'Com encosto. Em pé só com core mais forte' },
@@ -932,9 +926,9 @@
         },
         dom: {
           nome: 'Descanso ativo', foco: 'Zona 2 longo e mobilidade — sem musculação',
-          manha: 'Zona 2 longo · 40–50 min · caminhada, bike ou elíptico',
-          pos: '—', aq: '', ex: [],
-          livre: 'As séries que ficavam aqui foram distribuídas: panturrilha para terça e sexta, abdômen e antebraço para quinta. O volume semanal de cada grupo não mudou — mudou o dia. Faça 8 min de mobilidade (90/90 de quadril, rotação torácica, tornozelo na parede, gato-camelo), durma 7 a 9 horas e prepare a semana: comida, roupa de treino e horário do turno da manhã.'
+          cardio: 'Zona 2 longo · 40–50 min · esteira inclinada, bike ou elíptico',
+      aq: '', ex: [],
+          livre: 'As séries que ficavam aqui foram distribuídas: panturrilha para terça e sexta, abdômen e antebraço para quinta. O volume semanal de cada grupo não mudou — mudou o dia. Faça 8 min de mobilidade (90/90 de quadril, rotação torácica, tornozelo na parede, gato-camelo), durma 7 a 9 horas e prepare a semana: comida e roupa de treino. Se a manhã for de organizar a casa, o Zona 2 não é reposto.'
         }
       };
 
@@ -1193,11 +1187,10 @@
         html += '</div>';
 
         // contexto colapsado em uma linha
-        var resumoCtx = d.manha.split(' · ').slice(0, 2).join(' · ');
+        var resumoCtx = d.cardio.split(' · ').slice(0, 2).join(' · ');
         html += '<details class="ctx"><summary><i>Contexto</i><u>' + esc(resumoCtx) + '</u></summary>' +
-          '<div class="ctx-body"><p><strong>Manhã:</strong> ' + esc(d.manha) + '</p>' +
+          '<div class="ctx-body"><p><strong>' + (d.ex.length ? 'Cardio, depois da musculação:' : 'Cardio:') + '</strong> ' + esc(d.cardio) + '</p>' +
           (d.aq ? '<p><strong>Aquecimento:</strong> ' + esc(d.aq) + '</p>' : '') +
-          (d.pos && d.pos !== '—' ? '<p><strong>Pós-treino:</strong> ' + esc(d.pos) + '</p>' : '') +
           '</div></details>';
 
         if (!d.ex.length) {

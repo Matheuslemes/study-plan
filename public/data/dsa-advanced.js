@@ -2,7 +2,7 @@
  * Fonte única da Academia de Algoritmos e Estruturas de Dados (DSA).
  *
  * Preenche o "buraco estrutural" do §6.1 do diagnóstico: a trilha que o
- * cronograma executa 3×/semana durante 36 meses não tinha academia. Aqui ela
+ * cronograma executa 3×/semana durante todo o plano não tinha academia. Aqui ela
  * cobre a curva inteira — da análise de complexidade (faixa 1) à fronteira
  * (randomizados, streaming, NP-completude, aproximação, geometria).
  *

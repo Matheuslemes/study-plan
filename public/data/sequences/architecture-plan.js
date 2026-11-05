@@ -1,13 +1,12 @@
 // Planejamento puro: conteúdo e distribuição da sequência, sem persistência nem DOM.
-import { trilhaAtiva } from '../phases.js';
 import { PC } from '../config.js';
-import { weekDays, buildWorkWeekPlan, PERFIS_ROTINA, PERFIL_INTEGRAL } from '../routine.js';
+import { weekDays, buildWeekPlan, PERFIS_ROTINA, PERFIL_PADRAO } from '../routine.js';
 
 /*
- * Perfil trabalho-9-18: a grade e o sono vêm de routine.js. Aqui ficam a cadência
- * fixa da semana e os textos; o conteúdo de cada dia vem de `cadencia`, em arquitetura.js.
+ * A grade e o sono vêm de routine.js. Aqui ficam a cadência fixa da semana e os
+ * textos; o conteúdo de cada dia vem de `cadencia`, em arquitetura.js.
  */
-const SLOTS_TRABALHO = {
+const SLOTS_DA_SEMANA = {
   segunda: { nome: 'Enquadrar', intencao: 'definir o problema, os requisitos e as alternativas' },
   terca: { nome: 'Modelar e decidir', intencao: 'transformar o problema em modelo e decisão registrada' },
   quarta: { nome: 'Experimentar e dados', intencao: 'examinar o mecanismo no concreto e decidir os dados' },
@@ -42,7 +41,7 @@ function blocoDeObjetivo(phase, ref) {
 }
 
 function configDoDia(phase, chaveDoDia) {
-  const slot = SLOTS_TRABALHO[chaveDoDia];
+  const slot = SLOTS_DA_SEMANA[chaveDoDia];
   const { temas, objetivos, modulos, apoio } = phase.cadencia[chaveDoDia];
   const estudo = blocoDeObjetivo(phase, objetivos[0]);
   const pitch = objetivos[1]?.startsWith('ingles:');
@@ -63,16 +62,16 @@ function configDoDia(phase, chaveDoDia) {
 }
 
 const ajustesDoSabado = (phase) => ({
-  '08:00 – 10:00': { block: 'Exercícios dos módulos da etapa', k: 'arquitetura', tracks: ['Exercícios', 'Módulos da etapa'], modulos: phase.modules, d: 'Resolver os exercícios dos módulos da academia ligados à etapa, aplicando ao DevCore. Tentar antes de consultar a referência.' },
-  '10:30 – 12:30': { block: 'Consolidar a entrega da etapa', priority: 'Entrega', kind: 'entrega', tracks: ['Entrega', 'Evidência', 'Git'], d: `Fechar a entrega da semana. Critério: ${phase.proof}` },
-  '14:00 – 15:00': { topicos: [], d: 'Um desenho completo em 45 minutos + 15 de revisão, usando o DevCore: requisitos, estimativa de capacidade, API, modelo de dados, gargalos e trade-offs. Ganha peso em A4 e A5.' }
+  '13:00 – 15:00': { block: 'Exercícios dos módulos da etapa', k: 'arquitetura', tracks: ['Exercícios', 'Módulos da etapa'], modulos: phase.modules, d: 'Resolver os exercícios dos módulos da academia ligados à etapa, aplicando ao DevCore. Tentar antes de consultar a referência.' },
+  '15:30 – 17:30': { block: 'Consolidar a entrega da etapa', priority: 'Entrega', kind: 'entrega', tracks: ['Entrega', 'Evidência', 'Git'], d: `Fechar a entrega da semana. Critério: ${phase.proof}` },
+  '20:30 – 21:30': { topicos: [], d: 'Um desenho completo em 45 minutos + 15 de revisão, usando o DevCore: requisitos, estimativa de capacidade, API, modelo de dados, gargalos e trade-offs. Ganha peso em A4 e A5.' }
 });
 
-function architectureWorkRoutine(P, phaseId, mode) {
+function architectureRoutine(P, phaseId, mode, perfil) {
   const phase = P.find(p => p.id === phaseId) || P[0];
   const reduced = mode === 'minima' || mode === 'recuperacao';
-  const configs = Object.fromEntries(Object.keys(SLOTS_TRABALHO).map(chave => [chave, configDoDia(phase, chave)]));
-  const semana = buildWorkWeekPlan(configs);
+  const configs = Object.fromEntries(Object.keys(SLOTS_DA_SEMANA).map(chave => [chave, configDoDia(phase, chave)]));
+  const semana = buildWeekPlan(configs, perfil);
   const ajustes = ajustesDoSabado(phase);
   semana.sabado = semana.sabado.map(bloco => ({ ...bloco, ...ajustes[bloco.time] }));
   const plans = !reduced ? semana : Object.fromEntries(Object.entries(semana).map(([chave, blocos]) => [chave, blocos.map(bloco => (
@@ -89,52 +88,19 @@ function architectureWorkRoutine(P, phaseId, mode) {
   const focus = {};
   weekDays.forEach(({ key, label }) => {
     const plano = phase.cadencia[key];
-    if (plano) focus[key] = { ...base, day: label, focus: `${SLOTS_TRABALHO[key].nome}: ${plano.temas.join(' e ')}`, k: plano.objetivos[0].split(':')[0], tracks: plano.temas };
+    if (plano) focus[key] = { ...base, day: label, focus: `${SLOTS_DA_SEMANA[key].nome}: ${plano.temas.join(' e ')}`, k: plano.objetivos[0].split(':')[0], tracks: plano.temas };
   });
   focus.sabado = { ...base, day: 'Sábado', focus: `Entrega da etapa: ${phase.lab.entrega}`, k: 'pratica', tracks: ['Exercícios', 'Entrega', 'System Design'] };
-  focus.domingo = { ...base, day: 'Domingo', focus: 'Descanso e revisão leve', k: 'break', priority: 'Descanso', tracks: ['Revisão leve', 'Planejamento', 'Descanso'], strategy: 'No máximo 1h de revisão leve pela manhã. Não transferir atrasos para o descanso.' };
-  return { focus, plans };
-}
-
-function architectureRoutine(P, hours, phaseId, mode) {
-  const phase = P.find(p => p.id === phaseId) || P[0];
-  const reduced = mode === 'minima' || mode === 'recuperacao';
-  if (mode === 'minima') hours = Math.min(hours, 6);
-  if (mode === 'recuperacao') hours = Math.min(hours, 3);
-  const names = ['Requisitos e alternativas', 'Domínio, contratos e fluxos', 'Experimento executável', 'Falhas, segurança e operação', 'Decisão e apresentação', 'Consolidação e revisões', 'Descanso'];
-  const keys = ['arquitetura', 'arquitetura', 'java', 'devops', 'arquitetura', 'pratica', 'break'];
-  if (reduced) for (let i = 0; i < 6; i++) names[i] = 'Revisar decisão e consolidar experimento existente';
-  const focus = {}, plans = {};
-  // Orçamento semanal, sem impor horários de trabalho ou reduzir sono/descanso.
-  const totalMinutes = Math.round(hours * 60);
-  let assigned = 0;
-  weekDays.forEach((day, i) => {
-    focus[day.key] = { day: day.label, focus: names[i], k: keys[i], priority: i === 6 ? 'Descanso' : reduced ? 'Sem conteúdo novo' : 'Conteúdo da etapa ativa', tracks: [names[i]], practice: reduced ? 'Somente revisar e concluir trabalho já iniciado. Sem conteúdo novo.' : 'Aplicar ao DevCore de pedidos, pagamentos e conciliação.', review: 'Recuperar decisões sem consulta e conferir evidências e revisões D1/D7/D30.', connection: 'Um produto, seis etapas e decisões testáveis.', strategy: i === 6 ? 'Domingo livre. Não transferir atrasos para o descanso.' : 'Registrar hipótese, alternativa, resultado e condição de revisão.' };
-    if (i === 6) { plans[day.key] = [{ time: 'Domingo', dur: 'Livre', block: 'Descanso', k: 'break', type: 'break', kind: 'descanso', d: 'Sem conteúdo novo. Preserve sono, treino e vida pessoal.', tracks: [] }]; return; }
-    const minutes = i === 5 ? totalMinutes - assigned : Math.floor(totalMinutes / 6);
-    assigned += minutes;
-    const review = Math.round(minutes * .15), english = Math.round(minutes * .1), support = Math.round(minutes * .2), main = minutes - review - english - support;
-    const primaryKey = trilhaAtiva(phase, keys[i]) ? keys[i] : 'pratica';
-    const preferredSupport = ['db', 'sec', 'db', 'sec', 'aws', 'arquitetura'][i];
-    const supportKey = trilhaAtiva(phase, preferredSupport) ? preferredSupport : 'git';
-    const labels = { db: 'Dados e invariantes', sec: 'Segurança aplicada', aws: 'Arquitetura AWS', git: 'Versionar evidências', arquitetura: 'Revisar decisões' };
-    plans[day.key] = [
-      { time: 'Bloco principal', dur: `${main}min`, minutes: main, block: names[i], k: primaryKey, topicIndex: i === 1 ? 1 : i === 4 ? 2 : 0, type: primaryKey, kind: 'foco profundo', tracks: [names[i]], d: 'Use o objetivo da etapa abaixo. Divida o bloco com pausas e registre evidência reproduzível.' },
-      { time: 'Complemento', dur: `${support}min`, minutes: support, block: labels[supportKey], k: supportKey, type: supportKey, kind: 'complementar', tracks: [labels[supportKey]], d: 'Aplicar o conteúdo de apoio ao mesmo experimento da etapa.' },
-      { time: 'Comunicação', dur: `${english}min`, minutes: english, block: 'Apresentar a decisão em inglês', k: 'ingles', type: 'english', kind: 'transversal', tracks: ['Inglês'], d: 'Explique contexto, decisão e trade-off sem ler o documento.' },
-      { time: 'Revisões', dur: `${review}min`, minutes: review, block: 'Revisão e checkpoint', k: 'review', type: 'review', kind: 'revisão', tracks: ['D1', 'D7', 'D30'], d: 'Conclua revisões vencidas e registre o próximo experimento. Sono e pausas ficam fora deste orçamento técnico.' }
-    ];
-  });
+  focus.domingo = { ...base, day: 'Domingo', focus: 'Descanso e revisão leve', k: 'break', priority: 'Descanso', tracks: ['Revisão leve', 'Planejamento', 'Descanso'], strategy: 'No máximo 1h de revisão leve, às 13:00. Não transferir atrasos para o descanso.' };
   return { focus, plans };
 }
 
 
-export function createArchitecturePlan(sequence, { hours, phaseId, mode, perfil = PERFIL_INTEGRAL }) {
+export function createArchitecturePlan(sequence, { hours, phaseId, mode, perfil = PERFIL_PADRAO }) {
   let P, weeklyFocusByDay, dailyPlansByDay, monthlyCycle, MODOS_ROTINA, syncCycles, rules, awsMilestones, syncDependencies, syncCheckpoints, DEPENDENCIAS_CURRICULO, TRILHAS_TRANSVERSAIS, SIMULADOS_ENTREVISTA, projetos, heroTagsData, tracks;
   const weeks = Math.ceil(sequence.hours / hours);
   P = sequence.phases.map(p => ({ ...p, w: `Sem ${Math.floor((p.id - 1) * 80 / hours) + 1}–${Math.ceil(p.id * 80 / hours)} · estimativa` }));
-  const emTrabalho = perfil === 'trabalho-9-18';
-  const schedule = emTrabalho ? architectureWorkRoutine(P, phaseId, mode) : architectureRoutine(P, hours, phaseId, mode);
+  const schedule = architectureRoutine(P, phaseId, mode, perfil);
   weeklyFocusByDay = schedule.focus; dailyPlansByDay = schedule.plans;
   MODOS_ROTINA = {
     ideal: { nome: 'Ideal', carga: `${hours}h`, quando: 'Semana normal', regra: 'Executar estudo, experimento e defesa da etapa.', blocos: ['Arquitetura', 'DevCore', 'Revisões', 'Inglês'] },
@@ -157,8 +123,7 @@ export function createArchitecturePlan(sequence, { hours, phaseId, mode, perfil 
   ];
   SIMULADOS_ENTREVISTA = P.map(p => ({ id: `arquitetura-${p.slug}`, fase: p.id, titulo: `Defesa: ${p.t}`, tipo: 'Revisão arquitetural', duracao: 45, roteiro: ['Apresentar contexto e requisitos.', 'Comparar alternativas e defender a decisão.', 'Demonstrar evidência e responder a um cenário de falha.'], criterio: p.proof }));
   projetos = P.map(p => ({ fase: p.id, faseLabel: p.t, track: 'arquitetura', trackLabel: 'Arquitetura', titulo: `DevCore · ${p.l}`, resumo: p.lab.entrega, descricao: 'Evolução do mesmo produto de pedidos, pagamentos e conciliação.', entregaveis: [p.lab.entrega], evidencia: p.proof, competencias: ['Decisão', 'Implementação', 'Validação'] }));
-  const tagsDoPerfil = PERFIS_ROTINA[perfil].heroTags;
-  heroTagsData = [{ label: '6 etapas', cls: 'htag-g' }, { label: `~${weeks} semanas`, cls: 'htag-b' }, { label: emTrabalho ? tagsDoPerfil['36–40h/semana'] : `${hours}h/semana`, cls: 'htag-b' }, { label: '480h estimadas', cls: 'htag-b' }, ...(emTrabalho ? [{ label: tagsDoPerfil['sono 7h30 fixo'], cls: 'htag-p' }] : []), { label: 'Domingo livre', cls: 'htag-p' }];
+  heroTagsData = [{ label: '6 etapas', cls: 'htag-g' }, { label: `~${weeks} semanas`, cls: 'htag-b' }, { label: PERFIS_ROTINA[perfil].rotuloCarga, cls: 'htag-b' }, { label: '480h estimadas', cls: 'htag-b' }, { label: 'sono 4h30 de seg a sex', cls: 'htag-p' }, { label: 'Estudo no fim de semana: 13h à 01h', cls: 'htag-p' }];
   tracks = [{ key: 'arquitetura', label: 'Arquitetura e decisões', h: '35%', suffix: '' }, { key: 'db', label: 'Integração e dados', h: '25%', suffix: '' }, { key: 'aws', label: 'Cloud e operação', h: '20%', suffix: '' }, { key: 'java', label: 'Java específico', h: '10%', suffix: '' }, { key: 'ingles', label: 'Comunicação', h: '10%', suffix: '' }];
   return { P, weeklyFocusByDay, dailyPlansByDay, monthlyCycle, MODOS_ROTINA, syncCycles, rules, awsMilestones, syncDependencies, syncCheckpoints, DEPENDENCIAS_CURRICULO, TRILHAS_TRANSVERSAIS, SIMULADOS_ENTREVISTA, projetos, heroTagsData, tracks };
 }
