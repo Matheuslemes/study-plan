@@ -13,6 +13,7 @@
   <link href="./assets/css/tracks-palette.css" rel="stylesheet">
   <link href="./assets/css/base.css" rel="stylesheet">
   <link href="./assets/css/system.css?v=portfolio-11" rel="stylesheet">
+  <link href="./assets/css/recolocacao.css" rel="stylesheet">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="canonical" href="https://study-plan.vercel.app/">
   <meta property="og:type" content="website">
@@ -40,6 +41,7 @@
         <li class="cc-rail-label" role="presentation">Foco</li>
         <li class="cc-rail-item"><a class="cc-rail-link active" id="btn-tabHoje" data-bs-toggle="pill" href="#tabHoje" role="tab" aria-controls="tabHoje" aria-selected="true"><span class="cc-i" aria-hidden="true">◆</span>Hoje</a></li>
         <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabDaily" data-bs-toggle="pill" href="#tabDaily" role="tab" aria-controls="tabDaily" aria-selected="false"><span class="cc-i" aria-hidden="true">◷</span>Rotina diária</a></li>
+        <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabRecolocacao" data-bs-toggle="pill" href="#tabRecolocacao" role="tab" aria-controls="tabRecolocacao" aria-selected="false"><span class="cc-i" aria-hidden="true">➚</span>Recolocação</a></li>
         <li class="cc-rail-label" role="presentation">Plano</li>
         <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabFases" data-bs-toggle="pill" href="#tabFases" role="tab" aria-controls="tabFases" aria-selected="false"><span class="cc-i" aria-hidden="true">▤</span>Visão Geral</a></li>
         <li class="cc-rail-item"><a class="cc-rail-link" id="btn-tabDetail" data-bs-toggle="pill" href="#tabDetail" role="tab" aria-controls="tabDetail" aria-selected="false"><span class="cc-i" aria-hidden="true">▦</span>Fases (detalhe)</a></li>
@@ -260,6 +262,17 @@
           <span class="mono">Um buffer sempre consumido não é buffer</span>: é sinal de que o plano da semana
           está grande demais e precisa ser reduzido, não compensado com mais esforço.
         </div>
+      </div>
+
+      <!-- TAB RECOLOCAÇÃO (rotina alternativa para trocar de emprego) -->
+      <div class="tab-pane fade" id="tabRecolocacao" role="tabpanel" aria-labelledby="btn-tabRecolocacao">
+        <h4 class="mb-1">Recolocação — rotina dedicada à troca de emprego</h4>
+        <p class="text-muted small mb-3">Sprint de <strong>90 a 180 dias</strong> para vagas de desenvolvimento júnior e pleno, com âncora em
+          Backend Java + React. Cada semana define o que estudar e praticar em cada bloco do dia, os livros, os entregáveis
+          com evidência e as ações de candidatura. <strong>A duração muda a profundidade, não a velocidade</strong>: 13 semanas
+          cobrem o núcleo, e cada semana a mais acrescenta um aprofundamento. Esta rotina não altera a fase atual nem o
+          progresso das 12 fases.</p>
+        <div id="recolocacaoView"></div>
       </div>
 
       <!-- TAB PROGRESS -->

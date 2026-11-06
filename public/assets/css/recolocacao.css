@@ -1,0 +1,422 @@
+/* ═══════════════════════════════════════════════
+   RECOLOCAÇÃO — aba da rotina alternativa de troca de emprego
+
+   Só tokens de tokens.css e tracks-palette.css; a grade de
+   horários reaproveita .daily-block do system.css.
+═══════════════════════════════════════════════ */
+
+.rc-config {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: .9rem 1.2rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--track-financeiro);
+  border-radius: 12px;
+  padding: .9rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.rc-config-campo {
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  min-width: 0;
+}
+
+.rc-config-rotulo {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--track-financeiro);
+  font-weight: 700;
+  margin: 0;
+}
+
+.rc-config-hint,
+.rc-nota {
+  font-family: var(--font-mono);
+  font-size: .7rem;
+  color: var(--text3);
+}
+
+/*
+ * Caixas de seleção: o componente único de base.css dá a aparência;
+ * aqui só largura e densidade, como nas demais telas.
+ */
+.rc-config select {
+  width: 100%;
+  font-weight: 600;
+}
+
+/* Campo de data no mesmo padrão dos campos do painel de sequência e dos certificados. */
+.rc-campo {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: .45rem .7rem;
+  color: var(--text1);
+  background: var(--surface-2);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  font: 500 .84rem/1.35 var(--font-body);
+  transition: var(--transition-interactive);
+}
+
+/* Campo de URL no mesmo padrão da evidência de tópico (.topic-evidence-fields). */
+.rc-evidencia {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.5rem;
+  padding: .42rem .48rem;
+  color: var(--text1);
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  font-size: .7rem;
+}
+
+.rc-campo:hover,
+.rc-evidencia:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border-strong));
+}
+
+.rc-campo:focus-visible,
+.rc-evidencia:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.rc-semana-btn:focus-visible,
+.rc-link-btn:focus-visible {
+  outline: 2px solid var(--focus-color);
+  outline-offset: 2px;
+}
+
+.rc-hoje {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .5rem .9rem;
+  background: color-mix(in srgb, var(--track-financeiro) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--track-financeiro) 28%, transparent);
+  border-radius: 10px;
+  padding: .6rem .9rem;
+  font-size: .85rem;
+  color: var(--text2);
+  margin-bottom: 1.2rem;
+}
+
+.rc-link-btn {
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--track-financeiro) 45%, transparent);
+  color: var(--track-financeiro);
+  border-radius: 6px;
+  padding: .15rem .6rem;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+/* ── linha do tempo ── */
+.rc-timeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12.5rem, 1fr));
+  gap: .55rem;
+}
+
+.rc-semana-btn {
+  width: 100%;
+  height: 100%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--rc-cor, var(--accent));
+  border-radius: 10px;
+  padding: .55rem .7rem;
+  color: var(--text1);
+  transition: background var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out);
+}
+
+.rc-semana-btn:hover {
+  background: var(--surface-hover);
+}
+
+.rc-semana-btn.is-active {
+  border-color: var(--rc-cor, var(--accent));
+  background: color-mix(in srgb, var(--rc-cor, var(--accent)) 9%, var(--surface));
+}
+
+.rc-semana-btn.is-hoje .rc-semana-num::after {
+  content: ' · hoje';
+  color: var(--track-financeiro);
+}
+
+.rc-semana-num {
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  color: var(--text3);
+  letter-spacing: .04em;
+}
+
+.rc-semana-titulo {
+  font-size: .8rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.rc-semana-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .3rem;
+  margin-top: auto;
+}
+
+.rc-semana-prog {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: .66rem;
+  color: var(--text3);
+}
+
+.rc-tipo {
+  font-family: var(--font-mono);
+  font-size: .58rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  border-radius: 4px;
+  padding: .1rem .4rem;
+  border: 1px solid var(--border);
+  color: var(--text2);
+}
+
+.rc-tipo-nucleo { color: var(--state-success); border-color: color-mix(in srgb, var(--state-success) 40%, transparent); }
+.rc-tipo-aprofundamento { color: var(--state-info); border-color: color-mix(in srgb, var(--state-info) 40%, transparent); }
+.rc-tipo-consolidacao { color: var(--state-warning); border-color: color-mix(in srgb, var(--state-warning) 40%, transparent); }
+.rc-tipo-marco { color: var(--track-financeiro); border-color: color-mix(in srgb, var(--track-financeiro) 45%, transparent); }
+
+/* ── semana selecionada ── */
+.rc-semana {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--rc-cor, var(--accent));
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1.6rem;
+  scroll-margin-top: 1rem;
+}
+
+.rc-semana-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem .6rem;
+  margin-bottom: .35rem;
+}
+
+.rc-semana-h {
+  color: var(--rc-cor, var(--accent));
+  margin-bottom: .4rem;
+}
+
+.rc-objetivo {
+  font-size: .9rem;
+  color: var(--text1);
+  margin-bottom: .35rem;
+}
+
+.rc-porque {
+  font-size: .8rem;
+  color: var(--text2);
+  margin-bottom: .6rem;
+}
+
+.rc-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin-bottom: 1rem;
+}
+
+.rc-chip {
+  font-size: .72rem;
+  color: var(--text2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: .12rem .55rem;
+}
+
+.rc-sub {
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin: .4rem 0 .5rem;
+}
+
+.rc-dia-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .5rem 1rem;
+  margin-bottom: .5rem;
+}
+
+.rc-dia-foco {
+  font-weight: 700;
+  font-size: .9rem;
+  margin: .35rem 0 0;
+}
+
+.rc-grade {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  margin-bottom: 1rem;
+}
+
+.rc-fora {
+  padding: 1rem;
+  margin: 0;
+  color: var(--text3);
+  font-size: .85rem;
+}
+
+/* ── cartões ── */
+.rc-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  gap: .8rem;
+}
+
+.rc-card {
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .85rem .9rem;
+  min-width: 0;
+  font-size: .8rem;
+  color: var(--text2);
+}
+
+.rc-card h6 {
+  font-size: .82rem;
+  color: var(--text1);
+  margin-bottom: .55rem;
+}
+
+.rc-card p {
+  margin-bottom: .45rem;
+}
+
+.rc-lista {
+  padding-left: 1.1rem;
+  margin: 0 0 .4rem;
+}
+
+.rc-lista li {
+  margin-bottom: .3rem;
+}
+
+.rc-entregas,
+.rc-livros {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: .7rem;
+}
+
+.rc-entrega {
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+/* Checkboxes usam .topic-check (base.css/system.css); só o título ganha peso e a cor de feito. */
+.rc-entrega .topic-check span {
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.rc-entrega.is-feito .topic-check span {
+  color: var(--state-success);
+}
+
+.rc-criterio {
+  font-size: .74rem;
+  color: var(--text3);
+}
+
+.rc-aviso {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--track-financeiro);
+  min-height: 1em;
+}
+
+.rc-livro {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+
+.rc-livro-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .3rem .5rem;
+}
+
+.rc-livro-titulo {
+  font-weight: 700;
+  color: var(--text1);
+}
+
+.rc-livro-titulo a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 3px;
+}
+
+.rc-livro-autor {
+  font-family: var(--font-mono);
+  font-size: .68rem;
+  color: var(--text3);
+}
+
+.rc-livro-trecho {
+  font-size: .75rem;
+}
+
+.rc-tabela-prazo tr.is-incluida td {
+  color: var(--text1);
+}
+
+.rc-tabela-prazo tr:not(.is-incluida) td {
+  color: var(--text3);
+}
+
+@media (max-width: 575.98px) {
+  .rc-semana {
+    padding: .8rem;
+  }
+
+  .rc-timeline {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rc-cards {
+    grid-template-columns: 1fr;
+  }
+}

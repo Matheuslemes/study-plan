@@ -455,7 +455,40 @@ progress.registrarD30Concluida(testTopic, '2026-07-29T00:00:00.000Z');
 check(progress.estadoDoTopico(testTopic) === progress.ESTADOS.DOMINADO,
   'Revisão D30 não promoveu o tópico a Dominado.');
 
+// Rotina de recolocação: 13 semanas de núcleo, 13 de aprofundamento com prioridade
+// única, grade de 24h nos dois perfis e livros resolvidos no catálogo e na Biblioteca.
+const recolocacao = await import('../public/data/recolocacao.js');
+const { biblioteca: acervo } = await import('../public/data/biblioteca.js');
+const semanasRc = recolocacao.TODAS_AS_SEMANAS;
+const nucleoRc = semanasRc.filter((s) => s.tipo === 'nucleo');
+const extrasRc = semanasRc.filter((s) => s.tipo !== 'nucleo');
+check(nucleoRc.length === recolocacao.DURACAO.minSemanas, `Recolocação: núcleo com ${nucleoRc.length} semanas, esperado ${recolocacao.DURACAO.minSemanas}.`);
+check(semanasRc.length === recolocacao.DURACAO.maxSemanas, `Recolocação: ${semanasRc.length} semanas no total, esperado ${recolocacao.DURACAO.maxSemanas}.`);
+check(extrasRc.map((s) => s.prioridade).sort((a, b) => a - b).join() === extrasRc.map((_, i) => i + 1).join(), 'Recolocação: prioridades dos aprofundamentos devem ser 1..N sem repetição.');
+check(new Set(semanasRc.map((s) => s.ordem)).size === semanasRc.length, 'Recolocação: duas semanas com a mesma ordem.');
+check(recolocacao.diasDoSprint(recolocacao.DURACAO.minSemanas) >= recolocacao.DURACAO.minDias && recolocacao.diasDoSprint(recolocacao.DURACAO.maxSemanas) === recolocacao.DURACAO.maxDias, 'Recolocação: prazo fora de 90 a 180 dias.');
+check(semanasRc.filter((s) => s.marco === 'candidaturas').length === 1 && nucleoRc.some((s) => s.marco === 'candidaturas'), 'Recolocação: o início das candidaturas deve ser uma única semana do núcleo.');
+const entregaveisRc = semanasRc.flatMap((s) => s.entregaveis.map((e) => e.id));
+check(new Set(entregaveisRc).size === entregaveisRc.length, 'Recolocação: id de entregável repetido.');
+const minutosRc = (faixa) => { const [a, z] = faixa.split(' – ').map((t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m; }); return ((z - a) + 1440) % 1440; };
+semanasRc.forEach((s) => {
+  ['dias', 'transversal'].forEach((campo) => check(s[campo].length === 5, `Recolocação ${s.id}: ${campo} precisa de 5 dias úteis.`));
+  check(s.dsa.problemas.length === 5 && s.complemento.itens.length === 5, `Recolocação ${s.id}: DSA e complemento precisam de 5 itens.`);
+  check(s.perguntas.length >= 5 && s.entregaveis.length >= 1, `Recolocação ${s.id}: faltam perguntas ou entregáveis.`);
+  s.livros.forEach(([ref]) => {
+    const livro = recolocacao.LIVROS[ref];
+    check(Boolean(livro), `Recolocação ${s.id}: livro inexistente ${ref}.`);
+    if (livro?.biblioteca) check(acervo.some((b) => b.n === livro.biblioteca), `Recolocação: ${ref} aponta para o n ${livro.biblioteca}, ausente da Biblioteca.`);
+  });
+  Object.keys(PERFIS_ROTINA).forEach((perfil) => Object.entries(recolocacao.gradeDaSemana(s, perfil)).forEach(([diaRc, blocos]) => {
+    check(blocos.reduce((soma, b) => soma + minutosRc(b.time), 0) === 1440, `Recolocação ${s.id}/${perfil}/${diaRc}: a grade não fecha 24h.`);
+    check(blocos.every((b) => b.block && b.d), `Recolocação ${s.id}/${perfil}/${diaRc}: bloco sem título ou descrição.`);
+  }));
+});
+check(indexHtml.includes('id="btn-tabRecolocacao"') && indexHtml.includes('id="recolocacaoView"'), 'index.html sem a aba Recolocação no menu lateral.');
+
 evidence.push(`${observableTopics.length}/${allTopics.length} tópicos observáveis`);
+evidence.push(`Recolocação: ${nucleoRc.length} semanas de núcleo + ${extrasRc.length} de aprofundamento · ${Object.keys(recolocacao.LIVROS).length} leituras · ${entregaveisRc.length} entregáveis`);
 evidence.push(`${LABS_ENCADEADOS.length} labs encadeados`);
 evidence.push(`${hubFiles.length} hubs canônicos`);
 evidence.push(`${academyIds.length} Academias · ${academyShellCount} shells · ${moduleCount} módulos`);

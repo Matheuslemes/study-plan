@@ -28,6 +28,7 @@ export const CK = {
   ia: { t: 'var(--track-ia)', b: 'color-mix(in srgb, var(--track-ia) 10%, transparent)' },
   fin: { t: 'var(--track-financeiro)', b: 'color-mix(in srgb, var(--track-financeiro) 10%, transparent)' },
   treino: { t: 'var(--track-treino)', b: 'color-mix(in srgb, var(--track-treino) 10%, transparent)' },
+  mercado: { t: 'var(--track-financeiro)', b: 'color-mix(in srgb, var(--track-financeiro) 10%, transparent)' },
   sleep: { t: 'var(--state-validated)', b: 'color-mix(in srgb, var(--state-validated) 10%, transparent)' },
   cardio: { t: 'var(--state-danger)', b: 'color-mix(in srgb, var(--state-danger) 10%, transparent)' },
   strength: { t: 'var(--state-danger)', b: 'color-mix(in srgb, var(--state-danger) 10%, transparent)' },

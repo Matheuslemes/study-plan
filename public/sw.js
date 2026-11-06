@@ -3,7 +3,7 @@
  * HTML usa network-first; assets versionados usam cache-first com revalidação.
  */
 
-const VERSAO = 'v89-project-card-links';
+const VERSAO = 'v90-recolocacao';
 const CACHE = `plano-estudos-${VERSAO}`;
 
 const PARTES_ACADEMIA = {
@@ -63,6 +63,7 @@ const ESSENCIAIS = [
   './assets/css/hub.css',
   './assets/css/academy.css',
   './assets/css/project-guide.css',
+  './assets/css/recolocacao.css',
   './assets/js/pages/project-guide.js',
   './assets/vendor/bootstrap.min.css',
   './assets/vendor/bootstrap.bundle.min.js',
@@ -87,6 +88,12 @@ const ESSENCIAIS = [
   './data/track-exercises.js',
   './data/learning-path.js',
   './data/interviews.js',
+  './data/recolocacao.js',
+  './data/recolocacao/nucleo.js',
+  './data/recolocacao/aprofundamento.js',
+  './data/recolocacao/livros.js',
+  './data/recolocacao/util.js',
+  './data/biblioteca.js',
   './data/academy-data-factory.js',
   './data/arquitetura-advanced.js',
   './data/aws-advanced.js',
@@ -134,6 +141,7 @@ const ESSENCIAIS = [
   './assets/js/features/recovery.js',
   './assets/js/features/dependency-map.js',
   './assets/js/features/interviews.js',
+  './assets/js/features/recolocacao.js',
 
   // Renderers compartilhados
   './assets/js/pages/dashboard.js',

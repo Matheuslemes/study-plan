@@ -25,6 +25,7 @@ import { renderBackup } from '../features/backup.js';
 import { renderRecoveryProtocol } from '../features/recovery.js';
 import { renderDependencyMap } from '../features/dependency-map.js';
 import { renderInterviewSimulations } from '../features/interviews.js';
+import { renderRecolocacao } from '../features/recolocacao.js';
 import { registrarServiceWorker } from '../core/pwa.js';
 import { sincronizarProgresso } from '../core/storage.js';
 import { renderSystemHeader } from '../core/system-header.js';
@@ -148,8 +149,11 @@ async function init() {
   document.getElementById('mainTabs')?.addEventListener('shown.bs.tab', (e) => {
     document.querySelectorAll('#mainTabs [role="tab"]').forEach((t) => t.setAttribute('aria-selected', String(t === e.target)));
   });
-  // Retorno dos guias de projeto e troca de perfil na Arquitetura abrem a aba de origem.
-  if (location.hash === '#tabProjetos' || location.hash === '#tabDaily') {
+  // Rotina alternativa de recolocação (estado próprio, não depende da fase).
+  renderRecolocacao('recolocacaoView');
+
+  // Retorno dos guias de projeto e troca de perfil na Arquitetura ou na Recolocação abrem a aba de origem.
+  if (['#tabProjetos', '#tabDaily', '#tabRecolocacao'].includes(location.hash)) {
     const originTab = document.getElementById(`btn-${location.hash.slice(1)}`);
     if (originTab && window.bootstrap?.Tab) window.bootstrap.Tab.getOrCreateInstance(originTab).show();
   }
