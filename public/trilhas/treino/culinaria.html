@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cozinha do Zero</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -164,7 +169,7 @@ select{border:1px solid var(--line); background:var(--surface); border-radius:8p
 .ghead h3{font-family:var(--font-display); font-stretch:110%; font-weight:800; font-size:21px}
 .gabout{margin:-4px 0 12px; color:var(--muted); font-size:15px; max-width:76ch}
 .gabout b{color:var(--ink); font-weight:600}
-.list{display:grid; gap:10px}
+.list{display:grid; grid-template-columns:minmax(0,1fr); gap:10px}
 .card{display:grid; grid-template-columns:minmax(0,1fr) 108px; gap:8px 18px; padding:16px 18px; background:var(--surface); border:1px solid var(--line); border-radius:var(--r)}
 .card:hover{border-color:var(--clip)}
 .card .body{display:grid; gap:6px; min-width:0}
@@ -483,6 +488,11 @@ td.mono{white-space:nowrap}
 .mwlist label:has(input:checked) .mwbi > span:first-child{text-decoration:line-through; color:var(--muted)}
 .mwshop2{margin:6px 0 10px}
 .mwkv{list-style:none; padding:0; margin:0}
+.mwshop10{display:grid; gap:10px; border-top:1px dashed var(--line); padding-top:14px}
+.mwshop10 > div[data-dyn]{display:grid; gap:12px}
+.mwshop10 .mwshopg{margin-bottom:0; content-visibility:visible}
+.mwshop10 .tips{margin:6px 0 0}
+.mwshop10 .copyout{width:100%}
 .mwy input{width:84px; border:1px solid var(--line); background:var(--bg); border-radius:8px; padding:6px 8px; font-family:var(--font-mono); font-size:15px}
 .mwy td:nth-child(2){white-space:nowrap}
 @media (max-width: 760px){
@@ -546,6 +556,8 @@ footer .wrap{display:grid; gap:6px}
 }
 @media (prefers-reduced-motion: reduce){*{transition:none !important; animation:none !important} .tk{--tilt:0deg !important}}
 </style>
+</head>
+<body>
 
 <header class="hero">
   <div class="wrap">
@@ -821,7 +833,7 @@ footer .wrap{display:grid; gap:6px}
       <div class="head">
         <span class="label">Almoço e jantar prontos para a semana</span>
         <h2>Marmitas da semana</h2>
-        <p>Sete dias e duas marmitas por dia, com foco em frango (peito, coxa, sobrecoxa e coxinha da asa) e carne moída com menos frequência. Escolha uma combinação para cada almoço e jantar. Ingredientes, lote, sequência de preparo, lista de compras e estimativas se ajustam ao que você escolher.</p>
+        <p>Sete dias e duas marmitas por dia, com foco em frango (peito, coxa, sobrecoxa e coxinha da asa) e carne moída com menos frequência. Escolha uma combinação para cada almoço e jantar. Ingredientes, lote, sequência de preparo, lista de compras e estimativas se ajustam ao que você escolher. Nenhuma preparação usa forno: tudo vai ao fogão, à panela de pressão, à air fryer ou ao vapor, e o brócolis também pode ir ao micro-ondas.</p>
       </div>
       <p class="notice"><b>Exemplos ajustáveis, não prescrição.</b> As porções de referência servem para organizar a cozinha. Não são uma meta individual de calorias ou de macronutrientes e não garantem perda de gordura: para isso faltam os dados listados abaixo.</p>
 
@@ -899,7 +911,7 @@ footer .wrap{display:grid; gap:6px}
           </div>
         </div>
       </div>
-      <div class="resultline"><span id="mw-count" aria-live="polite"></span><span>Toque numa combinação para ver os detalhes</span></div>
+      <div class="resultline"><span id="mw-count" aria-live="polite"></span><span>Toque numa combinação para ver os detalhes e a lista de compras de 10 marmitas</span></div>
       <div class="list" id="mw-cards"></div>
       <div class="empty" id="mw-empty" hidden><b>Nenhuma combinação com esses filtros.</b></div>
 
@@ -927,10 +939,10 @@ footer .wrap{display:grid; gap:6px}
           <ul>
             <li><b>Cada quantidade tem uma base declarada.</b> Proteínas pelo peso cru (com osso, quando for o caso); arroz e feijão pelo peso cozido que vai ao pote; vegetais pelo peso cru e limpo.</li>
             <li><b>Composição pela TACO</b>, no mesmo estado da base: arroz cozido usa arroz cozido, frango cru usa frango cru. Em cortes com osso, só a parte comestível entra na conta.</li>
-            <li><b>Ingredientes medidos somam</b> por grama da base: azeite, cebola, manteiga e a massa das almôndegas. Sal, temperos, limão, laranja, vinho e fubá ficam de fora.</li>
+            <li><b>Ingredientes medidos somam</b> por grama da base: azeite, cebola, tomate, manteiga e a massa das almôndegas. Sal, temperos, limão, pimentão, vinho e fubá ficam de fora.</li>
             <li><b>Nada é reaproveitado das receitas originais.</b> Nenhuma das fontes publica informação nutricional por porção, e todas as quantidades foram recalculadas depois das adaptações.</li>
             <li><b>Peso não é proteína.</b> 200 g de peito cru têm cerca de 43 g de proteína.</li>
-            <li><b>A gordura que escorre</b> no forno ou na air fryer não é descontada, então a gordura das coxas e coxinhas tende a ficar superestimada.</li>
+            <li><b>A gordura que escorre</b> na air fryer ou na panela não é descontada, então a gordura das coxas e coxinhas tende a ficar superestimada.</li>
           </ul>
         </div>
         <div class="panel">
@@ -1615,14 +1627,14 @@ const RECIPES = [
     rel:["r-omelete","b-eggs","h-ovo"]},
   {id:"f-marmita", src:"cur", t:"Marmita da semana: frango, arroz, feijão e legumes", tr:["fit"], por:4, unit:"marmitas", tempo:"cerca de 1h30 (feijão de molho na véspera)", lvl:1,
     ing:[[1,"xícara (chá)","de arroz tipo 1 cru (ficha do arroz)",190,"arroz_cru"],[400,"g","de feijão cozido (cerca de 1 concha por marmita)",400,"feijao_coz"],[480,"g","de peito de frango cru",480,"frango_cru"],[1,"","abobrinha",250,"abobrinha"],[2,"","cenouras",200,"cenoura"],[200,"g","de brócolis",200,"brocolis_coz"],[4,"colheres (sopa)","de azeite, no total",52,"azeite"],[0,"","sal, alho, páprica e ervas",0,null]],
-    steps:["Na véspera, deixe o feijão de molho, ou use feijão já congelado.","Preaqueça o forno a 220 °C e coloque o frango na salmoura (ficha do frango).","Cozinhe o feijão na pressão. Enquanto isso, corte abobrinha e cenoura e leve ao forno (ficha dos legumes).","Faça o arroz. Cozinhe o brócolis no vapor por 4 minutos.","Grelhe o frango por último, em duas levas, e fatie.","Monte 4 potes rasos com arroz, feijão, frango e legumes. Tampe e leve à geladeira logo. O que for comido depois do 4º dia vai direto para o freezer."],
+    steps:["Na véspera, deixe o feijão de molho, ou use feijão já congelado.","Coloque o frango na salmoura (ficha do frango).","Cozinhe o feijão na pressão. Enquanto isso, corte abobrinha e cenoura e refogue numa frigideira grande com parte do azeite, como na aula de legumes refogados.","Faça o arroz. Cozinhe o brócolis no vapor por 4 minutos.","Grelhe o frango por último, em duas levas, e fatie.","Monte 4 potes rasos com arroz, feijão, frango e legumes. Tampe e leve à geladeira logo. O que for comido depois do 4º dia vai direto para o freezer."],
     tips:["Molho e salada vão à parte, na hora de comer.","Para descongelar, passe o pote do freezer para a geladeira na noite anterior.","As porções são divisões iguais do lote; pese a panela pronta se quiser precisão."],
-    rel:["t-marmita30","gr-marmita","r-prato","a-marmitas-panelinha"]},
-  {id:"f-almondegas", src:"cur", t:"Almôndegas de frango com abobrinha, assadas", tr:["fit","dois"], por:4, unit:"porções", tempo:"40 min", lvl:2,
-    ing:[[500,"g","de peito de frango moído",500,"frango_cru"],[1,"","abobrinha média ralada",200,"abobrinha"],[0.5,"","cebola ralada",50,"cebola"],[1,"","ovo",50,"ovo_cru"],[4,"colheres (sopa)","de aveia em flocos",40,"aveia"],[1,"colher (sopa)","de azeite, para a assadeira",13,"azeite"],[1,"colher (chá)","de sal",0,null],[1,"","dente de alho ralado",0,null],[1,"colher (chá)","de páprica",0,null]],
-    steps:["Preaqueça o forno a 200 °C e forre uma assadeira com papel-manteiga untado com o azeite.","Rale a abobrinha, misture uma pitada do sal e deixe 10 minutos. Esprema num pano limpo até sair quase todo o líquido.","Misture todos os ingredientes só até ficar homogêneo, sem sovar.","Com as mãos úmidas, faça bolinhas do mesmo tamanho, de cerca de 40 g (umas 5 por porção), e espalhe na assadeira.","Asse por 18 a 22 minutos, até dourar e o centro chegar a 74 °C."],
-    tips:["Tirar a água da abobrinha é o que impede a massa de ficar mole; a técnica é a mesma das almôndegas do Jack Ovens.","Congele as almôndegas separadas numa assadeira e depois junte num saco."],
-    rel:["j-meatballs","j-thai"]},
+    rel:["r-refogar","t-marmita30","gr-marmita","r-prato","a-marmitas-panelinha"]},
+  {id:"f-almondegas", src:"cur", t:"Almôndegas de frango com abobrinha na air fryer", tr:["fit","dois"], por:4, unit:"porções", tempo:"40 min", lvl:2,
+    ing:[[500,"g","de peito de frango moído",500,"frango_cru"],[1,"","abobrinha média ralada",200,"abobrinha"],[0.5,"","cebola ralada",50,"cebola"],[1,"","ovo",50,"ovo_cru"],[4,"colheres (sopa)","de aveia em flocos",40,"aveia"],[1,"colher (sopa)","de azeite, para borrifar ou pincelar",13,"azeite"],[1,"colher (chá)","de sal",0,null],[1,"","dente de alho ralado",0,null],[1,"colher (chá)","de páprica",0,null]],
+    steps:["Rale a abobrinha, misture uma pitada do sal e deixe 10 minutos. Esprema num pano limpo até sair quase todo o líquido.","Misture todos os ingredientes, menos o azeite, só até ficar homogêneo, sem sovar.","Com as mãos úmidas, faça bolinhas do mesmo tamanho, como uma bola de pingue-pongue.","Preaqueça a air fryer a 200 °C. Distribua uma leva de almôndegas no cesto e borrife ou pincele com azeite.","Asse por 12 minutos, chacoalhando o cesto na metade, até dourar e o centro chegar a 74 °C. Repita com o restante."],
+    tips:["Tirar a água da abobrinha é o que impede a massa de ficar mole; a técnica é a mesma das almôndegas do Jack Ovens.","Tempo e temperatura são os da almôndega na air fryer da Rita Lobo, feita com patinho; com frango, confira sempre os 74 °C no centro.","Congele as almôndegas separadas numa bandeja e depois junte num saco."],
+    rel:["n-almondega-af","j-meatballs","j-thai"]},
   {id:"f-overnight", src:"cur", t:"Overnight oats de iogurte e banana", tr:["fit"], por:1, unit:"porção", tempo:"5 min + 6 h de geladeira", lvl:1,
     ing:[[170,"g","de iogurte natural",170,"iogurte"],[4,"colheres (sopa)","de aveia em flocos",40,"aveia"],[1,"","banana-prata pequena",70,"banana"],[1,"colher (chá)","de mel (opcional)",7,"mel"],[0,"","canela a gosto",0,null]],
     steps:["Num pote com tampa, misture o iogurte e a aveia.","Junte metade da banana amassada e a canela, e cubra com o restante em rodelas.","Tampe e deixe na geladeira por pelo menos 6 horas.","Coma frio, com o mel por cima se quiser."],
@@ -1736,13 +1748,15 @@ Object.assign(FOODS, {
 
 /* fontes novas desta versão (lidas na página original) */
 [
-  {id:"n-sobrecoxa", t:"Sobrecoxas assadas com páprica e ervas", tr:["fit","basico"], tema:"prot", lvl:2, dur:"mais de 2 h · até 6 porções", url:"https://panelinha.com.br/receita/sobrecoxas-assadas-com-paprica-e-ervas", note:"Fonte nova (marmitas). Seis sobrecoxas com pele e osso, cerca de 1,2 kg, assadas a 200 °C por cerca de 1 hora sobre cebola-roxa, alho e ervas."},
-  {id:"n-coxa", t:"Coxa de frango assada", tr:["fit","basico"], tema:"prot", lvl:1, dur:"até 1 h · até 2 porções", url:"https://panelinha.com.br/receita/coxas-de-frango-assadas", note:"Fonte nova (marmitas). Quatro coxas marinadas em alho, cominho e suco de laranja; 20 minutos a 200 °C e mais 20 a 180 °C."},
+  {id:"n-teriyaki", t:"Frango teriyaki (Telma Shiraishi)", tr:["fit","basico"], tema:"prot", lvl:2, dur:"até 2 h · até 4 porções", url:"https://panelinha.com.br/receita/frango-teriyaki", note:"Fonte nova (marmitas). Receita de Telma Shiraishi no Panelinha: 4 sobrecoxas desossadas e sem pele, abertas em borboleta e douradas 2 por vez em frigideira antiaderente, cerca de 5 minutos de cada lado; o molho de shoyu, mirin e saquê reduz por cerca de 1h30. Para o bentô, a receita manda esfriar antes de fatiar."},
+  {id:"n-frango-quiabo", t:"Frango com quiabo", tr:["fit","basico"], tema:"prot", lvl:1, dur:"até 2 h · até 6 porções", url:"https://panelinha.com.br/receita/frango-com-quiabo", note:"Fonte nova (marmitas). 4 coxas e 4 sobrecoxas com pele e osso marinadas em limão, cominho e colorau, douradas 4 minutos de cada lado e cozidas 25 minutos com cebola, tomate e pimentão, com a tampa entreaberta. Até 3 dias na geladeira e até 3 meses no congelador; o quiabo fica mais mole."},
+  {id:"n-almondega-af", t:"Almôndega com molho de tomate na Air Fryer da Rita Lobo", tr:["fit","basico"], tema:"prot", lvl:1, dur:"até 1 h · até 4 porções", url:"https://panelinha.com.br/receita/almondega-molho-tomate-na-air-fryer", note:"Fonte nova (marmitas). 400 g de patinho rendem 20 almôndegas do tamanho de bola de pingue-pongue, assadas a 200 °C por 12 minutos com uma chacoalhada na metade, depois dos tomates do molho."},
   {id:"n-coxinha-asa", t:"Coxinha da asa de frango na Air Fryer da Rita Lobo", tr:["fit","basico"], tema:"prot", lvl:1, dur:"20 min de air fryer · até 4 porções", url:"https://panelinha.com.br/receita/coxinha-da-asa-frango-na-air-fryer", note:"Fonte nova (marmitas). 600 g, cerca de 13 peças, com azeite, páprica, cominho e fubá, a 200 °C por 20 minutos em camada única."},
   {id:"n-ensopado", t:"Ensopado de frango ao sugo", tr:["fit","basico"], tema:"prot", lvl:1, dur:"até 4 porções", url:"https://panelinha.com.br/receita/ensopado-de-frango-ao-sugo", note:"Fonte nova (marmitas). 1 kg de pedaços com osso e sem pele, vinho branco e tomate pelado batido; cerca de 25 minutos de fervura com a panela semitampada."},
   {id:"n-couve", t:"Couve refogada", tr:["fit","basico"], tema:"veg", lvl:1, dur:"até 4 porções", url:"https://panelinha.com.br/receita/couve-refogada", note:"Fonte nova (marmitas). Couve fatiada fina e refogada no azeite com alho por cerca de 2 minutos."},
   {id:"n-pure-bd", t:"Purê de batata-doce", tr:["fit","basico"], tema:"veg", lvl:1, dur:"até 1 h · até 4 porções", url:"https://panelinha.com.br/receita/pure-de-batata-doce", note:"Fonte nova (marmitas). Batata-doce cozida por cerca de 20 minutos e batida com a água do cozimento e manteiga."},
-  {id:"n-abobora", t:"Abóbora assada em cubos", tr:["fit","basico"], tema:"veg", lvl:1, dur:"até 2 h · até 4 porções", url:"https://panelinha.com.br/receita/abobora-assada-em-cubos", note:"Fonte nova (marmitas). 1 kg de abóbora em cubos de 3 cm com alecrim e alho, a 180 °C por cerca de 50 minutos."},
+  {id:"n-abobora-af", t:"Abóbora assada com tomilho na Air Fryer da Rita Lobo", tr:["fit","basico"], tema:"veg", lvl:1, dur:"20 min de air fryer · 3 porções", url:"https://panelinha.com.br/receita/abobora-assada-tomilho-airfryer", note:"Fonte nova (marmitas). 450 g de abóbora japonesa descascada em cubos de 2 cm com 1 colher (sopa) de azeite, a 180 °C por 20 minutos, mexendo na metade; o tomilho entra nos últimos 5 minutos."},
+  {id:"n-legumes-af", t:"Legumes assados na Air Fryer da Rita Lobo", tr:["fit","basico"], tema:"veg", lvl:1, dur:"20 min de air fryer · até 2 porções", url:"https://panelinha.com.br/receita/legumes-assados-na-air-fryer", note:"Fonte nova (marmitas). Abóbora japonesa com casca (cerca de 200 g), 1 cenoura e ½ maço de brócolis com 2 colheres (sopa) de azeite, a 180 °C: abóbora e cenoura por 10 minutos, depois o brócolis por mais 10."},
   {id:"n-brocolis", t:"Brócolis no vapor com molho de shoyu", tr:["fit","basico"], tema:"veg", lvl:1, dur:"até 4 porções", url:"https://panelinha.com.br/receita/brocolis-no-vapor-com-molho-de-shoyu", note:"Fonte nova (marmitas). Floretes no vapor por cerca de 15 minutos, ou cerca de 4 minutos no micro-ondas."},
   {id:"n-congelar", t:"Como congelar legumes e hortaliças", tr:["fit","basico"], tema:"marmita", lvl:1, fmt:"artigo", url:"https://panelinha.com.br/blog/alimentacaosaudavel/post/como-congelar-legumes-e-hortalicas", note:"Fonte nova (marmitas). Brócolis, cenoura, abóbora e batata-doce cozida congelam bem; abobrinha e batata não ficam boas depois de congeladas."}
 ].forEach(x => I.push(Object.assign({c:"rita", lang:"pt", fmt:"receita", ev:"rec"}, x)));
@@ -1753,8 +1767,8 @@ const MW_YINFO = {
   arroz:["Arroz branco", "TACO: 358 kcal cru ÷ 128 kcal cozido. Na prática varia de 2,5 a 3 conforme água e panela.", "cozido"],
   feijao:["Feijão carioca com caldo", "TACO: 329 kcal cru ÷ 76 kcal cozido. Depende de quanto caldo fica na panela.", "cozido"],
   peito:["Peito de frango", "TACO: 119 kcal cru ÷ 159 kcal grelhado.", "cru"],
-  sobrecoxa:["Sobrecoxa sem pele", "TACO: 162 kcal crua ÷ 233 kcal assada.", "cru"],
-  coxa:["Coxa com pele", "TACO: 161 kcal crua ÷ 215 kcal assada.", "cru"],
+  sobrecoxa:["Sobrecoxa sem pele", "TACO: 162 kcal crua ÷ 233 kcal assada. A TACO não tem sobrecoxa grelhada; o fator da assada é a aproximação.", "cru"],
+  coxa:["Coxa com pele", "TACO: 161 kcal crua ÷ 215 kcal assada. A TACO não tem coxa com pele cozida; a coxa braseada usa o mesmo fator.", "cru"],
   asa:["Coxinha da asa", "A TACO não tem asa assada; usamos o fator da coxa com pele.", "cru"],
   coxasob:["Coxa e sobrecoxa sem pele (ensopado)", "TACO: coxa sem pele, 120 kcal crua ÷ 167 kcal cozida.", "cru"],
   patinho:["Patinho moído", "TACO: patinho 133 kcal cru ÷ 219 kcal grelhado; carne moída refogada perde água de forma parecida.", "cru"]
@@ -1776,12 +1790,12 @@ const MW_P = {
   feijao:{n:"Feijão carioca", basis:"cozido, com caldo", cooked:true, food:"feijao_coz", y:"feijao", buy:"feijao_cru", ex:[["azeite",0.0112],["cebola",0.043]], st:"pressao", ativo:15,
     tools:["Panela de pressão","Frigideira para o tempero"], t:"8 a 12 h de molho + cerca de 45 min (ficha)", src:["r-feijao","a-feijao-caseiro","f-feijao","r-congelar"],
     calc:"Azeite e cebola como na ficha: 13 g e 50 g para 270 g de feijão cru."},
-  legumes:{n:"Legumes assados (abobrinha, cenoura e cebola)", basis:"cru, já limpo", mix:[["abobrinha",0.4],["cenoura",0.4],["cebola",0.2]], ex:[["azeite",0.047]], st:"forno", ativo:15,
-    tools:["Forno","Assadeira grande (duas, se o lote for grande)"], t:"40 min (ficha)", src:["r-assados","f-legumes"],
-    calc:"Mistura de 40% abobrinha, 40% cenoura e 20% cebola, com o azeite da ficha (26 g para 550 g). O pimentão da ficha ficou de fora."},
-  abobora:{n:"Abóbora assada em cubos", basis:"crua, já limpa", food:"abobora_cru", buy:"abobora", ex:[["azeite",0.026]], st:"forno", ativo:10,
-    tools:["Forno","Refratário ou assadeira"], t:"cerca de 50 min de forno a 180 °C (receita)", src:["n-abobora"],
-    adapt:"Adaptação proposta: 1 colher (sopa) de azeite para 500 g, em vez de ½ xícara para 1 kg, e sem a ricota com que a receita é servida."},
+  legumes:{n:"Legumes na air fryer (abóbora, cenoura e brócolis)", basis:"cru, já limpo", mix:[["abobora_cru",0.4],["cenoura",0.3],["brocolis_cru",0.3]], ex:[["azeite",0.058]], st:"airfryer", ativo:15,
+    tools:["Air fryer","Tigela grande","Centrífuga de salada ou pano limpo para secar o brócolis"], t:"20 min por leva a 180 °C: abóbora e cenoura por 10 min, depois o brócolis por mais 10 (receita)", src:["n-legumes-af"],
+    adapt:"Adaptação proposta: a receita faz até 2 porções por vez e não pesa a cenoura nem o brócolis. A conta usa 40% de abóbora, 30% de cenoura e 30% de brócolis, com as 2 colheres (sopa) de azeite da receita para cerca de 450 g de legumes (estimativa da curadoria). A receita assa a abóbora com casca; a lista de compras usa o peso sem casca."},
+  abobora:{n:"Abóbora assada com tomilho na air fryer", basis:"crua, descascada", food:"abobora_cru", buy:"abobora", ex:[["azeite",0.029]], st:"airfryer", ativo:10,
+    tools:["Air fryer","Tigela"], t:"20 min por leva a 180 °C, mexendo na metade; o tomilho entra nos últimos 5 min (receita)", src:["n-abobora-af"],
+    calc:"Azeite da receita: 1 colher (sopa) para 450 g de abóbora descascada, que a receita assa de uma vez."},
   pure:{n:"Purê de batata-doce", basis:"crua, descascada", food:"batata_doce_cru", buy:"batata_doce", ex:[["manteiga",0.0175]], st:"fogao", ativo:15,
     tools:["Panela média","Escorredor","Espremedor ou mixer"], t:"até 1 h; cerca de 20 min de cozimento (receita)", src:["n-pure-bd","a-nestle-marmita"],
     adapt:"Adaptação proposta: 1 colher (sopa) de manteiga para 800 g de batata-doce, como na receita da Nestlé (o Panelinha usa 2 colheres para 3 batatas). Ajuste a textura com a água do cozimento; leite, se usar, não entra na conta."},
@@ -1803,15 +1817,15 @@ const MW_P = {
   cubos:{n:"Peito em cubos grelhado com páprica e limão", basis:"cru", food:"frango_cru", y:"peito", buy:"peito", ex:[["azeite",0.02]], st:"fogao", ativo:25,
     tools:["Frigideira antiaderente","Tigela para marinar"], t:"20 min de marinada + grelha em levas (receita)", src:["a-nestle-marmita"],
     adapt:"A receita pede “um fio” de azeite; a conta usa 1 colher (sopa) para cada 650 g (estimativa)."},
-  almondega:{n:"Almôndegas de frango com abobrinha, assadas", basis:"cru (frango moído)", food:"frango_cru", y:"peito", buy:"frango_moido", ex:[["abobrinha",0.4],["cebola",0.1],["ovo_cru",0.1],["aveia",0.08],["azeite",0.026]], st:"forno", ativo:25,
-    tools:["Ralador","Pano limpo para espremer a abobrinha","Assadeira com papel-manteiga","Termômetro culinário"], t:"40 min (ficha); 50 min na receita do Jack Ovens", src:["f-almondegas","j-meatballs"],
-    calc:"Massa da ficha da curadoria: para 500 g de frango, 200 g de abobrinha, 50 g de cebola, 1 ovo, 40 g de aveia e 13 g de azeite. A receita do Jack Ovens (750 g, 20 unidades, 200 °C por 15 a 16 min) é a referência de técnica; ela diz que a marmita dura até 4 dias na geladeira ou 3 meses no freezer."},
-  sobrecoxa:{n:"Sobrecoxa assada com páprica e ervas", basis:"crua, sem pele e sem osso", food:"sobrecoxa_cru", y:"sobrecoxa", buy:"sobrecoxa", ex:[["azeite",0.022],["cebola",0.12]], st:"forno", ativo:20,
-    tools:["Forno","Assadeira grande","Pilão","Termômetro culinário"], t:"mais de 2 h na receita: 40 min de geladeira + cerca de 1 h de forno a 200 °C", src:["n-sobrecoxa"],
-    adapt:"Adaptação proposta: a receita usa sobrecoxa com pele e osso; aqui, sem pele e desossada, para reduzir a gordura. Sem pele e osso ela tende a assar mais rápido, então confira pelos 74 °C no centro em vez de seguir a 1 hora da receita."},
-  coxa:{n:"Coxa assada com laranja", basis:"crua, com osso e pele", food:"coxa_cp_cru", edible:"coxa", y:"coxa", buy:"coxa", ex:[["azeite",0.01]], st:"forno", ativo:15,
-    tools:["Forno","Refratário","Pilão","Termômetro culinário"], t:"até 1 h: 20 min a 200 °C e 20 min a 180 °C (receita)", src:["n-coxa"],
-    adapt:"O azeite é “a gosto” na receita; a conta usa 1 colher (chá) para cada 500 g (estimativa). Suco de laranja, alho e cominho ficaram de fora da conta."},
+  almondega:{n:"Almôndegas de frango com abobrinha na air fryer", basis:"cru (frango moído)", food:"frango_cru", y:"peito", buy:"frango_moido", ex:[["abobrinha",0.4],["cebola",0.1],["ovo_cru",0.1],["aveia",0.08],["azeite",0.026]], st:"airfryer", ativo:25,
+    tools:["Ralador","Pano limpo para espremer a abobrinha","Air fryer","Pinça","Termômetro culinário"], t:"12 min por leva a 200 °C, chacoalhando o cesto na metade (receita da air fryer)", src:["f-almondegas","n-almondega-af"],
+    calc:"Massa da ficha da curadoria: para 500 g de frango, 200 g de abobrinha, 50 g de cebola, 1 ovo, 40 g de aveia e 13 g de azeite para borrifar. Tempo e temperatura são os da almôndega na air fryer da Rita Lobo, que faz 20 almôndegas do tamanho de bola de pingue-pongue com 400 g de patinho. Com frango, tire a leva só quando o centro chegar a 74 °C."},
+  sobrecoxa:{n:"Sobrecoxa grelhada na frigideira", basis:"crua, sem pele e sem osso", food:"sobrecoxa_cru", y:"sobrecoxa", buy:"sobrecoxa", ex:[["azeite",0.052]], st:"fogao", ativo:25,
+    tools:["Frigideira antiaderente grande","Pinça","Termômetro culinário"], t:"cerca de 10 min por leva de 2 sobrecoxas: 5 min de um lado, depois o outro até cozinhar (receita)", src:["n-teriyaki"],
+    adapt:"Adaptação proposta do frango teriyaki: a mesma sobrecoxa sem pele e sem osso, aberta em borboleta e dourada na frigideira, mas sem o amido de milho e sem o molho. O óleo é o da receita, 2 colheres (sopa) para 4 sobrecoxas; a conta estima as 4 em cerca de 500 g. Confira 74 °C no centro."},
+  coxa:{n:"Coxa braseada com tomate e pimentão", basis:"crua, com osso e pele", food:"coxa_cp_cru", edible:"coxa", y:"coxa", buy:"coxa", ex:[["cebola",0.1],["tomate",0.1],["azeite",0.013]], bx:{tomate:"tomate_fresco"}, st:"fogao", ativo:20,
+    tools:["Caçarola larga ou panela grande com tampa","Pinça","Termômetro culinário"], t:"15 min de marinada + 4 min de cada lado para dourar + 25 min com a tampa entreaberta (receita)", src:["n-frango-quiabo"],
+    adapt:"Adaptação proposta do frango com quiabo: só coxas, e o quiabo fica opcional, fora da conta. A receita não pesa os ingredientes; a conta estima as 4 coxas e 4 sobrecoxas em cerca de 1 kg, a cebola e o tomate italiano em cerca de 100 g cada, e usa 1 colher (sopa) de azeite para dourar. Pimentão, limão, cominho e colorau ficam fora da conta."},
   coxinha:{n:"Coxinha da asa na air fryer", basis:"crua, com osso e pele", food:"asa_cp_cru", edible:"asa", y:"asa", buy:"coxinha_asa", ex:[["azeite",0.0217]], st:"airfryer", ativo:15,
     tools:["Air fryer","Tigela"], t:"20 min por leva, em camada única (receita)", src:["n-coxinha-asa"],
     calc:"Azeite da receita: 1 colher (sopa) para 600 g. O fubá (2 colheres de sopa para 600 g) ficou fora da conta por falta do item na tabela usada."},
@@ -1843,17 +1857,18 @@ const MW_BUY = {
   cenoura:{n:"Cenoura (peso limpo)", g:"Hortifrúti"},
   cebola:{n:"Cebola", g:"Hortifrúti"},
   tomate_pelado:{n:"Tomate pelado em lata (400 g)", g:"Mercearia", lata:400},
+  tomate_fresco:{n:"Tomate italiano maduro", g:"Hortifrúti"},
   ovo_massa:{n:"Ovos para a massa das almôndegas", g:"Ovos", ovo:true},
   azeite:{n:"Azeite ou óleo para o preparo", g:"Mercearia", oil:true},
   manteiga:{n:"Manteiga (purê)", g:"Mercearia"}
 };
-const MW_B4F = {azeite:"azeite", cebola:"cebola", abobrinha:"abobrinha", cenoura:"cenoura", ovo_cru:"ovo_massa", aveia:"aveia", tomate:"tomate_pelado", manteiga:"manteiga"};
+const MW_B4F = {azeite:"azeite", cebola:"cebola", abobrinha:"abobrinha", cenoura:"cenoura", abobora_cru:"abobora", brocolis_cru:"brocolis", ovo_cru:"ovo_massa", aveia:"aveia", tomate:"tomate_pelado", manteiga:"manteiga"};
 /* itens por unidade ou a gosto, conferidos na despensa */
 const MW_EXTRAS = {
   arroz:"sal; louro (opcional)",
   feijao:"alho, sal, louro",
-  legumes:"sal, tomilho ou orégano seco",
-  abobora:"alho com casca, alecrim, sal e pimenta",
+  legumes:"sal, pimenta-do-reino",
+  abobora:"tomilho (3 ramos para 450 g), sal e pimenta-do-reino",
   pure:"sal",
   couve:"alho, sal",
   brocolis:"limão ou molho à parte (opcional)",
@@ -1862,8 +1877,8 @@ const MW_EXTRAS = {
   peito:"sal para a salmoura (1 colher de sopa por 500 ml de água), páprica, pimenta",
   cubos:"limão (1 para 600 g), páprica defumada, sal, pimenta",
   almondega:"alho, sal, páprica",
-  sobrecoxa:"limão (cerca de 2 para 1,2 kg), alho, sálvia, orégano fresco, erva-doce, páprica, sal",
-  coxa:"laranja-baía (1 para cada 4 coxas), alho, cominho, sal",
+  sobrecoxa:"sal, pimenta-do-reino; molho teriyaki à parte, opcional",
+  coxa:"limão (2 para cerca de 1 kg), pimentão amarelo (1 para cerca de 1 kg), alho, cominho, colorau, sal; quiabo opcional (200 g para cerca de 1 kg)",
   coxinha:"fubá mimoso (2 colheres de sopa para 600 g), páprica doce, cominho, sal",
   ensopado:"vinagre de vinho branco, alho-poró, alho, vinho branco (1 xícara por kg), tomilho, manjericão",
   carne:"alho, sal, temperos"
@@ -1873,14 +1888,14 @@ const MW_EXTRAS = {
 const MW_PROT = {peito:"Peito", sobrecoxa:"Sobrecoxa", coxa:"Coxa", coxinha:"Coxinha da asa", coxasob:"Coxa e sobrecoxa", moida:"Carne moída"};
 const MW_FRZ = {sim:"Congela bem", parcial:"Congela com ressalvas"};
 const MW_C = [
-  {id:"c-pf-peito", n:"Pê-efe de peito grelhado", prot:"peito", lvl:1, frz:"parcial", rice:true,
-    d:"Arroz, feijão, filé de peito grelhado e legumes assados: a estrutura do pê-efe do Panelinha, feita em lote.",
+  {id:"c-pf-peito", n:"Pê-efe de peito grelhado", prot:"peito", lvl:1, frz:"sim", rice:true,
+    d:"Arroz, feijão, filé de peito grelhado e legumes na air fryer: a estrutura do pê-efe do Panelinha, feita em lote.",
     kind:"Receita original + adaptação", base:["a-pefe-frango"],
-    baseNote:"A combinação existe como receita original do Panelinha (até 4 porções, até 2 h). A adaptação proposta é o lote e as porções de referência; os legumes ficam sem chuchu e rabanete.",
+    baseNote:"A estrutura vem da receita original do Panelinha (até 4 porções, até 2 h), que assa os legumes no forno. A adaptação proposta troca esses legumes pelos legumes na air fryer, também do Panelinha (abóbora, cenoura e brócolis), e faz tudo em lote, com porções de referência.",
     items:[["peito",200,"Proteína"],["arroz",180,"Acompanhamento"],["feijao",120,"Leguminosa"],["legumes",150,"Vegetais"]],
     time:["cerca de 50 min","cerca de 1h30, fora o molho do feijão"],
-    store:"A abobrinha dos legumes assados perde textura no freezer, segundo o Panelinha. Prefira os dias de geladeira, ou troque a abobrinha por cenoura, abóbora ou brócolis nas marmitas que vão ao freezer.",
-    subs:[["Peito → sobrecoxa sem pele","Mesmo preparo na frigideira e carne mais suculenta, mas com mais gordura: na TACO, 9,6 g contra 3,0 g por 100 g cru."],["Arroz branco → integral","Muda a água e o tempo (aula da Rita na pressão) e o fator de rendimento; a conta desta página deixa de valer para o arroz."],["Feijão → lentilha","Não precisa de molho e cozinha em 20 a 25 minutos (ficha da lentilha); a composição muda."],["Legumes → brócolis ou abóbora","Congelam melhor que a abobrinha."]]},
+    store:"Abóbora, cenoura e brócolis congelam bem, segundo o Panelinha, então esta combinação pode ir ao freezer sem ressalva.",
+    subs:[["Peito → sobrecoxa sem pele","Mesmo preparo na frigideira e carne mais suculenta, mas com mais gordura: na TACO, 9,6 g contra 3,0 g por 100 g cru."],["Arroz branco → integral","Muda a água e o tempo (aula da Rita na pressão) e o fator de rendimento; a conta desta página deixa de valer para o arroz."],["Feijão → lentilha","Não precisa de molho e cozinha em 20 a 25 minutos (ficha da lentilha); a composição muda."],["Legumes da air fryer → cenoura refogada","Vai ao fogão e libera a air fryer quando ela estiver cheia de levas; também congela bem."]]},
   {id:"c-cubos-pure", n:"Frango em cubos, purê de batata-doce e couve", prot:"peito", lvl:1, frz:"parcial", rice:false,
     d:"Cubos de peito marinados em páprica defumada e limão, purê de batata-doce e couve refogada com alho.",
     kind:"Receita original + adaptação", base:["a-nestle-marmita"],
@@ -1888,31 +1903,31 @@ const MW_C = [
     items:[["cubos",200,"Proteína"],["pure",250,"Acompanhamento"],["couve",100,"Vegetais"]],
     time:["cerca de 40 min","cerca de 70 min (tempo da receita)"],
     store:"Folhas como a couve ficam moles depois de congeladas (Panelinha). Para o freezer, troque a couve por brócolis ou leve a couve fresca e refogue na hora.",
-    subs:[["Couve → brócolis no vapor","Aguenta melhor o freezer; a conta muda pouco."],["Purê → batata-doce assada em cubos","Menos louça e textura mais firme; sem manteiga na conta."],["Peito → sobrecoxa em cubos","Mais suculenta e com mais gordura."]]},
+    subs:[["Couve → brócolis no vapor","Aguenta melhor o freezer; a conta muda pouco."],["Purê → batata-doce cozida em cubos","Menos louça e textura mais firme; sem manteiga na conta."],["Peito → sobrecoxa em cubos","Mais suculenta e com mais gordura."]]},
   {id:"c-almondega", n:"Almôndegas de frango com arroz e brócolis", prot:"peito", lvl:2, frz:"sim", rice:true,
-    d:"Almôndegas assadas de frango moído com abobrinha ralada na massa, arroz branco e brócolis no vapor.",
+    d:"Almôndegas de frango moído com abobrinha ralada na massa, feitas na air fryer, com arroz branco e brócolis no vapor.",
     kind:"Combinação editorial", base:[],
-    baseNote:"Combinação editorial: as almôndegas seguem a ficha da curadoria, com a técnica da receita do Jack Ovens; arroz e brócolis vêm de fontes separadas.",
+    baseNote:"Combinação editorial: a massa das almôndegas segue a ficha da curadoria; tempo e temperatura vêm da almôndega na air fryer da Rita Lobo, feita com patinho. Arroz e brócolis vêm de fontes separadas.",
     items:[["almondega",200,"Proteína"],["arroz",180,"Acompanhamento"],["brocolis",120,"Vegetais"]],
-    time:["cerca de 40 min","cerca de 1 h"],
-    store:"Segundo a receita do Jack Ovens, as almôndegas duram até 4 dias na geladeira ou 3 meses no freezer, em pote hermético. O molho de iogurte da receita original vai à parte e não congela.",
-    subs:[["Arroz → purê de batata-doce","É o acompanhamento da receita original do Jack Ovens."],["Frango moído → peito moído na hora","Pedir para moer o filé limpo dá mais controle da gordura."],["Aveia → farinha de rosca","Muda um pouco o carboidrato e a textura."]]},
-  {id:"c-sobrecoxa", n:"Sobrecoxa assada com abóbora e arroz", prot:"sobrecoxa", lvl:2, frz:"sim", rice:true,
-    d:"Sobrecoxa temperada com páprica, erva-doce e ervas, assada sobre cebola-roxa, com abóbora em cubos e arroz.",
+    time:["cerca de 40 min","cerca de 1 h, conforme o número de levas na air fryer"],
+    store:"Congele as almôndegas separadas numa bandeja e depois junte num saco, como na ficha. Na geladeira, vale o limite de 3 dias desta página.",
+    subs:[["Arroz → purê de batata-doce","É o mesmo purê da combinação de frango em cubos; a conta da marmita muda."],["Frango moído → peito moído na hora","Pedir para moer o filé limpo dá mais controle da gordura."],["Aveia → farinha de rosca","É o que a receita da Rita Lobo usa na massa; muda um pouco o carboidrato e a textura."]]},
+  {id:"c-sobrecoxa", n:"Sobrecoxa grelhada com abóbora e arroz", prot:"sobrecoxa", lvl:2, frz:"sim", rice:true,
+    d:"Sobrecoxa sem pele e sem osso, aberta em borboleta e dourada na frigideira, com abóbora assada com tomilho na air fryer e arroz.",
     kind:"Combinação editorial", base:[],
-    baseNote:"Combinação editorial de três receitas. A sobrecoxa é adaptação proposta da receita original do Panelinha.",
+    baseNote:"Combinação editorial de três receitas. A sobrecoxa é adaptação proposta do frango teriyaki publicado no Panelinha, sem o amido e sem o molho; a abóbora é a receita da air fryer da Rita Lobo.",
     items:[["sobrecoxa",200,"Proteína"],["arroz",180,"Acompanhamento"],["abobora",150,"Vegetais"]],
-    time:["cerca de 35 min","cerca de 2 h, com os 40 min de geladeira da receita"],
-    store:"Abóbora cozida congela bem (Panelinha). Guarde a cebola e o caldo da assadeira junto da carne: ajudam a não ressecar ao reaquecer.",
-    subs:[["Sem pele e osso → com pele e osso","É a receita original: mais suculenta, com mais gordura, e o tempo de forno volta a ser o da receita."],["Abóbora → batata-doce assada","Mais carboidrato por grama."],["Arroz → arroz e feijão","Acrescente uma concha de feijão; a conta da marmita muda."]]},
-  {id:"c-coxa", n:"Coxa assada com laranja, arroz, feijão e cenoura", prot:"coxa", lvl:1, frz:"sim", rice:true,
-    d:"Coxas marinadas em alho, cominho e laranja, assadas no forno, com arroz, feijão e cenoura refogada.",
+    time:["cerca de 40 min","cerca de 1 h, conforme o número de levas na frigideira e na air fryer"],
+    store:"Abóbora cozida congela bem (Panelinha). Deixe a sobrecoxa esfriar antes de fatiar e montar o pote, como a receita do teriyaki recomenda para o bentô.",
+    subs:[["Sem molho → com o molho teriyaki da receita","Fica mais perto da receita original, mas o molho leva shoyu, mirin, saquê e açúcar. Sirva à parte; ele não entra na conta."],["Abóbora → purê de batata-doce","Mais carboidrato por grama."],["Arroz → arroz e feijão","Acrescente uma concha de feijão; a conta da marmita muda."]]},
+  {id:"c-coxa", n:"Coxa braseada com arroz, feijão e cenoura", prot:"coxa", lvl:1, frz:"sim", rice:true,
+    d:"Coxas com pele marinadas em limão, cominho e colorau, douradas e cozidas na panela com cebola, tomate e pimentão, com arroz, feijão e cenoura refogada.",
     kind:"Combinação editorial", base:[],
-    baseNote:"Combinação editorial. A coxa segue a receita original do Panelinha (4 coxas, até 2 porções); a quantidade da marmita é uma referência ajustável.",
+    baseNote:"Combinação editorial. A coxa é adaptação proposta do frango com quiabo do Panelinha (4 coxas e 4 sobrecoxas, até 6 porções): só coxas, e o quiabo fica opcional. A quantidade da marmita é uma referência ajustável.",
     items:[["coxa",300,"Proteína"],["arroz",150,"Acompanhamento"],["feijao",120,"Leguminosa"],["cenoura",120,"Vegetais"]],
     time:["cerca de 35 min","cerca de 1h15, fora o molho do feijão"],
-    store:"A coxa com osso reaquece bem. A cenoura entra no lugar da abobrinha porque congela melhor.",
-    subs:[["Com pele → sem pele","Menos gordura: na TACO, 4,9 g contra 9,8 g por 100 g de coxa crua."],["Cenoura → abobrinha","Só para os dias de geladeira."],["Laranja → limão","Muda o sabor, não a conta."]]},
+    store:"Segundo a receita, dura até 3 dias na geladeira e até 3 meses no congelador; o quiabo, se usar, fica mais mole. A cenoura entra no lugar da abobrinha porque congela melhor.",
+    subs:[["Com pele → sem pele","Menos gordura: na TACO, 4,9 g contra 9,8 g por 100 g de coxa crua."],["Cenoura → abobrinha","Só para os dias de geladeira."],["Sem quiabo → com quiabo","É a receita completa: 200 g de quiabo nos últimos 5 minutos, sem tampa. Amolece na geladeira e no freezer, segundo a receita."]]},
   {id:"c-coxinha", n:"Coxinha da asa, arroz, feijão e couve", prot:"coxinha", lvl:1, frz:"parcial", rice:true,
     d:"Coxinhas da asa temperadas com páprica e cominho, crocantes na air fryer, com arroz, feijão e couve refogada.",
     kind:"Combinação editorial", base:[],
@@ -1920,7 +1935,7 @@ const MW_C = [
     items:[["coxinha",300,"Proteína"],["arroz",150,"Acompanhamento"],["feijao",120,"Leguminosa"],["couve",100,"Vegetais"]],
     time:["cerca de 35 min","cerca de 1 h, conforme o número de levas"],
     store:"A casquinha perde a crocância na geladeira e no micro-ondas, e a couve fica mole no freezer. Prefira os primeiros dias da semana. Para recuperar a crocância, reaqueça a coxinha separada na air fryer.",
-    subs:[["Air fryer → forno","A receita não traz versão de forno. Sugestão da curadoria: 200 °C em assadeira com grade, conferindo 74 °C perto do osso."],["Couve → brócolis","Vai melhor ao freezer."],["Coxinha → coxa sem pele","Menos gordura por grama de carne: na TACO crua, 15,1 g na asa com pele contra 4,9 g na coxa sem pele."]]},
+    subs:[["Cesto pequeno → mais levas","A receita assa 600 g por vez, em camada única. Com cesto menor, faça mais levas em vez de sobrepor as peças."],["Couve → brócolis","Vai melhor ao freezer."],["Coxinha → coxa sem pele","Menos gordura por grama de carne: na TACO crua, 15,1 g na asa com pele contra 4,9 g na coxa sem pele."]]},
   {id:"c-ensopado", n:"Ensopado de frango ao sugo com arroz e brócolis", prot:"coxasob", lvl:1, frz:"sim", rice:true,
     d:"Coxa e sobrecoxa sem pele cozidas no tomate com vinho branco e manjericão, com arroz e brócolis.",
     kind:"Combinação editorial", base:[],
@@ -2826,6 +2841,7 @@ const MWS = (function(){
       fat: ["nenhuma","azeite","oleo","manteiga"].includes(e.fat) ? e.fat : "azeite", fg: mwClamp(e.fg, 0, 30, 5)},
     ses: s.ses === 2 ? 2 : 1, rice: s.rice === "fsa" ? "fsa" : "usda",
     buy: Array.isArray(s.buy) ? s.buy.filter(x => typeof x === "string" && MW_BUY[x]) : [],
+    buyc: perCombo(s.buyc, v => Array.isArray(v) ? v.filter(x => typeof x === "string" && MW_BUY[x]) : []),
     pend, Y,
     filt: {p: MW_PROT[f.p] ? f.p : "", l: f.l === "1" || f.l === "2" ? f.l : "", f: MW_FRZ[f.f] ? f.f : ""}
   };
@@ -2901,17 +2917,79 @@ function buyFrom(tot){
     if (p.cooked) add(p.buy, g / Yv(p.y));
     else if (p.buy) add(p.buy, g);
     else (p.mix || []).forEach(m => add(MW_B4F[m[0]], g * m[1]));
-    (p.ex || []).forEach(x => add(MW_B4F[x[0]], g * x[1]));
+    (p.ex || []).forEach(x => add((p.bx && p.bx[x[0]]) || MW_B4F[x[0]], g * x[1]));
   });
   return b;
 }
 const MW_FC = {batata_doce:[1.13,1.33], abobora:[1.15,1.64], brocolis:[2.12,2.12], couve:[1.60,2.22], cenoura:[1.17,1.17]};
-function buyQty(k, g){
+function buyQty(k, g, onde){
   const B = MW_BUY[k];
   if (B.ovo){ const n = Math.ceil(g / MWS.eggs.w - 1e-9); return n + (n === 1 ? " ovo" : " ovos"); }
-  if (B.lata){ const n = Math.ceil(g / B.lata - 1e-9); return n + (n === 1 ? " lata" : " latas") + " (" + fmtG(g) + " no plano)"; }
+  if (B.lata){ const n = Math.ceil(g / B.lata - 1e-9); return n + (n === 1 ? " lata" : " latas") + " (" + fmtG(g) + " " + (onde || "no plano") + ")"; }
   if (B.oil) return fmtG(g) + " (≈ " + nf(g / 13, 0) + " colheres de sopa)";
   return fmtG(g);
+}
+
+/* ---------- lista de compras por combinação: lote fixo, fora do quadro ---------- */
+const MW_LOTE = 10;
+const MW_GRUPOS = ["Frango e carne","Grãos","Hortifrúti","Ovos","Mercearia"];
+/* temperos com proporção declarada na receita (ver MW_EXTRAS): [unidades por g do componente, singular, plural, arredondamento para cima] */
+const MW_XQ = {
+  cubos:[[1 / 600, "limão", "limões", 1]],
+  abobora:[[3 / 450, "ramo de tomilho", "ramos de tomilho", 1]],
+  coxa:[[2 / 1000, "limão", "limões", 1], [1 / 1000, "pimentão amarelo", "pimentões amarelos", 1]],
+  coxinha:[[2 / 600, "colher (sopa) de fubá", "colheres (sopa) de fubá", 1]],
+  ensopado:[[1 / 1000, "xícara de vinho branco", "xícaras de vinho branco", 0.5]]
+};
+function loteDe(c){
+  const map = Object.create(null); map[c.id] = MW_LOTE;
+  const tot = totals(map);
+  return {tot, b:buyFrom(tot)};
+}
+const loteKeys = b => Object.keys(MW_BUY).filter(k => (b[k] || 0) > 0.5);
+function xqTxt(pid, g){
+  return (MW_XQ[pid] || []).map(q => { const v = Math.ceil(g * q[0] / q[3] - 1e-9) * q[3]; return "≈ " + nf(v, 1) + " " + (v <= 1 ? q[1] : q[2]); }).join(" · ");
+}
+function fcTxt(k, g){ const fc = MW_FC[k]; return fc ? "com casca e aparas: ≈ " + fmtG(g * fc[0]) + (fc[1] !== fc[0] ? " a " + fmtG(g * fc[1]) : "") : ""; }
+function ovosNaHoraTxt(){
+  const l = MWS.eggs.l, d = MWS.eggs.d;
+  if (!l && !d) return "Ovos feitos na hora: nenhum, pelos ajustes da semana.";
+  if (l === d) return "Ovos feitos na hora ficam fora da lista: com " + l + " por refeição, " + MW_LOTE + " refeições pedem " + l * MW_LOTE + (l * MW_LOTE === 1 ? " ovo." : " ovos.");
+  return "Ovos feitos na hora ficam fora da lista: de " + Math.min(l, d) * MW_LOTE + " a " + Math.max(l, d) * MW_LOTE + " ovos para " + MW_LOTE + " refeições, conforme sejam almoços (" + l + " cada) ou jantares (" + d + " cada).";
+}
+function loteBase(c){
+  const coz = c.items.filter(it => MW_P[it[0]].cooked).map(it => MW_P[it[0]].n.split(" ")[0].toLowerCase());
+  return "Peso de compra do alimento cru e limpo" + (coz.length ? "; " + coz.join(" e ") + (coz.length === 1 ? " convertido" : " convertidos") + " de cozido para cru pelos fatores de rendimento" : "") + ".";
+}
+function shop10HTML(c){
+  const {tot, b} = loteDe(c), marc = MWS.buyc[c.id] || [], keys = loteKeys(b);
+  const grupos = MW_GRUPOS.map(gname => {
+    const ks = keys.filter(k => MW_BUY[k].g === gname); if (!ks.length) return "";
+    return '<div class="mwshopg"><span class="label">' + gname + '</span><ul class="mwlist">' + ks.map(k => {
+      const f = fcTxt(k, b[k]);
+      return '<li><label><span class="box"><input type="checkbox" data-buyc="' + k + '"' + (marc.includes(k) ? ' checked' : '') + '><span></span></span><span class="mwbi"><span>' + esc(MW_BUY[k].n) + '</span><b class="mono">' + buyQty(k, b[k], "no lote") + '</b>' + (f ? '<span class="src">' + f + ' (fator de correção)</span>' : '') + '</span></label></li>';
+    }).join("") + '</ul></div>';
+  }).join("");
+  const temp = c.items.map(it => {
+    const x = xqTxt(it[0], tot[it[0]]);
+    return '<li><b>' + esc(MW_P[it[0]].n) + ':</b> ' + esc(MW_EXTRAS[it[0]]) + (x ? '. Para o lote: <span class="mono">' + x + '</span>' : '') + '</li>';
+  }).join("");
+  return '<p class="src">' + MW_LOTE + ' marmitas iguais desta combinação, na porção × ' + nf(mulOf(c.id), 1) + ', sem depender do quadro da semana. ' + esc(loteBase(c)) + '</p>' + grupos +
+    '<div><span class="label">Temperos e itens por unidade, para conferir na despensa</span><ul class="tips">' + temp + '</ul></div>' +
+    '<p class="src">' + esc(ovosNaHoraTxt()) + '</p>';
+}
+function shop10Text(c){
+  const {tot, b} = loteDe(c), marc = MWS.buyc[c.id] || [], keys = loteKeys(b);
+  const L = ["LISTA DE COMPRAS — " + MW_LOTE + " MARMITAS", c.n + " · porção × " + nf(mulOf(c.id), 1), loteBase(c) + " Estimativa ajustável, gerada em " + new Date().toLocaleDateString("pt-BR") + "."];
+  MW_GRUPOS.forEach(gname => {
+    const ks = keys.filter(k => MW_BUY[k].g === gname); if (!ks.length) return;
+    L.push("", gname.toUpperCase());
+    ks.forEach(k => { const f = fcTxt(k, b[k]); L.push("[" + (marc.includes(k) ? "x" : " ") + "] " + MW_BUY[k].n + ": " + buyQty(k, b[k], "no lote") + (f ? " (" + f + ")" : "")); });
+  });
+  L.push("", "TEMPEROS E ITENS POR UNIDADE (conferir na despensa)");
+  c.items.forEach(it => { const x = xqTxt(it[0], tot[it[0]]); L.push("- " + MW_P[it[0]].n + ": " + MW_EXTRAS[it[0]] + (x ? ". Para o lote: " + x : "")); });
+  L.push("", ovosNaHoraTxt());
+  return L.join("\n");
 }
 
 /* ---------- fontes ---------- */
@@ -2990,9 +3068,12 @@ function cardBody(c){
       '<div class="mwegg"><span class="label">Complemento preparado na hora: ovos</span><p>Os ovos não vão para o pote: são feitos na hora de comer, na quantidade definida em “Ajustes da semana”. Preparos do catálogo:</p><ul class="fichas">' + MW_EGGSRC.map(id => '<li>' + ext(byId[id].url, byId[id].t) + ' <span class="muted">· ' + esc(CREATORS[byId[id].c].name.split(" · ")[0]) + '</span></li>').join("") + '</ul></div>' +
       '<div class="nut"><span class="label">Estimativa por refeição (TACO)</span><div class="tablewrap"><table class="mt"><thead><tr><th></th><th>Energia</th><th>Proteína</th><th>Carboidrato</th><th>Gordura</th></tr></thead><tbody data-dyn="nut"></tbody></table></div><p class="src">Cada linha é uma refeição; almoço e jantar não são somados como se fossem o dia inteiro.</p></div>' +
       '<div><span class="label">Rendimento do lote</span><div data-dyn="batch"></div></div>' +
+      '<div class="mwshop10"><span class="label">Lista de compras · ' + MW_LOTE + ' marmitas</span><div data-dyn="shop10"></div>' +
+        '<div class="cta"><button type="button" class="btn" data-copy10>Copiar lista</button><button type="button" class="btn" data-clear10>Desmarcar itens</button></div>' +
+        '<textarea class="copyout" data-out10 readonly hidden aria-label="Texto da lista de compras"></textarea></div>' +
       '<div class="grid2 mwinfo2">' +
         '<div><span class="label">Utensílios e equipamentos</span><ul class="tips">' + tools.map(t => '<li>' + esc(t) + '</li>').join("") + '</ul></div>' +
-        '<div><span class="label">Tempo (estimativa da curadoria, para um lote)</span><p><b>Trabalho ativo:</b> ' + esc(c.time[0]) + '<br><b>Tempo total:</b> ' + esc(c.time[1]) + '</p><p class="src">Os tempos de cada fonte estão abaixo, junto dos links. Lote maior pede mais levas ou mais assadeiras; o tempo de cada leva continua o da receita.</p></div>' +
+        '<div><span class="label">Tempo (estimativa da curadoria, para um lote)</span><p><b>Trabalho ativo:</b> ' + esc(c.time[0]) + '<br><b>Tempo total:</b> ' + esc(c.time[1]) + '</p><p class="src">Os tempos de cada fonte estão abaixo, junto dos links. Lote maior pede mais levas ou mais panelas; o tempo de cada leva continua o da receita.</p></div>' +
         '<div><span class="label">Armazenamento, descongelamento e reaquecimento</span><p>' + esc(c.store) + '</p><p class="src">Regra geral: até 3 dias na geladeira pelo critério desta página; no freezer, melhor qualidade em até 3 a 4 meses; descongelar na geladeira na noite anterior; reaquecer até 74 °C no centro (USDA).</p></div>' +
         '<div><span class="label">Substituições</span><ul class="tips">' + c.subs.map(s => '<li><b>' + esc(s[0]) + ':</b> ' + esc(s[1]) + '</li>').join("") + '</ul></div>' +
       '</div>' +
@@ -3012,14 +3093,14 @@ function ensureCardBody(el){
   const body = el.querySelector(".rbody");
   body.innerHTML = cardBody(MWC[el.dataset.id]);
   const q = k => body.querySelector('[data-dyn="' + k + '"]');
-  el._d = {mout:q("mout"), xout:q("xout"), comp:q("comp"), nut:q("nut"), batch:q("batch")};
+  el._d = {mout:q("mout"), xout:q("xout"), comp:q("comp"), nut:q("nut"), batch:q("batch"), shop10:q("shop10")};
   el._dirty = true;
 }
 function syncCardBody(c, el, ctx){
   const d = el._d; el._dirty = false;
   setT(d.mout, "× " + mulOf(c.id).toFixed(1).replace(".", ","));
   setT(d.xout, String(MWS.extra[c.id] || 0));
-  setH(d.comp, compRows(c)); setH(d.nut, nutRows(c)); setH(d.batch, batchHTML(c, ctx.cnt));
+  setH(d.comp, compRows(c)); setH(d.nut, nutRows(c)); setH(d.batch, batchHTML(c, ctx.cnt)); setH(d.shop10, shop10HTML(c));
 }
 function syncCards(ctx){
   MW_C.forEach(c => {
@@ -3055,10 +3136,30 @@ mwCardsHost.addEventListener("input", e => {
 });
 mwCardsHost.addEventListener("click", e => {
   const sm = e.target.closest("summary"); if (sm){ const el = sm.closest(".mwcard"); if (el) ensureCardBody(el); return; }
+  const cp = e.target.closest("[data-copy10]");
+  if (cp){
+    const el = cp.closest(".mwcard"), txt = shop10Text(MWC[el.dataset.id]), out = el.querySelector("[data-out10]");
+    const fallback = () => { out.value = txt; out.hidden = false; out.focus(); out.select(); toast("Texto selecionado. Copie com Ctrl+C ou o menu do celular."); };
+    try { navigator.clipboard.writeText(txt).then(() => toast("Lista copiada."), fallback); } catch (err) { fallback(); }
+    return;
+  }
+  const cl = e.target.closest("[data-clear10]");
+  if (cl){
+    const el = cl.closest(".mwcard"); delete MWS.buyc[el.dataset.id];
+    el.querySelectorAll("[data-buyc]").forEach(i => { i.checked = false; });
+    save(); toast("Itens desmarcados."); return;
+  }
   const b = e.target.closest("[data-xstep]"); if (!b) return;
   const id = b.closest(".mwcard").dataset.id; const v = Math.min(14, Math.max(0, (MWS.extra[id] || 0) + (+b.dataset.xstep)));
   if (v) MWS.extra[id] = v; else delete MWS.extra[id];
   mwRefresh();
+});
+mwCardsHost.addEventListener("change", e => {
+  const k = e.target.dataset ? e.target.dataset.buyc : null; if (!k) return;
+  const id = e.target.closest(".mwcard").dataset.id, arr = (MWS.buyc[id] || []).filter(x => x !== k);
+  if (e.target.checked) arr.push(k);
+  if (arr.length) MWS.buyc[id] = arr; else delete MWS.buyc[id];
+  save();
 });
 
 /* ---------- quadro ---------- */
@@ -3122,7 +3223,7 @@ function syncReps(ctx){
 }
 
 /* ---------- sequência ---------- */
-const MW_ORDER = ["sobrecoxa","abobora","coxa","legumes","almondega","coxinha","arroz","feijao","pure","ensopado","carne","peito","cubos","abobrinha","cenoura","couve","brocolis"];
+const MW_ORDER = ["coxa","legumes","abobora","almondega","coxinha","arroz","feijao","pure","ensopado","sobrecoxa","carne","peito","cubos","abobrinha","cenoura","couve","brocolis"];
 function seqHTML(s, map, tot){
   const has = k => tot[k] > 0;
   const ids = Object.keys(map); if (!ids.length) return '<p class="muted">Nenhuma marmita nesta sessão.</p>';
@@ -3134,27 +3235,31 @@ function seqHTML(s, map, tot){
   pre.push("Se alguma carne estiver congelada, passe para a geladeira.");
   steps.push(["Na véspera", pre]);
   const a = [];
-  if (["sobrecoxa","abobora","coxa","legumes","almondega"].some(has)) a.push("Pré-aqueça o forno. As receitas vão de 180 a 220 °C; para assar tudo junto, a curadoria sugere 200 °C e conferir cada item pelo ponto, não pelo relógio.");
   if (has("feijao")) a.push("Feijão escorrido na pressão com água nova e louro (ficha do feijão).");
-  if (has("sobrecoxa")) a.push("Sobrecoxa (" + fmtG(tot.sobrecoxa) + "): esfregue o tempero e deixe 40 min na geladeira, como na receita.");
-  if (has("coxa")) a.push("Coxa (" + fmtG(tot.coxa) + "): marinada de alho, cominho e laranja enquanto o forno aquece.");
+  if (has("coxa")) a.push("Coxa (" + fmtG(tot.coxa) + "): marinada de 15 min com cominho, colorau, sal, pimenta e caldo de limão, como na receita.");
+  if (has("sobrecoxa")) a.push("Sobrecoxa (" + fmtG(tot.sobrecoxa) + "): abra cada uma em borboleta e tempere com sal e pimenta.");
   if (has("peito")) a.push("Peito (" + fmtG(tot.peito) + "): salmoura de 20 a 30 min na geladeira.");
   if (has("cubos")) a.push("Cubos de peito (" + fmtG(tot.cubos) + "): marinada de 20 min com páprica, sal e limão.");
   if (has("coxinha")) a.push("Coxinha da asa (" + fmtG(tot.coxinha) + "): tempere com azeite, sal e especiarias e passe no fubá.");
   if (has("ensopado")) a.push("Coxa e sobrecoxa do ensopado (" + fmtG(tot.ensopado) + "): marinar no vinagre.");
-  if (has("almondega")) a.push("Almôndegas: rale e esprema a abobrinha, misture a massa com " + fmtG(tot.almondega) + " de frango moído e modele bolinhas de cerca de 40 g.");
+  if (has("almondega")) a.push("Almôndegas: rale e esprema a abobrinha, misture a massa com " + fmtG(tot.almondega) + " de frango moído e modele bolinhas do tamanho de uma bola de pingue-pongue.");
   steps.push(["Começo da sessão", a]);
-  const f = [];
-  if (has("sobrecoxa")) f.push("Sobrecoxa sem pele e osso: até 74 °C no centro. A receita, com pele e osso, leva cerca de 1 h.");
-  if (has("abobora")) f.push("Abóbora (" + fmtG(tot.abobora) + " crua) em cubos de 3 cm: cerca de 50 min a 180 °C na receita; a 200 °C, confira antes.");
-  if (has("coxa")) f.push("Coxas: 20 min a 200 °C e mais 20 min a 180 °C, como na receita, ou até dourar e chegar a 74 °C perto do osso.");
-  if (has("legumes")) f.push("Legumes (" + fmtG(tot.legumes) + " crus) em camada única: 25 a 35 min, virando na metade.");
-  if (has("almondega")) f.push("Almôndegas: 18 a 22 min, até o centro chegar a 74 °C.");
-  if (f.length) steps.push(["Forno, começando pelo que demora mais", f.concat(["Se não couber tudo, faça em levas. O tempo de cada leva não muda com o tamanho do lote."])]);
+  const levas = (g, por) => { const k = Math.max(1, Math.ceil(g / por - 1e-9)); return "cerca de " + k + (k === 1 ? " leva" : " levas"); };
+  const af = [];
+  if (has("legumes")) af.push("Legumes (" + fmtG(tot.legumes) + " crus) a 180 °C: abóbora e cenoura por 10 min, depois o brócolis por mais 10. A receita faz até 2 porções por vez; contando cerca de 450 g por leva (estimativa), são " + levas(tot.legumes, 450) + ".");
+  if (has("abobora")) af.push("Abóbora (" + fmtG(tot.abobora) + " crua) em cubos de 2 cm, a 180 °C por 20 min, mexendo na metade; o tomilho entra nos últimos 5 min. A receita assa 450 g por vez: " + levas(tot.abobora, 450) + ".");
+  if (has("almondega")){
+    const massa = tot.almondega * (1 + MW_P.almondega.ex.filter(x => x[0] !== "azeite").reduce((s, x) => s + x[1], 0));
+    af.push("Almôndegas a 200 °C por 12 min, chacoalhando o cesto na metade, até dourar e o centro chegar a 74 °C. A receita assa 20 almôndegas por vez; com bolinhas de cerca de 25 g (estimativa), os " + fmtG(massa) + " de massa dão " + levas(massa, 500) + ".");
+  }
+  if (has("coxinha")) af.push("Coxinhas a 200 °C por 20 min, em camada única. A receita assa 600 g por vez: " + levas(tot.coxinha, 600) + ", conforme o cesto.");
+  if (af.length) steps.push(["Air fryer, em levas", af.concat(["Agrupe as levas por temperatura: primeiro as de 180 °C, depois as de 200 °C. Com muitas levas, a air fryer vira o gargalo da sessão: ligue-a primeiro e deixe o fogão andar em paralelo. O tempo de cada leva não muda com o tamanho do lote."])]);
   const g = [];
   if (has("arroz")) g.push("Arroz: " + raw("arroz") + " cru (≈ " + fmtG(tot.arroz) + " cozido). Em panela grande ou em " + Math.max(1, Math.round(tot.arroz / Yv("arroz") / 190)) + " panelas de 190 g, como na ficha.");
   if (has("pure")) g.push("Purê: " + fmtG(tot.pure) + " de batata-doce descascada, cerca de 20 min de cozimento.");
   if (has("ensopado")) g.push("Ensopado: refogue, doure o frango, reduza o vinho e cozinhe 25 min no tomate.");
+  if (has("coxa")) g.push("Coxa: doure com a pele para baixo, sem amontoar, 4 min de cada lado, em levas. Na mesma panela, refogue cebola, tomate e pimentão, junte a água e o líquido da marinada e cozinhe as coxas por 25 min com a tampa entreaberta, até ficarem macias e chegarem a 74 °C perto do osso.");
+  if (has("sobrecoxa")) g.push("Sobrecoxa: frigideira antiaderente em fogo médio com um fio de óleo, 2 por vez, cerca de 5 min de um lado; vire e doure o outro até o centro chegar a 74 °C. Deixe esfriar antes de fatiar.");
   if (has("carne")) g.push("Carne moída: " + fmtG(tot.carne) + " de patinho, dourada em levas para não cozinhar no vapor.");
   if (has("peito")) g.push("Peito grelhado em levas, sem amontoar, até 74 °C.");
   if (has("cubos")) g.push("Cubos de peito em levas na frigideira antiaderente.");
@@ -3162,8 +3267,7 @@ function seqHTML(s, map, tot){
   if (has("cenoura")) g.push("Cenoura refogada: " + fmtG(tot.cenoura) + " crua.");
   if (has("feijao")) g.push("Feijão: depois que a pressão sair, refogue o tempero e engrosse o caldo (≈ " + fmtG(tot.feijao) + " com caldo).");
   if (has("couve")) g.push("Couve por último: " + fmtG(tot.couve) + " de folhas, cerca de 2 a 3 min.");
-  if (g.length) steps.push(["Fogão, em paralelo ao forno", g]);
-  if (has("coxinha")) steps.push(["Air fryer", ["Coxinhas a 200 °C por 20 min, em camada única. A receita assa 600 g por vez: cerca de " + Math.ceil(tot.coxinha / 600) + (Math.ceil(tot.coxinha / 600) === 1 ? " leva" : " levas") + ", conforme o cesto."]]);
+  if (g.length) steps.push([af.length ? "Fogão, em paralelo à air fryer" : "Fogão", g]);
   if (has("brocolis")) steps.push(["Vapor", ["Brócolis: " + fmtG(tot.brocolis) + " em floretes. Tire ainda firme, porque cozinha mais ao reaquecer."]]);
   let fri = 0, frz = 0; MWS.plan.forEach((cid, i) => { if (cid && slotInfo(i).s === s){ if (slotInfo(i).fr) frz++; else fri++; } });
   if (s === 1) Object.keys(MWS.extra).forEach(k => { frz += MWS.extra[k] || 0; });
@@ -3173,7 +3277,7 @@ function seqHTML(s, map, tot){
     "Geladeira: " + fri + (fri === 1 ? " marmita" : " marmitas") + ". Freezer: " + frz + (frz === 1 ? " marmita" : " marmitas") + ", conforme o quadro."
   ]]);
   const used = MW_ORDER.filter(has);
-  const ST = {forno:"forno e assadeiras", pressao:"panela de pressão", fogao:"fogão com panelas e frigideiras", airfryer:"air fryer", vapor:"cesto de vapor"};
+  const ST = {pressao:"panela de pressão", fogao:"fogão com panelas e frigideiras", airfryer:"air fryer", vapor:"cesto de vapor"};
   const tools = Array.from(new Set(used.map(pid => ST[MW_P[pid].st]))).concat(["termômetro culinário", "balança", "potes rasos e etiquetas"]);
   const active = used.reduce((x, pid) => x + MW_P[pid].ativo, 0) + 20;
   return '<div class="panel mwses"><h3>' + (s === 1 ? (MWS.ses === 2 ? "Sessão 1 · domingo, para segunda a quarta" : "Sessão única · domingo") : "Sessão 2 · quarta à noite, para quinta a domingo") + '</h3>' +
@@ -3356,3 +3460,5 @@ buildGroups(); applyFilters(); progressChanged(); route(); tabHint();
 
 })();
 </script>
+</body>
+</html>
